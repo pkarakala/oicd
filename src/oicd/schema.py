@@ -152,6 +152,7 @@ class Penalty(BaseModel):
 class Link(BaseModel):
     model_config = _FROZEN
 
+    name: str = "unnamed link"
     tx: Transmitter
     rx: Receiver
     channel: tuple[LossElement, ...]

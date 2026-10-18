@@ -41,6 +41,7 @@ Wavelength compatibility (interval containment):
 
 ```
 [λ_TX − δ_TX, λ_TX + δ_TX] ⊆ [λ_RX,min, λ_RX,max]
+PASS iff both clearances >= -ε_nm, ε_nm = 1e-9 nm
 Δλ ≈ λ² Δf / c,   c = 299 792 458 m/s (exact, SI definition)
 ```
 
@@ -54,6 +55,8 @@ Why each choice:
 ## 4. Worked example (by hand)
 
 Inputs (all synthetic): P_TP2 = 0 dBm OMA. Channel: TX FAU mating 1.5 dB + patch connector 1.0 dB + RX FAU mating 1.5 dB + 2 m of single-mode fiber at 0.4 dB/km (0.0008 dB). S_RX = −6 dBm OMA, Π = 0, R = 1.5 dB.
+
+Wavelength and electrical (synthetic): TX 1310 ± 2 nm, RX passband 1300 to 1320 nm, PAM4, 106.25 GBd, 1 lane, RS(544,514).
 
 ```
 Σ L      = 1.5 + 1.0 + 1.5 + 0.0008      = 4.0008 dB
@@ -75,13 +78,13 @@ Unless stated, inputs are T01's: P_TP2 = 0 dBm OMA, S_RX = −6 dBm OMA, Π = 0,
 | T03 | Exact boundary | loss 4.5 dB | M = 0.0 dB, PASS (≥ −ε) |
 | T04 | Boundary with non-representable floats | losses 0.3 + 1.3 + 3.3 dB, R = 1.1 dB | exact M = 0; float M = −4.44e-16; PASS only because of ε |
 | T05 | Loss monotonicity | T01 plus one 0.5 dB connector | M drops by exactly 0.5 to 0.0 dB, PASS; property: adding any loss ≥ 0 never raises M |
-| T06 | Named penalty | T01 with Π = 1.0 dB | M = −0.5 dB, FAIL; report names the penalty |
-| T07 | OMA/average mixing | TX AVERAGE, RX OMA | raises UnitMismatchError |
+| T06 | Named penalty | T01 with Π = 1.0 dB | M = −0.5 dB, FAIL; report and check evidence name the penalty |
+| T07 | OMA/average mixing | TX AVERAGE, RX OMA | raises UnitMismatchError at schema construction (bad input, not a feasibility verdict) |
 | T08 | Average to OMA | P_avg = 0 dBm, ER = 4 dB | OMA = −0.650 dBm (−0.64991) |
 | T09 | Wavelength inside passband | TX 1310 ± 2 nm, RX 1300 to 1320 nm | PASS; 8 nm clearance each side |
 | T10 | Wavelength edge outside | TX 1318 ± 3 nm, RX 1300 to 1320 nm | FAIL; upper edge 1321 nm exceeds 1320 nm by 1 nm |
 | T11 | Electrical mismatch | TX 106.25 GBd PAM4, RX 53.125 GBd PAM4 | FAIL on symbol_rate_gbd; modulation, lanes, FEC still reported |
-| T12 | Invalid physics | negative loss, 0 nm wavelength, ER ≤ 0 dB | rejected at schema with ValueError |
+| T12 | Invalid physics | negative loss, 0 nm wavelength, passband min ≥ max, NaN/inf, ER ≤ 0 dB | negative loss, 0 nm wavelength, passband min >= max, NaN/inf rejected at schema with ValueError; ER <= 0 dB rejected by avg_to_oma |
 | T13 | Provenance | worked example | every input in the report lists its SourceClass (all SYNTHETIC here) |
 | T14 | Determinism | run T01 twice | identical reports, field for field |
 | T15 | Not-evaluated list | any link | lists BER, TDECQ, dispersion, reflections/MPI, thermal, reliability |
@@ -102,3 +105,5 @@ T04 note: the float result depends on summation order. The test asserts PASS and
 | 2026-10-18 | Allow DB − DB and −DB | The margin equation subtracts penalties and reserve (both dB) from a dB difference; a gain is a negative loss | Forbid them: the margin equation could not be written |
 | 2026-10-18 | Treat c as exact, no bib entry | c = 299 792 458 m/s by SI definition (2019 SI); cite the SI Brochure once read | Leave uncited: violates rule 1 |
 | 2026-10-18 | Pass rule M ≥ −1e-9 dB | Floating-point sums of dB values can land a hair below zero at an exact boundary (T04) | Exact M ≥ 0: fails real boundaries at random |
+| 2026-10-18 | Unit-kind mismatch raises instead of FAIL | a mismatch is invalid input, not a verdict; rule 5 applies to valid links | return FAIL: hides input bugs as physics |
+| 2026-10-18 | Wavelength pass rule clearance >= -1e-9 nm | float edge test found -2.27e-13 nm on an edge that is exact on paper | exact containment: random failures at real edges |

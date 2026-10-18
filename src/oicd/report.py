@@ -15,8 +15,9 @@ from oicd.checks.power_budget import check_power_budget
 from oicd.checks.wavelength import check_wavelength
 from oicd.provenance import Provenance, SourceClass
 from oicd.registry import EPSILON_DB, NOT_EVALUATED, ConstraintId
-from oicd.schema import Link
-from oicd.units import DB, DBm
+from oicd.schema import Link, UpstreamChain
+from oicd.units import DB, DBm, oma_offset_db
+from oicd.upstream import UpstreamStep, derive_tp2, max_fanout, tp2_launch
 
 _FROZEN = ConfigDict(frozen=True, extra="forbid")
 
@@ -71,6 +72,23 @@ class TracePoint(BaseModel):
     above_threshold: bool
 
 
+class UpstreamSection(BaseModel):
+    """TP2 derived from the laser (model card §10). The derived TP2 is INFERENCE: it is computed
+    from the chain inputs, whose own provenance is listed in the report's inputs."""
+
+    model_config = _FROZEN
+
+    chain_name: str
+    split_n: int
+    steps: tuple[UpstreamStep, ...]
+    p_tp2_avg_dbm: float
+    p_tp2_oma_dbm: float
+    oma_offset_db: float
+    max_fanout: int
+    tp2_source_class: SourceClass
+    derivation: str
+
+
 class FeasibilityReport(BaseModel):
     model_config = _FROZEN
 
@@ -82,6 +100,7 @@ class FeasibilityReport(BaseModel):
     not_evaluated: tuple[CheckResult, ...]
     inputs: tuple[InputRecord, ...]
     power_trace: tuple[TracePoint, ...]
+    upstream: UpstreamSection | None = None
 
     def to_json(self) -> str:
         """Deterministic JSON: sorted keys, compact separators, Python's shortest round-trip
@@ -140,13 +159,20 @@ def collect_inputs(link: Link) -> tuple[InputRecord, ...]:
             "nm",
             tx.wavelength_tolerance_nm.provenance,
         ),
-        _record(
-            "tx.launch_oma_min",
-            tx.name,
-            tx.launch_oma_min.value.power_dbm.value,
-            f"dBm {tx.launch_oma_min.value.kind.value.upper()}",
-            tx.launch_oma_min.provenance,
-        ),
+    ]
+    if tx.launch_oma_min is not None:
+        records.append(
+            _record(
+                "tx.launch_oma_min",
+                tx.name,
+                tx.launch_oma_min.value.power_dbm.value,
+                f"dBm {tx.launch_oma_min.value.kind.value.upper()}",
+                tx.launch_oma_min.provenance,
+            )
+        )
+    if tx.upstream is not None:
+        records += _upstream_records(tx.upstream)
+    records += [
         _record(
             "rx.passband_min_nm",
             rx.name,
@@ -195,6 +221,66 @@ def collect_inputs(link: Link) -> tuple[InputRecord, ...]:
     return tuple(records)
 
 
+def _upstream_records(chain: UpstreamChain) -> list[InputRecord]:
+    laser = chain.laser_power_avg
+    records = [
+        _record(
+            "tx.upstream.laser_power_avg",
+            chain.name,
+            laser.value.power_dbm.value,
+            f"dBm {laser.value.kind.value.upper()}",
+            laser.provenance,
+        )
+    ]
+    for field in ("laser_fiber_loss", "coupling_loss"):
+        q = getattr(chain, field)
+        records.append(
+            _record(f"tx.upstream.{field}", chain.name, q.value.value, "dB", q.provenance)
+        )
+    records.append(
+        _record(
+            "tx.upstream.split_n",
+            chain.name,
+            chain.split_n.value,
+            "outputs",
+            chain.split_n.provenance,
+        )
+    )
+    for field in ("excess_loss", "modulator_il", "output_coupler_loss", "extinction_ratio"):
+        q = getattr(chain, field)
+        records.append(
+            _record(f"tx.upstream.{field}", chain.name, q.value.value, "dB", q.provenance)
+        )
+    return records
+
+
+def upstream_section(link: Link) -> UpstreamSection | None:
+    chain = link.tx.upstream
+    if chain is None:
+        return None
+    oma, steps = derive_tp2(chain)
+    avg = steps[-2].power_dbm
+    offset = oma_offset_db(chain.extinction_ratio.value).value
+    return UpstreamSection(
+        chain_name=chain.name,
+        split_n=chain.split_n.value,
+        steps=steps,
+        p_tp2_avg_dbm=avg,
+        p_tp2_oma_dbm=oma.power_dbm.value,
+        oma_offset_db=offset,
+        max_fanout=max_fanout(link),
+        tp2_source_class=SourceClass.INFERENCE,
+        derivation=(
+            f"P_TP2,avg = {chain.laser_power_avg.value.power_dbm.value} dBm − "
+            f"{chain.laser_fiber_loss.value.value} − {chain.coupling_loss.value.value} − "
+            f"10·log10({chain.split_n.value}) − {chain.excess_loss.value.value} − "
+            f"{chain.modulator_il.value.value} − {chain.output_coupler_loss.value.value} dB "
+            f"= {avg} dBm; P_TP2,OMA = P_TP2,avg + 10·log10(2(ER−1)/(ER+1)) at ER "
+            f"{chain.extinction_ratio.value.value} dB = {oma.power_dbm.value} dBm (model card §10)"
+        ),
+    )
+
+
 def threshold(link: Link) -> DBm:
     """Required OMA at TP3: S_RX,OMA,max + Σ Π_j + R (model card §3 rearranged)."""
     penalties = sum((p.value.value for p in link.penalties), start=DB(0.0))
@@ -209,7 +295,7 @@ def power_trace(link: Link) -> tuple[TracePoint, ...]:
     (P − S_RX) − ΣΠ − R, the order of M_net, so headroom and above_threshold at TP3 equal the
     check's margin_db and status bit for bit (model card §3).
     """
-    launch = link.tx.launch_oma_min.value.power_dbm
+    launch = tp2_launch(link.tx).power_dbm
     sensitivity = link.rx.sensitivity_oma_max.value.power_dbm
     penalties = sum((p.value.value for p in link.penalties), start=DB(0.0))
     reserve = link.reserve.value
@@ -272,4 +358,5 @@ def evaluate(link: Link) -> FeasibilityReport:
         not_evaluated=not_evaluated,
         inputs=collect_inputs(link),
         power_trace=power_trace(link),
+        upstream=upstream_section(link),
     )

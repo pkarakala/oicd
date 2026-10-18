@@ -34,22 +34,22 @@ Baseline before Phase 0 (brief 03 tree on `main`): pytest 147 passed, ruff check
 - [x] 1.10 R6 card §4: fiber as the two §2 segments (2 × 0.0004 dB) — phase 1 commit (hash in the next entry)
 - [x] 1.11 Card uses ≥ and ≤, never >= or <=; 0.4 dB/km note kept until Phase 5 — phase 1 commit (hash in the next entry)
 - [x] 1.12 Card §7 row per change, dated 2026-10-18 — phase 1 commit (hash in the next entry)
-- [ ] 1.13 Phase 1 checks green and commit
+- [x] 1.13 Phase 1 checks green and commit — b6e9c6e; pytest 149 passed, ruff check and format clean, npm run build ok, typecheck ok, e2e 1 passed
 
 ## Phase 2: engine features (brief 04 phases B, C, D, D2)
 
-- [ ] 2a.1 Card §8 design-space sweep with hand cases (1.0, 0) +0.4992; (2.0, 0) −0.5008; (0, +1) +2.4992; slopes −1 and +1
-- [ ] 2a.2 src/oicd/sweep.py `sweep(link, x_path, x_values, y_path, y_values) -> SweepResult`, NumPy-vectorized, max 201×201
-- [ ] 2a.3 POST /sweep; tests: hand cases, slopes, 422 unknown path, 422 oversized grid
-- [ ] 2b.1 Card §9 multi-lane tray; hand case 8 lanes, lane 5 patch 2.0 dB → −0.5008, deciding lane 5, EXCLUDED
-- [ ] 2b.2 src/oicd/tray.py, POST /evaluate_tray; tests: hand case, property (adding a lane never raises tray margin)
-- [ ] 2c.1 Card §10 upstream chain (Milestone 2), hand cases N = 16, 17, 18, max fan-out 17
-- [ ] 2c.2 src/oicd/upstream.py `derive_tp2(chain)` with itemized trace, `max_fanout(...)`
-- [ ] 2c.3 Report gains optional upstream section; POST /evaluate accepts a fixed TP2 or a chain; tests
-- [ ] 2d.1 Card §11 statistical budget and yield, with the "why"; hand case σ_total 0.34641, z 1.44107, yield 0.92522, 3σ margin −0.54003
-- [ ] 2d.2 src/oicd/statistics.py `analytic_yield`, `monte_carlo_yield` (seeded Generator, 10^6 samples within 0.002)
-- [ ] 2d.3 POST /yield labeled "statistical, assumption-dependent"; never changes the worst-case verdict; tests
-- [ ] 2.4 docs/hand_calcs scripts for §8 to §11
+- [x] 2a.1 Card §8 design-space sweep with hand cases (1.0, 0) +0.4992; (2.0, 0) −0.5008; (0, +1) +2.4992; slopes −1 and +1 — phase 2 commit
+- [x] 2a.2 src/oicd/sweep.py `sweep(link, x_path, x_values, y_path, y_values) -> SweepResult`, NumPy-vectorized, max 201×201 — phase 2 commit
+- [x] 2a.3 POST /sweep; tests: hand cases, slopes, 422 unknown path, 422 oversized grid — phase 2 commit
+- [x] 2b.1 Card §9 multi-lane tray; hand case 8 lanes, lane 5 patch 2.0 dB → −0.5008, deciding lane 5, EXCLUDED — phase 2 commit
+- [x] 2b.2 src/oicd/tray.py, POST /evaluate_tray; tests: hand case, property (adding a lane never raises tray margin) — phase 2 commit
+- [x] 2c.1 Card §10 upstream chain (Milestone 2), hand cases N = 16, 17, 18, max fan-out 17 — phase 2 commit
+- [x] 2c.2 src/oicd/upstream.py `derive_tp2(chain)` with itemized trace, `max_fanout(...)` — phase 2 commit
+- [x] 2c.3 Report gains optional upstream section; POST /evaluate accepts a fixed TP2 or a chain; tests — phase 2 commit
+- [x] 2d.1 Card §11 statistical budget and yield, with the "why"; hand case σ_total 0.34641, z 1.44107, yield 0.92522, 3σ margin −0.54003 — phase 2 commit
+- [x] 2d.2 src/oicd/statistics.py `analytic_yield`, `monte_carlo_yield` (seeded Generator, 10^6 samples within 0.002) — phase 2 commit
+- [x] 2d.3 POST /yield labeled "statistical, assumption-dependent"; never changes the worst-case verdict; tests — phase 2 commit
+- [x] 2.4 docs/hand_calcs scripts for §8 to §11 — phase 2 commit
 - [ ] 2.5 Phase 2 checks green and commit
 
 ## Phase 3: validation against standards
@@ -153,3 +153,5 @@ Baseline before Phase 0 (brief 03 tree on `main`): pytest 147 passed, ruff check
 
 | Phase | Commit | pytest | ruff check | ruff format | web build | typecheck | e2e | vitest |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 0 | d0b203f | 147 passed | clean | clean | n/a | n/a | n/a | n/a |
+| 1 | b6e9c6e | 149 passed | clean | clean | ok | ok | 1 passed | n/a |

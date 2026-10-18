@@ -149,6 +149,19 @@ def avg_to_oma(p_avg: OpticalPower, er_db: DB) -> OpticalPower:
     return OpticalPower(mw_to_dbm(oma_mw), PowerKind.OMA)
 
 
+def oma_offset_db(er_db: DB) -> DB:
+    """OMA relative to average power for extinction ratio ER (linear): 10·log10(2(ER−1)/(ER+1)).
+
+    The §3 conversion OMA = 2·P_avg·(ER − 1)/(ER + 1) in dB form, so OMA_dBm = P_avg,dBm + offset.
+    """
+    if type(er_db) is not DB:
+        raise TypeError(f"extinction ratio must be DB, got {er_db!r}")
+    if er_db.value <= 0.0:
+        raise ValueError(f"extinction ratio must be > 0 dB, got {er_db.value} dB")
+    er = 10.0 ** (er_db.value / 10.0)
+    return DB(10.0 * math.log10(2.0 * (er - 1.0) / (er + 1.0)))
+
+
 def delta_lambda_nm(lambda_nm: float, delta_f_ghz: float) -> float:
     """Wavelength span for a frequency span: delta_lambda ~= lambda^2 * delta_f / c."""
     lam_nm = _finite_float(lambda_nm, "nm")

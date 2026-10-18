@@ -125,3 +125,100 @@ T04 note: the float result depends on summation order. The test asserts PASS and
 | 2026-10-18 | §4 lists the fiber as the two §2 segments, 2 × 0.0004 dB | matches the §2 diagram, the shipped profile and the 3D scene; Σ L stays 4.0008 dB (brief 03 decision 3) | one lumped 2 m element |
 | 2026-10-18 | T16 added: trace flag at an exact boundary | review R1 found the disagreement on this input | property test only |
 | 2026-10-18 | ≥, ≤ and − throughout the card instead of their ASCII spellings | one notation for every pass rule | mixed ASCII and math notation |
+| 2026-10-18 | §8 design-space sweep: a 2D grid of any two power or wavelength inputs, at most 201 × 201, with the 0 dB contour | brief 05 phase 2a; shows the trade-offs a single margin hides | 1D sweeps only (brief 04 phase B) |
+| 2026-10-18 | §9 multi-lane tray: excluded if any lane is, margin = minimum lane margin, deciding lane reported | brief 05 phase 2b; a tray ships as a unit | average lane margin: hides the lane that fails |
+| 2026-10-18 | §10 upstream chain derives TP2 from the laser (Milestone 2), with max fan-out by search | brief 05 phase 2c; TP2 in CPO is set by the shared external laser | keep TP2 a free input: hides the split limit |
+| 2026-10-18 | §11 statistical yield Φ(M_mean/σ_total) with a seeded Monte Carlo, never changing the worst-case verdict | brief 05 phase 2d; worst case over-provisions stacked connectors | replace the worst-case verdict with yield: assumption-dependent |
+
+## 8. Design-space sweep
+
+The margin and verdict over a 2D grid of two numeric inputs, every other input fixed.
+
+```
+M_net[j, i]   = M_net(link with x ← x_i and y ← y_j),   i = 0 … n_x − 1,  j = 0 … n_y − 1
+verdict[j, i] = verdict of the same edited link (all three checks of §3)
+```
+
+- **Sweepable inputs:** `channel[i].loss_max`, `penalties[i].value` and `reserve` (dB); `tx.launch_oma_min` and `rx.sensitivity_oma_max` (dBm OMA); `tx.center_wavelength_nm`, `tx.wavelength_tolerance_nm`, `rx.passband_min_nm` and `rx.passband_max_nm` (nm). Electrical inputs are matched, not swept.
+- **Axes:** 1 to 201 strictly increasing finite values each, every value valid for its input under the T12 rules, and x and y different inputs. A grid larger than 201 × 201 is invalid input.
+- **Exactness:** every cell is evaluated with the §3 expressions in the §3 summation order, so a cell equals the margin of the edited link evaluated on its own, bit for bit.
+- **Slopes:** M_net is affine in every power input: ∂M/∂L_i = −1, ∂M/∂Π_j = −1, ∂M/∂R = −1, ∂M/∂P_TP2 = +1, ∂M/∂S_RX = −1 (dB per dB).
+- **0 dB contour:** the segments where M_net crosses 0, by linear interpolation along the grid edges (marching squares). For an affine field this is exact.
+- **Best and worst cells:** the cells with the largest and smallest margin; ties go to the lowest (j, i).
+
+Why: one margin number hides which inputs the design is close to the boundary in. The grid shows which inputs trade against each other at 1 dB per dB and where the design falls off.
+
+Hand cases (`docs/hand_calcs/s08_sweep.py`): the §4 worked example, x = patch connector loss (`channel[2].loss_max`) from 0 to 2 dB, y = TX OMA (`tx.launch_oma_min`) from −1 to +1 dBm.
+
+| (patch loss, TX OMA) | M_net |
+| --- | --- |
+| (1.0 dB, 0 dBm), the design point | +0.4992 dB |
+| (2.0 dB, 0 dBm) | −0.5008 dB |
+| (0 dB, +1 dBm) | +2.4992 dB |
+
+Slope −1 dB per dB of patch loss, +1 dB per dB of TX OMA.
+
+## 9. Multi-lane tray
+
+A tray is N lanes, each a §3 link, evaluated independently.
+
+```
+M_tray        = min_k M_net,k
+verdict_tray  = EXCLUDED  iff  any lane is EXCLUDED
+deciding lane = the excluded lane with the smallest margin if any lane is excluded,
+                otherwise the lane with the smallest margin; ties go to the lowest index
+```
+
+Lanes are indexed from 0 in request order, like `channel[i]`. A tray has 1 to 1024 lanes.
+
+Property: adding a lane never raises M_tray (a minimum over a superset).
+
+Why: a tray ships as a unit. One excluded lane makes the tray unusable at the modeled constraints, so the tray is only as good as its worst lane, and the report has to say which lane that is.
+
+Hand case (`docs/hand_calcs/s09_tray.py`): 8 copies of the §4 worked example, lane 5 (index 5) with its patch connector at 2.0 dB: lane margins +0.4992 dB except lane 5 at −0.5008 dB; M_tray = −0.5008 dB, deciding lane 5, EXCLUDED.
+
+## 10. Upstream chain: TP2 derived (Milestone 2)
+
+The §2 upstream elements, from the laser to TP2, replace the fixed TP2 input when a chain is given.
+
+```
+P_TP2,avg [dBm] = P_laser,avg − L_laser_fiber − L_couple − 10·log10(N) − L_excess − L_mod − L_out
+P_TP2,OMA [dBm] = P_TP2,avg + 10·log10(2·(ER − 1)/(ER + 1)),   ER linear (the §3 OMA formula)
+max fan-out     = the largest N ≥ 1 for which the link is NOT_EXCLUDED, found by search
+```
+
+- P_laser,avg: average laser power per output fiber; L_laser_fiber: laser fiber and connector to the PIC; L_couple: fiber-to-PIC coupling; 10·log10(N): ideal 1:N split; L_excess: split excess loss; L_mod: modulator insertion loss; L_out: output coupler to TP2; ER: modulator extinction ratio. All dB values ≥ 0, N an integer ≥ 1, ER > 0 dB.
+- Losses are subtracted in the order written. M_net falls monotonically with N, so the search stops at the first excluded N. If N = 1 is already excluded, the max fan-out is 0.
+- The derived TP2 is INFERENCE (computed from its parents); the chain inputs keep their own provenance.
+
+Why: in co-packaged optics the laser is external and shared, so TP2 is not a free input but what is left of the laser power after the split and the modulator. Deriving it exposes the fan-out limit: each doubling of N costs 10·log10(2) = 3.0103 dB of margin.
+
+Hand case (`docs/hand_calcs/s10_upstream.py`; all SYNTHETIC): laser 20 dBm average, laser fiber and connector 0.5 dB, coupling 1.5 dB, excess 0 dB, modulator IL 4.0 dB, output coupler 1.5 dB, ER 4 dB, the §4 channel (4.0008 dB), S_RX −6 dBm OMA, R 1.5 dB. Tolerance 1e-4.
+
+| N | P_TP2,avg | P_TP2,OMA | M_net | Verdict |
+| --- | --- | --- | --- | --- |
+| 16 | +0.4588 dBm | −0.1911 dBm | +0.3081 dB | NOT_EXCLUDED |
+| 17 | +0.1955 dBm | −0.4544 dBm | +0.0448 dB | NOT_EXCLUDED |
+| 18 | −0.0527 dBm | −0.7026 dBm | −0.2034 dB | EXCLUDED |
+
+Max fan-out: 17.
+
+## 11. Statistical budget and yield
+
+Loss elements may carry a normal distribution (SYNTHETIC) in addition to their worst-case maximum.
+
+```
+L_i ~ N(μ_i, σ_i²), independent; elements without a distribution stay at L_i,max
+M_mean   = M_net with every distributed L_i at μ_i
+σ_total  = sqrt(Σ σ_i²)
+yield    = P(M_net ≥ 0) = Φ(M_mean / σ_total),   Φ the standard normal CDF
+M_kσ     = M_mean − k·σ_total
+```
+
+- Monte Carlo draws every distributed L_i from a seeded generator and evaluates M_net per sample with the §3 expression; the Monte Carlo yield is the fraction of samples with M_net ≥ −ε and must reproduce the analytic yield. Samples are not truncated at 0 dB, so that they match the analytic model.
+- With σ_total = 0 the yield is 1 if M_mean ≥ −ε and 0 otherwise, and z = M_mean/σ_total is undefined (reported as null).
+- The result is labeled "statistical, assumption-dependent". It never changes the worst-case verdict, which §3 decides with every L_i at L_i,max.
+
+Why: worst-case design over-provisions when connectors stack, because every connector at its maximum at once is rare. Independence and normality are assumptions: real connector loss is non-negative and skewed, so the normal tails are approximate, and correlated losses (one bad batch of ferrules) would widen σ_total beyond the root-sum-square.
+
+Hand case (`docs/hand_calcs/s11_yield.py`): the §4 worked example with the three matings (μ = 1.5, 1.0 and 1.5 dB) each σ = 0.2 dB, fiber fixed. σ_total = 0.34641 dB, z = 1.44107, yield = 0.92522, M_3σ = −0.54003 dB. A seeded Monte Carlo with 10^6 samples lands within 0.002 of 0.92522 (its standard error is 0.00026).

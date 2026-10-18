@@ -124,3 +124,6 @@ for name, lam in (("A", 1311.0), ("B", 1331.0)):
         f"  direction {name} at {lam} nm: lower clearance {lam - 1304.5:+.1f} nm, "
         f"upper clearance {1317.5 - lam:+.1f} nm"
     )
+
+peak = ring_drop(0.0, 0.0, fwhm, 1800.0)
+print(f"§13.1 image-sum peak at Q 3500, FSR 1.8 THz: {peak:.6f} = +{10 * log10(peak):.4f} dB")

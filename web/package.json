@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
     "e2e": "playwright test",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "gen:api": "uv run python ../scripts/dump_openapi.py openapi.json && openapi-typescript openapi.json -o src/api/schema.ts"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.9",
@@ -28,6 +29,7 @@
     "@types/react-dom": "^19.2.7",
     "@types/three": "^0.186.0",
     "@vitejs/plugin-react": "^6.1.1",
+    "openapi-typescript": "^7.13.0",
     "typescript": "~6.0.2",
     "vite": "^8.3.0"
   }

@@ -16,6 +16,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, Response
 from pydantic import BaseModel, ConfigDict, Field, ValidationError, model_validator
 
+from oicd.api_physics import router as physics_router
+from oicd.api_twin import router as twin_router
 from oicd.profiles import PROFILES_DIR, load_link, profile_path
 from oicd.report import FeasibilityReport, evaluate
 from oicd.schema import Link
@@ -36,7 +38,12 @@ from oicd.units import UnitMismatchError
 # The Vite dev server; no other origin may call the API from a browser.
 ALLOWED_ORIGINS = ["http://localhost:5173"]
 
-app = FastAPI(title="OICD feasibility engine", version="0.2.0")
+app = FastAPI(
+    title="OICD feasibility engine",
+    version="0.3.0",
+    description="Independent reconstruction from public information. Not affiliated with or "
+    "endorsed by Lightmatter. Product names belong to their owners.",
+)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=ALLOWED_ORIGINS,
@@ -83,6 +90,10 @@ def _engine_invalid(exc: Exception) -> JSONResponse:
 
 def _json(model: BaseModel) -> Response:
     return Response(content=canonical_json(model), media_type="application/json")
+
+
+app.include_router(twin_router)
+app.include_router(physics_router)
 
 
 @app.get("/health")

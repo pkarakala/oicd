@@ -1,0 +1,87 @@
+# Passage L20 package (model card §14.2). Units: mm. The outline is the OFC 2026 slide's
+# 37.5 x 27.6 x 4.55 mm (VENDOR); the product page says 37.5 x 26.4 mm (a recorded CONFLICT).
+# Everything inside the outline is SCHEMATIC: Lightmatter discloses no internal dimensions.
+# Independent reconstruction from public information. Not affiliated with or endorsed by
+# Lightmatter. Product names belong to their owners.
+
+[scene]
+id = "passage_l20"
+name = "Passage L20 package"
+unit = "mm"
+level = "package"
+summary = "BiDi optical engine for near-package and on-board optics: EIC stacked on PIC on an organic substrate, a vClick fiber-array unit and a BGA."
+
+[[part]]
+id = "l20g.outline"
+name = "package outline (OFC 2026 slide)"
+assembly = "package"
+size = [37.5, 27.6, 4.55]
+position = [0.0, 0.0, 2.275]
+material = "outline"
+dims_class = "VENDOR"
+dims_source = "l20.width_mm_yole"
+function = "Overall package envelope as given on the OFC 2026 slide (length l20.length_mm_yole, height l20.height_mm_yole)."
+
+[[part]]
+id = "l20g.substrate"
+name = "organic substrate"
+assembly = "package"
+size = [37.5, 27.6, 1.0]
+position = [0.0, 0.0, 0.5]
+material = "organic_substrate"
+dims_class = "SCHEMATIC"
+dims_source = "Footprint drawn to the outline; substrate thickness not disclosed."
+function = "Routes the SerDes and power between the BGA and the dies."
+explode = [0.0, 0.0, -6.0]
+
+[[part]]
+id = "l20g.pic"
+name = "photonic IC (PIC)"
+assembly = "dies"
+size = [22.0, 16.0, 0.775]
+position = [-2.0, 0.0, 1.39]
+material = "silicon"
+dims_class = "SCHEMATIC"
+dims_source = "PIC size not disclosed; drawn to fit the outline."
+function = "Modulators, photodiodes, on-chip diplexers and laser input couplers."
+explode = [0.0, 0.0, 4.0]
+
+[[part]]
+id = "l20g.eic"
+name = "electronic IC (EIC), 3D-stacked on the PIC"
+assembly = "dies"
+size = [14.0, 12.0, 0.5]
+position = [-4.0, 0.0, 2.05]
+material = "silicon_eic"
+dims_class = "SCHEMATIC"
+dims_source = "EIC size not disclosed; drawn to fit on the PIC."
+function = "Drivers, TIAs and 212.5 Gb/s PAM4 SerDes."
+explode = [0.0, 0.0, 9.0]
+
+[[part]]
+id = "l20g.fau"
+name = "vClick fiber-array unit"
+assembly = "optics"
+size = [8.0, 14.0, 2.2]
+position = [13.0, 0.0, 2.9]
+material = "glass"
+dims_class = "SCHEMATIC"
+dims_source = "FAU size not disclosed; drawn over the PIC edge."
+function = "Detachable vertically expanded-beam fiber attach for the 32 BiDi fibers and 8 laser fibers."
+explode = [8.0, 0.0, 6.0]
+
+[[part]]
+id = "l20g.bga"
+name = "BGA balls (2000 per the release, 1827 per the product page)"
+assembly = "package"
+shape = "sphere"
+size = [0.45, 0.45, 0.45]
+position = [-17.64, -12.87, -0.225]
+material = "solder"
+dims_class = "SCHEMATIC"
+dims_source = "Ball size and pitch not disclosed; drawn as 50 x 40 = 2000 balls at a schematic pitch."
+function = "Electrical interface to the board."
+explode = [0.0, 0.0, -10.0]
+count = 2000
+grid = [50, 40, 1]
+pitch = [0.72, 0.66, 0.0]

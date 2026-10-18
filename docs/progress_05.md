@@ -102,10 +102,10 @@ Baseline before Phase 0 (brief 03 tree on `main`): pytest 147 passed, ruff check
 
 ## Phase 7: API
 
-- [ ] 7.1 GET /catalog, GET /catalog/{product}, POST /inference/{product}, GET /geometry/{scene}
-- [ ] 7.2 POST /ring, /wdm/grid, /wdm/crosstalk, /bidi/link, /mpi, /rack, /pod, /ptc/simulate; existing endpoints kept
-- [ ] 7.3 web/src/api/schema.ts from OpenAPI via openapi-typescript (npm run gen:api), regenerated in CI
-- [ ] 7.4 Tests per endpoint with hand values; 422 on invalid physics; deterministic JSON
+- [x] 7.1 GET /catalog, GET /catalog/{product}, POST /inference/{product}, GET /geometry/{scene} — phase 7 commit; /ptc/simulate arrives with its model in phase 9 (D05-59)
+- [x] 7.2 POST /ring, /wdm/grid, /wdm/crosstalk, /bidi/link, /mpi, /rack, /pod, /ptc/simulate; existing endpoints kept — phase 7 commit; /ptc/simulate arrives with its model in phase 9 (D05-59)
+- [x] 7.3 web/src/api/schema.ts from OpenAPI via openapi-typescript (npm run gen:api), regenerated in CI — phase 7 commit; /ptc/simulate arrives with its model in phase 9 (D05-59)
+- [x] 7.4 Tests per endpoint with hand values; 422 on invalid physics; deterministic JSON — phase 7 commit; /ptc/simulate arrives with its model in phase 9 (D05-59)
 - [ ] 7.5 Phase 7 checks green and commit
 
 ## Phase 8: CAD-grade 3D explorer

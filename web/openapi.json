@@ -1,0 +1,4972 @@
+{
+  "components": {
+    "schemas": {
+      "AnalyticYield": {
+        "additionalProperties": false,
+        "properties": {
+          "distributed": {
+            "items": {
+              "$ref": "#/components/schemas/DistributedLoss"
+            },
+            "title": "Distributed",
+            "type": "array"
+          },
+          "label": {
+            "const": "statistical, assumption-dependent",
+            "default": "statistical, assumption-dependent",
+            "title": "Label",
+            "type": "string"
+          },
+          "m_mean_db": {
+            "title": "M Mean Db",
+            "type": "number"
+          },
+          "margin_at_3sigma_db": {
+            "title": "Margin At 3Sigma Db",
+            "type": "number"
+          },
+          "sigma_total_db": {
+            "title": "Sigma Total Db",
+            "type": "number"
+          },
+          "worst_case_margin_db": {
+            "title": "Worst Case Margin Db",
+            "type": "number"
+          },
+          "worst_case_verdict": {
+            "enum": [
+              "NOT_EXCLUDED",
+              "EXCLUDED"
+            ],
+            "title": "Worst Case Verdict",
+            "type": "string"
+          },
+          "yield_fraction": {
+            "title": "Yield Fraction",
+            "type": "number"
+          },
+          "z": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Z"
+          }
+        },
+        "required": [
+          "worst_case_verdict",
+          "worst_case_margin_db",
+          "m_mean_db",
+          "sigma_total_db",
+          "z",
+          "yield_fraction",
+          "margin_at_3sigma_db",
+          "distributed"
+        ],
+        "title": "AnalyticYield",
+        "type": "object"
+      },
+      "AxisRequest": {
+        "additionalProperties": false,
+        "description": "One sweep axis: explicit values, or start, stop and num (np.linspace).",
+        "properties": {
+          "num": {
+            "anyOf": [
+              {
+                "maximum": 201.0,
+                "minimum": 1.0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Num"
+          },
+          "path": {
+            "title": "Path",
+            "type": "string"
+          },
+          "start": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Start"
+          },
+          "stop": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Stop"
+          },
+          "values": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "number"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Values"
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "title": "AxisRequest",
+        "type": "object"
+      },
+      "BidiDirection": {
+        "additionalProperties": false,
+        "description": "One direction of a BiDi link, as the engine at each end specifies it.",
+        "properties": {
+          "extra_penalties_db": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/Quantity_float_"
+            },
+            "default": {},
+            "title": "Extra Penalties Db",
+            "type": "object"
+          },
+          "fec": {
+            "$ref": "#/components/schemas/FEC",
+            "default": "RS(544,514)"
+          },
+          "modulation": {
+            "enum": [
+              "NRZ",
+              "PAM4"
+            ],
+            "title": "Modulation",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "rx_passband_max_nm": {
+            "$ref": "#/components/schemas/Quantity_float_"
+          },
+          "rx_passband_min_nm": {
+            "$ref": "#/components/schemas/Quantity_float_"
+          },
+          "rx_sensitivity_dbm": {
+            "$ref": "#/components/schemas/Quantity_float_"
+          },
+          "symbol_rate_gbd": {
+            "exclusiveMinimum": 0.0,
+            "title": "Symbol Rate Gbd",
+            "type": "number"
+          },
+          "tx_center_nm": {
+            "$ref": "#/components/schemas/Quantity_float_"
+          },
+          "tx_oma_dbm": {
+            "$ref": "#/components/schemas/Quantity_float_"
+          },
+          "tx_tolerance_nm": {
+            "$ref": "#/components/schemas/Quantity_float_"
+          },
+          "wdm_leakage": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Quantity_float_"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "name",
+          "modulation",
+          "symbol_rate_gbd",
+          "tx_oma_dbm",
+          "tx_center_nm",
+          "tx_tolerance_nm",
+          "rx_passband_min_nm",
+          "rx_passband_max_nm",
+          "rx_sensitivity_dbm"
+        ],
+        "title": "BidiDirection",
+        "type": "object"
+      },
+      "BidiDirectionResult": {
+        "additionalProperties": false,
+        "properties": {
+          "channel_il_db": {
+            "title": "Channel Il Db",
+            "type": "number"
+          },
+          "min_tx_oma_dbm": {
+            "title": "Min Tx Oma Dbm",
+            "type": "number"
+          },
+          "mpi_db": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Mpi Db"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "reflection": {
+            "$ref": "#/components/schemas/ReflectionCrosstalk"
+          },
+          "report": {
+            "$ref": "#/components/schemas/FeasibilityReport"
+          },
+          "wdm_crosstalk_db": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Wdm Crosstalk Db"
+          }
+        },
+        "required": [
+          "name",
+          "report",
+          "channel_il_db",
+          "reflection",
+          "mpi_db",
+          "wdm_crosstalk_db",
+          "min_tx_oma_dbm"
+        ],
+        "title": "BidiDirectionResult",
+        "type": "object"
+      },
+      "BidiLinkRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "a_to_b": {
+            "$ref": "#/components/schemas/BidiDirection"
+          },
+          "b_to_a": {
+            "$ref": "#/components/schemas/BidiDirection"
+          },
+          "connector_losses_db": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/Quantity_float_"
+            },
+            "title": "Connector Losses Db",
+            "type": "array"
+          },
+          "diplexer_il_db": {
+            "$ref": "#/components/schemas/Quantity_float_"
+          },
+          "diplexer_isolation_db": {
+            "$ref": "#/components/schemas/Quantity_float_"
+          },
+          "fiber_length_km": {
+            "$ref": "#/components/schemas/Quantity_float_"
+          },
+          "fiber_loss_db_per_km": {
+            "$ref": "#/components/schemas/Quantity_float_",
+            "default": {
+              "provenance": {
+                "citation_key": "itut_g652_2024",
+                "rationale": "ITU-T G.652 (08/2024): maximum attenuation 0.40 dB/km from 1310 to 1625 nm.",
+                "source_class": "published_spec"
+              },
+              "value": 0.4
+            }
+          },
+          "mpi": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/MpiInputs"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "name": {
+            "default": "BiDi link",
+            "title": "Name",
+            "type": "string"
+          },
+          "reserve_db": {
+            "$ref": "#/components/schemas/Quantity_float_",
+            "default": {
+              "provenance": {
+                "rationale": "Entered as a what-if input of the BiDi link model (not from a source).",
+                "source_class": "synthetic"
+              },
+              "value": 0.0
+            }
+          },
+          "return_loss_db": {
+            "$ref": "#/components/schemas/Quantity_float_"
+          }
+        },
+        "required": [
+          "a_to_b",
+          "b_to_a",
+          "diplexer_il_db",
+          "diplexer_isolation_db",
+          "fiber_length_km",
+          "return_loss_db"
+        ],
+        "title": "BidiLinkRequest",
+        "type": "object"
+      },
+      "BidiLinkResult": {
+        "additionalProperties": false,
+        "properties": {
+          "deciding_direction": {
+            "title": "Deciding Direction",
+            "type": "string"
+          },
+          "directions": {
+            "items": {
+              "$ref": "#/components/schemas/BidiDirectionResult"
+            },
+            "title": "Directions",
+            "type": "array"
+          },
+          "margin_db": {
+            "title": "Margin Db",
+            "type": "number"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "verdict": {
+            "enum": [
+              "NOT_EXCLUDED",
+              "EXCLUDED"
+            ],
+            "title": "Verdict",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "verdict",
+          "margin_db",
+          "deciding_direction",
+          "directions"
+        ],
+        "title": "BidiLinkResult",
+        "type": "object"
+      },
+      "CatalogIndex": {
+        "additionalProperties": false,
+        "properties": {
+          "independence": {
+            "title": "Independence",
+            "type": "string"
+          },
+          "products": {
+            "items": {
+              "$ref": "#/components/schemas/ProductSummary"
+            },
+            "title": "Products",
+            "type": "array"
+          }
+        },
+        "required": [
+          "independence",
+          "products"
+        ],
+        "title": "CatalogIndex",
+        "type": "object"
+      },
+      "Channel": {
+        "additionalProperties": false,
+        "properties": {
+          "frequency_ghz": {
+            "title": "Frequency Ghz",
+            "type": "number"
+          },
+          "grid": {
+            "enum": [
+              "A",
+              "B"
+            ],
+            "title": "Grid",
+            "type": "string"
+          },
+          "index": {
+            "title": "Index",
+            "type": "integer"
+          },
+          "wavelength_nm": {
+            "title": "Wavelength Nm",
+            "type": "number"
+          }
+        },
+        "required": [
+          "index",
+          "frequency_ghz",
+          "wavelength_nm",
+          "grid"
+        ],
+        "title": "Channel",
+        "type": "object"
+      },
+      "CheckOutcome": {
+        "additionalProperties": false,
+        "properties": {
+          "a": {
+            "title": "A",
+            "type": "string"
+          },
+          "a_value": {
+            "title": "A Value",
+            "type": "number"
+          },
+          "b": {
+            "title": "B",
+            "type": "string"
+          },
+          "b_value": {
+            "title": "B Value",
+            "type": "number"
+          },
+          "explanation": {
+            "title": "Explanation",
+            "type": "string"
+          },
+          "gap_abs": {
+            "title": "Gap Abs",
+            "type": "number"
+          },
+          "gap_rel": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Gap Rel"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "interval_overlap": {
+            "title": "Interval Overlap",
+            "type": "boolean"
+          },
+          "kind": {
+            "enum": [
+              "consistent",
+              "bound"
+            ],
+            "title": "Kind",
+            "type": "string"
+          },
+          "rel_tol": {
+            "title": "Rel Tol",
+            "type": "number"
+          },
+          "status": {
+            "enum": [
+              "CONSISTENT",
+              "TENSION",
+              "CONFLICT"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "unit": {
+            "title": "Unit",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "kind",
+          "a",
+          "b",
+          "unit",
+          "a_value",
+          "b_value",
+          "gap_abs",
+          "gap_rel",
+          "rel_tol",
+          "status",
+          "interval_overlap",
+          "explanation"
+        ],
+        "title": "CheckOutcome",
+        "type": "object"
+      },
+      "CheckResult": {
+        "additionalProperties": false,
+        "properties": {
+          "constraint": {
+            "$ref": "#/components/schemas/ConstraintId"
+          },
+          "evidence": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            "title": "Evidence",
+            "type": "object"
+          },
+          "message": {
+            "title": "Message",
+            "type": "string"
+          },
+          "status": {
+            "$ref": "#/components/schemas/Status"
+          }
+        },
+        "required": [
+          "constraint",
+          "status",
+          "evidence",
+          "message"
+        ],
+        "title": "CheckResult",
+        "type": "object"
+      },
+      "ConflictPair": {
+        "additionalProperties": false,
+        "properties": {
+          "a": {
+            "title": "A",
+            "type": "string"
+          },
+          "b": {
+            "title": "B",
+            "type": "string"
+          },
+          "cite_a": {
+            "title": "Cite A",
+            "type": "string"
+          },
+          "cite_b": {
+            "title": "Cite B",
+            "type": "string"
+          },
+          "quantity_a": {
+            "title": "Quantity A",
+            "type": "string"
+          },
+          "quantity_b": {
+            "title": "Quantity B",
+            "type": "string"
+          },
+          "quote_a": {
+            "title": "Quote A",
+            "type": "string"
+          },
+          "quote_b": {
+            "title": "Quote B",
+            "type": "string"
+          },
+          "value_a": {
+            "title": "Value A",
+            "type": "string"
+          },
+          "value_b": {
+            "title": "Value B",
+            "type": "string"
+          }
+        },
+        "required": [
+          "a",
+          "b",
+          "quantity_a",
+          "quantity_b",
+          "quote_a",
+          "quote_b",
+          "cite_a",
+          "cite_b",
+          "value_a",
+          "value_b"
+        ],
+        "title": "ConflictPair",
+        "type": "object"
+      },
+      "ConstraintId": {
+        "enum": [
+          "electrical_match",
+          "wavelength_containment",
+          "optical_power_budget",
+          "ber",
+          "tdecq",
+          "dispersion",
+          "reflections_mpi",
+          "thermal",
+          "reliability"
+        ],
+        "title": "ConstraintId",
+        "type": "string"
+      },
+      "CrosstalkRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "center_nm": {
+            "default": 1310.0,
+            "exclusiveMinimum": 0.0,
+            "title": "Center Nm",
+            "type": "number"
+          },
+          "count": {
+            "default": 16,
+            "maximum": 128.0,
+            "minimum": 2.0,
+            "title": "Count",
+            "type": "integer"
+          },
+          "fsr_ghz": {
+            "exclusiveMinimum": 0.0,
+            "title": "Fsr Ghz",
+            "type": "number"
+          },
+          "il_db": {
+            "anyOf": [
+              {
+                "minimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Il Db"
+          },
+          "margin_ghz": {
+            "default": 300.0,
+            "minimum": 0.0,
+            "title": "Margin Ghz",
+            "type": "number"
+          },
+          "modulation": {
+            "default": "NRZ",
+            "enum": [
+              "NRZ",
+              "PAM4"
+            ],
+            "title": "Modulation",
+            "type": "string"
+          },
+          "q_loaded": {
+            "exclusiveMinimum": 0.0,
+            "title": "Q Loaded",
+            "type": "number"
+          },
+          "receive": {
+            "default": "odd",
+            "enum": [
+              "odd",
+              "even"
+            ],
+            "title": "Receive",
+            "type": "string"
+          },
+          "rl_db": {
+            "anyOf": [
+              {
+                "minimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rl Db"
+          },
+          "spacing_ghz": {
+            "default": 200.0,
+            "exclusiveMinimum": 0.0,
+            "title": "Spacing Ghz",
+            "type": "number"
+          },
+          "spectrum_points": {
+            "default": 0,
+            "maximum": 4001.0,
+            "minimum": 0.0,
+            "title": "Spectrum Points",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "q_loaded",
+          "fsr_ghz"
+        ],
+        "title": "CrosstalkRequest",
+        "type": "object"
+      },
+      "CrosstalkResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "frequency_ghz": {
+            "items": {
+              "type": "number"
+            },
+            "title": "Frequency Ghz",
+            "type": "array"
+          },
+          "fwhm_ghz": {
+            "title": "Fwhm Ghz",
+            "type": "number"
+          },
+          "grid": {
+            "$ref": "#/components/schemas/Grid"
+          },
+          "receive_channels": {
+            "items": {
+              "type": "integer"
+            },
+            "title": "Receive Channels",
+            "type": "array"
+          },
+          "rings": {
+            "items": {
+              "$ref": "#/components/schemas/RingLeakage"
+            },
+            "title": "Rings",
+            "type": "array"
+          },
+          "spectra": {
+            "items": {
+              "$ref": "#/components/schemas/RingSpectrum"
+            },
+            "title": "Spectra",
+            "type": "array"
+          },
+          "transmit_channels": {
+            "items": {
+              "type": "integer"
+            },
+            "title": "Transmit Channels",
+            "type": "array"
+          },
+          "worst": {
+            "$ref": "#/components/schemas/RingLeakage"
+          }
+        },
+        "required": [
+          "grid",
+          "fwhm_ghz",
+          "receive_channels",
+          "transmit_channels",
+          "rings",
+          "worst",
+          "frequency_ghz",
+          "spectra"
+        ],
+        "title": "CrosstalkResponse",
+        "type": "object"
+      },
+      "DB": {
+        "additionalProperties": false,
+        "description": "A power ratio in decibels.",
+        "properties": {
+          "value": {
+            "title": "Value",
+            "type": "number"
+          }
+        },
+        "required": [
+          "value"
+        ],
+        "title": "DB",
+        "type": "object"
+      },
+      "DBm": {
+        "additionalProperties": false,
+        "description": "An absolute power level in decibels relative to 1 mW.",
+        "properties": {
+          "value": {
+            "title": "Value",
+            "type": "number"
+          }
+        },
+        "required": [
+          "value"
+        ],
+        "title": "DBm",
+        "type": "object"
+      },
+      "DesignWindow": {
+        "additionalProperties": false,
+        "description": "[Q_min, Q_max] for one spacing and symbol rate (SYNTHETIC rules, model card §13.3).",
+        "properties": {
+          "bandwidth_factor": {
+            "title": "Bandwidth Factor",
+            "type": "number"
+          },
+          "f0_ghz": {
+            "title": "F0 Ghz",
+            "type": "number"
+          },
+          "max_crosstalk_db": {
+            "title": "Max Crosstalk Db",
+            "type": "number"
+          },
+          "open": {
+            "title": "Open",
+            "type": "boolean"
+          },
+          "q": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Q"
+          },
+          "q_inside": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Q Inside"
+          },
+          "q_max": {
+            "title": "Q Max",
+            "type": "number"
+          },
+          "q_min": {
+            "title": "Q Min",
+            "type": "number"
+          },
+          "spacing_ghz": {
+            "title": "Spacing Ghz",
+            "type": "number"
+          },
+          "symbol_rate_gbd": {
+            "title": "Symbol Rate Gbd",
+            "type": "number"
+          }
+        },
+        "required": [
+          "f0_ghz",
+          "spacing_ghz",
+          "symbol_rate_gbd",
+          "max_crosstalk_db",
+          "bandwidth_factor",
+          "q_min",
+          "q_max",
+          "open",
+          "q",
+          "q_inside"
+        ],
+        "title": "DesignWindow",
+        "type": "object"
+      },
+      "DistributedLoss": {
+        "additionalProperties": false,
+        "properties": {
+          "mean_db": {
+            "title": "Mean Db",
+            "type": "number"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "path": {
+            "title": "Path",
+            "type": "string"
+          },
+          "sigma_db": {
+            "title": "Sigma Db",
+            "type": "number"
+          },
+          "source_class": {
+            "$ref": "#/components/schemas/SourceClass"
+          }
+        },
+        "required": [
+          "path",
+          "name",
+          "mean_db",
+          "sigma_db",
+          "source_class"
+        ],
+        "title": "DistributedLoss",
+        "type": "object"
+      },
+      "ElectricalInterface": {
+        "additionalProperties": false,
+        "properties": {
+          "fec": {
+            "$ref": "#/components/schemas/FEC"
+          },
+          "lanes": {
+            "minimum": 1.0,
+            "title": "Lanes",
+            "type": "integer"
+          },
+          "modulation": {
+            "enum": [
+              "NRZ",
+              "PAM4"
+            ],
+            "title": "Modulation",
+            "type": "string"
+          },
+          "provenance": {
+            "$ref": "#/components/schemas/Provenance"
+          },
+          "symbol_rate_gbd": {
+            "exclusiveMinimum": 0.0,
+            "title": "Symbol Rate Gbd",
+            "type": "number"
+          }
+        },
+        "required": [
+          "modulation",
+          "symbol_rate_gbd",
+          "lanes",
+          "fec",
+          "provenance"
+        ],
+        "title": "ElectricalInterface",
+        "type": "object"
+      },
+      "EvaluatedGraph": {
+        "additionalProperties": false,
+        "properties": {
+          "checks": {
+            "items": {
+              "$ref": "#/components/schemas/CheckOutcome"
+            },
+            "title": "Checks",
+            "type": "array"
+          },
+          "conflicts": {
+            "items": {
+              "$ref": "#/components/schemas/ConflictPair"
+            },
+            "title": "Conflicts",
+            "type": "array"
+          },
+          "hypotheses": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Hypotheses",
+            "type": "array"
+          },
+          "nodes": {
+            "items": {
+              "$ref": "#/components/schemas/NodeResult"
+            },
+            "title": "Nodes",
+            "type": "array"
+          },
+          "overrides": {
+            "additionalProperties": {
+              "type": "number"
+            },
+            "title": "Overrides",
+            "type": "object"
+          },
+          "scope": {
+            "title": "Scope",
+            "type": "string"
+          },
+          "support": {
+            "items": {
+              "$ref": "#/components/schemas/SupportRow"
+            },
+            "title": "Support",
+            "type": "array"
+          },
+          "tornado": {
+            "items": {
+              "$ref": "#/components/schemas/TornadoEntry"
+            },
+            "title": "Tornado",
+            "type": "array"
+          }
+        },
+        "required": [
+          "scope",
+          "hypotheses",
+          "overrides",
+          "nodes",
+          "checks",
+          "conflicts",
+          "support",
+          "tornado"
+        ],
+        "title": "EvaluatedGraph",
+        "type": "object"
+      },
+      "FEC": {
+        "enum": [
+          "RS(544,514)",
+          "none"
+        ],
+        "title": "FEC",
+        "type": "string"
+      },
+      "FeasibilityReport": {
+        "additionalProperties": false,
+        "properties": {
+          "inputs": {
+            "items": {
+              "$ref": "#/components/schemas/InputRecord"
+            },
+            "title": "Inputs",
+            "type": "array"
+          },
+          "link_name": {
+            "title": "Link Name",
+            "type": "string"
+          },
+          "margin_db": {
+            "title": "Margin Db",
+            "type": "number"
+          },
+          "not_evaluated": {
+            "items": {
+              "$ref": "#/components/schemas/CheckResult"
+            },
+            "title": "Not Evaluated",
+            "type": "array"
+          },
+          "power_trace": {
+            "items": {
+              "$ref": "#/components/schemas/TracePoint"
+            },
+            "title": "Power Trace",
+            "type": "array"
+          },
+          "results": {
+            "items": {
+              "$ref": "#/components/schemas/CheckResult"
+            },
+            "title": "Results",
+            "type": "array"
+          },
+          "threshold_dbm": {
+            "title": "Threshold Dbm",
+            "type": "number"
+          },
+          "upstream": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UpstreamSection"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "verdict": {
+            "enum": [
+              "NOT_EXCLUDED",
+              "EXCLUDED"
+            ],
+            "title": "Verdict",
+            "type": "string"
+          }
+        },
+        "required": [
+          "link_name",
+          "verdict",
+          "margin_db",
+          "threshold_dbm",
+          "results",
+          "not_evaluated",
+          "inputs",
+          "power_trace"
+        ],
+        "title": "FeasibilityReport",
+        "type": "object"
+      },
+      "GeometryScene": {
+        "additionalProperties": false,
+        "properties": {
+          "part": {
+            "items": {
+              "$ref": "#/components/schemas/Part"
+            },
+            "title": "Part",
+            "type": "array"
+          },
+          "scene": {
+            "$ref": "#/components/schemas/SceneInfo"
+          }
+        },
+        "required": [
+          "scene",
+          "part"
+        ],
+        "title": "GeometryScene",
+        "type": "object"
+      },
+      "Grid": {
+        "additionalProperties": false,
+        "properties": {
+          "center_nm": {
+            "title": "Center Nm",
+            "type": "number"
+          },
+          "channels": {
+            "items": {
+              "$ref": "#/components/schemas/Channel"
+            },
+            "title": "Channels",
+            "type": "array"
+          },
+          "source_class": {
+            "const": "inference",
+            "default": "inference",
+            "title": "Source Class",
+            "type": "string"
+          },
+          "spacing_ghz": {
+            "title": "Spacing Ghz",
+            "type": "number"
+          },
+          "span_nm": {
+            "title": "Span Nm",
+            "type": "number"
+          }
+        },
+        "required": [
+          "center_nm",
+          "spacing_ghz",
+          "channels",
+          "span_nm"
+        ],
+        "title": "Grid",
+        "type": "object"
+      },
+      "GridRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "center_nm": {
+            "default": 1310.0,
+            "exclusiveMinimum": 0.0,
+            "title": "Center Nm",
+            "type": "number"
+          },
+          "count": {
+            "default": 16,
+            "maximum": 128.0,
+            "minimum": 1.0,
+            "title": "Count",
+            "type": "integer"
+          },
+          "spacing_ghz": {
+            "default": 200.0,
+            "exclusiveMinimum": 0.0,
+            "title": "Spacing Ghz",
+            "type": "number"
+          }
+        },
+        "title": "GridRequest",
+        "type": "object"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "title": "Detail",
+            "type": "array"
+          }
+        },
+        "title": "HTTPValidationError",
+        "type": "object"
+      },
+      "Histogram": {
+        "additionalProperties": false,
+        "description": "M_net samples binned over M_mean ± 5σ_total; samples outside are counted apart.",
+        "properties": {
+          "above": {
+            "title": "Above",
+            "type": "integer"
+          },
+          "below": {
+            "title": "Below",
+            "type": "integer"
+          },
+          "counts": {
+            "items": {
+              "type": "integer"
+            },
+            "title": "Counts",
+            "type": "array"
+          },
+          "edges_db": {
+            "items": {
+              "type": "number"
+            },
+            "title": "Edges Db",
+            "type": "array"
+          }
+        },
+        "required": [
+          "edges_db",
+          "counts",
+          "below",
+          "above"
+        ],
+        "title": "Histogram",
+        "type": "object"
+      },
+      "HypothesisInfo": {
+        "additionalProperties": false,
+        "properties": {
+          "group": {
+            "title": "Group",
+            "type": "string"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "sets": {
+            "additionalProperties": {
+              "type": "number"
+            },
+            "title": "Sets",
+            "type": "object"
+          },
+          "statement": {
+            "title": "Statement",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "statement",
+          "group",
+          "sets"
+        ],
+        "title": "HypothesisInfo",
+        "type": "object"
+      },
+      "Image": {
+        "additionalProperties": false,
+        "description": "A resonance order k ≠ 0 of a ring that lands exactly on a grid channel.",
+        "properties": {
+          "channel": {
+            "title": "Channel",
+            "type": "integer"
+          },
+          "direction": {
+            "enum": [
+              "co",
+              "counter"
+            ],
+            "title": "Direction",
+            "type": "string"
+          },
+          "effect": {
+            "title": "Effect",
+            "type": "string"
+          },
+          "order": {
+            "title": "Order",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "order",
+          "channel",
+          "direction",
+          "effect"
+        ],
+        "title": "Image",
+        "type": "object"
+      },
+      "InferenceRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "hypotheses": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "title": "Hypotheses",
+            "type": "array"
+          },
+          "overrides": {
+            "additionalProperties": {
+              "type": "number"
+            },
+            "default": {},
+            "title": "Overrides",
+            "type": "object"
+          }
+        },
+        "title": "InferenceRequest",
+        "type": "object"
+      },
+      "InputRecord": {
+        "additionalProperties": false,
+        "description": "One physical input to the evaluation, with its provenance.",
+        "properties": {
+          "citation_key": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Citation Key"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "path": {
+            "title": "Path",
+            "type": "string"
+          },
+          "rationale": {
+            "title": "Rationale",
+            "type": "string"
+          },
+          "source_class": {
+            "$ref": "#/components/schemas/SourceClass"
+          },
+          "unit": {
+            "title": "Unit",
+            "type": "string"
+          },
+          "value": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "integer"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "title": "Value"
+          }
+        },
+        "required": [
+          "path",
+          "name",
+          "value",
+          "unit",
+          "source_class",
+          "citation_key",
+          "rationale"
+        ],
+        "title": "InputRecord",
+        "type": "object"
+      },
+      "Item": {
+        "additionalProperties": false,
+        "properties": {
+          "label": {
+            "title": "Label",
+            "type": "string"
+          },
+          "note": {
+            "default": "",
+            "title": "Note",
+            "type": "string"
+          },
+          "source_class": {
+            "$ref": "#/components/schemas/SourceClass"
+          },
+          "unit": {
+            "title": "Unit",
+            "type": "string"
+          },
+          "value": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Value"
+          }
+        },
+        "required": [
+          "label",
+          "value",
+          "unit",
+          "source_class"
+        ],
+        "title": "Item",
+        "type": "object"
+      },
+      "LaneSummary": {
+        "additionalProperties": false,
+        "properties": {
+          "failed": {
+            "items": {
+              "$ref": "#/components/schemas/ConstraintId"
+            },
+            "title": "Failed",
+            "type": "array"
+          },
+          "index": {
+            "title": "Index",
+            "type": "integer"
+          },
+          "link_name": {
+            "title": "Link Name",
+            "type": "string"
+          },
+          "margin_db": {
+            "title": "Margin Db",
+            "type": "number"
+          },
+          "verdict": {
+            "enum": [
+              "NOT_EXCLUDED",
+              "EXCLUDED"
+            ],
+            "title": "Verdict",
+            "type": "string"
+          }
+        },
+        "required": [
+          "index",
+          "link_name",
+          "verdict",
+          "margin_db",
+          "failed"
+        ],
+        "title": "LaneSummary",
+        "type": "object"
+      },
+      "Link": {
+        "additionalProperties": false,
+        "properties": {
+          "channel": {
+            "items": {
+              "$ref": "#/components/schemas/LossElement"
+            },
+            "title": "Channel",
+            "type": "array"
+          },
+          "name": {
+            "default": "unnamed link",
+            "title": "Name",
+            "type": "string"
+          },
+          "penalties": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/Penalty"
+            },
+            "title": "Penalties",
+            "type": "array"
+          },
+          "reserve": {
+            "$ref": "#/components/schemas/Quantity_DB_"
+          },
+          "rx": {
+            "$ref": "#/components/schemas/Receiver"
+          },
+          "tx": {
+            "$ref": "#/components/schemas/Transmitter"
+          }
+        },
+        "required": [
+          "tx",
+          "rx",
+          "channel",
+          "reserve"
+        ],
+        "title": "Link",
+        "type": "object"
+      },
+      "LossDistribution": {
+        "additionalProperties": false,
+        "description": "Normal distribution of a loss for the statistical budget (model card §11). SYNTHETIC.",
+        "properties": {
+          "mean": {
+            "$ref": "#/components/schemas/Quantity_DB_"
+          },
+          "sigma": {
+            "$ref": "#/components/schemas/Quantity_DB_"
+          }
+        },
+        "required": [
+          "mean",
+          "sigma"
+        ],
+        "title": "LossDistribution",
+        "type": "object"
+      },
+      "LossElement": {
+        "additionalProperties": false,
+        "properties": {
+          "loss_distribution": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/LossDistribution"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "loss_max": {
+            "$ref": "#/components/schemas/Quantity_DB_"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "loss_max"
+        ],
+        "title": "LossElement",
+        "type": "object"
+      },
+      "MonteCarloYield": {
+        "additionalProperties": false,
+        "properties": {
+          "histogram": {
+            "$ref": "#/components/schemas/Histogram"
+          },
+          "label": {
+            "const": "statistical, assumption-dependent",
+            "default": "statistical, assumption-dependent",
+            "title": "Label",
+            "type": "string"
+          },
+          "n_samples": {
+            "title": "N Samples",
+            "type": "integer"
+          },
+          "sample_mean_db": {
+            "title": "Sample Mean Db",
+            "type": "number"
+          },
+          "sample_std_db": {
+            "title": "Sample Std Db",
+            "type": "number"
+          },
+          "seed": {
+            "title": "Seed",
+            "type": "integer"
+          },
+          "standard_error": {
+            "title": "Standard Error",
+            "type": "number"
+          },
+          "yield_fraction": {
+            "title": "Yield Fraction",
+            "type": "number"
+          }
+        },
+        "required": [
+          "n_samples",
+          "seed",
+          "yield_fraction",
+          "standard_error",
+          "sample_mean_db",
+          "sample_std_db",
+          "histogram"
+        ],
+        "title": "MonteCarloYield",
+        "type": "object"
+      },
+      "MpiInputs": {
+        "additionalProperties": false,
+        "properties": {
+          "er_db": {
+            "title": "Er Db",
+            "type": "number"
+          },
+          "m_levels": {
+            "title": "M Levels",
+            "type": "integer"
+          },
+          "n_connectors": {
+            "title": "N Connectors",
+            "type": "integer"
+          },
+          "provenance": {
+            "$ref": "#/components/schemas/Provenance",
+            "default": {
+              "rationale": "Entered as a what-if input of the BiDi link model (not from a source).",
+              "source_class": "synthetic"
+            }
+          },
+          "rc_db": {
+            "title": "Rc Db",
+            "type": "number"
+          },
+          "rr_db": {
+            "title": "Rr Db",
+            "type": "number"
+          },
+          "rt_db": {
+            "title": "Rt Db",
+            "type": "number"
+          }
+        },
+        "required": [
+          "m_levels",
+          "er_db",
+          "rt_db",
+          "rr_db",
+          "rc_db",
+          "n_connectors"
+        ],
+        "title": "MpiInputs",
+        "type": "object"
+      },
+      "MpiRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "er_db": {
+            "exclusiveMinimum": 0.0,
+            "title": "Er Db",
+            "type": "number"
+          },
+          "m_levels": {
+            "minimum": 2.0,
+            "title": "M Levels",
+            "type": "integer"
+          },
+          "n_connectors": {
+            "minimum": 0.0,
+            "title": "N Connectors",
+            "type": "integer"
+          },
+          "n_max": {
+            "anyOf": [
+              {
+                "maximum": 64.0,
+                "minimum": 0.0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "N Max"
+          },
+          "rc_db": {
+            "maximum": 0.0,
+            "title": "Rc Db",
+            "type": "number"
+          },
+          "rr_db": {
+            "maximum": 0.0,
+            "title": "Rr Db",
+            "type": "number"
+          },
+          "rt_db": {
+            "maximum": 0.0,
+            "title": "Rt Db",
+            "type": "number"
+          }
+        },
+        "required": [
+          "m_levels",
+          "er_db",
+          "rt_db",
+          "rr_db",
+          "rc_db",
+          "n_connectors"
+        ],
+        "title": "MpiRequest",
+        "type": "object"
+      },
+      "MpiResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "result": {
+            "$ref": "#/components/schemas/MpiResult"
+          },
+          "table": {
+            "items": {
+              "$ref": "#/components/schemas/MpiRow"
+            },
+            "title": "Table",
+            "type": "array"
+          }
+        },
+        "required": [
+          "result",
+          "table"
+        ],
+        "title": "MpiResponse",
+        "type": "object"
+      },
+      "MpiResult": {
+        "additionalProperties": false,
+        "properties": {
+          "method": {
+            "default": "worst-case bound (bhatt2016_mpi); conservative versus the 1e-6 allocation",
+            "title": "Method",
+            "type": "string"
+          },
+          "penalty_db": {
+            "title": "Penalty Db",
+            "type": "number"
+          },
+          "s_linear": {
+            "title": "S Linear",
+            "type": "number"
+          },
+          "x": {
+            "title": "X",
+            "type": "number"
+          }
+        },
+        "required": [
+          "s_linear",
+          "x",
+          "penalty_db"
+        ],
+        "title": "MpiResult",
+        "type": "object"
+      },
+      "MpiRow": {
+        "additionalProperties": false,
+        "properties": {
+          "n_connectors": {
+            "title": "N Connectors",
+            "type": "integer"
+          },
+          "penalty_db": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Penalty Db"
+          }
+        },
+        "required": [
+          "n_connectors",
+          "penalty_db"
+        ],
+        "title": "MpiRow",
+        "type": "object"
+      },
+      "NodeResult": {
+        "additionalProperties": false,
+        "properties": {
+          "bound": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Bound"
+          },
+          "cite": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cite"
+          },
+          "derivation": {
+            "title": "Derivation",
+            "type": "string"
+          },
+          "file": {
+            "title": "File",
+            "type": "string"
+          },
+          "flagged": {
+            "title": "Flagged",
+            "type": "boolean"
+          },
+          "hi": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Hi"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "inputs": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Inputs",
+            "type": "array"
+          },
+          "interval_parents": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Interval Parents",
+            "type": "array"
+          },
+          "kind": {
+            "enum": [
+              "fact",
+              "assumption",
+              "derived"
+            ],
+            "title": "Kind",
+            "type": "string"
+          },
+          "label": {
+            "title": "Label",
+            "type": "string"
+          },
+          "lo": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lo"
+          },
+          "method": {
+            "enum": [
+              "point",
+              "corners",
+              "monte_carlo"
+            ],
+            "title": "Method",
+            "type": "string"
+          },
+          "nominal": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nominal"
+          },
+          "pinned_by": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pinned By"
+          },
+          "quote": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Quote"
+          },
+          "source_class": {
+            "$ref": "#/components/schemas/SourceClass"
+          },
+          "unit": {
+            "title": "Unit",
+            "type": "string"
+          },
+          "verified": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Verified"
+          }
+        },
+        "required": [
+          "id",
+          "kind",
+          "label",
+          "unit",
+          "nominal",
+          "lo",
+          "hi",
+          "source_class",
+          "derivation",
+          "inputs",
+          "method",
+          "interval_parents",
+          "flagged",
+          "pinned_by",
+          "file"
+        ],
+        "title": "NodeResult",
+        "type": "object"
+      },
+      "OpticalPower": {
+        "additionalProperties": false,
+        "description": "An optical power level tagged with how it is measured (OMA or average).",
+        "properties": {
+          "kind": {
+            "$ref": "#/components/schemas/PowerKind"
+          },
+          "power_dbm": {
+            "$ref": "#/components/schemas/DBm"
+          }
+        },
+        "required": [
+          "power_dbm",
+          "kind"
+        ],
+        "title": "OpticalPower",
+        "type": "object"
+      },
+      "Part": {
+        "additionalProperties": false,
+        "description": "One part of a scene, in the scene's unit. size is the bounding box (x, y, z).",
+        "properties": {
+          "assembly": {
+            "default": "",
+            "title": "Assembly",
+            "type": "string"
+          },
+          "count": {
+            "default": 1,
+            "minimum": 1.0,
+            "title": "Count",
+            "type": "integer"
+          },
+          "dims_class": {
+            "enum": [
+              "PUBLISHED",
+              "VENDOR",
+              "INFERENCE",
+              "SCHEMATIC"
+            ],
+            "title": "Dims Class",
+            "type": "string"
+          },
+          "dims_source": {
+            "title": "Dims Source",
+            "type": "string"
+          },
+          "explode": {
+            "default": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "maxItems": 3,
+            "minItems": 3,
+            "prefixItems": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "title": "Explode",
+            "type": "array"
+          },
+          "function": {
+            "default": "",
+            "title": "Function",
+            "type": "string"
+          },
+          "grid": {
+            "default": [
+              1,
+              1,
+              1
+            ],
+            "maxItems": 3,
+            "minItems": 3,
+            "prefixItems": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "integer"
+              },
+              {
+                "type": "integer"
+              }
+            ],
+            "title": "Grid",
+            "type": "array"
+          },
+          "id": {
+            "pattern": "^[a-z0-9_]+(\\.[a-z0-9_]+)+$",
+            "title": "Id",
+            "type": "string"
+          },
+          "material": {
+            "title": "Material",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "pitch": {
+            "default": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "maxItems": 3,
+            "minItems": 3,
+            "prefixItems": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "title": "Pitch",
+            "type": "array"
+          },
+          "position": {
+            "default": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "maxItems": 3,
+            "minItems": 3,
+            "prefixItems": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "title": "Position",
+            "type": "array"
+          },
+          "rotation_deg": {
+            "default": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "maxItems": 3,
+            "minItems": 3,
+            "prefixItems": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "title": "Rotation Deg",
+            "type": "array"
+          },
+          "shape": {
+            "default": "box",
+            "enum": [
+              "box",
+              "cylinder",
+              "sphere",
+              "tube",
+              "ring",
+              "array"
+            ],
+            "title": "Shape",
+            "type": "string"
+          },
+          "size": {
+            "maxItems": 3,
+            "minItems": 3,
+            "prefixItems": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "title": "Size",
+            "type": "array"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "size",
+          "material",
+          "dims_class",
+          "dims_source"
+        ],
+        "title": "Part",
+        "type": "object"
+      },
+      "PathCase": {
+        "additionalProperties": false,
+        "properties": {
+          "channel_il_db": {
+            "title": "Channel Il Db",
+            "type": "number"
+          },
+          "hypothesis": {
+            "enum": [
+              "H_vclick_channel",
+              "H_vclick_module"
+            ],
+            "title": "Hypothesis",
+            "type": "string"
+          },
+          "report": {
+            "$ref": "#/components/schemas/FeasibilityReport"
+          },
+          "vclick_loss_db": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Vclick Loss Db"
+          }
+        },
+        "required": [
+          "hypothesis",
+          "vclick_loss_db",
+          "channel_il_db",
+          "report"
+        ],
+        "title": "PathCase",
+        "type": "object"
+      },
+      "Penalty": {
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "value": {
+            "$ref": "#/components/schemas/Quantity_DB_"
+          }
+        },
+        "required": [
+          "name",
+          "value"
+        ],
+        "title": "Penalty",
+        "type": "object"
+      },
+      "PodResult": {
+        "additionalProperties": false,
+        "properties": {
+          "bidi_fibers": {
+            "title": "Bidi Fibers",
+            "type": "number"
+          },
+          "connector_ends_per_path": {
+            "items": {
+              "type": "number"
+            },
+            "title": "Connector Ends Per Path",
+            "type": "array"
+          },
+          "connectors_per_mating_plane": {
+            "title": "Connectors Per Mating Plane",
+            "type": "number"
+          },
+          "duplex_fibers": {
+            "title": "Duplex Fibers",
+            "type": "number"
+          },
+          "fibers_saved": {
+            "title": "Fibers Saved",
+            "type": "number"
+          },
+          "gap_to_claimed_fibers": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Gap To Claimed Fibers"
+          },
+          "lanes_per_xpu": {
+            "title": "Lanes Per Xpu",
+            "type": "number"
+          },
+          "mated_pairs_per_path": {
+            "items": {
+              "type": "number"
+            },
+            "title": "Mated Pairs Per Path",
+            "type": "array"
+          },
+          "mean_length_m": {
+            "items": {
+              "type": "number"
+            },
+            "title": "Mean Length M",
+            "type": "array"
+          },
+          "source_class": {
+            "const": "inference",
+            "default": "inference",
+            "title": "Source Class",
+            "type": "string"
+          }
+        },
+        "required": [
+          "lanes_per_xpu",
+          "duplex_fibers",
+          "bidi_fibers",
+          "fibers_saved",
+          "gap_to_claimed_fibers",
+          "mean_length_m",
+          "connectors_per_mating_plane",
+          "connector_ends_per_path",
+          "mated_pairs_per_path"
+        ],
+        "title": "PodResult",
+        "type": "object"
+      },
+      "PodSpec": {
+        "additionalProperties": false,
+        "properties": {
+          "bw_per_xpu_tbps": {
+            "exclusiveMinimum": 0.0,
+            "title": "Bw Per Xpu Tbps",
+            "type": "number"
+          },
+          "claimed_connectors_saved": {
+            "default": [],
+            "items": {
+              "type": "number"
+            },
+            "title": "Claimed Connectors Saved",
+            "type": "array"
+          },
+          "claimed_fiber_saved_miles": {
+            "default": [],
+            "items": {
+              "type": "number"
+            },
+            "title": "Claimed Fiber Saved Miles",
+            "type": "array"
+          },
+          "claimed_fibers_before": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Claimed Fibers Before"
+          },
+          "ferrule_fibers": {
+            "minimum": 1.0,
+            "title": "Ferrule Fibers",
+            "type": "integer"
+          },
+          "lane_gbps": {
+            "exclusiveMinimum": 0.0,
+            "title": "Lane Gbps",
+            "type": "number"
+          },
+          "xpus": {
+            "minimum": 1.0,
+            "title": "Xpus",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "xpus",
+          "bw_per_xpu_tbps",
+          "lane_gbps",
+          "ferrule_fibers"
+        ],
+        "title": "PodSpec",
+        "type": "object"
+      },
+      "PowerKind": {
+        "enum": [
+          "oma",
+          "average"
+        ],
+        "title": "PowerKind",
+        "type": "string"
+      },
+      "ProductPhysics": {
+        "additionalProperties": false,
+        "properties": {
+          "product": {
+            "title": "Product",
+            "type": "string"
+          },
+          "sections": {
+            "items": {
+              "$ref": "#/components/schemas/Section"
+            },
+            "title": "Sections",
+            "type": "array"
+          }
+        },
+        "required": [
+          "product",
+          "sections"
+        ],
+        "title": "ProductPhysics",
+        "type": "object"
+      },
+      "ProductSummary": {
+        "additionalProperties": false,
+        "properties": {
+          "assumptions": {
+            "title": "Assumptions",
+            "type": "integer"
+          },
+          "checks": {
+            "title": "Checks",
+            "type": "integer"
+          },
+          "derived": {
+            "title": "Derived",
+            "type": "integer"
+          },
+          "facts": {
+            "title": "Facts",
+            "type": "integer"
+          },
+          "family": {
+            "title": "Family",
+            "type": "string"
+          },
+          "has_geometry": {
+            "title": "Has Geometry",
+            "type": "boolean"
+          },
+          "has_physics": {
+            "title": "Has Physics",
+            "type": "boolean"
+          },
+          "hypotheses": {
+            "items": {
+              "$ref": "#/components/schemas/HypothesisInfo"
+            },
+            "title": "Hypotheses",
+            "type": "array"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "kind": {
+            "enum": [
+              "product",
+              "reference",
+              "system"
+            ],
+            "title": "Kind",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "status": {
+            "title": "Status",
+            "type": "string"
+          },
+          "summary": {
+            "title": "Summary",
+            "type": "string"
+          },
+          "verified_facts": {
+            "title": "Verified Facts",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "family",
+          "kind",
+          "status",
+          "summary",
+          "facts",
+          "verified_facts",
+          "assumptions",
+          "derived",
+          "checks",
+          "hypotheses",
+          "has_physics",
+          "has_geometry"
+        ],
+        "title": "ProductSummary",
+        "type": "object"
+      },
+      "ProductView": {
+        "additionalProperties": false,
+        "properties": {
+          "graph": {
+            "$ref": "#/components/schemas/EvaluatedGraph"
+          },
+          "independence": {
+            "title": "Independence",
+            "type": "string"
+          },
+          "physics": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ProductPhysics"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "product": {
+            "$ref": "#/components/schemas/ProductSummary"
+          }
+        },
+        "required": [
+          "independence",
+          "product",
+          "graph",
+          "physics"
+        ],
+        "title": "ProductView",
+        "type": "object"
+      },
+      "ProfileList": {
+        "additionalProperties": false,
+        "properties": {
+          "profiles": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Profiles",
+            "type": "array"
+          }
+        },
+        "required": [
+          "profiles"
+        ],
+        "title": "ProfileList",
+        "type": "object"
+      },
+      "Provenance": {
+        "additionalProperties": false,
+        "description": "Where a value comes from.\n\ncitation_key is required unless the source class is SYNTHETIC or INFERENCE,\nand any key given must exist in references.bib. Pass\ncontext={\"citation_keys\": ...} to model_validate to check against another set.",
+        "properties": {
+          "citation_key": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Citation Key"
+          },
+          "rationale": {
+            "title": "Rationale",
+            "type": "string"
+          },
+          "source_class": {
+            "$ref": "#/components/schemas/SourceClass"
+          }
+        },
+        "required": [
+          "source_class",
+          "rationale"
+        ],
+        "title": "Provenance",
+        "type": "object"
+      },
+      "Quantity_DB_": {
+        "additionalProperties": false,
+        "properties": {
+          "provenance": {
+            "$ref": "#/components/schemas/Provenance"
+          },
+          "value": {
+            "$ref": "#/components/schemas/DB"
+          }
+        },
+        "required": [
+          "value",
+          "provenance"
+        ],
+        "title": "Quantity[DB]",
+        "type": "object"
+      },
+      "Quantity_OpticalPower_": {
+        "additionalProperties": false,
+        "properties": {
+          "provenance": {
+            "$ref": "#/components/schemas/Provenance"
+          },
+          "value": {
+            "$ref": "#/components/schemas/OpticalPower"
+          }
+        },
+        "required": [
+          "value",
+          "provenance"
+        ],
+        "title": "Quantity[OpticalPower]",
+        "type": "object"
+      },
+      "Quantity_float_": {
+        "additionalProperties": false,
+        "properties": {
+          "provenance": {
+            "$ref": "#/components/schemas/Provenance"
+          },
+          "value": {
+            "title": "Value",
+            "type": "number"
+          }
+        },
+        "required": [
+          "value",
+          "provenance"
+        ],
+        "title": "Quantity[float]",
+        "type": "object"
+      },
+      "Quantity_int_": {
+        "additionalProperties": false,
+        "properties": {
+          "provenance": {
+            "$ref": "#/components/schemas/Provenance"
+          },
+          "value": {
+            "title": "Value",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "value",
+          "provenance"
+        ],
+        "title": "Quantity[int]",
+        "type": "object"
+      },
+      "RackRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "link_yields": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "number"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Link Yields"
+          },
+          "rack_yield_target": {
+            "anyOf": [
+              {
+                "exclusiveMaximum": 1.0,
+                "exclusiveMinimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rack Yield Target"
+          }
+        },
+        "title": "RackRequest",
+        "type": "object"
+      },
+      "RackResult": {
+        "additionalProperties": false,
+        "properties": {
+          "bidi_fibers": {
+            "title": "Bidi Fibers",
+            "type": "integer"
+          },
+          "duplex_fibers": {
+            "title": "Duplex Fibers",
+            "type": "integer"
+          },
+          "fiber_db": {
+            "title": "Fiber Db",
+            "type": "number"
+          },
+          "fiber_m": {
+            "title": "Fiber M",
+            "type": "number"
+          },
+          "guide_dr_per_switch_tray": {
+            "title": "Guide Dr Per Switch Tray",
+            "type": "number"
+          },
+          "guide_dr_per_xpu_tray": {
+            "title": "Guide Dr Per Xpu Tray",
+            "type": "number"
+          },
+          "guide_dr_total": {
+            "title": "Guide Dr Total",
+            "type": "number"
+          },
+          "lanes_per_xpu_per_switch_tray": {
+            "title": "Lanes Per Xpu Per Switch Tray",
+            "type": "number"
+          },
+          "link_yield_needed": {
+            "title": "Link Yield Needed",
+            "type": "number"
+          },
+          "links": {
+            "title": "Links",
+            "type": "integer"
+          },
+          "links_match_switch_capacity": {
+            "title": "Links Match Switch Capacity",
+            "type": "boolean"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "ocp_vision_xpus": {
+            "maxItems": 2,
+            "minItems": 2,
+            "prefixItems": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "integer"
+              }
+            ],
+            "title": "Ocp Vision Xpus",
+            "type": "array"
+          },
+          "paths": {
+            "items": {
+              "$ref": "#/components/schemas/PathCase"
+            },
+            "title": "Paths",
+            "type": "array"
+          },
+          "planes_for_vision": {
+            "maxItems": 2,
+            "minItems": 2,
+            "prefixItems": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "title": "Planes For Vision",
+            "type": "array"
+          },
+          "rack_yield_target": {
+            "title": "Rack Yield Target",
+            "type": "number"
+          },
+          "single_tier_xpus": {
+            "title": "Single Tier Xpus",
+            "type": "number"
+          },
+          "source_class": {
+            "const": "synthetic",
+            "default": "synthetic",
+            "title": "Source Class",
+            "type": "string"
+          },
+          "space": {
+            "items": {
+              "$ref": "#/components/schemas/Space"
+            },
+            "title": "Space",
+            "type": "array"
+          },
+          "tx_lanes": {
+            "title": "Tx Lanes",
+            "type": "integer"
+          },
+          "xpus": {
+            "title": "Xpus",
+            "type": "integer"
+          },
+          "yields": {
+            "items": {
+              "$ref": "#/components/schemas/YieldRow"
+            },
+            "title": "Yields",
+            "type": "array"
+          },
+          "z_needed": {
+            "title": "Z Needed",
+            "type": "number"
+          }
+        },
+        "required": [
+          "name",
+          "space",
+          "xpus",
+          "links",
+          "lanes_per_xpu_per_switch_tray",
+          "links_match_switch_capacity",
+          "bidi_fibers",
+          "duplex_fibers",
+          "tx_lanes",
+          "guide_dr_total",
+          "guide_dr_per_xpu_tray",
+          "guide_dr_per_switch_tray",
+          "fiber_m",
+          "fiber_db",
+          "paths",
+          "yields",
+          "rack_yield_target",
+          "link_yield_needed",
+          "z_needed",
+          "single_tier_xpus",
+          "ocp_vision_xpus",
+          "planes_for_vision"
+        ],
+        "title": "RackResult",
+        "type": "object"
+      },
+      "Receiver": {
+        "additionalProperties": false,
+        "properties": {
+          "electrical": {
+            "$ref": "#/components/schemas/ElectricalInterface"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "passband_max_nm": {
+            "$ref": "#/components/schemas/Quantity_float_"
+          },
+          "passband_min_nm": {
+            "$ref": "#/components/schemas/Quantity_float_"
+          },
+          "sensitivity_oma_max": {
+            "$ref": "#/components/schemas/Quantity_OpticalPower_"
+          }
+        },
+        "required": [
+          "name",
+          "electrical",
+          "passband_min_nm",
+          "passband_max_nm",
+          "sensitivity_oma_max"
+        ],
+        "title": "Receiver",
+        "type": "object"
+      },
+      "ReflectionCrosstalk": {
+        "additionalProperties": false,
+        "properties": {
+          "meets_return_loss_rule": {
+            "title": "Meets Return Loss Rule",
+            "type": "boolean"
+          },
+          "method": {
+            "title": "Method",
+            "type": "string"
+          },
+          "penalty_db": {
+            "title": "Penalty Db",
+            "type": "number"
+          },
+          "r_linear": {
+            "title": "R Linear",
+            "type": "number"
+          },
+          "rule_margin_db": {
+            "title": "Rule Margin Db",
+            "type": "number"
+          },
+          "source_class": {
+            "$ref": "#/components/schemas/SourceClass"
+          },
+          "t_linear": {
+            "title": "T Linear",
+            "type": "number"
+          }
+        },
+        "required": [
+          "t_linear",
+          "r_linear",
+          "penalty_db",
+          "rule_margin_db",
+          "meets_return_loss_rule",
+          "source_class",
+          "method"
+        ],
+        "title": "ReflectionCrosstalk",
+        "type": "object"
+      },
+      "RingLeakage": {
+        "additionalProperties": false,
+        "properties": {
+          "channel": {
+            "title": "Channel",
+            "type": "integer"
+          },
+          "crosstalk_alternative_db": {
+            "title": "Crosstalk Alternative Db",
+            "type": "number"
+          },
+          "crosstalk_db": {
+            "title": "Crosstalk Db",
+            "type": "number"
+          },
+          "images": {
+            "items": {
+              "$ref": "#/components/schemas/Image"
+            },
+            "title": "Images",
+            "type": "array"
+          },
+          "leakage": {
+            "title": "Leakage",
+            "type": "number"
+          },
+          "reflected_leakage": {
+            "title": "Reflected Leakage",
+            "type": "number"
+          },
+          "reflection_db": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reflection Db"
+          },
+          "total_db": {
+            "title": "Total Db",
+            "type": "number"
+          }
+        },
+        "required": [
+          "channel",
+          "leakage",
+          "reflected_leakage",
+          "crosstalk_db",
+          "crosstalk_alternative_db",
+          "reflection_db",
+          "total_db",
+          "images"
+        ],
+        "title": "RingLeakage",
+        "type": "object"
+      },
+      "RingRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "bandwidth_factor": {
+            "default": 0.75,
+            "exclusiveMinimum": 0.0,
+            "title": "Bandwidth Factor",
+            "type": "number"
+          },
+          "diameter_um": {
+            "anyOf": [
+              {
+                "exclusiveMinimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Diameter Um"
+          },
+          "fsr_ghz": {
+            "anyOf": [
+              {
+                "exclusiveMinimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Fsr Ghz"
+          },
+          "group_index": {
+            "anyOf": [
+              {
+                "exclusiveMinimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Group Index"
+          },
+          "max_crosstalk_db": {
+            "default": -15.0,
+            "exclusiveMaximum": 0.0,
+            "title": "Max Crosstalk Db",
+            "type": "number"
+          },
+          "q_loaded": {
+            "exclusiveMinimum": 0.0,
+            "title": "Q Loaded",
+            "type": "number"
+          },
+          "spacings_ghz": {
+            "default": [
+              200.0,
+              400.0
+            ],
+            "items": {
+              "type": "number"
+            },
+            "title": "Spacings Ghz",
+            "type": "array"
+          },
+          "spectrum_points": {
+            "default": 401,
+            "maximum": 4001.0,
+            "minimum": 2.0,
+            "title": "Spectrum Points",
+            "type": "integer"
+          },
+          "spectrum_span_ghz": {
+            "anyOf": [
+              {
+                "exclusiveMinimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Spectrum Span Ghz"
+          },
+          "symbol_rates_gbd": {
+            "default": [],
+            "items": {
+              "type": "number"
+            },
+            "title": "Symbol Rates Gbd",
+            "type": "array"
+          },
+          "wavelength_nm": {
+            "default": 1310.0,
+            "exclusiveMinimum": 0.0,
+            "title": "Wavelength Nm",
+            "type": "number"
+          }
+        },
+        "required": [
+          "q_loaded"
+        ],
+        "title": "RingRequest",
+        "type": "object"
+      },
+      "RingResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "spectrum": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Spectrum"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "summary": {
+            "$ref": "#/components/schemas/RingSummary"
+          },
+          "windows": {
+            "items": {
+              "$ref": "#/components/schemas/DesignWindow"
+            },
+            "title": "Windows",
+            "type": "array"
+          }
+        },
+        "required": [
+          "summary",
+          "windows",
+          "spectrum"
+        ],
+        "title": "RingResponse",
+        "type": "object"
+      },
+      "RingSpectrum": {
+        "additionalProperties": false,
+        "properties": {
+          "channel": {
+            "title": "Channel",
+            "type": "integer"
+          },
+          "drop_db": {
+            "items": {
+              "type": "number"
+            },
+            "title": "Drop Db",
+            "type": "array"
+          }
+        },
+        "required": [
+          "channel",
+          "drop_db"
+        ],
+        "title": "RingSpectrum",
+        "type": "object"
+      },
+      "RingSummary": {
+        "additionalProperties": false,
+        "description": "A ring's derived parameters at one operating point (POST /ring).",
+        "properties": {
+          "f0_ghz": {
+            "title": "F0 Ghz",
+            "type": "number"
+          },
+          "fsr_ghz": {
+            "title": "Fsr Ghz",
+            "type": "number"
+          },
+          "fsr_nm": {
+            "title": "Fsr Nm",
+            "type": "number"
+          },
+          "fwhm_ghz": {
+            "title": "Fwhm Ghz",
+            "type": "number"
+          },
+          "fwhm_nm": {
+            "title": "Fwhm Nm",
+            "type": "number"
+          },
+          "group_index": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Group Index"
+          },
+          "length_um": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Length Um"
+          },
+          "neighbor_rejection_db": {
+            "additionalProperties": {
+              "type": "number"
+            },
+            "title": "Neighbor Rejection Db",
+            "type": "object"
+          },
+          "q_loaded": {
+            "title": "Q Loaded",
+            "type": "number"
+          },
+          "wavelength_nm": {
+            "title": "Wavelength Nm",
+            "type": "number"
+          }
+        },
+        "required": [
+          "wavelength_nm",
+          "f0_ghz",
+          "q_loaded",
+          "fwhm_ghz",
+          "fwhm_nm",
+          "fsr_ghz",
+          "fsr_nm",
+          "group_index",
+          "length_um",
+          "neighbor_rejection_db"
+        ],
+        "title": "RingSummary",
+        "type": "object"
+      },
+      "SceneInfo": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "level": {
+            "enum": [
+              "rack",
+              "tray",
+              "package",
+              "pic",
+              "device"
+            ],
+            "title": "Level",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "summary": {
+            "title": "Summary",
+            "type": "string"
+          },
+          "unit": {
+            "enum": [
+              "m",
+              "mm",
+              "um",
+              "nm"
+            ],
+            "title": "Unit",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "unit",
+          "summary",
+          "level"
+        ],
+        "title": "SceneInfo",
+        "type": "object"
+      },
+      "SceneList": {
+        "additionalProperties": false,
+        "properties": {
+          "scenes": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Scenes",
+            "type": "array"
+          }
+        },
+        "required": [
+          "scenes"
+        ],
+        "title": "SceneList",
+        "type": "object"
+      },
+      "SceneView": {
+        "additionalProperties": false,
+        "properties": {
+          "independence": {
+            "title": "Independence",
+            "type": "string"
+          },
+          "scene": {
+            "$ref": "#/components/schemas/GeometryScene"
+          },
+          "source_issues": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Source Issues",
+            "type": "array"
+          }
+        },
+        "required": [
+          "independence",
+          "scene",
+          "source_issues"
+        ],
+        "title": "SceneView",
+        "type": "object"
+      },
+      "Section": {
+        "additionalProperties": false,
+        "properties": {
+          "hypothesis": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Hypothesis"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/Item"
+            },
+            "title": "Items",
+            "type": "array"
+          },
+          "note": {
+            "default": "",
+            "title": "Note",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "verdict": {
+            "anyOf": [
+              {
+                "enum": [
+                  "NOT_EXCLUDED",
+                  "EXCLUDED"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Verdict"
+          }
+        },
+        "required": [
+          "title",
+          "items"
+        ],
+        "title": "Section",
+        "type": "object"
+      },
+      "SourceClass": {
+        "enum": [
+          "published_spec",
+          "proposed_standard",
+          "vendor_claim",
+          "peer_reviewed",
+          "third_party",
+          "synthetic",
+          "inference"
+        ],
+        "title": "SourceClass",
+        "type": "string"
+      },
+      "Space": {
+        "additionalProperties": false,
+        "properties": {
+          "fits": {
+            "title": "Fits",
+            "type": "boolean"
+          },
+          "hypothesis": {
+            "enum": [
+              "H_2U",
+              "H_1U"
+            ],
+            "title": "Hypothesis",
+            "type": "string"
+          },
+          "ou_available": {
+            "title": "Ou Available",
+            "type": "integer"
+          },
+          "ou_used": {
+            "title": "Ou Used",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "hypothesis",
+          "ou_used",
+          "ou_available",
+          "fits"
+        ],
+        "title": "Space",
+        "type": "object"
+      },
+      "Spectrum": {
+        "additionalProperties": false,
+        "description": "Drop-port response sampled for display: frequency (GHz), linear and dB.",
+        "properties": {
+          "drop": {
+            "items": {
+              "type": "number"
+            },
+            "title": "Drop",
+            "type": "array"
+          },
+          "drop_db": {
+            "items": {
+              "type": "number"
+            },
+            "title": "Drop Db",
+            "type": "array"
+          },
+          "frequency_ghz": {
+            "items": {
+              "type": "number"
+            },
+            "title": "Frequency Ghz",
+            "type": "array"
+          }
+        },
+        "required": [
+          "frequency_ghz",
+          "drop",
+          "drop_db"
+        ],
+        "title": "Spectrum",
+        "type": "object"
+      },
+      "Status": {
+        "enum": [
+          "pass",
+          "fail",
+          "not_evaluated"
+        ],
+        "title": "Status",
+        "type": "string"
+      },
+      "SupportCell": {
+        "additionalProperties": false,
+        "properties": {
+          "gap_rel": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Gap Rel"
+          },
+          "status": {
+            "enum": [
+              "CONSISTENT",
+              "TENSION",
+              "CONFLICT"
+            ],
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "status",
+          "gap_rel"
+        ],
+        "title": "SupportCell",
+        "type": "object"
+      },
+      "SupportRow": {
+        "additionalProperties": false,
+        "properties": {
+          "agrees": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Agrees",
+            "type": "array"
+          },
+          "cells": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/SupportCell"
+            },
+            "title": "Cells",
+            "type": "object"
+          },
+          "disagrees": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Disagrees",
+            "type": "array"
+          },
+          "group": {
+            "title": "Group",
+            "type": "string"
+          },
+          "hypothesis": {
+            "title": "Hypothesis",
+            "type": "string"
+          },
+          "statement": {
+            "title": "Statement",
+            "type": "string"
+          }
+        },
+        "required": [
+          "hypothesis",
+          "group",
+          "statement",
+          "cells",
+          "agrees",
+          "disagrees"
+        ],
+        "title": "SupportRow",
+        "type": "object"
+      },
+      "SweepAxis": {
+        "additionalProperties": false,
+        "properties": {
+          "path": {
+            "title": "Path",
+            "type": "string"
+          },
+          "unit": {
+            "enum": [
+              "dB",
+              "dBm OMA",
+              "dBm AVERAGE",
+              "nm",
+              "count"
+            ],
+            "title": "Unit",
+            "type": "string"
+          },
+          "values": {
+            "items": {
+              "type": "number"
+            },
+            "title": "Values",
+            "type": "array"
+          }
+        },
+        "required": [
+          "path",
+          "unit",
+          "values"
+        ],
+        "title": "SweepAxis",
+        "type": "object"
+      },
+      "SweepCell": {
+        "additionalProperties": false,
+        "properties": {
+          "i": {
+            "title": "I",
+            "type": "integer"
+          },
+          "j": {
+            "title": "J",
+            "type": "integer"
+          },
+          "margin_db": {
+            "title": "Margin Db",
+            "type": "number"
+          },
+          "verdict": {
+            "enum": [
+              "NOT_EXCLUDED",
+              "EXCLUDED"
+            ],
+            "title": "Verdict",
+            "type": "string"
+          },
+          "x": {
+            "title": "X",
+            "type": "number"
+          },
+          "y": {
+            "title": "Y",
+            "type": "number"
+          }
+        },
+        "required": [
+          "i",
+          "j",
+          "x",
+          "y",
+          "margin_db",
+          "verdict"
+        ],
+        "title": "SweepCell",
+        "type": "object"
+      },
+      "SweepRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "link": {
+            "$ref": "#/components/schemas/Link"
+          },
+          "x": {
+            "$ref": "#/components/schemas/AxisRequest"
+          },
+          "y": {
+            "$ref": "#/components/schemas/AxisRequest"
+          }
+        },
+        "required": [
+          "link",
+          "x",
+          "y"
+        ],
+        "title": "SweepRequest",
+        "type": "object"
+      },
+      "SweepResult": {
+        "additionalProperties": false,
+        "description": "margin_db[j][i] and verdict[j][i] at (x.values[i], y.values[j]).",
+        "properties": {
+          "best": {
+            "$ref": "#/components/schemas/SweepCell"
+          },
+          "contour_0db": {
+            "items": {
+              "maxItems": 2,
+              "minItems": 2,
+              "prefixItems": [
+                {
+                  "maxItems": 2,
+                  "minItems": 2,
+                  "prefixItems": [
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "number"
+                    }
+                  ],
+                  "type": "array"
+                },
+                {
+                  "maxItems": 2,
+                  "minItems": 2,
+                  "prefixItems": [
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "number"
+                    }
+                  ],
+                  "type": "array"
+                }
+              ],
+              "type": "array"
+            },
+            "title": "Contour 0Db",
+            "type": "array"
+          },
+          "design": {
+            "$ref": "#/components/schemas/SweepCell"
+          },
+          "margin_db": {
+            "items": {
+              "items": {
+                "type": "number"
+              },
+              "type": "array"
+            },
+            "title": "Margin Db",
+            "type": "array"
+          },
+          "verdict": {
+            "items": {
+              "items": {
+                "enum": [
+                  "NOT_EXCLUDED",
+                  "EXCLUDED"
+                ],
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "title": "Verdict",
+            "type": "array"
+          },
+          "worst": {
+            "$ref": "#/components/schemas/SweepCell"
+          },
+          "x": {
+            "$ref": "#/components/schemas/SweepAxis"
+          },
+          "y": {
+            "$ref": "#/components/schemas/SweepAxis"
+          }
+        },
+        "required": [
+          "x",
+          "y",
+          "margin_db",
+          "verdict",
+          "design",
+          "best",
+          "worst",
+          "contour_0db"
+        ],
+        "title": "SweepResult",
+        "type": "object"
+      },
+      "TornadoBar": {
+        "additionalProperties": false,
+        "properties": {
+          "assumption": {
+            "title": "Assumption",
+            "type": "string"
+          },
+          "high": {
+            "title": "High",
+            "type": "number"
+          },
+          "low": {
+            "title": "Low",
+            "type": "number"
+          },
+          "swing": {
+            "title": "Swing",
+            "type": "number"
+          },
+          "value_at_high": {
+            "title": "Value At High",
+            "type": "number"
+          },
+          "value_at_low": {
+            "title": "Value At Low",
+            "type": "number"
+          }
+        },
+        "required": [
+          "assumption",
+          "low",
+          "high",
+          "value_at_low",
+          "value_at_high",
+          "swing"
+        ],
+        "title": "TornadoBar",
+        "type": "object"
+      },
+      "TornadoEntry": {
+        "additionalProperties": false,
+        "properties": {
+          "bars": {
+            "items": {
+              "$ref": "#/components/schemas/TornadoBar"
+            },
+            "title": "Bars",
+            "type": "array"
+          },
+          "node": {
+            "title": "Node",
+            "type": "string"
+          },
+          "nominal": {
+            "title": "Nominal",
+            "type": "number"
+          }
+        },
+        "required": [
+          "node",
+          "nominal",
+          "bars"
+        ],
+        "title": "TornadoEntry",
+        "type": "object"
+      },
+      "TracePoint": {
+        "additionalProperties": false,
+        "description": "OMA at TP2, after each channel element in order, and at TP3.\n\nloss_db and loss_fraction (share of the total channel loss) are set for loss elements and\nare None at the reference planes. headroom_db = power_dbm − threshold_dbm (model card §3),\ncomputed in the same order as M_net, so the TP3 value equals margin_db exactly.\nabove_threshold = headroom_db ≥ −ε, the verdict's pass rule; displays use only this flag to\ndecide above or below threshold.",
+        "properties": {
+          "above_threshold": {
+            "title": "Above Threshold",
+            "type": "boolean"
+          },
+          "channel_index": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Channel Index"
+          },
+          "headroom_db": {
+            "title": "Headroom Db",
+            "type": "number"
+          },
+          "input_path": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Input Path"
+          },
+          "kind": {
+            "enum": [
+              "reference_plane",
+              "loss_element"
+            ],
+            "title": "Kind",
+            "type": "string"
+          },
+          "loss_db": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Loss Db"
+          },
+          "loss_fraction": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Loss Fraction"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "power_dbm": {
+            "title": "Power Dbm",
+            "type": "number"
+          }
+        },
+        "required": [
+          "kind",
+          "name",
+          "channel_index",
+          "input_path",
+          "power_dbm",
+          "loss_db",
+          "loss_fraction",
+          "headroom_db",
+          "above_threshold"
+        ],
+        "title": "TracePoint",
+        "type": "object"
+      },
+      "Transmitter": {
+        "additionalProperties": false,
+        "properties": {
+          "center_wavelength_nm": {
+            "$ref": "#/components/schemas/Quantity_float_"
+          },
+          "electrical": {
+            "$ref": "#/components/schemas/ElectricalInterface"
+          },
+          "launch_oma_min": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Quantity_OpticalPower_"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "upstream": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UpstreamChain"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "wavelength_tolerance_nm": {
+            "$ref": "#/components/schemas/Quantity_float_"
+          }
+        },
+        "required": [
+          "name",
+          "electrical",
+          "center_wavelength_nm",
+          "wavelength_tolerance_nm"
+        ],
+        "title": "Transmitter",
+        "type": "object"
+      },
+      "TrayReport": {
+        "additionalProperties": false,
+        "properties": {
+          "deciding_lane": {
+            "title": "Deciding Lane",
+            "type": "integer"
+          },
+          "deciding_report": {
+            "$ref": "#/components/schemas/FeasibilityReport"
+          },
+          "excluded_lanes": {
+            "items": {
+              "type": "integer"
+            },
+            "title": "Excluded Lanes",
+            "type": "array"
+          },
+          "lane_count": {
+            "title": "Lane Count",
+            "type": "integer"
+          },
+          "lanes": {
+            "items": {
+              "$ref": "#/components/schemas/LaneSummary"
+            },
+            "title": "Lanes",
+            "type": "array"
+          },
+          "margin_db": {
+            "title": "Margin Db",
+            "type": "number"
+          },
+          "tray_name": {
+            "title": "Tray Name",
+            "type": "string"
+          },
+          "verdict": {
+            "enum": [
+              "NOT_EXCLUDED",
+              "EXCLUDED"
+            ],
+            "title": "Verdict",
+            "type": "string"
+          }
+        },
+        "required": [
+          "tray_name",
+          "lane_count",
+          "verdict",
+          "margin_db",
+          "deciding_lane",
+          "excluded_lanes",
+          "lanes",
+          "deciding_report"
+        ],
+        "title": "TrayReport",
+        "type": "object"
+      },
+      "TrayRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "lanes": {
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "maxItems": 1024,
+            "minItems": 1,
+            "title": "Lanes",
+            "type": "array"
+          },
+          "name": {
+            "default": "tray",
+            "title": "Name",
+            "type": "string"
+          }
+        },
+        "required": [
+          "lanes"
+        ],
+        "title": "TrayRequest",
+        "type": "object"
+      },
+      "UpstreamChain": {
+        "additionalProperties": false,
+        "description": "Laser to TP2 (model card §10). Losses in dB, applied in field order to average power.",
+        "properties": {
+          "coupling_loss": {
+            "$ref": "#/components/schemas/Quantity_DB_"
+          },
+          "excess_loss": {
+            "$ref": "#/components/schemas/Quantity_DB_"
+          },
+          "extinction_ratio": {
+            "$ref": "#/components/schemas/Quantity_DB_"
+          },
+          "laser_fiber_loss": {
+            "$ref": "#/components/schemas/Quantity_DB_"
+          },
+          "laser_power_avg": {
+            "$ref": "#/components/schemas/Quantity_OpticalPower_"
+          },
+          "modulator_il": {
+            "$ref": "#/components/schemas/Quantity_DB_"
+          },
+          "name": {
+            "default": "upstream chain",
+            "title": "Name",
+            "type": "string"
+          },
+          "output_coupler_loss": {
+            "$ref": "#/components/schemas/Quantity_DB_"
+          },
+          "split_n": {
+            "$ref": "#/components/schemas/Quantity_int_"
+          }
+        },
+        "required": [
+          "laser_power_avg",
+          "laser_fiber_loss",
+          "coupling_loss",
+          "split_n",
+          "excess_loss",
+          "modulator_il",
+          "output_coupler_loss",
+          "extinction_ratio"
+        ],
+        "title": "UpstreamChain",
+        "type": "object"
+      },
+      "UpstreamSection": {
+        "additionalProperties": false,
+        "description": "TP2 derived from the laser (model card §10). The derived TP2 is INFERENCE: it is computed\nfrom the chain inputs, whose own provenance is listed in the report's inputs.",
+        "properties": {
+          "chain_name": {
+            "title": "Chain Name",
+            "type": "string"
+          },
+          "derivation": {
+            "title": "Derivation",
+            "type": "string"
+          },
+          "max_fanout": {
+            "title": "Max Fanout",
+            "type": "integer"
+          },
+          "oma_offset_db": {
+            "title": "Oma Offset Db",
+            "type": "number"
+          },
+          "p_tp2_avg_dbm": {
+            "title": "P Tp2 Avg Dbm",
+            "type": "number"
+          },
+          "p_tp2_oma_dbm": {
+            "title": "P Tp2 Oma Dbm",
+            "type": "number"
+          },
+          "split_n": {
+            "title": "Split N",
+            "type": "integer"
+          },
+          "steps": {
+            "items": {
+              "$ref": "#/components/schemas/UpstreamStep"
+            },
+            "title": "Steps",
+            "type": "array"
+          },
+          "tp2_source_class": {
+            "$ref": "#/components/schemas/SourceClass"
+          }
+        },
+        "required": [
+          "chain_name",
+          "split_n",
+          "steps",
+          "p_tp2_avg_dbm",
+          "p_tp2_oma_dbm",
+          "oma_offset_db",
+          "max_fanout",
+          "tp2_source_class",
+          "derivation"
+        ],
+        "title": "UpstreamSection",
+        "type": "object"
+      },
+      "UpstreamStep": {
+        "additionalProperties": false,
+        "description": "Power after one upstream element. Average power, except the final OMA step at TP2.",
+        "properties": {
+          "input_path": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Input Path"
+          },
+          "kind": {
+            "enum": [
+              "average",
+              "oma"
+            ],
+            "title": "Kind",
+            "type": "string"
+          },
+          "loss_db": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Loss Db"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "power_dbm": {
+            "title": "Power Dbm",
+            "type": "number"
+          }
+        },
+        "required": [
+          "name",
+          "input_path",
+          "loss_db",
+          "power_dbm",
+          "kind"
+        ],
+        "title": "UpstreamStep",
+        "type": "object"
+      },
+      "ValidationError": {
+        "properties": {
+          "ctx": {
+            "title": "Context",
+            "type": "object"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "title": "Location",
+            "type": "array"
+          },
+          "msg": {
+            "title": "Message",
+            "type": "string"
+          },
+          "type": {
+            "title": "Error Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError",
+        "type": "object"
+      },
+      "YieldRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "bins": {
+            "default": 60,
+            "maximum": 400.0,
+            "minimum": 1.0,
+            "title": "Bins",
+            "type": "integer"
+          },
+          "link": {
+            "$ref": "#/components/schemas/Link"
+          },
+          "n_samples": {
+            "default": 100000,
+            "maximum": 1000000.0,
+            "minimum": 1.0,
+            "title": "N Samples",
+            "type": "integer"
+          },
+          "seed": {
+            "default": 0,
+            "minimum": 0.0,
+            "title": "Seed",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "link"
+        ],
+        "title": "YieldRequest",
+        "type": "object"
+      },
+      "YieldResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "analytic": {
+            "$ref": "#/components/schemas/AnalyticYield"
+          },
+          "label": {
+            "const": "statistical, assumption-dependent",
+            "default": "statistical, assumption-dependent",
+            "title": "Label",
+            "type": "string"
+          },
+          "monte_carlo": {
+            "$ref": "#/components/schemas/MonteCarloYield"
+          },
+          "worst_case_margin_db": {
+            "title": "Worst Case Margin Db",
+            "type": "number"
+          },
+          "worst_case_verdict": {
+            "enum": [
+              "NOT_EXCLUDED",
+              "EXCLUDED"
+            ],
+            "title": "Worst Case Verdict",
+            "type": "string"
+          }
+        },
+        "required": [
+          "worst_case_verdict",
+          "worst_case_margin_db",
+          "analytic",
+          "monte_carlo"
+        ],
+        "title": "YieldResponse",
+        "type": "object"
+      },
+      "YieldRow": {
+        "additionalProperties": false,
+        "properties": {
+          "link_yield": {
+            "title": "Link Yield",
+            "type": "number"
+          },
+          "rack_yield": {
+            "title": "Rack Yield",
+            "type": "number"
+          }
+        },
+        "required": [
+          "link_yield",
+          "rack_yield"
+        ],
+        "title": "YieldRow",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "description": "Independent reconstruction from public information. Not affiliated with or endorsed by Lightmatter. Product names belong to their owners.",
+    "title": "OICD feasibility engine",
+    "version": "0.3.0"
+  },
+  "openapi": "3.1.0",
+  "paths": {
+    "/bidi/link": {
+      "post": {
+        "description": "Both directions of a BiDi link (model card §13.7).",
+        "operationId": "post_bidi_link_bidi_link_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BidiLinkRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BidiLinkResult"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Post Bidi Link"
+      }
+    },
+    "/catalog": {
+      "get": {
+        "operationId": "get_catalog_catalog_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CatalogIndex"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Get Catalog"
+      }
+    },
+    "/catalog/{product}": {
+      "get": {
+        "description": "The product's evaluated graph and physics, with no overrides or hypotheses.",
+        "operationId": "get_product_catalog__product__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "product",
+            "required": true,
+            "schema": {
+              "title": "Product",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductView"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Product"
+      }
+    },
+    "/evaluate": {
+      "post": {
+        "description": "Link JSON in, FeasibilityReport JSON out. TP2 is the transmitter's fixed launch_oma_min\nor is derived from its upstream chain (model card §10).",
+        "operationId": "evaluate_link_evaluate_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Link"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FeasibilityReport"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Evaluate Link"
+      }
+    },
+    "/evaluate_tray": {
+      "post": {
+        "description": "N lanes; EXCLUDED if any lane is, margin = minimum lane margin (model card §9).",
+        "operationId": "evaluate_tray_endpoint_evaluate_tray_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TrayRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TrayReport"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Evaluate Tray Endpoint"
+      }
+    },
+    "/geometry": {
+      "get": {
+        "operationId": "list_geometry_geometry_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SceneList"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "List Geometry"
+      }
+    },
+    "/geometry/{scene}": {
+      "get": {
+        "operationId": "get_geometry_geometry__scene__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "scene",
+            "required": true,
+            "schema": {
+              "title": "Scene",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SceneView"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Geometry"
+      }
+    },
+    "/health": {
+      "get": {
+        "operationId": "health_health_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "title": "Response Health Health Get",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Health"
+      }
+    },
+    "/inference/{product}": {
+      "post": {
+        "description": "Re-evaluate with assumption overrides (SYNTHETIC what-ifs) and at most one hypothesis per\ngroup. Unknown assumptions or hypotheses, or two alternatives, are 422.",
+        "operationId": "post_inference_inference__product__post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "product",
+            "required": true,
+            "schema": {
+              "title": "Product",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InferenceRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductView"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Post Inference"
+      }
+    },
+    "/mpi": {
+      "post": {
+        "description": "Worst-case MPI bound (model card §12.3), with an optional table over connector counts.",
+        "operationId": "post_mpi_mpi_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MpiRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MpiResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Post Mpi"
+      }
+    },
+    "/pod": {
+      "post": {
+        "description": "Pod fibers, fiber length and connectors against the claims (model card §14.8).",
+        "operationId": "post_pod_pod_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PodSpec"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PodResult"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Post Pod"
+      }
+    },
+    "/profiles": {
+      "get": {
+        "operationId": "list_profiles_profiles_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfileList"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "List Profiles"
+      }
+    },
+    "/profiles/{name}": {
+      "get": {
+        "operationId": "get_profile_profiles__name__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "schema": {
+              "title": "Name",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Link"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Profile"
+      }
+    },
+    "/rack": {
+      "post": {
+        "description": "The reference rack OICD-R64 (model card §14.9), built from the catalog (SYNTHETIC design).",
+        "operationId": "post_rack_rack_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RackRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RackResult"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Post Rack"
+      }
+    },
+    "/ring": {
+      "post": {
+        "description": "Ring parameters (model card §13.1), design windows (§13.3) and a sampled drop response.",
+        "operationId": "post_ring_ring_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RingRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RingResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Post Ring"
+      }
+    },
+    "/sweep": {
+      "post": {
+        "description": "Margin and verdict grids over two inputs (model card §8), at most 201 × 201.",
+        "operationId": "sweep_link_sweep_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SweepRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SweepResult"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Sweep Link"
+      }
+    },
+    "/wdm/crosstalk": {
+      "post": {
+        "description": "Per-ring leakage and penalties for a BiDi grid (model card §13.2, §13.6), the worst\nreceive channel, and sampled drop responses of every receive ring for display.",
+        "operationId": "post_wdm_crosstalk_wdm_crosstalk_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CrosstalkRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CrosstalkResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Post Wdm Crosstalk"
+      }
+    },
+    "/wdm/grid": {
+      "post": {
+        "description": "The interleaved grid of model card §13.5 (INFERENCE for the Guide grid).",
+        "operationId": "post_wdm_grid_wdm_grid_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GridRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Grid"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Post Wdm Grid"
+      }
+    },
+    "/yield": {
+      "post": {
+        "description": "Statistical, assumption-dependent yield (model card §11). The worst-case verdict is\nreported unchanged next to it.",
+        "operationId": "yield_endpoint_yield_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/YieldRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/YieldResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Yield Endpoint"
+      }
+    }
+  }
+}

@@ -1,0 +1,350 @@
+# Reference rack OICD-R64: an OICD design (model card §14.9). SYNTHETIC: never Lightmatter's.
+# Independent reconstruction from public information. Not affiliated with or endorsed by
+# Lightmatter. Product names belong to their owners.
+
+[product]
+name = "Reference rack OICD-R64"
+family = "OICD"
+kind = "system"
+status = "OICD design for analysis (SYNTHETIC), not a product"
+summary = "An ORv3 rack of switch and XPU trays wired single tier with BiDi engines, used to show what the public parts imply at rack scale: space, fibers, lasers, the worst optical path and rack yield."
+
+[[assumption]]
+id = "rack.switch_trays"
+nominal = 8.0
+low = 8.0
+high = 8.0
+unit = "count"
+rationale = "OICD-R64 design: 8 switch trays (one switch plane each)."
+
+[[assumption]]
+id = "rack.xpu_trays"
+nominal = 16.0
+low = 16.0
+high = 16.0
+unit = "count"
+rationale = "OICD-R64 design: 16 XPU trays."
+
+[[assumption]]
+id = "rack.power_shelves"
+nominal = 2.0
+low = 2.0
+high = 2.0
+unit = "count"
+rationale = "OICD-R64 design: 2 ORv3 HPR power shelves (ocp_orv3_hpr72)."
+
+[[assumption]]
+id = "rack.switch_tray_ou"
+nominal = 1.0
+low = 1.0
+high = 1.0
+unit = "count"
+rationale = "Switch tray height in OpenU: 1, as the 1RU switch tray of the release."
+
+[[assumption]]
+id = "rack.xpu_tray_ou"
+nominal = 2.0
+low = 1.0
+high = 2.0
+unit = "count"
+rationale = "XPU tray height in OpenU: 2 under H_2U, 1 under H_1U (the sources disagree)."
+
+[[assumption]]
+id = "rack.power_shelf_ou"
+nominal = 1.0
+low = 1.0
+high = 1.0
+unit = "count"
+rationale = "The HPR V2 shelf is a 1 OU shelf (ocp_orv3_hpr72: 537 x 46.2 x 867.5 mm)."
+
+[[assumption]]
+id = "rack.lanes_per_xpu"
+nominal = 128.0
+low = 128.0
+high = 128.0
+unit = "count"
+rationale = "200G lanes per XPU each way: 25.6 Tbps per XPU, the XPU tray under H_dir."
+
+[[assumption]]
+id = "rack.switch_lanes"
+nominal = 1024.0
+low = 1024.0
+high = 1024.0
+unit = "count"
+rationale = "200G lanes per switch tray each way: 204.8 Tbps under H_dir."
+
+[[assumption]]
+id = "rack.two"
+nominal = 2.0
+low = 2.0
+high = 2.0
+unit = "count"
+rationale = "Two fibers per duplex link, and a transmitter at each end of a link."
+
+[[assumption]]
+id = "rack.tray_fiber_m"
+nominal = 0.5
+low = 0.5
+high = 0.5
+unit = "m"
+rationale = "Fiber inside each tray on the worst path (OICD-R64 layout)."
+
+[[assumption]]
+id = "rack.rack_fiber_m"
+nominal = 3.0
+low = 3.0
+high = 3.0
+unit = "m"
+rationale = "Rack fiber from an XPU tray to the farthest switch tray (OICD-R64 layout)."
+
+[[assumption]]
+id = "rack.switch_connector_db"
+nominal = 0.5
+low = 0.5
+high = 0.5
+unit = "dB"
+rationale = "Switch-tray rear connector, TMT class (SYNTHETIC, as the PRIZM TMT figure)."
+
+[[assumption]]
+id = "rack.vclick_loss_db"
+nominal = 1.5
+low = 1.0
+high = 1.5
+unit = "dB"
+rationale = "vClick loss: 'less than 1.5 dB' (lm_pr_vclick) taken as 1.5; Futurum's 'below 1 dB' as the low end."
+
+[[assumption]]
+id = "rack.vclicks_in_channel"
+nominal = 2.0
+low = 0.0
+high = 2.0
+unit = "count"
+rationale = "vClick connections counted in the TP2-TP3 channel: 2 under H_vclick_channel (model card §2), 0 under H_vclick_module."
+
+[[assumption]]
+id = "rack.reserve_db"
+nominal = 0.0
+low = 0.0
+high = 0.0
+unit = "dB"
+rationale = "No unallocated reserve, as in the draft DR budget."
+
+[[assumption]]
+id = "rack.zero_db"
+nominal = 0.0
+low = 0.0
+high = 0.0
+unit = "dB"
+rationale = "The margin a link needs (model card §3)."
+
+[[derived]]
+id = "rack.xpus"
+fn = "times_count"
+inputs = ["rack.xpu_trays", "trays.xpu_accelerators"]
+unit = "count"
+note = "16 trays × 4 XPUs"
+
+[[derived]]
+id = "rack.links"
+fn = "times_count"
+inputs = ["rack.xpus", "rack.lanes_per_xpu"]
+unit = "count"
+note = "64 XPUs × 128 lanes"
+
+[[derived]]
+id = "rack.switch_capacity"
+fn = "times_count"
+inputs = ["rack.switch_trays", "rack.switch_lanes"]
+unit = "count"
+note = "8 × 1024 switch lanes"
+
+[[derived]]
+id = "rack.lanes_per_xpu_per_plane"
+fn = "divide_by_count"
+inputs = ["rack.lanes_per_xpu", "rack.switch_trays"]
+unit = "count"
+note = "each XPU sends 16 lanes to each switch tray"
+
+[[derived]]
+id = "rack.duplex_fibers"
+fn = "times_count"
+inputs = ["rack.two", "rack.links"]
+unit = "count"
+note = "fibers a duplex design would need"
+
+[[derived]]
+id = "rack.tx_lanes"
+fn = "times_count"
+inputs = ["rack.two", "rack.links"]
+unit = "count"
+note = "a transmitter at each end of every link"
+
+[[derived]]
+id = "rack.guidedr"
+fn = "count_ratio"
+inputs = ["rack.tx_lanes", "guidedr.lanes"]
+unit = "count"
+note = "Guide DR modules at 256 lanes each"
+
+[[derived]]
+id = "rack.ou_switch"
+fn = "times_count"
+inputs = ["rack.switch_trays", "rack.switch_tray_ou"]
+unit = "count"
+note = "OpenU of switch trays"
+
+[[derived]]
+id = "rack.ou_xpu"
+fn = "times_count"
+inputs = ["rack.xpu_trays", "rack.xpu_tray_ou"]
+unit = "count"
+note = "OpenU of XPU trays"
+
+[[derived]]
+id = "rack.ou_power"
+fn = "times_count"
+inputs = ["rack.power_shelves", "rack.power_shelf_ou"]
+unit = "count"
+note = "OpenU of power shelves"
+
+[[derived]]
+id = "rack.ou_trays"
+fn = "sum2"
+inputs = ["rack.ou_switch", "rack.ou_xpu"]
+unit = "count"
+note = "OpenU of trays"
+
+[[derived]]
+id = "rack.ou_used"
+fn = "sum2"
+inputs = ["rack.ou_trays", "rack.ou_power"]
+unit = "count"
+note = "OpenU used"
+
+[[derived]]
+id = "rack.fiber_two_trays"
+fn = "sum2"
+inputs = ["rack.tray_fiber_m", "rack.tray_fiber_m"]
+unit = "m"
+note = "fiber inside the two trays"
+
+[[derived]]
+id = "rack.fiber_m"
+fn = "sum2"
+inputs = ["rack.fiber_two_trays", "rack.rack_fiber_m"]
+unit = "m"
+note = "fiber on the worst path"
+
+[[derived]]
+id = "rack.fiber_db"
+fn = "fiber_loss_db"
+inputs = ["rack.fiber_m", "itut.g652d_atten_max"]
+unit = "dB"
+note = "4 m at 0.4 dB/km"
+
+[[derived]]
+id = "rack.vclick_db"
+fn = "times_count"
+inputs = ["rack.vclicks_in_channel", "rack.vclick_loss_db"]
+unit = "dB"
+note = "vClick loss inside the channel"
+
+[[derived]]
+id = "rack.connectors_db"
+fn = "sum2"
+inputs = ["prizm.usconec_insertion_loss", "rack.switch_connector_db"]
+unit = "dB"
+note = "PRIZM TMT blind mate plus the switch-tray connector"
+
+[[derived]]
+id = "rack.passive_db"
+fn = "sum2"
+inputs = ["rack.connectors_db", "rack.fiber_db"]
+unit = "dB"
+note = "connectors and fiber"
+
+[[derived]]
+id = "rack.channel_il"
+fn = "sum2"
+inputs = ["rack.vclick_db", "rack.passive_db"]
+unit = "dB"
+note = "channel insertion loss of the worst path"
+
+[[derived]]
+id = "rack.tx_oma"
+fn = "dbm_plus_db"
+inputs = ["ieee3dj.oma_min_intercept", "ieee3dj.tdecq_max"]
+unit = "dBm"
+note = "draft DR TX OMAouter min at max TDECQ"
+
+[[derived]]
+id = "rack.margin"
+fn = "budget_margin_db"
+inputs = ["rack.tx_oma", "rack.channel_il", "ieee3dj.rx_sens_intercept", "ieee3dj.penalty_allocation", "rack.reserve_db"]
+unit = "dB"
+note = "worst-path margin on the draft DR budget"
+
+[[derived]]
+id = "rack.single_tier_xpus"
+fn = "count_ratio"
+inputs = ["rack.switch_lanes", "rack.lanes_per_xpu_per_plane"]
+unit = "count"
+note = "single-tier radix: switch lanes / lanes per XPU per switch plane"
+
+[[check]]
+id = "rack.check_links"
+kind = "consistent"
+a = "rack.links"
+b = "rack.switch_capacity"
+rel_tol = 0.0
+note = "8192 XPU lanes = 8 × 1024 switch lanes"
+
+[[check]]
+id = "rack.check_space"
+kind = "bound"
+a = "rack.ou_used"
+b = "orv3.meta_capacity_openu"
+rel_tol = 0.0
+relation = "le"
+note = "fits the 44 OpenU of the Meta ORv3 frame"
+
+[[check]]
+id = "rack.check_margin"
+kind = "bound"
+a = "rack.margin"
+b = "rack.zero_db"
+rel_tol = 0.0
+relation = "ge"
+note = "the reference-plane definition, not the physics, decides this rack"
+
+[[check]]
+id = "rack.check_ocp_vision"
+kind = "consistent"
+a = "rack.single_tier_xpus"
+b = "osp.vision_flat_domain"
+rel_tol = 0.10
+note = "against the OCP vision's flat domains of 1,024 to 2,048 XPUs"
+
+[[hypothesis]]
+id = "H_vclick_channel"
+statement = "The vClick is a mated connection between TP2 and TP3 (model card §2), so its loss is in the channel."
+sets = { "rack.vclicks_in_channel" = 2.0 }
+group = "reference_plane"
+
+[[hypothesis]]
+id = "H_vclick_module"
+statement = "The engine's DR specification is defined after its vClick, so the vClick is inside the module."
+sets = { "rack.vclicks_in_channel" = 0.0 }
+group = "reference_plane"
+
+[[hypothesis]]
+id = "H_2U"
+statement = "XPU trays are 2 OU high: the rack uses 42 OU."
+sets = { "rack.xpu_tray_ou" = 2.0 }
+group = "rack_xpu_height"
+
+[[hypothesis]]
+id = "H_1U"
+statement = "XPU trays are 1 OU high: the rack uses 26 OU."
+sets = { "rack.xpu_tray_ou" = 1.0 }
+group = "rack_xpu_height"

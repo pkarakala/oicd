@@ -76,7 +76,12 @@ def test_declared_unit_must_match_formula():
 def test_bound_check_needs_a_min_or_max_fact():
     files = toy_files()
     files["toy"]["check"][3]["b"] = "toy.per_lambda"
-    with pytest.raises(ValueError, match="min or max fact"):
+    with pytest.raises(ValueError, match="min or max fact or a relation"):
+        build(files)
+    files["toy"]["check"][3]["relation"] = "ge"  # an explicit relation makes it valid
+    assert build(files).checks["toy.check_fiber_power"].relation == "ge"
+    files["toy"]["check"][0]["relation"] = "le"
+    with pytest.raises(ValueError, match="bound checks only"):
         build(files)
 
 

@@ -429,3 +429,184 @@ source_class = "vendor_claim"
 verified = true
 location = "Page 15, 4th bullet"
 note = "Evidence: text. Slide 14 states '<3 pJ/bit (PIC + Laser)'. The slide 15 components sum to 1.8 + 1.1 = 2.9 pJ/bit. lm_web_evk100 states 3.2 pJ/bit including laser."
+# ---- Model (brief 05 phase 6, model card §14.4) ---------------------------------------------
+
+[[fact]]
+id = "l200.bw_per_fiber_l200"
+quantity = "bandwidth per fiber, first figure"
+value = 800.0
+bound = "exact"
+unit = "Gbps"
+quote = "800Gbps/1.6Tbps per fiber"
+cite = "lm_pr_l200"
+source_class = "vendor_claim"
+verified = true
+note = "Evidence: text. Number split from l200.bw_per_fiber; the release does not say which figure belongs to the L200 and which to the L200X, nor whether they are per direction."
+
+[[fact]]
+id = "l200.bw_per_fiber_l200x"
+quantity = "bandwidth per fiber, second figure"
+value = 1600.0
+bound = "exact"
+unit = "Gbps"
+quote = "800Gbps/1.6Tbps per fiber"
+cite = "lm_pr_l200"
+source_class = "vendor_claim"
+verified = true
+note = "Evidence: text. Number split from l200.bw_per_fiber (1.6 Tbps written as 1600 Gb/s)."
+
+[[assumption]]
+id = "l200.payload_56"
+nominal = 50.0
+low = 50.0
+high = 56.0
+unit = "Gbps"
+rationale = "Payload carried by a 56 Gb/s lane: 50 Gb/s reproduces '32 Tbps total' (line overhead, INFERENCE), 56 Gb/s if the total counted line rate. Pinned by H_l200_payload or H_l200_line."
+
+[[assumption]]
+id = "l200.payload_112"
+nominal = 100.0
+low = 100.0
+high = 112.0
+unit = "Gbps"
+rationale = "Payload carried by a 106/112 Gb/s PAM4 lane: 100 Gb/s reproduces '64 Tbps total'."
+
+[[assumption]]
+id = "l200.two_directions"
+nominal = 2.0
+low = 2.0
+high = 2.0
+unit = "count"
+rationale = "'Total (Tx+Rx)' counts each SerDes lane in both directions."
+
+[[assumption]]
+id = "l200.chiplets_per_package"
+nominal = 4.0
+low = 1.0
+high = 4.0
+unit = "count"
+rationale = "L200X chiplets per package implied by 256 Tbps / 64 Tbps (INFERENCE); not disclosed."
+
+[[derived]]
+id = "l200.bw_l200_one_dir"
+fn = "aggregate_tbps"
+inputs = ["l200.serdes_count", "l200.payload_56"]
+unit = "Tbps"
+note = "320 SerDes × payload, one direction"
+
+[[derived]]
+id = "l200.bw_l200"
+fn = "times_count"
+inputs = ["l200.two_directions", "l200.bw_l200_one_dir"]
+unit = "Tbps"
+note = "L200 total (Tx + Rx)"
+
+[[derived]]
+id = "l200.bw_l200x_one_dir"
+fn = "aggregate_tbps"
+inputs = ["l200.serdes_count", "l200.payload_112"]
+unit = "Tbps"
+note = "320 SerDes × payload, one direction"
+
+[[derived]]
+id = "l200.bw_l200x"
+fn = "times_count"
+inputs = ["l200.two_directions", "l200.bw_l200x_one_dir"]
+unit = "Tbps"
+note = "L200X total (Tx + Rx)"
+
+[[derived]]
+id = "l200.fibers_l200"
+fn = "lanes"
+inputs = ["l200.bw_l200", "l200.bw_per_fiber_l200"]
+unit = "count"
+note = "fibers at 800 Gb/s each"
+
+[[derived]]
+id = "l200.fibers_l200x"
+fn = "lanes"
+inputs = ["l200.bw_l200x", "l200.bw_per_fiber_l200x"]
+unit = "count"
+note = "fibers at 1.6 Tb/s each"
+
+[[derived]]
+id = "l200.package_bw"
+fn = "times_count"
+inputs = ["l200.chiplets_per_package", "l200.bw_l200x"]
+unit = "Tbps"
+note = "4 × 64 Tbps per package"
+
+[[derived]]
+id = "l200.per_pluggable"
+fn = "rate_per_unit_gbps"
+inputs = ["l200.bw_l200", "l200.pluggable_equiv"]
+unit = "Gbps"
+note = "32 Tbps over 40 pluggable equivalents"
+
+[[check]]
+id = "l200.check_32"
+kind = "consistent"
+a = "l200.bw_l200"
+b = "l200.l200_bw_total"
+rel_tol = 0.001
+note = "against 'L200 ... 32 Tbps total (Tx+Rx)'"
+
+[[check]]
+id = "l200.check_64"
+kind = "consistent"
+a = "l200.bw_l200x"
+b = "l200.l200x_bw_total"
+rel_tol = 0.001
+note = "against 'L200X ... 64 Tbps total (Tx+Rx)'"
+
+[[check]]
+id = "l200.check_fibers"
+kind = "consistent"
+a = "l200.fibers_l200"
+b = "l200.fibers_l200x"
+rel_tol = 0.0
+note = "32/0.8 = 64/1.6 = 40 fibers"
+
+[[check]]
+id = "l200.check_fibers_pluggables"
+kind = "consistent"
+a = "l200.fibers_l200"
+b = "l200.pluggable_equiv"
+rel_tol = 0.0
+note = "40 fibers against '40 pluggable transceivers' equivalent"
+
+[[check]]
+id = "l200.check_256"
+kind = "consistent"
+a = "l200.package_bw"
+b = "l200.web_package_bw"
+rel_tol = 0.001
+note = "against '256 Tbps (Tx+Rx)' (in the product page metadata only)"
+
+[[check]]
+id = "l200.check_over_200"
+kind = "bound"
+a = "l200.package_bw"
+b = "l200.package_bw_min"
+rel_tol = 0.0
+note = "against 'over 200 Tbps ... per chip package'"
+
+[[check]]
+id = "l200.check_path_to_100"
+kind = "consistent"
+a = "l200.package_bw"
+b = "l200.package_bw_target_2026"
+rel_tol = 0.10
+note = "against the 2026 release's 'a clear path to 100 Tbps of total I/O per package'"
+
+[[hypothesis]]
+id = "H_l200_payload"
+statement = "The L200 totals count payload: 50 Gb/s on each 56 Gb/s NRZ lane and 100 Gb/s on each 106/112 Gb/s PAM4 lane."
+sets = { "l200.payload_56" = 50.0, "l200.payload_112" = 100.0 }
+group = "l200_rate"
+
+[[hypothesis]]
+id = "H_l200_line"
+statement = "The L200 totals count the line rate: 56 and 112 Gb/s per lane."
+sets = { "l200.payload_56" = 56.0, "l200.payload_112" = 112.0 }
+group = "l200_rate"

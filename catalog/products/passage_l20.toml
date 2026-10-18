@@ -618,3 +618,441 @@ source_class = "third_party"
 verified = true
 location = "paragraph 7"
 note = "Evidence: text. Extra (verifies references.bib note). DCD gives no pJ/bit figure."
+# ---- Model (brief 05 phase 6, model card §14.2) ---------------------------------------------
+
+[[fact]]
+id = "l20.switch_l20_count"
+quantity = "L20 engines in the switch example"
+value = 18.0
+bound = "exact"
+unit = "count"
+quote = "Switch: Up to 115.2 Tbps (18 x L20)"
+cite = "lm_yole_ofc26"
+source_class = "vendor_claim"
+verified = true
+location = "slide 20"
+note = "Evidence: text. Number split from l20.switch_bw_yole."
+
+[[fact]]
+id = "l20.xpu_l20_count"
+quantity = "L20 engines in the XPU example"
+value = 6.0
+bound = "exact"
+unit = "count"
+quote = "XPU: 38 Tbps (6 x L20)"
+cite = "lm_yole_ofc26"
+source_class = "vendor_claim"
+verified = true
+location = "slide 20"
+note = "Evidence: text. Number split from l20.xpu_bw_yole."
+
+[[fact]]
+id = "l20.pluggable_energy_lo"
+quantity = "pluggable energy per bit, low end"
+value = 17.0
+bound = "exact"
+unit = "pJ/bit"
+quote = "Power Efﬁciency 17–20 pJ/bit 5 pJ/bit"
+cite = "lm_yole_ofc26"
+source_class = "vendor_claim"
+verified = true
+location = "slide 20"
+note = "Evidence: text. Number split from l20.pluggable_energy_per_bit_yole."
+
+[[fact]]
+id = "l20.pluggable_energy_hi"
+quantity = "pluggable energy per bit, high end"
+value = 20.0
+bound = "exact"
+unit = "pJ/bit"
+quote = "Power Efﬁciency 17–20 pJ/bit 5 pJ/bit"
+cite = "lm_yole_ofc26"
+source_class = "vendor_claim"
+verified = true
+location = "slide 20"
+note = "Evidence: text. Number split from l20.pluggable_energy_per_bit_yole."
+
+[[assumption]]
+id = "l20.energy_direction_factor"
+nominal = 1.0
+low = 1.0
+high = 2.0
+unit = "count"
+rationale = "Directions the energy-per-bit figure divides the 30 W TDP by: 1 if per direction (as pluggables quote it), 2 if both. Not disclosed; pinned by H_l20_one_dir or H_l20_both_dirs."
+
+[[assumption]]
+id = "l20.two_directions"
+nominal = 2.0
+low = 2.0
+high = 2.0
+unit = "count"
+rationale = "A BiDi engine carries both directions on each fiber; used to state the both-directions rate."
+
+[[assumption]]
+id = "l20.fibers_per_lane_duplex"
+nominal = 2.0
+low = 2.0
+high = 2.0
+unit = "count"
+rationale = "A unidirectional DR lane uses one fiber each way, so two fibers per lane; the BiDi engine uses one."
+
+[[assumption]]
+id = "l20.lambda_tolerance_nm"
+nominal = 0.0
+low = 0.0
+high = 6.5
+unit = "nm"
+rationale = "TX wavelength tolerance δ, not disclosed: 0 as in model card §14.2, at most the half-width of the draft DR range."
+
+[[derived]]
+id = "l20.rate_per_port"
+fn = "rate_per_unit_gbps"
+inputs = ["l20.bw_per_direction", "l20.optical_ports"]
+unit = "Gbps"
+note = "rate per optical port"
+
+[[derived]]
+id = "l20.line_payload_ratio"
+fn = "ratio"
+inputs = ["l20.serdes_line_rate", "l20.lane_rate"]
+unit = "1"
+note = "SerDes line rate over lane payload rate (draft 802.3dj FEC and transcoding overhead)"
+
+[[derived]]
+id = "l20.rate_counted"
+fn = "times_count"
+inputs = ["l20.energy_direction_factor", "l20.bw_per_direction"]
+unit = "Tbps"
+note = "rate the energy figure divides by"
+
+[[derived]]
+id = "l20.energy_per_bit"
+fn = "pj_per_bit"
+inputs = ["l20.tdp_max", "l20.rate_counted"]
+unit = "pJ/bit"
+note = "energy per bit at maximum TDP"
+
+[[derived]]
+id = "l20.bw_both"
+fn = "times_count"
+inputs = ["l20.two_directions", "l20.bw_per_direction"]
+unit = "Tbps"
+note = "both directions"
+
+[[derived]]
+id = "l20.energy_per_bit_both"
+fn = "pj_per_bit"
+inputs = ["l20.tdp_max", "l20.bw_both"]
+unit = "pJ/bit"
+note = "energy per bit counting both directions"
+
+[[derived]]
+id = "l20.power_for_3pj"
+fn = "power_w_at_pj_per_bit"
+inputs = ["l20.energy_per_bit_bw", "l20.bw_per_direction"]
+unit = "W"
+note = "power that 3.0 pJ/bit implies at 6.4 Tbps"
+
+[[derived]]
+id = "l20.lambda_spacing_nm"
+fn = "difference"
+inputs = ["l20.lambda_b_nm", "l20.lambda_a_nm"]
+unit = "nm"
+note = "spacing of the two BiDi wavelengths"
+
+[[derived]]
+id = "l20.lambda_spacing_ghz"
+fn = "nm_pair_spacing_ghz"
+inputs = ["l20.lambda_a_nm", "l20.lambda_b_nm"]
+unit = "GHz"
+note = "spacing of the two BiDi wavelengths in frequency"
+
+[[derived]]
+id = "l20.a_lower_edge"
+fn = "difference"
+inputs = ["l20.lambda_a_nm", "l20.lambda_tolerance_nm"]
+unit = "nm"
+note = "direction A lower edge"
+
+[[derived]]
+id = "l20.a_upper_edge"
+fn = "sum2"
+inputs = ["l20.lambda_a_nm", "l20.lambda_tolerance_nm"]
+unit = "nm"
+note = "direction A upper edge"
+
+[[derived]]
+id = "l20.b_lower_edge"
+fn = "difference"
+inputs = ["l20.lambda_b_nm", "l20.lambda_tolerance_nm"]
+unit = "nm"
+note = "direction B lower edge"
+
+[[derived]]
+id = "l20.b_upper_edge"
+fn = "sum2"
+inputs = ["l20.lambda_b_nm", "l20.lambda_tolerance_nm"]
+unit = "nm"
+note = "direction B upper edge"
+
+[[derived]]
+id = "l20.lanes_per_laser_fiber"
+fn = "count_ratio"
+inputs = ["l20.optical_ports", "l20.laser_fibers_yole"]
+unit = "count"
+note = "lanes fed by each laser fiber"
+
+[[derived]]
+id = "l20.duplex_fibers"
+fn = "times_count"
+inputs = ["l20.fibers_per_lane_duplex", "l20.optical_ports"]
+unit = "count"
+note = "fibers a unidirectional DR engine with the same lanes would need"
+
+[[derived]]
+id = "l20.fiber_reduction"
+fn = "reduction_fraction"
+inputs = ["l20.fibers_yole", "l20.duplex_fibers"]
+unit = "1"
+note = "fiber reduction from BiDi"
+
+[[derived]]
+id = "l20.fiber_reduction_pct"
+fn = "percent"
+inputs = ["l20.fiber_reduction"]
+unit = "%"
+note = "fiber reduction from BiDi, percent"
+
+[[derived]]
+id = "l20.volume"
+fn = "volume_mm3"
+inputs = ["l20.length_mm_yole", "l20.width_mm_yole", "l20.height_mm_yole"]
+unit = "mm3"
+note = "L20 package volume"
+
+[[derived]]
+id = "l20.pluggable_volume"
+fn = "volume_mm3"
+inputs = ["l20.pluggable_length_mm_yole", "l20.pluggable_width_mm_yole", "l20.pluggable_height_mm_yole"]
+unit = "mm3"
+note = "pluggable volume"
+
+[[derived]]
+id = "l20.volume_reduction"
+fn = "reduction_fraction"
+inputs = ["l20.volume", "l20.pluggable_volume"]
+unit = "1"
+note = "volume reduction against the pluggable"
+
+[[derived]]
+id = "l20.volume_reduction_pct"
+fn = "percent"
+inputs = ["l20.volume_reduction"]
+unit = "%"
+note = "volume reduction, percent"
+
+[[derived]]
+id = "l20.switch_bw_18"
+fn = "times_count"
+inputs = ["l20.switch_l20_count", "l20.bw_per_direction"]
+unit = "Tbps"
+note = "18 × L20"
+
+[[derived]]
+id = "l20.xpu_bw_6"
+fn = "times_count"
+inputs = ["l20.xpu_l20_count", "l20.bw_per_direction"]
+unit = "Tbps"
+note = "6 × L20"
+
+[[derived]]
+id = "l20.savings_vs_17"
+fn = "reduction_fraction"
+inputs = ["l20.energy_per_bit_yole", "l20.pluggable_energy_lo"]
+unit = "1"
+note = "energy saving against a 17 pJ/bit pluggable"
+
+[[derived]]
+id = "l20.savings_vs_17_pct"
+fn = "percent"
+inputs = ["l20.savings_vs_17"]
+unit = "%"
+note = "energy saving against a 17 pJ/bit pluggable, percent"
+
+[[derived]]
+id = "l20.savings_vs_20"
+fn = "reduction_fraction"
+inputs = ["l20.energy_per_bit_yole", "l20.pluggable_energy_hi"]
+unit = "1"
+note = "energy saving against a 20 pJ/bit pluggable"
+
+[[derived]]
+id = "l20.savings_vs_20_pct"
+fn = "percent"
+inputs = ["l20.savings_vs_20"]
+unit = "%"
+note = "energy saving against a 20 pJ/bit pluggable, percent"
+
+[[check]]
+id = "l20.check_port_rate"
+kind = "consistent"
+a = "l20.rate_per_port"
+b = "l20.lane_rate"
+rel_tol = 0.001
+note = "6.4 Tbps / 32 against '200 Gbps per lane'"
+
+[[check]]
+id = "l20.check_energy_web"
+kind = "consistent"
+a = "l20.energy_per_bit"
+b = "l20.energy_per_bit_web"
+rel_tol = 0.10
+note = "against '5 pJ/bit' (product page)"
+
+[[check]]
+id = "l20.check_energy_yole"
+kind = "consistent"
+a = "l20.energy_per_bit"
+b = "l20.energy_per_bit_yole"
+rel_tol = 0.10
+note = "against '5 pJ/bit' (OFC 2026 slides)"
+
+[[check]]
+id = "l20.check_energy_bw"
+kind = "consistent"
+a = "l20.energy_per_bit"
+b = "l20.energy_per_bit_bw"
+rel_tol = 0.10
+note = "against '3.0 pJ/bit' (Business Wire copy only)"
+
+[[check]]
+id = "l20.check_tdp_for_3pj"
+kind = "consistent"
+a = "l20.power_for_3pj"
+b = "l20.tdp_max"
+rel_tol = 0.10
+note = "3.0 pJ/bit would need 19.2 W at 6.4 Tbps; both sources kept"
+
+[[check]]
+id = "l20.check_energy_copies"
+kind = "consistent"
+a = "l20.energy_per_bit_bw"
+b = "l20.energy_per_bit_web"
+rel_tol = 0.10
+note = "two published energy figures"
+
+[[check]]
+id = "l20.check_cwdm_spacing"
+kind = "consistent"
+a = "l20.lambda_spacing_nm"
+b = "itut.cwdm_spacing"
+rel_tol = 0.001
+note = "1311 and 1331 nm are two adjacent CWDM channels (INFERENCE)"
+
+[[check]]
+id = "l20.check_a_lower"
+kind = "bound"
+a = "l20.a_lower_edge"
+b = "ieee3dj.lane_wl_min"
+rel_tol = 0.0
+note = "direction A against the draft DR range, lower edge"
+
+[[check]]
+id = "l20.check_a_upper"
+kind = "bound"
+a = "l20.a_upper_edge"
+b = "ieee3dj.lane_wl_max"
+rel_tol = 0.0
+note = "direction A against the draft DR range, upper edge"
+
+[[check]]
+id = "l20.check_b_lower"
+kind = "bound"
+a = "l20.b_lower_edge"
+b = "ieee3dj.lane_wl_min"
+rel_tol = 0.0
+note = "direction B against the draft DR range, lower edge"
+
+[[check]]
+id = "l20.check_b_upper"
+kind = "bound"
+a = "l20.b_upper_edge"
+b = "ieee3dj.lane_wl_max"
+rel_tol = 0.0
+note = "direction B against the draft DR range, upper edge: 'DR compatible' cannot mean DR wavelength compliance in both directions (open question, INFERENCE)"
+
+[[check]]
+id = "l20.check_fiber_reduction"
+kind = "consistent"
+a = "l20.fiber_reduction_pct"
+b = "l20.fiber_mgmt_reduction"
+rel_tol = 0.01
+note = "against '-50%' fiber management"
+
+[[check]]
+id = "l20.check_volume"
+kind = "consistent"
+a = "l20.volume_reduction_pct"
+b = "l20.volume_reduction_yole"
+rel_tol = 0.01
+note = "against '~88% Smaller'"
+
+[[check]]
+id = "l20.check_switch_bw"
+kind = "consistent"
+a = "l20.switch_bw_18"
+b = "l20.switch_bw_yole"
+rel_tol = 0.001
+note = "18 × L20 against 'Up to 115.2 Tbps'"
+
+[[check]]
+id = "l20.check_xpu_bw"
+kind = "consistent"
+a = "l20.xpu_bw_6"
+b = "l20.xpu_bw_yole"
+rel_tol = 0.02
+note = "6 × L20 against '38 Tbps' (rounded down from 38.4)"
+
+[[check]]
+id = "l20.check_savings"
+kind = "consistent"
+a = "l20.savings_vs_20_pct"
+b = "l20.power_savings_yole"
+rel_tol = 0.001
+note = "against 'Up to 75% Power Savings'"
+
+[[check]]
+id = "l20.check_cpx_total"
+kind = "consistent"
+a = "l20.bw_both"
+b = "cpx.bw_total"
+rel_tol = 0.001
+note = "both directions against the CPX engine's 12.8 Tbps total"
+
+[[check]]
+id = "l20.check_widths"
+kind = "consistent"
+a = "l20.width_mm_web"
+b = "l20.width_mm_yole"
+rel_tol = 0.001
+note = "package width: product page against OFC 2026 slides"
+
+[[check]]
+id = "l20.check_pins"
+kind = "consistent"
+a = "l20.form_factor_pins"
+b = "l20.bga_balls_web"
+rel_tol = 0.001
+note = "BGA count: release against product page"
+
+[[hypothesis]]
+id = "H_l20_one_dir"
+statement = "The L20's energy per bit divides the 30 W TDP by one direction (6.4 Tbps), as pluggables quote it."
+sets = { "l20.energy_direction_factor" = 1.0 }
+group = "l20_energy"
+
+[[hypothesis]]
+id = "H_l20_both_dirs"
+statement = "The L20's energy per bit divides the 30 W TDP by both directions (12.8 Tbps)."
+sets = { "l20.energy_direction_factor" = 2.0 }
+group = "l20_energy"

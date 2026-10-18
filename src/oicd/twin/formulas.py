@@ -146,6 +146,84 @@ def heater_power_mw(tuning_nm: float, efficiency_nm_per_mw: float) -> float:
     return tuning_nm / efficiency_nm_per_mw
 
 
+def fiber_loss_db(length_m: float, attenuation_db_per_km: float) -> float:
+    return length_m / 1000.0 * attenuation_db_per_km
+
+
+def percent(fraction: float) -> float:
+    return 100.0 * fraction
+
+
+def ghz_to_thz(frequency_ghz: float) -> float:
+    return frequency_ghz / 1000.0
+
+
+def dbm_plus_db(level_dbm: float, delta_db: float) -> float:
+    """A level moved by a ratio: dBm + dB = dBm."""
+    return level_dbm + delta_db
+
+
+def budget_margin_db(
+    launch_dbm: float, channel_il_db: float, s_rx_dbm: float, penalties_db: float, reserve_db: float
+) -> float:
+    """Model card §3: M_net = ((P_TP2 − ΣL) − S_RX) − ΣΠ − R."""
+    return (((launch_dbm - channel_il_db) - s_rx_dbm) - penalties_db) - reserve_db
+
+
+def chain_margin_db(
+    laser_dbm: float,
+    split_count: float,
+    chain_loss_db: float,
+    er_db: float,
+    channel_il_db: float,
+    s_rx_dbm: float,
+    penalties_db: float,
+    reserve_db: float,
+) -> float:
+    """Model card §10 then §3: the margin of a link whose TP2 comes from a laser split N ways.
+    chain_loss_db lumps the non-split chain losses (fiber, coupling, excess, modulator, coupler)."""
+    from oicd.units import DB, oma_offset_db
+    from oicd.upstream import split_loss_db
+
+    n = int(split_count)
+    if n != split_count or n < 1:
+        raise ValueError(f"split count must be an integer >= 1, got {split_count}")
+    p_avg = laser_dbm - chain_loss_db - split_loss_db(n).value
+    oma = p_avg + oma_offset_db(DB(er_db)).value
+    return budget_margin_db(oma, channel_il_db, s_rx_dbm, penalties_db, reserve_db)
+
+
+def chain_max_fanout(
+    laser_dbm: float,
+    chain_loss_db: float,
+    er_db: float,
+    channel_il_db: float,
+    s_rx_dbm: float,
+    penalties_db: float,
+    reserve_db: float,
+) -> float:
+    """Largest N with chain_margin_db ≥ −1e-9 (model card §10 search; 0 if N = 1 fails)."""
+    from oicd.registry import EPSILON_DB
+    from oicd.upstream import MAX_FANOUT_SEARCH
+
+    def ok(n: int) -> bool:
+        margin = chain_margin_db(
+            laser_dbm, n, chain_loss_db, er_db, channel_il_db, s_rx_dbm, penalties_db, reserve_db
+        )
+        return margin >= -EPSILON_DB
+
+    if not ok(1):
+        return 0.0
+    good, bad = 1, 2
+    while bad <= MAX_FANOUT_SEARCH and ok(bad):
+        good, bad = bad, bad * 2
+    bad = min(bad, MAX_FANOUT_SEARCH + 1)
+    while bad - good > 1:
+        mid = (good + bad) // 2
+        good, bad = (mid, bad) if ok(mid) else (good, mid)
+    return float(good)
+
+
 @dataclass(frozen=True, slots=True)
 class Formula:
     name: str
@@ -259,6 +337,65 @@ FORMULAS: dict[str, Formula] = {
             "mW",
             "{tuning_nm} / {efficiency_nm_per_mw}",
         ),
+        _f(
+            fiber_loss_db,
+            (("length_m", "m"), ("attenuation_db_per_km", "dB/km")),
+            "dB",
+            "{length_m} × {attenuation_db_per_km}",
+        ),
+        _f(percent, (("fraction", "1"),), "%", "100 × {fraction}"),
+        _f(ghz_to_thz, (("frequency_ghz", "GHz"),), "THz", "{frequency_ghz}"),
+        _f(
+            dbm_plus_db,
+            (("level_dbm", "dBm"), ("delta_db", "dB")),
+            "dBm",
+            "{level_dbm} + {delta_db}",
+        ),
+        _f(
+            budget_margin_db,
+            (
+                ("launch_dbm", "dBm"),
+                ("channel_il_db", "dB"),
+                ("s_rx_dbm", "dBm"),
+                ("penalties_db", "dB"),
+                ("reserve_db", "dB"),
+            ),
+            "dB",
+            "(({launch_dbm} − {channel_il_db}) − {s_rx_dbm}) − {penalties_db} − {reserve_db}",
+        ),
+        _f(
+            chain_margin_db,
+            (
+                ("laser_dbm", "dBm"),
+                ("split_count", "count"),
+                ("chain_loss_db", "dB"),
+                ("er_db", "dB"),
+                ("channel_il_db", "dB"),
+                ("s_rx_dbm", "dBm"),
+                ("penalties_db", "dB"),
+                ("reserve_db", "dB"),
+            ),
+            "dB",
+            "§10 chain from {laser_dbm} split {split_count} ways, chain {chain_loss_db}, ER "
+            "{er_db}; §3 budget with IL {channel_il_db}, S_RX {s_rx_dbm}, penalties "
+            "{penalties_db}, reserve {reserve_db}",
+        ),
+        _f(
+            chain_max_fanout,
+            (
+                ("laser_dbm", "dBm"),
+                ("chain_loss_db", "dB"),
+                ("er_db", "dB"),
+                ("channel_il_db", "dB"),
+                ("s_rx_dbm", "dBm"),
+                ("penalties_db", "dB"),
+                ("reserve_db", "dB"),
+            ),
+            "count",
+            "largest N with M_net ≥ 0 for the §10 chain from {laser_dbm} (chain {chain_loss_db}, "
+            "ER {er_db}) into IL {channel_il_db}, S_RX {s_rx_dbm}, penalties {penalties_db}, "
+            "reserve {reserve_db}",
+        ),
     )
 }
 
@@ -284,8 +421,9 @@ def resolve_out_unit(formula: Formula, input_units: tuple[str, ...]) -> str:
 
 
 def format_number(x: float) -> str:
-    """Six significant digits, no trailing zeros: 4.6875, 263.782, 131072."""
-    return f"{x:.6g}"
+    """Seven significant digits, no trailing zeros: 4.6875, 38669.15, 131072."""
+    text = f"{x:.7g}"
+    return "−" + text[1:] if text.startswith("-") else text
 
 
 def with_unit(x: float, unit: str) -> str:
@@ -295,6 +433,11 @@ def with_unit(x: float, unit: str) -> str:
 def render(formula: Formula, values: tuple[float, ...], units: tuple[str, ...]) -> str:
     """The template filled with values and units, e.g. "30 W / 6.4 Tbps"."""
     names = [p for p, _ in formula.params]
+
+    def operand(value: float, unit: str) -> str:
+        text = with_unit(value, unit)
+        return f"({text})" if value < 0 else text
+
     return formula.template.format(
-        **{n: with_unit(v, u) for n, v, u in zip(names, values, units, strict=True)}
+        **{n: operand(v, u) for n, v, u in zip(names, values, units, strict=True)}
     )

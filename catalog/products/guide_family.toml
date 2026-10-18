@@ -816,3 +816,334 @@ source_class = "third_party"
 verified = true
 location = "'Guide DR Laser Engine' section, LNIC paragraph (raw.html.txt line 81)"
 note = "Evidence: text. Not in Appendix A; source not in Appendix B. Consistent with 51.2 Tbps per module (2 x 51.2 = 102.4), but '8 conventional ELSFP' differs from Lightmatter's 'about 18 conventional ELSFP modules' for 100 Tbps (lightmatter_guide_2026) and 'nine ELSFP' per Guide 1 (lm_web_guide1)."
+# ---- Model (brief 05 phase 6, model card §14.6) ---------------------------------------------
+
+[[fact]]
+id = "guide1.output_power_single"
+quantity = "optical output power, single package"
+value = 1.6
+bound = "exact"
+unit = "W"
+quote = "ranging from 1.6W in a single package up to 3.5W in"
+cite = "lm_web_guide1"
+source_class = "vendor_claim"
+verified = true
+note = "Evidence: text. Number split from guide1.output_power_range."
+
+[[fact]]
+id = "guide1.output_power_stacked"
+quantity = "optical output power, stacked"
+value = 3.5
+bound = "max"
+unit = "W"
+quote = "ranging from 1.6W in a single package up to 3.5W in"
+cite = "lm_web_guide1"
+source_class = "vendor_claim"
+verified = true
+note = "Evidence: text. Number split from guide1.output_power_range."
+
+[[assumption]]
+id = "guide1.fiber_power_assumed"
+nominal = 100.0
+low = 100.0
+high = 110.0
+unit = "mW"
+rationale = "Power per fiber between the stated 100 mW minimum and 110 mW (3.5 W / 32 fibers = 109.4 mW)."
+
+[[assumption]]
+id = "guidedr.chain_loss_db"
+nominal = 7.5
+low = 7.5
+high = 7.5
+unit = "dB"
+rationale = "Non-split chain losses of model card §10: laser fiber and connector 0.5 + coupling 1.5 + excess 0 + modulator 4.0 + output coupler 1.5 dB (all SYNTHETIC)."
+
+[[assumption]]
+id = "guidedr.er_db"
+nominal = 4.0
+low = 4.0
+high = 4.0
+unit = "dB"
+rationale = "Modulator extinction ratio of the model card §10 chain (SYNTHETIC)."
+
+[[assumption]]
+id = "guidedr.reserve_db"
+nominal = 0.0
+low = 0.0
+high = 0.0
+unit = "dB"
+rationale = "No unallocated reserve, as in the draft DR budget of model card §12.1."
+
+[[assumption]]
+id = "guidedr.chain_extra_db"
+nominal = 0.0
+low = 0.0
+high = 7.0
+unit = "dB"
+rationale = "Loss in the real chain beyond the SYNTHETIC §10 chain; pinned by H_chain_lossier."
+
+[[assumption]]
+id = "guidedr.provisioning_db"
+nominal = 0.0
+low = 0.0
+high = 7.0
+unit = "dB"
+rationale = "Laser power held back for aging, temperature and TDECQ corners; pinned by H_laser_headroom."
+
+[[derived]]
+id = "guide1.fiber_power"
+fn = "times_count"
+inputs = ["guide1.wavelengths_per_fiber", "guide1.power_per_lambda"]
+unit = "mW"
+note = "8 × 13 mW per fiber"
+
+[[derived]]
+id = "guide1.single_package_power"
+fn = "total_w_from_mw"
+inputs = ["guide1.fibers_single_package", "guide1.power_per_fiber_min"]
+unit = "W"
+note = "16 fibers × 100 mW"
+
+[[derived]]
+id = "guide1.stacked_power"
+fn = "total_w_from_mw"
+inputs = ["guide1.fibers_stacked", "guide1.fiber_power_assumed"]
+unit = "W"
+note = "32 fibers × 100 to 110 mW"
+
+[[derived]]
+id = "guide1.lambda_power_dbm"
+fn = "mw_to_dbm"
+inputs = ["guide1.power_per_lambda"]
+unit = "dBm"
+note = "13 mW per wavelength"
+
+[[derived]]
+id = "guide.module_bw_needed"
+fn = "divide_by_count"
+inputs = ["guide.validation_switch_bw_1ru", "guide.modules_100t_1ru_yole"]
+unit = "Tbps"
+note = "100 Tbps over 4 modules"
+
+[[derived]]
+id = "guide.bw_per_elsfp"
+fn = "divide_by_count"
+inputs = ["guide.validation_switch_bw_1ru", "guide.elsfp_equiv_count"]
+unit = "Tbps"
+note = "100 Tbps over about 18 ELSFP"
+
+[[derived]]
+id = "guidedr.total_power"
+fn = "total_w_from_mw"
+inputs = ["guidedr.fibers_max", "guidedr.power_per_fiber"]
+unit = "W"
+note = "64 fibers × 200 mW"
+
+[[derived]]
+id = "guidedr.bw"
+fn = "aggregate_tbps"
+inputs = ["guidedr.lanes", "guidedr.lane_rate"]
+unit = "Tbps"
+note = "256 lanes × 200 Gb/s"
+
+[[derived]]
+id = "guidedr.lanes_per_fiber"
+fn = "count_ratio"
+inputs = ["guidedr.lanes", "guidedr.fibers_max"]
+unit = "count"
+note = "lanes fed by each laser fiber"
+
+[[derived]]
+id = "guidedr.power_per_lane"
+fn = "divide_by_count"
+inputs = ["guidedr.power_per_fiber", "guidedr.lanes_per_fiber"]
+unit = "mW"
+note = "even split before PIC losses (INFERENCE)"
+
+[[derived]]
+id = "guidedr.power_per_lane_dbm"
+fn = "mw_to_dbm"
+inputs = ["guidedr.power_per_lane"]
+unit = "dBm"
+note = "per lane before PIC losses (INFERENCE)"
+
+[[derived]]
+id = "guidedr.power_dbm"
+fn = "mw_to_dbm"
+inputs = ["guidedr.power_per_fiber"]
+unit = "dBm"
+note = "200 mW per fiber"
+
+[[derived]]
+id = "guidedr.hazard_headroom"
+fn = "dbm_difference_db"
+inputs = ["elsfp.hazard_l1_limit", "guidedr.power_dbm"]
+unit = "dB"
+note = "below the ELSFP Hazard Level 1 limit"
+
+[[derived]]
+id = "guidedr.margin_n4"
+fn = "chain_margin_db"
+inputs = ["guidedr.power_dbm", "guidedr.lanes_per_fiber", "guidedr.chain_loss_db", "guidedr.er_db", "ieee3dj.channel_il", "ieee3dj.rx_sens_intercept", "ieee3dj.penalty_allocation", "guidedr.reserve_db"]
+unit = "dB"
+note = "margin at 4 lanes per fiber on the draft DR budget"
+
+[[derived]]
+id = "guidedr.max_fanout"
+fn = "chain_max_fanout"
+inputs = ["guidedr.power_dbm", "guidedr.chain_loss_db", "guidedr.er_db", "ieee3dj.channel_il", "ieee3dj.rx_sens_intercept", "ieee3dj.penalty_allocation", "guidedr.reserve_db"]
+unit = "count"
+note = "largest split on the draft DR budget"
+
+[[derived]]
+id = "guidedr.margin_less_extra"
+fn = "difference"
+inputs = ["guidedr.margin_n4", "guidedr.chain_extra_db"]
+unit = "dB"
+note = "margin left after extra chain loss"
+
+[[derived]]
+id = "guidedr.unexplained_db"
+fn = "difference"
+inputs = ["guidedr.margin_less_extra", "guidedr.provisioning_db"]
+unit = "dB"
+note = "margin neither hypothesis accounts for"
+
+[[derived]]
+id = "guidedr.bw_per_module_4"
+fn = "divide_by_count"
+inputs = ["guidedr.tray_bw_4_modules", "guidedr.modules_per_1ru_tray_release"]
+unit = "Tbps"
+note = "204.8 Tbps over four modules"
+
+[[derived]]
+id = "guidedr.bw_per_module_8"
+fn = "divide_by_count"
+inputs = ["guidedr.tray_bw_8_lnic", "guidedr.lnic_per_1ru_tray_page"]
+unit = "Tbps"
+note = "409.6 Tbps over eight LNIC"
+
+[[check]]
+id = "guide1.check_fiber_power"
+kind = "bound"
+a = "guide1.fiber_power"
+b = "guide1.power_per_fiber_min"
+rel_tol = 0.0
+note = "8 × 13 mW against '≥100 mW/fiber'"
+
+[[check]]
+id = "guide1.check_single_package"
+kind = "consistent"
+a = "guide1.single_package_power"
+b = "guide1.output_power_single"
+rel_tol = 0.001
+note = "16 × 100 mW against 1.6 W (single package)"
+
+[[check]]
+id = "guide1.check_stacked"
+kind = "consistent"
+a = "guide1.stacked_power"
+b = "guide1.power_per_module"
+rel_tol = 0.10
+note = "32 × 100 to 110 mW against '3.2–3.5 W/module' (stacked)"
+
+[[check]]
+id = "guide1.check_elsfp_lp"
+kind = "consistent"
+a = "guide1.lambda_power_dbm"
+b = "elsfp.class_lp"
+rel_tol = 0.02
+note = "13 mW = 11.14 dBm ≈ ELSFP LP class"
+
+[[check]]
+id = "guide.check_module_bw"
+kind = "bound"
+a = "guide.module_bw_needed"
+b = "guide.bw_per_module"
+rel_tol = 0.0
+note = "25 Tbps per module against 'Up to 51.2 Tbps per laser module' (bound)"
+
+[[check]]
+id = "guide.check_elsfp_count"
+kind = "consistent"
+a = "guide.elsfp_equiv_count"
+b = "guide.elsfp_modules_100t_hoti26"
+rel_tol = 0.05
+note = "about 18 ELSFP (release, OFC 2026) against 16 modules (HOTI26) for 100 Tbps"
+
+[[check]]
+id = "guidedr.check_total_power"
+kind = "consistent"
+a = "guidedr.total_power"
+b = "guidedr.optical_power_total"
+rel_tol = 0.001
+note = "64 × 200 mW against '12.8W total'"
+
+[[check]]
+id = "guidedr.check_bw"
+kind = "consistent"
+a = "guidedr.bw"
+b = "guidedr.bw_per_module"
+rel_tol = 0.001
+note = "256 × 200G against 51.2 Tbps"
+
+[[check]]
+id = "guidedr.check_elsfp_uhp"
+kind = "consistent"
+a = "guidedr.power_dbm"
+b = "elsfp.class_uhp"
+rel_tol = 0.01
+note = "200 mW = 23.01 dBm, the ELSFP UHP class"
+
+[[check]]
+id = "guidedr.check_hazard"
+kind = "bound"
+a = "guidedr.power_dbm"
+b = "elsfp.hazard_l1_limit"
+rel_tol = 0.0
+note = "below the 24.5 dBm Hazard Level 1 limit"
+
+[[check]]
+id = "guidedr.check_fanout"
+kind = "bound"
+a = "guidedr.max_fanout"
+b = "guidedr.lanes_per_fiber"
+rel_tol = 0.0
+relation = "ge"
+note = "the 4 lanes per fiber fit under the max fan-out of 17 with about 6.4 dB unallocated"
+
+[[check]]
+id = "guidedr.check_lasers"
+kind = "consistent"
+a = "guidedr.lasers_per_module"
+b = "guidedr.lasers_per_chip_counterpoint"
+rel_tol = 0.01
+note = "64 lasers per LNIC (product page) against 128 lasers per chip (Counterpoint); chip and module may differ"
+
+[[check]]
+id = "guidedr.check_modules_per_tray"
+kind = "consistent"
+a = "guidedr.modules_per_1ru_tray_release"
+b = "guidedr.lnic_per_1ru_tray_page"
+rel_tol = 0.01
+note = "four modules (release) against up to 8 LNIC (product page) per 1RU tray"
+
+[[check]]
+id = "guidedr.check_per_module_rates"
+kind = "consistent"
+a = "guidedr.bw_per_module_4"
+b = "guidedr.bw_per_module_8"
+rel_tol = 0.001
+note = "both tray figures give 51.2 Tbps per module"
+
+[[hypothesis]]
+id = "H_chain_lossier"
+statement = "Guide DR's 200 mW for 4 lanes is sized for a chain that loses about 6.4 dB more than the SYNTHETIC §10 chain."
+sets = { "guidedr.chain_extra_db" = 6.4398, "guidedr.provisioning_db" = 0.0 }
+group = "guidedr_margin"
+
+[[hypothesis]]
+id = "H_laser_headroom"
+statement = "The §10 chain is about right and Guide DR provisions about 6.4 dB for aging, temperature and TDECQ corners."
+sets = { "guidedr.chain_extra_db" = 0.0, "guidedr.provisioning_db" = 6.4398 }
+group = "guidedr_margin"

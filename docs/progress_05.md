@@ -71,7 +71,7 @@ Baseline before Phase 0 (brief 03 tree on `main`): pytest 147 passed, ruff check
 - [x] 4.5 src/oicd/twin/formulas.py: pure typed functions with units in names, each unit-tested — 3b4f339 (engine, first phase 4 commit); pytest 301 passed, ruff clean
 - [x] 4.6 src/oicd/twin/inference.py: nominal/lo/hi (corners; Monte Carlo above 12 interval parents, flagged), class, derivation strings; checks CONSISTENT/TENSION/CONFLICT; hypotheses and support matrix; tornado — 3b4f339 (engine, first phase 4 commit); pytest 301 passed, ruff clean
 - [x] 4.7 Tests: catalog validation, toy graph with hand values, support matrix, tornado — 3b4f339 (engine, first phase 4 commit); pytest 301 passed, ruff clean
-- [ ] 4.8 Phase 4 checks green and commit
+- [x] 4.8 Phase 4 checks green and commit — 9e8da7d; pytest 364 passed, ruff check and format clean
 
 ## Phase 5: device and link physics
 
@@ -87,17 +87,17 @@ Baseline before Phase 0 (brief 03 tree on `main`): pytest 147 passed, ruff check
 
 ## Phase 6: product twins and the reference rack
 
-- [ ] 6.1 Card §14: twin method, reference rack, every derived formula
-- [ ] 6.2 Passage L20 catalog and checks
-- [ ] 6.3 Passage M1000 catalog and checks
-- [ ] 6.4 Passage L200/L200X catalog and checks
-- [ ] 6.5 16λ BiDi link (EVK50, OFC 2026) with H_fsr18 and H_fsr32
-- [ ] 6.6 Guide family (Guide, Guide 1, Guide DR) and the Guide DR fan-out run
-- [ ] 6.7 OCP trays with H_dir / H_agg and height hypotheses
-- [ ] 6.8 Pod example (CPX, HOTI26)
-- [ ] 6.9 Reference rack OICD-R64: frame, trays, links, worst path, reference-plane hypotheses, rack yield
-- [ ] 6.10 src/oicd/system/rack.py and pod.py; single-tier topology radix vs OCP vision
-- [ ] 6.11 Hand-calc scripts and tests with every brief value
+- [x] 6.1 Card §14: twin method, reference rack, every derived formula — phase 6 commit
+- [x] 6.2 Passage L20 catalog and checks — phase 6 commit
+- [x] 6.3 Passage M1000 catalog and checks — phase 6 commit
+- [x] 6.4 Passage L200/L200X catalog and checks — phase 6 commit
+- [x] 6.5 16λ BiDi link (EVK50, OFC 2026) with H_fsr18 and H_fsr32 — phase 6 commit
+- [x] 6.6 Guide family (Guide, Guide 1, Guide DR) and the Guide DR fan-out run — phase 6 commit
+- [x] 6.7 OCP trays with H_dir / H_agg and height hypotheses — phase 6 commit
+- [x] 6.8 Pod example (CPX, HOTI26) — phase 6 commit
+- [x] 6.9 Reference rack OICD-R64: frame, trays, links, worst path, reference-plane hypotheses, rack yield — phase 6 commit
+- [x] 6.10 src/oicd/system/rack.py and pod.py; single-tier topology radix vs OCP vision — phase 6 commit
+- [x] 6.11 Hand-calc scripts and tests with every brief value — phase 6 commit
 - [ ] 6.12 Phase 6 checks green and commit
 
 ## Phase 7: API
@@ -159,3 +159,4 @@ Baseline before Phase 0 (brief 03 tree on `main`): pytest 147 passed, ruff check
 | 3 | 83416c0 | 238 passed | clean | clean | n/a | n/a | n/a | n/a |
 | 4 (engine) | 3b4f339 | 301 passed | clean | clean | n/a | n/a | n/a | n/a |
 | 5 | 5558b7e | 335 passed | clean | clean | n/a | n/a | n/a | n/a |
+| 4 (facts) | 9e8da7d | 364 passed | clean | clean | n/a | n/a | n/a | n/a |

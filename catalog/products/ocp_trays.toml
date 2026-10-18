@@ -404,3 +404,202 @@ source_class = "vendor_claim"
 verified = false
 location = "searched full text of lightmatter_openrack_2026, lm_pr_openrack, counterpoint_ocp26, futurum_ocp26, ine_ocp26"
 note = "Evidence: none. Absence confirmed. No switch ASIC is named, and the XPU tray's accelerator is described only as 'four accelerator ASICs'. futurum_ocp26 names Broadcom Tomahawk 6 Davisson and NVIDIA Quantum-X/Spectrum-X Photonics only as competitors. ine_ocp26 adds that the XPU-tray ODM's name 'Lightmatter has not disclosed'. Appendix A wording: Not disclosed: lane rate, fibers per engine, wavelengths, power, switch ASIC"
+# ---- Model (brief 05 phase 6, model card §14.7) ---------------------------------------------
+
+[[assumption]]
+id = "trays.bw_divisor"
+nominal = 1.0
+low = 1.0
+high = 2.0
+unit = "count"
+rationale = "Whether the tray totals are per direction (1) or aggregate of both directions (2); not disclosed. Pinned by H_dir or H_agg."
+
+[[assumption]]
+id = "trays.ine_reading"
+nominal = 2.0
+low = 2.0
+high = 2.0
+unit = "count"
+rationale = "ine_ocp26 calls 204.8 Tbps 'aggregate' switching bandwidth, read as both directions (INFERENCE)."
+
+[[assumption]]
+id = "trays.xpu_height_ru"
+nominal = 1.0
+low = 1.0
+high = 2.0
+unit = "RU"
+rationale = "XPU tray height: 1 RU (PR Newswire copy, Futurum) or 2 RU (lightmatter.com copy, Counterpoint, IN Electronics). Pinned by H_xpu_1u or H_xpu_2u."
+
+[[derived]]
+id = "trays.switch_per_engine"
+fn = "divide_by_count"
+inputs = ["trays.switch_bw", "trays.switch_engines"]
+unit = "Tbps"
+note = "204.8 Tbps over 8 engines"
+
+[[derived]]
+id = "trays.xpu_per_engine"
+fn = "divide_by_count"
+inputs = ["trays.xpu_bw", "trays.xpu_engines"]
+unit = "Tbps"
+note = "102.4 Tbps over 4 engines"
+
+[[derived]]
+id = "trays.engine_in_l20s"
+fn = "ratio"
+inputs = ["trays.switch_per_engine", "l20.bw_per_direction"]
+unit = "1"
+note = "tray engine bandwidth in L20s per direction (the release does not name the engine, INFERENCE)"
+
+[[derived]]
+id = "trays.switch_bw_per_dir"
+fn = "divide_by_count"
+inputs = ["trays.switch_bw", "trays.bw_divisor"]
+unit = "Tbps"
+note = "switch tray bandwidth each way"
+
+[[derived]]
+id = "trays.switch_lanes"
+fn = "lanes"
+inputs = ["trays.switch_bw_per_dir", "l20.lane_rate"]
+unit = "count"
+note = "200G lanes each way (lane rate not disclosed; the L20's, INFERENCE)"
+
+[[derived]]
+id = "trays.switch_guidedr_needed"
+fn = "count_ratio"
+inputs = ["trays.switch_lanes", "guidedr.lanes"]
+unit = "count"
+note = "Guide DR modules at 256 lanes each"
+
+[[derived]]
+id = "trays.xpu_bw_per_dir"
+fn = "divide_by_count"
+inputs = ["trays.xpu_bw", "trays.bw_divisor"]
+unit = "Tbps"
+note = "XPU tray bandwidth each way"
+
+[[derived]]
+id = "trays.xpu_lanes"
+fn = "lanes"
+inputs = ["trays.xpu_bw_per_dir", "l20.lane_rate"]
+unit = "count"
+note = "200G lanes each way"
+
+[[derived]]
+id = "trays.xpu_guidedr_needed"
+fn = "count_ratio"
+inputs = ["trays.xpu_lanes", "guidedr.lanes"]
+unit = "count"
+note = "Guide DR modules for the XPU tray"
+
+[[derived]]
+id = "trays.xpu_bw_per_xpu"
+fn = "divide_by_count"
+inputs = ["trays.xpu_bw_per_dir", "trays.xpu_accelerators"]
+unit = "Tbps"
+note = "bandwidth per accelerator each way"
+
+[[check]]
+id = "trays.check_engine_rates"
+kind = "consistent"
+a = "trays.switch_per_engine"
+b = "trays.xpu_per_engine"
+rel_tol = 0.0
+note = "25.6 Tbps per engine in both trays"
+
+[[check]]
+id = "trays.check_guidedr_release"
+kind = "consistent"
+a = "trays.switch_guidedr_needed"
+b = "trays.switch_guidedr_count_lm"
+rel_tol = 0.01
+note = "against lm_pr_guidedr: four Guide DR modules for a 204.8 Tbps 1 RU switch tray"
+
+[[check]]
+id = "trays.check_guidedr_counterpoint"
+kind = "consistent"
+a = "trays.switch_guidedr_needed"
+b = "trays.switch_guidedr_count_cp"
+rel_tol = 0.01
+note = "against Counterpoint: two Guide DR modules in the switch tray"
+
+[[check]]
+id = "trays.check_xpu_guidedr_counterpoint"
+kind = "consistent"
+a = "trays.xpu_guidedr_needed"
+b = "trays.xpu_guidedr_count_cp"
+rel_tol = 0.01
+note = "against Counterpoint: two Guide DR modules in the XPU tray"
+
+[[check]]
+id = "trays.check_ine_aggregate"
+kind = "consistent"
+a = "trays.bw_divisor"
+b = "trays.ine_reading"
+rel_tol = 0.0
+note = "against IN Electronics: 204.8 Tbps is 'aggregate'"
+
+[[check]]
+id = "trays.check_height_prnewswire"
+kind = "consistent"
+a = "trays.xpu_height_ru"
+b = "trays.xpu_height_prnewswire"
+rel_tol = 0.0
+note = "against the PR Newswire copy: XPU tray in a single rack unit"
+
+[[check]]
+id = "trays.check_height_lmcom"
+kind = "consistent"
+a = "trays.xpu_height_ru"
+b = "trays.xpu_height_lmcom"
+rel_tol = 0.0
+note = "against the lightmatter.com copy: 2U rack height"
+
+[[check]]
+id = "trays.check_height_counterpoint"
+kind = "consistent"
+a = "trays.xpu_height_ru"
+b = "trays.xpu_height_counterpoint"
+rel_tol = 0.0
+note = "against Counterpoint: a 2RU server"
+
+[[check]]
+id = "trays.check_height_futurum"
+kind = "consistent"
+a = "trays.xpu_height_ru"
+b = "trays.xpu_height_futurum"
+rel_tol = 0.0
+note = "against Futurum: a single rack unit"
+
+[[check]]
+id = "trays.check_height_sources"
+kind = "consistent"
+a = "trays.xpu_height_prnewswire"
+b = "trays.xpu_height_lmcom"
+rel_tol = 0.0
+note = "the two copies of the same release disagree"
+
+[[hypothesis]]
+id = "H_dir"
+statement = "The trays' 204.8 and 102.4 Tbps are per direction: 1024 lanes and 4 Guide DR in the switch tray, 512 lanes and 2 Guide DR in the XPU tray."
+sets = { "trays.bw_divisor" = 1.0 }
+group = "switch_bw"
+
+[[hypothesis]]
+id = "H_agg"
+statement = "The trays' totals are aggregate (both directions): 512 lanes and 2 Guide DR in the switch tray."
+sets = { "trays.bw_divisor" = 2.0 }
+group = "switch_bw"
+
+[[hypothesis]]
+id = "H_xpu_1u"
+statement = "The XPU tray is 1 RU high."
+sets = { "trays.xpu_height_ru" = 1.0 }
+group = "xpu_height"
+
+[[hypothesis]]
+id = "H_xpu_2u"
+statement = "The XPU tray is 2 RU high."
+sets = { "trays.xpu_height_ru" = 2.0 }
+group = "xpu_height"

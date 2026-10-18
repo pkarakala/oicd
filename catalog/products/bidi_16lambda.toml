@@ -268,3 +268,188 @@ source_class = "vendor_claim"
 verified = true
 location = "slide 9 (text layer; slide also viewed as an image)"
 note = "Evidence: text. Differs from the EVK50 product page (16 wavelengths, 400 Gbps Tx + 400 Gbps Rx per fiber): the OFC 2026 live demo used half the wavelengths and a band-interleaved (4+4) rather than odd/even-interleaved plan. Futurum (futurum_ocp26) says Lightmatter 'reconfigured its 16-wavelength demo to replicate the MSA’s Gen 2 spec at OFC'."
+# ---- Model (brief 05 phase 6, model card §14.5) ---------------------------------------------
+# The ring analysis (worst receive channel, reflection crosstalk, MPI, minimum TX OMA) runs in
+# the product's physics evaluation (oicd.twin.physics) with these assumptions.
+
+[[assumption]]
+id = "bidi16.ring_fsr_thz"
+nominal = 1.8
+low = 1.8
+high = 3.2
+unit = "THz"
+rationale = "FSR of the 16λ link's rings, not disclosed. H_fsr18: the OFC 2025 ring (1.8 THz); H_fsr32: an FSR covering the whole 3.2 THz grid (INFERENCE)."
+
+[[assumption]]
+id = "bidi16.two_directions"
+nominal = 2.0
+low = 2.0
+high = 2.0
+unit = "count"
+rationale = "One fiber carries both directions."
+
+[[assumption]]
+id = "bidi16.return_loss_db"
+nominal = 15.5
+low = 15.5
+high = 15.5
+unit = "dB"
+rationale = "Return loss at the fiber interfaces: the draft 200GBASE-DR1 ORL tolerance (ieee3dj.orl_tolerance_dr1) used as a stand-in, as in model card §14.5."
+
+[[assumption]]
+id = "bidi16.mpi_er_db"
+nominal = 6.0
+low = 6.0
+high = 6.0
+unit = "dB"
+rationale = "Extinction ratio for the MPI bound (NRZ microring modulator), model card §14.5."
+
+[[assumption]]
+id = "bidi16.mpi_rt_db"
+nominal = -26.0
+low = -26.0
+high = -26.0
+unit = "dB"
+rationale = "Transmitter reflectance for the MPI bound, as the draft DR TX reflectance."
+
+[[assumption]]
+id = "bidi16.mpi_rr_db"
+nominal = -26.0
+low = -26.0
+high = -26.0
+unit = "dB"
+rationale = "Receiver reflectance for the MPI bound, as the draft DR RX reflectance."
+
+[[assumption]]
+id = "bidi16.mpi_rc_db"
+nominal = -45.0
+low = -45.0
+high = -45.0
+unit = "dB"
+rationale = "Connector reflectance for the MPI bound (angled connectors)."
+
+[[derived]]
+id = "bidi16.bw_per_fiber_calc"
+fn = "times_count"
+inputs = ["bidi16.lambda_count", "bidi16.rate_per_lambda_gbps"]
+unit = "Gbps"
+note = "16 × 50 Gb/s per fiber"
+
+[[derived]]
+id = "bidi16.lambdas_per_dir"
+fn = "divide_by_count"
+inputs = ["bidi16.lambda_count", "bidi16.two_directions"]
+unit = "count"
+note = "wavelengths each way"
+
+[[derived]]
+id = "bidi16.bw_per_dir"
+fn = "times_count"
+inputs = ["bidi16.lambdas_per_dir", "bidi16.rate_per_lambda_gbps"]
+unit = "Gbps"
+note = "8 × 50 Gb/s each way"
+
+[[derived]]
+id = "bidi16.interleave_spacing"
+fn = "times_count"
+inputs = ["bidi16.two_directions", "bidi16.txrx_spacing_ghz"]
+unit = "GHz"
+note = "co-directional spacing of two interleaved grids"
+
+[[derived]]
+id = "bidi16.grid_span_ghz"
+fn = "times_count"
+inputs = ["bidi16.lambda_count", "bidi16.txrx_spacing_ghz"]
+unit = "GHz"
+note = "16 slots of 200 GHz"
+
+[[derived]]
+id = "bidi16.grid_span_thz"
+fn = "ghz_to_thz"
+inputs = ["bidi16.grid_span_ghz"]
+unit = "THz"
+note = "16 slots of 200 GHz, in THz"
+
+[[derived]]
+id = "bidi16.energy_total"
+fn = "sum2"
+inputs = ["bidi16.energy_photonics", "bidi16.serdes_energy"]
+unit = "pJ/bit"
+note = "photonics plus XSR SerDes"
+
+[[check]]
+id = "bidi16.check_bw"
+kind = "consistent"
+a = "bidi16.bw_per_fiber_calc"
+b = "bidi16.bw_per_fiber"
+rel_tol = 0.001
+note = "16 × 50 against '800 Gbps / fiber'"
+
+[[check]]
+id = "bidi16.check_per_direction"
+kind = "consistent"
+a = "bidi16.bw_per_dir"
+b = "bidi16.evk50_bw_per_dir_gbps"
+rel_tol = 0.001
+note = "8 × 50 against '400 Gbps Tx and 400 Gbps Rx'"
+
+[[check]]
+id = "bidi16.check_interleave"
+kind = "consistent"
+a = "bidi16.interleave_spacing"
+b = "bidi16.same_dir_spacing_ghz"
+rel_tol = 0.001
+note = "2 × 200 GHz against '400 GHz spacing between channels going the same way'"
+
+[[check]]
+id = "bidi16.check_mrm_count"
+kind = "consistent"
+a = "bidi16.lambdas_per_dir"
+b = "bidi16.mrm_count"
+rel_tol = 0.0
+note = "eight ring modulators, one per transmitted wavelength"
+
+[[check]]
+id = "bidi16.check_energy"
+kind = "consistent"
+a = "bidi16.energy_total"
+b = "bidi16.wallplug_pj_bit"
+rel_tol = 0.01
+note = "2.6 + 2 against the 4.6 pJ/bit wall-plug figure"
+
+[[check]]
+id = "bidi16.check_fsr_ofc25"
+kind = "consistent"
+a = "bidi16.ring_fsr_thz"
+b = "ring.fsr_thz"
+rel_tol = 0.001
+note = "the 16λ rings against the OFC 2025 ring's 1.8 THz FSR"
+
+[[check]]
+id = "bidi16.check_unique_channel"
+kind = "bound"
+a = "bidi16.grid_span_thz"
+b = "bidi16.ring_fsr_thz"
+rel_tol = 0.0
+relation = "le"
+note = "every channel unique within one FSR: the grid span must not exceed the FSR (model card §13.6)"
+
+[[check]]
+id = "bidi16.check_evk50_lane_rate"
+kind = "consistent"
+a = "bidi16.evk50_modulation_gbps"
+b = "bidi16.rate_per_lambda_gbps"
+rel_tol = 0.01
+note = "EVK50 '56 Gbps NRZ' against 50 Gb/s per channel (blog); 8 × 56 is not 400"
+
+[[hypothesis]]
+id = "H_fsr18"
+statement = "The 16λ link's rings are the OFC 2025 rings, FSR 1.8 THz = 9 slots of 200 GHz."
+sets = { "bidi16.ring_fsr_thz" = 1.8 }
+group = "ring_fsr"
+
+[[hypothesis]]
+id = "H_fsr32"
+statement = "The 16λ link's rings have an FSR of 3.2 THz, so every channel is unique within one FSR (R ≤ 3.5501 µm at n_g 4.2)."
+sets = { "bidi16.ring_fsr_thz" = 3.2 }
+group = "ring_fsr"

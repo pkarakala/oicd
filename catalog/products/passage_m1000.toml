@@ -613,3 +613,260 @@ source_class = "vendor_claim"
 verified = true
 location = "page 10 (exploded-view label; not in the text layer)"
 note = "Evidence: image. Image-only label. Does not say whether each fiber carries Tx and Rx (BiDi) or the array holds separate Tx and Rx fibers; relevant to the 448 Gbps per fiber vs '800 Gbps / fiber (Tx+Rx)' conflict."
+# ---- Model (brief 05 phase 6, model card §14.3) ---------------------------------------------
+
+[[assumption]]
+id = "m1000.two_directions"
+nominal = 2.0
+low = 2.0
+high = 2.0
+unit = "count"
+rationale = "Each SerDes has a transmitter and a receiver, so 'Tx + Rx' counts every SerDes lane twice."
+
+[[assumption]]
+id = "m1000.energy_rate_divisor"
+nominal = 1.0
+low = 1.0
+high = 2.0
+unit = "count"
+rationale = "Whether 2.3 pJ/bit applies to the Tx + Rx total (divisor 1) or to one direction (divisor 2); not disclosed. Pinned by H_m1000_txrx or H_m1000_per_dir."
+
+[[assumption]]
+id = "m1000.center_nm"
+nominal = 1310.0
+low = 1300.0
+high = 1320.0
+unit = "nm"
+rationale = "O-band operating point taken as 1310 nm, as for Lightmatter's other WDM grids; the M1000 grid is not disclosed."
+
+[[derived]]
+id = "m1000.bw_fibers"
+fn = "aggregate_tbps"
+inputs = ["m1000.fiber_count", "m1000.bw_per_fiber"]
+unit = "Tbps"
+note = "256 fibers × 448 Gb/s"
+
+[[derived]]
+id = "m1000.per_fiber_lambdas"
+fn = "times_count"
+inputs = ["m1000.wdm_lambda", "m1000.lane_rate_nrz"]
+unit = "Gbps"
+note = "8 λ × 56 Gb/s"
+
+[[derived]]
+id = "m1000.serdes_one_dir"
+fn = "aggregate_tbps"
+inputs = ["m1000.serdes_count", "m1000.lane_rate_nrz"]
+unit = "Tbps"
+note = "1024 SerDes × 56 Gb/s"
+
+[[derived]]
+id = "m1000.bw_serdes"
+fn = "times_count"
+inputs = ["m1000.two_directions", "m1000.serdes_one_dir"]
+unit = "Tbps"
+note = "1024 × 56 × 2, Tx + Rx"
+
+[[derived]]
+id = "m1000.links_per_tile"
+fn = "times_count"
+inputs = ["m1000.buses_per_tile", "m1000.links_per_bus"]
+unit = "count"
+note = "16 buses × 2 links"
+
+[[derived]]
+id = "m1000.links_total"
+fn = "times_count"
+inputs = ["m1000.tile_count", "m1000.links_per_tile"]
+unit = "count"
+note = "links over 8 tiles (= fibers)"
+
+[[derived]]
+id = "m1000.serdes_total"
+fn = "times_count"
+inputs = ["m1000.tile_count", "m1000.serdes_per_tile"]
+unit = "count"
+note = "128 SerDes × 8 tiles"
+
+[[derived]]
+id = "m1000.package_area_dims"
+fn = "area_mm2"
+inputs = ["m1000.package_length_mm", "m1000.package_width_mm"]
+unit = "mm2"
+note = "91 × 85 mm"
+
+[[derived]]
+id = "m1000.power_ceiling"
+fn = "power_w_from_density"
+inputs = ["m1000.interposer_area", "m1000.power_density"]
+unit = "W"
+note = "4000 mm² × 1.4 W/mm² ceiling"
+
+[[derived]]
+id = "m1000.power_delivery_w"
+fn = "kw_to_w"
+inputs = ["m1000.power_delivery"]
+unit = "W"
+note = "1.5 kW delivered"
+
+[[derived]]
+id = "m1000.density_package"
+fn = "power_density_w_per_mm2"
+inputs = ["m1000.power_delivery_w", "m1000.package_area"]
+unit = "W/mm2"
+note = "1.5 kW over the 7,735 mm² package"
+
+[[derived]]
+id = "m1000.density_interposer"
+fn = "power_density_w_per_mm2"
+inputs = ["m1000.power_delivery_w", "m1000.interposer_area"]
+unit = "W/mm2"
+note = "1.5 kW over 4,000 mm² of interposer"
+
+[[derived]]
+id = "m1000.io_rate_counted"
+fn = "divide_by_count"
+inputs = ["m1000.bw_fibers", "m1000.energy_rate_divisor"]
+unit = "Tbps"
+note = "rate the 2.3 pJ/bit applies to"
+
+[[derived]]
+id = "m1000.io_power"
+fn = "power_w_at_pj_per_bit"
+inputs = ["m1000.energy_system", "m1000.io_rate_counted"]
+unit = "W"
+note = "optical I/O power at 2.3 pJ/bit"
+
+[[derived]]
+id = "m1000.io_power_share"
+fn = "ratio"
+inputs = ["m1000.io_power", "m1000.power_delivery_w"]
+unit = "1"
+note = "I/O share of the delivered power"
+
+[[derived]]
+id = "m1000.io_power_share_pct"
+fn = "percent"
+inputs = ["m1000.io_power_share"]
+unit = "%"
+note = "I/O share of the delivered power, percent"
+
+[[derived]]
+id = "m1000.lambda_channels"
+fn = "times_count"
+inputs = ["m1000.fiber_count", "m1000.wdm_lambda"]
+unit = "count"
+note = "λ-channels, one ring each (INFERENCE)"
+
+[[derived]]
+id = "m1000.spacing_nm"
+fn = "ghz_span_to_nm"
+inputs = ["ring.wdm_compat_spacing_ghz", "m1000.center_nm"]
+unit = "nm"
+note = "one 200 GHz channel spacing in wavelength (assumes the OFC 2025 ring's grid)"
+
+[[derived]]
+id = "m1000.heater_per_ring"
+fn = "heater_power_mw"
+inputs = ["m1000.spacing_nm", "ring.heater_nm_per_mw"]
+unit = "mW"
+note = "worst case per ring with barrel shifting (one spacing at 0.44 nm/mW)"
+
+[[derived]]
+id = "m1000.heater_total"
+fn = "total_w_from_mw"
+inputs = ["m1000.lambda_channels", "m1000.heater_per_ring"]
+unit = "W"
+note = "worst-case heater power, assuming M1000 rings resemble the OFC 2025 rings (INFERENCE)"
+
+[[check]]
+id = "m1000.check_bw_pr"
+kind = "consistent"
+a = "m1000.bw_fibers"
+b = "m1000.bw_total_pr"
+rel_tol = 0.01
+note = "114.688 against '114 Tbps' (0.6%)"
+
+[[check]]
+id = "m1000.check_bw_evk"
+kind = "consistent"
+a = "m1000.bw_fibers"
+b = "m1000.bw_total_evk"
+rel_tol = 0.01
+note = "114.688 against '114.6 Tbps' (a truncation, not a rounding)"
+
+[[check]]
+id = "m1000.check_per_fiber"
+kind = "consistent"
+a = "m1000.per_fiber_lambdas"
+b = "m1000.bw_per_fiber"
+rel_tol = 0.001
+note = "8 × 56 against 448 Gb/s per fiber"
+
+[[check]]
+id = "m1000.check_serdes_txrx"
+kind = "consistent"
+a = "m1000.bw_serdes"
+b = "m1000.bw_total_hc25"
+rel_tol = 0.01
+note = "1024 × 56 × 2 against 'Bandwidth (Tx + Rx) Up to 114 Tbps'"
+
+[[check]]
+id = "m1000.check_links_fibers"
+kind = "consistent"
+a = "m1000.links_total"
+b = "m1000.fiber_count"
+rel_tol = 0.0
+note = "16 buses × 2 × 8 tiles = 256 fibers (one link per bus populated would halve it)"
+
+[[check]]
+id = "m1000.check_serdes_count"
+kind = "consistent"
+a = "m1000.serdes_total"
+b = "m1000.serdes_count"
+rel_tol = 0.0
+note = "128 × 8 = 1024"
+
+[[check]]
+id = "m1000.check_package_area"
+kind = "consistent"
+a = "m1000.package_area_dims"
+b = "m1000.package_area"
+rel_tol = 0.001
+note = "91 × 85 mm against 7,735 mm²"
+
+[[check]]
+id = "m1000.check_density_claim"
+kind = "bound"
+a = "m1000.density_package"
+b = "m1000.power_density"
+rel_tol = 0.0
+note = "1.5 kW over the package is 0.194 W/mm², so '>1.4 W/mm2' reads as a local or capability figure (INFERENCE)"
+
+[[check]]
+id = "m1000.check_fiber_rate_ises"
+kind = "consistent"
+a = "m1000.bw_per_fiber_ises25"
+b = "m1000.bw_per_fiber"
+rel_tol = 0.01
+note = "ISES 2025 '800 Gbps / fiber (Tx+Rx)' against 448 Gb/s per fiber"
+
+[[check]]
+id = "m1000.check_txrx_area"
+kind = "consistent"
+a = "m1000.txrx_area"
+b = "m1000.txrx_area_p15"
+rel_tol = 0.01
+note = "Hot Chips slide 13 against slide 15"
+
+[[hypothesis]]
+id = "H_m1000_txrx"
+statement = "The M1000's 2.3 pJ/bit applies to the 114.688 Tbps Tx + Rx total (I/O power 263.78 W)."
+sets = { "m1000.energy_rate_divisor" = 1.0 }
+group = "m1000_energy"
+
+[[hypothesis]]
+id = "H_m1000_per_dir"
+statement = "The M1000's 2.3 pJ/bit applies to one direction, 57.344 Tbps (I/O power 131.89 W)."
+sets = { "m1000.energy_rate_divisor" = 2.0 }
+group = "m1000_energy"

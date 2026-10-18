@@ -154,7 +154,8 @@ class Derived(BaseModel):
 
 
 class Check(BaseModel):
-    """consistent: |a − b| ≤ rel_tol·|b|. bound: b is a min or max fact and a must respect it."""
+    """consistent: |a − b| ≤ rel_tol·|b|. bound: a ≥ b or a ≤ b, from b's min or max bound when b
+    is such a fact, otherwise from `relation` ("ge" or "le")."""
 
     model_config = _FROZEN
 
@@ -163,7 +164,14 @@ class Check(BaseModel):
     a: str
     b: str
     rel_tol: float = Field(ge=0.0)
+    relation: Literal["le", "ge"] | None = None
     note: str = ""
+
+    @model_validator(mode="after")
+    def _relation_only_for_bounds(self) -> Self:
+        if self.relation is not None and self.kind != "bound":
+            raise ValueError(f"{self.id}: relation applies to bound checks only")
+        return self
 
 
 class Hypothesis(BaseModel):
@@ -284,10 +292,11 @@ class Catalog(BaseModel):
                     if nodes[c.a].unit != nodes[c.b].unit:
                         errors.append(f"{c.id}: compares {nodes[c.a].unit} with {nodes[c.b].unit}")
                     b = nodes[c.b]
-                    if c.kind == "bound" and not (
-                        isinstance(b, Fact) and b.bound in ("min", "max")
-                    ):
-                        errors.append(f"{c.id}: a bound check needs b to be a min or max fact")
+                    bounded = isinstance(b, Fact) and b.bound in ("min", "max")
+                    if c.kind == "bound" and not bounded and c.relation is None:
+                        errors.append(
+                            f"{c.id}: a bound check needs b to be a min or max fact or a relation"
+                        )
             for h in f.hypothesis:
                 for target, value in h.sets.items():
                     node = nodes.get(target)

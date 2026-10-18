@@ -71,8 +71,16 @@ def test_render_and_format():
     text = render(FORMULAS["pj_per_bit"], (30.0, 6.4), ("W", "Tbps"))
     assert text == "30 W / 6.4 Tbps"
     assert render(FORMULAS["count_ratio"], (32.0, 8.0), ("count", "count")) == "32 / 8"
-    assert format_number(263.7824) == "263.782"
+    assert format_number(263.7824) == "263.7824"
+    assert format_number(38669.15) == "38669.15"
     assert format_number(131072.0) == "131072"
+    assert format_number(-4.3) == "−4.3"  # a true minus sign
+    margin = render(
+        FORMULAS["budget_margin_db"],
+        (2.4, 4.0016, -4.3, 3.7, 0.0),
+        ("dBm", "dB", "dBm", "dB", "dB"),
+    )
+    assert margin == "((2.4 dBm − 4.0016 dB) − (−4.3 dBm)) − 3.7 dB − 0 dB"
 
 
 def test_formulas_are_pure_functions_of_floats():

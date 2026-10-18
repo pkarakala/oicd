@@ -254,14 +254,14 @@ def _check(graph: _Graph, check: Check, values: Mapping[str, tuple[float, float,
     b_node = catalog.nodes[check.b]
     unit = catalog.unit_of(check.a)
     if check.kind == "bound":
-        assert isinstance(b_node, Fact)
-        if b_node.bound == "min":
-            ok = a_nom >= b_nom - tol_abs
-            relation = "≥"
+        if check.relation is not None:
+            greater, label = check.relation == "ge", "required"
         else:
-            ok = a_nom <= b_nom + tol_abs
-            relation = "≤"
-        detail = f"{with_unit(a_nom, unit)} {relation} {with_unit(b_nom, unit)} ({b_node.bound})"
+            assert isinstance(b_node, Fact)
+            greater, label = b_node.bound == "min", b_node.bound
+        ok = a_nom >= b_nom - tol_abs if greater else a_nom <= b_nom + tol_abs
+        relation = "≥" if greater else "≤"
+        detail = f"{with_unit(a_nom, unit)} {relation} {with_unit(b_nom, unit)} ({label})"
         detail += " holds" if ok else " fails"
     else:
         ok = abs(gap_abs) <= tol_abs

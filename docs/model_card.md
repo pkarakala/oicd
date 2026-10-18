@@ -77,7 +77,7 @@ M_net    = (−4.0008 − (−6)) − 0 − 1.5     = +0.4992 dB
 Verdict  = PASS
 ```
 
-What this shows: the 2 m of fiber contributes 0.0008 dB, 0.02% of the budget. At rack scale, connector count, not fiber length, sets the budget. The 0.4 dB/km figure is a typical single-mode value at 1310 nm, to be cited (ITU-T G.652) before it is used outside this example.
+What this shows: the 2 m of fiber contributes 0.0008 dB, 0.02% of the budget. At rack scale, connector count, not fiber length, sets the budget. The 0.4 dB/km figure is the ITU-T G.652.D maximum cable attenuation from 1310 to 1625 nm (itut_g652_2024, Table 2). G.652 says its values should not be applied to short jumper, indoor or drop cables; even at the 1.0 dB/km it cites for indoor cable, 2 m would add 0.002 dB.
 
 ## 5. Test cases
 
@@ -136,6 +136,8 @@ T04 note: the float result depends on summation order. The test asserts PASS and
 | 2026-10-18 | Source classes PEER_REVIEWED and THIRD_PARTY added; both need a citation key | the twin cites peer-reviewed papers (some vendor-authored) and analysts, which are neither vendor claims nor specifications | fold them into VENDOR_CLAIM: hides independent and reviewed sources |
 | 2026-10-18 | §14.1 twin method: facts, assumptions, derived nodes with corner intervals, CONSISTENT/TENSION/CONFLICT checks, hypotheses, support matrix, tornado | brief 05 phase 4; written before the engine, the products follow in phase 6 | one confidence score per number: hides why a number is uncertain |
 | 2026-10-18 | §14.1 status rule: CONFLICT only when two facts disagree, TENSION when a derived node does | a derived node carries our reading, a fact pair is a disagreement between sources | one threshold on the gap size: mixes source disagreement with our assumptions |
+| 2026-10-18 | §4 fiber note cites ITU-T G.652.D (0.40 dB/km, 1310 to 1625 nm) with its short-cable caveat | brief 05 phase 5; the source was opened | keep "typical value, to be cited" |
+| 2026-10-18 | §13 microring and WDM physics: periodic Lorentzian (k = −50 … 50), FWHM = f0/Q_L with the factor-2 lifetime caveat, crosstalk −10·log10(1 − kX) (INFERENCE) with 10·log10(1 + X) alongside, SYNTHETIC design window, thermal tuning with barrel shifting, interleaved Guide grid (INFERENCE), aliasing and the worst-channel rule, BiDi link model | brief 05 phase 5 | single-neighbor Lorentzian without images: misses the FSR aliasing that decides the 16λ BiDi result |
 
 ## 8. Design-space sweep
 
@@ -325,7 +327,115 @@ Why: a BiDi link puts its own transmitter's reflections into its receiver, so it
 
 ## 13. Microring and WDM link physics
 
-(Written in brief 05 phase 5.)
+Sources, all opened 2026-10-18: hu2025_arxiv (photon-lifetime bandwidth), geravand2025_mrm (its caution), decort2011 (resonance shift), frey2006_dndt (silicon dn/dT), xu2014_thermo (a measured ring drift), sun2015_nature (precedent: microring WDM optical I/O on a processor chip), andre2000_xtalk (an open source for the alternative crosstalk form) and bogaerts2012_mrr (review, abstract only). Every relation here is a model of a generic silicon microring; nothing in this section is a Lightmatter specification.
+
+### 13.1 Ring relations
+
+```
+f0         = c/λ0
+L          = π·D                                    (circumference of a ring of diameter D)
+FSR_f      = c/(n_g·L),   FSR_λ = λ0²/(n_g·L)       (n_g the group index)
+FWHM       = f0/Q_L                                 (Q_L the loaded quality factor)
+T(Δ)       = Σ_{k=−50}^{50} 1/(1 + (2(Δ − k·FSR_f)/FWHM)²)   drop-port power, Δ = f − f_res
+f_ph       = FWHM = f0/Q_L                          (photon-lifetime bandwidth)
+Δλ/λ0      = Δn_eff/n_g                             (decort2011)
+Δλ_heater  = η·P                                    (heater efficiency η in nm/mW)
+dλ/dT      = λ0·(dn/dT)/n_g                         (mode taken fully in silicon: an upper bound)
+```
+
+- The drop port is a Lorentzian of width FWHM, repeated every FSR; the sum over 101 resonance orders (k = −50 … 50) captures the images that land on other channels (13.6).
+- Lifetime caveat: Q = ω0·τ with τ the energy (photon) lifetime, so f_ph = 1/(2πτ) = f0/Q, the form hu2025_arxiv gives (≈ c/(λQ)). The field amplitude decays with 2τ; a two-pole model written with the field lifetime, as in geravand2025_mrm, gives f0/(2Q), a factor of 2 apart. geravand2025_mrm also warns that this two-pole estimate "is often misleading" because it ignores detuning. OICD therefore uses FWHM = f0/Q_L only as the filter width for crosstalk and in the SYNTHETIC design-window rule of 13.3, never as a predicted electro-optic bandwidth.
+- Silicon dn/dT = 1.94e-4 /K at 1.3 µm and 295 K (frey2006_dndt); with n_g = 3.5343 (13.8) this gives dλ/dT = 1310 × 1.94e-4/3.5343 = 0.0719 nm/K, the same order as the 77 pm/K measured for an 11 µm silicon ring in the C band (xu2014_thermo). The confinement of the mode in silicon is not modeled, so this is an upper bound.
+
+### 13.2 WDM crosstalk penalty (INFERENCE)
+
+```
+X        = Σ_{m ≠ n, co-directional} T_n(f_m)          leakage of the other channels into ring n's drop port
+Π_xt     = −10·log10(1 − k·X),   k = 1 for NRZ, k = 3 for PAM4;   invalid input if k·X ≥ 1
+Π_alt    = 10·log10(1 + X)       (andre2000_xtalk, reported alongside)
+```
+
+Why the primary form: incoherent leakage with every interferer at its top level and a fixed decision threshold closes the eye by X times the top level. An NRZ eye (infinite extinction) is the full OMA wide, so its opening falls to (1 − X); each PAM4 eye is OMA/3 wide, so the same leakage closes it three times as much, (1 − 3X). This worst-case form is OICD's model (INFERENCE). The alternative 10·log10(1 + X) is the heterodyne crosstalk penalty of andre2000_xtalk (their eq. 8), derived for NRZ with infinite extinction and a decision level adjusted to the crosstalk; it is smaller because the threshold follows the crosstalk. Agrawal's textbook treatment was not opened in this run.
+
+### 13.3 Design window (SYNTHETIC rules, adjustable in the UI)
+
+```
+neighbor rejection T(Δ) ≤ 10^(XT/10), XT = −15 dB:  Q_L ≥ Q_min = f0·√(10^(−XT/10) − 1)/(2Δ)
+bandwidth f0/Q_L ≥ b·B, b = 0.75, B the symbol rate: Q_L ≤ Q_max = f0/(b·B)
+window open  iff  Q_min ≤ Q_max
+```
+
+Δ is the spacing to the nearest co-directional neighbor. Both rules are assumptions, not physics: −15 dB of single-neighbor rejection and a filter at least 0.75 of the symbol rate wide.
+
+### 13.4 Thermal tuning
+
+```
+required tuning = laser accuracy (±20 GHz as λ²·Δf/c) + fabrication offset (SYNTHETIC ±1 nm) + dλ/dT·ΔT
+worst-case range = one co-directional channel spacing with barrel shifting; up to one FSR without
+heater power     = range/η
+```
+
+Heaters only red-shift a ring. With barrel shifting, a ring locks to the nearest channel on its heater side and the electrical lanes are rotated to match, so no ring ever tunes more than one co-directional spacing. Without it, a ring must reach its assigned channel, which can take up to one FSR. The report also flags when the required tuning exceeds the worst-case range.
+
+### 13.5 Guide grid (INFERENCE)
+
+```
+f_n = c/1310 nm + (n − 7.5)·200 GHz,   n = 0 … 15
+even n: grid A; odd n: grid B   (two 400 GHz grids interleaved at 200 GHz)
+```
+
+Lightmatter says "centered at 1310 nm", two 400 GHz grids interleaved at a 200 GHz offset and ±20 GHz accuracy, but gives no channel frequencies, so this grid is OICD's inference.
+
+### 13.6 Aliasing and the worst receive channel
+
+A ring on channel n with FSR F has images at n ± j·F/200 GHz (j = 1, 2, …). An image on a co-directional channel adds that channel's full power to X (13.2). An image on a counter-directional channel (a local transmitter, travelling the other way) does not drop that channel's outbound light, which couples to the ring's other circulation; backscatter into the forward circulation is the residual path and is NOT_EVALUATED. The local transmitter's inbound reflections, however, travel with the signal and are dropped like signal, so they enter the reflection crosstalk of §12.4 weighted by the ring:
+
+```
+X_r     = Σ_{m local transmit} T_n(f_m)
+Π_refl  = 10·log10(T/(T − R·X_r)),   T = 10^(−IL/10), R = 10^(−RL/10)
+```
+
+Worst receive channel: the largest Π_xt + Π_refl. Totals within 1e-6 dB are ties (truncating the image sum at k = ±50 moves physically identical channels by about 1e-8 dB), broken by the distance to the grid centre (the channel with neighbors on both sides), then by the lower index.
+
+### 13.7 BiDi link model
+
+Each direction is a §3 link. TP2 is the TX engine output before its diplexer and TP3 the RX engine input after its diplexer, so both diplexers are loss elements:
+
+```
+channel   = TX-end diplexer IL + fiber (length × α) + connectors + RX-end diplexer IL
+penalties = reflection crosstalk (§12.4, from the fiber-plus-connector IL, the return loss and the
+            diplexer isolation) + MPI (§12.3) + co-directional WDM crosstalk (§13.2) + named extras
+α         = 0.40 dB/km at most from 1310 to 1625 nm for G.652.D cable (itut_g652_2024)
+link NOT_EXCLUDED iff both directions are; margin = the smaller direction margin
+minimum TX OMA of a direction = S_RX + Σ Π + R + Σ L   (the launch at which its M_net = 0)
+```
+
+Each direction's TX wavelength range must also sit inside its own receiver's passband (§3). G.652 notes that its attenuation values should not be applied to short jumper, indoor or drop cables (IEC 60794-2-11, cited there and not read, gives 1.0 dB/km or less for indoor cable); at the metre lengths inside a rack the difference is below 0.01 dB.
+
+### 13.8 Hand cases (`docs/hand_calcs/s13_ring_wdm.py`)
+
+| Case | Expected |
+| --- | --- |
+| f0 at 1310 nm | 228.8492 THz |
+| Q_L 3500 (lm_ofc25_talk): FWHM | 65.3855 GHz |
+| one neighbor at 400 GHz; at 200 GHz | −21.781 dB; −15.846 dB, so interleaved BiDi gains 5.935 dB of isolation |
+| two nearest neighbors at 400 GHz (single Lorentzian, images excluded) | X400 = 0.013272 → NRZ 0.0580 dB, PAM4 0.1764 dB |
+| two nearest neighbors at 200 GHz | X200 = 0.052050 → NRZ 0.2321 dB, PAM4 0.7373 dB |
+| alternative form 10·log10(1 + X) | 0.0573 dB (X400), 0.2204 dB (X200) |
+| FSR 1.8 THz (lm_ofc25_paper) | 10.3037 nm = 9 slots of 200 GHz |
+| implied n_g for a 15 µm diameter (lm_hc25_m1000) | 3.5343 (cross-source INFERENCE) |
+| window 56 GBd at 200 GHz | [3166.0, 5448.8], open, Q 3500 inside |
+| window 56 GBd at 400 GHz | [1583.0, 5448.8], open |
+| window 106.25 GBd at 200 GHz | [3166.0, 2871.8], closed |
+| window 106.25 GBd at 400 GHz | [1583.0, 2871.8], open, Q 3500 outside |
+| heater at 0.44 nm/mW (lm_ofc25_paper) | 200 GHz = 1.1449 nm = 2.6020 mW; 400 GHz 5.2039 mW; full FSR 23.4176 mW |
+| unique channel within one FSR for 16 × 200 GHz = 3.2 THz | L ≤ c/(n_g·3.2 THz), so R ≤ 3.5501 µm at n_g 4.2 (SYNTHETIC n_g) |
+| Guide grid | λ_0 1318.6431 nm, λ_15 1301.4695 nm, outer span 17.1736 nm; ±20 GHz = ±0.11449 nm |
+| ring on channel 0 with FSR 1.8 THz | image on channel 9 (grid B, counter-directional) |
+
+BiDi link model case (`docs/hand_calcs/s13_ring_wdm.py`): an L20-style BiDi pair on the draft DR budget of §12.1. TX OMA 2.4 dBm, diplexer IL 1.0 dB at each end (SYNTHETIC), 0.5 km of fiber at 0.4 dB/km (0.2 dB), one 0.5 dB connector (SYNTHETIC), S_RX −4.3 dBm, TDECQ 3.4 dB and MPI 0.1 dB as named extras, return loss 15.5 dB and diplexer isolation 25 dB (SYNTHETIC), R = 0. The reflection crosstalk at channel IL 0.7 dB is 0.000455 dB, so each direction has M_net = 0.49955 dB. Direction A at 1311 nm (δ = 0) clears the 1304.5 to 1317.5 nm passband by 6.5 nm on each side; direction B at 1331 nm misses it by 13.5 nm, so the link is EXCLUDED on wavelength alone.
+
+Properties tested: crosstalk falls with spacing, the penalty rises with X, heater power is linear in the tuning.
 
 ## 14. Product twin
 

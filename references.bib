@@ -140,4 +140,113 @@
   note         = {Read in full 2026-10-18 (PDF, 10 pages, dated June 28, 2001). Class: proposed standard (study-group contribution). For single-wavelength BiDi with non-WDM couplers, NRZ and an adjusted receiver threshold: crosstalk penalty approx. 10 log(channel_loss/(channel_loss - return_loss)), both as fractions; example IL 7 dB, RL 12 dB gives 1.65 dB; thumb rule: return loss at least 5 dB greater than channel insertion loss.}
 }
 
+@techreport{itut_g652_2024,
+  title        = {Characteristics of a single-mode optical fibre and cable},
+  institution  = {International Telecommunication Union, ITU-T},
+  type         = {Recommendation},
+  number       = {ITU-T G.652 (08/2024)},
+  year         = {2024},
+  month        = aug,
+  url          = {https://www.itu.int/rec/T-REC-G.652-202408-I/en},
+  note         = {Read 2026-10-18 (PDF): clause 7.1 and Table 2 (G.652.D attributes). Class: published specification. Cable attenuation coefficient, maximum from 1310 nm to 1625 nm: 0.40 dB/km (0.30 dB/km at 1530 to 1565 nm). Note 1: these values should not be applied to short cables such as jumper, indoor and drop cables; IEC 60794-2-11 (not read) gives 1.0 dB/km or less for indoor cable at 1310 and 1550 nm.}
+}
+
+% ---- Microring and WDM physics (brief 05 phase 5). Opened and read 2026-10-18.
+
+@misc{hu2025_arxiv,
+  title        = {400-{Gbps}/$\lambda$ Ultrafast Silicon Microring Modulator for Scalable Optical Compute Interconnects},
+  author       = {Hu, Fangchen and Yu, Fengxin and Liu, Xingyu and Wang, Aoxue and Hu, Xiao and Cai, Haiwen and Chu, Wei},
+  year         = {2025},
+  eprint       = {2509.01555},
+  archivePrefix= {arXiv},
+  url          = {https://arxiv.org/abs/2509.01555},
+  note         = {Read 2026-10-18 (arXiv PDF): Device design (Eqs. 1 to 3), the measured FWHM, FSR and Q paragraph, and the outlook. Class: preprint, used for a relation only. States 1/f_EO^2 = 1/f_ph^2 + 1/f_e^2 and Q = omega tau_ph, with the photon-lifetime-limited bandwidth f_ph = 1/(2 pi tau_ph) approx. c/(lambda Q).}
+}
+
+@article{geravand2025_mrm,
+  title        = {Ultrafast Coherent Dynamics of Microring Modulators},
+  author       = {Geravand, Alireza and Zheng, Zibo and Shateri, Farshid and Levasseur, Simon and Rusch, Leslie A. and Shi, Wei},
+  journal      = {Nature Photonics},
+  year         = {2025},
+  doi          = {10.1038/s41566-025-01686-1},
+  eprint       = {2412.17986},
+  archivePrefix= {arXiv},
+  url          = {https://arxiv.org/abs/2412.17986},
+  note         = {Read 2026-10-18 (arXiv version): abstract and the EO-bandwidth discussion around their Eq. 2. Class: peer reviewed (Nature Photonics; arXiv text read). Caution used in the model card: the two-pole estimate 1/f_EO^2 = (2 pi Rs Cj)^2 + (2 pi tau)^2, with tau the optical field lifetime, "does not provide an accurate estimation of EO bandwidth of a solitary MRM, and is often misleading" because it ignores detuning.}
+}
+
+@article{decort2011,
+  title        = {Wide tuning of silicon-on-insulator ring resonators with a liquid crystal cladding},
+  author       = {De Cort, Wout and Beeckman, Jeroen and Claes, Tom and Neyts, Kristiaan and Baets, Roel},
+  journal      = {Optics Letters},
+  volume       = {36},
+  number       = {19},
+  pages        = {3876--3878},
+  year         = {2011},
+  url          = {https://photonics.intec.ugent.be/download/pub_2826.pdf},
+  note         = {Read in full 2026-10-18 (PDF). Class: peer reviewed. Resonance shift: Delta lambda / lambda = Delta n_eff / n_g, n_g the group index of the mode.}
+}
+
+@inproceedings{frey2006_dndt,
+  title        = {Temperature-dependent refractive index of silicon and germanium},
+  author       = {Frey, Bradley J. and Leviton, Douglas B. and Madison, Timothy J.},
+  booktitle    = {Proc. SPIE 6273},
+  year         = {2006},
+  doi          = {10.1117/12.672850},
+  eprint       = {physics/0606168},
+  archivePrefix= {arXiv},
+  url          = {https://arxiv.org/abs/physics/0606168},
+  note         = {Read 2026-10-18 (arXiv PDF): abstract and the silicon tables. Class: peer reviewed (SPIE proceedings). Table 4, measured thermo-optic coefficient of silicon: dn/dT = 1.94E-04 /K at 1.3 microns and 295 K; absolute index 3.50616 at 1.3 microns and 295 K.}
+}
+
+@article{xu2014_thermo,
+  title        = {Ultra-sensitive chip-based photonic temperature sensor using ring resonator structures},
+  author       = {Xu, Haitan and Hafezi, Mohammad and Fan, J. and Taylor, J. M. and Strouse, G. F. and Ahmed, Zeeshan},
+  journal      = {Optics Express},
+  volume       = {22},
+  pages        = {3098},
+  year         = {2014},
+  eprint       = {1312.5252},
+  archivePrefix= {arXiv},
+  url          = {https://arxiv.org/abs/1312.5252},
+  note         = {Read 2026-10-18 (arXiv PDF): device and results paragraphs. Class: peer reviewed. A silicon ring of 11 um diameter, FSR ca. 9.2 nm, Q 52000 and group index 4.2 (COMSOL estimate) shifts its resonance by 77 pm/K.}
+}
+
+@article{sun2015_nature,
+  title        = {Single-chip microprocessor that communicates directly using light},
+  author       = {Sun, Chen and Wade, Mark T. and Lee, Yunsup and Orcutt, Jason S. and Alloatti, Luca and Georgas, Michael S. and Waterman, Andrew S. and Shainline, Jeffrey M. and Avizienis, Rimas R. and Lin, Sen and Moss, Benjamin R. and Kumar, Rajesh and Pavanello, Fabio and Atabaki, Amir H. and Cook, Henry M. and Ou, Albert J. and Leu, Jonathan C. and Chen, Yu-Hsin and Asanovi{\'c}, Krste and Ram, Rajeev J. and Popovi{\'c}, Milo{\v s} A. and Stojanovi{\'c}, Vladimir M.},
+  journal      = {Nature},
+  volume       = {528},
+  pages        = {534--538},
+  year         = {2015},
+  doi          = {10.1038/nature16454},
+  url          = {https://people.eecs.berkeley.edu/~krste/papers/nature16454.pdf},
+  note         = {Read 2026-10-18 (PDF): abstract and the link description. Class: peer reviewed. Precedent for microring-based optical I/O on a processor chip: over 70 million transistors and 850 photonic components; one wavelength demonstrated at 2.5 Gb/s each way, each additional wavelength adding 5 Gb/s up to 55 Gb/s without more fibres.}
+}
+
+@article{andre2000_xtalk,
+  title        = {Performance Degradations due to Crosstalk in Multiwavelength Optical Networks Using Optical Add Drop Multiplexers Based on Fibre {Bragg} Gratings},
+  author       = {Andr{\'e}, P. S. and Pinto, J. L. and Nolasco Pinto, A. and Almeida, T.},
+  journal      = {Revista do DETUA},
+  volume       = {3},
+  number       = {2},
+  year         = {2000},
+  month        = oct,
+  url          = {https://proa.ua.pt/index.php/revdeti/article/download/18288/13182},
+  note         = {Read 2026-10-18 (PDF), section II. Class: peer reviewed (university journal). Heterodyne (out-of-band, incoherent) crosstalk power penalty Px approx. 10 Log(1 + X), X the total fraction of power leaked into a channel from all others, for NRZ with infinite extinction ratio, an optimally adjusted decision level and all interferers at 1 (their eq. 8); homodyne penalty -10 log(1 - Q^2 X).}
+}
+
+@article{bogaerts2012_mrr,
+  title        = {Silicon microring resonators},
+  author       = {Bogaerts, Wim and De Heyn, Peter and Van Vaerenbergh, Thomas and De Vos, Katrien and Selvaraja, Shankar Kumar and Claes, Tom and Dumon, Pieter and Bienstman, Peter and Van Thourhout, Dries and Baets, Roel},
+  journal      = {Laser \& Photonics Reviews},
+  volume       = {6},
+  number       = {1},
+  pages        = {47--73},
+  year         = {2012},
+  doi          = {10.1002/lpor.201100017},
+  url          = {https://research.tue.nl/en/publications/silicon-microring-resonators/},
+  note         = {Abstract only, read 2026-10-18 on the TU/e research portal (the publisher page returned HTTP 403). Class: peer reviewed review. Cited only as a general review of ring resonator theory and silicon ring applications, never for a number.}
+}
+
 % TODO before citing: IEEE 802.3 200 Gb/s-per-lane DR PMD clauses (TP2/TP3, OMA, TDECQ); OIF CEI-224G.

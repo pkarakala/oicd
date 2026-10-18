@@ -75,14 +75,14 @@ Baseline before Phase 0 (brief 03 tree on `main`): pytest 147 passed, ruff check
 
 ## Phase 5: device and link physics
 
-- [ ] 5.1 Open and cite hu2025_arxiv, geravand2025_mrm, decort2011, frey2006_dndt, xu2014_thermo, sun2015_nature, bogaerts2012_mrr, itut_g652_2024 (and an open source for the crosstalk form)
-- [ ] 5.2 Card §13 microring and WDM link physics (f0, FSR, FWHM, periodic Lorentzian, lifetime caveat, thermal tuning)
-- [ ] 5.3 Crosstalk penalty (INFERENCE): −10·log10(1 − k·X), k = 1 NRZ, 3 PAM4; alternative 10·log10(1 + X)
-- [ ] 5.4 Design window (SYNTHETIC rules): Q_min, Q_max
-- [ ] 5.5 Thermal tuning requirement, barrel shifting, heater power
-- [ ] 5.6 Guide grid (INFERENCE) and aliasing analysis
-- [ ] 5.7 BiDi link model in bidi.py (per-direction budget, diplexer IL, reflection crosstalk, MPI, containment, G.652 fiber loss); §4 note cites itut_g652_2024
-- [ ] 5.8 Hand-calc script with every brief value; tests and properties
+- [x] 5.1 Open and cite hu2025_arxiv, geravand2025_mrm, decort2011, frey2006_dndt, xu2014_thermo, sun2015_nature, bogaerts2012_mrr, itut_g652_2024 (and an open source for the crosstalk form) — phase 5 commit
+- [x] 5.2 Card §13 microring and WDM link physics (f0, FSR, FWHM, periodic Lorentzian, lifetime caveat, thermal tuning) — phase 5 commit
+- [x] 5.3 Crosstalk penalty (INFERENCE): −10·log10(1 − k·X), k = 1 NRZ, 3 PAM4; alternative 10·log10(1 + X) — phase 5 commit
+- [x] 5.4 Design window (SYNTHETIC rules): Q_min, Q_max — phase 5 commit
+- [x] 5.5 Thermal tuning requirement, barrel shifting, heater power — phase 5 commit
+- [x] 5.6 Guide grid (INFERENCE) and aliasing analysis — phase 5 commit
+- [x] 5.7 BiDi link model in bidi.py (per-direction budget, diplexer IL, reflection crosstalk, MPI, containment, G.652 fiber loss); §4 note cites itut_g652_2024 — phase 5 commit
+- [x] 5.8 Hand-calc script with every brief value; tests and properties — phase 5 commit
 - [ ] 5.9 Phase 5 checks green and commit
 
 ## Phase 6: product twins and the reference rack

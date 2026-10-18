@@ -21,6 +21,8 @@ class SourceClass(StrEnum):
     PUBLISHED_SPEC = "published_spec"
     PROPOSED_STANDARD = "proposed_standard"
     VENDOR_CLAIM = "vendor_claim"
+    PEER_REVIEWED = "peer_reviewed"  # peer-reviewed paper, including vendor-authored ones
+    THIRD_PARTY = "third_party"  # analysts and press reporting on someone else's product
     SYNTHETIC = "synthetic"
     INFERENCE = "inference"
 

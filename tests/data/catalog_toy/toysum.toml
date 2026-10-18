@@ -1,0 +1,181 @@
+[product]
+name = "Toy sum"
+family = "Toy"
+status = "test fixture"
+summary = "Thirteen assumptions summed, to exercise the Monte Carlo interval."
+
+[[assumption]]
+id = "toysum.a0"
+nominal = 1.0
+low = 0.5
+high = 1.5
+unit = "W"
+rationale = "Toy assumption."
+
+[[assumption]]
+id = "toysum.a1"
+nominal = 1.0
+low = 0.5
+high = 1.5
+unit = "W"
+rationale = "Toy assumption."
+
+[[assumption]]
+id = "toysum.a2"
+nominal = 1.0
+low = 0.5
+high = 1.5
+unit = "W"
+rationale = "Toy assumption."
+
+[[assumption]]
+id = "toysum.a3"
+nominal = 1.0
+low = 0.5
+high = 1.5
+unit = "W"
+rationale = "Toy assumption."
+
+[[assumption]]
+id = "toysum.a4"
+nominal = 1.0
+low = 0.5
+high = 1.5
+unit = "W"
+rationale = "Toy assumption."
+
+[[assumption]]
+id = "toysum.a5"
+nominal = 1.0
+low = 0.5
+high = 1.5
+unit = "W"
+rationale = "Toy assumption."
+
+[[assumption]]
+id = "toysum.a6"
+nominal = 1.0
+low = 0.5
+high = 1.5
+unit = "W"
+rationale = "Toy assumption."
+
+[[assumption]]
+id = "toysum.a7"
+nominal = 1.0
+low = 0.5
+high = 1.5
+unit = "W"
+rationale = "Toy assumption."
+
+[[assumption]]
+id = "toysum.a8"
+nominal = 1.0
+low = 0.5
+high = 1.5
+unit = "W"
+rationale = "Toy assumption."
+
+[[assumption]]
+id = "toysum.a9"
+nominal = 1.0
+low = 0.5
+high = 1.5
+unit = "W"
+rationale = "Toy assumption."
+
+[[assumption]]
+id = "toysum.a10"
+nominal = 1.0
+low = 0.5
+high = 1.5
+unit = "W"
+rationale = "Toy assumption."
+
+[[assumption]]
+id = "toysum.a11"
+nominal = 1.0
+low = 0.5
+high = 1.5
+unit = "W"
+rationale = "Toy assumption."
+
+[[assumption]]
+id = "toysum.a12"
+nominal = 1.0
+low = 0.5
+high = 1.5
+unit = "W"
+rationale = "Toy assumption."
+
+[[derived]]
+id = "toysum.s1"
+fn = "sum2"
+inputs = ["toysum.a0", "toysum.a1"]
+unit = "W"
+
+[[derived]]
+id = "toysum.s2"
+fn = "sum2"
+inputs = ["toysum.s1", "toysum.a2"]
+unit = "W"
+
+[[derived]]
+id = "toysum.s3"
+fn = "sum2"
+inputs = ["toysum.s2", "toysum.a3"]
+unit = "W"
+
+[[derived]]
+id = "toysum.s4"
+fn = "sum2"
+inputs = ["toysum.s3", "toysum.a4"]
+unit = "W"
+
+[[derived]]
+id = "toysum.s5"
+fn = "sum2"
+inputs = ["toysum.s4", "toysum.a5"]
+unit = "W"
+
+[[derived]]
+id = "toysum.s6"
+fn = "sum2"
+inputs = ["toysum.s5", "toysum.a6"]
+unit = "W"
+
+[[derived]]
+id = "toysum.s7"
+fn = "sum2"
+inputs = ["toysum.s6", "toysum.a7"]
+unit = "W"
+
+[[derived]]
+id = "toysum.s8"
+fn = "sum2"
+inputs = ["toysum.s7", "toysum.a8"]
+unit = "W"
+
+[[derived]]
+id = "toysum.s9"
+fn = "sum2"
+inputs = ["toysum.s8", "toysum.a9"]
+unit = "W"
+
+[[derived]]
+id = "toysum.s10"
+fn = "sum2"
+inputs = ["toysum.s9", "toysum.a10"]
+unit = "W"
+
+[[derived]]
+id = "toysum.s11"
+fn = "sum2"
+inputs = ["toysum.s10", "toysum.a11"]
+unit = "W"
+
+[[derived]]
+id = "toysum.s12"
+fn = "sum2"
+inputs = ["toysum.s11", "toysum.a12"]
+unit = "W"

@@ -5,6 +5,8 @@ export type SourceClass =
   | 'published_spec'
   | 'proposed_standard'
   | 'vendor_claim'
+  | 'peer_reviewed'
+  | 'third_party'
   | 'synthetic'
   | 'inference'
 

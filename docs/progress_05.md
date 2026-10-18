@@ -60,7 +60,7 @@ Baseline before Phase 0 (brief 03 tree on `main`): pytest 147 passed, ruff check
 - [x] 3.4 src/oicd/physics/mpi.py worst-case bound; published example n = 2, 4, 6 → 0.8142, 1.4378, 2.3137 dB; card says bound is conservative vs IEEE 1e-6 allocation — phase 3 commit
 - [x] 3.5 src/oicd/physics/bidi.py reflection crosstalk; IL 7, RL 12 → 1.6509 dB; BiDi extension (INFERENCE) IL 3, RL 15.5, I 0 → 0.2514 dB; I 25 → 0.000772 dB; RL ≥ IL + 5 dB rule — phase 3 commit
 - [x] 3.6 Hand-calc scripts and tests for all of the above — phase 3 commit
-- [ ] 3.7 Phase 3 checks green and commit
+- [x] 3.7 Phase 3 checks green and commit — 83416c0; pytest 238 passed, ruff check and format clean; no web changes
 
 ## Phase 4: twin foundation
 
@@ -156,3 +156,4 @@ Baseline before Phase 0 (brief 03 tree on `main`): pytest 147 passed, ruff check
 | 0 | d0b203f | 147 passed | clean | clean | n/a | n/a | n/a | n/a |
 | 1 | b6e9c6e | 149 passed | clean | clean | ok | ok | 1 passed | n/a |
 | 2 | 832ea3e | 206 passed | clean | clean | ok | ok | 1 passed | n/a |
+| 3 | 83416c0 | 238 passed | clean | clean | n/a | n/a | n/a | n/a |

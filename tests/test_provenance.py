@@ -76,9 +76,12 @@ def test_unknown_key_rejected_even_for_synthetic():
         SourceClass.VENDOR_CLAIM,
         SourceClass.PUBLISHED_SPEC,
         SourceClass.PROPOSED_STANDARD,
+        SourceClass.PEER_REVIEWED,
+        SourceClass.THIRD_PARTY,
     ],
 )
 def test_cited_classes_require_a_key(source_class):
+    # Model card §7: PEER_REVIEWED and THIRD_PARTY need a citation key like the other cited classes.
     with pytest.raises(ValidationError, match="citation_key"):
         Provenance(source_class=source_class, rationale="Missing key.")
 

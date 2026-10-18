@@ -133,6 +133,9 @@ T04 note: the float result depends on summation order. The test asserts PASS and
 | 2026-10-18 | §12.1 uses the D3.x values, not the 2023 baseline (budget 6.5, OMA −1.2 + TDECQ) or open comment R2-199 (budget 6.9) | johnson2025_3dj_mpidgd and dawe2026_3dj_er199 state the D3.x values; R2-199's outcome is unknown | the baseline: superseded |
 | 2026-10-18 | §12.3 MPI as the bhatt2016 worst-case bound, stated as conservative versus the 1e-6 allocation | a closed form the engine can evaluate | a Monte Carlo of phases: not reproducible from the sources read |
 | 2026-10-18 | §12.4 reflection crosstalk from bhatt2001, with a diplexer-isolation extension labeled INFERENCE | BiDi needs a reflection penalty; the extension is ours | apply the single-wavelength formula unchanged to two-wavelength BiDi |
+| 2026-10-18 | Source classes PEER_REVIEWED and THIRD_PARTY added; both need a citation key | the twin cites peer-reviewed papers (some vendor-authored) and analysts, which are neither vendor claims nor specifications | fold them into VENDOR_CLAIM: hides independent and reviewed sources |
+| 2026-10-18 | §14.1 twin method: facts, assumptions, derived nodes with corner intervals, CONSISTENT/TENSION/CONFLICT checks, hypotheses, support matrix, tornado | brief 05 phase 4; written before the engine, the products follow in phase 6 | one confidence score per number: hides why a number is uncertain |
+| 2026-10-18 | §14.1 status rule: CONFLICT only when two facts disagree, TENSION when a derived node does | a derived node carries our reading, a fact pair is a disagreement between sources | one threshold on the gap size: mixes source disagreement with our assumptions |
 
 ## 8. Design-space sweep
 
@@ -319,3 +322,47 @@ Two-wavelength extension (INFERENCE, not in the source): with a diplexer that is
 Expected (`docs/hand_calcs/s12_dr_budget.py`): the source's example IL 7 dB, RL 12 dB → 1.6509 dB (source ≈ 1.65). Extension: IL 3 dB, RL 15.5 dB (the draft DR1 ORL tolerance), I 0 → 0.2514 dB; I 25 dB (SYNTHETIC) → 0.000772 dB.
 
 Why: a BiDi link puts its own transmitter's reflections into its receiver, so it has to carry a crosstalk penalty that a duplex link does not. The extension shows why the wavelength diplexer matters: 25 dB of isolation removes the penalty almost entirely. Its form assumes the reflected light is suppressed like any out-of-band light, which holds only as far as the diplexer isolation does; the source's derivation (NRZ, threshold adjustment) is not re-derived for PAM4.
+
+## 13. Microring and WDM link physics
+
+(Written in brief 05 phase 5.)
+
+## 14. Product twin
+
+### 14.1 Method
+
+The twin reconstructs a product from what its maker and others have published, and labels every number by where it came from. It is not Lightmatter's specification and is not affiliated with or endorsed by Lightmatter.
+
+- **Facts** (`catalog/products/*.toml`, `[[fact]]`): a public statement with its exact quote, citation key and class (VENDOR_CLAIM, PEER_REVIEWED, THIRD_PARTY, PUBLISHED_SPEC or PROPOSED_STANDARD). `verified` is true only if the value was confirmed in the opened source in this run; otherwise the Appendix wording is kept and a note says why. A fact is a point (`value`) or a range (`lo`, `hi`); `bound` records whether the source says exact, approximately, at least (min) or at most (max). Non-numeric facts (a modulation format) carry no number.
+- **Assumptions** (`[[assumption]]`): SYNTHETIC values with nominal, low, high and a rationale.
+- **Derived nodes** (`[[derived]]`): INFERENCE. A registered formula (`oicd.twin.formulas`, never an evaluated string) of other nodes, with the formula's units checked against its inputs. Each carries a derivation string, e.g. "30 W / 6.4 Tbps = 4.6875 pJ/bit".
+- **Intervals:** facts are points unless the source gives a range (nominal = the middle); assumptions span [low, high]. A derived node's [lo, hi] is the minimum and maximum of the node evaluated at its nominal point and at every corner of its interval-valued ancestors. This is exact when the node is monotone in each ancestor, which holds for every formula used here (products, quotients, sums, differences and logarithms of positive quantities). With more than 12 interval ancestors, 4096 seeded uniform samples replace the corners and the node is flagged.
+- **Checks** (`[[check]]`): `consistent` compares two nodes in the same unit, gap = |a − b|/|b|; `bound` requires a ≥ b (b a "min" fact) or a ≤ b (b a "max" fact), each with tolerance rel_tol·|b|.
+
+```
+CONSISTENT  if the gap is within tolerance (or the bound holds)
+CONFLICT    otherwise, if a and b are both facts (two sources disagree)
+TENSION     otherwise (a derived node or assumption, that is, a reading of ours, disagrees with a claim)
+```
+
+  Each outcome also reports whether the two intervals, widened by the tolerance, overlap: an overlap means some assumption inside its range would reconcile them.
+- **Conflicts:** facts list the facts they contradict (`conflicts_with`). Both sides are carried downstream and shown side by side; neither is silently picked.
+- **Hypotheses** (`[[hypothesis]]`): a named reading of an ambiguous claim that pins assumptions (`sets`). Alternatives share a `group`; at most one per group is applied. Re-evaluating the graph under each hypothesis gives the **support matrix**: hypothesis × check status, and for each hypothesis the checks it agrees with (CONSISTENT) and disagrees with.
+- **Tornado:** for each derived node, each SYNTHETIC ancestor in turn at its low and high value, the others at nominal; bars sorted by swing |value(high) − value(low)|.
+
+Why: reverse engineering mixes three kinds of number, what a source says, what we assume and what follows from both. Keeping them apart, with intervals and named readings, lets a reader see which conclusions depend on which assumption, and which public claims each reading agrees with.
+
+Hand case (`docs/hand_calcs/s14_toy_graph.py`, the toy graph of `tests/data/catalog_toy`): power 30 W and rate 6.4 Tbps (facts), direction factor 1 (assumption, range 1 to 2), energy = 30 W / (factor × 6.4 Tbps):
+
+| Quantity | Expected |
+| --- | --- |
+| energy at factor 1 (nominal) | 4.6875 pJ/bit |
+| energy interval over factor 1 to 2 (corners) | 2.34375 to 4.6875 pJ/bit |
+| check against a 5 pJ/bit claim, tolerance 10% | gap 6.25%, CONSISTENT |
+| check against a 3.0 pJ/bit copy, tolerance 25% | gap 56.25%, TENSION (derived node involved) |
+| the same two checks under the hypothesis factor = 2 | gap 53.125%, TENSION; gap 21.875%, CONSISTENT |
+| two width facts 26.4 and 27.6 mm, tolerance 1% | gap 4.348%, CONFLICT (both facts) |
+| tornado swing of the factor on the energy | 2.34375 pJ/bit |
+| bound: 8 × 13 mW against a "minimum 100 mW" fact | 104 mW ≥ 100 mW, CONSISTENT |
+
+With 13 interval ancestors the node is evaluated by Monte Carlo and flagged.

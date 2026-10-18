@@ -63,4 +63,81 @@
   note         = {Read partially (HTML, 2 of 8 tasks). Method reference for Milestone 3.5 design search.}
 }
 
+% ---- Draft IEEE P802.3dj (PROPOSED_STANDARD: draft D3.x, not approved) and reflection analyses.
+% Opened and read 2026-10-18 (brief 05 phase 3).
+
+@techreport{welch2023_3dj_baseline,
+  title        = {Baseline proposals for 200G/L PMD 500 m and 2 km objectives},
+  author       = {Welch, Brian and Ingham, Jonathan and Bernier, Eric and Dawe, Piers and Johnson, John},
+  institution  = {IEEE P802.3dj Task Force},
+  number       = {welch\_3dj\_02b\_2311},
+  year         = {2023},
+  month        = nov,
+  url          = {https://www.ieee802.org/3/dj/public/23_11/welch_3dj_02b_2311.pdf},
+  note         = {Read in full 2026-10-18 (PDF, 27 slides). Class: proposed standard (task-force baseline, later revised). 200GBASE-DR1-FECo: 106.25 GBd PAM4; lane wavelengths 1304.5 to 1317.5 nm; TDECQ max 3.4 dB; ER min 3.5 dB; RX sensitivity (OMAouter) -4.3 + TECQ for 0.9 dB <= TECQ <= SECQ (-3.4 dBm below 0.9 dB); channel insertion loss 3 dB; 500 m; ORL tolerance 21.4 dB (15.5 for DR1); TX and RX reflectance -26 dB; FECo = RS(544,514). This 2023 version still has OMAouter min -1.2 + MAX(TECQ,TDECQ), power budget 6.5 dB and penalties 3.5 dB, superseded by johnson2025_3dj_mpidgd.}
+}
+
+@techreport{johnson2025_3dj_mpidgd,
+  title        = {Proposed changes to {P802.3dj} {MPI} and {DGD} penalty specifications},
+  author       = {Johnson, John},
+  institution  = {IEEE P802.3dj Task Force},
+  number       = {johnson\_3dj\_01\_2507},
+  year         = {2025},
+  month        = jul,
+  url          = {https://ieee802.org/3/dj/public/25_07/johnson_3dj_01_2507.pdf},
+  note         = {Read in full 2026-10-18 (PDF, 27 slides). Class: proposed standard (D2.0 comment resolution). Clause 180 DRn: power budget (for max TDECQ) 6.7 dB; allocation for penalties 3.7 dB including 0.1 dB MPI and 0.2 dB DGD; TX OMAouter min -1 + TDECQ; channel insertion loss may be reduced by up to 0.5 dB depending on discrete reflectances; Table 180-12 maximum channel insertion loss versus reflectance counts (values copied into the model card section 12).}
+}
+
+@techreport{dawe2026_3dj_er199,
+  title        = {Extinction ratio in {DR} links (comment 199)},
+  author       = {Dawe, Piers},
+  institution  = {IEEE P802.3dj Task Force},
+  number       = {dawe\_3dj\_01\_2609},
+  year         = {2026},
+  month        = sep,
+  url          = {https://www.ieee802.org/3/dj/public/26_09/dawe_3dj_01_2609.pdf},
+  note         = {Read in full 2026-10-18 (PDF, 14 slides; footer dated Aug 2026). Class: proposed standard (open comment R2-199 against the D3.x draft). States the current draft values: ER min 3.5 dB, RX sensitivity -3.4 and -4.3 + TECQ, power budget 6.7 dB, penalties 3.7 dB, MPI allocation 0.1 dB, Table 180-12 unchanged. Proposes ER 3 dB, sensitivity -4.5 + TECQ, budget 6.9 dB, penalties 3.9 dB (MPI up to 0.3 dB). The source does not say whether the change was adopted.}
+}
+
+@techreport{simms2026_3dj_tt,
+  title        = {Transition time in {DR} transmitters},
+  author       = {Simms, Bill and Dawe, Piers},
+  institution  = {IEEE P802.3dj Task Force},
+  number       = {simms\_3dj\_01a\_2609},
+  year         = {2026},
+  month        = sep,
+  url          = {https://www.ieee802.org/3/dj/public/26_09/simms_3dj_01a_2609.pdf},
+  note         = {Read slides 1 to 14 of 23 on 2026-10-18 (PDF). Class: proposed standard (comments R2-195 and R2-200 against D3.2, 2nd SA recirculation ballot). Confirms the draft is D3.2 in recirculation; Table 180-7 200GBASE-DR1 at 106.25 GBd with TDECQ max 3.4 dB and TECQ max 3.4 dB; proposes transmitter transition time 8 ps to 10 ps.}
+}
+
+@techreport{bhatt2016_mpi,
+  title        = {Estimating {MPI} Penalty},
+  author       = {Bhatt, Vipul and Smith, Benjamin},
+  institution  = {IEEE 802.3bs SMF Ad Hoc},
+  year         = {2016},
+  month        = jan,
+  url          = {https://www.ieee802.org/3/bs/public/adhoc/smf/16_01_07/bhatt_01_0116_smf.pdf},
+  note         = {Read in full 2026-10-18 (PDF, 25 slides). Class: proposed standard (task-force contribution). Deterministic MPI upper bound: penalty = 10 log10(1/(1 - x)), x = (m - 1) 4 S E/(E - 1), S = sqrt(Rt Rr) + n sqrt(Rt Rc) + n sqrt(Rr Rc) + n(n - 1)/2 Rc. Table 1, DR4 D1.0 (Tx 20, Rx 26, connector 35 dB reflectance; PAM4; ER 6 dB): 0.81, 1.44 and 2.31 dB for 2, 4 and 6 connectors. Discount factors D = 0.5 to 0.7 discussed as less pessimistic.}
+}
+
+@techreport{anslow2017_drrefl,
+  title        = {{100GBASE-DR} optical reflection limits},
+  author       = {Anslow, Pete},
+  institution  = {IEEE P802.3cd Task Force},
+  year         = {2017},
+  month        = may,
+  url          = {https://www.ieee802.org/3/cd/public/May17/anslow_3cd_01_0517.pdf},
+  note         = {Read in full 2026-10-18 (PDF, 10 slides). Class: proposed standard (task-force contribution). States that during P802.3bs the MPI penalty allocation was agreed to equal the 1E-6 cumulative probability point of the Monte Carlo spreadsheet king_02a_0116_smf.}
+}
+
+@techreport{bhatt2001_bidixtalk,
+  title        = {Cross-talk in bi-directional, single wavelength, single fiber {Gigabit Ethernet} links},
+  author       = {Bhatt, Vipul},
+  institution  = {IEEE 802.3 EFM Study Group},
+  year         = {2001},
+  month        = jun,
+  url          = {https://www.ieee802.org/3/efm/public/jul01/presentations/bhatt_1_0701.pdf},
+  note         = {Read in full 2026-10-18 (PDF, 10 pages, dated June 28, 2001). Class: proposed standard (study-group contribution). For single-wavelength BiDi with non-WDM couplers, NRZ and an adjusted receiver threshold: crosstalk penalty approx. 10 log(channel_loss/(channel_loss - return_loss)), both as fractions; example IL 7 dB, RL 12 dB gives 1.65 dB; thumb rule: return loss at least 5 dB greater than channel insertion loss.}
+}
+
 % TODO before citing: IEEE 802.3 200 Gb/s-per-lane DR PMD clauses (TP2/TP3, OMA, TDECQ); OIF CEI-224G.

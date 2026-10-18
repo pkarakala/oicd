@@ -50,16 +50,16 @@ Baseline before Phase 0 (brief 03 tree on `main`): pytest 147 passed, ruff check
 - [x] 2d.2 src/oicd/statistics.py `analytic_yield`, `monte_carlo_yield` (seeded Generator, 10^6 samples within 0.002) — phase 2 commit
 - [x] 2d.3 POST /yield labeled "statistical, assumption-dependent"; never changes the worst-case verdict; tests — phase 2 commit
 - [x] 2.4 docs/hand_calcs scripts for §8 to §11 — phase 2 commit
-- [ ] 2.5 Phase 2 checks green and commit
+- [x] 2.5 Phase 2 checks green and commit — 832ea3e; pytest 206 passed, ruff check and format clean, npm run build ok, typecheck ok, e2e 1 passed
 
 ## Phase 3: validation against standards
 
-- [ ] 3.1 Open and cite welch2023_3dj_baseline, johnson2025_3dj_mpidgd, dawe2026_3dj_er199, simms2026_3dj_tt, bhatt2016_mpi, anslow2017_drrefl, bhatt2001_bidixtalk
-- [ ] 3.2 Card §12 draft IEEE 802.3dj 200G DR budget; profiles/ieee_dr_200g.json (PROPOSED_STANDARD); test NOT_EXCLUDED and |M| < 1e-9
-- [ ] 3.3 `max_channel_il(n_refl_45_35, n_refl_55_45)` from Table 180-12; tests (0,0) 3.0, (0,6) 2.9, (2,3) 2.8, (4,4) 2.5, (5,0) 2.5, (4,8) and (6,0) not supported
-- [ ] 3.4 src/oicd/physics/mpi.py worst-case bound; published example n = 2, 4, 6 → 0.8142, 1.4378, 2.3137 dB; card says bound is conservative vs IEEE 1e-6 allocation
-- [ ] 3.5 src/oicd/physics/bidi.py reflection crosstalk; IL 7, RL 12 → 1.6509 dB; BiDi extension (INFERENCE) IL 3, RL 15.5, I 0 → 0.2514 dB; I 25 → 0.000772 dB; RL ≥ IL + 5 dB rule
-- [ ] 3.6 Hand-calc scripts and tests for all of the above
+- [x] 3.1 Open and cite welch2023_3dj_baseline, johnson2025_3dj_mpidgd, dawe2026_3dj_er199, simms2026_3dj_tt, bhatt2016_mpi, anslow2017_drrefl, bhatt2001_bidixtalk — phase 3 commit
+- [x] 3.2 Card §12 draft IEEE 802.3dj 200G DR budget; profiles/ieee_dr_200g.json (PROPOSED_STANDARD); test NOT_EXCLUDED and |M| < 1e-9 — phase 3 commit
+- [x] 3.3 `max_channel_il(n_refl_45_35, n_refl_55_45)` from Table 180-12; tests (0,0) 3.0, (0,6) 2.9, (2,3) 2.8, (4,4) 2.5, (5,0) 2.5, (4,8) and (6,0) not supported — phase 3 commit
+- [x] 3.4 src/oicd/physics/mpi.py worst-case bound; published example n = 2, 4, 6 → 0.8142, 1.4378, 2.3137 dB; card says bound is conservative vs IEEE 1e-6 allocation — phase 3 commit
+- [x] 3.5 src/oicd/physics/bidi.py reflection crosstalk; IL 7, RL 12 → 1.6509 dB; BiDi extension (INFERENCE) IL 3, RL 15.5, I 0 → 0.2514 dB; I 25 → 0.000772 dB; RL ≥ IL + 5 dB rule — phase 3 commit
+- [x] 3.6 Hand-calc scripts and tests for all of the above — phase 3 commit
 - [ ] 3.7 Phase 3 checks green and commit
 
 ## Phase 4: twin foundation
@@ -155,3 +155,4 @@ Baseline before Phase 0 (brief 03 tree on `main`): pytest 147 passed, ruff check
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | 0 | d0b203f | 147 passed | clean | clean | n/a | n/a | n/a | n/a |
 | 1 | b6e9c6e | 149 passed | clean | clean | ok | ok | 1 passed | n/a |
+| 2 | 832ea3e | 206 passed | clean | clean | ok | ok | 1 passed | n/a |

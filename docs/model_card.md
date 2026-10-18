@@ -129,6 +129,10 @@ T04 note: the float result depends on summation order. The test asserts PASS and
 | 2026-10-18 | §9 multi-lane tray: excluded if any lane is, margin = minimum lane margin, deciding lane reported | brief 05 phase 2b; a tray ships as a unit | average lane margin: hides the lane that fails |
 | 2026-10-18 | §10 upstream chain derives TP2 from the laser (Milestone 2), with max fan-out by search | brief 05 phase 2c; TP2 in CPO is set by the shared external laser | keep TP2 a free input: hides the split limit |
 | 2026-10-18 | §11 statistical yield Φ(M_mean/σ_total) with a seeded Monte Carlo, never changing the worst-case verdict | brief 05 phase 2d; worst case over-provisions stacked connectors | replace the worst-case verdict with yield: assumption-dependent |
+| 2026-10-18 | §12 draft IEEE 802.3dj 200GBASE-DR1 budget as a validation profile, M_net = 0 on paper | brief 05 phase 3; an external budget the engine must close exactly | validate only against hand cases we wrote ourselves |
+| 2026-10-18 | §12.1 uses the D3.x values, not the 2023 baseline (budget 6.5, OMA −1.2 + TDECQ) or open comment R2-199 (budget 6.9) | johnson2025_3dj_mpidgd and dawe2026_3dj_er199 state the D3.x values; R2-199's outcome is unknown | the baseline: superseded |
+| 2026-10-18 | §12.3 MPI as the bhatt2016 worst-case bound, stated as conservative versus the 1e-6 allocation | a closed form the engine can evaluate | a Monte Carlo of phases: not reproducible from the sources read |
+| 2026-10-18 | §12.4 reflection crosstalk from bhatt2001, with a diplexer-isolation extension labeled INFERENCE | BiDi needs a reflection penalty; the extension is ours | apply the single-wavelength formula unchanged to two-wavelength BiDi |
 
 ## 8. Design-space sweep
 
@@ -222,3 +226,96 @@ M_kσ     = M_mean − k·σ_total
 Why: worst-case design over-provisions when connectors stack, because every connector at its maximum at once is rare. Independence and normality are assumptions: real connector loss is non-negative and skewed, so the normal tails are approximate, and correlated losses (one bad batch of ferrules) would widen σ_total beyond the root-sum-square.
 
 Hand case (`docs/hand_calcs/s11_yield.py`): the §4 worked example with the three matings (μ = 1.5, 1.0 and 1.5 dB) each σ = 0.2 dB, fiber fixed. σ_total = 0.34641 dB, z = 1.44107, yield = 0.92522, M_3σ = −0.54003 dB. A seeded Monte Carlo with 10^6 samples lands within 0.002 of 0.92522 (its standard error is 0.00026).
+
+## 12. Draft IEEE 802.3dj 200G DR budget
+
+Every value in this section is PROPOSED_STANDARD: IEEE P802.3dj is a draft (D3.2 in its second Standards Association recirculation ballot, simms2026_3dj_tt), not an approved standard. The draft's numbers can still change; dawe2026_3dj_er199 is an open comment that would change four of them (below).
+
+### 12.1 The 200GBASE-DR1 link budget as an OICD link
+
+| Quantity | Draft value | Source |
+| --- | --- | --- |
+| Signaling | 106.25 GBd PAM4, RS(544,514) (FECo) | welch2023_3dj_baseline |
+| Lane wavelengths, TX and RX | 1304.5 to 1317.5 nm | welch2023_3dj_baseline |
+| TX OMAouter (min) | −1 + max(TECQ, TDECQ) dBm | johnson2025_3dj_mpidgd |
+| TDECQ (max), TECQ (max) | 3.4 dB, 3.4 dB | welch2023_3dj_baseline, simms2026_3dj_tt |
+| Extinction ratio (min) | 3.5 dB | welch2023_3dj_baseline, dawe2026_3dj_er199 |
+| RX sensitivity (OMAouter, max) | −4.3 + TECQ dBm for 0.9 dB ≤ TECQ ≤ SECQ; −3.4 dBm below | welch2023_3dj_baseline, dawe2026_3dj_er199 |
+| Channel insertion loss (max) | 3.0 dB, reduced by up to 0.5 dB by reflectances (12.2) | johnson2025_3dj_mpidgd |
+| Allocation for penalties | 3.7 dB, including MPI 0.1 dB and DGD 0.2 dB | johnson2025_3dj_mpidgd |
+| Power budget (for max TDECQ) | 6.7 dB | johnson2025_3dj_mpidgd |
+| Operating distance; ORL tolerance; TX and RX reflectance | 500 m; 21.4 dB (15.5 dB for DR1); −26 dB | welch2023_3dj_baseline |
+
+Mapping onto §3 (`profiles/ieee_dr_200g.json`):
+
+```
+P_TP2,OMA = −1 + 3.4                    = 2.4 dBm   (TX OMAouter min at max TDECQ)
+S_RX      = −4.3 dBm                                (the sensitivity line −4.3 + TECQ at TECQ = 0)
+Σ L       = 3.0 dB                                  (channel insertion loss)
+Σ Π       = TDECQ 3.4 + MPI 0.1 + DGD 0.2 = 3.7 dB  (the draft's allocation, named)
+R         = 0 dB                                    (the draft budget leaves nothing unallocated)
+power budget = P_TP2 − S_RX = 6.7 dB;  allocation for penalties = 6.7 − 3.0 = 3.7 dB
+M_net     = (2.4 − 3.0 − (−4.3)) − 3.7 − 0 = 0 dB on paper
+```
+
+The TX and RX wavelength range 1304.5 to 1317.5 nm is written as TX 1311 ± 6.5 nm into an RX passband of 1304.5 to 1317.5 nm, so both clearances are 0 nm.
+
+Expected (`docs/hand_calcs/s12_dr_budget.py`): power budget 6.7 dB, allocation for penalties 3.7 dB, M_net = 0 on paper. In float, in the §3 order, M_net = −4.44e-16 dB, so the test asserts NOT_EXCLUDED and |M_net| < 1e-9: a second T04-type trap that only the ε of §3 resolves.
+
+Why: an independent check of the engine against a budget written by others. The draft is built to close at exactly 0 dB with TDECQ at its maximum, so the engine must reproduce 0, not a rounding error of either sign.
+
+Caveats:
+- S_RX = −4.3 dBm is the intercept of the sensitivity line. The draft caps the receiver requirement at −3.4 dBm for TECQ below 0.9 dB, so −4.3 dBm is the reference the power budget is defined against, not a sensitivity a receiver must reach with an ideal transmitter.
+- TDECQ enters as a named penalty because the TX OMA is taken at maximum TDECQ, as in the draft's "power budget (for max TDECQ)".
+- Open comment R2-199 (dawe2026_3dj_er199) would set ER min 3 dB, sensitivity −4.5 + TECQ, budget 6.9 dB and penalties 3.9 dB (MPI up to 0.3 dB). Its outcome is not in any source read here, so the profile keeps the D3.x values.
+
+### 12.2 Maximum channel insertion loss versus discrete reflectances (Table 180-12)
+
+`max_channel_il(n_refl_45_35, n_refl_55_45)`: rows count the reflectances in (−45, −35] dB, columns those in (−55, −45] dB (johnson2025_3dj_mpidgd; unchanged in dawe2026_3dj_er199). "—" is not supported. Counts beyond the table are not supported either; negative counts are invalid input.
+
+| (−45, −35] \ (−55, −45] | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 0 | 3.0 | 3.0 | 3.0 | 3.0 | 3.0 | 3.0 | 2.9 | 2.9 | 2.9 |
+| 1 | 3.0 | 3.0 | 3.0 | 2.9 | 2.9 | 2.9 | 2.9 | 2.8 | 2.8 |
+| 2 | 2.9 | 2.9 | 2.9 | 2.8 | 2.8 | 2.8 | 2.7 | 2.7 | 2.7 |
+| 3 | 2.8 | 2.8 | 2.7 | 2.7 | 2.7 | 2.6 | 2.6 | 2.6 | 2.6 |
+| 4 | 2.7 | 2.6 | 2.6 | 2.6 | 2.5 | 2.5 | 2.5 | 2.5 | — |
+| 5 | 2.5 | 2.5 | 2.5 | — | — | — | — | — | — |
+| 6 | — | — | — | — | — | — | — | — | — |
+
+Expected: (0, 0) 3.0 dB; (0, 6) 2.9 dB; (2, 3) 2.8 dB; (4, 4) 2.5 dB; (5, 0) 2.5 dB; (4, 8) and (6, 0) not supported.
+
+Why: in the draft, reflections and loss trade against each other. More reflectances mean more MPI, which the draft pays for with less allowed insertion loss instead of a larger MPI allocation.
+
+### 12.3 Multipath interference: worst-case bound
+
+From bhatt2016_mpi, for PAM-m with extinction ratio E (linear), transmitter, receiver and connector reflectances Rt, Rr, Rc (linear, from dB as 10^(R_dB/10)) and n connectors:
+
+```
+S       = √(Rt·Rr) + n·√(Rt·Rc) + n·√(Rr·Rc) + n(n − 1)/2 · Rc
+x       = (m − 1) · 4 · S · E/(E − 1)
+Π_MPI   = −10·log10(1 − x)  dB;   invalid input if x ≥ 1 (the bound diverges)
+```
+
+The four terms count the reflection pairs: TX–RX, TX–connector, RX–connector and connector–connector. Every interferer is assumed at the highest PAM level, coherent, antipodal and co-polarized with the victim.
+
+Expected (`docs/hand_calcs/s12_dr_budget.py`): the source's example, PAM4 (m = 4), ER 6 dB, Rt −20 dB, Rr −26 dB, Rc −35 dB: n = 2, 4, 6 → 0.8142, 1.4378, 2.3137 dB (the source prints 0.81, 1.44, 2.31).
+
+Why: MPI is the penalty a BiDi link and a dense connector plant both have to pay, and it needs a closed form the engine can evaluate. This form is a deterministic worst-case bound. IEEE allocates MPI at the 1e-6 cumulative probability point of a Monte Carlo of random phases (anslow2017_drrefl, used again for the Table 180-12 penalties in johnson2025_3dj_mpidgd), so the bound is conservative: it overstates the draft's own MPI allocation.
+
+### 12.4 Reflection crosstalk in BiDi links
+
+From bhatt2001_bidixtalk, for a single-wavelength BiDi link with a non-WDM coupler, NRZ and a receiver threshold adjusted for the crosstalk: the local transmitter's light reflected at the fiber interface reaches the local receiver.
+
+```
+T       = 10^(−IL/10)        channel transmission, IL the channel insertion loss in dB
+R       = 10^(−RL/10)        reflection, RL the return loss at the interface in dB
+Π_xtalk = 10·log10(T/(T − R))  dB;   invalid input if R ≥ T
+source rule: RL ≥ IL + 5 dB keeps Π_xtalk below about 1.65 dB
+```
+
+Two-wavelength extension (INFERENCE, not in the source): with a diplexer that isolates the receiver from the local transmitter's wavelength by I dB, the reflected light is attenuated by I before the photodiode, so R = 10^(−(RL + I)/10). With I = 0 this is the source's formula.
+
+Expected (`docs/hand_calcs/s12_dr_budget.py`): the source's example IL 7 dB, RL 12 dB → 1.6509 dB (source ≈ 1.65). Extension: IL 3 dB, RL 15.5 dB (the draft DR1 ORL tolerance), I 0 → 0.2514 dB; I 25 dB (SYNTHETIC) → 0.000772 dB.
+
+Why: a BiDi link puts its own transmitter's reflections into its receiver, so it has to carry a crosstalk penalty that a duplex link does not. The extension shows why the wavelength diplexer matters: 25 dB of isolation removes the penalty almost entirely. Its form assumes the reflected light is suppressed like any out-of-band light, which holds only as far as the diplexer isolation does; the source's derivation (NRZ, threshold adjustment) is not re-derived for PAM4.

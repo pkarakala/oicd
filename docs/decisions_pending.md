@@ -34,3 +34,13 @@ Two Claude sessions ran this brief at the same time in the same working tree. oi
 | R4 | The verdict badge is a fixed 2D overlay on the canvas, not an object floating in the 3D scene. Decision 13 gives the reason as drei `<Html>` failing under React 19 StrictMode; oicd-69 did not re-verify that. | `web/src/components/Scene3D.tsx`. | Accept as is, or retry drei `<Html>` / `<Billboard>` + `<Text>` later. |
 | R5 | When "Add connector" inserts an element, the selected trace index is not remapped, so an open side panel can jump to the neighboring component. | `web/src/App.tsx`: selection is cleared only when the index runs past the end. | Select by `input_path` or name instead of by index, or clear the selection on insert. |
 | R6 | Model card gap behind R1: the card does not define `threshold_dbm` (S + ΣΠ + R) or TP3 headroom. It also does not say that M_net, not P_TP3 − threshold, decides; in float the two differ by ulps. | §3 has only the M_net form. | One line in §3: "threshold = S + ΣΠ + R; headroom shown for display uses the same ε as M_net." |
+
+## Brief 05 (unattended run, 2026-10-18)
+
+Every judgment call made while Pranav was away, to confirm or overturn. Format per the brief: decision, options, what was picked, why.
+
+| # | Decision | Options | Picked | Why |
+| --- | --- | --- | --- | --- |
+| D05-1 | Brief 05 says brief 04 is `briefs/04-refine-v2.md`; the repo holds `briefs/04-state-of-the-art-explorer.md` (untracked) and there is no `v2` branch. Where does the file go, and is any brief 04 work present? | (a) commit it with the brief 03 work; (b) commit it with brief 05; (c) leave it untracked | (b): committed in "brief 05: add brief" (5469737). No brief 04 work exists (no v2 branch, no "brief 04 phase" commits), so all of brief 04 is done through brief 05. | It is not brief 03 output, git status had to be clean, and brief 05 states it contains brief 04 in full. |
+| D05-2 | Phase 0 commits must not touch main. | (a) commit brief 03 on main, then branch; (b) branch first | (b): `git switch -c v2` before the first commit, so main still ends at d37b15d. | "Never touch main" overrides the order of the Phase 0 bullets. |
+| D05-3 | The brief asks for "the commit hash" next to each ticked item, but a commit cannot contain its own hash. | (a) amend after commit (changes the hash); (b) record each phase's hash in docs/progress_05.md in the next phase's commit | (b). The final phase's hash goes into a last commit with the run summary. | Keeps one commit per phase and every recorded hash real. |

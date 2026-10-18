@@ -34,3 +34,8 @@ tests/
 ## Commands
 
 `uv run pytest -q` · `uv run ruff check .` · `uv run ruff format .`
+
+## Active run (remove when the run ends)
+An unattended run of briefs/05-v2-twin.md is in progress. After any compaction, restart or pause, re-read that file and docs/progress_05.md and continue from the first unchecked item. Never ask questions; log decisions in docs/decisions_pending.md.
+# Compact instructions
+Keep the current phase and item, failing checks, decisions made this run and files changed since the last commit.

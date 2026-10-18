@@ -1,0 +1,615 @@
+# Passage M1000: public facts with exact quotes (brief 05 phase 4 fact check, 2026-10-18).
+# Independent reconstruction from public information. Not affiliated with or endorsed by
+# Lightmatter. Product names belong to their owners.
+
+[product]
+name = "Passage M1000"
+family = "Passage"
+kind = "product"
+status = "Announced 2025-03-31 as a reference platform; EVK page published (vendor claims)"
+summary = "3D photonic superchip: a multi-tile active photonic interposer under a large package, with edge-attached fibers carrying WDM microring links (vendor description)."
+
+[[fact]]
+id = "m1000.bw_total_pr"
+quantity = "total optical bandwidth (press release; Tx/Rx counting not stated)"
+value = 114.0
+bound = "exact"
+unit = "Tbps"
+quote = "114 Tbps total optical bandwidth"
+cite = "lm_pr_m1000"
+source_class = "vendor_claim"
+verified = true
+location = "paragraph 1 (dateline paragraph)"
+note = "Evidence: text. Matches. The PR says 'total' but not whether it counts Tx + Rx; HC25 slide 11 says '(Tx + Rx)' and the EVK page says 'Total bi-directional'. Arithmetic, not a source statement: 256 fibers x 448 Gbps = 1024 SerDes x 56 Gbps x 2 directions = 114.688 Tbps."
+
+[[fact]]
+id = "m1000.bw_total_hc25"
+quantity = "bandwidth counting Tx + Rx (Specifications table)"
+value = 114.0
+bound = "max"
+unit = "Tbps"
+quote = "Bandwidth (Tx + Rx) Up to 114 Tbps"
+cite = "lm_hc25_m1000"
+source_class = "vendor_claim"
+verified = true
+location = "page 11 (slide 'Unprecedented performance and scale', Specifications table); also checked on the rendered slide"
+note = "Evidence: text. Matches. Explicitly counts Tx + Rx. ISES 2025 slide 11 also gives '114 Tbps' for the M-series."
+
+[[fact]]
+id = "m1000.bw_total_evk"
+quantity = "total bi-directional bandwidth (EVK technical specifications)"
+value = 114.6
+bound = "exact"
+unit = "Tbps"
+quote = "Total bi-directional bandwidth 114.6 Tbps"
+cite = "lm_web_m1000evk"
+source_class = "vendor_claim"
+verified = true
+location = "Technical Specifications list; hero also reads 'Data rate 114.6 Tbps Total Bi-Directional'"
+note = "Evidence: text. Matches. The same page's meta description says '114 Tbps of interconnect bandwidth'. Arithmetic: 114.6 equals 114.688 Tbps (1024 x 56 Gbps x 2) truncated; rounding would give 114.7."
+
+[[fact]]
+id = "m1000.interposer_area"
+quantity = "multi-reticle active photonic interposer area"
+value = 4000.0
+bound = "min"
+unit = "mm2"
+quote = "At more than 4,000 square millimeters, the M1000 reference platform is a multi-reticle active photonic interposer"
+cite = "lm_pr_m1000"
+source_class = "vendor_claim"
+verified = true
+location = "paragraph 1"
+note = "Evidence: text. Only the PR says 'more than'. HC25 slide 11: 'Silicon die Complex 4,000 mm2' (the die complex, no '>'); EVK: 'Active interposer area 4,000 mm²'; product page: 'A 4000 mm2 photonic interposer' and icon '4,000 MM²' labelled 'Biggest die complexes in a package'."
+
+[[fact]]
+id = "m1000.tile_count"
+quantity = "number of tiles in the active interposer"
+value = 8.0
+bound = "exact"
+unit = "count"
+quote = "8-tile 3D active interposer with integrated programmable waveguide network"
+cite = "lm_pr_m1000"
+source_class = "vendor_claim"
+verified = true
+location = "Key features list, item 1"
+note = "Evidence: text. Matches. EVK also: 'Form factor 2x4 tile matrix (8 tiles total)'."
+
+[[fact]]
+id = "m1000.tile_arrangement"
+quantity = "tile arrangement, 2 rows x 4 columns"
+bound = "exact"
+unit = "text"
+quote = "A dynamic, programmable optical fabric in the 2x4 tile design"
+cite = "lm_hc25_m1000"
+source_class = "vendor_claim"
+verified = true
+location = "page 22 (slide 'Reconfigurable connectivity'); slide image labels 'Passage M1000 2x4 tile' with tiles 00-03 and 10-13"
+note = "Evidence: text. Matches (source writes '2x4' with a letter x). EVK page: '2x4 tile matrix (8 tiles total)'."
+
+[[fact]]
+id = "m1000.reticle_count"
+quantity = "number of reticles in the multi-reticle interposer (Appendix: not disclosed)"
+bound = "exact"
+unit = "text"
+quote = "multi-reticle active photonic interposer"
+cite = "lm_pr_m1000"
+source_class = "vendor_claim"
+verified = true
+location = "paragraph 1"
+note = "Evidence: text. Confirmed: no G1 source states a reticle count; the PR says only 'multi-reticle'. ISES slide 11 labels the M-series PIC 'multi-reticle photonic die'. HC25 slide 22 marks 'Photonic cross-reticle stitching' at a tile boundary and slide 24 shows 'Cross reticle metal stitching' between neighbouring tiles, which suggests one reticle per tile (8); inference only. HC25 slide 24 annotates a two-tile layout with '16.4 mm' (arrow spans the left of the two layouts) and '28.2 mm' (height) without naming the object; 8 x 16.4 x 28.2 mm = 3,700 mm2, below the stated 4,000 mm2 (arithmetic)."
+
+[[fact]]
+id = "m1000.power_delivery"
+quantity = "power delivery in the integrated advanced package"
+value = 1.5
+bound = "exact"
+unit = "kW"
+quote = "1.5 kW power delivery in integrated advanced package (7,735 mm2)"
+cite = "lm_pr_m1000"
+source_class = "vendor_claim"
+verified = true
+location = "Key features list, item 6"
+note = "Evidence: text. Sources differ: product page says 'supports 1.5kW+ power delivery' (a minimum) and its icon reads '1,500 WATT'; the EVK page says 'Supports >1 kW of power delivery for XPUs and switches' (see m1000.power_delivery_evk); HC25 gives only a density, '>1.4 W/mm2'."
+
+[[fact]]
+id = "m1000.package_area"
+quantity = "integrated advanced package area"
+value = 7735.0
+bound = "exact"
+unit = "mm2"
+quote = "integrated advanced package (7,735 mm2)"
+cite = "lm_pr_m1000"
+source_class = "vendor_claim"
+verified = true
+location = "Key features list, item 6"
+note = "Evidence: text. Matches. Consistent with the product page icon '91×85 MM': 91 mm x 85 mm = 7,735 mm2 (arithmetic)."
+
+[[fact]]
+id = "m1000.package_dims"
+quantity = "package outline, 91 mm x 85 mm (two values; icon labelled '3D photonic chip-on-wafer package')"
+bound = "exact"
+unit = "text"
+quote = "91×85 MM"
+cite = "lm_web_m1000"
+source_class = "vendor_claim"
+verified = true
+location = "Specifications grid, icon 91-85-mm2.svg (downloaded to SRC/lm_web_m1000_assets/, rendered), label '3D photonic chip-on-wafer package'; raw.html alt text 'Icon representing 91 mm x 85 mm dimensions for Lightmatter modules'"
+note = "Evidence: image. Value matches. The exact wording '91 mm x 85 mm' is only in the image alt attribute in raw.html (not in raw.html.txt); the visible icon reads '91×85 MM'. The page labels it '3D photonic chip-on-wafer package', not explicitly 'package size'. 91 x 85 = 7,735 mm2 matches the PR."
+
+[[fact]]
+id = "m1000.package_length_mm"
+quantity = "package length"
+value = 91.0
+bound = "exact"
+unit = "mm"
+quote = "91×85 MM"
+cite = "lm_web_m1000"
+source_class = "vendor_claim"
+verified = true
+location = "Specifications grid, icon 91-85-mm2.svg (downloaded to SRC/lm_web_m1000_assets/, rendered), label '3D photonic chip-on-wafer package'; raw.html alt text 'Icon representing 91 mm x 85 mm dimensions for Lightmatter modules'"
+note = "Evidence: image. Value matches. The exact wording '91 mm x 85 mm' is only in the image alt attribute in raw.html (not in raw.html.txt); the visible icon reads '91×85 MM'. The page labels it '3D photonic chip-on-wafer package', not explicitly 'package size'. 91 x 85 = 7,735 mm2 matches the PR. Number split from m1000.package_dims."
+
+[[fact]]
+id = "m1000.package_width_mm"
+quantity = "package width"
+value = 85.0
+bound = "exact"
+unit = "mm"
+quote = "91×85 MM"
+cite = "lm_web_m1000"
+source_class = "vendor_claim"
+verified = true
+location = "Specifications grid, icon 91-85-mm2.svg (downloaded to SRC/lm_web_m1000_assets/, rendered), label '3D photonic chip-on-wafer package'; raw.html alt text 'Icon representing 91 mm x 85 mm dimensions for Lightmatter modules'"
+note = "Evidence: image. Value matches. The exact wording '91 mm x 85 mm' is only in the image alt attribute in raw.html (not in raw.html.txt); the visible icon reads '91×85 MM'. The page labels it '3D photonic chip-on-wafer package', not explicitly 'package size'. 91 x 85 = 7,735 mm2 matches the PR. Number split from m1000.package_dims."
+
+[[fact]]
+id = "m1000.power_density"
+quantity = "power delivery density"
+value = 1.4
+bound = "min"
+unit = "W/mm2"
+quote = "Power delivery >1.4 W/mm2 density"
+cite = "lm_hc25_m1000"
+source_class = "vendor_claim"
+verified = true
+location = "page 11, Specifications table"
+note = "Evidence: text. Matches. Slide 26 reports a '369mm2 thermal test chip, power density 1.47W/mm2' (see m1000.thermal_test_density)."
+
+[[fact]]
+id = "m1000.fiber_count"
+quantity = "optical fibers, edge attached"
+value = 256.0
+bound = "exact"
+unit = "count"
+quote = "256 optical fibers edge attached with 448 Gbps bandwidth per fiber"
+cite = "lm_pr_m1000"
+source_class = "vendor_claim"
+verified = true
+location = "Key features list, item 5"
+note = "Evidence: text. Matches. Also HC25 slide 11 'Fibers 256', EVK 'Optical fibers 256 total', product page icon '256 TOTAL FIBERS'. No source says whether laser-supply fibers are inside or outside the 256 (HC25 slide 13 labels 'Fiber Attach Data & Laser')."
+
+[[fact]]
+id = "m1000.bw_per_fiber"
+quantity = "bandwidth per fiber (direction counting not stated)"
+value = 448.0
+bound = "exact"
+unit = "Gbps"
+quote = "256 optical fibers edge attached with 448 Gbps bandwidth per fiber"
+cite = "lm_pr_m1000"
+source_class = "vendor_claim"
+verified = true
+conflicts_with = ["m1000.bw_per_fiber_ises25"]
+location = "Key features list, item 5"
+note = "Evidence: text. Conflicts with ISES 2025 '800 Gbps / fiber (Tx+Rx)' for the M-series (see m1000.bw_per_fiber_ises25). The PR does not say per direction or Tx+Rx. Arithmetic: 8 λ x 56 Gbps = 448 Gbps and 256 x 448 Gbps = 114.688 Tbps, the HC25 '(Tx + Rx)' total, which fits unidirectional fibers (half Tx, half Rx) at 448 Gbps each; inference. The HOTI 2025 paper's generic 56G 8λ design point uses separate fibers ('two TX and two RX fibers per 5 sqmm')."
+
+[[fact]]
+id = "m1000.wdm_lambda"
+quantity = "WDM wavelengths per waveguide and fiber"
+value = 8.0
+bound = "exact"
+unit = "count"
+quote = "8 wavelength WDM transmission on waveguides and fibers"
+cite = "lm_pr_m1000"
+source_class = "vendor_claim"
+verified = true
+location = "Key features list, item 4"
+note = "Evidence: text. Matches. Product page: '8 wavelength DWDM' and icon '8λ' (Wavelengths per fiber); EVK: '8-wavelength DWDM'; HC25 slide 23: '8λ @ 56Gbps/λ per link'. The Guide laser in HC25 offers 'Up to 16 wavelengths per fiber, 200 GHz grid' (slide 17) and '16λ 100 mW/fiber' (slide 32); M1000 uses 8."
+
+[[fact]]
+id = "m1000.lane_rate_nrz"
+quantity = "per-wavelength lane rate, NRZ"
+value = 56.0
+bound = "exact"
+unit = "Gbps"
+quote = "56 Gbps NRZ modulation"
+cite = "lm_pr_m1000"
+source_class = "vendor_claim"
+verified = true
+conflicts_with = ["m1000.serdes_rate_web"]
+location = "Key features list, item 3"
+note = "Evidence: text. Matches. EVK: 'Signaling protocol 56 Gbps NRZ'; HC25 slide 30: '56 Gbps, NRZ' with 'PAM4 also enabled'; product page icon reads '56/112 Gbps' (Power efficient SerDes; see m1000.serdes_rate_web)."
+
+[[fact]]
+id = "m1000.serdes_count"
+quantity = "electrical SerDes count"
+value = 1024.0
+bound = "exact"
+unit = "count"
+quote = "containing a total of 1024 Electrical SerDes"
+cite = "lm_pr_m1000"
+source_class = "vendor_claim"
+verified = true
+location = "Key features list, item 2"
+note = "Evidence: text. Matches. HC25 slide 11 '# of SerDes 1024'; EVK 'SerDes lane count 1024'; product page icon '1024 SERDES'."
+
+[[fact]]
+id = "m1000.serdes_per_tile"
+quantity = "SerDes per tile"
+value = 128.0
+bound = "exact"
+unit = "count"
+quote = "128 SerDes per tile"
+cite = "lm_hc25_m1000"
+source_class = "vendor_claim"
+verified = true
+location = "page 30 (slide 'Bandwidth density leadership'; shows a 16 x 8 grid of eye diagrams); repeated on ISES slide 17"
+note = "Evidence: text. Matches. 128 x 8 tiles = 1024 (arithmetic)."
+
+[[fact]]
+id = "m1000.chiplets"
+quantity = "chiplets stacked on the interposer"
+value = 34.0
+bound = "exact"
+unit = "count"
+quote = "34 chiplets with 1024 SerDes"
+cite = "lm_hc25_m1000"
+source_class = "vendor_claim"
+verified = true
+location = "page 11 (callout on the package image; also in text layer)"
+note = "Evidence: text. Matches. Consistent with EVK '32 I/O chiplets and two thermal load chips' (32 + 2 = 34). If the thermal load chips carry no SerDes, 1024 / 32 = 32 SerDes per I/O chiplet (inference)."
+
+[[fact]]
+id = "m1000.buses_per_tile"
+quantity = "horizontal optical buses per tile"
+value = 16.0
+bound = "exact"
+unit = "count"
+quote = "16 horizontal buses"
+cite = "lm_hc25_m1000"
+source_class = "vendor_claim"
+verified = true
+location = "page 23 (slide 'Tile design')"
+note = "Evidence: text. Matches. The slide image also labels '4 buses (16 waveguides)' and '64 waveguides' per tile."
+
+[[fact]]
+id = "m1000.links_per_bus"
+quantity = "full-duplex TX-RX links per bus (capacity)"
+value = 2.0
+bound = "max"
+unit = "count"
+quote = "Each bus supports up to 2 full-duplex TX-RX links"
+cite = "lm_hc25_m1000"
+source_class = "vendor_claim"
+verified = true
+location = "page 23 (slide 'Tile design')"
+note = "Evidence: text. Matches. Arithmetic (inference): 8 tiles x 16 buses x 2 links x 8λ x 56 Gbps = 114.688 Tbps per direction (229 Tbps Tx+Rx), twice the stated 114 Tbps (Tx + Rx) and twice 128 SerDes per tile; the numbers agree only if one link per bus is populated, so 'up to 2' reads as capacity."
+
+[[fact]]
+id = "m1000.link_lane_rate"
+quantity = "per-link configuration: 8 wavelengths at 56 Gbps each (value = Gbps per wavelength)"
+value = 56.0
+bound = "exact"
+unit = "Gbps"
+quote = "8λ @ 56Gbps/λ per link"
+cite = "lm_hc25_m1000"
+source_class = "vendor_claim"
+verified = true
+location = "page 23 (slide 'Tile design')"
+note = "Evidence: text. Matches. 8 x 56 = 448 Gbps per link per direction (arithmetic), equal to the PR's 448 Gbps per fiber."
+
+[[fact]]
+id = "m1000.pam4_tdecq"
+quantity = "TDECQ of the 112 Gbps PAM4 eye ('PAM4 also enabled')"
+value = 0.83
+bound = "exact"
+unit = "dB"
+quote = "112 Gbps, TDECQ = 0.83 dB"
+cite = "lm_hc25_m1000"
+source_class = "vendor_claim"
+verified = true
+location = "page 30 (inset eye diagram under 'SerDes eye diagrams'); repeated on ISES slide 17"
+note = "Evidence: text. Matches. The slide does not state the measurement reference plane (TDECQ is normally an optical transmitter metric, but the slide says 'SerDes eye diagrams') and the EVK specifies 56 Gbps NRZ only."
+
+[[fact]]
+id = "m1000.io_chiplets"
+quantity = "I/O chiplets 3D stacked on the interposer (EVK)"
+value = 32.0
+bound = "exact"
+unit = "count"
+quote = "An array of 32 I/O chiplets and two thermal load chips"
+cite = "lm_web_m1000evk"
+source_class = "vendor_claim"
+verified = true
+location = "intro paragraph"
+note = "Evidence: text."
+
+[[fact]]
+id = "m1000.thermal_load_chips"
+quantity = "thermal load chips 3D stacked on the interposer (EVK)"
+value = 2.0
+bound = "exact"
+unit = "count"
+quote = "An array of 32 I/O chiplets and two thermal load chips"
+cite = "lm_web_m1000evk"
+source_class = "vendor_claim"
+verified = true
+location = "intro paragraph"
+note = "Evidence: text. Matches; the page spells the number 'two'."
+
+[[fact]]
+id = "m1000.energy_system"
+quantity = "system-level energy efficiency including laser (EVK)"
+value = 2.3
+bound = "exact"
+unit = "pJ/bit"
+quote = "System-level efficiency 2.3 pJ/bit (including laser)"
+cite = "lm_web_m1000evk"
+source_class = "vendor_claim"
+verified = true
+conflicts_with = ["m1000.energy_pic_laser_hoti"]
+location = "Technical Specifications; hero also reads 'System Efficiency 2.3 pJ/bit incl. laser power; SerDes ~2.0 pJ/bit'"
+note = "Evidence: text. Matches. Ambiguity: the page calls 2.3 pJ/bit 'System-level' and lists SerDes 2.0 pJ/bit separately; the HOTI 2025 paper treats 2.3 pJ/bit as 'PIC and laser' with SerDes added on top (Passage total 4.3 pJ/bit in its Table III). Whether 2.3 includes SerDes is not settled by this page."
+
+[[fact]]
+id = "m1000.energy_serdes"
+quantity = "SerDes energy efficiency (EVK)"
+value = 2.0
+bound = "exact"
+unit = "pJ/bit"
+quote = "SerDes efficiency 2.0 pJ/bit"
+cite = "lm_web_m1000evk"
+source_class = "vendor_claim"
+verified = true
+location = "Technical Specifications"
+note = "Evidence: text. Matches the spec table; the hero line says 'SerDes ~2.0 pJ/bit' (approximate). The HOTI 2025 paper uses '2 pJ/bit for 56G NRZ' as an assumption (doubling a 1 pJ/bit 112G PAM-4 XSR figure from its ref [23]), not a measurement."
+
+[[fact]]
+id = "m1000.energy_pic_laser_hoti"
+quantity = "PIC + laser energy efficiency of 'current Passage products' (SerDes excluded)"
+value = 2.3
+bound = "exact"
+unit = "pJ/bit"
+quote = "2.3 pJ/bit for PIC and laser"
+cite = "lm_hoti25_paper"
+source_class = "peer_reviewed"
+verified = true
+location = "page 5, Section III (Passage), first paragraph; repeated page 7, Section IV.A d)"
+note = "Evidence: text. Value matches, but the paper never names the M1000 ('current Passage products') and cites the figure to its ref [22], 'N. Harris, Lightmatter InterConnect Launch Event at OFC 2025' (a vendor event): a vendor claim restated in a conference paper, not an independent measurement. The paper does not itself state that it was peer reviewed (venue: 2025 IEEE Symposium on High-Performance Interconnects (HotI)); PEER_REVIEWED rests on the venue."
+
+[[fact]]
+id = "m1000.mrr_diameter"
+quantity = "microring diameter"
+value = 15.0
+bound = "approx"
+unit = "um"
+quote = "Diameter ~ 15um"
+cite = "lm_hc25_m1000"
+source_class = "vendor_claim"
+verified = true
+location = "page 14 (slide 'The heart of the engine: silicon microrings')"
+note = "Evidence: text. Matches. Slide 16 also says 'Yes, ~15µm in diameter.' The slides describe Passage microrings generally, not an M1000-specific design value."
+
+[[fact]]
+id = "m1000.mrr_heater"
+quantity = "microring tuning element: resistive heater"
+bound = "exact"
+unit = "text"
+quote = "Resistive heater for tuning"
+cite = "lm_hc25_m1000"
+source_class = "vendor_claim"
+verified = true
+location = "page 14"
+note = "Evidence: text."
+
+[[fact]]
+id = "m1000.mrr_modulation"
+quantity = "microring modulation mechanism: depletion PN junction"
+bound = "exact"
+unit = "text"
+quote = "Depletion PN junction for modulation"
+cite = "lm_hc25_m1000"
+source_class = "vendor_claim"
+verified = true
+location = "page 14"
+note = "Evidence: text."
+
+[[fact]]
+id = "m1000.bump_pitch"
+quantity = "chip-to-interposer bump pitch"
+value = 120.0
+bound = "approx"
+unit = "um"
+quote = "Bump pitch: ~120 µm"
+cite = "lm_hc25_m1000"
+source_class = "vendor_claim"
+verified = true
+location = "page 13 (slide '3D stacking requires compact optical Tx and Rx')"
+note = "Evidence: text. Matches. Listed under 'Standard processes today' (a generic process figure, not a stated M1000 design value); the same slide gives 'Bump size: ~80 µm'. Repeated on ISES slides 12 and 15."
+
+[[fact]]
+id = "m1000.txrx_area"
+quantity = "area for an optical transmitter/receiver"
+value = 0.015
+bound = "exact"
+unit = "mm2"
+quote = "Area for a transmitter/receiver: 0.015 mm²"
+cite = "lm_hc25_m1000"
+source_class = "vendor_claim"
+verified = true
+conflicts_with = ["m1000.txrx_area_p15"]
+location = "page 13 (slide '3D stacking requires compact optical Tx and Rx')"
+note = "Evidence: text. Internal tension in HC25: slide 15 says microrings with inductorless driver and analog front end 'enable 0.006 mm² Tx + Rx area' (see m1000.txrx_area_p15). Slide 13 lists 0.015 mm² under 'Standard processes today'; 'transmitter/receiver' does not say whether it is each or a Tx+Rx pair. Repeated on ISES slides 12 and 15."
+
+[[fact]]
+id = "m1000.pic_platform"
+quantity = "silicon photonics platform of the PIC"
+bound = "exact"
+unit = "text"
+quote = "The Passage M1000 utilizes the GF Fotonix™ silicon photonics platform"
+cite = "lm_pr_m1000"
+source_class = "vendor_claim"
+verified = true
+location = "paragraph 3"
+note = "Evidence: text. Matches. HC25 slide 32 (image) shows the Passage PIC with GF, tsmc and Tower logos, i.e. several PIC fabs for Passage generally (see m1000.supply_chain_hc25)."
+
+[[fact]]
+id = "m1000.partners"
+quantity = "foundry and assembly partners named for M1000 production readiness"
+bound = "exact"
+unit = "text"
+quote = "including GlobalFoundries (GF) and Amkor"
+cite = "lm_pr_m1000"
+source_class = "vendor_claim"
+verified = true
+location = "paragraph 3"
+note = "Evidence: text. Matches. HC25 slide 32 (image) additionally shows tsmc and ASE for packaging and tsmc for the Passage EIC."
+
+[[fact]]
+id = "m1000.bw_per_fiber_ises25"
+quantity = "bandwidth per fiber counting Tx + Rx, M-series (ISES slide)"
+value = 800.0
+bound = "exact"
+unit = "Gbps"
+quote = "800 Gbps / fiber (Tx+Rx)"
+cite = "lm_ises25"
+source_class = "vendor_claim"
+verified = true
+location = "page 11 (slide 'Beyond the Limit of 2D'), under 'GEN 4 3D Interposer M-series' below '114 Tbps'; column mapping checked on the rendered slide"
+note = "Evidence: text. Confirmed conflict with the PR's '448 Gbps bandwidth per fiber'. 256 fibers x 800 Gbps = 204.8 Tbps, inconsistent with the '114 Tbps' printed above it (arithmetic). The slide says 'M-series', not M1000. 800 Gbps per fiber matches the separate '16 wavelength Bi-Directional link' demonstration on ISES slide 9 ('800 Gbps per fiber'), so the slide may mix link generations (inference)."
+
+[[fact]]
+id = "m1000.txrx_area_p15"
+quantity = "Tx + Rx area with microrings, inductorless driver and analog front end"
+value = 0.006
+bound = "exact"
+unit = "mm2"
+quote = "0.006 mm² Tx + Rx area"
+cite = "lm_hc25_m1000"
+source_class = "vendor_claim"
+verified = true
+location = "page 15 (slide 'Ultracompact transmitter and receiver')"
+note = "Evidence: text. Conflicts with slide 13 'Area for a transmitter/receiver: 0.015 mm²' in the same deck (m1000.txrx_area). Appendix A5 lists 0.006 mm² for lm_ofc25_paper (not checked by G1)."
+
+[[fact]]
+id = "m1000.thermal_test_density"
+quantity = "power density of a 369 mm2 thermal test chip on Passage"
+value = 1.47
+bound = "exact"
+unit = "W/mm2"
+quote = "369mm2 thermal test chip, power density 1.47W/mm2."
+cite = "lm_hc25_m1000"
+source_class = "vendor_claim"
+verified = true
+location = "page 26 (slide 'Power delivery and thermal load')"
+note = "Evidence: text. Supports the '>1.4 W/mm2' spec. The heat map image labels four regions '170W' each; the slide does not say how they relate to the 369 mm2 chip (4 x 170 W = 680 W vs 369 mm2 x 1.47 W/mm2 = 542 W, arithmetic)."
+
+[[fact]]
+id = "m1000.tsv_current_density"
+quantity = "Passage TSV current density capability"
+value = 2.5
+bound = "min"
+unit = "A/mm2"
+quote = "Passage TSVs support >2.5A/mm2."
+cite = "lm_hc25_m1000"
+source_class = "vendor_claim"
+verified = true
+location = "page 26 (slide 'Power delivery and thermal load')"
+note = "Evidence: text."
+
+[[fact]]
+id = "m1000.power_delivery_evk"
+quantity = "power delivery for XPUs and switches (EVK page)"
+value = 1.0
+bound = "min"
+unit = "kW"
+quote = "Supports >1 kW of power delivery for XPUs and switches"
+cite = "lm_web_m1000evk"
+source_class = "vendor_claim"
+verified = true
+location = "Technical Specifications, 'Power delivery'"
+note = "Evidence: text. Lower than the PR's '1.5 kW power delivery' and the product page's '1.5kW+' / '1,500 WATT'. Not strictly contradictory (>1 kW includes 1.5 kW) but the EVK states a lower figure."
+
+[[fact]]
+id = "m1000.serdes_rate_web"
+quantity = "SerDes rate options on the product page (56 and 112 Gbps)"
+bound = "exact"
+unit = "text"
+quote = "56/112 Gbps"
+cite = "lm_web_m1000"
+source_class = "vendor_claim"
+verified = true
+location = "Specifications grid, icon 56-112-gbps2.svg labelled 'Power efficient SerDes' (downloaded to SRC/lm_web_m1000_assets/, rendered); alt text 'Icon showing the comparison between 56 Gbps and 112 Gbps speeds'"
+note = "Evidence: image. PR and EVK state 56 Gbps NRZ only; HC25 slide 30 shows a 112 Gbps PAM4 eye ('PAM4 also enabled'). The product page does not say 112 Gbps is PAM4."
+
+[[fact]]
+id = "m1000.mrm_eo_bw"
+quantity = "microring modulator measured EO S21 bandwidth at -1 V bias (35.4 GHz at -2 V)"
+value = 31.8
+bound = "exact"
+unit = "GHz"
+quote = "Bias V: -1V, 31.8 GHz"
+cite = "lm_hc25_m1000"
+source_class = "vendor_claim"
+verified = true
+location = "page 15, 'Measured EO S21' plot legend (image only)"
+note = "Evidence: image. Image-only. The second legend entry reads 'Bias V: -2V, 35.4 GHz'. The slide does not say these are -3 dB bandwidths, though the plot draws a dashed line at -3 dB where the curves cross near those frequencies."
+
+[[fact]]
+id = "m1000.supply_chain_hc25"
+quantity = "Passage supply chain on HC25 slide: EIC fab, PIC fabs, packaging"
+bound = "exact"
+unit = "text"
+quote = "Passage EIC: [tsmc logo]; Passage PIC: [GF logo] [tsmc logo] [Tower Semiconductor logo]; package: [tsmc logo] [ASE logo] [Amkor Technology logo]; Customer ASIC with UCIe IP: Multiple fabs; Pluggable fiber coupler: Strategic partner"
+cite = "lm_hc25_m1000"
+source_class = "vendor_claim"
+verified = true
+location = "page 32 (slide 'Optimized end-to-end and production-ready'; logos are images)"
+note = "Evidence: image. Broader than the PR's 'GlobalFoundries (GF) and Amkor' and 'GF Fotonix': the slide shows three PIC fabs and three packaging houses for Passage generally, without saying which built the M1000."
+
+[[fact]]
+id = "m1000.evk_chassis"
+quantity = "EVK server form factor"
+value = 3.0
+bound = "exact"
+unit = "RU"
+quote = "Integrated into a liquid-cooled 19” 3U server environment to manage high-density thermal loads"
+cite = "lm_web_m1000evk"
+source_class = "vendor_claim"
+verified = true
+location = "SDK section, 'Liquid-Cooling Ready'"
+note = "Evidence: text. HC25 slide 28 photo (image only, not a stated spec) shows the chassis front panel with 16 ports labelled DATA 1 to DATA 16."
+
+[[fact]]
+id = "m1000.energy_split_hoti"
+quantity = "authors' split of the 2.3 pJ/bit: laser (off-package) 1.1, PIC (in-package) 1.2 (value = laser share)"
+value = 1.1
+bound = "exact"
+unit = "pJ/bit"
+quote = "We further split this into 1.1 pJ/bit for the laser (off- package power) and 1.2 pJ/bit for the PIC (in-package power)"
+cite = "lm_hoti25_paper"
+source_class = "peer_reviewed"
+verified = true
+location = "page 7, Section IV.A d) (Passage)"
+note = "Evidence: text. Authors' modelling assumption, not a measurement. Quote keeps the text file's line-break hyphen 'off- package'. Table III lists Passage in-package 3.2, off-package 1.1, total 4.3 pJ/bit."
+
+[[fact]]
+id = "m1000.fiber_array_bidir"
+quantity = "fiber array described as bi-directional, pluggable, high-density"
+bound = "exact"
+unit = "text"
+quote = "Bi-directional, pluggable, high-density fiber array"
+cite = "lm_hc25_m1000"
+source_class = "vendor_claim"
+verified = true
+location = "page 10 (exploded-view label; not in the text layer)"
+note = "Evidence: image. Image-only label. Does not say whether each fiber carries Tx and Rx (BiDi) or the array holds separate Tx and Rx fibers; relevant to the 448 Gbps per fiber vs '800 Gbps / fiber (Tx+Rx)' conflict."

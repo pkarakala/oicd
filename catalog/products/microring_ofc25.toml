@@ -1,0 +1,256 @@
+# Microring transmitter and receiver (OFC 2025): public facts with exact quotes (brief 05 phase 4 fact check, 2026-10-18).
+# Independent reconstruction from public information. Not affiliated with or endorsed by
+# Lightmatter. Product names belong to their owners.
+
+[product]
+name = "Microring transmitter and receiver (OFC 2025)"
+family = "Passage"
+kind = "product"
+status = "Published at OFC 2025, paper Tu3J.6, with its talk"
+summary = "Monolithic O-band microring modulator and receiver with integrated driver and front end (peer-reviewed paper; talk slides are vendor claims)."
+
+[[fact]]
+id = "ring.max_rate_gbps"
+quantity = "Max NRZ rate of the monolithic microring Tx+Rx with integrated driver and analog front end; 64 Gbps needed 3-tap software Rx FFE with BER < 10^-12 only inferred on the sampling scope; open eye without equalization up to 56 Gbps"
+value = 64.0
+bound = "max"
+unit = "Gbps"
+quote = "monolithically integrated driver and analog front end at up to 64Gbps NRZ"
+cite = "lm_ofc25_paper"
+source_class = "peer_reviewed"
+verified = true
+location = "Abstract (p.1); Sec. 3.2 and Fig. 2(e)-(f) (p.3)"
+note = "Evidence: text."
+
+[[fact]]
+id = "ring.band"
+quantity = "Operating band of the MRMs and MRRs (design); measured spectra in Fig. 1(e) span about 1302-1316 nm"
+bound = "exact"
+unit = "text"
+quote = "The MRMs and MRRs were designed for O-band operation"
+cite = "lm_ofc25_paper"
+source_class = "peer_reviewed"
+verified = true
+location = "Sec. 2 Design (p.2)"
+note = "Evidence: text."
+
+[[fact]]
+id = "ring.fsr_thz"
+quantity = "Free spectral range of the MRMs and MRRs (design value)"
+value = 1.8
+bound = "exact"
+unit = "THz"
+quote = "O-band operation with 1.8 THz FSR"
+cite = "lm_ofc25_paper"
+source_class = "peer_reviewed"
+verified = true
+location = "Sec. 2 Design (p.2)"
+note = "Evidence: text."
+
+[[fact]]
+id = "ring.wdm_compat_spacing_ghz"
+quantity = "WDM plan the FSR is designed for: 8 wavelengths at 200 GHz spacing"
+value = 200.0
+bound = "exact"
+unit = "GHz"
+quote = "(compatible with 200 GHz spacing 8-λ WDM)"
+cite = "lm_ofc25_paper"
+source_class = "peer_reviewed"
+verified = true
+location = "Sec. 2 Design (p.2)"
+note = "Evidence: text."
+
+[[fact]]
+id = "ring.heater_nm_per_mw"
+quantity = "Integrated heater tuning efficiency (MRM)"
+value = 0.44
+bound = "exact"
+unit = "nm/mW"
+quote = "The integrated heaters provided tuning of 0.44 nm/mW"
+cite = "lm_ofc25_paper"
+source_class = "peer_reviewed"
+verified = true
+location = "Sec. 3.1 (p.2)"
+note = "Evidence: text."
+
+[[fact]]
+id = "ring.mrm_er_db"
+quantity = "MRM extinction ratio, stated as voltage-dependent, read from the Fig. 1(e) spectra (no modulated ER at the 1.3 Vpp drive is given)"
+value = 18.0
+bound = "min"
+unit = "dB"
+quote = "The MRMs have a voltage-dependent extinction ratio >18 dB"
+cite = "lm_ofc25_paper"
+source_class = "peer_reviewed"
+verified = true
+location = "Sec. 3.1 and Fig. 1(e) (p.2, figure on p.1)"
+note = "Evidence: text. Value matches; context: the text says Fig. 1 shows the MRM spectrum vs bias on the modulation junction, but the caption says '(e) MRM spectra at different heater voltages' and the talk shows the same plot as 'Thermal wavelength detuning' (heater 0.0 V to 1.5 V), so the >18 dB reads as a static notch depth (inference)."
+
+[[fact]]
+id = "ring.pd_bw_ghz"
+quantity = "Ge photodetector 3 dB bandwidth at -1 V bias"
+value = 56.0
+bound = "exact"
+unit = "GHz"
+quote = "The PDs exhibited 3 dB bandwidth of 56 GHz at a bias voltage of -1 V"
+cite = "lm_ofc25_paper"
+source_class = "peer_reviewed"
+verified = true
+conflicts_with = ["ring.pd_bw_talk_ghz"]
+location = "Sec. 3.1 (p.2); also p.2 line 1: '56GHz-bandwidth germanium (Ge) photodetector (PD) at the drop port'"
+note = "Evidence: text. CONFLICT with the OFC talk (lm_ofc25_talk slide 8): 'PD EO bandwidth > 46 GHz', plot legend '-3dB BW: 46.434 GHz' (ring.pd_bw_talk_ghz)."
+
+[[fact]]
+id = "ring.power_mw"
+quantity = "Tx+Rx power consumption excluding the laser (one wavelength, 56 Gbps)"
+value = 84.4
+bound = "exact"
+unit = "mW"
+quote = "Our Tx and Rx had a power consumption of 84.4 mW (excluding the laser)"
+cite = "lm_ofc25_paper"
+source_class = "peer_reviewed"
+verified = true
+location = "Sec. 4 Discussion (p.3)"
+note = "Evidence: text."
+
+[[fact]]
+id = "ring.energy_pj_bit"
+quantity = "Tx+Rx energy per bit excluding laser at 56 Gbps (talk rounds to 1.5 pJ/bit)"
+value = 1.51
+bound = "exact"
+unit = "pJ/bit"
+quote = "translating to an efficiency of 1.51 pJ/bit at 56 Gbps"
+cite = "lm_ofc25_paper"
+source_class = "peer_reviewed"
+verified = true
+location = "Sec. 4 Discussion (p.3); Table 1"
+note = "Evidence: text."
+
+[[fact]]
+id = "ring.area_mm2"
+quantity = "Total die area of the Tx+Rx circuits (MRM + driver 2.8e-3 mm2; MRR + PD + AFE 3.2e-3 mm2)"
+value = 0.006
+bound = "exact"
+unit = "mm2"
+quote = "The total die area of the circuits is 0.006 mm2"
+cite = "lm_ofc25_paper"
+source_class = "peer_reviewed"
+verified = true
+location = "Abstract (p.1); Sec. 2; Table 1"
+note = "Evidence: text."
+
+[[fact]]
+id = "ring.process"
+quantity = "Fabrication platform: GF 45SPCLO (45 nm CMOS silicon photonics, monolithic)"
+bound = "exact"
+unit = "text"
+quote = "The designs were fabricated in the GF 45SPCLO platform"
+cite = "lm_ofc25_paper"
+source_class = "peer_reviewed"
+verified = true
+location = "Sec. 3.1 (p.2)"
+note = "Evidence: text."
+
+[[fact]]
+id = "ring.mrm_q"
+quantity = "MRM quality factor (loaded or intrinsic not stated; same table: tuning efficiency 50 pm/V, EO bandwidth > 30 GHz)"
+value = 3500.0
+bound = "exact"
+unit = "1"
+quote = "Quality factor Value 50 pm/V > 30 GHz 3500"
+cite = "lm_ofc25_talk"
+source_class = "vendor_claim"
+verified = true
+location = "slide 12 'Optical TX: Micro Ring Modulator' parameter table; the text layer flattens the table (headers, then 'Value 50 pm/V > 30 GHz 3500'); column match Quality factor = 3500 checked on the rendered slide"
+note = "Evidence: text."
+
+[[fact]]
+id = "ring.pd_responsivity_a_per_w"
+quantity = "Ge PD responsivity (table value; the slide's responsivity histogram spans about 0.88 to 1.04 A/W, so not every device exceeds 0.9; wavelength not stated)"
+value = 0.9
+bound = "min"
+unit = "A/W"
+quote = "> 0.9 A/W"
+cite = "lm_ofc25_talk"
+source_class = "vendor_claim"
+verified = true
+location = "slide 8 'Optical RX: Micro Ring Resonator + PD' table, 'PD responsivity' column (column match checked on the rendered slide)"
+note = "Evidence: text."
+
+[[fact]]
+id = "ring.oma_min_dbm"
+quantity = "Minimum received OMA (receiver sensitivity) at 56 Gbps NRZ, PRBS9, BER < 10^-12, with 4-tap FFE on the BERT (OMA, not average power)"
+value = -9.0
+bound = "exact"
+unit = "dBm"
+quote = "(with FFE (4 taps) on BERT) -9 dBm"
+cite = "lm_ofc25_talk"
+source_class = "vendor_claim"
+verified = true
+location = "slide 10 'BER Measurements at 32G and 56G' table (checked on the rendered slide); slide 16: 'receiver sensitivity -9 dBm OMA'"
+note = "Evidence: text."
+
+[[fact]]
+id = "ring.oma_min_dbm_32g"
+quantity = "Minimum received OMA at 32 Gbps NRZ, PRBS9, BER < 10^-12, no equalization"
+value = -11.0
+bound = "exact"
+unit = "dBm"
+quote = "32 Gbps NRZ, PRBS9, BER < 10⁻¹² -11 dBm"
+cite = "lm_ofc25_talk"
+source_class = "vendor_claim"
+verified = true
+location = "slide 10 table (checked on the rendered slide); slide 11: '32Gbps with no equalization'"
+note = "Evidence: text."
+
+[[fact]]
+id = "ring.pd_bw_talk_ghz"
+quantity = "PD electro-optic bandwidth per the OFC talk (bias not stated)"
+value = 46.0
+bound = "min"
+unit = "GHz"
+quote = "> 46 GHz"
+cite = "lm_ofc25_talk"
+source_class = "vendor_claim"
+verified = true
+location = "slide 8 table 'PD EO bandwidth'; the 'Measured OE BW' plot legend reads '-3dB BW: 46.434 GHz' (image only)"
+note = "Evidence: text. CONFLICT with the paper's 56 GHz PD 3 dB bandwidth at -1 V bias (ring.pd_bw_ghz, lm_ofc25_paper)."
+
+[[fact]]
+id = "ring.mrr_il_db"
+quantity = "Receiver microring (MRR) insertion loss (talk table; which path is not specified)"
+value = 0.1
+bound = "exact"
+unit = "dB"
+quote = "Value 0.1 dB"
+cite = "lm_ofc25_talk"
+source_class = "vendor_claim"
+verified = true
+location = "slide 8 table, 'MRR IL (dB)' column (column match checked on the rendered slide)"
+note = "Evidence: text."
+
+[[fact]]
+id = "ring.mrm_eo_bw_ghz"
+quantity = "MRM electro-optic 3 dB bandwidth at -1 V bias (spread ±2 GHz)"
+value = 30.9
+bound = "approx"
+unit = "GHz"
+quote = "The MRMs exhibited 3dB bandwidths in the range of 30.9 ± 2 GHz for a bias voltage of -1V"
+cite = "lm_ofc25_paper"
+source_class = "peer_reviewed"
+verified = true
+location = "Sec. 3.1 (p.2); Fig. 1(f) (p.1)"
+note = "Evidence: text. Internal inconsistency in the paper: the Fig. 1(f) legend reads 31.8 GHz at -1 V and 35.4 GHz at -2 V, and the caption says 'near 34.1 GHz for a -2V bias'; the talk (slide 12) gives 'EO bandwidth > 30 GHz'."
+
+[[fact]]
+id = "ring.mod_il_db"
+quantity = "MRM modulation insertion loss in the Tx+Rx test (input optical power to the MRM about 4 dBm)"
+value = 4.9
+bound = "approx"
+unit = "dB"
+quote = "the modulation insertion loss was approximately 4.9 dB"
+cite = "lm_ofc25_paper"
+source_class = "peer_reviewed"
+verified = true
+location = "Sec. 3.2 (p.3)"
+note = "Evidence: text."

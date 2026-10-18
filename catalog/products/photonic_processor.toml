@@ -1,0 +1,1426 @@
+# Photonic processor (Nature 2025): public facts with exact quotes (brief 05 phase 4 fact check, 2026-10-18).
+# Independent reconstruction from public information. Not affiliated with or endorsed by
+# Lightmatter. Product names belong to their owners.
+
+[product]
+name = "Photonic processor (Nature 2025)"
+family = "Photonic compute"
+kind = "product"
+status = "Published in Nature 640, 368 to 374 (2025)"
+summary = "Six-chip photonic processor: four photonic tensor cores under two control dies, running neural networks in adaptive block floating point (peer-reviewed, vendor-authored)."
+
+[[fact]]
+id = "ptc.chip_count"
+quantity = "chips in the photonic processor package"
+value = 6.0
+bound = "exact"
+unit = "count"
+quote = "The processor integrates six chips within a single package"
+cite = "lm_blog_newcomputer"
+source_class = "vendor_claim"
+verified = true
+location = "blog section 'A Fundamental Departure', paragraph 4"
+note = "Evidence: text. Appendix attributes this to ahmed2025_nature (PEER_REVIEWED), whose main text is paywalled and was not seen. The word 'six' was found only in the Lightmatter blog (vendor_claim, Nick Harris, 2025-04-09). Peer-reviewed material agrees on the parts: Fig. 1b caption 'two 12-nm control chiplets ... and four 349-mm2 photonic chiplets' and SI p.5 'two DCIs ... four PTCs' (2 + 4 = 6)."
+
+[[fact]]
+id = "ptc.ptc_count"
+quantity = "photonic tensor cores (PTCs) per processor"
+value = 4.0
+bound = "exact"
+unit = "count"
+quote = "Photograph of processor on a 16-lane PCIe card with four PTCs, each with a 12-fibre array attached."
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = true
+location = "Figure 1 page; Fig. 1a caption"
+note = "Evidence: text. Also SI Table S3 matrix size '4×128×128 (65,536)'."
+
+[[fact]]
+id = "ptc.ptc_matrix_size"
+quantity = "PTC weight-array dimension N (N x N = 128 x 128)"
+value = 128.0
+bound = "exact"
+unit = "count"
+quote = "dual 128x128 photonic tensor cores per digital chip"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = true
+location = "Supplementary Information; SI section II (Inference Throughput), p.4"
+note = "Evidence: text. Also implies two PTCs per control die (DCI)."
+
+[[fact]]
+id = "ptc.ptc_process_node"
+quantity = "photonic tensor core process node"
+value = 90.0
+bound = "exact"
+unit = "nm"
+quote = "90-nm photonics + RF SOI"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = true
+location = "Figure 3 page; Fig. 3a image, lower-left label of the photonic die; Fig. 1b image labels the die '90-nm PTC'; SRC/ahmed2025_nature_fig3/fig.png (41586_2025_8854_Fig3_HTML.png)"
+note = "Evidence: image. 'GF' (GlobalFoundries) is not stated in any accessible part of the paper (main text paywalled). Only an indirect hint exists: the reference list cites Giewont, K. et al. '300-mm monolithic silicon photonics foundry technology' (IEEE JSTQE 2019), which is inference, not a statement. The figure adds '+ RF SOI'."
+
+[[fact]]
+id = "ptc.dci_count"
+quantity = "control dies (digital control interface, DCI) per processor"
+value = 2.0
+bound = "exact"
+unit = "count"
+quote = "two 12-nm control chiplets"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = true
+location = "Figure 1 page; Fig. 1b caption"
+note = "Evidence: text."
+
+[[fact]]
+id = "ptc.dci_node"
+quantity = "control die process node"
+value = 12.0
+bound = "exact"
+unit = "nm"
+quote = "two 12-nm control chiplets"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = true
+location = "Figure 1 page; Fig. 1b caption; Fig. 3a image also labels the electronics '12-nm FinFET'; Fig. 1b image '12-nm DCI'"
+note = "Evidence: text."
+
+[[fact]]
+id = "ptc.stack_orientation"
+quantity = "PTCs under the control dies: DCIs on the top side of the interposer, PTCs on the bottom side"
+bound = "exact"
+unit = "text"
+quote = "There are two DCIs each with 25,000 bumps on the top side of the interposer and four PTCs each with 6,000 bumps on the bottom of the interposer."
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = true
+location = "Supplementary Information; SI section III (Packaging), p.5"
+note = "Evidence: text. Fig. 1b caption words it as 'four 349-mm2 photonic chiplets on the back side'."
+
+[[fact]]
+id = "ptc.interposer_dims"
+quantity = "organic interposer dimensions (Appendix: 54 x 56 mm)"
+bound = "exact"
+unit = "text"
+quote = "54 × 56 mm organic interposer"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = false
+note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. Accessible material gives only the package size: SI p.5 'The package dimension is 80 mm by 65 mm'. 'Organic interposer' is not confirmed either: the Fig. 1b caption places the control chiplets 'on an organic substrate', and the Fig. 1b image labels separate 'Interposer' and 'Substrate' layers. Appendix A wording: on a 54 × 56 mm organic interposer"
+
+[[fact]]
+id = "ptc.interposer_length_mm"
+quantity = "interposer length"
+value = 56.0
+bound = "exact"
+unit = "mm"
+quote = "54 × 56 mm organic interposer"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = false
+note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. Accessible material gives only the package size: SI p.5 'The package dimension is 80 mm by 65 mm'. 'Organic interposer' is not confirmed either: the Fig. 1b caption places the control chiplets 'on an organic substrate', and the Fig. 1b image labels separate 'Interposer' and 'Substrate' layers. Appendix A wording: on a 54 × 56 mm organic interposer Number split from ptc.interposer_dims."
+
+[[fact]]
+id = "ptc.interposer_width_mm"
+quantity = "interposer width"
+value = 54.0
+bound = "exact"
+unit = "mm"
+quote = "54 × 56 mm organic interposer"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = false
+note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. Accessible material gives only the package size: SI p.5 'The package dimension is 80 mm by 65 mm'. 'Organic interposer' is not confirmed either: the Fig. 1b caption places the control chiplets 'on an organic substrate', and the Fig. 1b image labels separate 'Interposer' and 'Substrate' layers. Appendix A wording: on a 54 × 56 mm organic interposer Number split from ptc.interposer_dims."
+
+[[fact]]
+id = "ptc.ptc_die_dims"
+quantity = "PTC die dimensions (Appendix: 14.00 x 24.96 mm)"
+bound = "exact"
+unit = "text"
+quote = "PTC 14.00 × 24.96 mm"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = false
+note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. The peer-reviewed area is available: Fig. 1b caption 'four 349-mm2 photonic chiplets' and SI Table S3 '349 mm²×4'. 14.00 x 24.96 = 349.44 mm2, consistent (arithmetic check only). Appendix A wording: PTC 14.00 × 24.96 mm"
+
+[[fact]]
+id = "ptc.ptc_die_length_mm"
+quantity = "PTC die length"
+value = 24.96
+bound = "exact"
+unit = "mm"
+quote = "PTC 14.00 × 24.96 mm"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = false
+note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. The peer-reviewed area is available: Fig. 1b caption 'four 349-mm2 photonic chiplets' and SI Table S3 '349 mm²×4'. 14.00 x 24.96 = 349.44 mm2, consistent (arithmetic check only). Appendix A wording: PTC 14.00 × 24.96 mm Number split from ptc.ptc_die_dims."
+
+[[fact]]
+id = "ptc.ptc_die_width_mm"
+quantity = "PTC die width"
+value = 14.0
+bound = "exact"
+unit = "mm"
+quote = "PTC 14.00 × 24.96 mm"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = false
+note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. The peer-reviewed area is available: Fig. 1b caption 'four 349-mm2 photonic chiplets' and SI Table S3 '349 mm²×4'. 14.00 x 24.96 = 349.44 mm2, consistent (arithmetic check only). Appendix A wording: PTC 14.00 × 24.96 mm Number split from ptc.ptc_die_dims."
+
+[[fact]]
+id = "ptc.dci_die_dims"
+quantity = "control die dimensions (Appendix: 31.4 x 25.0 mm)"
+bound = "exact"
+unit = "text"
+quote = "control die 31.4 × 25.0 mm"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = false
+note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. The peer-reviewed area is available: Fig. 1b caption 'two 12-nm control chiplets measuring approximately 780 mm2'. 31.4 x 25.0 = 785 mm2, consistent with 'approximately 780 mm2' (arithmetic check only). Appendix A wording: control die 31.4 × 25.0 mm"
+
+[[fact]]
+id = "ptc.dci_die_length_mm"
+quantity = "control die length"
+value = 31.4
+bound = "exact"
+unit = "mm"
+quote = "control die 31.4 × 25.0 mm"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = false
+note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. The peer-reviewed area is available: Fig. 1b caption 'two 12-nm control chiplets measuring approximately 780 mm2'. 31.4 x 25.0 = 785 mm2, consistent with 'approximately 780 mm2' (arithmetic check only). Appendix A wording: control die 31.4 × 25.0 mm Number split from ptc.dci_die_dims."
+
+[[fact]]
+id = "ptc.dci_die_width_mm"
+quantity = "control die width"
+value = 25.0
+bound = "exact"
+unit = "mm"
+quote = "control die 31.4 × 25.0 mm"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = false
+note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. The peer-reviewed area is available: Fig. 1b caption 'two 12-nm control chiplets measuring approximately 780 mm2'. 31.4 x 25.0 = 785 mm2, consistent with 'approximately 780 mm2' (arithmetic check only). Appendix A wording: control die 31.4 × 25.0 mm Number split from ptc.dci_die_dims."
+
+[[fact]]
+id = "ptc.throughput_sustained"
+quantity = "throughput at the 500 MHz sustained clock, ABFP16 operations per second"
+value = 65.5
+bound = "exact"
+unit = "TOPS"
+quote = "4×128×128 (65,536) 65.5 TOPS"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = true
+location = "Supplementary Information; SI Table S3, row 'This work (2024)', p.10"
+note = "Evidence: text. The Appendix quotes a main-text sentence that could not be checked (main text paywalled). The values are in SI Table S3, and the Lightmatter blog (lm_blog_newcomputer) words it as 'the processor performs 65.5 trillion Adaptive Block Floating-Point 16-bit (ABFP) operations per second, consuming only 78 watts of electrical power and 1.6 watts of optical power'. Arithmetic check (inference): 65,536 MACs/cycle x 2 ops x 500 MHz = 65.5 TOPS."
+
+[[fact]]
+id = "ptc.power_electrical"
+quantity = "electrical power of the processor while running"
+value = 78.0
+bound = "exact"
+unit = "W"
+quote = "78W electrical, 1.6W optical, 250mW / PTC"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = true
+location = "Supplementary Information; SI Table S3, row 'This work (2024)', p.10"
+note = "Evidence: text. The Appendix quotes a main-text sentence that could not be checked (main text paywalled). The values are in SI Table S3, and the Lightmatter blog (lm_blog_newcomputer) words it as 'the processor performs 65.5 trillion Adaptive Block Floating-Point 16-bit (ABFP) operations per second, consuming only 78 watts of electrical power and 1.6 watts of optical power'. SI Table S4 lists TDP '78 avg, 150 peak'."
+
+[[fact]]
+id = "ptc.power_optical"
+quantity = "optical (laser) power delivered to the processor"
+value = 1.6
+bound = "exact"
+unit = "W"
+quote = "78W electrical, 1.6W optical, 250mW / PTC"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = true
+location = "Supplementary Information; SI Table S3, row 'This work (2024)', p.10"
+note = "Evidence: text. The Appendix quotes a main-text sentence that could not be checked (main text paywalled). The values are in SI Table S3, and the Lightmatter blog (lm_blog_newcomputer) words it as 'the processor performs 65.5 trillion Adaptive Block Floating-Point 16-bit (ABFP) operations per second, consuming only 78 watts of electrical power and 1.6 watts of optical power'."
+
+[[fact]]
+id = "ptc.clock_sustained"
+quantity = "PTC clock frequency, sustained"
+value = 500.0
+bound = "exact"
+unit = "MHz"
+quote = "our clock tree design limited our chip to running at 500 MHz sustained clock"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = true
+location = "Supplementary Information; SI section VI, p.11 (also p.4: 'The digital clock tree performance limits a maximum photonic tensor core clock frequency of 500 MHz.')"
+note = "Evidence: text."
+
+[[fact]]
+id = "ptc.clock_peak"
+quantity = "PTC clock frequency, peak"
+value = 2.0
+bound = "exact"
+unit = "GHz"
+quote = "the peak clock frequency of 2 GHz results in 262 TOPS of ABFP16 throughput"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = true
+location = "Supplementary Information; SI section VI, p.11; Table S3 '500 MHz avg, 2 GHz peak'"
+note = "Evidence: text. 'with intermittent errors' was not found in accessible material (main text paywalled). The SI only calls 2 GHz the 'peak clock frequency' and, on p.4, says the clock tree 'limits a maximum photonic tensor core clock frequency of 500 MHz'; it does not describe 2 GHz operation or its error behaviour."
+
+[[fact]]
+id = "ptc.throughput_peak"
+quantity = "throughput at the 2 GHz peak clock, ABFP16 operations per second"
+value = 262.0
+bound = "exact"
+unit = "TOPS"
+quote = "the peak clock frequency of 2 GHz results in 262 TOPS of ABFP16 throughput"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = true
+location = "Supplementary Information; SI section VI, p.11; Table S4 'This Work 65 avg, 262 peak'"
+note = "Evidence: text. Arithmetic check (inference): 65.5 TOPS x (2 GHz / 500 MHz) = 262 TOPS."
+
+[[fact]]
+id = "ptc.ptc_power_each"
+quantity = "power per photonic tensor core (Appendix: 3.2 W each)"
+value = 3.2
+bound = "exact"
+unit = "W"
+quote = "PTC 3.2 W each"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = false
+note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. The SI gives a different, narrower figure: Table S3 '250mW / PTC', and p.11 'isolating just the energy cost of encoding vectors and weights during the operation of the PTC, resulting in a power consumption of 0.25 W' (vector and weight encoding only, incl. weight DAC). 4 x 3.2 W + 65 W = 77.8 W, close to the 78 W total, so the Appendix split is arithmetically plausible (inference only). Appendix A wording: PTC 3.2 W each"
+
+[[fact]]
+id = "ptc.dci_power"
+quantity = "power of the two control dies (Appendix: 65 W)"
+value = 65.0
+bound = "exact"
+unit = "W"
+quote = "control dies 65 W"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = false
+note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. SI Table S4 gives only whole-processor TDP '78 avg, 150 peak'. Appendix A wording: control dies 65 W"
+
+[[fact]]
+id = "ptc.abfp_block_len"
+quantity = "ABFP block: one bfloat16 scale per vector; vector length N = 128 (PTC width)"
+value = 128.0
+bound = "exact"
+unit = "count"
+quote = "every bfloat16 vector with a scale (the scale is in bfloat16) and then quantize the resulting"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = true
+location = "Supplementary Information; SI section I, p.2"
+note = "Evidence: text. The SI defines one bfloat16 scale per vector of an N x N tile without writing '128'; N = 128 comes from SI p.4 'dual 128x128 photonic tensor cores' and the Fig. 2 caption 'accumulation of 128 elements per vector element'. basumallik2022_abfp states it generally: 'we choose a vector of length n to share a single BFLOAT 16 scale'."
+
+[[fact]]
+id = "ptc.weight_bits"
+quantity = "weight precision (weight DAC)"
+value = 7.0
+bound = "exact"
+unit = "bits"
+quote = "from 7-bit weights, 10-bit activations and accumulation of 128 elements per vector element"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = true
+location = "Figure 2 page; Fig. 2d caption"
+note = "Evidence: text. Also SI p.2: 'then quantized to 7 bits by the DAC'; Fig. 1d image 'Weight unit cells (128 × 128 × 7 bits × 2)'."
+
+[[fact]]
+id = "ptc.activation_bits"
+quantity = "activation (input vector) precision"
+value = 10.0
+bound = "exact"
+unit = "bits"
+quote = "from 7-bit weights, 10-bit activations and accumulation of 128 elements per vector element"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = true
+location = "Figure 2 page; Fig. 2d caption"
+note = "Evidence: text. Note SI Table S3 lists bit precision as '7×11 (77)' (W x A), i.e. it counts the 11-bit ADC, not the 10-bit activation DAC."
+
+[[fact]]
+id = "ptc.adc_bits"
+quantity = "output ADC resolution"
+value = 11.0
+bound = "exact"
+unit = "bits"
+quote = "the output is quantized to 11 bits by the ADC"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = true
+location = "Supplementary Information; SI section I, p.2"
+note = "Evidence: text. Also SI p.10: 'The PTC presented here performs tensor operations with 11 bits of precision (set by the output ADC on the DCI)'."
+
+[[fact]]
+id = "ptc.adc_enob"
+quantity = "output ADC effective number of bits"
+value = 9.8
+bound = "exact"
+unit = "bits"
+quote = "ENOB 9.8"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = false
+note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. Appendix A wording: ADC 11 bits, ENOB 9.8, up to 2 GS/s, 66 mW"
+
+[[fact]]
+id = "ptc.adc_rate"
+quantity = "output ADC sample rate"
+value = 2.0
+bound = "max"
+unit = "GS/s"
+quote = "up to 2 GS/s"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = false
+note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. Appendix A wording: ADC 11 bits, ENOB 9.8, up to 2 GS/s, 66 mW"
+
+[[fact]]
+id = "ptc.adc_power"
+quantity = "output ADC power"
+value = 66.0
+bound = "exact"
+unit = "mW"
+quote = "66 mW"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = false
+note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. Appendix A wording: ADC 11 bits, ENOB 9.8, up to 2 GS/s, 66 mW"
+
+[[fact]]
+id = "ptc.vdac_bits"
+quantity = "vector (activation) DAC resolution"
+value = 10.0
+bound = "exact"
+unit = "bits"
+quote = "(which now has a value between -1 and 1 only) to 10 bits by the DAC"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = true
+location = "Supplementary Information; SI section I, p.2"
+note = "Evidence: text. Also Fig. 1d image 'Vector units (128 × 10 bits)'."
+
+[[fact]]
+id = "ptc.vdac_enob"
+quantity = "vector DAC effective number of bits"
+value = 8.3
+bound = "exact"
+unit = "bits"
+quote = "ENOB 8.3"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = false
+note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. Appendix A wording: vector DAC 10 bits, ENOB 8.3, 72 mW"
+
+[[fact]]
+id = "ptc.vdac_power"
+quantity = "vector DAC power"
+value = 72.0
+bound = "exact"
+unit = "mW"
+quote = "72 mW"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = false
+note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. Appendix A wording: vector DAC 10 bits, ENOB 8.3, 72 mW"
+
+[[fact]]
+id = "ptc.tia_gain"
+quantity = "TIA transimpedance gain"
+value = 2.8
+bound = "exact"
+unit = "kOhm"
+quote = "TIA 2.8 kΩ"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = false
+note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. The SI mentions TIAs only qualitatively (gain G is raised by 'increasing both the TIA gain and the laser power'; TIAs + VADCs calibrated with LUTs). Appendix A wording: TIA 2.8 kΩ, 0.8 GHz, 0.4 µA rms"
+
+[[fact]]
+id = "ptc.tia_bw"
+quantity = "TIA bandwidth"
+value = 0.8
+bound = "exact"
+unit = "GHz"
+quote = "0.8 GHz"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = false
+note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. Appendix A wording: TIA 2.8 kΩ, 0.8 GHz, 0.4 µA rms"
+
+[[fact]]
+id = "ptc.tia_noise"
+quantity = "TIA input-referred noise current"
+value = 0.4
+bound = "exact"
+unit = "uA rms"
+quote = "0.4 µA rms"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = false
+note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. Appendix A wording: TIA 2.8 kΩ, 0.8 GHz, 0.4 µA rms"
+
+[[fact]]
+id = "ptc.gain_measured"
+quantity = "achieved overamplification (gain) factor G"
+value = 1.86
+bound = "exact"
+unit = "1"
+quote = "We confirmed that the photonic processor achieved an overamplification factor of 1.86."
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = true
+location = "Supplementary Information; SI section I, p.4"
+note = "Evidence: text."
+
+[[fact]]
+id = "ptc.gain_design_target"
+quantity = "design target for the gain factor G"
+value = 4.0
+bound = "exact"
+unit = "1"
+quote = "a design target of 4"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = false
+note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. 'Design target' wording not found. The SI uses G = 4 only in its CPU/GPU emulation study (Table S1 columns 'ABFP with G=1', 'ABFP with G=4', 'After QAT with G=4'), and Fig. 2d illustrates Gain = 1, 2, 4; neither calls 4 a design target. Appendix A wording: gain 1.86 vs a design target of 4"
+
+[[fact]]
+id = "ptc.vmod_type"
+quantity = "vector modulator (vector encoder) type: MZI"
+bound = "exact"
+unit = "text"
+quote = "Vector encoder unit cell comprises a MZI and temperature stabilization feedback loop."
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = true
+location = "Figure 3 page; Fig. 3c caption"
+note = "Evidence: text. Only the MZI type is confirmed. Fig. 3c image shows the encoder as MZI stages with 'PN' elements driven by a vDAC ('Data'), 'R' elements driven by rDACs for the laser power regulator ('LPR') and the 'Stabilizer', and iADC monitors; the SI calls the modulator VMOD. Bandwidth, insertion loss and VpiL not found (main text paywalled)."
+
+[[fact]]
+id = "ptc.vmod_bw"
+quantity = "MZI vector modulator bandwidth"
+value = 3.8
+bound = "exact"
+unit = "GHz"
+quote = "3.8 GHz"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = false
+note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. Appendix A wording: MZI vector modulators 3.8 GHz, IL 1.1 dB, VπL 0.92 V·cm"
+
+[[fact]]
+id = "ptc.vmod_il"
+quantity = "MZI vector modulator insertion loss"
+value = 1.1
+bound = "exact"
+unit = "dB"
+quote = "IL 1.1 dB"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = false
+note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. Appendix A wording: MZI vector modulators 3.8 GHz, IL 1.1 dB, VπL 0.92 V·cm"
+
+[[fact]]
+id = "ptc.vmod_vpil"
+quantity = "MZI vector modulator VpiL"
+value = 0.92
+bound = "exact"
+unit = "V cm"
+quote = "VπL 0.92 V·cm"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = false
+note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. Appendix A wording: MZI vector modulators 3.8 GHz, IL 1.1 dB, VπL 0.92 V·cm"
+
+[[fact]]
+id = "ptc.pd_bw"
+quantity = "weight-cell photodetector bandwidth"
+value = 10.6
+bound = "exact"
+unit = "GHz"
+quote = "PD 10.6 GHz"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = false
+note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. Fig. 3b shows two photodiodes (differential photodetection) per weight unit cell, no bandwidth. Appendix A wording: PD 10.6 GHz"
+
+[[fact]]
+id = "ptc.loss_si_ridge"
+quantity = "silicon ridge waveguide propagation loss"
+value = 1.35
+bound = "exact"
+unit = "dB/cm"
+quote = "Si ridge 1.35 dB/cm"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = false
+note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. Appendix A wording: Si ridge 1.35 dB/cm, SiN 0.68 dB/cm"
+
+[[fact]]
+id = "ptc.loss_sin"
+quantity = "silicon nitride waveguide propagation loss"
+value = 0.68
+bound = "exact"
+unit = "dB/cm"
+quote = "SiN 0.68 dB/cm"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = false
+note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. No SiN layer is mentioned anywhere in the accessible material. Appendix A wording: Si ridge 1.35 dB/cm, SiN 0.68 dB/cm"
+
+[[fact]]
+id = "ptc.vgroove_loss"
+quantity = "V-groove fibre-to-chip coupling loss"
+value = 1.56
+bound = "exact"
+unit = "dB"
+quote = "V-groove 1.56 dB"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = false
+note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. V-grooves are confirmed without a loss figure: SI p.5 'There are 12 v-grooves per PTC with a pitch of 250µm.' Appendix A wording: V-groove 1.56 dB"
+
+[[fact]]
+id = "ptc.laser_count"
+quantity = "number of DFB lasers"
+value = 8.0
+bound = "exact"
+unit = "count"
+quote = "eight DFB lasers"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = false
+note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. No laser count, type, grid or wall-plug power appears in the accessible material. The SI mentions per-channel Laser Power Regulators (LPR) set to 'approximately 92% of its maximum power' during calibration; total optical power is 1.6 W (SI Table S3), which equals 8 x 200 mW (arithmetic only). Appendix A wording: eight DFB lasers, 200 mW in fibre each, CWDM4 grid in the 1310 nm band, 1.25 W each incl. TEC"
+
+[[fact]]
+id = "ptc.laser_power_fibre"
+quantity = "optical power in fibre per laser"
+value = 200.0
+bound = "exact"
+unit = "mW"
+quote = "200 mW in fibre each"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = false
+note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. No laser count, type, grid or wall-plug power appears in the accessible material. The SI mentions per-channel Laser Power Regulators (LPR) set to 'approximately 92% of its maximum power' during calibration; total optical power is 1.6 W (SI Table S3), which equals 8 x 200 mW (arithmetic only). Appendix A wording: eight DFB lasers, 200 mW in fibre each, CWDM4 grid in the 1310 nm band, 1.25 W each incl. TEC"
+
+[[fact]]
+id = "ptc.laser_grid"
+quantity = "laser wavelength grid: CWDM4 in the 1310 nm band"
+bound = "exact"
+unit = "text"
+quote = "CWDM4 grid in the 1310 nm band"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = false
+note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. No laser count, type, grid or wall-plug power appears in the accessible material. The SI mentions per-channel Laser Power Regulators (LPR) set to 'approximately 92% of its maximum power' during calibration; total optical power is 1.6 W (SI Table S3), which equals 8 x 200 mW (arithmetic only). Appendix A wording: eight DFB lasers, 200 mW in fibre each, CWDM4 grid in the 1310 nm band, 1.25 W each incl. TEC"
+
+[[fact]]
+id = "ptc.laser_wallplug"
+quantity = "electrical power per laser including TEC"
+value = 1.25
+bound = "exact"
+unit = "W"
+quote = "1.25 W each incl. TEC"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = false
+note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. No laser count, type, grid or wall-plug power appears in the accessible material. The SI mentions per-channel Laser Power Regulators (LPR) set to 'approximately 92% of its maximum power' during calibration; total optical power is 1.6 W (SI Table S3), which equals 8 x 200 mW (arithmetic only). Appendix A wording: eight DFB lasers, 200 mW in fibre each, CWDM4 grid in the 1310 nm band, 1.25 W each incl. TEC"
+
+[[fact]]
+id = "ptc.fanout_tree"
+quantity = "optical fan-out tree from each input fibre"
+value = 16.0
+bound = "exact"
+unit = "count"
+quote = "16-way tree"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = true
+location = "Figure 3 page; Fig. 3c image, top: 'Fibre' -> '16-way tree' -> stack of '×16' vector channels; SRC/ahmed2025_nature_fig3/fig.png (41586_2025_8854_Fig3_HTML.png)"
+note = "Evidence: image. 'Binary' is not stated; the figure shows a '16-way tree' after the fibre feeding 16 vector channels, each of which then feeds a 'Weight tree' to '×128' weight cells 'Wij'."
+
+[[fact]]
+id = "ptc.weight_cell_photocurrent"
+quantity = "weight applied on photocurrent inside each weight unit cell"
+bound = "exact"
+unit = "text"
+quote = "Weight unit cell consists of a differential photodetection unit coupled to a resistive, differential DAC."
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = true
+location = "Figure 3 page; Fig. 3b caption"
+note = "Evidence: text. Supports multiplication on photocurrent: each weight cell detects light differentially and a resistive (R-2R ladder in the Fig. 3b image) DAC sets the weight on the current; the MZI appears only in the vector encoder (Fig. 3c caption), so this is not an MZI mesh. Contrast: the Lightmatter Vision page (lm_web_ptc) describes Envise as 'when light passes through an optical system, interference naturally computes linear transformations', which does not match this architecture."
+
+[[fact]]
+id = "ptc.rowline_current_sum"
+quantity = "weighted products summed as current on row lines"
+bound = "exact"
+unit = "text"
+quote = "This ensures accurate encoding of weight values by the ratio of currents drawn from row lines."
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = true
+location = "Supplementary Information; SI section V, step 8 (Calibrating WMODs), p.9"
+note = "Evidence: text. SI p.2 also: each vector element 'is split into row-lines and is then modulated by the weight value before' ... 'addition is performed at each row-line to produce the result'. Fig. 3a image shows each row's differential (+/-) line going to a TIA and then an ADC."
+
+[[fact]]
+id = "ptc.t1_resnet18_cifar10_fp32"
+quantity = "Table 1 ResNet18 CIFAR-10, FP32 reference"
+value = 88.3
+bound = "exact"
+unit = "%"
+quote = "ResNet18 CIFAR-10 88.3 86.4 97.8"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = true
+location = "Table 1 page; Table 1, row 1 (column 'FP32 (%)')"
+note = "Evidence: text."
+
+[[fact]]
+id = "ptc.t1_resnet18_cifar10_photonic"
+quantity = "Table 1 ResNet18 CIFAR-10, on the photonic processor"
+value = 86.4
+bound = "exact"
+unit = "%"
+quote = "ResNet18 CIFAR-10 88.3 86.4 97.8"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = true
+location = "Table 1 page; Table 1, row 1 (column 'Here (%)')"
+note = "Evidence: text."
+
+[[fact]]
+id = "ptc.t1_resnet18_mnist_fp32"
+quantity = "Table 1 ResNet18 MNIST, FP32 reference"
+value = 99.4
+bound = "exact"
+unit = "%"
+quote = "ResNet18 MNIST 99.4 99.3 99.8"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = true
+location = "Table 1 page; Table 1, row 4 (column 'FP32 (%)')"
+note = "Evidence: text."
+
+[[fact]]
+id = "ptc.t1_resnet18_mnist_photonic"
+quantity = "Table 1 ResNet18 MNIST, on the photonic processor"
+value = 99.3
+bound = "exact"
+unit = "%"
+quote = "ResNet18 MNIST 99.4 99.3 99.8"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = true
+location = "Table 1 page; Table 1, row 4 (column 'Here (%)')"
+note = "Evidence: text."
+
+[[fact]]
+id = "ptc.t1_berttiny_imdb_fp32"
+quantity = "Table 1 BERT-Tiny IMDb, FP32 reference"
+value = 86.2
+bound = "exact"
+unit = "%"
+quote = "BERT-Tiny IMDb 86.2 83.2 96.5"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = true
+location = "Table 1 page; Table 1, row 6 (column 'FP32 (%)')"
+note = "Evidence: text."
+
+[[fact]]
+id = "ptc.t1_berttiny_imdb_photonic"
+quantity = "Table 1 BERT-Tiny IMDb, on the photonic processor"
+value = 83.2
+bound = "exact"
+unit = "%"
+quote = "BERT-Tiny IMDb 86.2 83.2 96.5"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = true
+location = "Table 1 page; Table 1, row 6 (column 'Here (%)')"
+note = "Evidence: text."
+
+[[fact]]
+id = "ptc.t1_berttiny_squad_f1_fp32"
+quantity = "Table 1 BERT-Tiny SQuAD (F1 score), FP32 reference"
+value = 43.5
+bound = "exact"
+unit = "%"
+quote = "BERT-Tiny SQuAD (F1) 43.5 12.0 27.5"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = true
+location = "Table 1 page; Table 1, row 7 (column 'FP32 (%)')"
+note = "Evidence: text."
+
+[[fact]]
+id = "ptc.t1_berttiny_squad_f1_photonic"
+quantity = "Table 1 BERT-Tiny SQuAD (F1 score), on the photonic processor"
+value = 12.0
+bound = "exact"
+unit = "%"
+quote = "BERT-Tiny SQuAD (F1) 43.5 12.0 27.5"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = true
+location = "Table 1 page; Table 1, row 7 (column 'Here (%)')"
+note = "Evidence: text."
+
+[[fact]]
+id = "ptc.t1_segnet_pet_fp32"
+quantity = "Table 1 SegNet Oxford-IIIT Pet, FP32 reference"
+value = 82.3
+bound = "exact"
+unit = "%"
+quote = "SegNet Oxford-IIIT Pet 82.3 63.7 77.4"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = true
+location = "Table 1 page; Table 1, row 8 (column 'FP32 (%)')"
+note = "Evidence: text."
+
+[[fact]]
+id = "ptc.t1_segnet_pet_photonic"
+quantity = "Table 1 SegNet Oxford-IIIT Pet, on the photonic processor"
+value = 63.7
+bound = "exact"
+unit = "%"
+quote = "SegNet Oxford-IIIT Pet 82.3 63.7 77.4"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = true
+location = "Table 1 page; Table 1, row 8 (column 'Here (%)')"
+note = "Evidence: text."
+
+[[fact]]
+id = "ptc.c262_web"
+quantity = "vendor web: Envise efficiency, operations per watt"
+value = 262.0
+bound = "exact"
+unit = "TOPS/W"
+quote = "262T Ops/Watt"
+cite = "lm_web_ptc"
+source_class = "vendor_claim"
+verified = true
+conflicts_with = ["ptc.c262_paper"]
+location = "Vision page, Envise block 'A new kind of computer', stat 'Efficiency'"
+note = "Evidence: text. The exact phrase '262 trillion operations per watt' is in Lightmatter's llms.txt (see ptc.c262_llms); the Vision page shows '262T Ops/Watt'. The SI of the paper contains BOTH 262 figures: '262 TOPS of ABFP16 throughput' at the 2 GHz peak clock, and '262 TOPS/Watt' for the PTC vector/weight encoding energy only (0.25 W; see ptc.ptc_only_tops_per_w). The web figure has the same value as that PTC-only encoding efficiency (inference that it is the same metric) and is far from whole-processor efficiency, which SI Table S4 gives as '0.81 avg, 1.75 peak' TOPS/W. The web page does not state any scope."
+
+[[fact]]
+id = "ptc.c262_paper"
+quantity = "paper: throughput at the 2 GHz peak clock (operations per second)"
+value = 262.0
+bound = "exact"
+unit = "TOPS"
+quote = "the peak clock frequency of 2 GHz results in 262 TOPS of ABFP16 throughput"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = true
+location = "Supplementary Information; SI section VI, p.11"
+note = "Evidence: text. Found in the SI; whether the main text also says '262 trillion' per second could not be checked (paywalled). The same SI page also states '262 TOPS/Watt' (PTC encoding only), so the paper itself uses 262 both per second and per watt."
+
+[[fact]]
+id = "ptc.components_1m"
+quantity = "photonic components in the processor (vendor blog)"
+value = 1000000.0
+bound = "approx"
+unit = "count"
+quote = "50 billion transistors spanning 6 chips with 1 million photonic components"
+cite = "lm_blog_newcomputer"
+source_class = "vendor_claim"
+verified = true
+conflicts_with = ["ptc.components_200k"]
+location = "blog section 'A Fundamental Departure', paragraph 4"
+note = "Evidence: text. Same blog, section 'Behind the Scenes': 'roughly one million photonic elements in our processor'. Whether the Nature main text gives a count could not be checked (paywalled); the SI gives none."
+
+[[fact]]
+id = "ptc.components_200k"
+quantity = "optical components in the processor (vendor web)"
+value = 200000.0
+bound = "min"
+unit = "count"
+quote = "four photonic chips manipulate 512 light beams through over 200,000 optical components"
+cite = "lm_web_ptc"
+source_class = "vendor_claim"
+verified = true
+location = "Vision page, Envise block 'A new kind of computer', paragraph 1"
+note = "Evidence: text. Same page's stat block: 'Photonics 200K+ Components'; llms.txt: 'more than 200,000 photonic components'. Both counts are Lightmatter's own and differ by about 5x; neither appears in the accessible peer-reviewed material, and neither page defines what is counted."
+
+[[fact]]
+id = "ptc.abfp_ref_title_authors"
+quantity = "basumallik2022_abfp title and authors"
+bound = "exact"
+unit = "text"
+quote = "Adaptive Block Floating-Point for Analog Deep Learning Hardware Ayon Basumallik, Darius Bunandar, Nicholas Dronen, Nicholas C. Harris, Ludmila Levkova, Calvin McCarter, Lakshmi Nair, David Walter, David Widemann"
+cite = "basumallik2022_abfp"
+source_class = "vendor_claim"
+verified = true
+location = "p.1, title and author line (arXiv:2205.06287v1, 12 May 2022)"
+note = "Evidence: text. Classed vendor_claim: arXiv preprint (v1) by Lightmatter authors; peer-review status not established in this run. ahmed2025_nature cites it as a preprint."
+
+[[fact]]
+id = "ptc.abfp_ref_affiliation"
+quantity = "basumallik2022_abfp authors' affiliation"
+bound = "exact"
+unit = "text"
+quote = "All the authors are afﬁliated with Lightmatter, Inc., Boston, Massachusetts, USA"
+cite = "basumallik2022_abfp"
+source_class = "vendor_claim"
+verified = true
+location = "p.1, footnote"
+note = "Evidence: text."
+
+[[fact]]
+id = "ptc.abfp_ref_meaning"
+quantity = "what ABFP means in basumallik2022_abfp: a length-n vector (tile width) shares one BFLOAT16 scale"
+bound = "exact"
+unit = "text"
+quote = "In our scheme, we choose a vector of length n to share a single BFLOAT 16 scale."
+cite = "basumallik2022_abfp"
+source_class = "vendor_claim"
+verified = true
+location = "Section III.A, p.3"
+note = "Evidence: text. Rest of the definition (p.3): each weight row vector and each input column vector of length n gets scale = max |element|; normalized vectors are quantized symmetrically to fixed point; the analog dot-product output is rescaled by s_w*s_x to BFLOAT16; gain G is added in Section III.B. See the ptc.abfp_* extras."
+
+[[fact]]
+id = "ptc.shen2017_harris_coauthor"
+quantity = "shen2017 authors (Harris is a co-author)"
+bound = "exact"
+unit = "text"
+quote = "Deep Learning with Coherent Nanophotonic Circuits Yichen Shen1∗, Nicholas C. Harris1∗,"
+cite = "shen2017"
+source_class = "peer_reviewed"
+verified = true
+location = "p.1, title and author line (arXiv:1610.02365v1)"
+note = "Evidence: text. Harris is joint first author, not just a co-author: '⋆These authors contributed equally to this work.' (marks Shen and Harris); author contributions: 'N.H., M.P., and Y.S. performed the experiment.'"
+
+[[fact]]
+id = "ptc.shen2017_not_lightmatter"
+quantity = "shen2017 affiliations (no Lightmatter)"
+bound = "exact"
+unit = "text"
+quote = "1Research Laboratory of Electronics, Massachusetts Institute of Technology, Cambridge, MA 02139, USA"
+cite = "shen2017"
+source_class = "peer_reviewed"
+verified = true
+location = "p.1, affiliation list"
+note = "Evidence: text. Affiliations are MIT (Research Laboratory of Electronics, Mathematics, Biology), Coriant Advanced Technology and Twitter Inc.; Lightmatter does not appear. 'Not Lightmatter work' is supported by the affiliations, not by an explicit statement."
+
+[[fact]]
+id = "ptc.c262_llms"
+quantity = "vendor llms.txt: Envise operations per watt (exact Appendix phrase)"
+value = 262.0
+bound = "exact"
+unit = "TOPS/W"
+quote = "Envise demonstrates 262 trillion operations per watt, 200 picoseconds of latency per matrix-vector product, more than 200,000 photonic components, and 50 billion electronic transistors."
+cite = "lm_llms_txt"
+source_class = "vendor_claim"
+verified = true
+conflicts_with = ["ptc.c262_paper"]
+location = "llms.txt, section 'Industry Leadership', entry 'Photonic AI Acceleration Performance'"
+note = "Evidence: text. Source of the exact Appendix wording. llms.txt links this entry to https://lightmatter.co/, but the current home page no longer carries it (saved as SRC/lm_web_home); the claims are on /vision/ (lm_web_ptc)."
+
+[[fact]]
+id = "ptc.ptc_only_tops_per_w"
+quantity = "PTC-only computational efficiency (vector and weight encoding energy only)"
+value = 262.0
+bound = "exact"
+unit = "TOPS/W"
+quote = "resulting in a power consumption of 0.25 W and a computational efficiency of 262 TOPS/Watt (including the weight digital-to-analog converter power cost)"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = true
+location = "Supplementary Information; SI section VI, p.11"
+note = "Evidence: text. Scope: 'isolating just the energy cost of encoding vectors and weights during the operation of the PTC'. Ambiguity (inference): Table S3 says '250mW / PTC'; 65.5 TOPS / 0.25 W = 262 and 262 TOPS / (4 x 0.25 W) = 262 both reproduce the number, and the SI does not say which was meant."
+
+[[fact]]
+id = "ptc.ptc_encoding_power"
+quantity = "PTC power for vector and weight encoding only (per PTC per Table S3)"
+value = 250.0
+bound = "exact"
+unit = "mW"
+quote = "250mW / PTC"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = true
+location = "Supplementary Information; SI Table S3, row 'This work (2024)', p.10; p.11 gives 0.25 W"
+note = "Evidence: text. Not the full PTC power: see ptc.ptc_power_each (Appendix 3.2 W, unverified)."
+
+[[fact]]
+id = "ptc.tops_per_w_system_avg"
+quantity = "whole-processor efficiency, average (SI Table S4; peak 1.75)"
+value = 0.81
+bound = "exact"
+unit = "TOPS/W"
+quote = "2024 This Work 65 avg, 262 peak 78 avg, 150 peak 0.81 avg, 1.75 peak"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = true
+location = "Supplementary Information; SI Table S4, row '2024 This Work', p.11"
+note = "Evidence: text. Columns: peak FP16/ABFP16 throughput (TFLOPS), TDP (W), peak TOPS/Watt. This, not 262, is the system-level ops-per-watt figure."
+
+[[fact]]
+id = "ptc.tdp_peak"
+quantity = "processor TDP at the 2 GHz peak (average 78 W)"
+value = 150.0
+bound = "exact"
+unit = "W"
+quote = "2024 This Work 65 avg, 262 peak 78 avg, 150 peak 0.81 avg, 1.75 peak"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = true
+location = "Supplementary Information; SI Table S4, row '2024 This Work', p.11"
+note = "Evidence: text."
+
+[[fact]]
+id = "ptc.latency_tof"
+quantity = "time-of-flight latency through the PTC (vector modulator to weights to TIA)"
+value = 200.0
+bound = "approx"
+unit = "ps"
+quote = "is approximately 200 picoseconds and is set by the propagation time of the optical signal from the vector modulator to the weights and from the weights to the transimpedance amplifier"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = true
+location = "Supplementary Information; SI section VI, p.11"
+note = "Evidence: text. The Vision page (lm_web_ptc) shows this as 'Latency 200ps Per matrix-vector product', but the SI says computational latency 'is currently dominated by the communication latency of the PCIe 4.0 IP (milliseconds) and digital pipeline'."
+
+[[fact]]
+id = "ptc.ptc_area"
+quantity = "photonic chiplet (PTC) area"
+value = 349.0
+bound = "exact"
+unit = "mm2"
+quote = "four 349-mm2 photonic chiplets on the back side"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = true
+location = "Figure 1 page; Fig. 1b caption"
+note = "Evidence: text. SI Table S3 also '349 mm²×4'."
+
+[[fact]]
+id = "ptc.dci_area"
+quantity = "control chiplet (DCI) area"
+value = 780.0
+bound = "approx"
+unit = "mm2"
+quote = "two 12-nm control chiplets measuring approximately 780 mm2"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = true
+location = "Figure 1 page; Fig. 1b caption"
+note = "Evidence: text."
+
+[[fact]]
+id = "ptc.package_dims"
+quantity = "processor package dimensions (80 x 65 mm)"
+bound = "exact"
+unit = "text"
+quote = "The package dimension is 80 mm by 65 mm"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = true
+location = "Supplementary Information; SI section III (Packaging), p.5"
+note = "Evidence: text."
+
+[[fact]]
+id = "ptc.package_length_mm"
+quantity = "package length (SI)"
+value = 80.0
+bound = "exact"
+unit = "mm"
+quote = "The package dimension is 80 mm by 65 mm"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = true
+location = "Supplementary Information; SI section III (Packaging), p.5"
+note = "Evidence: text. Number split from ptc.package_dims."
+
+[[fact]]
+id = "ptc.package_width_mm"
+quantity = "package width (SI)"
+value = 65.0
+bound = "exact"
+unit = "mm"
+quote = "The package dimension is 80 mm by 65 mm"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = true
+location = "Supplementary Information; SI section III (Packaging), p.5"
+note = "Evidence: text. Number split from ptc.package_dims."
+
+[[fact]]
+id = "ptc.bumps_dci"
+quantity = "bumps per control die (top side of the interposer)"
+value = 25000.0
+bound = "exact"
+unit = "count"
+quote = "There are two DCIs each with 25,000 bumps on the top side of the interposer"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = true
+location = "Supplementary Information; SI section III (Packaging), p.5"
+note = "Evidence: text."
+
+[[fact]]
+id = "ptc.bumps_ptc"
+quantity = "bumps per PTC (bottom side of the interposer)"
+value = 6000.0
+bound = "exact"
+unit = "count"
+quote = "four PTCs each with 6,000 bumps on the bottom of the interposer"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = true
+location = "Supplementary Information; SI section III (Packaging), p.5"
+note = "Evidence: text."
+
+[[fact]]
+id = "ptc.vgroove_count"
+quantity = "fibre V-grooves per PTC"
+value = 12.0
+bound = "exact"
+unit = "count"
+quote = "There are 12 v-grooves per PTC with a pitch of 250µm."
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = true
+location = "Supplementary Information; SI section III (Packaging), p.5"
+note = "Evidence: text. Fig. 1a caption: 'four PTCs, each with a 12-fibre array attached'; Fig. 1b image shows MT connectors."
+
+[[fact]]
+id = "ptc.vgroove_pitch"
+quantity = "fibre V-groove pitch"
+value = 250.0
+bound = "exact"
+unit = "um"
+quote = "There are 12 v-grooves per PTC with a pitch of 250µm."
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = true
+location = "Supplementary Information; SI section III (Packaging), p.5"
+note = "Evidence: text."
+
+[[fact]]
+id = "ptc.abfp_act_scale"
+quantity = "ABFP activation scale: one bfloat16 scale per input vector"
+bound = "exact"
+unit = "text"
+quote = "every bfloat16 vector with a scale (the scale is in bfloat16) and then quantize the resulting"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = true
+location = "Supplementary Information; SI section I, p.2"
+note = "Evidence: text. The formula s_x = max(|x|) is inline math that pypdf displaces; read from the rendered page in ptc.abfp_scale_formulas."
+
+[[fact]]
+id = "ptc.abfp_weight_scale"
+quantity = "ABFP weight scale: one bfloat16 scale per weight-matrix row"
+bound = "exact"
+unit = "text"
+quote = "Similarly, we normalize every row vector of the bfloat16 weight with a scale"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = true
+location = "Supplementary Information; SI section I, p.2"
+note = "Evidence: text. Formula s_w;i = max(|w_i|): see ptc.abfp_scale_formulas."
+
+[[fact]]
+id = "ptc.abfp_scale_formulas"
+quantity = "ABFP scale choice (max-abs) and normalization to [-1, 1]"
+bound = "exact"
+unit = "text"
+quote = "we normalize every bfloat16 vector with a scale s_x = max(|x⃗|) (the scale is in bfloat16) and then quantize the resulting vector x̂ (which now has a value between -1 and 1 only) to 10 bits by the DAC, which we denote with the function Q_10. Similarly, we normalize every row vector of the bfloat16 weight with a scale s_w;i = max(|w⃗_i|), where w⃗_i denotes row i of the weight matrix w. The resulting vector ŵ_i (which has a value between -1 and 1) is then quantized to 7 bits by the DAC, denoted with Q_7."
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = true
+location = "Supplementary Information; SI PDF page 2, rendered to PNG with pypdfium2 (linear transcription of typeset math)"
+note = "Evidence: image."
+
+[[fact]]
+id = "ptc.abfp_qn_formula"
+quantity = "symmetric DAC quantizer Q_n (n = 7 weights, 10 activations; Q_11 at the ADC)"
+bound = "exact"
+unit = "text"
+quote = "Q_n(α) = clamp_[−1,+1](round(α/δ_n) · δ_n), where clamp_[−1,+1](β) = max(min(β, 1), −1) and δ_n = 1/(2^(n−1) − 1)"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = true
+location = "Supplementary Information; SI PDF page 2, rendered to PNG with pypdfium2 (linear transcription of typeset math)"
+note = "Evidence: image. The pypdf text loses the fraction bar (it reads 'round(αδ𝑛)'); the rendered page shows α over δ_n. The SI does not give a tie rule for round(); basumallik2022_abfp says round-half-to-even (ptc.abfp_rounding). The SI applies Q_11 with its [−1,+1] clamp directly to the N-term sum without stating the 1/N scaling that basumallik2022_abfp Eq. (3) makes explicit (ptc.abfp_output_norm)."
+
+[[fact]]
+id = "ptc.abfp_symmetric"
+quantity = "DAC quantization symmetric around zero, one level forgone"
+bound = "exact"
+unit = "text"
+quote = "one level but allows the numerical representation to be symmetric around zero."
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = true
+location = "Supplementary Information; SI section I, p.2"
+note = "Evidence: text. Full sentences on the rendered page: 'Quantization for the DACs are performed symmetrically around 0 (for signed integers) to eliminate any bias' and 'This quantization method forgoes one level but allows the numerical representation to be symmetric around zero.' (the text file separates them with displaced math)."
+
+[[fact]]
+id = "ptc.abfp_output_rescale"
+quantity = "ADC output rescaled by the bfloat16 scales (in the NCE)"
+bound = "exact"
+unit = "text"
+quote = "The resulting fixed point output is then multiplied with the scales to reconstruct the"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = true
+location = "Supplementary Information; SI section I, p.2"
+note = "Evidence: text. Equation: see ptc.abfp_output_formula."
+
+[[fact]]
+id = "ptc.abfp_output_formula"
+quantity = "ABFP output equation without gain"
+bound = "exact"
+unit = "text"
+quote = "y_i = s_w;i s_x × Q_11{Σ_{j=1}^{N} Q_7(ŵ_ij) Q_10(x̂_j)}. Therefore, the operation Q_11{Σ_{j=1}^{N} Q_7(ŵ_ij) Q_10(x̂_j)} is done in the PTC, and the multiplication with bfloat16 scales s_w;i s_x is performed in the NCE."
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = true
+location = "Supplementary Information; SI PDF page 2, rendered to PNG with pypdfium2 (linear transcription of typeset math)"
+note = "Evidence: image."
+
+[[fact]]
+id = "ptc.gain_mechanism"
+quantity = "how gain G > 1 is realized: TIA gain and laser power both raised"
+bound = "exact"
+unit = "text"
+quote = "by increasing both the TIA gain and 𝐺>1 the laser power, such that the photonic processor operates with:"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = true
+location = "Supplementary Information; SI section I, p.3"
+note = "Evidence: text. '𝐺>1' is the inline 'G > 1' displaced by text extraction; rendered page: 'we introduce an overamplification—or gain—factor G > 1 by increasing both the TIA gain and the laser power'. Both act before the ADC."
+
+[[fact]]
+id = "ptc.abfp_gain_formula"
+quantity = "ABFP output equation with gain G (gain inside Q_11, divided out in the NCE)"
+bound = "exact"
+unit = "text"
+quote = "y_i = (s_w;i s_x / G) Q_11{G · Σ_{j=1}^{N} Q_7(ŵ_ij) Q_10(x̂_j)}. This modified operation has Q_11{G · Σ_{j=1}^{N} Q_7(ŵ_ij) Q_10(x̂_j)} being performed in the PTC and the multiplication with the scale s_y_i = (s_w;i s_x/G) to be done by the NCE."
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = true
+location = "Supplementary Information; SI PDF page 3, rendered to PNG with pypdfium2 (linear transcription of typeset math)"
+note = "Evidence: image."
+
+[[fact]]
+id = "ptc.gain_before_adc"
+quantity = "position of gain G in the signal chain: after the PTC, before the ADC"
+bound = "exact"
+unit = "text"
+quote = "PTC → Gain → ADC → Scale to bfloat16 → (Partial) output"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = true
+location = "Figure 2 page; Fig. 2c image, signal-chain blocks left to right; SRC/ahmed2025_nature_fig2/fig.png (41586_2025_8854_Fig2_HTML.png)"
+note = "Evidence: image. The inputs are 'Normalize, quantize by s_w = max(|w|)' -> Weight DAC and 'Normalize, quantize by s_w = max(|x|)' -> Activation DAC; the activation label says s_w although the SI calls it s_x (figure label slip)."
+
+[[fact]]
+id = "ptc.gain_adc_bits"
+quantity = "effect of gain: ADC reads lower bits, upper bits may saturate"
+bound = "exact"
+unit = "text"
+quote = "Increasing gain allows lower bits to be read by the ADC, shown as highlighted, whereas upper bits may saturate."
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = true
+location = "Figure 2 page; Fig. 2d caption"
+note = "Evidence: text."
+
+[[fact]]
+id = "ptc.gain_adc_window"
+quantity = "ADC 11-bit window within the 24-bit output word versus gain"
+bound = "exact"
+unit = "text"
+quote = "Gain = 1: b1–b11 highlighted; Gain = 2: b2–b12 highlighted; Gain = 4: b3–b13 highlighted (b1 = Most significant bit (MSB), b24 = Least significant bit (LSB))"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = true
+location = "Figure 2 page; Fig. 2d image (highlighted cells read off the figure); SRC/ahmed2025_nature_fig2/fig.png (41586_2025_8854_Fig2_HTML.png)"
+note = "Evidence: image. Implies each doubling of G shifts the ADC window down one bit."
+
+[[fact]]
+id = "ptc.output_bits_total"
+quantity = "full-precision bits of one 128-term dot product (7-bit x 10-bit)"
+value = 24.0
+bound = "exact"
+unit = "bits"
+quote = "The example shows a total of 24 bits output (from 7-bit weights, 10-bit activations and accumulation of 128 elements per vector element)."
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = true
+location = "Figure 2 page; Fig. 2d caption"
+note = "Evidence: text. basumallik2022_abfp counts 'approximately bW +bX + log2n− 1' bits (23 for these widths); the 1-bit difference is sign-bit bookkeeping."
+
+[[fact]]
+id = "ptc.gain_before_adc_blog"
+quantity = "vendor wording: analog signal amplified by G before the ADC, G divided out digitally"
+bound = "exact"
+unit = "text"
+quote = "physically amplified by a gain factor, G, before it hits the ADC"
+cite = "lm_blog_newcomputer"
+source_class = "vendor_claim"
+verified = true
+location = "blog section 'Behind the Scenes', paragraph 2"
+note = "Evidence: text. Same paragraph: 'The gain is then divided out digitally'."
+
+[[fact]]
+id = "ptc.abfp_rounding"
+quantity = "rounding rule of the ABFP quantizer"
+bound = "exact"
+unit = "text"
+quote = "The rounding operation denoted by ⌊·⌉ uses round-half-to-even method."
+cite = "basumallik2022_abfp"
+source_class = "vendor_claim"
+verified = true
+location = "Section III.A, p.3"
+note = "Evidence: text. From the 2022 Lightmatter preprint; the Nature SI writes only 'round' with no tie rule, so this may or may not match the hardware or emulator used for the Nature paper."
+
+[[fact]]
+id = "ptc.abfp_output_norm"
+quantity = "output (ADC) quantizer for an n-term dot product: bin n*delta_Y, clamp +-n"
+bound = "exact"
+unit = "text"
+quote = "where the output is clamped with τY =n due to the summation within the dot product that results in an output between [−n,n ]."
+cite = "basumallik2022_abfp"
+source_class = "vendor_claim"
+verified = true
+location = "Section III.A, Eq. (3), p.3"
+note = "Evidence: text. Eq. (3) is yqij = Q(wqij·xqj; nδY, τY); next sentence (p.4): 'It also increases the discretization bin by a factor of n.' With gain, Eq. (5) is Q(G·wqij·xqj; nδY, τY) and Eq. (6) divides G out at accumulation. The Nature SI omits this n scaling."
+
+[[fact]]
+id = "ptc.abfp_tile_accum"
+quantity = "accumulation of partial outputs across tiles when the matrix is wider than n"
+bound = "exact"
+unit = "text"
+quote = "is accumulated in FLOAT32 and then converted to BFLOAT 16 precision as well."
+cite = "basumallik2022_abfp"
+source_class = "vendor_claim"
+verified = true
+location = "Section III, p.3"
+note = "Evidence: text. From the 2022 preprint; the Nature SI does not describe cross-tile accumulation precision."
+
+[[fact]]
+id = "ptc.abfp_qat_ste"
+quantity = "QAT: forward pass in ABFP, straight-through estimator for Q7, Q10, Q11"
+bound = "exact"
+unit = "text"
+quote = "the forward pass is executed using ABFP, with a straight-through estimator of the quantization functions in the backward pass:"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = true
+location = "Supplementary Information; SI section I, p.3"
+note = "Evidence: text. Rendered page: '∂Q(α)/∂α = I, for α within the accepted range of inputs (between [-1,+1] for DACs).'"
+
+[[fact]]
+id = "ptc.noise_model"
+quantity = "analog noise model used in QAT"
+bound = "exact"
+unit = "text"
+quote = "We represent this noise to be an additive Gaussian noise to the result of the analog matrix-vector multiplication."
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = true
+location = "Supplementary Information; SI section I, p.3"
+note = "Evidence: text. SI section IV notes the measured error distribution (Fig. 3f) is fitted better in the tails by a logistic than a Gaussian distribution."
+
+[[fact]]
+id = "ptc.gain_cal_method"
+quantity = "how G = 1.86 was measured"
+bound = "exact"
+unit = "text"
+quote = "Dividing (2) by (3) and averaging across all the lanes and vectors."
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = true
+location = "Supplementary Information; SI section I, p.4, calibration step 4"
+note = "Evidence: text. Steps 1-3: turn off the output vector lookup tables; send a tile of one weight code and vectors of one value through the PTC and read the output; compute the expected output code."
+
+[[fact]]
+id = "ptc.table_s1_resnet50"
+quantity = "SI Table S1 emulation, ResNet50 ImageNet accuracy (%): FP32, ABFP G=1, ABFP G=4, after QAT G=4"
+bound = "exact"
+unit = "text"
+quote = "ResNet50 ImageNet (acc.) 76.1 0.7 73.9 75.3"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = true
+location = "Supplementary Information; SI Table S1, row 1, p.3"
+note = "Evidence: text. CPU/GPU emulation of the hardware precision, not a hardware run."
+
+[[fact]]
+id = "ptc.table_s1_bertlarge"
+quantity = "SI Table S1 emulation, BERT-Large SQuADv1.1 F1 (%): FP32, ABFP G=1, ABFP G=4, after QAT G=4"
+bound = "exact"
+unit = "text"
+quote = "BERT-Large SQuADv1.1 (F1) 93.5 5.4 90.5 92.3"
+cite = "ahmed2025_nature"
+source_class = "peer_reviewed"
+verified = true
+location = "Supplementary Information; SI Table S1, row 4, p.3"
+note = "Evidence: text. CPU/GPU emulation of the hardware precision, not a hardware run."
+
+[[fact]]
+id = "ptc.shen2017_mzi_mesh"
+quantity = "shen2017 processor: MZI mesh size"
+value = 56.0
+bound = "exact"
+unit = "count"
+quote = "composed of an array of 56 Mach-Zehnder interferometers (MZIs) and 213 phase"
+cite = "shen2017"
+source_class = "peer_reviewed"
+verified = true
+location = "p.2, Experiment section"
+note = "Evidence: text. Confirms shen2017 is the MIT coherent MZI-mesh optical neural network (programmable nanophotonic processor, OPSIS foundry, vowel recognition)."
+
+[[fact]]
+id = "ptc.clements2016_title"
+quantity = "clements2016 title and authors"
+bound = "exact"
+unit = "text"
+quote = "An Optimal Design for Universal Multiport Interferometers William R. Clements,1,∗ Peter C. Humphreys,1 Benjamin J. Metcalf,1 W. Steven Kolthammer,1 and Ian A. Walmsley1"
+cite = "clements2016"
+source_class = "peer_reviewed"
+verified = true
+location = "p.1, title and author line (arXiv:1603.08788v2, Oxford)"
+note = "Evidence: text."
+
+[[fact]]
+id = "ptc.clements2016_claim"
+quantity = "clements2016 claim: half the footprint of the Reck design, more loss tolerant"
+bound = "exact"
+unit = "text"
+quote = "Our design occupies half the physical footprint of the Reck design and is signiﬁcantly more robust to optical losses."
+cite = "clements2016"
+source_class = "peer_reviewed"
+verified = true
+location = "abstract, p.1"
+note = "Evidence: text."
+
+[[fact]]
+id = "ptc.clements2016_depth"
+quantity = "clements2016: optical depth N vs 2N-3 (Reck), same N(N-1)/2 beam splitters"
+bound = "exact"
+unit = "text"
+quote = "the Reck design has an optical depth of 2N−3, whereas our design has an optical depth of N"
+cite = "clements2016"
+source_class = "peer_reviewed"
+verified = true
+location = "pp.2-3"
+note = "Evidence: text."

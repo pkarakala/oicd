@@ -1,0 +1,431 @@
+# Passage L200 and L200X: public facts with exact quotes (brief 05 phase 4 fact check, 2026-10-18).
+# Independent reconstruction from public information. Not affiliated with or endorsed by
+# Lightmatter. Product names belong to their owners.
+
+[product]
+name = "Passage L200 and L200X"
+family = "Passage"
+kind = "product"
+status = "Announced 2025-03-31; available in 2026 per the release (vendor claim)"
+summary = "Co-packaged optics chiplet with 3D-integrated SerDes for edgeless I/O beside an XPU die, and the Passage EVK100 16-wavelength link (vendor descriptions)."
+
+[[fact]]
+id = "l200.l200_lane_rate"
+quantity = "L200 lane rate and modulation (56 Gbps NRZ)"
+value = 56.0
+bound = "exact"
+unit = "Gbps"
+quote = "L200: 56 Gbps NRZ"
+cite = "lm_pr_l200"
+source_class = "vendor_claim"
+verified = true
+conflicts_with = ["l200.web_modulation"]
+location = "Key features, 'Passage PIC' bullets (raw.html.txt line 83)"
+note = "Evidence: text. Conflicts with lm_web_l200 'PAM4 (56G, 112G)' (entry l200.web_modulation). Consistent with lm_web_evk100 '56G NRZ, 112G PAM4' and lm_ofc26_kumar slide 17 '56 Gbps NRZ'."
+
+[[fact]]
+id = "l200.l200_bw_total"
+quantity = "L200 total optical bandwidth per engine (Tx+Rx)"
+value = 32.0
+bound = "exact"
+unit = "Tbps"
+quote = "L200: 56 Gbps NRZ, 32 Tbps total (Tx+Rx)"
+cite = "lm_pr_l200"
+source_class = "vendor_claim"
+verified = true
+location = "Key features, 'Passage PIC' bullets (line 83); SKU sentence 'the L200 (32Tbps) and L200X (64Tbps) 3D CPO engines' (line 77)"
+note = "Evidence: text."
+
+[[fact]]
+id = "l200.l200x_lane_rate"
+quantity = "L200X lane rate, PAM4: two supported rates, 106 and 112 Gbps (not a continuous range)"
+lo = 106.0
+hi = 112.0
+bound = "exact"
+unit = "Gbps"
+quote = "L200X: 106/112 Gbps PAM4"
+cite = "lm_pr_l200"
+source_class = "vendor_claim"
+verified = true
+location = "Key features, 'Passage PIC' bullets (line 84)"
+note = "Evidence: text."
+
+[[fact]]
+id = "l200.l200x_bw_total"
+quantity = "L200X total optical bandwidth per engine (Tx+Rx)"
+value = 64.0
+bound = "exact"
+unit = "Tbps"
+quote = "L200X: 106/112 Gbps PAM4, 64 Tbps total (Tx+Rx)"
+cite = "lm_pr_l200"
+source_class = "vendor_claim"
+verified = true
+location = "Key features, 'Passage PIC' bullets (line 84)"
+note = "Evidence: text."
+
+[[fact]]
+id = "l200.serdes_count"
+quantity = "SerDes per engine ('Optically-optimized multi-rate/multi-protocol'), listed for both L200 and L200X"
+value = 320.0
+bound = "exact"
+unit = "count"
+quote = "320 Optically-optimized multi-rate/multi-protocol SerDes"
+cite = "lm_pr_l200"
+source_class = "vendor_claim"
+verified = true
+location = "Key features of the L200 and L200X, 'Advanced node CMOS EIC' bullets (line 81)"
+note = "Evidence: text."
+
+[[fact]]
+id = "l200.ucie_d2d_rate"
+quantity = "UCIe die-to-die interface rate (per-lane basis not stated)"
+value = 32.0
+bound = "exact"
+unit = "Gbps"
+quote = "32Gbps UCIe D2D interface"
+cite = "lm_pr_l200"
+source_class = "vendor_claim"
+verified = true
+location = "Key features, 'Advanced node CMOS EIC' bullets (line 80); full bullet: '32Gbps UCIe D2D interface (IP offered royalty-free by Alphawave Semi for accompanying XPU/Switch die)'"
+note = "Evidence: text. Wording only: the source writes '32Gbps' without a space and does not say whether the rate is per lane."
+
+[[fact]]
+id = "l200.eic_partner"
+quantity = "EIC (UCIe and SerDes chiplet) supplier: Alphawave Semi; EIC 3D-integrated on the Passage PIC (chip-on-wafer)"
+bound = "exact"
+unit = "text"
+quote = "Alphawave Semi’s advanced-node electrical integrated circuit (EIC) is 3D integrated on the Passage PIC"
+cite = "lm_pr_l200"
+source_class = "vendor_claim"
+verified = true
+location = "Paragraph 3 (line 72); UCIe IP note on line 80"
+note = "Evidence: text."
+
+[[fact]]
+id = "l200.eic_partner_now_qualcomm"
+quantity = "Ownership of the L200 EIC/SerDes partner: Alphawave Semi is now part of Qualcomm Technologies (stated 2026-03-11)"
+bound = "exact"
+unit = "text"
+quote = "Alphawave Semi—now part of Qualcomm Technologies"
+cite = "lm_pr_1p6t"
+source_class = "vendor_claim"
+verified = true
+location = "Paragraph 3 (raw.html.txt line 72)"
+note = "Evidence: text."
+
+[[fact]]
+id = "l200.wdm_lambda_count"
+quantity = "WDM wavelengths per waveguide/fiber (L200 and L200X)"
+value = 16.0
+bound = "exact"
+unit = "count"
+quote = "16 wavelength WDM per waveguide/fiber"
+cite = "lm_pr_l200"
+source_class = "vendor_claim"
+verified = true
+location = "Key features, 'Passage PIC' bullets (line 85); also '16 WDM wavelengths per waveguide/fiber' (line 77)"
+note = "Evidence: text."
+
+[[fact]]
+id = "l200.bw_per_fiber"
+quantity = "Bandwidth per fiber: 800 Gbps / 1.6 Tbps (by list order presumably L200 / L200X; direction not stated)"
+lo = 800.0
+hi = 1600.0
+bound = "exact"
+unit = "Gbps"
+quote = "800Gbps/1.6Tbps per fiber"
+cite = "lm_pr_l200"
+source_class = "vendor_claim"
+verified = true
+location = "Key features, 'Passage PIC' bullets (line 85)"
+note = "Evidence: text. No difference from the Appendix. The release does not say which SKU gets which value (the L200 = 800 Gbps, L200X = 1.6 Tbps mapping is an inference from list order) or whether it is per direction. 16 x 56 Gbps = 896 Gbps and 16 x 112 Gbps = 1.792 Tbps, so the figures correspond to 50/100 Gbps payload per wavelength (inference)."
+
+[[fact]]
+id = "l200.package_bw_min"
+quantity = "Total I/O bandwidth per chip package (multiple L200s per package)"
+value = 200.0
+bound = "min"
+unit = "Tbps"
+quote = "over 200 Tbps of total I/O bandwidth per chip package"
+cite = "lm_pr_l200"
+source_class = "vendor_claim"
+verified = true
+location = "Paragraph 1 (line 70)"
+note = "Evidence: text. Source says 'per chip package'. Related figures: lm_web_l200 meta description '256 Tbps (Tx+Rx) of total bandwidth per package' (entry l200.web_package_bw) and visible '200+ Tbps / Chip' (entry l200.web_package_bw_body). lm_pr_1p6t (2026) instead names 'a clear path to 100 Tbps of total I/O per package' (entry l200.package_bw_target_2026)."
+
+[[fact]]
+id = "l200.pluggable_equiv"
+quantity = "Equivalent number of pluggable optical transceivers (bandwidth) per L200"
+value = 40.0
+bound = "exact"
+unit = "count"
+quote = "the equivalent bandwidth of 40 pluggable optical transceivers per L200"
+cite = "lm_pr_l200"
+source_class = "vendor_claim"
+verified = true
+location = "Paragraph 3 (line 72)"
+note = "Evidence: text."
+
+[[fact]]
+id = "l200.edgeless_io"
+quantity = "I/O topology: edgeless I/O (area-array I/O across the die, enabled by 3D stacking)"
+bound = "exact"
+unit = "text"
+quote = "the world’s first edgeless I/O, scaling bandwidth across the entire die area"
+cite = "lm_pr_l200"
+source_class = "vendor_claim"
+verified = true
+location = "Paragraph 2 (line 71); product page spec table also says 'Edgeless I/O (area-array)'"
+note = "Evidence: text."
+
+[[fact]]
+id = "l200.availability"
+quantity = "Availability year of L200 and L200X"
+value = 2026.0
+bound = "exact"
+unit = "year"
+quote = "Available in 2026"
+cite = "lm_pr_l200"
+source_class = "vendor_claim"
+verified = true
+location = "Closing paragraph (line 87)"
+note = "Evidence: text. No difference from the Appendix. Product page (lm_web_l200) adds: 'L200 design partnerships are open for 2026 roadmaps.'"
+
+[[fact]]
+id = "l200.web_package_bw"
+quantity = "Total bandwidth per package (Tx+Rx), product page metadata"
+value = 256.0
+bound = "exact"
+unit = "Tbps"
+quote = "enabling 256 Tbps (Tx+Rx) of total bandwidth per package"
+cite = "lm_web_l200"
+source_class = "vendor_claim"
+verified = true
+conflicts_with = ["l200.package_bw_target_2026"]
+location = "HTML meta description, og:description and twitter:description only (raw.html.txt lines 2 and 4); NOT in the visible page body"
+note = "Evidence: text. The value appears only in page metadata. The visible body says 'Total I/O 200+ Tbps / Chip' (entry l200.web_package_bw_body). It is more specific than lm_pr_l200's 'over 200 Tbps of total I/O bandwidth per chip package'; 256 = 4 x 64 Tbps or 8 x 32 Tbps (inference). lm_pr_1p6t (2026) names 100 Tbps per package as the next milestone."
+
+[[fact]]
+id = "l200.web_modulation"
+quantity = "Modulation and lane rates per product page: PAM4 at 56G and 112G"
+lo = 56.0
+hi = 112.0
+bound = "exact"
+unit = "Gbps"
+quote = "PAM4 (56G, 112G)"
+cite = "lm_web_l200"
+source_class = "vendor_claim"
+verified = true
+location = "Technical Specifications, 'Modulation' row (line 105)"
+note = "Evidence: text. CONFLICT: lm_pr_l200 says 'L200: 56 Gbps NRZ' (PAM4 only for L200X at 106/112 Gbps). lm_web_evk100 lists '56G NRZ, 112G PAM4', and lm_ofc26_kumar slide 17 shows '56 Gbps NRZ' and '112 Gbps PAM4'. The product page is the outlier."
+
+[[fact]]
+id = "l200.web_energy"
+quantity = "Energy efficiency, '(Optical)' (scope, e.g. laser or SerDes included, not defined)"
+value = 5.0
+bound = "max"
+unit = "pJ/bit"
+quote = "< 5 pJ/bit (Optical)"
+cite = "lm_web_l200"
+source_class = "vendor_claim"
+verified = true
+location = "Technical Specifications, 'Energy efficiency' row (line 109)"
+note = "Evidence: text."
+
+[[fact]]
+id = "l200.web_reach"
+quantity = "Direct drive reach (DR/FR)"
+lo = 10.0
+hi = 2000.0
+bound = "exact"
+unit = "m"
+quote = "10m to 2km (DR/FR)"
+cite = "lm_web_l200"
+source_class = "vendor_claim"
+verified = true
+location = "Technical Specifications, 'Direct drive reach' row (line 115)"
+note = "Evidence: text. No difference from the Appendix. lm_ofc26_kumar slide 17 says 'up to 1 km', and its demos use 1 km fiber, so 2 km is not demonstrated there."
+
+[[fact]]
+id = "evk100.wdm_lambda_count"
+quantity = "EVK100 DWDM wavelengths per fiber"
+value = 16.0
+bound = "exact"
+unit = "count"
+quote = "16λ DWDM"
+cite = "lm_web_evk100"
+source_class = "vendor_claim"
+verified = true
+location = "Technical Specifications, 'Link architecture' row (line 99); also 'Passage EVK100 uses a 16-wavelength 112G PAM4 DWDM architecture' (line 80)"
+note = "Evidence: text."
+
+[[fact]]
+id = "evk100.lane_rate"
+quantity = "EVK100 lane rate per wavelength (PAM4), product page"
+value = 112.0
+bound = "exact"
+unit = "Gbps"
+quote = "16-wavelength 112G PAM4 DWDM architecture"
+cite = "lm_web_evk100"
+source_class = "vendor_claim"
+verified = true
+conflicts_with = ["evk100.lane_rate_talk"]
+location = "Architecture paragraph (line 80); spec table 'SerDes modulation formats 56G NRZ, 112G PAM4'"
+note = "Evidence: text. lm_ofc26_kumar slides 14-15 (PASSAGE 100) give 106 Gbps per wavelength (entry evk100.lane_rate_talk)."
+
+[[fact]]
+id = "evk100.bw_per_fiber"
+quantity = "EVK100 throughput per fiber, unidirectional (separate Tx and Rx fibers)"
+value = 1.6
+bound = "exact"
+unit = "Tbps"
+quote = "1.6 Tbps unidirectional (separate Tx/Rx fibers)"
+cite = "lm_web_evk100"
+source_class = "vendor_claim"
+verified = true
+location = "Architecture paragraph (line 80); also '1,600 Gbps per fiber enabled by a 16-channel DWDM O-band link architecture' (line 83) and spec 'Throughput modes 1.6 Tbps UniDi' (line 103)"
+note = "Evidence: text. The page does not state the equation '16 lambda x 112 Gbps = 1.6 Tbps'. 16 x 112 Gbps = 1.792 Tbps, so 1.6 Tbps implies 100 Gbps payload per wavelength (inference). The page specifies unidirectional transmission with separate Tx/Rx fibers."
+
+[[fact]]
+id = "evk100.grid_spacing"
+quantity = "EVK100 DWDM channel spacing"
+value = 200.0
+bound = "exact"
+unit = "GHz"
+quote = "200 GHz spacing centered at 1310 nm (O-band)"
+cite = "lm_web_evk100"
+source_class = "vendor_claim"
+verified = true
+location = "Technical Specifications, 'Wavelength grid' row (line 101)"
+note = "Evidence: text."
+
+[[fact]]
+id = "evk100.grid_center"
+quantity = "EVK100 DWDM grid centre wavelength"
+value = 1310.0
+bound = "exact"
+unit = "nm"
+quote = "200 GHz spacing centered at 1310 nm (O-band)"
+cite = "lm_web_evk100"
+source_class = "vendor_claim"
+verified = true
+location = "Technical Specifications, 'Wavelength grid' row (line 101)"
+note = "Evidence: text."
+
+[[fact]]
+id = "evk100.energy_incl_laser"
+quantity = "EVK100 link energy efficiency at 112G PAM4, including laser (hero tile calls it a target)"
+value = 3.2
+bound = "exact"
+unit = "pJ/bit"
+quote = "3.2 pJ/bit @112G PAM4 including laser"
+cite = "lm_web_evk100"
+source_class = "vendor_claim"
+verified = true
+conflicts_with = ["evk100.energy_total_talk"]
+location = "Technical Specifications, 'Efficiency' row (line 107); hero tile '3.2 pJ/bit target link efficiency @ 112G PAM4' (lines 73-74)"
+note = "Evidence: text. The hero tile labels 3.2 pJ/bit a 'target link efficiency'. lm_ofc26_kumar (PASSAGE 100) gives '3pJ/bit PIC + Laser (1.8 pJ/bit PIC, 1.1 pJ/bit laser)' on slide 15 (the components sum to 2.9) and '<3 pJ/bit (PIC + Laser)' on slide 14. Whether SerDes power is included is not stated."
+
+[[fact]]
+id = "evk100.energy_pic"
+quantity = "PIC energy per bit, PASSAGE 100 EVK (EVK100) 16-lambda 106G PAM4 unidirectional link, 1600 Gbps per fiber (slide does not name L200/L200X)"
+value = 1.8
+bound = "exact"
+unit = "pJ/bit"
+quote = "1.8 pJ/bit PIC"
+cite = "lm_ofc26_kumar"
+source_class = "vendor_claim"
+verified = true
+location = "Page 15 ('Eye diagrams 16λ 106G PAM4'), 4th bullet; in the PDF text layer and confirmed on the rendered slide"
+note = "Evidence: text. Value matches. Context: slides 14-15 are about the PASSAGE 100 EVK, so this is filed under prefix evk100, not l200. The same bullet gives '3pJ/bit PIC + Laser' as the total, but 1.8 + 1.1 = 2.9 pJ/bit. lm_web_evk100 gives 3.2 pJ/bit including laser."
+
+[[fact]]
+id = "evk100.energy_laser"
+quantity = "Laser energy per bit, PASSAGE 100 EVK (EVK100) 16-lambda 106G PAM4 unidirectional link (slide does not name L200/L200X)"
+value = 1.1
+bound = "exact"
+unit = "pJ/bit"
+quote = "1.1 pJ/bit laser"
+cite = "lm_ofc26_kumar"
+source_class = "vendor_claim"
+verified = true
+location = "Page 15, 4th bullet (wraps over two lines in the text layer); confirmed on the rendered slide"
+note = "Evidence: text. Value matches. Same context note as evk100.energy_pic (PASSAGE 100 EVK, not a named L200 part)."
+
+[[fact]]
+id = "l200.web_package_bw_body"
+quantity = "Total I/O per chip, visible body of the L200 product page"
+value = 200.0
+bound = "min"
+unit = "Tbps"
+quote = "200+ Tbps / Chip"
+cite = "lm_web_l200"
+source_class = "vendor_claim"
+verified = true
+location = "Hero spec bar 'Total I/O' (lines 71-73)"
+note = "Evidence: text. This is the visible counterpart of the metadata-only '256 Tbps (Tx+Rx)' claim, and it matches lm_pr_l200's 'over 200 Tbps'. The same page also says 'we deliver 32-64 Tbps of optical I/O per chip'."
+
+[[fact]]
+id = "l200.package_bw_target_2026"
+quantity = "Per-package total I/O target for Passage L-Series, stated in 2026 ('clear path to'; Qualcomm EVP quote; release body: 'on track to deliver 100 Tbps and beyond')"
+value = 100.0
+bound = "exact"
+unit = "Tbps"
+quote = "a clear path to 100 Tbps of total I/O per package"
+cite = "lm_pr_1p6t"
+source_class = "vendor_claim"
+verified = true
+location = "Tony Pialis quote (raw.html.txt line 73); release body line 72"
+note = "Evidence: text. TENSION with lm_pr_l200 (2025) 'over 200 Tbps of total I/O bandwidth per chip package' and lm_web_l200 meta '256 Tbps (Tx+Rx)'."
+
+[[fact]]
+id = "evk100.bw_aggregate"
+quantity = "EVK100 aggregate bandwidth (spec table: 'Port count 2 fibers', 'Throughput modes 1.6 Tbps UniDi')"
+value = 3.2
+bound = "exact"
+unit = "Tbps"
+quote = "3.2 Tbps aggregate bandwidth @ 112G PAM4"
+cite = "lm_web_evk100"
+source_class = "vendor_claim"
+verified = true
+location = "Hero tile 'Aggregate I/O' (lines 70-71); spec table 'Port count 2 fibers' (lines 104-105)"
+note = "Evidence: text."
+
+[[fact]]
+id = "evk100.ber_prefec_target"
+quantity = "EVK100 pre-FEC BER target"
+value = 1e-05
+bound = "max"
+unit = "BER"
+quote = "Pre-FEC BER target < 1e-5"
+cite = "lm_web_evk100"
+source_class = "vendor_claim"
+verified = true
+location = "Technical Specifications, 'Pre-FEC BER target' row (lines 108-109)"
+note = "Evidence: text. lm_ofc26_kumar PASSAGE 100 slides report measured 'BER < 1E-6' (slide 14) and '1e-7 BER' (slide 15)."
+
+[[fact]]
+id = "evk100.lane_rate_talk"
+quantity = "PASSAGE 100 EVK lane rate per wavelength, 16-lambda unidirectional PAM4 link (OFC 2026 talk)"
+value = 106.0
+bound = "exact"
+unit = "Gbps"
+quote = "16λ UNIDIRECTIONAL @ 106 GBPS/λ"
+cite = "lm_ofc26_kumar"
+source_class = "vendor_claim"
+verified = true
+location = "Page 14 ('PASSAGE 100 The first 16λ PAM4 Link'); page 15 title 'Eye diagrams 16λ 106G PAM4'"
+note = "Evidence: text. CONFLICT with lm_web_evk100's 112G PAM4 (entry evk100.lane_rate). lm_pr_l200 lists L200X as '106/112 Gbps PAM4', so both rates are within the family. 16 x 106 Gbps = 1.696 Tbps for the stated '1.6 TBPS / FIBER'."
+
+[[fact]]
+id = "evk100.energy_total_talk"
+quantity = "PASSAGE 100 EVK energy per bit, PIC + laser (OFC 2026 talk)"
+value = 3.0
+bound = "exact"
+unit = "pJ/bit"
+quote = "3pJ/bit PIC + Laser"
+cite = "lm_ofc26_kumar"
+source_class = "vendor_claim"
+verified = true
+location = "Page 15, 4th bullet"
+note = "Evidence: text. Slide 14 states '<3 pJ/bit (PIC + Laser)'. The slide 15 components sum to 1.8 + 1.1 = 2.9 pJ/bit. lm_web_evk100 states 3.2 pJ/bit including laser."

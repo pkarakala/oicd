@@ -1,0 +1,17 @@
+# Sources named in the brief that could not be opened in this run. They are never in
+# references.bib and only unverified facts may cite them (model card §14.1).
+
+[[source]]
+key = "corning_tmt_lan3581"
+url = "https://www.corning.com/catalog/coc/documents/product-specifications/LAN-3581-AEN.pdf"
+tried = [
+  "curl with a browser user agent",
+  "curl with full browser headers",
+  "non-www and http:// URLs",
+  "WebFetch",
+  "Internet Archive (no capture)",
+  "archive.today (404)",
+  "web search for a mirror (none)",
+]
+result = "HTTP 403 from corning.com; no copy found. usconec_prizm_tmt confirms 0.5 dB insertion loss, 16 fibers scalable to 32 and blind mating."
+date = "2026-10-18"

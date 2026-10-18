@@ -1,0 +1,156 @@
+# Scale-up pod example: public facts with exact quotes (brief 05 phase 4 fact check, 2026-10-18).
+# Independent reconstruction from public information. Not affiliated with or endorsed by
+# Lightmatter. Product names belong to their owners.
+
+[product]
+name = "Scale-up pod example"
+family = "Passage"
+kind = "system"
+status = "Example in vendor releases and talks, 2026"
+summary = "The 512-accelerator scale-up pod Lightmatter uses to illustrate BiDi fiber and connector savings."
+
+[[fact]]
+id = "pod.fibers_before_cpx"
+quantity = "fibers in a 512-GPU scale-up pod with conventional (non-BiDi) links"
+value = 130000.0
+bound = "approx"
+unit = "count"
+quote = "taking the pod from about 130,000 fibers to 65,000"
+cite = "lm_pr_cpx"
+source_class = "vendor_claim"
+verified = true
+location = "paragraph 2 (attributed to 'Lightmatter’s analysis in a recent tech brief')"
+note = "Evidence: text."
+
+[[fact]]
+id = "pod.fibers_after_cpx"
+quantity = "fibers in the same 512-GPU pod with BiDi links"
+value = 65000.0
+bound = "approx"
+unit = "count"
+quote = "taking the pod from about 130,000 fibers to 65,000"
+cite = "lm_pr_cpx"
+source_class = "vendor_claim"
+verified = true
+location = "paragraph 2 (attributed to 'Lightmatter’s analysis in a recent tech brief')"
+note = "Evidence: text. Matches. Note: 'about' in the source precedes 130,000; 65,000 is exactly half, so it is marked approx as well."
+
+[[fact]]
+id = "pod.connectors_saved_cpx"
+quantity = "connectors saved in a 512-GPU scale-up pod by BiDi"
+value = 16000.0
+bound = "approx"
+unit = "count"
+quote = "approximately 16,000 fewer connectors"
+cite = "lm_pr_cpx"
+source_class = "vendor_claim"
+verified = true
+conflicts_with = ["pod.connectors_saved_hoti26"]
+location = "paragraph 2"
+note = "Evidence: text. Matches. Unflagged conflict with HOTI26 '20,000 Fewer connectors and failure points' for a 512 XPU cluster (pod.connectors_saved_hoti26); the Appendix lists both without marking the conflict."
+
+[[fact]]
+id = "pod.fiber_length_saved_cpx"
+quantity = "fiber length saved in a 512-GPU scale-up pod by BiDi"
+value = 200.0
+bound = "min"
+unit = "miles"
+quote = "save more than 200 miles of fiber"
+cite = "lm_pr_cpx"
+source_class = "vendor_claim"
+verified = true
+conflicts_with = ["pod.fiber_length_saved_hoti26"]
+location = "paragraph 2"
+note = "Evidence: text. Matches. Unflagged conflict with HOTI26 '150 miles of fiber saved' for a 512 XPU cluster (pod.fiber_length_saved_hoti26); the Appendix lists both without marking the conflict."
+
+[[fact]]
+id = "pod.cost_savings_cpx"
+quantity = "share of total scale-up interconnect network cost saved by BiDi (512-GPU pod)"
+value = 15.0
+bound = "approx"
+unit = "%"
+quote = "saves about 15 percent of total scale-up interconnect network cost"
+cite = "lm_pr_cpx"
+source_class = "vendor_claim"
+verified = true
+conflicts_with = ["pod.cost_savings_hoti26"]
+location = "paragraph 2"
+note = "Evidence: text. Source wording is 'of total scale-up interconnect network cost' (Appendix: 'of scale-up network cost'). Conflicts with HOTI26 '16% Savings in total network spend' (pod.cost_savings_hoti26)."
+
+[[fact]]
+id = "pod.size_gpus_cpx"
+quantity = "GPUs in the scale-up pod used for the CPX savings analysis"
+value = 512.0
+bound = "exact"
+unit = "count"
+quote = "In a 512-GPU scale-up pod"
+cite = "lm_pr_cpx"
+source_class = "vendor_claim"
+verified = true
+location = "paragraph 2"
+note = "Evidence: text. Matches. Note: the release does not state per-GPU bandwidth; HOTI26 states '32 Tbps / XPU' for its 512 XPU cluster, so the two analyses may not share assumptions."
+
+[[fact]]
+id = "pod.fiber_length_saved_hoti26"
+quantity = "fiber length saved by BiDi for a typical 512 XPU scale-up cluster"
+value = 150.0
+bound = "exact"
+unit = "miles"
+quote = "150 miles of ﬁber saved"
+cite = "lm_hoti26"
+source_class = "vendor_claim"
+verified = true
+location = "p13 (BiDi savings slide; also seen on rendered slide; text layer spells 'fiber' with the U+FB01 ligature)"
+note = "Evidence: text. Matches. Unflagged conflict with the CPX release 'more than 200 miles of fiber' for a 512-GPU pod (pod.fiber_length_saved_cpx)."
+
+[[fact]]
+id = "pod.connectors_saved_hoti26"
+quantity = "connectors (and failure points) saved by BiDi for a typical 512 XPU scale-up cluster"
+value = 20000.0
+bound = "exact"
+unit = "count"
+quote = "20,000 Fewer connectors and failure points"
+cite = "lm_hoti26"
+source_class = "vendor_claim"
+verified = true
+location = "p13 (also seen on rendered slide)"
+note = "Evidence: text. Matches. Unflagged conflict with the CPX release 'approximately 16,000 fewer connectors' (pod.connectors_saved_cpx)."
+
+[[fact]]
+id = "pod.cost_savings_hoti26"
+quantity = "savings in total network spend from BiDi for a typical 512 XPU scale-up cluster"
+value = 16.0
+bound = "exact"
+unit = "%"
+quote = "16% Savings in total network spend"
+cite = "lm_hoti26"
+source_class = "vendor_claim"
+verified = true
+location = "p13 (also seen on rendered slide)"
+note = "Evidence: text. Matches. Unflagged conflict with the CPX release 'about 15 percent of total scale-up interconnect network cost' (pod.cost_savings_cpx)."
+
+[[fact]]
+id = "pod.size_xpus_hoti26"
+quantity = "XPUs in the typical scale-up cluster used for the HOTI26 BiDi savings"
+value = 512.0
+bound = "exact"
+unit = "count"
+quote = "for a typical 512 XPU scale-up cluster, 32 Tbps / XPU"
+cite = "lm_hoti26"
+source_class = "vendor_claim"
+verified = true
+location = "p13 footnote line (also seen on rendered slide)"
+note = "Evidence: text."
+
+[[fact]]
+id = "pod.bw_per_xpu_hoti26"
+quantity = "scale-up bandwidth per XPU assumed for the HOTI26 BiDi savings"
+value = 32.0
+bound = "exact"
+unit = "Tbps"
+quote = "for a typical 512 XPU scale-up cluster, 32 Tbps / XPU"
+cite = "lm_hoti26"
+source_class = "vendor_claim"
+verified = true
+location = "p13 footnote line (also seen on rendered slide)"
+note = "Evidence: text. Matches. Note: the slide does not say whether 32 Tbps is per direction or aggregate."

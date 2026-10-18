@@ -25,6 +25,10 @@ from oicd.twin.formulas import FORMULAS, resolve_out_unit
 CATALOG_DIR = Path(__file__).resolve().parents[3] / "catalog"
 PRODUCTS_DIR = CATALOG_DIR / "products"
 GEOMETRY_DIR = CATALOG_DIR / "geometry"
+UNOPENED_PATH = CATALOG_DIR / "unopened_sources.toml"
+
+# An unverified fact taken from the brief's Appendix A with no source that could confirm it.
+APPENDIX_KEY = "appendix_a"
 
 _FROZEN = ConfigDict(frozen=True, extra="forbid")
 _ID = r"^[a-z0-9_]+(\.[a-z0-9_]+)+$"
@@ -238,6 +242,9 @@ class Catalog(BaseModel):
         keys = context.get("citation_keys")
         if keys is None:
             keys = load_citation_keys()
+        unopened = context.get("unopened_keys")
+        if unopened is None:
+            unopened = load_unopened_keys()
         nodes = {n.id: n for f in self.files.values() for n in (*f.fact, *f.assumption, *f.derived)}
 
         def numeric(node_id: str, where: str) -> bool:
@@ -252,8 +259,12 @@ class Catalog(BaseModel):
 
         for f in self.files.values():
             for fact in f.fact:
-                if fact.cite not in keys:
-                    errors.append(f"{fact.id}: cite {fact.cite!r} not in references.bib")
+                # Verified facts cite an opened source; an unverified fact may also cite a source
+                # that could not be opened (unopened_sources.toml) or the brief's Appendix A.
+                allowed = keys if fact.verified else (keys | unopened | {APPENDIX_KEY})
+                if fact.cite not in allowed:
+                    where = "references.bib" if fact.verified else "references.bib or unopened"
+                    errors.append(f"{fact.id}: cite {fact.cite!r} not in {where}")
                 for other in fact.conflicts_with:
                     if not isinstance(nodes.get(other), Fact):
                         errors.append(f"{fact.id}: conflicts_with unknown fact {other!r}")
@@ -316,6 +327,30 @@ def _cycles(edges: dict[str, tuple[str, ...]]) -> list[str]:
                 state[node] = 2
                 stack.pop()
     return errors
+
+
+class UnopenedSource(BaseModel):
+    """A source the brief names that could not be opened in this run (never in references.bib)."""
+
+    model_config = _FROZEN
+
+    key: str
+    url: str
+    tried: tuple[str, ...]
+    result: str
+    date: str
+
+
+def load_unopened_sources(path: Path = UNOPENED_PATH) -> tuple[UnopenedSource, ...]:
+    if not path.is_file():
+        return ()
+    with path.open("rb") as handle:
+        data = tomllib.load(handle)
+    return tuple(UnopenedSource.model_validate(s) for s in data.get("source", []))
+
+
+def load_unopened_keys(path: Path = UNOPENED_PATH) -> frozenset[str]:
+    return frozenset(s.key for s in load_unopened_sources(path))
 
 
 def load_catalog_file(path: Path) -> CatalogFile:

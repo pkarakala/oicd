@@ -1,0 +1,620 @@
+# Passage L20: public facts with exact quotes (brief 05 phase 4 fact check, 2026-10-18).
+# Independent reconstruction from public information. Not affiliated with or endorsed by
+# Lightmatter. Product names belong to their owners.
+
+[product]
+name = "Passage L20"
+family = "Passage"
+kind = "product"
+status = "Announced 2026-03-11; sampling late 2026 per the release, Q1 2027 per HOTI26 (vendor claims)"
+summary = "Unified optical engine for near-package and on-board optics with two-wavelength BiDi on 200G lanes, and the bidirectional CPX engine (vendor descriptions)."
+
+[[fact]]
+id = "l20.bw_per_direction"
+quantity = "L20 total bandwidth, each direction"
+value = 6.4
+bound = "exact"
+unit = "Tbps"
+quote = "Total Bandwidth: 6.4 Tbps (each direction)"
+cite = "lm_pr_l20"
+source_class = "vendor_claim"
+verified = true
+location = "Preliminary Specifications list (also first paragraph)"
+note = "Evidence: text."
+
+[[fact]]
+id = "l20.optical_ports"
+quantity = "L20 optical ports per module"
+value = 32.0
+bound = "exact"
+unit = "count"
+quote = "32 optical ports at 200 Gbps per lane DR"
+cite = "lm_pr_l20"
+source_class = "vendor_claim"
+verified = true
+location = "paragraph before Preliminary Specifications"
+note = "Evidence: text."
+
+[[fact]]
+id = "l20.lane_rate"
+quantity = "L20 optical data rate per lane (DR)"
+value = 200.0
+bound = "exact"
+unit = "Gbps"
+quote = "32 optical ports at 200 Gbps per lane DR"
+cite = "lm_pr_l20"
+source_class = "vendor_claim"
+verified = true
+location = "paragraph before Preliminary Specifications"
+note = "Evidence: text."
+
+[[fact]]
+id = "l20.serdes_line_rate"
+quantity = "L20 SerDes line rate (PAM4)"
+value = 212.5
+bound = "exact"
+unit = "Gbps"
+quote = "SerDes Line Rate: 212.5 Gbps PAM4"
+cite = "lm_pr_l20"
+source_class = "vendor_claim"
+verified = true
+location = "Preliminary Specifications list"
+note = "Evidence: text."
+
+[[fact]]
+id = "l20.bidi_wavelengths"
+quantity = "L20 transmission: 2 BiDi wavelengths, 1311 nm and 1331 nm; IEEE 802.3dj, DR compatible"
+bound = "exact"
+unit = "text"
+quote = "Transmission: 2 wavelength BiDi (1311, 1331nm), IEEE 802.3dj, DR compatible"
+cite = "lm_pr_l20"
+source_class = "vendor_claim"
+verified = true
+location = "Preliminary Specifications list"
+note = "Evidence: text."
+
+[[fact]]
+id = "l20.lambda_a_nm"
+quantity = "BiDi wavelength A"
+value = 1311.0
+bound = "exact"
+unit = "nm"
+quote = "Transmission: 2 wavelength BiDi (1311, 1331nm), IEEE 802.3dj, DR compatible"
+cite = "lm_pr_l20"
+source_class = "vendor_claim"
+verified = true
+location = "Preliminary Specifications list"
+note = "Evidence: text. Number split from l20.bidi_wavelengths."
+
+[[fact]]
+id = "l20.lambda_b_nm"
+quantity = "BiDi wavelength B"
+value = 1331.0
+bound = "exact"
+unit = "nm"
+quote = "Transmission: 2 wavelength BiDi (1311, 1331nm), IEEE 802.3dj, DR compatible"
+cite = "lm_pr_l20"
+source_class = "vendor_claim"
+verified = true
+location = "Preliminary Specifications list"
+note = "Evidence: text. Number split from l20.bidi_wavelengths."
+
+[[fact]]
+id = "l20.tdp_max"
+quantity = "L20 thermal design power, maximum"
+value = 30.0
+bound = "max"
+unit = "W"
+quote = "TDP (max): 30W"
+cite = "lm_pr_l20"
+source_class = "vendor_claim"
+verified = true
+location = "Preliminary Specifications list"
+note = "Evidence: text. Matches. Note: the Business Wire copy of the same release reads 'TDP (max): 30W (3.0 pJ/bit)' (see l20.energy_per_bit_bw); this lightmatter.co copy has no pJ/bit."
+
+[[fact]]
+id = "l20.form_factor_pins"
+quantity = "L20 form factor: BGA pin count (BiDi variant)"
+value = 2000.0
+bound = "exact"
+unit = "count"
+quote = "Form Factor: 2000-pin BGA (BiDi)"
+cite = "lm_pr_l20"
+source_class = "vendor_claim"
+verified = true
+conflicts_with = ["l20.bga_balls_web"]
+location = "Preliminary Specifications list"
+note = "Evidence: text. Matches. Unflagged conflict: the product page says '1827-ball BGA' (lm_web_l20); the Appendix lists both without marking them as a conflict."
+
+[[fact]]
+id = "l20.fiber_mgmt_reduction"
+quantity = "reduction in fiber management requirements vs unidirectional DR optics"
+value = 50.0
+bound = "exact"
+unit = "%"
+quote = "reduce fiber management requirements by 50% as compared to existing unidirectional Data center Reach (DR) optical standards"
+cite = "lm_pr_l20"
+source_class = "vendor_claim"
+verified = true
+location = "paragraph 2"
+note = "Evidence: text."
+
+[[fact]]
+id = "l20.sampling"
+quantity = "L20 sampling start"
+bound = "exact"
+unit = "text"
+quote = "The Passage L20 module is expected to begin sampling in late 2026."
+cite = "lm_pr_l20"
+source_class = "vendor_claim"
+verified = true
+conflicts_with = ["l20.availability_hoti26"]
+location = "Availability section"
+note = "Evidence: text. Matches. Later Lightmatter sources move the date: HOTI26 L20 slide shows 'Q1 2027' (l20.availability_hoti26) and the CPX release says L20 CPX evaluation kits ship in 'the first quarter of 2027' (cpx.evk_ship)."
+
+[[fact]]
+id = "l20.energy_per_bit_bw"
+quantity = "L20 energy per bit stated beside max TDP (Business Wire copy)"
+value = 3.0
+bound = "exact"
+unit = "pJ/bit"
+quote = "TDP (max): 30W (3.0 pJ/bit)"
+cite = "lm_pr_l20_bw"
+source_class = "vendor_claim"
+verified = true
+conflicts_with = ["l20.energy_per_bit_web", "l20.energy_per_bit_yole"]
+location = "Preliminary Specifications list (Wayback capture of businesswire.com, SRC/lm_pr_l20_bw_retry/raw.html.txt; same line in Yahoo Finance syndication)"
+note = "Evidence: text. Exact wording is 'TDP (max): 30W (3.0 pJ/bit)'. businesswire.com returned 403 to curl and WebFetch; verified from an Internet Archive capture of the businesswire.com page and from the Yahoo Finance syndication of the same Business Wire release. The lightmatter.co copy (lm_pr_l20) and Lightmatter's PDF of it say only 'TDP (max): 30W'. Conflicts with '5 pJ/bit' (lm_web_l20, lm_yole_ofc26). My arithmetic: 30 W / 6.4 Tbps = 4.69 pJ/bit and 30 W / 12.8 Tbps = 2.34 pJ/bit, so 3.0 does not follow from 30 W."
+
+[[fact]]
+id = "l20.energy_per_bit_web"
+quantity = "L20 power efficiency (product page)"
+value = 5.0
+bound = "exact"
+unit = "pJ/bit"
+quote = "Efficiency 5 pJ/bit"
+cite = "lm_web_l20"
+source_class = "vendor_claim"
+verified = true
+location = "hero tiles near top of page ('Efficiency / 5 pJ/bit / Industry Leading'); also meta description '200G per lane and 5 pJ/bit power efficiency'"
+note = "Evidence: text."
+
+[[fact]]
+id = "l20.energy_per_bit_yole"
+quantity = "L20 (NPO/OBO) power efficiency (OFC 2026 Yole slides)"
+value = 5.0
+bound = "exact"
+unit = "pJ/bit"
+quote = "Power Efﬁciency 17–20 pJ/bit 5 pJ/bit"
+cite = "lm_yole_ofc26"
+source_class = "vendor_claim"
+verified = true
+location = "p20 table 'Passage L20 NPO Summary', row 'Power Efficiency', column 'L20 (NPO/OBO)' (also seen on rendered slide)"
+note = "Evidence: text."
+
+[[fact]]
+id = "l20.bga_balls_web"
+quantity = "L20 form factor: BGA ball count (product page)"
+value = 1827.0
+bound = "exact"
+unit = "count"
+quote = "Form factor 1827-ball BGA"
+cite = "lm_web_l20"
+source_class = "vendor_claim"
+verified = true
+location = "Technical Specifications table, 'Form factor' (adds 'Reflow compatible')"
+note = "Evidence: text. Matches. Unflagged conflict with '2000-pin BGA (BiDi)' in lm_pr_l20 and lm_pr_l20_bw; the Appendix lists both without marking the conflict."
+
+[[fact]]
+id = "l20.length_mm_web"
+quantity = "L20 package length (product page)"
+value = 37.5
+bound = "exact"
+unit = "mm"
+quote = "Dimensions 37.5 mm x 26.4 mm"
+cite = "lm_web_l20"
+source_class = "vendor_claim"
+verified = true
+location = "Technical Specifications table, 'Dimensions'"
+note = "Evidence: text."
+
+[[fact]]
+id = "l20.width_mm_web"
+quantity = "L20 package width (product page)"
+value = 26.4
+bound = "exact"
+unit = "mm"
+quote = "Dimensions 37.5 mm x 26.4 mm"
+cite = "lm_web_l20"
+source_class = "vendor_claim"
+verified = true
+conflicts_with = ["l20.width_mm_yole"]
+location = "Technical Specifications table, 'Dimensions'"
+note = "Evidence: text. Matches. Unflagged conflict: lm_yole_ofc26 p20 gives width 27.6 mm ('37.5 x 27.6 x 4.55mm'); the Appendix lists both without marking the 26.4 vs 27.6 difference."
+
+[[fact]]
+id = "l20.data_fibers_web"
+quantity = "L20 data fibers (Corning CPO Flexconnect)"
+value = 32.0
+bound = "exact"
+unit = "count"
+quote = "Data fibers 32 Corning CPO Flexconnect"
+cite = "lm_web_l20"
+source_class = "vendor_claim"
+verified = true
+location = "Technical Specifications table, 'Data fibers'"
+note = "Evidence: text."
+
+[[fact]]
+id = "l20.cooling_web"
+quantity = "L20 cooling: cold plate, A2 ASHRAE compliant"
+bound = "exact"
+unit = "text"
+quote = "Cooling Cold plate A2 ASHRAE compliant"
+cite = "lm_web_l20"
+source_class = "vendor_claim"
+verified = true
+location = "Technical Specifications table, 'Cooling'"
+note = "Evidence: text. Wording: source adds 'A2 ASHRAE compliant' (not in the Appendix)."
+
+[[fact]]
+id = "l20.length_mm_yole"
+quantity = "L20 form factor length (L of L x W x H)"
+value = 37.5
+bound = "exact"
+unit = "mm"
+quote = "37.5 x 27.6 x 4.55mm"
+cite = "lm_yole_ofc26"
+source_class = "vendor_claim"
+verified = true
+location = "p20 table, row 'Form Factor (L x W x H)', column 'L20 (NPO/OBO)' (also seen on rendered slide)"
+note = "Evidence: text."
+
+[[fact]]
+id = "l20.width_mm_yole"
+quantity = "L20 form factor width (W of L x W x H)"
+value = 27.6
+bound = "exact"
+unit = "mm"
+quote = "37.5 x 27.6 x 4.55mm"
+cite = "lm_yole_ofc26"
+source_class = "vendor_claim"
+verified = true
+location = "p20 table, row 'Form Factor (L x W x H)', column 'L20 (NPO/OBO)' (also seen on rendered slide)"
+note = "Evidence: text. Matches. Unflagged conflict with 26.4 mm on the product page (lm_web_l20 'Dimensions 37.5 mm x 26.4 mm')."
+
+[[fact]]
+id = "l20.height_mm_yole"
+quantity = "L20 form factor height (H of L x W x H)"
+value = 4.55
+bound = "exact"
+unit = "mm"
+quote = "37.5 x 27.6 x 4.55mm"
+cite = "lm_yole_ofc26"
+source_class = "vendor_claim"
+verified = true
+location = "p20 table, row 'Form Factor (L x W x H)', column 'L20 (NPO/OBO)' (also seen on rendered slide)"
+note = "Evidence: text."
+
+[[fact]]
+id = "l20.pluggable_length_mm_yole"
+quantity = "comparison pluggable optics length (L of L x W x H)"
+value = 108.8
+bound = "exact"
+unit = "mm"
+quote = "108.8 x 22.93 x 15.5mm"
+cite = "lm_yole_ofc26"
+source_class = "vendor_claim"
+verified = true
+location = "p20 table, row 'Form Factor (L x W x H)', column 'Pluggable Optics' (also seen on rendered slide)"
+note = "Evidence: text."
+
+[[fact]]
+id = "l20.pluggable_width_mm_yole"
+quantity = "comparison pluggable optics width (W of L x W x H)"
+value = 22.93
+bound = "exact"
+unit = "mm"
+quote = "108.8 x 22.93 x 15.5mm"
+cite = "lm_yole_ofc26"
+source_class = "vendor_claim"
+verified = true
+location = "p20 table, row 'Form Factor (L x W x H)', column 'Pluggable Optics' (also seen on rendered slide)"
+note = "Evidence: text."
+
+[[fact]]
+id = "l20.pluggable_height_mm_yole"
+quantity = "comparison pluggable optics height (H of L x W x H)"
+value = 15.5
+bound = "exact"
+unit = "mm"
+quote = "108.8 x 22.93 x 15.5mm"
+cite = "lm_yole_ofc26"
+source_class = "vendor_claim"
+verified = true
+location = "p20 table, row 'Form Factor (L x W x H)', column 'Pluggable Optics' (also seen on rendered slide)"
+note = "Evidence: text."
+
+[[fact]]
+id = "l20.volume_reduction_yole"
+quantity = "L20 volume reduction vs pluggable optics"
+value = 88.0
+bound = "approx"
+unit = "%"
+quote = "~88% Smaller Form Factor (by Vol)"
+cite = "lm_yole_ofc26"
+source_class = "vendor_claim"
+verified = true
+location = "p20 table, row 'Form Factor', column 'Advantages' (also seen on rendered slide)"
+note = "Evidence: text."
+
+[[fact]]
+id = "l20.fibers_yole"
+quantity = "L20 BiDi data fibers (each carries TX and RX)"
+value = 32.0
+bound = "exact"
+unit = "count"
+quote = "32 BiDi TX + RX Fibers"
+cite = "lm_yole_ofc26"
+source_class = "vendor_claim"
+verified = true
+location = "p18 'L20 Deployment Options for Multi-Rack Scale-up' diagrams (NPO and OBO; text layer has two spaces before 'Fibers')"
+note = "Evidence: text."
+
+[[fact]]
+id = "l20.laser_fibers_yole"
+quantity = "external laser feed per L20: 1 ELSFP with 8 laser fibers"
+value = 8.0
+bound = "exact"
+unit = "count"
+quote = "1 ELSFP / 8 Laser Fibers"
+cite = "lm_yole_ofc26"
+source_class = "vendor_claim"
+verified = true
+location = "p18 'L20 Deployment Options for Multi-Rack Scale-up' diagrams (also seen on rendered slide)"
+note = "Evidence: text."
+
+[[fact]]
+id = "l20.switch_bw_yole"
+quantity = "switch application bandwidth per direction with 18 x L20"
+value = 115.2
+bound = "max"
+unit = "Tbps"
+quote = "Switch: Up to 115.2 Tbps (18 x L20)"
+cite = "lm_yole_ofc26"
+source_class = "vendor_claim"
+verified = true
+location = "p19 'Applications (total bandwidth per direction)'; slide note: bandwidths are per direction (UniDi), i.e. Tx or Rx"
+note = "Evidence: text."
+
+[[fact]]
+id = "l20.xpu_bw_yole"
+quantity = "XPU application bandwidth per direction with 6 x L20"
+value = 38.0
+bound = "exact"
+unit = "Tbps"
+quote = "XPU: 38 Tbps (6 x L20)"
+cite = "lm_yole_ofc26"
+source_class = "vendor_claim"
+verified = true
+location = "p19 'Applications (total bandwidth per direction)'; slide note: bandwidths are per direction (UniDi), i.e. Tx or Rx"
+note = "Evidence: text. Matches. Note (my arithmetic): 6 x 6.4 Tbps = 38.4 Tbps, so the slide rounds down to 38."
+
+[[fact]]
+id = "l20.pluggable_energy_per_bit_yole"
+quantity = "pluggable optics power efficiency (comparison)"
+lo = 17.0
+hi = 20.0
+bound = "exact"
+unit = "pJ/bit"
+quote = "Power Efﬁciency 17–20 pJ/bit 5 pJ/bit"
+cite = "lm_yole_ofc26"
+source_class = "vendor_claim"
+verified = true
+location = "p20 table, row 'Power Efficiency', column 'Pluggable Optics' (also seen on rendered slide)"
+note = "Evidence: text."
+
+[[fact]]
+id = "l20.power_savings_yole"
+quantity = "power savings of L20 vs pluggable optics"
+value = 75.0
+bound = "max"
+unit = "%"
+quote = "Up to 75% Power Savings"
+cite = "lm_yole_ofc26"
+source_class = "vendor_claim"
+verified = true
+location = "p20 table, row 'Power Efficiency', column 'Advantages' (also seen on rendered slide)"
+note = "Evidence: text. Matches. Unflagged internal tension: p19 of the same deck says 'cutting interconnect power by 70%'. My arithmetic: 1 - 5/20 = 75% and 1 - 5/17 = 70.6%, i.e. the two ends of the 17–20 pJ/bit range."
+
+[[fact]]
+id = "cpx.bw_total"
+quantity = "Passage L20 CPX total bandwidth (6.4 Tbps transmit + 6.4 Tbps receive)"
+value = 12.8
+bound = "exact"
+unit = "Tbps"
+quote = "12.8 Tbps of total bandwidth (6.4 Tbps transmit and 6.4 Tbps receive)"
+cite = "lm_pr_cpx"
+source_class = "vendor_claim"
+verified = true
+location = "paragraph 6 ('Built on the Passage L-Series optical engine platform...')"
+note = "Evidence: text."
+
+[[fact]]
+id = "cpx.lanes_per_direction"
+quantity = "Passage L20 CPX optical lanes per direction"
+value = 32.0
+bound = "exact"
+unit = "count"
+quote = "32 optical lanes per direction at a 212.5 Gbps PAM4 line rate"
+cite = "lm_pr_cpx"
+source_class = "vendor_claim"
+verified = true
+location = "paragraph 6"
+note = "Evidence: text."
+
+[[fact]]
+id = "cpx.line_rate"
+quantity = "Passage L20 CPX lane line rate (PAM4)"
+value = 212.5
+bound = "exact"
+unit = "Gbps"
+quote = "32 optical lanes per direction at a 212.5 Gbps PAM4 line rate"
+cite = "lm_pr_cpx"
+source_class = "vendor_claim"
+verified = true
+location = "paragraph 6"
+note = "Evidence: text."
+
+[[fact]]
+id = "cpx.reach"
+quantity = "Passage L20 CPX reach over single-mode fiber"
+value = 500.0
+bound = "min"
+unit = "m"
+quote = "reaches beyond 500 meters over single-mode fiber"
+cite = "lm_pr_cpx"
+source_class = "vendor_claim"
+verified = true
+location = "paragraph 6"
+note = "Evidence: text."
+
+[[fact]]
+id = "l20.tdp_max_hoti26"
+quantity = "L20 thermal design power, maximum (HOTI26 slide)"
+value = 30.0
+bound = "max"
+unit = "W"
+quote = "30 W TDP max"
+cite = "lm_hoti26"
+source_class = "vendor_claim"
+verified = true
+location = "p12 'PASSAGE L20' spec list (also seen on rendered slide)"
+note = "Evidence: text."
+
+[[fact]]
+id = "l20.bw_aggregate_hoti26"
+quantity = "L20 aggregate bandwidth (Tx + Rx)"
+value = 12.8
+bound = "exact"
+unit = "Tbps"
+quote = "12.8 Tbps aggregate"
+cite = "lm_hoti26"
+source_class = "vendor_claim"
+verified = true
+location = "p12 'PASSAGE L20' spec list (also seen on rendered slide)"
+note = "Evidence: text. Extra. Consistent with 6.4 Tbps each direction and with the CPX release '12.8 Tbps of total bandwidth'."
+
+[[fact]]
+id = "l20.serdes_rate_hoti26"
+quantity = "L20 SerDes rate as stated on HOTI26 slide"
+value = 200.0
+bound = "exact"
+unit = "Gbps"
+quote = "200 Gbps PAM4 SerDes · IEEE 802.3dj"
+cite = "lm_hoti26"
+source_class = "vendor_claim"
+verified = true
+location = "p12 'PASSAGE L20' spec list (also seen on rendered slide)"
+note = "Evidence: text. Extra. Press release says 'SerDes Line Rate: 212.5 Gbps PAM4' and Yole p19 says '212G PAM4 per port'; 200 Gbps here is likely the data rate rather than the line rate (my inference)."
+
+[[fact]]
+id = "l20.availability_hoti26"
+quantity = "L20 availability date shown on HOTI26 slide"
+bound = "exact"
+unit = "text"
+quote = "Q1 2027"
+cite = "lm_hoti26"
+source_class = "vendor_claim"
+verified = true
+location = "p12 'PASSAGE L20' slide header (also seen on rendered slide)"
+note = "Evidence: text. Extra. Differs from lm_pr_l20 'expected to begin sampling in late 2026'; the slide does not say whether Q1 2027 means sampling, evaluation kits or production."
+
+[[fact]]
+id = "l20.volume_vs_osfp_web"
+quantity = "L20 volume reduction vs OSFP (product page)"
+value = 88.0
+bound = "exact"
+unit = "%"
+quote = "88% smaller By volume compared to OSFP"
+cite = "lm_web_l20"
+source_class = "vendor_claim"
+verified = true
+location = "hero tile 'Density' near top of page"
+note = "Evidence: text. Extra. Names OSFP as the comparison form factor, which the Yole p20 table (pluggable 108.8 x 22.93 x 15.5mm) does not."
+
+[[fact]]
+id = "cpx.evk_ship"
+quantity = "Passage L20 CPX evaluation kit shipping date"
+bound = "exact"
+unit = "text"
+quote = "Passage L20 CPX module evaluation kits are anticipated to ship to customers in the first quarter of 2027."
+cite = "lm_pr_cpx"
+source_class = "vendor_claim"
+verified = true
+location = "paragraph 7"
+note = "Evidence: text. Extra. Consistent with the HOTI26 L20 slide 'Q1 2027'; later than the March release's 'sampling in late 2026' for the L20 module."
+
+[[fact]]
+id = "l20.bw_dcd"
+quantity = "L20 optical bandwidth as reported by DCD"
+value = 6.4
+bound = "exact"
+unit = "Tbps"
+quote = "The L20 offers 6.4Tbps optical bandwidth"
+cite = "lightmatter_l20_2026"
+source_class = "third_party"
+verified = true
+location = "paragraph 7"
+note = "Evidence: text. Extra (verifies references.bib note for lightmatter_l20_2026). DCD omits 'each direction'."
+
+[[fact]]
+id = "l20.serdes_dcd"
+quantity = "L20 SerDes line rate as reported by DCD"
+value = 212.5
+bound = "exact"
+unit = "Gbps"
+quote = "line rate based on 212.5Gbps PA 4 interfaces"
+cite = "lightmatter_l20_2026"
+source_class = "third_party"
+verified = true
+location = "paragraph 7"
+note = "Evidence: text. Extra (verifies references.bib note). DCD has the typo 'PA 4' for PAM4."
+
+[[fact]]
+id = "l20.ports_dcd"
+quantity = "L20 optical ports at 200 Gbps per lane DR, as reported by DCD"
+value = 32.0
+bound = "exact"
+unit = "count"
+quote = "32 optical ports at 200Gbps per lane DR data rates"
+cite = "lightmatter_l20_2026"
+source_class = "third_party"
+verified = true
+location = "paragraph 8"
+note = "Evidence: text. Extra (verifies references.bib note)."
+
+[[fact]]
+id = "l20.bidi_dcd"
+quantity = "L20 two-wavelength bidirectional transmission, as reported by DCD"
+bound = "exact"
+unit = "text"
+quote = "two wavelength bidirectional transmission on waveguides and fibers"
+cite = "lightmatter_l20_2026"
+source_class = "third_party"
+verified = true
+location = "paragraph 7"
+note = "Evidence: text. Extra (verifies references.bib note). DCD gives no wavelengths (1311, 1331 nm) and adds 'on waveguides and fibers'."
+
+[[fact]]
+id = "l20.tdp_max_dcd"
+quantity = "L20 maximum TDP as reported by DCD"
+value = 30.0
+bound = "max"
+unit = "W"
+quote = "a maximum TDP of 30W"
+cite = "lightmatter_l20_2026"
+source_class = "third_party"
+verified = true
+location = "paragraph 7"
+note = "Evidence: text. Extra (verifies references.bib note). DCD gives no pJ/bit figure."

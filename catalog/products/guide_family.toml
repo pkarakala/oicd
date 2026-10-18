@@ -1,0 +1,818 @@
+# Guide, Guide 1 and Guide DR: public facts with exact quotes (brief 05 phase 4 fact check, 2026-10-18).
+# Independent reconstruction from public information. Not affiliated with or endorsed by
+# Lightmatter. Product names belong to their owners.
+
+[product]
+name = "Guide, Guide 1 and Guide DR"
+family = "Guide"
+kind = "product"
+status = "Guide announced 2026-01-26; Guide DR sampling Q4 2026 (vendor claims)"
+summary = "External multi-wavelength laser engines: Guide (VLSP), Guide 1 (DWDM for microring transmitters) and Guide DR (liquid-cooled laser NIC for 200G DR lanes)."
+
+[[fact]]
+id = "guide.modules_100t_1ru_yole"
+quantity = "Guide modules for 100 Tbps of laser supply in 1RU"
+value = 4.0
+bound = "exact"
+unit = "count"
+quote = "4 x GUIDE 100T in 1RU"
+cite = "lm_yole_ofc26"
+source_class = "vendor_claim"
+verified = true
+location = "p12 right-hand caption under the 1RU chassis (also seen on rendered slide)"
+note = "Evidence: text. Wording: slide has no colon ('4 x GUIDE' above '100T in 1RU'); the Appendix adds one. My arithmetic: p13 of the same deck claims 51.2 Tbps per Guide module, so 4 modules would be 204.8 Tbps, about twice the '100T' shown."
+
+[[fact]]
+id = "guide.elsfp_100t_4ru_yole"
+quantity = "discrete ELSFP modules for 100 Tbps of laser supply in 4RU"
+value = 18.0
+bound = "exact"
+unit = "count"
+quote = "18 x ELSFP 100T in 4RU"
+cite = "lm_yole_ofc26"
+source_class = "vendor_claim"
+verified = true
+conflicts_with = ["guide.elsfp_modules_100t_hoti26"]
+location = "p12 left-hand caption under the 4RU chassis (also seen on rendered slide)"
+note = "Evidence: text. Wording: slide has no colon; the Appendix adds one. Unflagged conflict with HOTI26 p15 which shows '16 Modules' of discrete ELSFP for '100 Tbps' (guide.elsfp_modules_100t_hoti26)."
+
+[[fact]]
+id = "guide.fiber_outputs_yole"
+quantity = "Guide fiber outputs per module"
+value = 32.0
+bound = "exact"
+unit = "count"
+quote = "32 ﬁber output with > 100 mW each."
+cite = "lm_yole_ofc26"
+source_class = "vendor_claim"
+verified = true
+location = "p13 'Guide VLSP Light Engine Overview', bullet 2 (text layer spells 'fiber' with the U+FB01 ligature; also seen on rendered slide)"
+note = "Evidence: text."
+
+[[fact]]
+id = "guide.power_per_fiber_yole"
+quantity = "Guide optical power per output fiber"
+value = 100.0
+bound = "min"
+unit = "mW"
+quote = "32 ﬁber output with > 100 mW each."
+cite = "lm_yole_ofc26"
+source_class = "vendor_claim"
+verified = true
+location = "p13 'Guide VLSP Light Engine Overview', bullet 2 (also tile '100 mW+ per Fiber')"
+note = "Evidence: text. Matches. Unflagged internal tension: in the same deck, p14 'POWER IN FIBER' box plot (post 24-hr burn-in, reference lines at 100mW and 150mW) has its lower whisker at roughly 87 mW (my visual estimate), i.e. some measured fibers below 100 mW."
+
+[[fact]]
+id = "guide.mrm_optimized_yole"
+quantity = "Guide design target: microring modulator transmitters"
+bound = "exact"
+unit = "text"
+quote = "Optimized for microring modulator Tx architectures."
+cite = "lm_yole_ofc26"
+source_class = "vendor_claim"
+verified = true
+location = "p13 'Guide VLSP Light Engine Overview', bullet 3 (also seen on rendered slide)"
+note = "Evidence: text."
+
+[[fact]]
+id = "guide.lasers_per_chip_hoti26"
+quantity = "lasers per Guide VLSP chip"
+value = 128.0
+bound = "min"
+unit = "count"
+quote = "128+ Lasers per chip"
+cite = "lm_hoti26"
+source_class = "vendor_claim"
+verified = true
+location = "p18 Guide VLSP stats grid (also seen on rendered slide)"
+note = "Evidence: text. Matches. Note on the A6 conflict 'Counterpoint: 128 lasers per chip (CONFLICT with 64)': this Lightmatter slide itself says '128+ Lasers per chip'; the A6 figure of 64 is the Guide DR laser count (lm_pr_guidedr, not checked by G3), so per chip vs per module may explain the difference (my inference)."
+
+[[fact]]
+id = "guide.fit_hoti26"
+quantity = "Guide VLSP reliability (FIT), with self-healing"
+value = 0.1
+bound = "exact"
+unit = "FIT"
+quote = "0.1 FIT Reliability and self-healing"
+cite = "lm_hoti26"
+source_class = "vendor_claim"
+verified = true
+location = "p18 Guide VLSP stats grid (also seen on rendered slide)"
+note = "Evidence: text. Matches. Note: the slide gives no conditions (per laser, per chip or per module; temperature; time base)."
+
+[[fact]]
+id = "guide.power_accuracy_hoti26"
+quantity = "Guide VLSP optical power accuracy"
+value = 0.25
+bound = "exact"
+unit = "dB"
+quote = "0.25 dB Power Accuracy"
+cite = "lm_hoti26"
+source_class = "vendor_claim"
+verified = true
+location = "p18 Guide VLSP stats grid (also seen on rendered slide)"
+note = "Evidence: text."
+
+[[fact]]
+id = "guide.freq_accuracy_hoti26"
+quantity = "Guide VLSP frequency accuracy"
+value = 3.0
+bound = "exact"
+unit = "GHz"
+quote = "3 GHz Frequency Accuracy"
+cite = "lm_hoti26"
+source_class = "vendor_claim"
+verified = true
+location = "p18 Guide VLSP stats grid (also seen on rendered slide)"
+note = "Evidence: text. Matches. Unflagged tension: contrasts with lm_yole_ofc26 p14 'ACCURACY OF +/- 15 GHZ' (guide.freq_accuracy_yole) and the A6 grid tolerance of ±20 GHz; the metrics may differ (tuned accuracy vs as-built spread), the slides do not say."
+
+[[fact]]
+id = "guide.elsfp_modules_100t_hoti26"
+quantity = "discrete ELSFP laser modules needed for 100 Tbps (HOTI26)"
+value = 16.0
+bound = "exact"
+unit = "count"
+quote = "100 Tbps 16 Modules"
+cite = "lm_hoti26"
+source_class = "vendor_claim"
+verified = true
+location = "p15 'Conventional Discrete Laser Bottleneck' bar chart: 16/32/64/128 Modules for 100/200/400/800 Tbps (also seen on rendered slide)"
+note = "Evidence: text. Extra. Conflicts with lm_yole_ofc26 p12 '18 x ELSFP 100T in 4RU' (and the A6 'about 18 ELSFP in 4RU')."
+
+[[fact]]
+id = "guide.wavelengths_hoti26"
+quantity = "Guide VLSP wavelengths (multi-color)"
+value = 64.0
+bound = "min"
+unit = "count"
+quote = "64λ+ multi-color"
+cite = "lm_hoti26"
+source_class = "vendor_claim"
+verified = true
+location = "p18 Guide VLSP stats grid (also seen on rendered slide)"
+note = "Evidence: text. Extra. Related to the A6 '1 to 64 wavelengths' (lightmatter_guide_2026, not checked by G3); same slide also says '300mm CMOS SOI Wafers'."
+
+[[fact]]
+id = "guide.freq_accuracy_yole"
+quantity = "Guide wavelength (frequency) accuracy window shown in OFC 2026 data"
+value = 15.0
+bound = "exact"
+unit = "GHz"
+quote = "ACCURACY OF +/- 15 GHZ"
+cite = "lm_yole_ofc26"
+source_class = "vendor_claim"
+verified = true
+conflicts_with = ["guide.freq_accuracy_hoti26"]
+location = "p14 'Guide VLSP Industry-Leading Performance', fourth plot title; dashed lines at 15GHz and -15GHz (also seen on rendered slide)"
+note = "Evidence: text. Extra. Value is +/-15 GHz. Contrasts with HOTI26 '3 GHz Frequency Accuracy'. My visual estimate of the plotted data: whiskers about -16 to +11 GHz, median about -2 GHz, outliers near +14, -17.5 and -21 GHz, so a few points fall outside the +/-15 GHz lines."
+
+[[fact]]
+id = "guide.bw_per_module_yole"
+quantity = "Guide data bandwidth supported per module"
+value = 51.2
+bound = "exact"
+unit = "Tbps"
+quote = "51.2 Tbps per Module"
+cite = "lm_yole_ofc26"
+source_class = "vendor_claim"
+verified = true
+location = "p13 stat tile (also seen on rendered slide)"
+note = "Evidence: text. Extra. My arithmetic: 4 x 51.2 = 204.8 Tbps, about twice the '100T' that p12 attributes to 4 Guide modules."
+
+[[fact]]
+id = "guide.wavelengths"
+quantity = "wavelengths generated with multiplexing by the Guide light engine (validation platform)"
+value = 16.0
+bound = "exact"
+unit = "count"
+quote = "Wavelengths: generates 16 wavelengths with multiplexing"
+cite = "lightmatter_guide_2026"
+source_class = "vendor_claim"
+verified = true
+location = "'Lightmatter VLSP Technology Validation' bullet list, bullet 3 (raw.html.txt line 82)"
+note = "Evidence: text."
+
+[[fact]]
+id = "guide.power_per_fiber_min"
+quantity = "optical output power per fiber (power kind, average or OMA, not stated; CW source)"
+value = 100.0
+bound = "min"
+unit = "mW"
+quote = "High Optical Output Power: Minimum of 100 mW per fiber"
+cite = "lightmatter_guide_2026"
+source_class = "vendor_claim"
+verified = true
+location = "'Lightmatter VLSP Technology Validation' bullet list, bullet 2 (raw.html.txt line 81)"
+note = "Evidence: text."
+
+[[fact]]
+id = "guide.grid_spacing_per_grid"
+quantity = "spacing of each of the two interleaved wavelength grids (bidirectional links)"
+value = 400.0
+bound = "exact"
+unit = "GHz"
+quote = "two 400 GHz-spaced wavelength grids interleave at precisely 200 GHz offset"
+cite = "lightmatter_guide_2026"
+source_class = "vendor_claim"
+verified = true
+location = "'Closed-Loop Control' bullet (raw.html.txt line 83)"
+note = "Evidence: text."
+
+[[fact]]
+id = "guide.grid_offset"
+quantity = "offset between the two interleaved 400 GHz grids"
+value = 200.0
+bound = "exact"
+unit = "GHz"
+quote = "two 400 GHz-spaced wavelength grids interleave at precisely 200 GHz offset"
+cite = "lightmatter_guide_2026"
+source_class = "vendor_claim"
+verified = true
+location = "'Closed-Loop Control' bullet (raw.html.txt line 83)"
+note = "Evidence: text."
+
+[[fact]]
+id = "guide.wavelength_accuracy"
+quantity = "accuracy of the 200 GHz interleave offset (± tolerance magnitude)"
+value = 20.0
+bound = "max"
+unit = "GHz"
+quote = "+/- 20 GHz accuracy"
+cite = "lightmatter_guide_2026"
+source_class = "vendor_claim"
+verified = true
+conflicts_with = ["guide.freq_accuracy_yole"]
+location = "'Closed-Loop Control' bullet (raw.html.txt line 83)"
+note = "Evidence: text. Source writes '+/- 20 GHz' (ASCII); Appendix writes '±20 GHz'. Same value."
+
+[[fact]]
+id = "guide.power_uniformity"
+quantity = "optical power uniformity across the channels in fiber"
+value = 0.1
+bound = "max"
+unit = "dB"
+quote = "optical power uniformity of up to 0.1 dB across the channels in fiber"
+cite = "lightmatter_guide_2026"
+source_class = "vendor_claim"
+verified = true
+location = "'Closed-Loop Control' bullet (raw.html.txt line 83)"
+note = "Evidence: text."
+
+[[fact]]
+id = "guide.bw_per_module"
+quantity = "bandwidth supported per laser module (NPO and CPO applications)"
+value = 51.2
+bound = "max"
+unit = "Tbps"
+quote = "Up to 51.2 Tbps per laser module for NPO and CPO applications"
+cite = "lightmatter_guide_2026"
+source_class = "vendor_claim"
+verified = true
+location = "'Lightmatter VLSP Technology Validation' bullet list, bullet 1 ('High Bandwidth Density') (raw.html.txt line 80)"
+note = "Evidence: text."
+
+[[fact]]
+id = "guide.validation_switch_bw_1ru"
+quantity = "switch bandwidth enabled by the first-generation Guide validation platform in a 1RU chassis"
+value = 100.0
+bound = "exact"
+unit = "Tbps"
+quote = "enables 100 Tbps of switch bandwidth in a compact 1RU chassis"
+cite = "lightmatter_guide_2026"
+source_class = "vendor_claim"
+verified = true
+location = "'A New Scaling Paradigm' paragraph (raw.html.txt line 75)"
+note = "Evidence: text."
+
+[[fact]]
+id = "guide.elsfp_equiv_count"
+quantity = "conventional ELSFP modules that the same 100 Tbps would require"
+value = 18.0
+bound = "approx"
+unit = "count"
+quote = "would require about 18 conventional ELSFP modules, occupying 4RU of rack space"
+cite = "lightmatter_guide_2026"
+source_class = "vendor_claim"
+verified = true
+conflicts_with = ["guide.elsfp_modules_100t_hoti26"]
+location = "'A New Scaling Paradigm' paragraph (raw.html.txt line 75)"
+note = "Evidence: text. Conflicts with counterpoint_nvlinkfusion (Guide DR): 'Only two units are required to power a 100T switch replacing 8 conventional ELSFP format lasers' (8 vs about 18 ELSFP for ~100T). Consistent with lm_web_guide1 'nine ELSFP' per ~51 Tbps module."
+
+[[fact]]
+id = "guide.elsfp_equiv_ru"
+quantity = "rack space occupied by the ~18 ELSFP modules"
+value = 4.0
+bound = "exact"
+unit = "RU"
+quote = "occupying 4RU of rack space"
+cite = "lightmatter_guide_2026"
+source_class = "vendor_claim"
+verified = true
+location = "'A New Scaling Paradigm' paragraph (raw.html.txt line 75)"
+note = "Evidence: text."
+
+[[fact]]
+id = "guide.wavelength_roadmap"
+quantity = "laser roadmap wavelength count ('and beyond' after 64)"
+lo = 1.0
+hi = 64.0
+bound = "exact"
+unit = "count"
+quote = "efficiently scales from 1 to 64 wavelengths and beyond"
+cite = "lightmatter_guide_2026"
+source_class = "vendor_claim"
+verified = true
+location = "'A New Scaling Paradigm' paragraph (raw.html.txt line 75)"
+note = "Evidence: text. Source adds 'and beyond' after 64, which the Appendix omits; 64 is not stated as an upper limit."
+
+[[fact]]
+id = "guide.device_hours"
+quantity = "failure-free device hours cited for Guide lasers in Lightmatter validation systems (analyst relaying a vendor claim)"
+value = 2000000.0
+bound = "approx"
+unit = "h"
+quote = "Lightmatter cites approximately 2 million failure-free device hours on Guide lasers"
+cite = "futurum_ocp26"
+source_class = "third_party"
+verified = true
+location = "section 'Serviceable Connectors and Laser Supply Address CPO’s Two Hardest Objections', paragraph on Guide DR (raw.html.txt line 239)"
+note = "Evidence: text. Not in Appendix A. Third-party relay of a Lightmatter figure; same sentence: 'approaching 1 million on Passage'."
+
+[[fact]]
+id = "guide1.band_center"
+quantity = "O-band wavelength grid center"
+value = 1310.0
+bound = "exact"
+unit = "nm"
+quote = "Guide 1 features a tight O-band wavelength grid centered at 1310 nm."
+cite = "lm_web_guide1"
+source_class = "vendor_claim"
+verified = true
+location = "section '01 – Optical Architecture / 16λ DWDM Output' (raw.html.txt line 84)"
+note = "Evidence: text. Spec table also says '16λ DWDM centered at 1310 nm'."
+
+[[fact]]
+id = "guide1.wavelengths_per_fiber"
+quantity = "multiplexed wavelengths per fiber (spec table; 'scales to 16')"
+value = 8.0
+bound = "exact"
+unit = "count"
+quote = "8 multiplexed wavelengths per fiber (scales to 16)"
+cite = "lm_web_guide1"
+source_class = "vendor_claim"
+verified = true
+location = "Technical Specifications, 'Wavelength count' (raw.html.txt line 105)"
+note = "Evidence: text. Same page: hero '16 λ DWDM grid', spec 'Wavelength grid 16λ DWDM', and 'interleaved sets of 16 wavelengths per pair of fibers' (16 per fiber pair = 8 per fiber)."
+
+[[fact]]
+id = "guide1.channel_spacing"
+quantity = "channel spacing (spec table)"
+value = 200.0
+bound = "exact"
+unit = "GHz"
+quote = "Channel spacing 200 GHz"
+cite = "lm_web_guide1"
+source_class = "vendor_claim"
+verified = true
+location = "Technical Specifications, 'Channel spacing' (label and value on consecutive lines) (raw.html.txt line 108-109)"
+note = "Evidence: text. Ambiguity, not a contradiction: the page does not say whether 200 GHz is the spacing within one fiber or of the combined 16λ grid. lightmatter_guide_2026 describes two 400 GHz-spaced grids interleaved at a 200 GHz offset, which would make the per-fiber spacing 400 GHz if each fiber carries one 8λ set (inference)."
+
+[[fact]]
+id = "guide1.wavelength_stability"
+quantity = "wavelength stability (± tolerance magnitude)"
+value = 20.0
+bound = "max"
+unit = "GHz"
+quote = "Wavelength stability ±20 GHz"
+cite = "lm_web_guide1"
+source_class = "vendor_claim"
+verified = true
+location = "Technical Specifications, 'Wavelength stability' (label and value on consecutive lines) (raw.html.txt line 110-111)"
+note = "Evidence: text. Same page also says 'λ DWDM grid (±20 GHz wavelength control)' and, in the Control section, that the controller 'maintains sub-GHz wavelength precision' (see guide1.wavelength_precision); the page does not reconcile the two."
+
+[[fact]]
+id = "guide1.power_per_lambda"
+quantity = "optical output power per wavelength"
+value = 13.0
+bound = "exact"
+unit = "mW"
+quote = "13 mW/λ · ≥100 mW/fiber · 3.2–3.5 W/module"
+cite = "lm_web_guide1"
+source_class = "vendor_claim"
+verified = true
+location = "Technical Specifications, 'Optical output power' (raw.html.txt line 113)"
+note = "Evidence: text. Power kind (average or OMA) not stated (CW laser source). Arithmetic check (inference): 13 mW x 8 λ = 104 mW per fiber, consistent with ≥100 mW/fiber."
+
+[[fact]]
+id = "guide1.power_per_fiber_min"
+quantity = "optical output power per fiber"
+value = 100.0
+bound = "min"
+unit = "mW"
+quote = "≥100 mW/fiber"
+cite = "lm_web_guide1"
+source_class = "vendor_claim"
+verified = true
+location = "Technical Specifications, 'Optical output power'; also heading '≥100 mW Per Fiber' (raw.html.txt line 113)"
+note = "Evidence: text."
+
+[[fact]]
+id = "guide1.power_per_module"
+quantity = "optical output power per module"
+lo = 3.2
+hi = 3.5
+bound = "exact"
+unit = "W"
+quote = "3.2–3.5 W/module"
+cite = "lm_web_guide1"
+source_class = "vendor_claim"
+verified = true
+location = "Technical Specifications, 'Optical output power' (raw.html.txt line 113)"
+note = "Evidence: text. This is optical output power (spec label 'Optical output power'), not electrical consumption; no electrical power is given. The '02 – Power' section says '1.6W in a single package up to 3.5W in a stacked configuration', so 3.2–3.5 W/module appears to describe the stacked 32-fiber build; the page does not say so (inference: 13 mW x 8 λ x 32 fibers = 3.33 W; x 16 fibers = 1.66 W)."
+
+[[fact]]
+id = "guide1.fibers_single_package"
+quantity = "output fibers, single package"
+value = 16.0
+bound = "exact"
+unit = "count"
+quote = "16 fibers (single package) / 32 fibers (stacked)"
+cite = "lm_web_guide1"
+source_class = "vendor_claim"
+verified = true
+location = "Technical Specifications, 'Fiber configuration' (raw.html.txt line 115)"
+note = "Evidence: text."
+
+[[fact]]
+id = "guide1.fibers_stacked"
+quantity = "output fibers, stacked configuration"
+value = 32.0
+bound = "exact"
+unit = "count"
+quote = "16 fibers (single package) / 32 fibers (stacked)"
+cite = "lm_web_guide1"
+source_class = "vendor_claim"
+verified = true
+location = "Technical Specifications, 'Fiber configuration' (raw.html.txt line 115)"
+note = "Evidence: text. Optical Architecture section also says 'bidirectional communication layouts across 32 fibers in a stacked configuration'."
+
+[[fact]]
+id = "guide1.output_power_range"
+quantity = "scalable output from a single package (low end) to a stacked configuration (high end)"
+lo = 1.6
+hi = 3.5
+bound = "exact"
+unit = "W"
+quote = "ranging from 1.6W in a single package up to 3.5W in a stacked configuration"
+cite = "lm_web_guide1"
+source_class = "vendor_claim"
+verified = true
+location = "section '02 – Power / ≥100 mW Per Fiber' (raw.html.txt line 87)"
+note = "Evidence: text. Source ties 1.6W to a single package and 'up to 3.5W' to a stacked configuration; it does not say optical or electrical, but the section heading is '≥100 mW Per Fiber' and the spec table lists 3.2–3.5 W under 'Optical output power', so these read as optical output (inference)."
+
+[[fact]]
+id = "guide1.function_cw"
+quantity = "function: continuous-wave (CW) laser source for DWDM"
+bound = "exact"
+unit = "text"
+quote = "Continuous-wave (CW) laser source for DWDM"
+cite = "lm_web_guide1"
+source_class = "vendor_claim"
+verified = true
+location = "Technical Specifications, 'Function' (raw.html.txt line 103)"
+note = "Evidence: text."
+
+[[fact]]
+id = "guide1.control_cmis"
+quantity = "control interface: CMIS 5.3 over I2C / I3C"
+bound = "exact"
+unit = "text"
+quote = "CMIS 5.3 over I²C / I3C"
+cite = "lm_web_guide1"
+source_class = "vendor_claim"
+verified = true
+location = "Technical Specifications, 'Control interface' (raw.html.txt line 119)"
+note = "Evidence: text. Source writes 'I²C' with a superscript 2 (U+00B2)."
+
+[[fact]]
+id = "guide1.bw_per_module"
+quantity = "supported I/O per Guide 1 module"
+value = 51.2
+bound = "exact"
+unit = "Tbps"
+quote = "51.2 Tbps per module"
+cite = "lm_web_guide1"
+source_class = "vendor_claim"
+verified = true
+location = "hero stats 'Supported I/O' (number and unit on consecutive lines) (raw.html.txt line 69-70)"
+note = "Evidence: text. Not in Appendix A for Guide 1. Same page, Performance paragraph: 'Guide 1 powers up to 51 Tbps of I/O' (51 vs 51.2)."
+
+[[fact]]
+id = "guide1.elsfp_replaced"
+quantity = "ELSFP light sources whose output one Guide 1 replaces"
+value = 9.0
+bound = "exact"
+unit = "count"
+quote = "replacing the output of nine ELSFP light sources with a single Guide light engine"
+cite = "lm_web_guide1"
+source_class = "vendor_claim"
+verified = true
+location = "Performance paragraph ('Deep Tech and Engineering') (raw.html.txt line 81)"
+note = "Evidence: text. Not in Appendix A. Consistent with lightmatter_guide_2026 (about 18 ELSFP for 100 Tbps, i.e. two modules); conflicts with counterpoint_nvlinkfusion's 8 ELSFP for a 100T switch."
+
+[[fact]]
+id = "guide1.wavelength_precision"
+quantity = "wavelength precision maintained by the integrated controller ('sub-GHz', i.e. below 1 GHz)"
+value = 1.0
+bound = "max"
+unit = "GHz"
+quote = "maintains sub-GHz wavelength precision"
+cite = "lm_web_guide1"
+source_class = "vendor_claim"
+verified = true
+location = "section '03 – Control / Software-Defined Precision' (raw.html.txt line 90)"
+note = "Evidence: text. Not in Appendix A. Coexists with the '±20 GHz' wavelength stability spec on the same page; the page does not define precision versus stability."
+
+[[fact]]
+id = "guidedr.form_factor"
+quantity = "form factor: Laser Network Interface Card (LNIC) built to OCP NIC 3.0 dimensions"
+bound = "exact"
+unit = "text"
+quote = "Laser Network Interface Card (“LNIC”) form factor built to OCP NIC 3.0 dimensions"
+cite = "lm_pr_guidedr"
+source_class = "vendor_claim"
+verified = true
+location = "paragraph 1 (raw.html.txt line 70)"
+note = "Evidence: text. Release does not say which OCP NIC 3.0 size (SFF or LFF) and gives no mm dimensions."
+
+[[fact]]
+id = "guidedr.power_per_fiber"
+quantity = "optical power supplied per fiber"
+value = 200.0
+bound = "exact"
+unit = "mW"
+quote = "supplies 200 mW of optical power per fiber across up to 64 fibers to drive 256 lanes at 200G each"
+cite = "lm_pr_guidedr"
+source_class = "vendor_claim"
+verified = true
+location = "'Key specifications' list, 'High-Density Optical Power' bullet (raw.html.txt line 76)"
+note = "Evidence: text. Product page (lm_web_guidedr) states '≥200 mW per fiber (12.8W total)', i.e. a minimum, while the release states 200 mW flat. Power kind (average or OMA) not stated (CW laser)."
+
+[[fact]]
+id = "guidedr.fibers_max"
+quantity = "output fibers per module"
+value = 64.0
+bound = "max"
+unit = "count"
+quote = "supplies 200 mW of optical power per fiber across up to 64 fibers to drive 256 lanes at 200G each"
+cite = "lm_pr_guidedr"
+source_class = "vendor_claim"
+verified = true
+location = "'Key specifications' list, 'High-Density Optical Power' bullet (raw.html.txt line 76)"
+note = "Evidence: text."
+
+[[fact]]
+id = "guidedr.lanes"
+quantity = "lanes driven per module"
+value = 256.0
+bound = "exact"
+unit = "count"
+quote = "supplies 200 mW of optical power per fiber across up to 64 fibers to drive 256 lanes at 200G each"
+cite = "lm_pr_guidedr"
+source_class = "vendor_claim"
+verified = true
+location = "'Key specifications' list, 'High-Density Optical Power' bullet (raw.html.txt line 76)"
+note = "Evidence: text. Product page agrees: '64 Lasers inside a single Guide DR LNIC power 256 scale-up lanes at 200G'."
+
+[[fact]]
+id = "guidedr.lane_rate"
+quantity = "lane rate driven by the module ('200G')"
+value = 200.0
+bound = "exact"
+unit = "Gbps"
+quote = "supplies 200 mW of optical power per fiber across up to 64 fibers to drive 256 lanes at 200G each"
+cite = "lm_pr_guidedr"
+source_class = "vendor_claim"
+verified = true
+location = "'Key specifications' list, 'High-Density Optical Power' bullet (raw.html.txt line 76)"
+note = "Evidence: text. Source writes '200G' (unit and modulation not spelled out; Gbps assumed)."
+
+[[fact]]
+id = "guidedr.bw_per_module"
+quantity = "total bandwidth powered by one Guide DR LNIC"
+value = 51.2
+bound = "exact"
+unit = "Tbps"
+quote = "for a total bandwidth of 51.2 Tbps"
+cite = "lm_web_guidedr"
+source_class = "vendor_claim"
+verified = true
+location = "section '01 – Consolidation / Optical Power Density' (raw.html.txt line 81)"
+note = "Evidence: text. Release (lm_pr_guidedr) words it as 'designed to drive up to 51.2 Tbps of aggregate CPO or NPO scale-up bandwidth' (a maximum). Arithmetic: 256 lanes x 200G = 51.2 Tbps. Neither source says whether this counts one direction or both."
+
+[[fact]]
+id = "guidedr.optical_power_total"
+quantity = "total optical output power per module"
+value = 12.8
+bound = "exact"
+unit = "W"
+quote = "≥200 mW per fiber (12.8W total)"
+cite = "lm_web_guidedr"
+source_class = "vendor_claim"
+verified = true
+location = "Technical Specifications, 'Output power'; hero stat 'Optical Power 12.8 W per module' (raw.html.txt line 100)"
+note = "Evidence: text. 12.8 W is optical output (= 64 x 200 mW), not electrical consumption; no electrical power is disclosed."
+
+[[fact]]
+id = "guidedr.lasers_per_module"
+quantity = "lasers per Guide DR LNIC module"
+value = 64.0
+bound = "exact"
+unit = "count"
+quote = "64 Lasers inside a single Guide DR LNIC"
+cite = "lm_web_guidedr"
+source_class = "vendor_claim"
+verified = true
+conflicts_with = ["guidedr.lasers_per_chip_counterpoint"]
+location = "section '01 – Consolidation / Optical Power Density'; also spec table 'Wavelength count: 64 Lasers' and intro 'integrating 64 high-power lasers' (raw.html.txt line 81)"
+note = "Evidence: text. Spec table files this under 'Wavelength count' although only two wavelength ranges (1311/1331 nm) are listed; 64 is a laser count, not a wavelength count. Conflicts with counterpoint_nvlinkfusion 'a chip with 128 lasers' (guidedr.lasers_per_chip_counterpoint); note the units differ (module vs chip)."
+
+[[fact]]
+id = "guidedr.lambda_range_a"
+quantity = "wavelength range A"
+value = 1311.0
+bound = "exact"
+unit = "nm"
+quote = "Range A: 1311nm, Range B: 1331nm"
+cite = "lm_web_guidedr"
+source_class = "vendor_claim"
+verified = true
+location = "Technical Specifications, 'Wavelength ranges' (raw.html.txt line 102)"
+note = "Evidence: text. Single nominal values are given for each 'range'; no width or tolerance."
+
+[[fact]]
+id = "guidedr.lambda_range_b"
+quantity = "wavelength range B"
+value = 1331.0
+bound = "exact"
+unit = "nm"
+quote = "Range A: 1311nm, Range B: 1331nm"
+cite = "lm_web_guidedr"
+source_class = "vendor_claim"
+verified = true
+location = "Technical Specifications, 'Wavelength ranges' (raw.html.txt line 102)"
+note = "Evidence: text. Single nominal values are given for each 'range'; no width or tolerance."
+
+[[fact]]
+id = "guidedr.connectors"
+quantity = "optical output connectors per module (SNMT-8)"
+value = 8.0
+bound = "exact"
+unit = "count"
+quote = "8 SNMT-8 connectors"
+cite = "lm_web_guidedr"
+source_class = "vendor_claim"
+verified = true
+location = "Technical Specifications, 'Optical connector' (raw.html.txt line 106)"
+note = "Evidence: text. Fibers per SNMT-8 connector not stated (8 x 8 = 64 would match 'up to 64 fibers', but that is inference)."
+
+[[fact]]
+id = "guidedr.modules_per_1ru_tray_release"
+quantity = "Guide DR modules used for a 204.8 Tbps 1RU switch tray (May 2026 release)"
+value = 4.0
+bound = "exact"
+unit = "count"
+quote = "By utilizing four Guide DR modules, a single 1 RU switch tray can support up to 204.8 Tbps of CPO scale-up switching bandwidth"
+cite = "lm_pr_guidedr"
+source_class = "vendor_claim"
+verified = true
+conflicts_with = ["guidedr.lnic_per_1ru_tray_page"]
+location = "paragraph 2 (raw.html.txt line 71)"
+note = "Evidence: text. CONFLICT: release also says 'The modular architecture accommodates up to 4 Guide DR modules supporting scale-up bandwidth of over 200 Tbps in a 1RU switch tray' (4 as the maximum), while lm_web_guidedr says 'up to 8 LNIC in a single 1RU switch tray' (409.6 Tbps)."
+
+[[fact]]
+id = "guidedr.tray_bw_4_modules"
+quantity = "1RU switch tray bandwidth with four Guide DR modules"
+value = 204.8
+bound = "max"
+unit = "Tbps"
+quote = "By utilizing four Guide DR modules, a single 1 RU switch tray can support up to 204.8 Tbps of CPO scale-up switching bandwidth"
+cite = "lm_pr_guidedr"
+source_class = "vendor_claim"
+verified = true
+location = "paragraph 2 (raw.html.txt line 71)"
+note = "Evidence: text. Arithmetic: 4 x 51.2 = 204.8 Tbps."
+
+[[fact]]
+id = "guidedr.lnic_per_1ru_tray_page"
+quantity = "maximum Guide DR LNICs in one 1RU switch tray (product page)"
+value = 8.0
+bound = "max"
+unit = "count"
+quote = "allows up to 8 LNIC in a single 1RU switch tray, powering up to 409.6 Tbps scale-up bandwidth"
+cite = "lm_web_guidedr"
+source_class = "vendor_claim"
+verified = true
+location = "section 'ENGINEERED TO SCALE'; repeated in '01 – Consolidation' ('up to 8 LNICs fit into a single 1RU tray') (raw.html.txt line 78)"
+note = "Evidence: text. CONFLICT with lm_pr_guidedr 'accommodates up to 4 Guide DR modules' in a 1RU switch tray."
+
+[[fact]]
+id = "guidedr.tray_bw_8_lnic"
+quantity = "1RU switch tray bandwidth with eight Guide DR LNICs (product page)"
+value = 409.6
+bound = "max"
+unit = "Tbps"
+quote = "allows up to 8 LNIC in a single 1RU switch tray, powering up to 409.6 Tbps scale-up bandwidth"
+cite = "lm_web_guidedr"
+source_class = "vendor_claim"
+verified = true
+location = "section 'ENGINEERED TO SCALE' (raw.html.txt line 78)"
+note = "Evidence: text. Arithmetic: 8 x 51.2 = 409.6 Tbps."
+
+[[fact]]
+id = "guidedr.liquid_cooled"
+quantity = "cooling: liquid-cooled cold plate package"
+bound = "exact"
+unit = "text"
+quote = "using a high-efficiency liquid-cooled cold plate package design"
+cite = "lm_pr_guidedr"
+source_class = "vendor_claim"
+verified = true
+location = "'Key specifications' list, 'Thermal Efficiency' bullet; also the release title 'Industry First Liquid-Cooled Laser NIC' (raw.html.txt line 81)"
+note = "Evidence: text. Product page agrees: 'designed with an integrated cold-plate'."
+
+[[fact]]
+id = "guidedr.sampling"
+quantity = "availability: sampling start"
+bound = "exact"
+unit = "text"
+quote = "The Guide DR Laser NIC will begin sampling in Q4 2026."
+cite = "lm_pr_guidedr"
+source_class = "vendor_claim"
+verified = true
+location = "'Availability' section (raw.html.txt line 84)"
+note = "Evidence: text. futurum_ocp26 (Oct 2026) says 'Lightmatter’s first production sampling year is 2027' (production sampling, not necessarily the same milestone)."
+
+[[fact]]
+id = "guidedr.lasers_per_chip_counterpoint"
+quantity = "lasers on the Guide DR chip (Counterpoint)"
+value = 128.0
+bound = "exact"
+unit = "count"
+quote = "Guide DR consists of a chip with 128 lasers on it"
+cite = "counterpoint_nvlinkfusion"
+source_class = "third_party"
+verified = true
+location = "'Key Technology Differentiators', 'Guide DR Laser Engine' paragraph (raw.html.txt line 80)"
+note = "Evidence: text. NOT in counterpoint_ocp26 (OCP article; whole raw HTML incl. embedded JSON searched, no '128' and no laser count). Found in a different Counterpoint insight that is NOT in Appendix B: 'Lightmatter Joins NVLink Fusion Club' (Gareth Owen, 2026-06-12), https://counterpointresearch.com/en/insights/lightmatter-joins-nvlink-fusion-club, saved as SRC/counterpoint_nvlinkfusion/ (needs an Appendix B key). Counterpoint says per chip; Lightmatter (lm_web_guidedr) says '64 Lasers' per LNIC module, so the conflict may partly be chip vs module scope. Appendix A also lists '128+ lasers per chip' for lm_hoti26 (another group's item, not checked here)."
+
+[[fact]]
+id = "guidedr.density_vs_elsfp"
+quantity = "rack density relative to conventional ELSFPs"
+value = 4.0
+bound = "approx"
+unit = "1"
+quote = "enables approximately four times the rack density of conventional External Laser Small Form Factor Pluggables (ELSFPs)"
+cite = "lm_pr_guidedr"
+source_class = "vendor_claim"
+verified = true
+location = "paragraph 1 (raw.html.txt line 70)"
+note = "Evidence: text. Not in Appendix A. Product page states a different metric: 'deliver 4x higher optical power density than pluggable ELSFPs'."
+
+[[fact]]
+id = "guidedr.ashrae_class"
+quantity = "thermal environment: ASHRAE A2"
+bound = "exact"
+unit = "text"
+quote = "Optimized for A2 ASHRAE-compliant environments"
+cite = "lm_pr_guidedr"
+source_class = "vendor_claim"
+verified = true
+location = "'Key specifications' list, 'Thermal Efficiency' bullet (raw.html.txt line 81)"
+note = "Evidence: text. Not in Appendix A."
+
+[[fact]]
+id = "guidedr.band_plans"
+quantity = "supported band plans: 1311 nm UniDi, 1311/1331 nm BiDi, 8λ CWDM; custom up to 16λ DWDM"
+value = 16.0
+bound = "max"
+unit = "count"
+quote = "Guide DR supports all common O-band band configurations from 1311nm UniDi, 1311/1331nm BiDi to 8λ CWDM. Custom band plans up to 16λ DWDM are feasible."
+cite = "lm_web_guidedr"
+source_class = "vendor_claim"
+verified = true
+location = "section '04 – Compatibility / Optical Link Configurations' (raw.html.txt line 90)"
+note = "Evidence: text. Not in Appendix A. The spec table lists only 'Range A: 1311nm, Range B: 1331nm'."
+
+[[fact]]
+id = "guidedr.units_per_100t_counterpoint"
+quantity = "Guide DR units needed to power a 100T switch (Counterpoint)"
+value = 2.0
+bound = "exact"
+unit = "count"
+quote = "Only two units are required to power a 100T switch replacing 8 conventional ELSFP format lasers."
+cite = "counterpoint_nvlinkfusion"
+source_class = "third_party"
+verified = true
+location = "'Guide DR Laser Engine' section, LNIC paragraph (raw.html.txt line 81)"
+note = "Evidence: text. Not in Appendix A; source not in Appendix B. Consistent with 51.2 Tbps per module (2 x 51.2 = 102.4), but '8 conventional ELSFP' differs from Lightmatter's 'about 18 conventional ELSFP modules' for 100 Tbps (lightmatter_guide_2026) and 'nine ELSFP' per Guide 1 (lm_web_guide1)."

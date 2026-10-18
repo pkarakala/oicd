@@ -1,0 +1,270 @@
+# 16λ BiDi link (Passage EVK50): public facts with exact quotes (brief 05 phase 4 fact check, 2026-10-18).
+# Independent reconstruction from public information. Not affiliated with or endorsed by
+# Lightmatter. Product names belong to their owners.
+
+[product]
+name = "16λ BiDi link (Passage EVK50)"
+family = "Passage"
+kind = "product"
+status = "Demonstrated at OFC 2026; EVK50 product page (vendor claims)"
+summary = "Single-fiber bidirectional WDM link with interleaved wavelength grids and microring transceivers (vendor descriptions)."
+
+[[fact]]
+id = "bidi16.bw_per_fiber"
+quantity = "Throughput per fiber of the 16-lambda bidirectional link (both directions combined; slide 5 shows 8 wavelengths per direction, so about 400 Gbps each way by inference)"
+value = 800.0
+bound = "exact"
+unit = "Gbps"
+quote = "800 GBPS / FIBER"
+cite = "lm_ofc26_kumar"
+source_class = "vendor_claim"
+verified = true
+location = "Page 4 bullet list ('The first 16-wavelength bidirectional link.'); title slide '16-Wavelength 800-Gbps Bidirectional Link'"
+note = "Evidence: text."
+
+[[fact]]
+id = "bidi16.ber_no_fec"
+quantity = "Bit error rate without FEC, 16-lambda BiDi link"
+value = 1e-09
+bound = "max"
+unit = "BER"
+quote = "BER < 1E-9, NO FEC"
+cite = "lm_ofc26_kumar"
+source_class = "vendor_claim"
+verified = true
+location = "Page 4 bullet list; slide 12 plots per-lane BER for Lane_0-Lane_7 over insertions 0-9 against a 1e-9 line"
+note = "Evidence: text."
+
+[[fact]]
+id = "bidi16.energy_photonics"
+quantity = "Photonics energy per bit, 16-lambda BiDi link (scope, PIC and/or laser, not defined on slide)"
+value = 2.6
+bound = "exact"
+unit = "pJ/bit"
+quote = "2.6 PJ/BIT PHOTONICS"
+cite = "lm_ofc26_kumar"
+source_class = "vendor_claim"
+verified = true
+location = "Page 4 bullet list"
+note = "Evidence: text. No difference from the Appendix. Note (inference): 2.6 + 2 (XSR SerDes) = 4.6 pJ/bit."
+
+[[fact]]
+id = "bidi16.fiber_length"
+quantity = "Fiber length of the 16-lambda BiDi link demo (single-mode fiber spool)"
+value = 1.0
+bound = "exact"
+unit = "km"
+quote = "1 KILOMETER FIBER"
+cite = "lm_ofc26_kumar"
+source_class = "vendor_claim"
+verified = true
+location = "Page 4 bullet list; slide 5 diagram shows a '1km SMF spool'"
+note = "Evidence: text."
+
+[[fact]]
+id = "bidi16.channel_loss"
+quantity = "Channel loss of the 16-lambda BiDi link demo (1 km fiber plus 6 connectors)"
+value = 3.0
+bound = "exact"
+unit = "dB"
+quote = "3 DB CHANNEL LOSS"
+cite = "lm_ofc26_kumar"
+source_class = "vendor_claim"
+verified = true
+location = "Page 4 bullet list (the same '3 DB CHANNEL LOSS' is repeated on page 14 for the PASSAGE 100 PAM4 link)"
+note = "Evidence: text."
+
+[[fact]]
+id = "bidi16.connector_count"
+quantity = "Connectors in the 16-lambda BiDi link channel"
+value = 6.0
+bound = "exact"
+unit = "count"
+quote = "6 CONNECTORS"
+cite = "lm_ofc26_kumar"
+source_class = "vendor_claim"
+verified = true
+location = "Page 4 bullet list. By my count, the slide 5 diagram shows 2 multi-fiber MT + 4 single-fiber LC/FC connectors in the data path, which is consistent."
+note = "Evidence: text."
+
+[[fact]]
+id = "bidi16.serdes_energy"
+quantity = "XSR SerDes energy per bit, 16-lambda BiDi link"
+value = 2.0
+bound = "exact"
+unit = "pJ/bit"
+quote = "2 PJ/BIT XSR SERDES"
+cite = "lm_ofc26_kumar"
+source_class = "vendor_claim"
+verified = true
+location = "Page 4 bullet list; slide 5 diagram labels the electrical side 'XSR SerDes'"
+note = "Evidence: text."
+
+[[fact]]
+id = "bidi16.wdm_lambda_count"
+quantity = "Wavelengths on the bidirectional fiber (both directions together)"
+value = 16.0
+bound = "exact"
+unit = "count"
+quote = "16 λ"
+cite = "lm_ofc26_kumar"
+source_class = "vendor_claim"
+verified = true
+location = "Page 4 bullet list; title slide '16-Wavelength 800-Gbps Bidirectional Link over Single-Mode Fiber Using Microring Transceivers'"
+note = "Evidence: text."
+
+[[fact]]
+id = "bidi16.lambda_plan"
+quantity = "Per-direction wavelength assignment: side A transmits even-indexed λ0-λ14 (WDM Laser Module A) and side B transmits odd-indexed λ1-λ15 (WDM Laser Module B), interleaved on one fiber. That is 8 per direction, a count inferred from the listed indices."
+bound = "exact"
+unit = "text"
+quote = "WDM Laser Module A λ0, λ2, λ4, ... λ14 | WDM Laser Module B λ1, λ3, λ5, ... λ15"
+cite = "lm_ofc26_kumar"
+source_class = "vendor_claim"
+verified = true
+location = "Page 5 link diagram (image only, not in the text layer); ' | ' separates the two labels as they appear on the slide"
+note = "Evidence: image."
+
+[[fact]]
+id = "bidi16.lambda_count"
+quantity = "Wavelengths on one single-mode fiber in the 16-wavelength BiDi link (8 per direction; odd λ1..λ15 one way, even λ2..λ16 the other)"
+value = 16.0
+bound = "exact"
+unit = "count"
+quote = "16 distinct wavelengths of light centered on the 1310 nm band"
+cite = "lm_blog_doubling"
+source_class = "vendor_claim"
+verified = true
+location = "section 'A New Architecture for AI Interconnect', paragraph 1"
+note = "Evidence: text."
+
+[[fact]]
+id = "bidi16.center_nm"
+quantity = "Center of the 16-wavelength grid"
+value = 1310.0
+bound = "approx"
+unit = "nm"
+quote = "centered on the 1310 nm band"
+cite = "lm_blog_doubling"
+source_class = "vendor_claim"
+verified = true
+location = "section 'A New Architecture for AI Interconnect', paragraph 1"
+note = "Evidence: text. Source says 'centered on the 1310 nm band', a band rather than a stated center wavelength or grid anchor; absolute channel frequencies are not given."
+
+[[fact]]
+id = "bidi16.same_dir_spacing_ghz"
+quantity = "Spacing between channels travelling in the same direction"
+value = 400.0
+bound = "exact"
+unit = "GHz"
+quote = "400 GHz spacing between channels going the same way"
+cite = "lm_blog_doubling"
+source_class = "vendor_claim"
+verified = true
+location = "section 'A New Architecture for AI Interconnect', paragraph 2"
+note = "Evidence: text."
+
+[[fact]]
+id = "bidi16.txrx_spacing_ghz"
+quantity = "Spacing between adjacent transmit and receive (opposite-direction) channels"
+value = 200.0
+bound = "exact"
+unit = "GHz"
+quote = "200 GHz spacing between adjacent transmit and receive channels"
+cite = "lm_blog_doubling"
+source_class = "vendor_claim"
+verified = true
+location = "section 'A New Architecture for AI Interconnect', paragraph 2 (preceded by 'a tight')"
+note = "Evidence: text."
+
+[[fact]]
+id = "bidi16.rate_per_lambda_gbps"
+quantity = "Data rate per wavelength (8 x 50 Gbps = 400 Gbps per direction; 800 Gbps per fiber over 1 km)"
+value = 50.0
+bound = "exact"
+unit = "Gbps"
+quote = "With each channel operating at 50 Gbps"
+cite = "lm_blog_doubling"
+source_class = "vendor_claim"
+verified = true
+location = "section 'A New Architecture for AI Interconnect', paragraph 1"
+note = "Evidence: text. lm_web_evk50 lists 'Modulation 56 Gbps NRZ' for the EVK50 16-wavelength BiDi link (bidi16.evk50_modulation_gbps); 50 Gbps fits the stated 400 Gbps per direction, 56 Gbps does not."
+
+[[fact]]
+id = "bidi16.mrm_count"
+quantity = "Microring modulators on the Passage chip for the 16-wavelength BiDi link"
+value = 8.0
+bound = "exact"
+unit = "count"
+quote = "The system uses eight ultra-efficient micro-ring modulators (MRMs) to encode data"
+cite = "lm_blog_doubling"
+source_class = "vendor_claim"
+verified = true
+location = "section 'Under the Hood: High Performance Silicon Photonics'"
+note = "Evidence: text. lm_blog_seeing's Figure 2 caption describes 'a worst-case 1-kilometer Passage link with 16 MRMs' (consistent with 8 per end, which no source states)."
+
+[[fact]]
+id = "bidi16.wallplug_pj_bit"
+quantity = "Wall-plug energy per bit of the HOTI 2025 16-wavelength BiDi Passage link = 2.6 pJ/bit photonics + Guide laser + ~2 pJ/bit off-the-shelf XSR SerDes"
+value = 4.6
+bound = "exact"
+unit = "pJ/bit"
+quote = "The system achieves wall-plug efficiency of 4.6 pJ/bit, inclusive of the 2.6 pJ/bit for the photonics and external light source (Guide), and ~2 pJ/bit for an off-the-shelf XSR SerDes co-packaged with Passage"
+cite = "lm_blog_seeing"
+source_class = "vendor_claim"
+verified = true
+location = "section 'Hot Interconnects: Redefining Performance and Efficiency', 'Unprecedented Efficiency' bullet"
+note = "Evidence: text."
+
+[[fact]]
+id = "bidi16.evk50_bw_per_dir_gbps"
+quantity = "EVK50 bandwidth per fiber in each direction: 400 Gbps Tx + 400 Gbps Rx = 800 Gbps per fiber strand (16 wavelengths, 8 each way)"
+value = 400.0
+bound = "exact"
+unit = "Gbps"
+quote = "800 Gbps per fiber strand with 400 Gbps Tx and 400 Gbps Rx"
+cite = "lm_web_evk50"
+source_class = "vendor_claim"
+verified = true
+location = "'Innovation' section, 'Link Architecture' item"
+note = "Evidence: text."
+
+[[fact]]
+id = "bidi16.evk50_modulation_gbps"
+quantity = "EVK50 modulation format and lane rate (Technical Specifications table)"
+value = 56.0
+bound = "exact"
+unit = "Gbps"
+quote = "Modulation 56 Gbps NRZ"
+cite = "lm_web_evk50"
+source_class = "vendor_claim"
+verified = true
+conflicts_with = ["bidi16.rate_per_lambda_gbps"]
+location = "'Technical Specifications' table, 'Modulation' row"
+note = "Evidence: text. Inconsistent with this page's own 400 Gbps per direction over 8 wavelengths (= 50 Gbps per wavelength; 8 x 56 = 448 Gbps), with lm_blog_doubling ('each channel operating at 50 Gbps') and with lm_yole_ofc26 slide 9 for the EVK50 ('8λ/fiber, 50 Gbps/λ'; panel 'SerDes Speed 50 Gbps'). No source explains the 56 Gbps figure."
+
+[[fact]]
+id = "bidi16.evk50_efficiency_pj_bit"
+quantity = "EVK50 'Total link efficiency' including laser (photonics + Guide laser; excludes SerDes per lm_blog_seeing)"
+value = 2.6
+bound = "exact"
+unit = "pJ/bit"
+quote = "Total link efficiency 2.6 pJ/bit including Laser"
+cite = "lm_web_evk50"
+source_class = "vendor_claim"
+verified = true
+location = "'Technical Specifications' table; also 'Measured Efficiency 2.6 pJ / bit' and '2.6 pJ/bit total link efficiency at rack scale'"
+note = "Evidence: text. Naming conflict: lm_blog_seeing gives 4.6 pJ/bit wall-plug for the 16-wavelength BiDi link, of which 2.6 pJ/bit is photonics + Guide laser and ~2 pJ/bit the XSR SerDes; this page calls 2.6 pJ/bit the 'Total link efficiency', i.e. without SerDes."
+
+[[fact]]
+id = "bidi16.evk50_ofc26_live_bw_per_dir"
+quantity = "EVK50 as run live at OFC 2026: 4+4 band-interleaved BiDi, 8 wavelengths per fiber at 50 Gbps each, 200 m SMF; bandwidth per fiber in each direction"
+value = 200.0
+bound = "exact"
+unit = "Gbps"
+quote = "400 Gbps BiDi (200 Gbps Tx, 200 Gbps Rx) per fiber"
+cite = "lm_yole_ofc26"
+source_class = "vendor_claim"
+verified = true
+location = "slide 9 (text layer; slide also viewed as an image)"
+note = "Evidence: text. Differs from the EVK50 product page (16 wavelengths, 400 Gbps Tx + 400 Gbps Rx per fiber): the OFC 2026 live demo used half the wavelengths and a band-interleaved (4+4) rather than odd/even-interleaved plan. Futurum (futurum_ocp26) says Lightmatter 'reconfigured its 16-wavelength demo to replicate the MSA’s Gen 2 spec at OFC'."

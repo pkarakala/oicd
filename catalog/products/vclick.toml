@@ -1,0 +1,176 @@
+# vClick optics: public facts with exact quotes (brief 05 phase 4 fact check, 2026-10-18).
+# Independent reconstruction from public information. Not affiliated with or endorsed by
+# Lightmatter. Product names belong to their owners.
+
+[product]
+name = "vClick optics"
+family = "Passage"
+kind = "product"
+status = "Announced 2026-03-11 (vendor and partner releases)"
+summary = "Detachable fiber-array unit with vertical expanded-beam coupling to the PIC, built with SENKO (vendor and partner descriptions)."
+
+[[fact]]
+id = "vclick.il_reinsertion_max"
+quantity = "vClick detachable FAU insertion and re-insertion loss, demonstrated (no wavelength, mating-cycle count or measurement conditions stated)"
+value = 1.5
+bound = "max"
+unit = "dB"
+quote = "A demonstrated insertion and re-insertion loss of less than 1.5 dB"
+cite = "lm_pr_vclick"
+source_class = "vendor_claim"
+verified = true
+conflicts_with = ["vclick.il_futurum"]
+location = "'Key advantages' list, 'Field Serviceability' item; paragraph 1 also says 'demonstrating a low insertion loss of less than 1.5 dB'"
+note = "Evidence: text."
+
+[[fact]]
+id = "vclick.wdm_span_nm"
+quantity = "Spectral span over which vClick supports CWDM and DWDM (Lightmatter wording)"
+value = 80.0
+bound = "min"
+unit = "nm"
+quote = "Supports broadband (up to 80+ nanometers) Coarse Wavelength Division Multiplexing (CWDM) and Dense Wavelength Division Multiplexing (DWDM)"
+cite = "lm_pr_vclick"
+source_class = "vendor_claim"
+verified = true
+location = "'Key advantages' list, 'High Bandwidth DWDM Compatibility' item"
+note = "Evidence: text. Wording only: Lightmatter writes 'up to 80+ nanometers' ('up to' qualifying an open-ended '80+'); SENKO writes 'more than 80 nm of spectrum' (vclick.wdm_span_nm_senko). Recorded as min 80 nm. Neither source gives band edges or a center wavelength."
+
+[[fact]]
+id = "vclick.wdm_span_nm_senko"
+quantity = "Spectral span over which vClick supports CWDM and DWDM (SENKO wording)"
+value = 80.0
+bound = "min"
+unit = "nm"
+quote = "Supports broadband CWDM and DWDM operation across more than 80 nm of spectrum"
+cite = "senko_pr_vclick"
+source_class = "vendor_claim"
+verified = true
+location = "'Key Advantages of Lightmatter vClick Optics', 'High‑Bandwidth Optical Connectivity' item"
+note = "Evidence: text."
+
+[[fact]]
+id = "vclick.mold_and_grind"
+quantity = "Compatible with mold-and-grind advanced packaging flows (Lightmatter: 'as demonstrated in ASE’s advanced packaging flows')"
+bound = "exact"
+unit = "text"
+quote = "The technology is mold-and-grind compatible across advanced packaging flows"
+cite = "lm_pr_vclick"
+source_class = "vendor_claim"
+verified = true
+location = "'Key advantages' list, 'Advanced Packaging Compatible' item; also paragraph 3"
+note = "Evidence: text."
+
+[[fact]]
+id = "vclick.no_active_alignment"
+quantity = "No active fiber alignment needed in assembly (SENKO: 'passive expanded‑beam interface')"
+bound = "exact"
+unit = "text"
+quote = "Does not require active fiber alignment during production"
+cite = "lm_pr_vclick"
+source_class = "vendor_claim"
+verified = true
+location = "'Key advantages' list, 'Automated Assembly' item"
+note = "Evidence: text."
+
+[[fact]]
+id = "vclick.senko_seat_mpc"
+quantity = "Uses SENKO SEAT optical interface and SENKO MPC (Metallic PIC Coupler) connector; MPC variant not named"
+bound = "exact"
+unit = "text"
+quote = "SENKO’s SEAT™ and MPC Connector solutions"
+cite = "lm_pr_vclick"
+source_class = "vendor_claim"
+verified = true
+location = "section 'vClick Optics: Shifting Left to Scale Photonic Interconnect Production', paragraph 1"
+note = "Evidence: text."
+
+[[fact]]
+id = "vclick.vertical_expanded_beam"
+quantity = "Optical interface: Lightmatter vertically expanded-beam coupling between fiber array and PIC"
+bound = "exact"
+unit = "text"
+quote = "Lightmatter’s vertically expanded-beam photonic technology"
+cite = "lm_pr_vclick"
+source_class = "vendor_claim"
+verified = true
+location = "section 'vClick Optics: Shifting Left to Scale Photonic Interconnect Production', paragraph 1"
+note = "Evidence: text. Wording only: Lightmatter says 'vertically expanded-beam photonic technology'; the exact phrase 'vertical expanded beam architecture' is in senko_pr_vclick."
+
+[[fact]]
+id = "vclick.il_futurum"
+quantity = "vClick insertion loss as relayed by Futurum from Lightmatter (analyst report of a verbal company claim)"
+value = 1.0
+bound = "max"
+unit = "dB"
+quote = "Lightmatter told Futurum the connector demonstrates insertion loss below 1 dB"
+cite = "futurum_ocp26"
+source_class = "third_party"
+verified = true
+location = "section 'Serviceable Connectors and Laser Supply Address CPO’s Two Hardest Objections', paragraph 1; repeated in 'What to Watch' ('sub-1 dB detachable loss')"
+note = "Evidence: text. CONFLICT with both March 2026 releases (lm_pr_vclick, senko_pr_vclick), which claim insertion and re-insertion loss 'less than 1.5 dB'. Futurum attributes the sub-1 dB figure to Lightmatter verbally and recasts ~1.5 dB as 'an industry benchmark near 1.5 dB for permanently attached fiber requiring active alignment'. No Lightmatter document in this group states < 1 dB. The article carries a generative-AI assistance disclosure."
+
+[[fact]]
+id = "vclick.count_switch_tray"
+quantity = "vClick detachable fiber connectors in the OCP 2026 1RU 204.8T CPO switch tray built with Flex (same tray: eight Passage CPO engines)"
+value = 8.0
+bound = "exact"
+unit = "count"
+quote = "eight vClick detachable fiber connectors"
+cite = "counterpoint_ocp26"
+source_class = "third_party"
+verified = true
+location = "first of the two reference-design bullets"
+note = "Evidence: text."
+
+[[fact]]
+id = "vclick.count_xpu_tray"
+quantity = "Passage engines with vClick in the OCP 2026 102.4T XPU tray ('four Passage and vClick units'; engine and connector counts not separated)"
+value = 4.0
+bound = "exact"
+unit = "count"
+quote = "four Passage and vClick units"
+cite = "counterpoint_ocp26"
+source_class = "third_party"
+verified = true
+location = "second of the two reference-design bullets"
+note = "Evidence: text. Same bullet calls the server '2RU 102.4 Gbps' (unit presumably Tbps) with 'two Guide DR modules'; the 2RU and Guide DR counts conflict with other sources (A7, another group)."
+
+[[fact]]
+id = "senko.mpc20_fiber_count"
+quantity = "SENKO MPC20 Metallic PIC Coupler fiber count"
+value = 20.0
+bound = "exact"
+unit = "count"
+quote = "accommodates 20 fibers with a 127um pitch between each fibers"
+cite = "senko_mpc20"
+source_class = "published_spec"
+verified = true
+location = "product description, paragraph 2"
+note = "Evidence: text."
+
+[[fact]]
+id = "senko.mpc20_pitch_um"
+quantity = "SENKO MPC20 fiber pitch"
+value = 127.0
+bound = "exact"
+unit = "um"
+quote = "20 fibers with a 127um pitch"
+cite = "senko_mpc20"
+source_class = "published_spec"
+verified = true
+location = "product description, paragraph 2"
+note = "Evidence: text."
+
+[[fact]]
+id = "senko.mpc20_profile_mm"
+quantity = "SENKO MPC20 profile height"
+value = 1.2
+bound = "max"
+unit = "mm"
+quote = "Low Profile, less than 1.2mm"
+cite = "senko_mpc20"
+source_class = "published_spec"
+verified = true
+location = "feature list under the product description"
+note = "Evidence: text."

@@ -64,13 +64,13 @@ Baseline before Phase 0 (brief 03 tree on `main`): pytest 147 passed, ruff check
 
 ## Phase 4: twin foundation
 
-- [ ] 4.1 PEER_REVIEWED and THIRD_PARTY source classes (citation key required); card §7 row
-- [ ] 4.2 Catalog file format: catalog/products/<product>.toml and catalog/geometry/<scene>.toml
-- [ ] 4.3 Fact verification: every Appendix A fact checked against its opened source, exact quote stored, verified flag set
-- [ ] 4.4 src/oicd/twin/catalog.py: Pydantic models and validation (unique ids, cites in references.bib, inputs resolve, no cycles)
-- [ ] 4.5 src/oicd/twin/formulas.py: pure typed functions with units in names, each unit-tested
-- [ ] 4.6 src/oicd/twin/inference.py: nominal/lo/hi (corners; Monte Carlo above 12 interval parents, flagged), class, derivation strings; checks CONSISTENT/TENSION/CONFLICT; hypotheses and support matrix; tornado
-- [ ] 4.7 Tests: catalog validation, toy graph with hand values, support matrix, tornado
+- [x] 4.1 PEER_REVIEWED and THIRD_PARTY source classes (citation key required); card §7 row — 3b4f339 (engine, first phase 4 commit); pytest 301 passed, ruff clean
+- [x] 4.2 Catalog file format: catalog/products/<product>.toml and catalog/geometry/<scene>.toml — 3b4f339 (engine, first phase 4 commit); pytest 301 passed, ruff clean
+- [x] 4.3 Fact verification: every Appendix A fact checked against its opened source, exact quote stored, verified flag set — phase 4 facts commit (hash in the next entry); 498 facts, 454 verified, every text quote machine-checked
+- [x] 4.4 src/oicd/twin/catalog.py: Pydantic models and validation (unique ids, cites in references.bib, inputs resolve, no cycles) — 3b4f339 (engine, first phase 4 commit); pytest 301 passed, ruff clean
+- [x] 4.5 src/oicd/twin/formulas.py: pure typed functions with units in names, each unit-tested — 3b4f339 (engine, first phase 4 commit); pytest 301 passed, ruff clean
+- [x] 4.6 src/oicd/twin/inference.py: nominal/lo/hi (corners; Monte Carlo above 12 interval parents, flagged), class, derivation strings; checks CONSISTENT/TENSION/CONFLICT; hypotheses and support matrix; tornado — 3b4f339 (engine, first phase 4 commit); pytest 301 passed, ruff clean
+- [x] 4.7 Tests: catalog validation, toy graph with hand values, support matrix, tornado — 3b4f339 (engine, first phase 4 commit); pytest 301 passed, ruff clean
 - [ ] 4.8 Phase 4 checks green and commit
 
 ## Phase 5: device and link physics
@@ -83,7 +83,7 @@ Baseline before Phase 0 (brief 03 tree on `main`): pytest 147 passed, ruff check
 - [x] 5.6 Guide grid (INFERENCE) and aliasing analysis — phase 5 commit
 - [x] 5.7 BiDi link model in bidi.py (per-direction budget, diplexer IL, reflection crosstalk, MPI, containment, G.652 fiber loss); §4 note cites itut_g652_2024 — phase 5 commit
 - [x] 5.8 Hand-calc script with every brief value; tests and properties — phase 5 commit
-- [ ] 5.9 Phase 5 checks green and commit
+- [x] 5.9 Phase 5 checks green and commit — 5558b7e; pytest 335 passed, ruff check and format clean; no web changes
 
 ## Phase 6: product twins and the reference rack
 
@@ -157,3 +157,5 @@ Baseline before Phase 0 (brief 03 tree on `main`): pytest 147 passed, ruff check
 | 1 | b6e9c6e | 149 passed | clean | clean | ok | ok | 1 passed | n/a |
 | 2 | 832ea3e | 206 passed | clean | clean | ok | ok | 1 passed | n/a |
 | 3 | 83416c0 | 238 passed | clean | clean | n/a | n/a | n/a | n/a |
+| 4 (engine) | 3b4f339 | 301 passed | clean | clean | n/a | n/a | n/a | n/a |
+| 5 | 5558b7e | 335 passed | clean | clean | n/a | n/a | n/a | n/a |

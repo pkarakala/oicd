@@ -14,7 +14,7 @@ from oicd.checks.electrical import check_electrical
 from oicd.checks.power_budget import check_power_budget
 from oicd.checks.wavelength import check_wavelength
 from oicd.provenance import Provenance, SourceClass
-from oicd.registry import NOT_EVALUATED, ConstraintId
+from oicd.registry import EPSILON_DB, NOT_EVALUATED, ConstraintId
 from oicd.schema import Link
 from oicd.units import DB, DBm
 
@@ -52,7 +52,10 @@ class TracePoint(BaseModel):
     """OMA at TP2, after each channel element in order, and at TP3.
 
     loss_db and loss_fraction (share of the total channel loss) are set for loss elements and
-    are None at the reference planes. headroom_db = power_dbm − threshold_dbm.
+    are None at the reference planes. headroom_db = power_dbm − threshold_dbm (model card §3),
+    computed in the same order as M_net, so the TP3 value equals margin_db exactly.
+    above_threshold = headroom_db ≥ −ε, the verdict's pass rule; displays use only this flag to
+    decide above or below threshold.
     """
 
     model_config = _FROZEN
@@ -65,6 +68,7 @@ class TracePoint(BaseModel):
     loss_db: float | None
     loss_fraction: float | None
     headroom_db: float
+    above_threshold: bool
 
 
 class FeasibilityReport(BaseModel):
@@ -201,10 +205,14 @@ def power_trace(link: Link) -> tuple[TracePoint, ...]:
     """OMA at TP2, after each loss element, and at TP3.
 
     Losses are accumulated in channel order with the same start and order as the power-budget
-    check, so the TP3 point equals the check's p_tp3_dbm exactly.
+    check, so the TP3 point equals the check's p_tp3_dbm exactly. Headroom is evaluated as
+    (P − S_RX) − ΣΠ − R, the order of M_net, so headroom and above_threshold at TP3 equal the
+    check's margin_db and status bit for bit (model card §3).
     """
     launch = link.tx.launch_oma_min.value.power_dbm
-    thr = threshold(link)
+    sensitivity = link.rx.sensitivity_oma_max.value.power_dbm
+    penalties = sum((p.value.value for p in link.penalties), start=DB(0.0))
+    reserve = link.reserve.value
     total_loss = sum((e.loss_max.value for e in link.channel), start=DB(0.0))
 
     def point(
@@ -217,6 +225,7 @@ def power_trace(link: Link) -> tuple[TracePoint, ...]:
         fraction = None
         if loss is not None:
             fraction = loss.value / total_loss.value if total_loss.value > 0.0 else 0.0
+        headroom = ((power - sensitivity) - penalties) - reserve
         return TracePoint(
             kind=kind,
             name=name,
@@ -225,7 +234,8 @@ def power_trace(link: Link) -> tuple[TracePoint, ...]:
             power_dbm=power.value,
             loss_db=None if loss is None else loss.value,
             loss_fraction=fraction,
-            headroom_db=(power - thr).value,
+            headroom_db=headroom.value,
+            above_threshold=headroom.value >= -EPSILON_DB,
         )
 
     points = [point("reference_plane", "TP2", launch)]

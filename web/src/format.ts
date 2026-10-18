@@ -16,6 +16,22 @@ export function inputsFor(report: FeasibilityReport, point: TracePoint): InputRe
   return prefix === null ? [] : report.inputs.filter((r) => r.path.startsWith(prefix))
 }
 
+/** At TP3 the threshold is S_RX + ΣΠ + R, so its panel also lists the penalty and reserve
+ * records (review R3). Empty for every other point. */
+export function thresholdTermsFor(report: FeasibilityReport, point: TracePoint): InputRecord[] {
+  if (point.kind !== 'reference_plane' || point.name !== 'TP3') return []
+  return report.inputs.filter((r) => r.path.startsWith('penalties[') || r.path === 'reserve')
+}
+
+/** Index of the trace point a selection key names, or null when it names none or several.
+ * Keys are point names ("TP2", "TP3" or the element name), which survive a connector insert;
+ * input paths do not, because they carry the channel index (review R5). */
+export function indexForKey(report: FeasibilityReport, key: string | null): number | null {
+  if (key === null) return null
+  const matches = report.power_trace.flatMap((p, i) => (p.name === key ? [i] : []))
+  return matches.length === 1 ? (matches[0] ?? null) : null
+}
+
 /** The one record shown in a hover tooltip: the loss, or the launch/sensitivity at a plane. */
 export function primaryInput(report: FeasibilityReport, point: TracePoint): InputRecord | undefined {
   const all = inputsFor(report, point)

@@ -4,7 +4,7 @@ import { Controls } from './components/Controls'
 import { ChecksPanel, ProvenancePanel } from './components/Panels'
 import { type CameraPreset, Scene3D } from './components/Scene3D'
 import { Waterfall } from './components/Waterfall'
-import { fmt } from './format'
+import { fmt, indexForKey } from './format'
 import type { FeasibilityReport, Link } from './types'
 
 const DEBOUNCE_MS = 150
@@ -16,7 +16,9 @@ export default function App() {
   const [error, setError] = useState<string | null>(null)
   const [pending, setPending] = useState(false)
   const [hovered, setHovered] = useState<number | null>(null)
-  const [selected, setSelected] = useState<number | null>(null)
+  // Selection is a stable key (the trace point's name), not an index, so inserting a connector
+  // never moves an open panel to another component (review R5).
+  const [selectedKey, setSelectedKey] = useState<string | null>(null)
   const [preset, setPreset] = useState<CameraPreset>('overview')
   const requestId = useRef(0)
 
@@ -57,11 +59,13 @@ export default function App() {
     }
   }, [link])
 
-  // Indices shift when a connector is added; drop a selection that no longer exists.
-  const traceLength = report?.power_trace.length ?? 0
+  const selected = report === null ? null : indexForKey(report, selectedKey)
+  const select = (index: number | null) =>
+    setSelectedKey(index === null || report === null ? null : (report.power_trace[index]?.name ?? null))
+  // Drop a key that no longer names exactly one point.
   useEffect(() => {
-    if (selected !== null && selected >= traceLength) setSelected(null)
-  }, [selected, traceLength])
+    if (report !== null && selectedKey !== null && indexForKey(report, selectedKey) === null) setSelectedKey(null)
+  }, [report, selectedKey])
 
   return (
     <div className="app">
@@ -106,7 +110,7 @@ export default function App() {
                 selected={selected}
                 preset={preset}
                 onHover={setHovered}
-                onSelect={setSelected}
+                onSelect={select}
               />
             )}
           </div>
@@ -117,7 +121,7 @@ export default function App() {
         </div>
 
         {report && selected !== null && (
-          <ProvenancePanel report={report} index={selected} onClose={() => setSelected(null)} />
+          <ProvenancePanel report={report} index={selected} onClose={() => setSelectedKey(null)} />
         )}
       </main>
 

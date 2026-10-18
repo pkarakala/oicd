@@ -6,11 +6,13 @@ Expected values come from docs/model_card.md (§4 worked example, §5 table).
 import json
 
 import pytest
+from hypothesis import given
+from hypothesis import strategies as st
 
 from oicd.checks import Status
 from oicd.profiles import PROFILES_DIR, load_link, profile_path
 from oicd.provenance import SourceClass
-from oicd.registry import ConstraintId
+from oicd.registry import EPSILON_DB, ConstraintId
 from oicd.report import FeasibilityReport, evaluate
 from oicd.schema import Link
 
@@ -150,3 +152,54 @@ def test_profile_path_rejects_unknown_and_traversal():
     for bad in ("no_such_profile", "../pyproject", "worked_example.json", ""):
         with pytest.raises(FileNotFoundError):
             profile_path(bad)
+
+
+def test_T16_trace_flag_at_exact_boundary(make_link):
+    # T16 (review R1): losses 0.1, 0, 1.0, 0, 0.2 dB, R = 4.7 dB, T01 otherwise. Exact M = 0:
+    # NOT_EXCLUDED, TP3 above_threshold true, |headroom_db(TP3)| < 1e-9.
+    losses = (0.1, 0.0, 1.0, 0.0, 0.2)
+    link = make_link(channel_db=tuple((f"l{i}", v) for i, v in enumerate(losses)), reserve_db=4.7)
+    report = evaluate(link)
+    assert report.verdict == "NOT_EXCLUDED"
+    tp3 = report.power_trace[-1]
+    assert tp3.name == "TP3"
+    assert tp3.above_threshold is True
+    assert abs(tp3.headroom_db) < 1e-9
+    # §3: headroom at TP3 equals M_net.
+    assert tp3.headroom_db == report.margin_db
+
+
+# Losses, penalties and reserve on a 0.1 dB grid make exact-on-paper boundaries common (the
+# review found 110 of them in a small grid); a continuous strategy covers everything else.
+grid_db = st.integers(min_value=0, max_value=60).map(lambda k: k / 10)
+any_db = st.floats(min_value=0.0, max_value=20.0, allow_nan=False, allow_infinity=False)
+level_db = st.one_of(st.integers(min_value=-100, max_value=100).map(lambda k: k / 10), any_db)
+
+
+@given(
+    losses=st.lists(st.one_of(grid_db, any_db), max_size=6),
+    penalties=st.lists(st.one_of(grid_db, any_db), max_size=3),
+    reserve=st.one_of(grid_db, any_db),
+    launch=level_db,
+    sensitivity=level_db,
+)
+def test_verdict_and_tp3_flag_always_agree(
+    make_link, losses, penalties, reserve, launch, sensitivity
+):
+    # §3: M_net decides; above_threshold uses the same ε rule; at TP3 headroom equals M_net.
+    link = make_link(
+        channel_db=tuple((f"l{i}", v) for i, v in enumerate(losses)),
+        penalties_db=tuple((f"p{i}", v) for i, v in enumerate(penalties)),
+        reserve_db=reserve,
+        launch_dbm=launch,
+        sensitivity_dbm=sensitivity,
+    )
+    report = evaluate(link)
+    tp3 = report.power_trace[-1]
+    budget = report.results[2]
+    assert tp3.headroom_db == report.margin_db
+    assert (budget.status is Status.PASS) is tp3.above_threshold
+    # The default link passes the electrical and wavelength checks, so the verdict is the budget.
+    assert (report.verdict == "NOT_EXCLUDED") is tp3.above_threshold
+    for point in report.power_trace:
+        assert point.above_threshold is (point.headroom_db >= -EPSILON_DB)

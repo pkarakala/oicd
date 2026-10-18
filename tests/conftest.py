@@ -24,12 +24,13 @@ REPRESENTATIVE_200G = Provenance(
     "FEC assumed RS(544,514); IEEE 802.3 clause not yet cited.",
 )
 
-# Model card §4 channel, TP2 to TP3.
+# Model card §4 channel, TP2 to TP3, in the §2 order (fiber as two 1 m segments).
 WORKED_EXAMPLE_CHANNEL_DB = (
     ("TX FAU mating", 1.5),
+    ("SMF 1 m (TX side)", 0.0004),
     ("patch connector", 1.0),
+    ("SMF 1 m (RX side)", 0.0004),
     ("RX FAU mating", 1.5),
-    ("2 m SMF at 0.4 dB/km", 0.0008),
 )
 
 

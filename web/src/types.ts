@@ -99,6 +99,7 @@ export interface TracePoint {
   loss_db: number | null
   loss_fraction: number | null
   headroom_db: number
+  above_threshold: boolean
 }
 
 export interface FeasibilityReport {

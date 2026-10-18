@@ -42,7 +42,8 @@ export function Waterfall({ report, hovered, onHover }: Props) {
       ),
       hoverinfo: 'text',
       marker: {
-        color: losses.map((i) => ((trace[i]?.headroom_db ?? 0) >= 0 ? '#22c55e' : '#ef4444')),
+        // Hue from the API's above_threshold flag only (review R1).
+        color: losses.map((i) => (trace[i]?.above_threshold ? '#22c55e' : '#ef4444')),
         opacity: losses.map((i) => (hovered === null || hovered === i ? 0.95 : 0.45)),
         line: { color: '#fbbf24', width: losses.map((i) => (hovered === i ? 3 : 0)) },
       },

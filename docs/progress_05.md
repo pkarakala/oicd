@@ -17,23 +17,23 @@ Baseline before Phase 0 (brief 03 tree on `main`): pytest 147 passed, ruff check
 
 - [x] 0.1 Commit the brief 03 work as "brief 03: report, API, 3D explorer" (421fc08)
 - [x] 0.2 Commit the brief as "brief 05: add brief"; git status clean (5469737; also holds briefs/04-state-of-the-art-explorer.md, decision D05-1)
-- [ ] 0.3 Append the "Active run" and "Compact instructions" section to CLAUDE.md and commit
-- [ ] 0.4 Create docs/progress_05.md with the uv, Python, Node and npm versions
+- [x] 0.3 Append the "Active run" and "Compact instructions" section to CLAUDE.md and commit — d0b203f; pytest 147 passed, ruff clean
+- [x] 0.4 Create docs/progress_05.md with the uv, Python, Node and npm versions — d0b203f; pytest 147 passed, ruff clean
 
 ## Phase 1: review fixes R1 to R6 (brief 04 phase A)
 
-- [ ] 1.1 R1 engine: `above_threshold: bool` on every power_trace point, same ε rule as the verdict
-- [ ] 1.2 R1 web: fiber tube and waterfall bars colored from that flag only
-- [ ] 1.3 R1 test: losses [0.1, 0, 1.0, 0, 0.2] dB, R 4.7 dB, T01 otherwise → NOT_EXCLUDED, TP3 flag true, TP3 headroom within 1e-9 of 0
-- [ ] 1.4 R1 hypothesis property: verdict and TP3 flag always agree
-- [ ] 1.5 R2: README bibliography wording, drop "realistic"
-- [ ] 1.6 R3: threshold terms (penalties, reserve) in the TP3 / RX panel
-- [ ] 1.7 R4: no change (recorded)
-- [ ] 1.8 R5: selection by stable identity, so inserting a connector never moves an open panel
-- [ ] 1.9 R6 card §3: threshold_dbm = S_RX + ΣΠ + R, headroom_db(plane), lower/upper clearance; M_net decides; headroom at TP3 equals M_net
-- [ ] 1.10 R6 card §4: fiber as the two §2 segments (2 × 0.0004 dB)
-- [ ] 1.11 Card uses ≥ and ≤, never >= or <=; 0.4 dB/km note kept until Phase 5
-- [ ] 1.12 Card §7 row per change, dated 2026-10-18
+- [x] 1.1 R1 engine: `above_threshold: bool` on every power_trace point, same ε rule as the verdict — phase 1 commit (hash in the next entry)
+- [x] 1.2 R1 web: fiber tube and waterfall bars colored from that flag only — phase 1 commit (hash in the next entry)
+- [x] 1.3 R1 test: losses [0.1, 0, 1.0, 0, 0.2] dB, R 4.7 dB, T01 otherwise → NOT_EXCLUDED, TP3 flag true, TP3 headroom within 1e-9 of 0 — phase 1 commit (hash in the next entry)
+- [x] 1.4 R1 hypothesis property: verdict and TP3 flag always agree — phase 1 commit (hash in the next entry)
+- [x] 1.5 R2: README bibliography wording, drop "realistic" — phase 1 commit (hash in the next entry)
+- [x] 1.6 R3: threshold terms (penalties, reserve) in the TP3 / RX panel — phase 1 commit (hash in the next entry)
+- [x] 1.7 R4: no change (recorded) — no change, as the brief says
+- [x] 1.8 R5: selection by stable identity, so inserting a connector never moves an open panel — phase 1 commit (hash in the next entry)
+- [x] 1.9 R6 card §3: threshold_dbm = S_RX + ΣΠ + R, headroom_db(plane), lower/upper clearance; M_net decides; headroom at TP3 equals M_net — phase 1 commit (hash in the next entry)
+- [x] 1.10 R6 card §4: fiber as the two §2 segments (2 × 0.0004 dB) — phase 1 commit (hash in the next entry)
+- [x] 1.11 Card uses ≥ and ≤, never >= or <=; 0.4 dB/km note kept until Phase 5 — phase 1 commit (hash in the next entry)
+- [x] 1.12 Card §7 row per change, dated 2026-10-18 — phase 1 commit (hash in the next entry)
 - [ ] 1.13 Phase 1 checks green and commit
 
 ## Phase 2: engine features (brief 04 phases B, C, D, D2)

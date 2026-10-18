@@ -18,7 +18,7 @@ Checks:
 
 ```bash
 uv run pytest -q && uv run ruff check .
-cd web && npx tsc --noEmit && npm run build && npx playwright test
+cd web && npm run typecheck && npm run build && npm run e2e
 ```
 
 ## Pipeline
@@ -34,7 +34,7 @@ The engine is the only place physics is computed. The explorer sends the edited 
 
 ## Limitations
 
-- **Synthetic values.** Every value in the shipped profile is synthetic: realistic, but not taken from a datasheet. Each input says so in its provenance.
+- **Synthetic values.** Every value in the shipped profile is synthetic, not taken from a datasheet. Each input says so in its provenance.
 - **Single lane.** A link is one point-to-point lane. There is no multi-lane, breakout or WDM aggregation.
 - **No BER prediction.** BER, TDECQ, dispersion, reflections/MPI, thermal behavior and reliability are always reported as `NOT_EVALUATED`. A PASS means "not excluded by the modeled constraints", never "the link works".
 - **Not a compliance tool.** OICD is not an OCP or IEEE 802.3 compliance tool, and its results do not certify conformance to any specification.
@@ -42,7 +42,7 @@ The engine is the only place physics is computed. The explorer sends the edited 
 
 ## References
 
-From [references.bib](references.bib). Only sources that were actually opened are listed there, and each entry's note records its information class.
+From [references.bib](references.bib). Each entry's note records whether it was read and its information class.
 
 - `ocp_osp_initiative_2026`: OCP Launches Open Silicon Photonics for AI Systems Initiative, Converge Digest, 2026 (proposed architecture vision, news summary).
 - `ocp_osp_vision_2026`: Architecture Vision: Open Silicon Photonics for AI Systems, Open Compute Project, 2026 (listed, not yet read).

@@ -29,11 +29,10 @@ function layout(count: number): THREE.Vector3[] {
   })
 }
 
-/** Color for a headroom value returned by the API: green at or above threshold, red below. */
-function headroomColor(headroomDb: number): THREE.Color {
-  const strength = Math.min(Math.abs(headroomDb) / 3, 1)
-  return new THREE.Color().setHSL(headroomDb >= 0 ? 0.33 : 0.0, 0.85, 0.62 - 0.27 * strength)
-}
+// Fiber colors keyed only by the API's above_threshold flag; the web never compares a power
+// with the threshold itself (review R1).
+const ABOVE_COLOR = new THREE.Color('#22c55e')
+const BELOW_COLOR = new THREE.Color('#ef4444')
 
 interface ComponentProps {
   point: TracePoint
@@ -151,7 +150,7 @@ function FiberTube({ trace, positions }: { trace: TracePoint[]; positions: THREE
       {segments.map((geometry, i) => {
         const point = trace[i]
         if (point === undefined) return null
-        const color = headroomColor(point.headroom_db)
+        const color = point.above_threshold ? ABOVE_COLOR : BELOW_COLOR
         return (
           <mesh key={i} geometry={geometry}>
             <meshStandardMaterial color={color} emissive={color} emissiveIntensity={0.45} roughness={0.3} />

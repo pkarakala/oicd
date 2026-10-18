@@ -1,25 +1,25 @@
 # Model card: optical link feasibility (Milestone 1)
 
-Author: Pranav. Write this by hand before any code exists. Every blank (`____`) is yours to fill; the code and tests must match it.
+Author: Pranav. This card is the spec: code implements it, tests take their expected values from it. All component values are **synthetic** unless a citation key is given.
 
 ## 1. Scope
 
-What the model decides: whether a single point-to-point optical lane is **not excluded** by electrical, wavelength and optical-power constraints.
-What it does not decide: BER, eye quality, dispersion, reflections, thermal behavior, reliability. These are listed as `NOT_EVALUATED`.
+The model decides whether a single point-to-point optical lane is **not excluded** by three constraints: electrical interface match, wavelength containment, and worst-case optical power budget.
+It does not decide BER, eye quality (TDECQ), dispersion, reflections and multipath interference, thermal behavior, or reliability. These are always reported as `NOT_EVALUATED`.
 
 ## 2. Reference planes
 
-Draw the chain and define each plane in one sentence.
-
 ```
 laser out ──► [laser fiber + connector] ──► PIC in ──► [split 1:N] ──► [modulator] ──► [out coupler] ──► TP2
-TP2 ──► [connector] ──► [fiber] ──► [connector] ──► TP3 ──► [RX coupler] ──► PD
+TP2 ══► [TX FAU mating] ══► [fiber] ══► [patch connector] ══► [fiber] ══► [RX FAU mating] ══► TP3 ──► [RX coupler] ──► PD
 ```
 
-- TP2: ____ (where transmitter power is specified)
-- TP3: ____ (where receiver sensitivity is specified)
-- Which elements are inside the Milestone 1 budget (TP2 to TP3): ____
-- Which elements are upstream and deferred to Milestone 2: ____
+- **TP2:** the transmitter's optical output at its fiber interface, before the first mated connection. Transmitter OMA is specified here, so everything upstream (laser, split, modulator, coupler) is inside the transmitter spec.
+- **TP3:** the receiver's optical input at its fiber interface, after the last mated connection. Receiver sensitivity is specified here, so the receiver's own coupler and photodiode response are inside the receiver spec.
+- **Inside the Milestone 1 budget (TP2 to TP3):** the passive channel only: every mated connector or fiber-array-unit (FAU) interface, fiber attenuation, and any shuffle or patch panel. This is the channel insertion loss.
+- **Upstream, deferred to Milestone 2:** laser power, laser-to-PIC coupling, split loss 10·log10(N), modulator insertion loss, output coupler. Milestone 2 derives TP2 from these instead of taking it as an input.
+
+This convention follows the TP2/TP3 split used by IEEE 802.3 optical PMD clauses (to be cited once the clause is read).
 
 ## 3. Equations
 
@@ -27,63 +27,78 @@ Power budget, worst case, OMA throughout:
 
 ```
 P_TP3,OMA [dBm] = P_TP2,OMA,min [dBm] − Σ L_i,max [dB]
-M_net [dB]      = P_TP3,OMA − S_RX,OMA,max − Σ Π_j − R
+M_net [dB]      = (P_TP3,OMA − S_RX,OMA,max) − Σ Π_j − R
 PASS  iff  M_net ≥ −ε,   ε = 1e-9 dB
 ```
 
-OMA from average power (only for converting inputs, never mixed in the budget):
+OMA from average power (only to convert inputs, never mixed in the budget):
 
 ```
-OMA = 2 · P_avg · (ER − 1) / (ER + 1),   ER linear
+OMA = 2 · P_avg · (ER − 1) / (ER + 1),   P_avg and OMA in mW, ER linear
 ```
 
 Wavelength compatibility (interval containment):
 
 ```
 [λ_TX − δ_TX, λ_TX + δ_TX] ⊆ [λ_RX,min, λ_RX,max]
-Δλ ≈ λ² Δf / c
+Δλ ≈ λ² Δf / c,   c = 299 792 458 m/s (exact, SI definition)
 ```
 
-Electrical compatibility: TX and RX match on (modulation, symbol_rate_gbd, lanes, fec). Line rate = symbol rate × bits per symbol.
+Electrical compatibility: TX and RX must match on (modulation, symbol_rate_gbd, lanes, fec). Line rate = symbol rate × bits per symbol (PAM4: 2).
 
-Explain in your own words, two lines each:
-- Why OMA and not average power: ____
-- Why worst case and not typical: ____
-- Why penalties Π_j are separate from reserve R: ____
+Why each choice:
+- **OMA, not average power:** 200G/lane DR optics specify transmitter power and receiver sensitivity as OMA, because the receiver decides between levels, so only the separation between them matters. Mixing an average launch with an OMA sensitivity overstates margin by 10·log10((ER+1)/(2(ER−1))); at ER = 4 dB that is 0.65 dB.
+- **Worst case, not typical:** feasibility has to hold for every unit that ships, so the decision uses minimum launch, maximum loss and maximum (least sensitive) sensitivity. Typical values may be reported but never decide PASS or FAIL.
+- **Penalties Π_j separate from reserve R:** penalties are named physical impairments (TDECQ, reflections, crosstalk, temperature, aging) that differ between architectures. R is unallocated engineering margin. Keeping them separate means a BiDi link pays its own crosstalk penalty instead of hiding it inside a shared reserve.
 
 ## 4. Worked example (by hand)
 
-Inputs: P_TP2 = 0 dBm OMA, losses = connector ____ dB + fiber ____ dB + connector ____ dB (sum 4.0 dB), S_RX = −6 dBm OMA, Π = 0, R = 1.5 dB.
-P_TP3 = ____ dBm. M_net = ____ dB. Verdict: ____.
+Inputs (all synthetic): P_TP2 = 0 dBm OMA. Channel: TX FAU mating 1.5 dB + patch connector 1.0 dB + RX FAU mating 1.5 dB + 2 m of single-mode fiber at 0.4 dB/km (0.0008 dB). S_RX = −6 dBm OMA, Π = 0, R = 1.5 dB.
 
-## 5. Test cases (expected values from your hand calculations)
+```
+Σ L      = 1.5 + 1.0 + 1.5 + 0.0008      = 4.0008 dB
+P_TP3    = 0 − 4.0008                     = −4.0008 dBm OMA
+M_net    = (−4.0008 − (−6)) − 0 − 1.5     = +0.4992 dB
+Verdict  = PASS
+```
+
+What this shows: the 2 m of fiber contributes 0.0008 dB, 0.02% of the budget. At rack scale, connector count, not fiber length, sets the budget. The 0.4 dB/km figure is a typical single-mode value at 1310 nm, to be cited (ITU-T G.652) before it is used outside this example.
+
+## 5. Test cases
+
+Unless stated, inputs are T01's: P_TP2 = 0 dBm OMA, S_RX = −6 dBm OMA, Π = 0, R = 1.5 dB.
 
 | ID | What it tests | Key inputs | Expected |
 | --- | --- | --- | --- |
-| T01 | Nominal pass | 0 dBm, 4 dB, −6 dBm, R 1.5 | M = +0.5 dB, PASS |
-| T02 | Nominal fail | 0 dBm, 5 dB, −6 dBm, R 1.5 | M = −0.5 dB, FAIL |
-| T03 | Exact boundary | loss = 4.5 dB | M = ____, ____ |
-| T04 | Boundary with non-representable floats | losses 0.1 + 0.2 + ... | ____ |
-| T05 | Loss monotonicity | add one 0.5 dB connector | margin drops by exactly ____ |
-| T06 | Named penalty | Π = 1.0 dB on T01 | M = ____, ____ |
-| T07 | OMA/average mixing | TX average, RX OMA | raises error |
-| T08 | Average to OMA conversion | P_avg = 0 dBm, ER = 4 dB | OMA = ____ dBm |
-| T09 | Wavelength inside passband | 1310 ± 2 nm into 1300 to 1320 nm | ____ |
-| T10 | Wavelength edge outside | 1318 ± 3 nm into 1300 to 1320 nm | ____ |
-| T11 | Electrical mismatch | 106.25 GBd PAM4 vs 53.125 GBd PAM4 | ____ |
-| T12 | Invalid physics | negative loss, 0 nm wavelength | rejected at schema |
-| T13 | Provenance | every result lists source class of each input | ____ |
-| T14 | Determinism | run twice | identical report |
-| T15 | Not evaluated list | any link | lists BER, dispersion, reflections, thermal, reliability |
+| T01 | Nominal pass | loss 4.0 dB | M = +0.5 dB, PASS |
+| T02 | Nominal fail | loss 5.0 dB | M = −0.5 dB, FAIL |
+| T03 | Exact boundary | loss 4.5 dB | M = 0.0 dB, PASS (≥ −ε) |
+| T04 | Boundary with non-representable floats | losses 0.3 + 1.3 + 3.3 dB, R = 1.1 dB | exact M = 0; float M = −4.44e-16; PASS only because of ε |
+| T05 | Loss monotonicity | T01 plus one 0.5 dB connector | M drops by exactly 0.5 to 0.0 dB, PASS; property: adding any loss ≥ 0 never raises M |
+| T06 | Named penalty | T01 with Π = 1.0 dB | M = −0.5 dB, FAIL; report names the penalty |
+| T07 | OMA/average mixing | TX AVERAGE, RX OMA | raises UnitMismatchError |
+| T08 | Average to OMA | P_avg = 0 dBm, ER = 4 dB | OMA = −0.650 dBm (−0.64991) |
+| T09 | Wavelength inside passband | TX 1310 ± 2 nm, RX 1300 to 1320 nm | PASS; 8 nm clearance each side |
+| T10 | Wavelength edge outside | TX 1318 ± 3 nm, RX 1300 to 1320 nm | FAIL; upper edge 1321 nm exceeds 1320 nm by 1 nm |
+| T11 | Electrical mismatch | TX 106.25 GBd PAM4, RX 53.125 GBd PAM4 | FAIL on symbol_rate_gbd; modulation, lanes, FEC still reported |
+| T12 | Invalid physics | negative loss, 0 nm wavelength, ER ≤ 0 dB | rejected at schema with ValueError |
+| T13 | Provenance | worked example | every input in the report lists its SourceClass (all SYNTHETIC here) |
+| T14 | Determinism | run T01 twice | identical reports, field for field |
+| T15 | Not-evaluated list | any link | lists BER, TDECQ, dispersion, reflections/MPI, thermal, reliability |
+
+T04 note: the float result depends on summation order. The test asserts PASS and |M| < 1e-9; it does not assert the exact float.
 
 ## 6. What would validate this model on real hardware
 
-- Loss elements: ____ (instrument and method)
-- TP2 OMA: ____
-- Sensitivity: ____ (BER target and how measured)
+- **Channel loss (TP2 to TP3):** insertion loss with a stabilized 1310 nm source and optical power meter, referenced through a launch cord, measured per mated connection and end to end. Validates Σ L.
+- **TP2 OMA:** sampling oscilloscope with an optical reference receiver on a square-wave or PRBS pattern, reading P1 and P0. Validates P_TP2 and the average-to-OMA conversion via measured ER.
+- **Sensitivity:** BER versus received OMA, swept with a variable optical attenuator, at the target pre-FEC BER of the link's FEC. Gives S_RX for the specific receiver. Cite the FEC threshold before using a number.
 
 ## 7. Decision log
 
 | Date | Decision | Why | Alternative rejected |
 | --- | --- | --- | --- |
 | 2026-10-18 | Budget in OMA | 200G/lane DR optics specify TX and RX in OMA | Average power: simpler but mixes quantities |
+| 2026-10-18 | Allow DB − DB and −DB | The margin equation subtracts penalties and reserve (both dB) from a dB difference; a gain is a negative loss | Forbid them: the margin equation could not be written |
+| 2026-10-18 | Treat c as exact, no bib entry | c = 299 792 458 m/s by SI definition (2019 SI); cite the SI Brochure once read | Leave uncited: violates rule 1 |
+| 2026-10-18 | Pass rule M ≥ −1e-9 dB | Floating-point sums of dB values can land a hair below zero at an exact boundary (T04) | Exact M ≥ 0: fails real boundaries at random |

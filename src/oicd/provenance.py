@@ -62,18 +62,14 @@ class Provenance(BaseModel):
             raise ValueError("rationale must not be blank")
         if self.citation_key is None:
             if self.source_class not in _KEY_OPTIONAL:
-                raise ValueError(
-                    f"citation_key is required for {self.source_class.value}"
-                )
+                raise ValueError(f"citation_key is required for {self.source_class.value}")
             return self
         context = info.context or {}
         keys = context.get("citation_keys")
         if keys is None:
             keys = load_citation_keys()
         if self.citation_key not in keys:
-            raise ValueError(
-                f"citation_key {self.citation_key!r} not found in references.bib"
-            )
+            raise ValueError(f"citation_key {self.citation_key!r} not found in references.bib")
         return self
 
 

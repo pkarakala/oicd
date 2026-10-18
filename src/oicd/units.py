@@ -140,9 +140,7 @@ def avg_to_oma(p_avg: OpticalPower, er_db: DB) -> OpticalPower:
     if type(er_db) is not DB:
         raise TypeError(f"extinction ratio must be DB, got {er_db!r}")
     if p_avg.kind is not PowerKind.AVERAGE:
-        raise UnitMismatchError(
-            f"avg_to_oma needs average power, got {p_avg.kind.value}"
-        )
+        raise UnitMismatchError(f"avg_to_oma needs average power, got {p_avg.kind.value}")
     if er_db.value <= 0.0:
         raise ValueError(f"extinction ratio must be > 0 dB, got {er_db.value} dB")
     p_avg_mw = dbm_to_mw(p_avg.power_dbm)

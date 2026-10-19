@@ -68,7 +68,7 @@ Each added 0.5 dB connector costs exactly 0.5 dB of worst-case margin; the stati
 ![Ring design window](../figures/q_design_window.png)
 ![Interleaving](../figures/interleave_crosstalk.png)
 
-For a microring at 1310 nm with loaded Q 3500 [PEER_REVIEWED, lm_ofc25_paper], the FWHM is 65.3855 GHz and a single co-directional neighbor 200 GHz away leaks −15.846 dB, 400 GHz away −21.781 dB: interleaving the two directions of a bidirectional link on alternate 200 GHz slots gains 5.935 dB of isolation [INFERENCE] (§13). The design window of SYNTHETIC rules (−15 dB per neighbor, f0/Q ≥ 0.75 × symbol rate) is open at 56 GBd for both spacings and closed at 106.25 GBd for 200 GHz.
+For a microring at 1310 nm with Q 3500 [VENDOR_CLAIM, lm_ofc25_talk], taken as loaded (an assumption), the FWHM is 65.3855 GHz and a single co-directional neighbor 200 GHz away leaks −15.846 dB, 400 GHz away −21.781 dB: interleaving the two directions of a bidirectional link on alternate 200 GHz slots gains 5.935 dB of isolation [INFERENCE] (§13). The design window of SYNTHETIC rules (−15 dB per neighbor, f0/Q ≥ 0.75 × symbol rate) is open at 56 GBd for both spacings and closed at 106.25 GBd for 200 GHz.
 
 ![16λ BiDi crosstalk under two FSR hypotheses](../figures/bidi16_crosstalk.png)
 
@@ -85,7 +85,7 @@ The support matrix shows the 204.8 Tbps switch tray read per direction (four Gui
 
 ![Processor error versus gain](../figures/processor_error_vs_gain.png)
 
-For the photonic processor of [ahmed2025_nature], OICD re-implements the adaptive block floating-point data path independently from the paper's Supplementary Information and [basumallik2022_abfp]; it is not the authors' code (§15). The published counts multiply out consistently: 4 × 128 × 128 MACs at 500 MHz give 65.536 TOPS against the stated 65.5, and 4 × 3.2 W + 65 W = 77.8 W against 78 W [INFERENCE]. The SI's quantizer can be read with the ADC range ±n (H_out_n) or literally ±1 (H_out_1); only the first agrees with the SI's 24-bit output word, and the literal reading clips most sums. On synthetic data, the matrix-vector error falls from 6.5 % at G = 1 to 2.0 % at the design-target gain of 4 and rises again once the ADC clips [INFERENCE on SYNTHETIC inputs]; these are not the paper's Table 1 results, which are cited as measured.
+For the photonic processor of [ahmed2025_nature], OICD re-implements the adaptive block floating-point data path independently from the paper's Supplementary Information and [basumallik2022_abfp]; it is not the authors' code (§15). The published counts multiply out: 4 × 128 × 128 MACs at 500 MHz give 65.536 TOPS against the stated 65.5 [INFERENCE]. (A per-core power split could not be checked: the main text is paywalled, and the Supplementary Information's Table S3 gives 250 mW per core.) The SI's quantizer can be read with the ADC range ±n (H_out_n) or literally ±1 (H_out_1); only the first agrees with the SI's 24-bit output word, and the literal reading clips most sums. On synthetic data, the matrix-vector error falls from 6.5 % at G = 1 to 2.0 % at G = 4 (the SI's emulation setting) and rises again once the ADC clips [INFERENCE on SYNTHETIC inputs]; these are not the paper's Table 1 results, which are cited as measured.
 
 ## 6. Case study: a public product line
 
@@ -101,7 +101,7 @@ Microring modulators and filters [bogaerts2012_mrr], their thermo-optic tuning [
 
 ## Acknowledgments
 
-The code, tests and documents of OICD were written with an AI coding assistant; the models, physics and design decisions are the author's. [TODO Pranav: confirm the wording.]
+The code, tests and documents of OICD were written with an AI coding assistant, which also proposed design decisions that the author reviewed; the models and physics are the author's.
 
 ## Disclaimer
 

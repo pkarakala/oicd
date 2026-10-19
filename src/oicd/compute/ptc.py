@@ -85,14 +85,17 @@ def quantize_vector(x: list[float], bits: int, bfloat16_scale: bool = True) -> Q
 
 
 class PtcConfig(BaseModel):
-    """Data-path parameters; defaults are the paper's (ahmed2025_nature) except where marked."""
+    """Data-path parameters; defaults follow ahmed2025_nature except where marked.
+
+    enob = 9.8 is unverified (ptc.adc_enob: the main text is paywalled), so the ADC noise it sets
+    is an assumption, not a published value."""
 
     model_config = _FROZEN
 
     weight_bits: int = Field(default=7, ge=2, le=16)
     activation_bits: int = Field(default=10, ge=2, le=16)
     adc_bits: int = Field(default=11, ge=2, le=24)
-    enob: float | None = Field(default=9.8, gt=0, le=24)  # None: a noiseless ADC
+    enob: float | None = Field(default=9.8, gt=0, le=24)  # unverified; None: a noiseless ADC
     gain: float = Field(default=1.86, gt=0, le=1024)
     block: int = Field(default=BLOCK, ge=1, le=4096)
     output_range: Literal["n", "1"] = "n"  # H_out_n or H_out_1 (model card §15.3)

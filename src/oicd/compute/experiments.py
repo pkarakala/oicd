@@ -12,7 +12,12 @@ from oicd.compute.ptc import PtcConfig, abfp_matmul, effective_bits, relative_er
 
 _FROZEN = ConfigDict(frozen=True, extra="forbid")
 
-GAINS = (1.0, 1.86, 4.0, 8.0)  # 1.86 measured, 4 the design target (ahmed2025_nature)
+GAINS = (
+    1.0,
+    1.86,
+    4.0,
+    8.0,
+)  # 1.86 measured (ahmed2025_nature); 4 the SI's emulation setting (unverified as a design target)
 MLP_GAINS = (0.1, 0.25, 0.5, 1.0, 1.86, 4.0, 8.0)
 LENGTHS = (128, 256, 512, 1024)
 ENOBS = (6.0, 8.0, 9.8, 11.0)

@@ -1782,7 +1782,10 @@ export interface components {
         };
         /**
          * PtcConfig
-         * @description Data-path parameters; defaults are the paper's (ahmed2025_nature) except where marked.
+         * @description Data-path parameters; defaults follow ahmed2025_nature except where marked.
+         *
+         *     enob = 9.8 is unverified (ptc.adc_enob: the main text is paywalled), so the ADC noise it sets
+         *     is an assumption, not a published value.
          */
         PtcConfig: {
             /**

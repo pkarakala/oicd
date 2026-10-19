@@ -91,7 +91,7 @@ def test_seeded_and_shape_checked():
 
 
 def test_gain_trades_resolution_for_clipping():
-    # §15.4: error falls from G = 1 to the design target 4, until clipping sets in
+    # §15.4: error falls from G = 1 to G = 4 (the SI's emulation setting), until clipping sets in
     e = {g: matvec_error(128, g, 9.8, seed=0) for g in (1.0, 1.86, 4.0, 128.0)}
     assert e[1.0].relative_error > e[1.86].relative_error > e[4.0].relative_error
     assert e[4.0].clipped_fraction == 0.0

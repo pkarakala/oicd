@@ -636,7 +636,7 @@ A twin of the photonic processor published in Nature in 2025 (ahmed2025_nature: 
 
 ### 15.1 Facts
 
-Six chips: four 128 × 128 photonic tensor cores (PTCs, GF 90 nm photonics) and two 12 nm control dies on an organic interposer, 54 × 56 mm. PTC 14.00 × 24.96 mm, control die 31.4 × 25.0 mm. 65.5 trillion ABFP16 operations per second at 78 W electrical and 1.6 W optical; 500 MHz sustained (2 GHz with intermittent errors, 262 trillion). PTC 3.2 W each, control dies 65 W. Every 128-long vector shares one bfloat16 scale; weights 7 bits, activations 10 bits; ADC 11 bits, ENOB 9.8; measured gain 1.86 against a design target of 4. Eight DFB lasers, 200 mW in fibre each, 1.25 W wall power each including the TEC. A 16-way tree feeds the vector channels; multiplication happens on photocurrent inside each weight cell, summed as current on row lines (not an MZI mesh). The catalog (`catalog/products/photonic_processor.toml`) holds each fact with its quote; two conflicts stay recorded: the web's "262T Ops/Watt" against the paper's 262 TOPS (at 2 GHz) and 0.81 TOPS/W system average, and "1 million" against "over 200,000" photonic components.
+Values marked † are unverified: their only source is the paper's main text, which OICD could not open, so the catalog records them with `verified = false` and they are not used as published specs. Six chips: four 128 × 128 photonic tensor cores (PTCs, GF 90 nm photonics) and two 12 nm control dies on an organic interposer, 54 × 56 mm†. PTC 14.00 × 24.96 mm†, control die 31.4 × 25.0 mm†. 65.5 trillion ABFP16 operations per second at 78 W electrical and 1.6 W optical; 500 MHz sustained (2 GHz with intermittent errors, 262 trillion). PTC 3.2 W each†, control dies 65 W†; the Supplementary Information's Table S3 gives 250 mW per PTC. Every 128-long vector shares one bfloat16 scale; weights 7 bits, activations 10 bits; ADC 11 bits, ENOB 9.8†; measured gain 1.86; the SI uses G = 4 in an emulation study (the phrase "design target" is not in any opened source). Eight DFB lasers†, 200 mW in fibre each†, 1.25 W wall power each including the TEC†. A 16-way tree feeds the vector channels; multiplication happens on photocurrent inside each weight cell, summed as current on row lines (not an MZI mesh). The catalog (`catalog/products/photonic_processor.toml`) holds each fact with its quote; two conflicts stay recorded: the web's "262T Ops/Watt" against the paper's 262 TOPS (at 2 GHz) and 0.81 TOPS/W system average, and "1 million" against "over 200,000" photonic components.
 
 ### 15.2 Derived values (INFERENCE)
 
@@ -687,15 +687,15 @@ ENOB 9.8 gives SNR 60.756 dB and σ = 6.481641e-4 of the ADC range r.
 - ABFP against one global scale over the whole vector, for activations with outliers (a Student-t, ν = 3, SYNTHETIC);
 - a 3-layer MLP (128-128-128-10, ReLU) trained in float64 on a synthetic 10-class Gaussian-mixture dataset, then evaluated with every matrix-vector product through the ABFP data path, accuracy versus G.
 
-The expected shape, which the tests check: error falls as G rises from 1 toward the design target of 4 (more ADC levels on the signal) until clipping sets in; error falls with ENOB; ABFP beats a global scale on data with outliers; the MLP's accuracy approaches its float64 accuracy as G rises from 1.86 to 4. The tables are generated, not hand-computed, and are labelled INFERENCE on synthetic data; they are not the paper's Table 1.
+The expected shape, which the tests check: error falls as G rises from 1 toward G = 4 (the SI's emulation setting) (more ADC levels on the signal) until clipping sets in; error falls with ENOB; ABFP beats a global scale on data with outliers; the MLP's accuracy approaches its float64 accuracy as G rises from 1.86 to 4. The tables are generated, not hand-computed, and are labelled INFERENCE on synthetic data; they are not the paper's Table 1.
 
 ### 15.5 Optical power per weight cell (stretch, INFERENCE)
 
-The paper does not say how the eight lasers map onto the four PTCs. Each PTC has 128 vector channels feeding 128 weight cells each, so 65,536 weight cells share 1.6 W of laser power in fibre whatever the mapping:
+The paper does not say how the eight lasers map onto the four PTCs. Each PTC has 128 vector channels feeding 128 weight cells each, so 65,536 weight cells share 1.6 W of laser power in fibre whatever the mapping (the 1.6 W total is verified, SI Table S3; the split into 8 × 200 mW and every loss below is unverified†):
 
 ```
 P_cell = 8 × 200 mW × 10^(−L/10) / (4 × 128 × 128)
-L = V-groove 1.56 dB + vector modulator IL 1.1 dB + on-chip path (SYNTHETIC 1 cm of Si ridge at 1.35 dB/cm) [+ splitter excess]
+L = V-groove 1.56 dB† + vector modulator IL 1.1 dB† + on-chip path (SYNTHETIC 1 cm of Si ridge at 1.35 dB/cm†) [+ splitter excess]
 ```
 
-H_lasers_dedicated (two lasers per PTC): L = 4.01 dB, 9.6971 µW per cell. H_lasers_shared (each laser split four ways to all PTCs, one more splitter stage, SYNTHETIC 0.5 dB excess): L = 4.51 dB, 8.6425 µW per cell. Before any loss: 24.4141 µW per cell. The mapping changes only the splitter count, so the per-cell power is about 9 µW under either; the gain G of §15.3 raises it (the SI raises laser power with G).
+H_lasers_dedicated (two lasers per PTC): L = 4.01 dB, 9.6971 µW per cell. H_lasers_shared (each laser split four ways to all PTCs, one more splitter stage, SYNTHETIC 0.5 dB excess): L = 4.51 dB, 8.6425 µW per cell. Before any loss: 24.4141 µW per cell. These values rest on the unverified losses above and are INFERENCE on unverified inputs. The mapping changes only the splitter count, so the per-cell power is about 9 µW under either; the gain G of §15.3 raises it (the SI raises laser power with G).

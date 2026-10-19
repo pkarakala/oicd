@@ -528,6 +528,13 @@ def validate_geometry_sources(scene: GeometryScene, catalog: Catalog) -> list[st
         if p.sourced and p.dims_source not in catalog.nodes
     ]
     issues += [
+        f"{p.id}: dims_axes claim a source but {p.dims_source!r} is unverified"
+        for p in scene.part
+        if p.sourced
+        and isinstance(catalog.nodes.get(p.dims_source), Fact)
+        and not catalog.nodes[p.dims_source].verified
+    ]
+    issues += [
         f"tour stop at {t.part}: node {t.node!r} is not in the catalog"
         for t in scene.tour
         if t.node and t.node not in catalog.nodes and t.node not in catalog.checks

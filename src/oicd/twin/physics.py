@@ -116,7 +116,8 @@ def _prov(catalog: Catalog, node_id: str) -> Provenance:
 
 def _class(catalog: Catalog, node_id: str) -> SourceClass:
     node = catalog.nodes[node_id]
-    return node.source_class if isinstance(node, Fact) else SYN
+    # An unverified fact is badged SYNTHETIC, as _prov does: it must not show a published class.
+    return node.source_class if isinstance(node, Fact) and node.verified else SYN
 
 
 def dr_budget_link(catalog: Catalog, name: str = "draft 802.3dj DR budget") -> Link:
@@ -880,7 +881,8 @@ def _processor(catalog: Catalog) -> tuple[Section, ...]:
             )
             for r in sweeps["gain"]
         ),
-        note="G = 1.86 measured, 4 the design target (ahmed2025_nature); model card §15.4.",
+        note="G = 1.86 measured; G = 4 is the SI's emulation setting, not a verified design "
+        "target (ahmed2025_nature); model card §15.4.",
     )
     scale = Section(
         title="One scale per 128-block against one global scale (1024-long, G = 4)",

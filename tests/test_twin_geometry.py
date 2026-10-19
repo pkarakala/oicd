@@ -36,6 +36,16 @@ def test_unknown_dims_source_is_reported():
     ]
 
 
+def test_unverified_dims_source_is_reported():
+    scene = load_geometry("toy_engine", GEOMETRY_TOY)
+    catalog = load_catalog(CATALOG_TOY, citation_keys=frozenset({"toy_source", "toy_other"}))
+    sourced = next(p for p in scene.part if p.sourced)
+    fact = catalog.nodes[sourced.dims_source]
+    nodes = {**catalog.nodes, fact.id: fact.model_copy(update={"verified": False})}
+    issues = validate_geometry_sources(scene, catalog.model_copy(update={"nodes": nodes}))
+    assert issues == [f"{sourced.id}: dims_axes claim a source but {fact.id!r} is unverified"]
+
+
 @pytest.mark.parametrize(
     "change, message",
     [

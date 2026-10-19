@@ -3,8 +3,11 @@ import { defineConfig, devices } from '@playwright/test'
 // Starts the engine API (port 8000) and the Vite dev server (port 5173) unless already running.
 export default defineConfig({
   testDir: './tests',
-  timeout: 60_000,
-  expect: { timeout: 15_000 },
+  // CI runners render WebGL in software (SwiftShader) and run about twice as slow as a laptop.
+  timeout: process.env.CI ? 180_000 : 60_000,
+  expect: { timeout: process.env.CI ? 30_000 : 15_000 },
+  // The github reporter turns failures into check-run annotations, readable without the log.
+  reporter: process.env.CI ? [['github'], ['list']] : 'list',
   use: {
     baseURL: 'http://localhost:5173',
     ...devices['Desktop Chrome'],

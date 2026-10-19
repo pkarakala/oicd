@@ -822,8 +822,8 @@ def _processor(
             LightPath(
                 part="proc.fibres",
                 kind="cw",
-                label=f"8 lasers at {per_fibre:g} mW in fibre (CWDM grid; mapping to cores not "
-                "disclosed)",
+                label=f"8 lasers at {per_fibre:g} mW in fibre (unverified; CWDM grid; mapping to "
+                "cores not disclosed)",
                 color=palette(mode).cw,
                 direction="forward",
                 power_kind="AVERAGE",

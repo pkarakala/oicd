@@ -125,7 +125,7 @@ Baseline before Phase 0 (brief 03 tree on `main`): pytest 147 passed, ruff check
 - [x] 8.13 Ease of use: guided tours, shortcut sheet, tooltips, URL state, PNG export 2×, themes, ARIA and focus — tours from catalog captions with class/status badges (D05-72), shortcut sheet, tooltips on tools, URL state, PNG 2x clean export, light/dark from the API, ARIA labels and focus rings
 - [x] 8.14 Scenes 1 to 7 (rack, switch tray, XPU tray, L20 + BiDi link, M1000, L200, Guide family) with Spec sheet, Inference and Physics tabs — 10 scenes (rack, switch tray, XPU tray, L20, BiDi link, M1000, L200, Guide family, PIC region um, ring section nm), each with Spec sheet, Inference and Physics tabs
 - [x] 8.15 Playwright suite and screenshots; Vitest for store and URL state — Playwright 13 tests (smoke moved; per-scene screenshots; L20 exploded; section; measure 37.5 mm; zoom to ring; palette; rack plane flip; sweep, tray, upstream N=18, yield, spectrum, inference); Vitest 21 tests (store, URL state, format, link edits)
-- [ ] 8.16 Phase 8 checks green and commit
+- [x] 8.16 Phase 8 checks green and commit — commit 58b63de; pytest 456 passed, ruff clean, build ok, typecheck ok, Vitest 21 passed, Playwright 13 passed
 
 ## Phase 9: photonic processor
 
@@ -162,3 +162,4 @@ Baseline before Phase 0 (brief 03 tree on `main`): pytest 147 passed, ruff check
 | 4 (facts) | 9e8da7d | 364 passed | clean | clean | n/a | n/a | n/a | n/a |
 | 6 | 24aa45a | 382 passed | clean | clean | n/a | n/a | n/a | n/a |
 | 7 | a78fb8f | 404 passed | clean | clean | ok | ok | 1 passed | n/a |
+| 8 | 58b63de | 456 passed | clean | clean | ok | ok | 13 passed | 21 passed |

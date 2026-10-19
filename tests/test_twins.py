@@ -1,5 +1,5 @@
 """Model card §14: architecture twins and the reference rack. Expected values are copied from
-§14.2 to §14.9 (and through them from the brief), never from running the code."""
+§14.2 to §14.9, never from running the code."""
 
 import pytest
 

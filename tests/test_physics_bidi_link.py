@@ -103,7 +103,7 @@ def test_bidi_inputs_carry_provenance(card_case):
     ],
 )
 def test_16_lambda_worst_receive_channel(fsr, channel, x, nrz, xr, refl):
-    # Brief 05 phase 6 values (model card §14), from the §13.6 ring model: Q 3500, IL 3 dB,
+    # Values (model card §14), from the §13.6 ring model: Q 3500, IL 3 dB,
     # RL 15.5 dB, receive on odd n, transmit on even n.
     grid = wdm.interleaved_grid()
     fwhm = ring.fwhm_ghz(ring.resonance_frequency_ghz(1310.0), 3500.0)  # 65.3855 GHz, every ring

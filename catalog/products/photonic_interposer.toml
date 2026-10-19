@@ -1,4 +1,4 @@
-# 3D photonic interposer: public facts with exact quotes (brief 05 phase 4 fact check, 2026-10-18).
+# 3D photonic interposer: public facts with exact quotes (fact check, 2026-10-18).
 # Independent model built from public information. Not affiliated with or endorsed by
 # any company whose publications are cited.
 
@@ -88,7 +88,7 @@ note = "Evidence: text. Matches (source writes '2x4' with a letter x). EVK page:
 
 [[fact]]
 id = "interposer.reticle_count"
-quantity = "number of reticles in the multi-reticle interposer (Appendix: not disclosed)"
+quantity = "number of reticles in the multi-reticle interposer (initial list: not disclosed)"
 bound = "exact"
 unit = "text"
 quote = "multi-reticle active photonic interposer"
@@ -498,7 +498,7 @@ cite = "vendor_hc25_interposer"
 source_class = "vendor_claim"
 verified = true
 location = "page 15 (slide 'Ultracompact transmitter and receiver')"
-note = "Evidence: text. Conflicts with slide 13 'Area for a transmitter/receiver: 0.015 mm²' in the same deck (interposer.txrx_area). Appendix A5 lists 0.006 mm² for vendor_ofc25_paper (not checked by G1)."
+note = "Evidence: text. Conflicts with slide 13 'Area for a transmitter/receiver: 0.015 mm²' in the same deck (interposer.txrx_area). The initial fact list5 lists 0.006 mm² for vendor_ofc25_paper (not checked by G1)."
 
 [[fact]]
 id = "interposer.thermal_test_density"
@@ -613,7 +613,7 @@ source_class = "vendor_claim"
 verified = true
 location = "page 10 (exploded-view label; not in the text layer)"
 note = "Evidence: image. Image-only label. Does not say whether each fiber carries Tx and Rx (BiDi) or the array holds separate Tx and Rx fibers; relevant to the 448 Gbps per fiber vs '800 Gbps / fiber (Tx+Rx)' conflict."
-# ---- Model (brief 05 phase 6, model card §14.3) ---------------------------------------------
+# ---- Model (model card §14.3) ---------------------------------------------
 
 [[assumption]]
 id = "interposer.two_directions"

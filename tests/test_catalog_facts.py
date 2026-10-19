@@ -1,5 +1,5 @@
-"""The shipped catalog (catalog/products/*.toml): structure, provenance and a few Appendix A
-values that the brief and the model card rely on."""
+"""The shipped catalog (catalog/products/*.toml): structure, provenance and a few
+values that the model card relies on."""
 
 import pytest
 
@@ -86,7 +86,7 @@ def test_appendix_values(catalog, fact_id, value):
 
 
 def test_known_conflicts_are_recorded(catalog):
-    # Appendix A and the fact check: both sides carried, never silently picked (brief rule 3).
+    # the initial fact list and the fact check: both sides carried, never silently picked.
     pairs = {
         ("engine.width_mm_web", "engine.width_mm_yole"),
         ("engine.form_factor_pins", "engine.bga_balls_web"),

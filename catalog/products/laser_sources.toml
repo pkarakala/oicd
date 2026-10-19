@@ -1,4 +1,4 @@
-# external laser sources (ELS, ELS-DWDM, ELS-DR): public facts with exact quotes (brief 05 phase 4 fact check, 2026-10-18).
+# external laser sources (ELS, ELS-DWDM, ELS-DR): public facts with exact quotes (fact check, 2026-10-18).
 # Independent model built from public information. Not affiliated with or endorsed by
 # any company whose publications are cited.
 
@@ -20,7 +20,7 @@ cite = "vendor_yole_ofc26"
 source_class = "vendor_claim"
 verified = true
 location = "p12 right-hand caption under the 1RU chassis (also seen on rendered slide)"
-note = "Evidence: text. Wording: slide has no colon ('4 x [ELS]' above '100T in 1RU'); the Appendix adds one. My arithmetic: p13 of the same deck claims 51.2 Tbps per ELS module, so 4 modules would be 204.8 Tbps, about twice the '100T' shown."
+note = "Evidence: text. Wording: slide has no colon ('4 x [ELS]' above '100T in 1RU'); the initial fact list adds one. My arithmetic: p13 of the same deck claims 51.2 Tbps per ELS module, so 4 modules would be 204.8 Tbps, about twice the '100T' shown."
 
 [[fact]]
 id = "els.elsfp_100t_4ru_yole"
@@ -34,7 +34,7 @@ source_class = "vendor_claim"
 verified = true
 conflicts_with = ["els.elsfp_modules_100t_hoti26"]
 location = "p12 left-hand caption under the 4RU chassis (also seen on rendered slide)"
-note = "Evidence: text. Wording: slide has no colon; the Appendix adds one. Unflagged conflict with HOTI26 p15 which shows '16 Modules' of discrete ELSFP for '100 Tbps' (els.elsfp_modules_100t_hoti26)."
+note = "Evidence: text. Wording: slide has no colon; the initial fact list adds one. Unflagged conflict with HOTI26 p15 which shows '16 Modules' of discrete ELSFP for '100 Tbps' (els.elsfp_modules_100t_hoti26)."
 
 [[fact]]
 id = "els.fiber_outputs_yole"
@@ -243,7 +243,7 @@ source_class = "vendor_claim"
 verified = true
 conflicts_with = ["els.freq_accuracy_yole"]
 location = "'Closed-Loop Control' bullet (raw.html.txt line 83)"
-note = "Evidence: text. Source writes '+/- 20 GHz' (ASCII); Appendix writes '±20 GHz'. Same value."
+note = "Evidence: text. Source writes '+/- 20 GHz' (ASCII); the initial list writes '±20 GHz'. Same value."
 
 [[fact]]
 id = "els.power_uniformity"
@@ -323,7 +323,7 @@ cite = "press_els_2026"
 source_class = "vendor_claim"
 verified = true
 location = "'A New Scaling Paradigm' paragraph (raw.html.txt line 75)"
-note = "Evidence: text. Source adds 'and beyond' after 64, which the Appendix omits; 64 is not stated as an upper limit."
+note = "Evidence: text. Source adds 'and beyond' after 64, which the initial fact list omits; 64 is not stated as an upper limit."
 
 [[fact]]
 id = "els.device_hours"
@@ -336,7 +336,7 @@ cite = "futurum_ocp26"
 source_class = "third_party"
 verified = true
 location = "section 'Serviceable Connectors and Laser Supply Address CPO’s Two Hardest Objections', paragraph on ELS-DR (raw.html.txt line 239)"
-note = "Evidence: text. Not in Appendix A. Third-party relay of a vendor figure; same sentence: 'approaching 1 million on photonic interconnect'."
+note = "Evidence: text. Not in the initial fact list. Third-party relay of a vendor figure; same sentence: 'approaching 1 million on photonic interconnect'."
 
 [[fact]]
 id = "els_dwdm.band_center"
@@ -505,7 +505,7 @@ cite = "vendor_web_els_dwdm"
 source_class = "vendor_claim"
 verified = true
 location = "hero stats 'Supported I/O' (number and unit on consecutive lines) (raw.html.txt line 69-70)"
-note = "Evidence: text. Not in Appendix A for ELS-DWDM. Same page, Performance paragraph: 'ELS-DWDM powers up to 51 Tbps of I/O' (51 vs 51.2)."
+note = "Evidence: text. Not in the initial fact list for ELS-DWDM. Same page, Performance paragraph: 'ELS-DWDM powers up to 51 Tbps of I/O' (51 vs 51.2)."
 
 [[fact]]
 id = "els_dwdm.elsfp_replaced"
@@ -518,7 +518,7 @@ cite = "vendor_web_els_dwdm"
 source_class = "vendor_claim"
 verified = true
 location = "Performance paragraph ('Deep Tech and Engineering') (raw.html.txt line 81)"
-note = "Evidence: text. Not in Appendix A. Consistent with press_els_2026 (about 18 ELSFP for 100 Tbps, i.e. two modules); conflicts with counterpoint_nvlinkfusion's 8 ELSFP for a 100T switch."
+note = "Evidence: text. Not in the initial fact list. Consistent with press_els_2026 (about 18 ELSFP for 100 Tbps, i.e. two modules); conflicts with counterpoint_nvlinkfusion's 8 ELSFP for a 100T switch."
 
 [[fact]]
 id = "els_dwdm.wavelength_precision"
@@ -531,7 +531,7 @@ cite = "vendor_web_els_dwdm"
 source_class = "vendor_claim"
 verified = true
 location = "section '03 – Control / Software-Defined Precision' (raw.html.txt line 90)"
-note = "Evidence: text. Not in Appendix A. Coexists with the '±20 GHz' wavelength stability spec on the same page; the page does not define precision versus stability."
+note = "Evidence: text. Not in the initial fact list. Coexists with the '±20 GHz' wavelength stability spec on the same page; the page does not define precision versus stability."
 
 [[fact]]
 id = "els_dr.form_factor"
@@ -764,7 +764,7 @@ cite = "counterpoint_nvlinkfusion"
 source_class = "third_party"
 verified = true
 location = "'Key Technology Differentiators', 'ELS-DR Laser Engine' paragraph (raw.html.txt line 80)"
-note = "Evidence: text. NOT in counterpoint_ocp26 (OCP article; whole raw HTML incl. embedded JSON searched, no '128' and no laser count). Found in a different Counterpoint insight that is NOT in Appendix B: 'the vendor Joins NVLink Fusion Club' (Gareth Owen, 2026-06-12), https://counterpointresearch.com/en/insights/lightmatter-joins-nvlink-fusion-club, saved as SRC/counterpoint_nvlinkfusion/ (needs an Appendix B key). Counterpoint says per chip; the vendor (vendor_web_els_dr) says '64 Lasers' per LNIC module, so the conflict may partly be chip vs module scope. Appendix A also lists '128+ lasers per chip' for vendor_hoti26 (another group's item, not checked here)."
+note = "Evidence: text. NOT in counterpoint_ocp26 (OCP article; whole raw HTML incl. embedded JSON searched, no '128' and no laser count). Found in a different Counterpoint insight that is NOT in the initial source list: 'the vendor Joins NVLink Fusion Club' (Gareth Owen, 2026-06-12), https://counterpointresearch.com/en/insights/lightmatter-joins-nvlink-fusion-club, saved as SRC/counterpoint_nvlinkfusion/ (needs an initial source list key). Counterpoint says per chip; the vendor (vendor_web_els_dr) says '64 Lasers' per LNIC module, so the conflict may partly be chip vs module scope. The initial fact list also lists '128+ lasers per chip' for vendor_hoti26 (another group's item, not checked here)."
 
 [[fact]]
 id = "els_dr.density_vs_elsfp"
@@ -777,7 +777,7 @@ cite = "vendor_pr_els_dr"
 source_class = "vendor_claim"
 verified = true
 location = "paragraph 1 (raw.html.txt line 70)"
-note = "Evidence: text. Not in Appendix A. Product page states a different metric: 'deliver 4x higher optical power density than pluggable ELSFPs'."
+note = "Evidence: text. Not in the initial fact list. Product page states a different metric: 'deliver 4x higher optical power density than pluggable ELSFPs'."
 
 [[fact]]
 id = "els_dr.ashrae_class"
@@ -789,7 +789,7 @@ cite = "vendor_pr_els_dr"
 source_class = "vendor_claim"
 verified = true
 location = "'Key specifications' list, 'Thermal Efficiency' bullet (raw.html.txt line 81)"
-note = "Evidence: text. Not in Appendix A."
+note = "Evidence: text. Not in the initial fact list."
 
 [[fact]]
 id = "els_dr.band_plans"
@@ -802,7 +802,7 @@ cite = "vendor_web_els_dr"
 source_class = "vendor_claim"
 verified = true
 location = "section '04 – Compatibility / Optical Link Configurations' (raw.html.txt line 90)"
-note = "Evidence: text. Not in Appendix A. The spec table lists only 'Range A: 1311nm, Range B: 1331nm'."
+note = "Evidence: text. Not in the initial fact list. The spec table lists only 'Range A: 1311nm, Range B: 1331nm'."
 
 [[fact]]
 id = "els_dr.units_per_100t_counterpoint"
@@ -815,8 +815,8 @@ cite = "counterpoint_nvlinkfusion"
 source_class = "third_party"
 verified = true
 location = "'ELS-DR Laser Engine' section, LNIC paragraph (raw.html.txt line 81)"
-note = "Evidence: text. Not in Appendix A; source not in Appendix B. Consistent with 51.2 Tbps per module (2 x 51.2 = 102.4), but '8 conventional ELSFP' differs from the vendor's 'about 18 conventional ELSFP modules' for 100 Tbps (press_els_2026) and 'nine ELSFP' per ELS-DWDM (vendor_web_els_dwdm)."
-# ---- Model (brief 05 phase 6, model card §14.6) ---------------------------------------------
+note = "Evidence: text. Not in the initial fact list; source not in the initial source list. Consistent with 51.2 Tbps per module (2 x 51.2 = 102.4), but '8 conventional ELSFP' differs from the vendor's 'about 18 conventional ELSFP modules' for 100 Tbps (press_els_2026) and 'nine ELSFP' per ELS-DWDM (vendor_web_els_dwdm)."
+# ---- Model (model card §14.6) ---------------------------------------------
 
 [[fact]]
 id = "els_dwdm.output_power_single"

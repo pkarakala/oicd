@@ -1,4 +1,4 @@
-# OCP 2026 CPO switch and XPU trays: public facts with exact quotes (brief 05 phase 4 fact check, 2026-10-18).
+# OCP 2026 CPO switch and XPU trays: public facts with exact quotes (fact check, 2026-10-18).
 # Independent model built from public information. Not affiliated with or endorsed by
 # any company whose publications are cited.
 
@@ -238,7 +238,7 @@ source_class = "vendor_claim"
 verified = true
 conflicts_with = ["trays.xpu_height_vendor_site_para2"]
 location = "paragraph 5, last sentence (raw.html.txt line 77)"
-note = "Evidence: text. New key vendor_pr_openrack (not in Appendix B): https://lightmatter.com/press-release/lightmatter-delivers-open-rack-cpo-switch-and-xpu-scale-up-server-through-independent-collaborations-with-flex-and-other-industry-partners/ (same text at lightmatter.co). Full sentence: 'Making its public debut at the summit, it is the industry’s first compute tray to carry four XPUs connected with 102.4 Tbps of scale-up optical bandwidth in a 2U rack height.' This is the only sentence that differs from the PR Newswire copy. The same lightmatter.com page is internally inconsistent: paragraph 2 still says '1 rack unit (RU) height' for the 102.4T XPU tray (see trays.xpu_height_vendor_site_para2). Page dateModified 2026-10-13T04:36:38Z is about 2 h after the PR Newswire timestamp (Oct 12, 2026, 22:17 ET = 2026-10-13T02:17Z), consistent with a post-wire edit (inference)."
+note = "Evidence: text. New key vendor_pr_openrack (not in the initial source list): https://lightmatter.com/press-release/lightmatter-delivers-open-rack-cpo-switch-and-xpu-scale-up-server-through-independent-collaborations-with-flex-and-other-industry-partners/ (same text at lightmatter.co). Full sentence: 'Making its public debut at the summit, it is the industry’s first compute tray to carry four XPUs connected with 102.4 Tbps of scale-up optical bandwidth in a 2U rack height.' This is the only sentence that differs from the PR Newswire copy. The same lightmatter.com page is internally inconsistent: paragraph 2 still says '1 rack unit (RU) height' for the 102.4T XPU tray (see trays.xpu_height_vendor_site_para2). Page dateModified 2026-10-13T04:36:38Z is about 2 h after the PR Newswire timestamp (Oct 12, 2026, 22:17 ET = 2026-10-13T02:17Z), consistent with a post-wire edit (inference)."
 
 [[fact]]
 id = "trays.xpu_height_vendor_site_para2"
@@ -330,7 +330,7 @@ cite = "counterpoint_ocp26"
 source_class = "third_party"
 verified = true
 location = "opening bullet list, bullet 2 (raw.html.txt line 72)"
-note = "Evidence: text. Not in Appendix A. The release gives no ELS-DR count for the XPU tray."
+note = "Evidence: text. Not in the initial fact list. The release gives no ELS-DR count for the XPU tray."
 
 [[fact]]
 id = "trays.fiber_count_counterpoint"
@@ -343,7 +343,7 @@ cite = "counterpoint_ocp26"
 source_class = "third_party"
 verified = true
 location = "paragraph after the bullet list (raw.html.txt line 74)"
-note = "Evidence: text. Not in Appendix A or in the release. The only fiber count in any tray source; scope (which tray, per engine or total) is not stated."
+note = "Evidence: text. Not in the initial fact list or in the release. The only fiber count in any tray source; scope (which tray, per engine or total) is not stated."
 
 [[fact]]
 id = "trays.nd_lane_rate"
@@ -355,7 +355,7 @@ cite = "press_openrack_2026"
 source_class = "vendor_claim"
 verified = false
 location = "searched full text of press_openrack_2026, vendor_pr_openrack, counterpoint_ocp26, futurum_ocp26, ine_ocp26"
-note = "Evidence: none. Absence confirmed, not a failed lookup. No lane rate (G/Gbps per lane, 'lane', PAM4, NRZ, SerDes) appears in any of the five tray sources. counterpoint_ocp26's '204.8 Gbps' and '102.4 Gbps' are the tray totals with a unit error, not lane rates. Related but not tray-specific: vendor_pr_els_dr says each ELS-DR drives '256 lanes at 200G each'. Appendix A wording: Not disclosed: lane rate, fibers per engine, wavelengths, power, switch ASIC"
+note = "Evidence: none. Absence confirmed, not a failed lookup. No lane rate (G/Gbps per lane, 'lane', PAM4, NRZ, SerDes) appears in any of the five tray sources. counterpoint_ocp26's '204.8 Gbps' and '102.4 Gbps' are the tray totals with a unit error, not lane rates. Related but not tray-specific: vendor_pr_els_dr says each ELS-DR drives '256 lanes at 200G each'. The initial fact list wording: Not disclosed: lane rate, fibers per engine, wavelengths, power, switch ASIC"
 
 [[fact]]
 id = "trays.nd_fibers_per_engine"
@@ -367,7 +367,7 @@ cite = "press_openrack_2026"
 source_class = "vendor_claim"
 verified = false
 location = "searched full text of press_openrack_2026, vendor_pr_openrack, counterpoint_ocp26, futurum_ocp26, ine_ocp26"
-note = "Evidence: none. Absence confirmed. No per-engine fiber count in any of the five tray sources. The only fiber count is counterpoint_ocp26's 'routing 1,925 optical fibers in a confined space' (trays.fiber_count_counterpoint), which is not per engine and not clearly tied to either tray. Appendix A wording: Not disclosed: lane rate, fibers per engine, wavelengths, power, switch ASIC"
+note = "Evidence: none. Absence confirmed. No per-engine fiber count in any of the five tray sources. The only fiber count is counterpoint_ocp26's 'routing 1,925 optical fibers in a confined space' (trays.fiber_count_counterpoint), which is not per engine and not clearly tied to either tray. The initial fact list wording: Not disclosed: lane rate, fibers per engine, wavelengths, power, switch ASIC"
 
 [[fact]]
 id = "trays.nd_wavelengths"
@@ -379,7 +379,7 @@ cite = "press_openrack_2026"
 source_class = "vendor_claim"
 verified = false
 location = "searched full text of press_openrack_2026, vendor_pr_openrack, counterpoint_ocp26, futurum_ocp26, ine_ocp26"
-note = "Evidence: none. Absence confirmed. The tray sources say only 'BiDi'. futurum_ocp26 mentions the vendor's '16-wavelength demo' at OFC, unrelated to the trays. ELS-DR in general (vendor_web_els_dr) lists 'Range A: 1311nm, Range B: 1331nm'. Appendix A wording: Not disclosed: lane rate, fibers per engine, wavelengths, power, switch ASIC"
+note = "Evidence: none. Absence confirmed. The tray sources say only 'BiDi'. futurum_ocp26 mentions the vendor's '16-wavelength demo' at OFC, unrelated to the trays. ELS-DR in general (vendor_web_els_dr) lists 'Range A: 1311nm, Range B: 1331nm'. The initial fact list wording: Not disclosed: lane rate, fibers per engine, wavelengths, power, switch ASIC"
 
 [[fact]]
 id = "trays.nd_power"
@@ -391,7 +391,7 @@ cite = "press_openrack_2026"
 source_class = "vendor_claim"
 verified = false
 location = "searched full text of press_openrack_2026, vendor_pr_openrack, counterpoint_ocp26, futurum_ocp26, ine_ocp26"
-note = "Evidence: none. Absence confirmed. No W or pJ/bit figure for the trays in press_openrack_2026, vendor_pr_openrack, futurum_ocp26 or ine_ocp26. counterpoint_ocp26's '<5 pj/bit power consumption for interconnects' is a generic analyst remark about CPO, not a tray spec. ine_ocp26 notes the 2-4x claim is 'not a measured reduction in total system energy consumption'. Appendix A wording: Not disclosed: lane rate, fibers per engine, wavelengths, power, switch ASIC"
+note = "Evidence: none. Absence confirmed. No W or pJ/bit figure for the trays in press_openrack_2026, vendor_pr_openrack, futurum_ocp26 or ine_ocp26. counterpoint_ocp26's '<5 pj/bit power consumption for interconnects' is a generic analyst remark about CPO, not a tray spec. ine_ocp26 notes the 2-4x claim is 'not a measured reduction in total system energy consumption'. The initial fact list wording: Not disclosed: lane rate, fibers per engine, wavelengths, power, switch ASIC"
 
 [[fact]]
 id = "trays.nd_switch_asic"
@@ -403,8 +403,8 @@ cite = "press_openrack_2026"
 source_class = "vendor_claim"
 verified = false
 location = "searched full text of press_openrack_2026, vendor_pr_openrack, counterpoint_ocp26, futurum_ocp26, ine_ocp26"
-note = "Evidence: none. Absence confirmed. No switch ASIC is named, and the XPU tray's accelerator is described only as 'four accelerator ASICs'. futurum_ocp26 names Broadcom Tomahawk 6 Davisson and NVIDIA Quantum-X/Spectrum-X Photonics only as competitors. ine_ocp26 adds that the XPU-tray ODM's name 'the vendor has not disclosed'. Appendix A wording: Not disclosed: lane rate, fibers per engine, wavelengths, power, switch ASIC"
-# ---- Model (brief 05 phase 6, model card §14.7) ---------------------------------------------
+note = "Evidence: none. Absence confirmed. No switch ASIC is named, and the XPU tray's accelerator is described only as 'four accelerator ASICs'. futurum_ocp26 names Broadcom Tomahawk 6 Davisson and NVIDIA Quantum-X/Spectrum-X Photonics only as competitors. ine_ocp26 adds that the XPU-tray ODM's name 'the vendor has not disclosed'. The initial fact list wording: Not disclosed: lane rate, fibers per engine, wavelengths, power, switch ASIC"
+# ---- Model (model card §14.7) ---------------------------------------------
 
 [[assumption]]
 id = "trays.bw_divisor"

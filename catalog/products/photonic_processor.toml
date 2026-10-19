@@ -1,4 +1,4 @@
-# Photonic processor (Nature 2025): public facts with exact quotes (brief 05 phase 4 fact check, 2026-10-18).
+# Photonic processor (Nature 2025): public facts with exact quotes (fact check, 2026-10-18).
 # Independent model built from public information. Not affiliated with or endorsed by
 # any company whose publications are cited.
 
@@ -20,7 +20,7 @@ cite = "vendor_blog_newcomputer"
 source_class = "vendor_claim"
 verified = true
 location = "blog section 'A Fundamental Departure', paragraph 4"
-note = "Evidence: text. Appendix attributes this to ahmed2025_nature (PEER_REVIEWED), whose main text is paywalled and was not seen. The word 'six' was found only in the vendor blog (vendor_claim, Nick Harris, 2025-04-09). Peer-reviewed material agrees on the parts: Fig. 1b caption 'two 12-nm control chiplets ... and four 349-mm2 photonic chiplets' and SI p.5 'two DCIs ... four PTCs' (2 + 4 = 6)."
+note = "Evidence: text. The initial list attributes this to ahmed2025_nature (PEER_REVIEWED), whose main text is paywalled and was not seen. The word 'six' was found only in the vendor blog (vendor_claim, Nick Harris, 2025-04-09). Peer-reviewed material agrees on the parts: Fig. 1b caption 'two 12-nm control chiplets ... and four 349-mm2 photonic chiplets' and SI p.5 'two DCIs ... four PTCs' (2 + 4 = 6)."
 
 [[fact]]
 id = "ptc.ptc_count"
@@ -101,14 +101,14 @@ note = "Evidence: text. Fig. 1b caption words it as 'four 349-mm2 photonic chipl
 
 [[fact]]
 id = "ptc.interposer_dims"
-quantity = "organic interposer dimensions (Appendix: 54 x 56 mm)"
+quantity = "organic interposer dimensions (initial list: 54 x 56 mm)"
 bound = "exact"
 unit = "text"
 quote = "54 × 56 mm organic interposer"
 cite = "ahmed2025_nature"
 source_class = "peer_reviewed"
 verified = false
-note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. Accessible material gives only the package size: SI p.5 'The package dimension is 80 mm by 65 mm'. 'Organic interposer' is not confirmed either: the Fig. 1b caption places the control chiplets 'on an organic substrate', and the Fig. 1b image labels separate 'Interposer' and 'Substrate' layers. Appendix A wording: on a 54 × 56 mm organic interposer"
+note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. Accessible material gives only the package size: SI p.5 'The package dimension is 80 mm by 65 mm'. 'Organic interposer' is not confirmed either: the Fig. 1b caption places the control chiplets 'on an organic substrate', and the Fig. 1b image labels separate 'Interposer' and 'Substrate' layers. The initial fact list wording: on a 54 × 56 mm organic interposer"
 
 [[fact]]
 id = "ptc.interposer_length_mm"
@@ -120,7 +120,7 @@ quote = "54 × 56 mm organic interposer"
 cite = "ahmed2025_nature"
 source_class = "peer_reviewed"
 verified = false
-note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. Accessible material gives only the package size: SI p.5 'The package dimension is 80 mm by 65 mm'. 'Organic interposer' is not confirmed either: the Fig. 1b caption places the control chiplets 'on an organic substrate', and the Fig. 1b image labels separate 'Interposer' and 'Substrate' layers. Appendix A wording: on a 54 × 56 mm organic interposer Number split from ptc.interposer_dims."
+note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. Accessible material gives only the package size: SI p.5 'The package dimension is 80 mm by 65 mm'. 'Organic interposer' is not confirmed either: the Fig. 1b caption places the control chiplets 'on an organic substrate', and the Fig. 1b image labels separate 'Interposer' and 'Substrate' layers. The initial fact list wording: on a 54 × 56 mm organic interposer Number split from ptc.interposer_dims."
 
 [[fact]]
 id = "ptc.interposer_width_mm"
@@ -132,18 +132,18 @@ quote = "54 × 56 mm organic interposer"
 cite = "ahmed2025_nature"
 source_class = "peer_reviewed"
 verified = false
-note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. Accessible material gives only the package size: SI p.5 'The package dimension is 80 mm by 65 mm'. 'Organic interposer' is not confirmed either: the Fig. 1b caption places the control chiplets 'on an organic substrate', and the Fig. 1b image labels separate 'Interposer' and 'Substrate' layers. Appendix A wording: on a 54 × 56 mm organic interposer Number split from ptc.interposer_dims."
+note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. Accessible material gives only the package size: SI p.5 'The package dimension is 80 mm by 65 mm'. 'Organic interposer' is not confirmed either: the Fig. 1b caption places the control chiplets 'on an organic substrate', and the Fig. 1b image labels separate 'Interposer' and 'Substrate' layers. The initial fact list wording: on a 54 × 56 mm organic interposer Number split from ptc.interposer_dims."
 
 [[fact]]
 id = "ptc.ptc_die_dims"
-quantity = "PTC die dimensions (Appendix: 14.00 x 24.96 mm)"
+quantity = "PTC die dimensions (initial list: 14.00 x 24.96 mm)"
 bound = "exact"
 unit = "text"
 quote = "PTC 14.00 × 24.96 mm"
 cite = "ahmed2025_nature"
 source_class = "peer_reviewed"
 verified = false
-note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. The peer-reviewed area is available: Fig. 1b caption 'four 349-mm2 photonic chiplets' and SI Table S3 '349 mm²×4'. 14.00 x 24.96 = 349.44 mm2, consistent (arithmetic check only). Appendix A wording: PTC 14.00 × 24.96 mm"
+note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. The peer-reviewed area is available: Fig. 1b caption 'four 349-mm2 photonic chiplets' and SI Table S3 '349 mm²×4'. 14.00 x 24.96 = 349.44 mm2, consistent (arithmetic check only). The initial fact list wording: PTC 14.00 × 24.96 mm"
 
 [[fact]]
 id = "ptc.ptc_die_length_mm"
@@ -155,7 +155,7 @@ quote = "PTC 14.00 × 24.96 mm"
 cite = "ahmed2025_nature"
 source_class = "peer_reviewed"
 verified = false
-note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. The peer-reviewed area is available: Fig. 1b caption 'four 349-mm2 photonic chiplets' and SI Table S3 '349 mm²×4'. 14.00 x 24.96 = 349.44 mm2, consistent (arithmetic check only). Appendix A wording: PTC 14.00 × 24.96 mm Number split from ptc.ptc_die_dims."
+note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. The peer-reviewed area is available: Fig. 1b caption 'four 349-mm2 photonic chiplets' and SI Table S3 '349 mm²×4'. 14.00 x 24.96 = 349.44 mm2, consistent (arithmetic check only). The initial fact list wording: PTC 14.00 × 24.96 mm Number split from ptc.ptc_die_dims."
 
 [[fact]]
 id = "ptc.ptc_die_width_mm"
@@ -167,18 +167,18 @@ quote = "PTC 14.00 × 24.96 mm"
 cite = "ahmed2025_nature"
 source_class = "peer_reviewed"
 verified = false
-note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. The peer-reviewed area is available: Fig. 1b caption 'four 349-mm2 photonic chiplets' and SI Table S3 '349 mm²×4'. 14.00 x 24.96 = 349.44 mm2, consistent (arithmetic check only). Appendix A wording: PTC 14.00 × 24.96 mm Number split from ptc.ptc_die_dims."
+note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. The peer-reviewed area is available: Fig. 1b caption 'four 349-mm2 photonic chiplets' and SI Table S3 '349 mm²×4'. 14.00 x 24.96 = 349.44 mm2, consistent (arithmetic check only). The initial fact list wording: PTC 14.00 × 24.96 mm Number split from ptc.ptc_die_dims."
 
 [[fact]]
 id = "ptc.dci_die_dims"
-quantity = "control die dimensions (Appendix: 31.4 x 25.0 mm)"
+quantity = "control die dimensions (initial list: 31.4 x 25.0 mm)"
 bound = "exact"
 unit = "text"
 quote = "control die 31.4 × 25.0 mm"
 cite = "ahmed2025_nature"
 source_class = "peer_reviewed"
 verified = false
-note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. The peer-reviewed area is available: Fig. 1b caption 'two 12-nm control chiplets measuring approximately 780 mm2'. 31.4 x 25.0 = 785 mm2, consistent with 'approximately 780 mm2' (arithmetic check only). Appendix A wording: control die 31.4 × 25.0 mm"
+note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. The peer-reviewed area is available: Fig. 1b caption 'two 12-nm control chiplets measuring approximately 780 mm2'. 31.4 x 25.0 = 785 mm2, consistent with 'approximately 780 mm2' (arithmetic check only). The initial fact list wording: control die 31.4 × 25.0 mm"
 
 [[fact]]
 id = "ptc.dci_die_length_mm"
@@ -190,7 +190,7 @@ quote = "control die 31.4 × 25.0 mm"
 cite = "ahmed2025_nature"
 source_class = "peer_reviewed"
 verified = false
-note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. The peer-reviewed area is available: Fig. 1b caption 'two 12-nm control chiplets measuring approximately 780 mm2'. 31.4 x 25.0 = 785 mm2, consistent with 'approximately 780 mm2' (arithmetic check only). Appendix A wording: control die 31.4 × 25.0 mm Number split from ptc.dci_die_dims."
+note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. The peer-reviewed area is available: Fig. 1b caption 'two 12-nm control chiplets measuring approximately 780 mm2'. 31.4 x 25.0 = 785 mm2, consistent with 'approximately 780 mm2' (arithmetic check only). The initial fact list wording: control die 31.4 × 25.0 mm Number split from ptc.dci_die_dims."
 
 [[fact]]
 id = "ptc.dci_die_width_mm"
@@ -202,7 +202,7 @@ quote = "control die 31.4 × 25.0 mm"
 cite = "ahmed2025_nature"
 source_class = "peer_reviewed"
 verified = false
-note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. The peer-reviewed area is available: Fig. 1b caption 'two 12-nm control chiplets measuring approximately 780 mm2'. 31.4 x 25.0 = 785 mm2, consistent with 'approximately 780 mm2' (arithmetic check only). Appendix A wording: control die 31.4 × 25.0 mm Number split from ptc.dci_die_dims."
+note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. The peer-reviewed area is available: Fig. 1b caption 'two 12-nm control chiplets measuring approximately 780 mm2'. 31.4 x 25.0 = 785 mm2, consistent with 'approximately 780 mm2' (arithmetic check only). The initial fact list wording: control die 31.4 × 25.0 mm Number split from ptc.dci_die_dims."
 
 [[fact]]
 id = "ptc.throughput_sustained"
@@ -215,7 +215,7 @@ cite = "ahmed2025_nature"
 source_class = "peer_reviewed"
 verified = true
 location = "Supplementary Information; SI Table S3, row 'This work (2024)', p.10"
-note = "Evidence: text. The Appendix quotes a main-text sentence that could not be checked (main text paywalled). The values are in SI Table S3, and the vendor blog (vendor_blog_newcomputer) words it as 'the processor performs 65.5 trillion Adaptive Block Floating-Point 16-bit (ABFP) operations per second, consuming only 78 watts of electrical power and 1.6 watts of optical power'. Arithmetic check (inference): 65,536 MACs/cycle x 2 ops x 500 MHz = 65.5 TOPS."
+note = "Evidence: text. The initial fact list quotes a main-text sentence that could not be checked (main text paywalled). The values are in SI Table S3, and the vendor blog (vendor_blog_newcomputer) words it as 'the processor performs 65.5 trillion Adaptive Block Floating-Point 16-bit (ABFP) operations per second, consuming only 78 watts of electrical power and 1.6 watts of optical power'. Arithmetic check (inference): 65,536 MACs/cycle x 2 ops x 500 MHz = 65.5 TOPS."
 
 [[fact]]
 id = "ptc.power_electrical"
@@ -228,7 +228,7 @@ cite = "ahmed2025_nature"
 source_class = "peer_reviewed"
 verified = true
 location = "Supplementary Information; SI Table S3, row 'This work (2024)', p.10"
-note = "Evidence: text. The Appendix quotes a main-text sentence that could not be checked (main text paywalled). The values are in SI Table S3, and the vendor blog (vendor_blog_newcomputer) words it as 'the processor performs 65.5 trillion Adaptive Block Floating-Point 16-bit (ABFP) operations per second, consuming only 78 watts of electrical power and 1.6 watts of optical power'. SI Table S4 lists TDP '78 avg, 150 peak'."
+note = "Evidence: text. The initial fact list quotes a main-text sentence that could not be checked (main text paywalled). The values are in SI Table S3, and the vendor blog (vendor_blog_newcomputer) words it as 'the processor performs 65.5 trillion Adaptive Block Floating-Point 16-bit (ABFP) operations per second, consuming only 78 watts of electrical power and 1.6 watts of optical power'. SI Table S4 lists TDP '78 avg, 150 peak'."
 
 [[fact]]
 id = "ptc.power_optical"
@@ -241,7 +241,7 @@ cite = "ahmed2025_nature"
 source_class = "peer_reviewed"
 verified = true
 location = "Supplementary Information; SI Table S3, row 'This work (2024)', p.10"
-note = "Evidence: text. The Appendix quotes a main-text sentence that could not be checked (main text paywalled). The values are in SI Table S3, and the vendor blog (vendor_blog_newcomputer) words it as 'the processor performs 65.5 trillion Adaptive Block Floating-Point 16-bit (ABFP) operations per second, consuming only 78 watts of electrical power and 1.6 watts of optical power'."
+note = "Evidence: text. The initial fact list quotes a main-text sentence that could not be checked (main text paywalled). The values are in SI Table S3, and the vendor blog (vendor_blog_newcomputer) words it as 'the processor performs 65.5 trillion Adaptive Block Floating-Point 16-bit (ABFP) operations per second, consuming only 78 watts of electrical power and 1.6 watts of optical power'."
 
 [[fact]]
 id = "ptc.clock_sustained"
@@ -284,7 +284,7 @@ note = "Evidence: text. Arithmetic check (inference): 65.5 TOPS x (2 GHz / 500 M
 
 [[fact]]
 id = "ptc.ptc_power_each"
-quantity = "power per photonic tensor core (Appendix: 3.2 W each)"
+quantity = "power per photonic tensor core (initial list: 3.2 W each)"
 value = 3.2
 bound = "exact"
 unit = "W"
@@ -292,11 +292,11 @@ quote = "PTC 3.2 W each"
 cite = "ahmed2025_nature"
 source_class = "peer_reviewed"
 verified = false
-note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. The SI gives a different, narrower figure: Table S3 '250mW / PTC', and p.11 'isolating just the energy cost of encoding vectors and weights during the operation of the PTC, resulting in a power consumption of 0.25 W' (vector and weight encoding only, incl. weight DAC). 4 x 3.2 W + 65 W = 77.8 W, close to the 78 W total, so the Appendix split is arithmetically plausible (inference only). Appendix A wording: PTC 3.2 W each"
+note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. The SI gives a different, narrower figure: Table S3 '250mW / PTC', and p.11 'isolating just the energy cost of encoding vectors and weights during the operation of the PTC, resulting in a power consumption of 0.25 W' (vector and weight encoding only, incl. weight DAC). 4 x 3.2 W + 65 W = 77.8 W, close to the 78 W total, so the initial fact list split is arithmetically plausible (inference only). The initial fact list wording: PTC 3.2 W each"
 
 [[fact]]
 id = "ptc.dci_power"
-quantity = "power of the two control dies (Appendix: 65 W)"
+quantity = "power of the two control dies (initial list: 65 W)"
 value = 65.0
 bound = "exact"
 unit = "W"
@@ -304,7 +304,7 @@ quote = "control dies 65 W"
 cite = "ahmed2025_nature"
 source_class = "peer_reviewed"
 verified = false
-note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. SI Table S4 gives only whole-processor TDP '78 avg, 150 peak'. Appendix A wording: control dies 65 W"
+note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. SI Table S4 gives only whole-processor TDP '78 avg, 150 peak'. The initial fact list wording: control dies 65 W"
 
 [[fact]]
 id = "ptc.abfp_block_len"
@@ -368,7 +368,7 @@ quote = "ENOB 9.8"
 cite = "ahmed2025_nature"
 source_class = "peer_reviewed"
 verified = false
-note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. Appendix A wording: ADC 11 bits, ENOB 9.8, up to 2 GS/s, 66 mW"
+note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. The initial fact list wording: ADC 11 bits, ENOB 9.8, up to 2 GS/s, 66 mW"
 
 [[fact]]
 id = "ptc.adc_rate"
@@ -380,7 +380,7 @@ quote = "up to 2 GS/s"
 cite = "ahmed2025_nature"
 source_class = "peer_reviewed"
 verified = false
-note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. Appendix A wording: ADC 11 bits, ENOB 9.8, up to 2 GS/s, 66 mW"
+note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. The initial fact list wording: ADC 11 bits, ENOB 9.8, up to 2 GS/s, 66 mW"
 
 [[fact]]
 id = "ptc.adc_power"
@@ -392,7 +392,7 @@ quote = "66 mW"
 cite = "ahmed2025_nature"
 source_class = "peer_reviewed"
 verified = false
-note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. Appendix A wording: ADC 11 bits, ENOB 9.8, up to 2 GS/s, 66 mW"
+note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. The initial fact list wording: ADC 11 bits, ENOB 9.8, up to 2 GS/s, 66 mW"
 
 [[fact]]
 id = "ptc.vdac_bits"
@@ -417,7 +417,7 @@ quote = "ENOB 8.3"
 cite = "ahmed2025_nature"
 source_class = "peer_reviewed"
 verified = false
-note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. Appendix A wording: vector DAC 10 bits, ENOB 8.3, 72 mW"
+note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. The initial fact list wording: vector DAC 10 bits, ENOB 8.3, 72 mW"
 
 [[fact]]
 id = "ptc.vdac_power"
@@ -429,7 +429,7 @@ quote = "72 mW"
 cite = "ahmed2025_nature"
 source_class = "peer_reviewed"
 verified = false
-note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. Appendix A wording: vector DAC 10 bits, ENOB 8.3, 72 mW"
+note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. The initial fact list wording: vector DAC 10 bits, ENOB 8.3, 72 mW"
 
 [[fact]]
 id = "ptc.tia_gain"
@@ -441,7 +441,7 @@ quote = "TIA 2.8 kΩ"
 cite = "ahmed2025_nature"
 source_class = "peer_reviewed"
 verified = false
-note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. The SI mentions TIAs only qualitatively (gain G is raised by 'increasing both the TIA gain and the laser power'; TIAs + VADCs calibrated with LUTs). Appendix A wording: TIA 2.8 kΩ, 0.8 GHz, 0.4 µA rms"
+note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. The SI mentions TIAs only qualitatively (gain G is raised by 'increasing both the TIA gain and the laser power'; TIAs + VADCs calibrated with LUTs). The initial fact list wording: TIA 2.8 kΩ, 0.8 GHz, 0.4 µA rms"
 
 [[fact]]
 id = "ptc.tia_bw"
@@ -453,7 +453,7 @@ quote = "0.8 GHz"
 cite = "ahmed2025_nature"
 source_class = "peer_reviewed"
 verified = false
-note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. Appendix A wording: TIA 2.8 kΩ, 0.8 GHz, 0.4 µA rms"
+note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. The initial fact list wording: TIA 2.8 kΩ, 0.8 GHz, 0.4 µA rms"
 
 [[fact]]
 id = "ptc.tia_noise"
@@ -465,7 +465,7 @@ quote = "0.4 µA rms"
 cite = "ahmed2025_nature"
 source_class = "peer_reviewed"
 verified = false
-note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. Appendix A wording: TIA 2.8 kΩ, 0.8 GHz, 0.4 µA rms"
+note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. The initial fact list wording: TIA 2.8 kΩ, 0.8 GHz, 0.4 µA rms"
 
 [[fact]]
 id = "ptc.gain_measured"
@@ -490,7 +490,7 @@ quote = "a design target of 4"
 cite = "ahmed2025_nature"
 source_class = "peer_reviewed"
 verified = false
-note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. 'Design target' wording not found. The SI uses G = 4 only in its CPU/GPU emulation study (Table S1 columns 'ABFP with G=1', 'ABFP with G=4', 'After QAT with G=4'), and Fig. 2d illustrates Gain = 1, 2, 4; neither calls 4 a design target. Appendix A wording: gain 1.86 vs a design target of 4"
+note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. 'Design target' wording not found. The SI uses G = 4 only in its CPU/GPU emulation study (Table S1 columns 'ABFP with G=1', 'ABFP with G=4', 'After QAT with G=4'), and Fig. 2d illustrates Gain = 1, 2, 4; neither calls 4 a design target. The initial fact list wording: gain 1.86 vs a design target of 4"
 
 [[fact]]
 id = "ptc.vmod_type"
@@ -514,7 +514,7 @@ quote = "3.8 GHz"
 cite = "ahmed2025_nature"
 source_class = "peer_reviewed"
 verified = false
-note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. Appendix A wording: MZI vector modulators 3.8 GHz, IL 1.1 dB, VπL 0.92 V·cm"
+note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. The initial fact list wording: MZI vector modulators 3.8 GHz, IL 1.1 dB, VπL 0.92 V·cm"
 
 [[fact]]
 id = "ptc.vmod_il"
@@ -526,7 +526,7 @@ quote = "IL 1.1 dB"
 cite = "ahmed2025_nature"
 source_class = "peer_reviewed"
 verified = false
-note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. Appendix A wording: MZI vector modulators 3.8 GHz, IL 1.1 dB, VπL 0.92 V·cm"
+note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. The initial fact list wording: MZI vector modulators 3.8 GHz, IL 1.1 dB, VπL 0.92 V·cm"
 
 [[fact]]
 id = "ptc.vmod_vpil"
@@ -538,7 +538,7 @@ quote = "VπL 0.92 V·cm"
 cite = "ahmed2025_nature"
 source_class = "peer_reviewed"
 verified = false
-note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. Appendix A wording: MZI vector modulators 3.8 GHz, IL 1.1 dB, VπL 0.92 V·cm"
+note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. The initial fact list wording: MZI vector modulators 3.8 GHz, IL 1.1 dB, VπL 0.92 V·cm"
 
 [[fact]]
 id = "ptc.pd_bw"
@@ -550,7 +550,7 @@ quote = "PD 10.6 GHz"
 cite = "ahmed2025_nature"
 source_class = "peer_reviewed"
 verified = false
-note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. Fig. 3b shows two photodiodes (differential photodetection) per weight unit cell, no bandwidth. Appendix A wording: PD 10.6 GHz"
+note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. Fig. 3b shows two photodiodes (differential photodetection) per weight unit cell, no bandwidth. The initial fact list wording: PD 10.6 GHz"
 
 [[fact]]
 id = "ptc.loss_si_ridge"
@@ -562,7 +562,7 @@ quote = "Si ridge 1.35 dB/cm"
 cite = "ahmed2025_nature"
 source_class = "peer_reviewed"
 verified = false
-note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. Appendix A wording: Si ridge 1.35 dB/cm, SiN 0.68 dB/cm"
+note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. The initial fact list wording: Si ridge 1.35 dB/cm, SiN 0.68 dB/cm"
 
 [[fact]]
 id = "ptc.loss_sin"
@@ -574,7 +574,7 @@ quote = "SiN 0.68 dB/cm"
 cite = "ahmed2025_nature"
 source_class = "peer_reviewed"
 verified = false
-note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. No SiN layer is mentioned anywhere in the accessible material. Appendix A wording: Si ridge 1.35 dB/cm, SiN 0.68 dB/cm"
+note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. No SiN layer is mentioned anywhere in the accessible material. The initial fact list wording: Si ridge 1.35 dB/cm, SiN 0.68 dB/cm"
 
 [[fact]]
 id = "ptc.vgroove_loss"
@@ -586,7 +586,7 @@ quote = "V-groove 1.56 dB"
 cite = "ahmed2025_nature"
 source_class = "peer_reviewed"
 verified = false
-note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. V-grooves are confirmed without a loss figure: SI p.5 'There are 12 v-grooves per PTC with a pitch of 250µm.' Appendix A wording: V-groove 1.56 dB"
+note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. V-grooves are confirmed without a loss figure: SI p.5 'There are 12 v-grooves per PTC with a pitch of 250µm.' the initial fact list wording: V-groove 1.56 dB"
 
 [[fact]]
 id = "ptc.laser_count"
@@ -598,7 +598,7 @@ quote = "eight DFB lasers"
 cite = "ahmed2025_nature"
 source_class = "peer_reviewed"
 verified = false
-note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. No laser count, type, grid or wall-plug power appears in the accessible material. The SI mentions per-channel Laser Power Regulators (LPR) set to 'approximately 92% of its maximum power' during calibration; total optical power is 1.6 W (SI Table S3), which equals 8 x 200 mW (arithmetic only). Appendix A wording: eight DFB lasers, 200 mW in fibre each, CWDM4 grid in the 1310 nm band, 1.25 W each incl. TEC"
+note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. No laser count, type, grid or wall-plug power appears in the accessible material. The SI mentions per-channel Laser Power Regulators (LPR) set to 'approximately 92% of its maximum power' during calibration; total optical power is 1.6 W (SI Table S3), which equals 8 x 200 mW (arithmetic only). The initial fact list wording: eight DFB lasers, 200 mW in fibre each, CWDM4 grid in the 1310 nm band, 1.25 W each incl. TEC"
 
 [[fact]]
 id = "ptc.laser_power_fibre"
@@ -610,7 +610,7 @@ quote = "200 mW in fibre each"
 cite = "ahmed2025_nature"
 source_class = "peer_reviewed"
 verified = false
-note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. No laser count, type, grid or wall-plug power appears in the accessible material. The SI mentions per-channel Laser Power Regulators (LPR) set to 'approximately 92% of its maximum power' during calibration; total optical power is 1.6 W (SI Table S3), which equals 8 x 200 mW (arithmetic only). Appendix A wording: eight DFB lasers, 200 mW in fibre each, CWDM4 grid in the 1310 nm band, 1.25 W each incl. TEC"
+note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. No laser count, type, grid or wall-plug power appears in the accessible material. The SI mentions per-channel Laser Power Regulators (LPR) set to 'approximately 92% of its maximum power' during calibration; total optical power is 1.6 W (SI Table S3), which equals 8 x 200 mW (arithmetic only). The initial fact list wording: eight DFB lasers, 200 mW in fibre each, CWDM4 grid in the 1310 nm band, 1.25 W each incl. TEC"
 
 [[fact]]
 id = "ptc.laser_grid"
@@ -621,7 +621,7 @@ quote = "CWDM4 grid in the 1310 nm band"
 cite = "ahmed2025_nature"
 source_class = "peer_reviewed"
 verified = false
-note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. No laser count, type, grid or wall-plug power appears in the accessible material. The SI mentions per-channel Laser Power Regulators (LPR) set to 'approximately 92% of its maximum power' during calibration; total optical power is 1.6 W (SI Table S3), which equals 8 x 200 mW (arithmetic only). Appendix A wording: eight DFB lasers, 200 mW in fibre each, CWDM4 grid in the 1310 nm band, 1.25 W each incl. TEC"
+note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. No laser count, type, grid or wall-plug power appears in the accessible material. The SI mentions per-channel Laser Power Regulators (LPR) set to 'approximately 92% of its maximum power' during calibration; total optical power is 1.6 W (SI Table S3), which equals 8 x 200 mW (arithmetic only). The initial fact list wording: eight DFB lasers, 200 mW in fibre each, CWDM4 grid in the 1310 nm band, 1.25 W each incl. TEC"
 
 [[fact]]
 id = "ptc.laser_wallplug"
@@ -633,7 +633,7 @@ quote = "1.25 W each incl. TEC"
 cite = "ahmed2025_nature"
 source_class = "peer_reviewed"
 verified = false
-note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. No laser count, type, grid or wall-plug power appears in the accessible material. The SI mentions per-channel Laser Power Regulators (LPR) set to 'approximately 92% of its maximum power' during calibration; total optical power is 1.6 W (SI Table S3), which equals 8 x 200 mW (arithmetic only). Appendix A wording: eight DFB lasers, 200 mW in fibre each, CWDM4 grid in the 1310 nm band, 1.25 W each incl. TEC"
+note = "Evidence: none. Not found: the main text and Methods of ahmed2025_nature are paywalled (nature.com serves a preview only; no open-access copy via the nature.com PDF link, OpenAlex, Europe PMC/PMC, Semantic Scholar, arXiv or the Wayback Machine). The freely available SI, Table 1 page and Fig. 1-4 pages/images do not state this value. No laser count, type, grid or wall-plug power appears in the accessible material. The SI mentions per-channel Laser Power Regulators (LPR) set to 'approximately 92% of its maximum power' during calibration; total optical power is 1.6 W (SI Table S3), which equals 8 x 200 mW (arithmetic only). The initial fact list wording: eight DFB lasers, 200 mW in fibre each, CWDM4 grid in the 1310 nm band, 1.25 W each incl. TEC"
 
 [[fact]]
 id = "ptc.fanout_tree"
@@ -866,7 +866,7 @@ cite = "basumallik2022_abfp"
 source_class = "vendor_claim"
 verified = true
 location = "p.1, title and author line (arXiv:2205.06287v1, 12 May 2022)"
-note = "Evidence: text. Classed vendor_claim: arXiv preprint (v1) by the vendor authors; peer-review status not established in this run. ahmed2025_nature cites it as a preprint."
+note = "Evidence: text. Classed vendor_claim: arXiv preprint (v1) by the vendor authors; peer-review status not established. ahmed2025_nature cites it as a preprint."
 
 [[fact]]
 id = "ptc.abfp_ref_affiliation"
@@ -918,7 +918,7 @@ note = "Evidence: text. Affiliations are MIT (Research Laboratory of Electronics
 
 [[fact]]
 id = "ptc.c262_llms"
-quantity = "vendor llms.txt: photonic processor operations per watt (exact Appendix phrase)"
+quantity = "vendor llms.txt: photonic processor operations per watt (exact initial-list phrase)"
 value = 262.0
 bound = "exact"
 unit = "TOPS/W"
@@ -928,7 +928,7 @@ source_class = "vendor_claim"
 verified = true
 conflicts_with = ["ptc.c262_paper"]
 location = "llms.txt, section 'Industry Leadership', entry 'Photonic AI Acceleration Performance'"
-note = "Evidence: text. Source of the exact Appendix wording. llms.txt links this entry to https://lightmatter.co/, but the current home page no longer carries it (saved as SRC/lm_web_home); the claims are on /vision/ (vendor_web_ptc)."
+note = "Evidence: text. Source of the exact initial wording. llms.txt links this entry to https://lightmatter.co/, but the current home page no longer carries it (saved as SRC/lm_web_home); the claims are on /vision/ (vendor_web_ptc)."
 
 [[fact]]
 id = "ptc.ptc_only_tops_per_w"
@@ -954,7 +954,7 @@ cite = "ahmed2025_nature"
 source_class = "peer_reviewed"
 verified = true
 location = "Supplementary Information; SI Table S3, row 'This work (2024)', p.10; p.11 gives 0.25 W"
-note = "Evidence: text. Not the full PTC power: see ptc.ptc_power_each (Appendix 3.2 W, unverified)."
+note = "Evidence: text. Not the full PTC power: see ptc.ptc_power_each (3.2 W, unverified)."
 
 [[fact]]
 id = "ptc.tops_per_w_system_avg"

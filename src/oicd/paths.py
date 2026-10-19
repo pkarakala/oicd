@@ -1,7 +1,7 @@
 """Numeric input paths of a Link, as the report's InputRecord.path names them.
 
 get_input reads a value; set_input returns a new, fully re-validated Link with one value
-changed and relabeled SYNTHETIC (an edited value no longer matches its source, CLAUDE.md rule 1).
+changed and relabeled SYNTHETIC (an edited value no longer matches its source).
 Invalid physics raises ValueError exactly as constructing the Link would.
 """
 

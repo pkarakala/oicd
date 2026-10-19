@@ -64,7 +64,7 @@ export function marginColor(bins: readonly MarginBinLike[], value: number): stri
   return bins.find((b) => (b.lo_db === null || value >= b.lo_db) && (b.hi_db === null || value < b.hi_db))?.color
 }
 
-// --- the brief 03 link view ------------------------------------------------------------------
+// --- the link view ------------------------------------------------------------------
 
 /** Input records that describe a trace point: TX inputs at TP2, RX inputs at TP3, otherwise the
  * loss element's own record. */

@@ -33,7 +33,7 @@ Status: Published in Nature 640, 368 to 374 (2025). Catalog file `catalog/produc
 | output ADC sample rate | ≤ 2 GS/s | PEER_REVIEWED (not verified) | [ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x) |
 | bumps per control die (top side of the interposer) | 25000 | PEER_REVIEWED | [ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x) |
 | bumps per PTC (bottom side of the interposer) | 6000 | PEER_REVIEWED | [ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x) |
-| vendor llms.txt: photonic processor operations per watt (exact Appendix phrase) | 262 TOPS/W | VENDOR_CLAIM | [vendor_llms_txt](https://lightmatter.co/llms.txt) |
+| vendor llms.txt: photonic processor operations per watt (exact initial-list phrase) | 262 TOPS/W | VENDOR_CLAIM | [vendor_llms_txt](https://lightmatter.co/llms.txt) |
 | paper: throughput at the 2 GHz peak clock (operations per second) | 262 TOPS | PEER_REVIEWED | [ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x) |
 | vendor web: photonic processor efficiency, operations per watt | 262 TOPS/W | VENDOR_CLAIM | [vendor_web_ptc](https://lightmatter.co/vision/) |
 | chips in the photonic processor package | 6 | VENDOR_CLAIM | [vendor_blog_newcomputer](https://lightmatter.com/blog/a-new-kind-of-computer/) |
@@ -46,11 +46,11 @@ Status: Published in Nature 640, 368 to 374 (2025). Catalog file `catalog/produc
 | optical components in the processor (vendor web) | ≥ 200000 | VENDOR_CLAIM | [vendor_web_ptc](https://lightmatter.co/vision/) |
 | control chiplet (DCI) area | ≈ 780 mm2 | PEER_REVIEWED | [ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x) |
 | control dies (digital control interface, DCI) per processor | 2 | PEER_REVIEWED | [ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x) |
-| control die dimensions (Appendix: 31.4 x 25.0 mm) | text | PEER_REVIEWED (not verified) | [ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x) |
+| control die dimensions (initial list: 31.4 x 25.0 mm) | text | PEER_REVIEWED (not verified) | [ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x) |
 | control die length | 31.4 mm | PEER_REVIEWED (not verified) | [ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x) |
 | control die width | 25 mm | PEER_REVIEWED (not verified) | [ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x) |
 | control die process node | 12 nm | PEER_REVIEWED | [ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x) |
-| power of the two control dies (Appendix: 65 W) | 65 W | PEER_REVIEWED (not verified) | [ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x) |
+| power of the two control dies (initial list: 65 W) | 65 W | PEER_REVIEWED (not verified) | [ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x) |
 | optical fan-out tree from each input fibre | 16 | PEER_REVIEWED | [ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x) |
 | effect of gain: ADC reads lower bits, upper bits may saturate | text | PEER_REVIEWED | [ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x) |
 | ADC 11-bit window within the 24-bit output word versus gain | text | PEER_REVIEWED | [ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x) |
@@ -60,7 +60,7 @@ Status: Published in Nature 640, 368 to 374 (2025). Catalog file `catalog/produc
 | design target for the gain factor G | 4 | PEER_REVIEWED (not verified) | [ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x) |
 | achieved overamplification (gain) factor G | 1.86 | PEER_REVIEWED | [ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x) |
 | how gain G > 1 is realized: TIA gain and laser power both raised | text | PEER_REVIEWED | [ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x) |
-| organic interposer dimensions (Appendix: 54 x 56 mm) | text | PEER_REVIEWED (not verified) | [ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x) |
+| organic interposer dimensions (initial list: 54 x 56 mm) | text | PEER_REVIEWED (not verified) | [ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x) |
 | interposer length | 56 mm | PEER_REVIEWED (not verified) | [ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x) |
 | interposer width | 54 mm | PEER_REVIEWED (not verified) | [ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x) |
 | number of DFB lasers | 8 | PEER_REVIEWED (not verified) | [ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x) |
@@ -80,13 +80,13 @@ Status: Published in Nature 640, 368 to 374 (2025). Catalog file `catalog/produc
 | optical (laser) power delivered to the processor | 1.6 W | PEER_REVIEWED | [ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x) |
 | photonic chiplet (PTC) area | 349 mm2 | PEER_REVIEWED | [ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x) |
 | photonic tensor cores (PTCs) per processor | 4 | PEER_REVIEWED | [ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x) |
-| PTC die dimensions (Appendix: 14.00 x 24.96 mm) | text | PEER_REVIEWED (not verified) | [ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x) |
+| PTC die dimensions (initial list: 14.00 x 24.96 mm) | text | PEER_REVIEWED (not verified) | [ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x) |
 | PTC die length | 24.96 mm | PEER_REVIEWED (not verified) | [ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x) |
 | PTC die width | 14 mm | PEER_REVIEWED (not verified) | [ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x) |
 | PTC power for vector and weight encoding only (per PTC per Table S3) | 250 mW | PEER_REVIEWED | [ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x) |
 | PTC weight-array dimension N (N x N = 128 x 128) | 128 | PEER_REVIEWED | [ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x) |
 | PTC-only computational efficiency (vector and weight encoding energy only) | 262 TOPS/W | PEER_REVIEWED | [ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x) |
-| power per photonic tensor core (Appendix: 3.2 W each) | 3.2 W | PEER_REVIEWED (not verified) | [ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x) |
+| power per photonic tensor core (initial list: 3.2 W each) | 3.2 W | PEER_REVIEWED (not verified) | [ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x) |
 | photonic tensor core process node | 90 nm | PEER_REVIEWED | [ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x) |
 | weighted products summed as current on row lines | text | PEER_REVIEWED | [ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x) |
 | shen2017 authors (Harris is a co-author) | text | PEER_REVIEWED | [shen2017](https://arxiv.org/abs/1610.02365) |
@@ -162,7 +162,7 @@ Status: Published in Nature 640, 368 to 374 (2025). Catalog file `catalog/produc
 
 ## Open tensions and conflicts
 
-- CONFLICT: vendor llms.txt: photonic processor operations per watt (exact Appendix phrase): 262 TOPS/W (“[photonic processor] demonstrates 262 trillion operations per watt, 200 picoseconds of latency per matrix-vector product, more than 200,000 photonic components, and 50 billion electronic transistors.”, [vendor_llms_txt](https://lightmatter.co/llms.txt)) against paper: throughput at the 2 GHz peak clock (operations per second): 262 TOPS (“the peak clock frequency of 2 GHz results in 262 TOPS of ABFP16 throughput”, [ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x)). Both are kept.
+- CONFLICT: vendor llms.txt: photonic processor operations per watt (exact initial-list phrase): 262 TOPS/W (“[photonic processor] demonstrates 262 trillion operations per watt, 200 picoseconds of latency per matrix-vector product, more than 200,000 photonic components, and 50 billion electronic transistors.”, [vendor_llms_txt](https://lightmatter.co/llms.txt)) against paper: throughput at the 2 GHz peak clock (operations per second): 262 TOPS (“the peak clock frequency of 2 GHz results in 262 TOPS of ABFP16 throughput”, [ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x)). Both are kept.
 - CONFLICT: paper: throughput at the 2 GHz peak clock (operations per second): 262 TOPS (“the peak clock frequency of 2 GHz results in 262 TOPS of ABFP16 throughput”, [ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x)) against vendor web: photonic processor efficiency, operations per watt: 262 TOPS/W (“262T Ops/Watt”, [vendor_web_ptc](https://lightmatter.co/vision/)). Both are kept.
 - CONFLICT: photonic components in the processor (vendor blog): 1000000 (“50 billion transistors spanning 6 chips with 1 million photonic components”, [vendor_blog_newcomputer](https://lightmatter.com/blog/a-new-kind-of-computer/)) against optical components in the processor (vendor web): 200000 (“four photonic chips manipulate 512 light beams through over 200,000 optical components”, [vendor_web_ptc](https://lightmatter.co/vision/)). Both are kept.
 
@@ -186,12 +186,12 @@ Status: Published in Nature 640, 368 to 374 (2025). Catalog file `catalog/produc
 - `ptc.adc_enob`: output ADC effective number of bits ([ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x))
 - `ptc.adc_power`: output ADC power ([ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x))
 - `ptc.adc_rate`: output ADC sample rate ([ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x))
-- `ptc.dci_die_dims`: control die dimensions (Appendix: 31.4 x 25.0 mm) ([ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x))
+- `ptc.dci_die_dims`: control die dimensions (initial list: 31.4 x 25.0 mm) ([ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x))
 - `ptc.dci_die_length_mm`: control die length ([ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x))
 - `ptc.dci_die_width_mm`: control die width ([ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x))
-- `ptc.dci_power`: power of the two control dies (Appendix: 65 W) ([ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x))
+- `ptc.dci_power`: power of the two control dies (initial list: 65 W) ([ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x))
 - `ptc.gain_design_target`: design target for the gain factor G ([ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x))
-- `ptc.interposer_dims`: organic interposer dimensions (Appendix: 54 x 56 mm) ([ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x))
+- `ptc.interposer_dims`: organic interposer dimensions (initial list: 54 x 56 mm) ([ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x))
 - `ptc.interposer_length_mm`: interposer length ([ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x))
 - `ptc.interposer_width_mm`: interposer width ([ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x))
 - `ptc.laser_count`: number of DFB lasers ([ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x))
@@ -201,10 +201,10 @@ Status: Published in Nature 640, 368 to 374 (2025). Catalog file `catalog/produc
 - `ptc.loss_si_ridge`: silicon ridge waveguide propagation loss ([ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x))
 - `ptc.loss_sin`: silicon nitride waveguide propagation loss ([ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x))
 - `ptc.pd_bw`: weight-cell photodetector bandwidth ([ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x))
-- `ptc.ptc_die_dims`: PTC die dimensions (Appendix: 14.00 x 24.96 mm) ([ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x))
+- `ptc.ptc_die_dims`: PTC die dimensions (initial list: 14.00 x 24.96 mm) ([ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x))
 - `ptc.ptc_die_length_mm`: PTC die length ([ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x))
 - `ptc.ptc_die_width_mm`: PTC die width ([ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x))
-- `ptc.ptc_power_each`: power per photonic tensor core (Appendix: 3.2 W each) ([ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x))
+- `ptc.ptc_power_each`: power per photonic tensor core (initial list: 3.2 W each) ([ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x))
 - `ptc.tia_bw`: TIA bandwidth ([ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x))
 - `ptc.tia_gain`: TIA transimpedance gain ([ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x))
 - `ptc.tia_noise`: TIA input-referred noise current ([ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x))

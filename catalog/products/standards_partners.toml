@@ -1,4 +1,4 @@
-# Standards and partner parts: public facts with exact quotes (brief 05 phase 4 fact check, 2026-10-18).
+# Standards and partner parts: public facts with exact quotes (fact check, 2026-10-18).
 # Independent model built from public information. Not affiliated with or endorsed by
 # any company whose publications are cited.
 
@@ -19,7 +19,7 @@ quote = "0.5 dB insertion loss"
 cite = "corning_tmt_lan3581"
 source_class = "published_spec"
 verified = false
-note = "Evidence: none. corning_tmt_lan3581 (LAN-3581-AEN.pdf) could not be opened: HTTP 403 Akamai 'Access Denied' on curl with a browser user agent (SRC/corning_tmt_lan3581_retry/raw.html), on curl with full browser headers (SRC/corning_tmt_lan3581_retry2/raw.bin), on the non-www and http:// variants (SRC/corning_tmt_lan3581_retry3/), and on WebFetch; the Wayback Machine has no capture of the PDF, archive.today returned 404, and a web search for 'LAN-3581-AEN' found no mirror. Web-search result summaries claimed the datasheet lists '0.5 dB insertion loss per connector', but I did not see the document, so this is not evidence. The same words '0.5 dB insertion loss' appear in the US Conec PRIZM TMT sheet (see prizm.usconec_insertion_loss; NEW source not in Appendix B), which does not say whether 0.5 dB is a maximum or typical value and does not say 'per connector'. Appendix A wording: PRIZM TMT (corning_tmt_lan3581): \"0.5 dB insertion loss\" per connector"
+note = "Evidence: none. corning_tmt_lan3581 (LAN-3581-AEN.pdf) could not be opened: HTTP 403 Akamai 'Access Denied' on curl with a browser user agent (SRC/corning_tmt_lan3581_retry/raw.html), on curl with full browser headers (SRC/corning_tmt_lan3581_retry2/raw.bin), on the non-www and http:// variants (SRC/corning_tmt_lan3581_retry3/), and on WebFetch; the Wayback Machine has no capture of the PDF, archive.today returned 404, and a web search for 'LAN-3581-AEN' found no mirror. Web-search result summaries claimed the datasheet lists '0.5 dB insertion loss per connector', but I did not see the document, so this is not evidence. The same words '0.5 dB insertion loss' appear in the US Conec PRIZM TMT sheet (see prizm.usconec_insertion_loss; NEW source not in the initial source list), which does not say whether 0.5 dB is a maximum or typical value and does not say 'per connector'. The initial fact list wording: PRIZM TMT (corning_tmt_lan3581): \"0.5 dB insertion loss\" per connector"
 
 [[fact]]
 id = "prizm.availability"
@@ -30,7 +30,7 @@ quote = "available Q4 2026"
 cite = "corning_tmt_lan3581"
 source_class = "published_spec"
 verified = false
-note = "Evidence: none. corning_tmt_lan3581 (LAN-3581-AEN.pdf) could not be opened: HTTP 403 Akamai 'Access Denied' on curl with a browser user agent (SRC/corning_tmt_lan3581_retry/raw.html), on curl with full browser headers (SRC/corning_tmt_lan3581_retry2/raw.bin), on the non-www and http:// variants (SRC/corning_tmt_lan3581_retry3/), and on WebFetch; the Wayback Machine has no capture of the PDF, archive.today returned 404, and a web search for 'LAN-3581-AEN' found no mirror. A web-search summary attributed 'Available in Q4 2026' to a footnote on Corning's product page (mmc-connectors-prizm-tmt-ferrule.html), but that page also returns 403 to curl and WebFetch and has no Wayback capture, so I did not see it. No document I opened (Corning press release of 11 March 2026 via Wayback, US Conec sheet, US Conec joint release) gives an availability date. Appendix A wording: available Q4 2026"
+note = "Evidence: none. corning_tmt_lan3581 (LAN-3581-AEN.pdf) could not be opened: HTTP 403 Akamai 'Access Denied' on curl with a browser user agent (SRC/corning_tmt_lan3581_retry/raw.html), on curl with full browser headers (SRC/corning_tmt_lan3581_retry2/raw.bin), on the non-www and http:// variants (SRC/corning_tmt_lan3581_retry3/), and on WebFetch; the Wayback Machine has no capture of the PDF, archive.today returned 404, and a web search for 'LAN-3581-AEN' found no mirror. A web-search summary attributed 'Available in Q4 2026' to a footnote on Corning's product page (mmc-connectors-prizm-tmt-ferrule.html), but that page also returns 403 to curl and WebFetch and has no Wayback capture, so I did not see it. No document I opened (Corning press release of 11 March 2026 via Wayback, US Conec sheet, US Conec joint release) gives an availability date. The initial fact list wording: available Q4 2026"
 
 [[fact]]
 id = "prizm.fibers_per_ferrule"
@@ -42,7 +42,7 @@ quote = "16-fiber ferrules"
 cite = "corning_tmt_lan3581"
 source_class = "published_spec"
 verified = false
-note = "Evidence: none. corning_tmt_lan3581 (LAN-3581-AEN.pdf) could not be opened: HTTP 403 Akamai 'Access Denied' on curl with a browser user agent (SRC/corning_tmt_lan3581_retry/raw.html), on curl with full browser headers (SRC/corning_tmt_lan3581_retry2/raw.bin), on the non-www and http:// variants (SRC/corning_tmt_lan3581_retry3/), and on WebFetch; the Wayback Machine has no capture of the PDF, archive.today returned 404, and a web search for 'LAN-3581-AEN' found no mirror. The US Conec PRIZM TMT sheet states '1x16 fiber (scalable to 2x16 fiber)' (see prizm.usconec_fibers_1x16), consistent with the Appendix. Appendix A wording: 16-fiber ferrules scaling to 32"
+note = "Evidence: none. corning_tmt_lan3581 (LAN-3581-AEN.pdf) could not be opened: HTTP 403 Akamai 'Access Denied' on curl with a browser user agent (SRC/corning_tmt_lan3581_retry/raw.html), on curl with full browser headers (SRC/corning_tmt_lan3581_retry2/raw.bin), on the non-www and http:// variants (SRC/corning_tmt_lan3581_retry3/), and on WebFetch; the Wayback Machine has no capture of the PDF, archive.today returned 404, and a web search for 'LAN-3581-AEN' found no mirror. The US Conec PRIZM TMT sheet states '1x16 fiber (scalable to 2x16 fiber)' (see prizm.usconec_fibers_1x16), consistent with the initial fact list. The initial fact list wording: 16-fiber ferrules scaling to 32"
 
 [[fact]]
 id = "prizm.fibers_scaled"
@@ -54,7 +54,7 @@ quote = "scaling to 32"
 cite = "corning_tmt_lan3581"
 source_class = "published_spec"
 verified = false
-note = "Evidence: none. corning_tmt_lan3581 (LAN-3581-AEN.pdf) could not be opened: HTTP 403 Akamai 'Access Denied' on curl with a browser user agent (SRC/corning_tmt_lan3581_retry/raw.html), on curl with full browser headers (SRC/corning_tmt_lan3581_retry2/raw.bin), on the non-www and http:// variants (SRC/corning_tmt_lan3581_retry3/), and on WebFetch; the Wayback Machine has no capture of the PDF, archive.today returned 404, and a web search for 'LAN-3581-AEN' found no mirror. The US Conec PRIZM TMT sheet states '1x16 fiber (scalable to 2x16 fiber)' (see prizm.usconec_fibers_2x16); 32 = 2 x 16. Appendix A wording: 16-fiber ferrules scaling to 32"
+note = "Evidence: none. corning_tmt_lan3581 (LAN-3581-AEN.pdf) could not be opened: HTTP 403 Akamai 'Access Denied' on curl with a browser user agent (SRC/corning_tmt_lan3581_retry/raw.html), on curl with full browser headers (SRC/corning_tmt_lan3581_retry2/raw.bin), on the non-www and http:// variants (SRC/corning_tmt_lan3581_retry3/), and on WebFetch; the Wayback Machine has no capture of the PDF, archive.today returned 404, and a web search for 'LAN-3581-AEN' found no mirror. The US Conec PRIZM TMT sheet states '1x16 fiber (scalable to 2x16 fiber)' (see prizm.usconec_fibers_2x16); 32 = 2 x 16. The initial fact list wording: 16-fiber ferrules scaling to 32"
 
 [[fact]]
 id = "prizm.beam_diameter"
@@ -66,7 +66,7 @@ quote = "80 µm beam"
 cite = "corning_tmt_lan3581"
 source_class = "published_spec"
 verified = false
-note = "Evidence: none. corning_tmt_lan3581 (LAN-3581-AEN.pdf) could not be opened: HTTP 403 Akamai 'Access Denied' on curl with a browser user agent (SRC/corning_tmt_lan3581_retry/raw.html), on curl with full browser headers (SRC/corning_tmt_lan3581_retry2/raw.bin), on the non-www and http:// variants (SRC/corning_tmt_lan3581_retry3/), and on WebFetch; the Wayback Machine has no capture of the PDF, archive.today returned 404, and a web search for 'LAN-3581-AEN' found no mirror. No document I opened gives a beam size. Web-search summaries were inconsistent: one attributed an '80 µm' effective area (vs 9 µm for physical contact) to LAN-3581, another attributed 'approximately 60-80 microns' to a Corning blog post (403 to WebFetch, no Wayback capture). Neither page was seen. Appendix A wording: 80 µm beam"
+note = "Evidence: none. corning_tmt_lan3581 (LAN-3581-AEN.pdf) could not be opened: HTTP 403 Akamai 'Access Denied' on curl with a browser user agent (SRC/corning_tmt_lan3581_retry/raw.html), on curl with full browser headers (SRC/corning_tmt_lan3581_retry2/raw.bin), on the non-www and http:// variants (SRC/corning_tmt_lan3581_retry3/), and on WebFetch; the Wayback Machine has no capture of the PDF, archive.today returned 404, and a web search for 'LAN-3581-AEN' found no mirror. No document I opened gives a beam size. Web-search summaries were inconsistent: one attributed an '80 µm' effective area (vs 9 µm for physical contact) to LAN-3581, another attributed 'approximately 60-80 microns' to a Corning blog post (403 to WebFetch, no Wayback capture). Neither page was seen. The initial fact list wording: 80 µm beam"
 
 [[fact]]
 id = "prizm.remates_no_cleaning"
@@ -78,7 +78,7 @@ quote = "50 re-mates without cleaning"
 cite = "corning_tmt_lan3581"
 source_class = "published_spec"
 verified = false
-note = "Evidence: none. corning_tmt_lan3581 (LAN-3581-AEN.pdf) could not be opened: HTTP 403 Akamai 'Access Denied' on curl with a browser user agent (SRC/corning_tmt_lan3581_retry/raw.html), on curl with full browser headers (SRC/corning_tmt_lan3581_retry2/raw.bin), on the non-www and http:// variants (SRC/corning_tmt_lan3581_retry3/), and on WebFetch; the Wayback Machine has no capture of the PDF, archive.today returned 404, and a web search for 'LAN-3581-AEN' found no mirror. No document I opened gives a re-mate count. A web-search summary attributed '80% more stable re-mating performance' (not a cycle count) to the Corning product page, which I could not open. Appendix A wording: 50 re-mates without cleaning"
+note = "Evidence: none. corning_tmt_lan3581 (LAN-3581-AEN.pdf) could not be opened: HTTP 403 Akamai 'Access Denied' on curl with a browser user agent (SRC/corning_tmt_lan3581_retry/raw.html), on curl with full browser headers (SRC/corning_tmt_lan3581_retry2/raw.bin), on the non-www and http:// variants (SRC/corning_tmt_lan3581_retry3/), and on WebFetch; the Wayback Machine has no capture of the PDF, archive.today returned 404, and a web search for 'LAN-3581-AEN' found no mirror. No document I opened gives a re-mate count. A web-search summary attributed '80% more stable re-mating performance' (not a cycle count) to the Corning product page, which I could not open. The initial fact list wording: 50 re-mates without cleaning"
 
 [[fact]]
 id = "prizm.blind_mate"
@@ -89,7 +89,7 @@ quote = "blind-mate capable"
 cite = "corning_tmt_lan3581"
 source_class = "published_spec"
 verified = false
-note = "Evidence: none. corning_tmt_lan3581 (LAN-3581-AEN.pdf) could not be opened: HTTP 403 Akamai 'Access Denied' on curl with a browser user agent (SRC/corning_tmt_lan3581_retry/raw.html), on curl with full browser headers (SRC/corning_tmt_lan3581_retry2/raw.bin), on the non-www and http:// variants (SRC/corning_tmt_lan3581_retry3/), and on WebFetch; the Wayback Machine has no capture of the PDF, archive.today returned 404, and a web search for 'LAN-3581-AEN' found no mirror. The US Conec sheet says the MMC connectors with PRIZM TMT are 'Designed for use with single-mode MMC platform solutions in patch panel, on-board and blind mate applications.' (see prizm.usconec_blind_mate). Appendix A wording: blind-mate capable"
+note = "Evidence: none. corning_tmt_lan3581 (LAN-3581-AEN.pdf) could not be opened: HTTP 403 Akamai 'Access Denied' on curl with a browser user agent (SRC/corning_tmt_lan3581_retry/raw.html), on curl with full browser headers (SRC/corning_tmt_lan3581_retry2/raw.bin), on the non-www and http:// variants (SRC/corning_tmt_lan3581_retry3/), and on WebFetch; the Wayback Machine has no capture of the PDF, archive.today returned 404, and a web search for 'LAN-3581-AEN' found no mirror. The US Conec sheet says the MMC connectors with PRIZM TMT are 'Designed for use with single-mode MMC platform solutions in patch panel, on-board and blind mate applications.' (see prizm.usconec_blind_mate). The initial fact list wording: blind-mate capable"
 
 [[fact]]
 id = "prizm.usconec_insertion_loss"
@@ -102,7 +102,7 @@ cite = "usconec_prizm_tmt"
 source_class = "published_spec"
 verified = true
 location = "page 1, 'Single Mode Features' bullet list"
-note = "Evidence: text. NEW SOURCE not in Appendix B (proposed key usconec_prizm_tmt = https://www.usconec.com/media/bmgdecdq/prizm-tmt.pdf, US Conec sheet SM-0049-0826; text at SRC/usconec_prizm_tmt_retry/raw.pdf.txt). It is the ferrule designer's sheet, not Corning LAN-3581. Value equals the Appendix value, but the sheet does not say whether it is maximum or typical and does not say 'per connector'."
+note = "Evidence: text. NEW SOURCE not in the initial source list (proposed key usconec_prizm_tmt = https://www.usconec.com/media/bmgdecdq/prizm-tmt.pdf, US Conec sheet SM-0049-0826; text at SRC/usconec_prizm_tmt_retry/raw.pdf.txt). It is the ferrule designer's sheet, not Corning LAN-3581. Value equals the initial fact list value, but the sheet does not say whether it is maximum or typical and does not say 'per connector'."
 
 [[fact]]
 id = "prizm.usconec_fibers_1x16"
@@ -115,7 +115,7 @@ cite = "usconec_prizm_tmt"
 source_class = "published_spec"
 verified = true
 location = "page 1, 'Single Mode Features'"
-note = "Evidence: text. NEW SOURCE not in Appendix B (proposed key usconec_prizm_tmt = https://www.usconec.com/media/bmgdecdq/prizm-tmt.pdf, US Conec sheet SM-0049-0826; text at SRC/usconec_prizm_tmt_retry/raw.pdf.txt). It is the ferrule designer's sheet, not Corning LAN-3581."
+note = "Evidence: text. NEW SOURCE not in the initial source list (proposed key usconec_prizm_tmt = https://www.usconec.com/media/bmgdecdq/prizm-tmt.pdf, US Conec sheet SM-0049-0826; text at SRC/usconec_prizm_tmt_retry/raw.pdf.txt). It is the ferrule designer's sheet, not Corning LAN-3581."
 
 [[fact]]
 id = "prizm.usconec_fibers_2x16"
@@ -128,7 +128,7 @@ cite = "usconec_prizm_tmt"
 source_class = "published_spec"
 verified = true
 location = "page 1, 'Single Mode Features'"
-note = "Evidence: text. NEW SOURCE not in Appendix B (proposed key usconec_prizm_tmt = https://www.usconec.com/media/bmgdecdq/prizm-tmt.pdf, US Conec sheet SM-0049-0826; text at SRC/usconec_prizm_tmt_retry/raw.pdf.txt). It is the ferrule designer's sheet, not Corning LAN-3581. 32 is computed from '2x16'."
+note = "Evidence: text. NEW SOURCE not in the initial source list (proposed key usconec_prizm_tmt = https://www.usconec.com/media/bmgdecdq/prizm-tmt.pdf, US Conec sheet SM-0049-0826; text at SRC/usconec_prizm_tmt_retry/raw.pdf.txt). It is the ferrule designer's sheet, not Corning LAN-3581. 32 is computed from '2x16'."
 
 [[fact]]
 id = "prizm.usconec_blind_mate"
@@ -140,7 +140,7 @@ cite = "usconec_prizm_tmt"
 source_class = "published_spec"
 verified = true
 location = "page 1, first sentence"
-note = "Evidence: text. NEW SOURCE not in Appendix B (proposed key usconec_prizm_tmt = https://www.usconec.com/media/bmgdecdq/prizm-tmt.pdf, US Conec sheet SM-0049-0826; text at SRC/usconec_prizm_tmt_retry/raw.pdf.txt). It is the ferrule designer's sheet, not Corning LAN-3581."
+note = "Evidence: text. NEW SOURCE not in the initial source list (proposed key usconec_prizm_tmt = https://www.usconec.com/media/bmgdecdq/prizm-tmt.pdf, US Conec sheet SM-0049-0826; text at SRC/usconec_prizm_tmt_retry/raw.pdf.txt). It is the ferrule designer's sheet, not Corning LAN-3581."
 
 [[fact]]
 id = "orv3.openu_pitch"
@@ -530,7 +530,7 @@ cite = "oif_elsfp_02"
 source_class = "published_spec"
 verified = true
 location = "p38, Table 6 Optical power classes (identical in OIF-ELSFP-01.0, p39; both checked as images)"
-note = "Evidence: text. None in value. The SHP nominal 26 dBm per λ per core exceeds the 24.5 dBm/fiber Hazard Level 1 limit stated for systems without an interlock (Appendix A, §11.1) for single-wavelength fibers."
+note = "Evidence: text. None in value. The SHP nominal 26 dBm per λ per core exceeds the 24.5 dBm/fiber Hazard Level 1 limit stated for systems without an interlock (the initial fact list, §11.1) for single-wavelength fibers."
 
 [[fact]]
 id = "elsfp.hazard_l1_limit"
@@ -542,7 +542,7 @@ quote = "must not exceed 24.5 dBm/fiber in order to maintain Hazard level 1"
 cite = "oif_elsfp_02"
 source_class = "published_spec"
 verified = true
-location = "p55, Appendix A 'Interpretation of eye safety requirements for high power ribbon fibers', §11.1 Automatic Power Reduction (OIF-ELSFP-01.0 p56, identical)"
+location = "p55, the initial fact list 'Interpretation of eye safety requirements for high power ribbon fibers', §11.1 Automatic Power Reduction (OIF-ELSFP-01.0 p56, identical)"
 note = "Evidence: text. Value matches but the limit is conditional: 'Systems without an interlock must execute Automatic Power Reduction (APR) within 250ms and fibers conforming to fiber assignment Figure 36 and Table 5 must not exceed 24.5 dBm/fiber in order to maintain Hazard level 1.' It is not stated as a general limit for interlocked systems; the general requirement is that ELSFP implementations meet IEC 60825-2 Hazard Level 1 when used as specified."
 
 [[fact]]
@@ -845,7 +845,7 @@ cite = "ocp_osp_vision_2026"
 source_class = "proposed_standard"
 verified = true
 location = "PDF p12 (printed p11), 'Table: Target Outcomes' (checked as image), row 'Scale-up bandwidth fraction of memory bandwidth (α)', Target Outcome column"
-note = "Evidence: text. Appendix A cites only the Converge Digest article; the primary OCP white paper (ocp_osp_vision_2026) states this too. Same range, stated without 'about', as a target outcome conditional on α ≥ 1/2 (current state α ≈ 1/6–1/4)."
+note = "Evidence: text. The initial fact list cites only the Converge Digest article; the primary OCP white paper (ocp_osp_vision_2026) states this too. Same range, stated without 'about', as a target outcome conditional on α ≥ 1/2 (current state α ≈ 1/6–1/4)."
 
 [[fact]]
 id = "osp.vision_cpo_energy"
@@ -859,7 +859,7 @@ cite = "ocp_osp_vision_2026"
 source_class = "proposed_standard"
 verified = true
 location = "PDF p12 (printed p11), 'Table: Target Outcomes' (checked as image), row 'Interconnect energy', Target Outcome column"
-note = "Evidence: text. Appendix A cites only the Converge Digest article; the primary OCP white paper (ocp_osp_vision_2026) states this too. Same values ('~5-7' with a hyphen); listed in the Target Outcome column although labelled 'demonstrated'."
+note = "Evidence: text. The initial fact list cites only the Converge Digest article; the primary OCP white paper (ocp_osp_vision_2026) states this too. Same values ('~5-7' with a hyphen); listed in the Target Outcome column although labelled 'demonstrated'."
 
 [[fact]]
 id = "osp.vision_pluggable_energy"
@@ -873,7 +873,7 @@ cite = "ocp_osp_vision_2026"
 source_class = "proposed_standard"
 verified = true
 location = "PDF p12 (printed p11), 'Table: Target Outcomes' (checked as image), row 'Interconnect energy', Current State column"
-note = "Evidence: text. Appendix A cites only the Converge Digest article; the primary OCP white paper (ocp_osp_vision_2026) states this too. Same values."
+note = "Evidence: text. The initial fact list cites only the Converge Digest article; the primary OCP white paper (ocp_osp_vision_2026) states this too. Same values."
 
 [[fact]]
 id = "osp.vision_aspirational_energy"
@@ -886,7 +886,7 @@ cite = "ocp_osp_vision_2026"
 source_class = "proposed_standard"
 verified = true
 location = "PDF p12 (printed p11), 'Table: Target Outcomes' (checked as image), row 'Interconnect energy', Target Outcome column"
-note = "Evidence: text. Appendix A cites only the Converge Digest article; the primary OCP white paper (ocp_osp_vision_2026) states this too. Same value."
+note = "Evidence: text. The initial fact list cites only the Converge Digest article; the primary OCP white paper (ocp_osp_vision_2026) states this too. Same value."
 
 [[fact]]
 id = "osp.vision_fei_energy"
@@ -1001,7 +1001,7 @@ cite = "johnson2025_3dj_mpidgd"
 source_class = "proposed_standard"
 verified = true
 location = "slide 22, 'This Proposal' column for Cl. 180 DRn"
-note = "Evidence: text. The Appendix also says 'for ER >= 3.5 dB'; no source read states that qualifier (decision D05-25). welch2023 still has -1.2 + MAX(TECQ,TDECQ), superseded."
+note = "Evidence: text. The initial fact list also says 'for ER >= 3.5 dB'; no source read states that qualifier. welch2023 still has -1.2 + MAX(TECQ,TDECQ), superseded."
 
 [[fact]]
 id = "ieee3dj.tdecq_max"
@@ -1206,4 +1206,4 @@ quote = "RevCom planned December 2026"
 cite = "simms2026_3dj_tt"
 source_class = "proposed_standard"
 verified = false
-note = "Evidence: none. Not in any source read; the adopted timeline (projdoc/timeline_3dj_241114.pdf) is a chart with no extractable dates. Appendix wording kept (decision D05-26)."
+note = "Evidence: none. Not in any source read; the adopted timeline (projdoc/timeline_3dj_241114.pdf) is a chart with no extractable dates. Initial wording kept (decision D05-26)."

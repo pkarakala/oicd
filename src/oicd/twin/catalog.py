@@ -27,7 +27,7 @@ PRODUCTS_DIR = CATALOG_DIR / "products"
 GEOMETRY_DIR = CATALOG_DIR / "geometry"
 UNOPENED_PATH = CATALOG_DIR / "unopened_sources.toml"
 
-# An unverified fact taken from the brief's Appendix A with no source that could confirm it.
+# An unverified fact taken from the initial fact list with no source that could confirm it.
 APPENDIX_KEY = "appendix_a"
 
 _FROZEN = ConfigDict(frozen=True, extra="forbid")
@@ -281,7 +281,7 @@ class Catalog(BaseModel):
         for f in self.files.values():
             for fact in f.fact:
                 # Verified facts cite an opened source; an unverified fact may also cite a source
-                # that could not be opened (unopened_sources.toml) or the brief's Appendix A.
+                # that could not be opened (unopened_sources.toml) or the initial fact list.
                 allowed = keys if fact.verified else (keys | unopened | {APPENDIX_KEY})
                 if fact.cite not in allowed:
                     where = "references.bib" if fact.verified else "references.bib or unopened"
@@ -352,7 +352,7 @@ def _cycles(edges: dict[str, tuple[str, ...]]) -> list[str]:
 
 
 class UnopenedSource(BaseModel):
-    """A source the brief names that could not be opened in this run (never in references.bib)."""
+    """A cited source that could not be opened (never in references.bib)."""
 
     model_config = _FROZEN
 

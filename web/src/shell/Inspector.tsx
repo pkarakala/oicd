@@ -1,6 +1,6 @@
 // Inspector: the selection's dimensions with their classes, material, function, live physics from
 // the overlay, and the catalog nodes behind it with provenance and source links. In the link scene
-// it shows the brief 03 provenance panel for the selected trace point.
+// it shows the provenance panel for the selected trace point.
 
 import { ArrowDownRight, Crosshair } from 'lucide-react'
 import type { BibEntry, FeasibilityReport, InputRecord, NodeResult, Overlay, Part, SceneView } from '../api/client'
@@ -245,7 +245,7 @@ function Record({ r }: { r: InputRecord }) {
   )
 }
 
-/** The brief 03 provenance panel: inputs behind a trace point, with the threshold terms at TP3. */
+/** The provenance panel: inputs behind a trace point, with the threshold terms at TP3. */
 export function ProvenancePanel({ report, index, onClose }: { report: FeasibilityReport; index: number; onClose: () => void }) {
   const point = report.power_trace[index]
   if (point === undefined) return null

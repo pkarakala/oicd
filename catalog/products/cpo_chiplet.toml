@@ -1,4 +1,4 @@
-# CPO chiplet (32T and 64T): public facts with exact quotes (brief 05 phase 4 fact check, 2026-10-18).
+# CPO chiplet (32T and 64T): public facts with exact quotes (fact check, 2026-10-18).
 # Independent model built from public information. Not affiliated with or endorsed by
 # any company whose publications are cited.
 
@@ -138,7 +138,7 @@ cite = "vendor_pr_chiplet"
 source_class = "vendor_claim"
 verified = true
 location = "Key features, 'photonic interconnect PIC' bullets (line 85)"
-note = "Evidence: text. No difference from the Appendix. The release does not say which SKU gets which value (the 32T chiplet = 800 Gbps, 64T chiplet = 1.6 Tbps mapping is an inference from list order) or whether it is per direction. 16 x 56 Gbps = 896 Gbps and 16 x 112 Gbps = 1.792 Tbps, so the figures correspond to 50/100 Gbps payload per wavelength (inference)."
+note = "Evidence: text. No difference from the initial fact list. The release does not say which SKU gets which value (the 32T chiplet = 800 Gbps, 64T chiplet = 1.6 Tbps mapping is an inference from list order) or whether it is per direction. 16 x 56 Gbps = 896 Gbps and 16 x 112 Gbps = 1.792 Tbps, so the figures correspond to 50/100 Gbps payload per wavelength (inference)."
 
 [[fact]]
 id = "chiplet.package_bw_min"
@@ -189,7 +189,7 @@ cite = "vendor_pr_chiplet"
 source_class = "vendor_claim"
 verified = true
 location = "Closing paragraph (line 87)"
-note = "Evidence: text. No difference from the Appendix. Product page (vendor_web_chiplet) adds: '32T chiplet design partnerships are open for 2026 roadmaps.'"
+note = "Evidence: text. No difference from the initial fact list. Product page (vendor_web_chiplet) adds: '32T chiplet design partnerships are open for 2026 roadmaps.'"
 
 [[fact]]
 id = "chiplet.web_package_bw"
@@ -244,7 +244,7 @@ cite = "vendor_web_chiplet"
 source_class = "vendor_claim"
 verified = true
 location = "Technical Specifications, 'Direct drive reach' row (line 115)"
-note = "Evidence: text. No difference from the Appendix. vendor_ofc26_kumar slide 17 says 'up to 1 km', and its demos use 1 km fiber, so 2 km is not demonstrated there."
+note = "Evidence: text. No difference from the initial fact list. vendor_ofc26_kumar slide 17 says 'up to 1 km', and its demos use 1 km fiber, so 2 km is not demonstrated there."
 
 [[fact]]
 id = "kit16.wdm_lambda_count"
@@ -429,7 +429,7 @@ source_class = "vendor_claim"
 verified = true
 location = "Page 15, 4th bullet"
 note = "Evidence: text. Slide 14 states '<3 pJ/bit (PIC + Laser)'. The slide 15 components sum to 1.8 + 1.1 = 2.9 pJ/bit. vendor_web_kit16 states 3.2 pJ/bit including laser."
-# ---- Model (brief 05 phase 6, model card §14.4) ---------------------------------------------
+# ---- Model (model card §14.4) ---------------------------------------------
 
 [[fact]]
 id = "chiplet.bw_per_fiber_chiplet"

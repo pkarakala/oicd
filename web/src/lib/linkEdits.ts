@@ -4,7 +4,7 @@
 import type { Link, Provenance } from '../api/client'
 
 // An edited value no longer matches its original source, so it is relabeled SYNTHETIC
-// (CLAUDE.md rule 1: a value with no source is synthetic).
+// (a value with no source is synthetic).
 export const EDITED: Provenance = {
   source_class: 'synthetic',
   citation_key: null,

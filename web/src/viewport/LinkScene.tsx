@@ -1,4 +1,4 @@
-// The brief 03 link view as a schematic scene (not to scale): TX engine, matings, fiber, patch
+// The link view as a schematic scene (not to scale): TX engine, matings, fiber, patch
 // connector, RX engine, from the FeasibilityReport. Fiber segments are colored only by the API's
 // above_threshold flag (review R1); pulses dim with the API's relative_power at each element.
 // With an upstream chain, the external laser and its 1:N split appear before TP2.

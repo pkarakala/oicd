@@ -1,7 +1,7 @@
 import { useCatalog } from '../api/hooks'
 import { INDEPENDENCE } from './ui'
 
-/** The brief 03 caption next to the independence line (from the API when it has answered). */
+/** The caption next to the independence line (from the API when it has answered). */
 export function Footer() {
   const catalog = useCatalog()
   return (

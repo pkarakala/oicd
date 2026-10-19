@@ -1,4 +1,4 @@
-# 16λ BiDi link: public facts with exact quotes (brief 05 phase 4 fact check, 2026-10-18).
+# 16λ BiDi link: public facts with exact quotes (fact check, 2026-10-18).
 # Independent model built from public information. Not affiliated with or endorsed by
 # any company whose publications are cited.
 
@@ -46,7 +46,7 @@ cite = "vendor_ofc26_kumar"
 source_class = "vendor_claim"
 verified = true
 location = "Page 4 bullet list"
-note = "Evidence: text. No difference from the Appendix. Note (inference): 2.6 + 2 (XSR SerDes) = 4.6 pJ/bit."
+note = "Evidence: text. No difference from the initial fact list. Note (inference): 2.6 + 2 (XSR SerDes) = 4.6 pJ/bit."
 
 [[fact]]
 id = "bidi16.fiber_length"
@@ -268,7 +268,7 @@ source_class = "vendor_claim"
 verified = true
 location = "slide 9 (text layer; slide also viewed as an image)"
 note = "Evidence: text. Differs from the 16λ BiDi kit product page (16 wavelengths, 400 Gbps Tx + 400 Gbps Rx per fiber): the OFC 2026 live demo used half the wavelengths and a band-interleaved (4+4) rather than odd/even-interleaved plan. Futurum (futurum_ocp26) says the vendor 'reconfigured its 16-wavelength demo to replicate the MSA’s Gen 2 spec at OFC'."
-# ---- Model (brief 05 phase 6, model card §14.5) ---------------------------------------------
+# ---- Model (model card §14.5) ---------------------------------------------
 # The ring analysis (worst receive channel, reflection crosstalk, MPI, minimum TX OMA) runs in
 # the product's physics evaluation (oicd.twin.physics) with these assumptions.
 

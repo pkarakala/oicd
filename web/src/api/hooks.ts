@@ -24,7 +24,7 @@ import {
   query,
 } from './client'
 
-export const LINK_SCENE = 'link' // the procedural worked-example link (brief 03 scene)
+export const LINK_SCENE = 'link' // the procedural worked-example link
 
 export function useDebounced<T>(value: T, ms = 150): T {
   const [debounced, setDebounced] = useState(value)

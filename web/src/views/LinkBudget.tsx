@@ -1,4 +1,4 @@
-// Link budget (the brief 03 view): inputs that POST the whole Link, the OMA waterfall and the
+// Link budget : inputs that POST the whole Link, the OMA waterfall and the
 // checks. Every number is the engine's; edits are SYNTHETIC what-ifs with undo and redo.
 
 import { useEffect, useState } from 'react'

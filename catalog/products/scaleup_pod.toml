@@ -1,4 +1,4 @@
-# Scale-up pod example: public facts with exact quotes (brief 05 phase 4 fact check, 2026-10-18).
+# Scale-up pod example: public facts with exact quotes (fact check, 2026-10-18).
 # Independent model built from public information. Not affiliated with or endorsed by
 # any company whose publications are cited.
 
@@ -47,7 +47,7 @@ source_class = "vendor_claim"
 verified = true
 conflicts_with = ["pod.connectors_saved_hoti26"]
 location = "paragraph 2"
-note = "Evidence: text. Matches. Unflagged conflict with HOTI26 '20,000 Fewer connectors and failure points' for a 512 XPU cluster (pod.connectors_saved_hoti26); the Appendix lists both without marking the conflict."
+note = "Evidence: text. Matches. Unflagged conflict with HOTI26 '20,000 Fewer connectors and failure points' for a 512 XPU cluster (pod.connectors_saved_hoti26); the initial fact list lists both without marking the conflict."
 
 [[fact]]
 id = "pod.fiber_length_saved_cpx"
@@ -61,7 +61,7 @@ source_class = "vendor_claim"
 verified = true
 conflicts_with = ["pod.fiber_length_saved_hoti26"]
 location = "paragraph 2"
-note = "Evidence: text. Matches. Unflagged conflict with HOTI26 '150 miles of fiber saved' for a 512 XPU cluster (pod.fiber_length_saved_hoti26); the Appendix lists both without marking the conflict."
+note = "Evidence: text. Matches. Unflagged conflict with HOTI26 '150 miles of fiber saved' for a 512 XPU cluster (pod.fiber_length_saved_hoti26); the initial fact list lists both without marking the conflict."
 
 [[fact]]
 id = "pod.cost_savings_cpx"
@@ -75,7 +75,7 @@ source_class = "vendor_claim"
 verified = true
 conflicts_with = ["pod.cost_savings_hoti26"]
 location = "paragraph 2"
-note = "Evidence: text. Source wording is 'of total scale-up interconnect network cost' (Appendix: 'of scale-up network cost'). Conflicts with HOTI26 '16% Savings in total network spend' (pod.cost_savings_hoti26)."
+note = "Evidence: text. Source wording is 'of total scale-up interconnect network cost' (initial list: 'of scale-up network cost'). Conflicts with HOTI26 '16% Savings in total network spend' (pod.cost_savings_hoti26)."
 
 [[fact]]
 id = "pod.size_gpus_cpx"
@@ -154,7 +154,7 @@ source_class = "vendor_claim"
 verified = true
 location = "p13 footnote line (also seen on rendered slide)"
 note = "Evidence: text. Matches. Note: the slide does not say whether 32 Tbps is per direction or aggregate."
-# ---- Model (brief 05 phase 6, model card §14.8) ---------------------------------------------
+# ---- Model (model card §14.8) ---------------------------------------------
 
 [[assumption]]
 id = "pod.bw_per_xpu"

@@ -1,4 +1,4 @@
-# BiDi optical engine: public facts with exact quotes (brief 05 phase 4 fact check, 2026-10-18).
+# BiDi optical engine: public facts with exact quotes (fact check, 2026-10-18).
 # Independent model built from public information. Not affiliated with or endorsed by
 # any company whose publications are cited.
 
@@ -124,7 +124,7 @@ source_class = "vendor_claim"
 verified = true
 conflicts_with = ["engine.bga_balls_web"]
 location = "Preliminary Specifications list"
-note = "Evidence: text. Matches. Unflagged conflict: the product page says '1827-ball BGA' (vendor_web_engine); the Appendix lists both without marking them as a conflict."
+note = "Evidence: text. Matches. Unflagged conflict: the product page says '1827-ball BGA' (vendor_web_engine); the initial fact list lists both without marking them as a conflict."
 
 [[fact]]
 id = "engine.fiber_mgmt_reduction"
@@ -203,7 +203,7 @@ cite = "vendor_web_engine"
 source_class = "vendor_claim"
 verified = true
 location = "Technical Specifications table, 'Form factor' (adds 'Reflow compatible')"
-note = "Evidence: text. Matches. Unflagged conflict with '2000-pin BGA (BiDi)' in vendor_pr_engine and vendor_pr_engine_bw; the Appendix lists both without marking the conflict."
+note = "Evidence: text. Matches. Unflagged conflict with '2000-pin BGA (BiDi)' in vendor_pr_engine and vendor_pr_engine_bw; the initial fact list lists both without marking the conflict."
 
 [[fact]]
 id = "engine.length_mm_web"
@@ -230,7 +230,7 @@ source_class = "vendor_claim"
 verified = true
 conflicts_with = ["engine.width_mm_yole"]
 location = "Technical Specifications table, 'Dimensions'"
-note = "Evidence: text. Matches. Unflagged conflict: vendor_yole_ofc26 p20 gives width 27.6 mm ('37.5 x 27.6 x 4.55mm'); the Appendix lists both without marking the 26.4 vs 27.6 difference."
+note = "Evidence: text. Matches. Unflagged conflict: vendor_yole_ofc26 p20 gives width 27.6 mm ('37.5 x 27.6 x 4.55mm'); the initial fact list lists both without marking the 26.4 vs 27.6 difference."
 
 [[fact]]
 id = "engine.data_fibers_web"
@@ -255,7 +255,7 @@ cite = "vendor_web_engine"
 source_class = "vendor_claim"
 verified = true
 location = "Technical Specifications table, 'Cooling'"
-note = "Evidence: text. Wording: source adds 'A2 ASHRAE compliant' (not in the Appendix)."
+note = "Evidence: text. Wording: source adds 'A2 ASHRAE compliant' (not in the initial fact list)."
 
 [[fact]]
 id = "engine.length_mm_yole"
@@ -618,7 +618,7 @@ source_class = "third_party"
 verified = true
 location = "paragraph 7"
 note = "Evidence: text. Extra (verifies references.bib note). DCD gives no pJ/bit figure."
-# ---- Model (brief 05 phase 6, model card §14.2) ---------------------------------------------
+# ---- Model (model card §14.2) ---------------------------------------------
 
 [[fact]]
 id = "engine.switch_engine_count"

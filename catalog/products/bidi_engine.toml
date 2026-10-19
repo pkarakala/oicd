@@ -234,7 +234,7 @@ note = "Evidence: text. Matches. Unflagged conflict: vendor_yole_ofc26 p20 gives
 
 [[fact]]
 id = "engine.data_fibers_web"
-quantity = "BiDi engine data fibers (Corning CPO Flexconnect)"
+quantity = "BiDi engine data fibers (fiber flex circuit)"
 value = 32.0
 bound = "exact"
 unit = "count"

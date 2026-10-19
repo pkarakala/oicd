@@ -23,7 +23,7 @@ Status: Public technical material, 2026. Catalog file `catalog/products/bidi_eng
 | BiDi engine optical bandwidth as reported by DCD | 6.4 Tbps | THIRD_PARTY | [press_engine_2026](https://www.datacenterdynamics.com/en/news/lightmatter-unveils-passage-l20-photonic-interconnect-announces-vclick-optics-offering-for-high-volume-cpo-manufacturing/) |
 | BiDi engine total bandwidth, each direction | 6.4 Tbps | VENDOR_CLAIM | [vendor_pr_engine](https://lightmatter.co/press-release/lightmatter-expands-photonic-interconnect-roadmap-with-passage-l20-unified-optical-engine-for-npo-and-obo-applications/) |
 | BiDi engine cooling: cold plate, A2 ASHRAE compliant | text | VENDOR_CLAIM | [vendor_web_engine](https://lightmatter.co/products/passage-l20/) |
-| BiDi engine data fibers (Corning CPO Flexconnect) | 32 | VENDOR_CLAIM | [vendor_web_engine](https://lightmatter.co/products/passage-l20/) |
+| BiDi engine data fibers (fiber flex circuit) | 32 | VENDOR_CLAIM | [vendor_web_engine](https://lightmatter.co/products/passage-l20/) |
 | BiDi engine energy per bit stated beside max TDP (Business Wire copy) | 3 pJ/bit | VENDOR_CLAIM | [vendor_pr_engine_bw](https://www.businesswire.com/news/home/20260311102347/en) |
 | BiDi engine power efficiency (product page) | 5 pJ/bit | VENDOR_CLAIM | [vendor_web_engine](https://lightmatter.co/products/passage-l20/) |
 | BiDi engine (NPO/OBO) power efficiency (OFC 2026 Yole slides) | 5 pJ/bit | VENDOR_CLAIM | [vendor_yole_ofc26](https://lightmatter.co/wp-content/uploads/2026/04/OFC-2026-Yole-Nikhil-Kumar.pdf) |

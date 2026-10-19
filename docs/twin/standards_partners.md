@@ -92,7 +92,7 @@ Status: Published specifications, draft standards and partner datasheets. Catalo
 | link MTBF cited for CPO-class implementations (OCP white paper) | ≥ 2600000 h | PROPOSED_STANDARD | [ocp_osp_vision_2026](https://www.opencompute.org/documents/vision-opensiphforaisystems-final-pdf) |
 | link MTBF of pluggable optics, current state (OCP white paper) | 550000 h | PROPOSED_STANDARD | [ocp_osp_vision_2026](https://www.opencompute.org/documents/vision-opensiphforaisystems-final-pdf) |
 | interconnect energy, pluggable optics, current state (OCP white paper) | 17.5 pJ/bit | PROPOSED_STANDARD | [ocp_osp_vision_2026](https://www.opencompute.org/documents/vision-opensiphforaisystems-final-pdf) |
-| PRIZM TMT (Corning MMC with PRIZM TMT ferrule) availability date (Q4 2026) | text | PUBLISHED_SPEC (not verified) | `corning_tmt_lan3581` |
+| expanded-beam MMC-ferrule connector availability date (Q4 2026) | text | PUBLISHED_SPEC (not verified) | `corning_tmt_lan3581` |
 | PRIZM TMT expanded beam diameter | 80 um | PUBLISHED_SPEC (not verified) | `corning_tmt_lan3581` |
 | PRIZM TMT blind-mate capability | text | PUBLISHED_SPEC (not verified) | `corning_tmt_lan3581` |
 | fibers per PRIZM TMT ferrule (single row) | 16 | PUBLISHED_SPEC (not verified) | `corning_tmt_lan3581` |
@@ -107,7 +107,7 @@ Status: Published specifications, draft standards and partner datasheets. Catalo
 ## Facts not verified
 
 - `ieee3dj.revcom`: RevCom planned December 2026 ([simms2026_3dj_tt](https://www.ieee802.org/3/dj/public/26_09/simms_3dj_01a_2609.pdf))
-- `prizm.availability`: PRIZM TMT (Corning MMC with PRIZM TMT ferrule) availability date (Q4 2026) (`corning_tmt_lan3581`)
+- `prizm.availability`: expanded-beam MMC-ferrule connector availability date (Q4 2026) (`corning_tmt_lan3581`)
 - `prizm.beam_diameter`: PRIZM TMT expanded beam diameter (`corning_tmt_lan3581`)
 - `prizm.blind_mate`: PRIZM TMT blind-mate capability (`corning_tmt_lan3581`)
 - `prizm.fibers_per_ferrule`: fibers per PRIZM TMT ferrule (single row) (`corning_tmt_lan3581`)

@@ -162,7 +162,7 @@ note = "Evidence: text. Release expands DC-MHS as 'Data Center Modular Hardware'
 
 [[fact]]
 id = "trays.prizm_tmt"
-quantity = "XPU tray uses Corning expanded-beam PRIZM TMT connector technology"
+quantity = "XPU tray uses expanded-beam multi-fiber connector technology"
 bound = "exact"
 unit = "text"
 quote = "expanded beam PRIZM® TMT optical connector technology from Corning Incorporated"

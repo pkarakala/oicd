@@ -23,7 +23,7 @@ note = "Evidence: none. corning_tmt_lan3581 (LAN-3581-AEN.pdf) could not be open
 
 [[fact]]
 id = "prizm.availability"
-quantity = "PRIZM TMT (Corning MMC with PRIZM TMT ferrule) availability date (Q4 2026)"
+quantity = "expanded-beam MMC-ferrule connector availability date (Q4 2026)"
 bound = "exact"
 unit = "text"
 quote = "available Q4 2026"

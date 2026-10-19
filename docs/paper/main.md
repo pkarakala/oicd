@@ -10,7 +10,7 @@ Optical interconnect for AI accelerators is now designed from public fragments: 
 
 ## 1. Motivation
 
-Co-packaged and near-packaged optics move the optical engine next to the switch or accelerator package, and the external laser out of the engine [TODO Pranav: cite a survey of co-packaged optics; none is in references.bib]. Vendors announce such systems with a handful of numbers: aggregate bandwidth, energy per bit, fiber counts, package sizes. Whether those numbers describe a feasible link depends on details they do not state: which side of a connector the budget is measured at, whether a rate counts one direction or both, how a laser's power is split. An analysis that fills these gaps silently produces conclusions that cannot be audited.
+Co-packaged and near-packaged optics move the optical engine next to the switch or accelerator package, and the external laser out of the engine [tan2023_cpo_survey]. Vendors announce such systems with a handful of numbers: aggregate bandwidth, energy per bit, fiber counts, package sizes. Whether those numbers describe a feasible link depends on details they do not state: which side of a connector the budget is measured at, whether a rate counts one direction or both, how a laser's power is split. An analysis that fills these gaps silently produces conclusions that cannot be audited.
 
 OICD's design goal is auditability. Every input is a `Quantity` with a provenance class and, unless it is SYNTHETIC or INFERENCE, a citation key that must exist in references.bib; every check returns PASS, FAIL or NOT_EVALUATED with numeric evidence; a PASS means only "not excluded by the modeled constraints"; and every equation is first written in the model card with a reason, a source or label, and hand-computed cases that a standard-library script reproduces.
 
@@ -81,7 +81,7 @@ The reference rack OICD-R64 [SYNTHETIC design] places 16 XPU trays and 8 switch 
 
 ![Support matrix](../figures/support_matrix.png)
 
-The support matrix shows the 204.8 Tbps switch tray read per direction (four ELS-DR modules, agreeing with the vendor's release [vendor_pr_els_dr]) or as an aggregate (two modules, agreeing with [counterpoint_ocp26] and [ine_ocp26]); neither reading is dropped (§14.7).
+The support matrix shows the 204.8 Tbps switch tray read per direction (four external laser modules, agreeing with the vendor's release [vendor_pr_els_dr]) or as an aggregate (two modules, agreeing with [counterpoint_ocp26] and [ine_ocp26]); neither reading is dropped (§14.7).
 
 ![Processor error versus gain](../figures/processor_error_vs_gain.png)
 

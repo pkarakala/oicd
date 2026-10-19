@@ -1,0 +1,157 @@
+{
+  "name": "Draft IEEE P802.3dj 200GBASE-DR1 budget (model card §12.1)",
+  "tx": {
+    "name": "200GBASE-DR1 TX (draft)",
+    "electrical": {
+      "modulation": "PAM4",
+      "symbol_rate_gbd": 106.25,
+      "lanes": 1,
+      "fec": "RS(544,514)",
+      "provenance": {
+        "source_class": "proposed_standard",
+        "citation_key": "welch2023_3dj_baseline",
+        "rationale": "200GBASE-DR1-FECo: 106.25 GBd PAM4, one lane, RS(544,514) (draft IEEE P802.3dj D3.x, not an approved standard)."
+      }
+    },
+    "center_wavelength_nm": {
+      "value": 1311.0,
+      "provenance": {
+        "source_class": "proposed_standard",
+        "citation_key": "welch2023_3dj_baseline",
+        "rationale": "Lane wavelengths 1304.5 to 1317.5 nm, written as 1311 ± 6.5 nm for the TX (model card §12.1) (draft IEEE P802.3dj D3.x, not an approved standard)."
+      }
+    },
+    "wavelength_tolerance_nm": {
+      "value": 6.5,
+      "provenance": {
+        "source_class": "proposed_standard",
+        "citation_key": "welch2023_3dj_baseline",
+        "rationale": "Lane wavelengths 1304.5 to 1317.5 nm, written as 1311 ± 6.5 nm for the TX (model card §12.1) (draft IEEE P802.3dj D3.x, not an approved standard)."
+      }
+    },
+    "launch_oma_min": {
+      "value": {
+        "power_dbm": {
+          "value": 2.4
+        },
+        "kind": "oma"
+      },
+      "provenance": {
+        "source_class": "proposed_standard",
+        "citation_key": "johnson2025_3dj_mpidgd",
+        "rationale": "TX OMAouter (min) = -1 + max(TECQ, TDECQ) dBm at TDECQ max 3.4 dB, so 2.4 dBm (draft IEEE P802.3dj D3.x, not an approved standard)."
+      }
+    },
+    "upstream": null
+  },
+  "rx": {
+    "name": "200GBASE-DR1 RX (draft)",
+    "electrical": {
+      "modulation": "PAM4",
+      "symbol_rate_gbd": 106.25,
+      "lanes": 1,
+      "fec": "RS(544,514)",
+      "provenance": {
+        "source_class": "proposed_standard",
+        "citation_key": "welch2023_3dj_baseline",
+        "rationale": "200GBASE-DR1-FECo: 106.25 GBd PAM4, one lane, RS(544,514) (draft IEEE P802.3dj D3.x, not an approved standard)."
+      }
+    },
+    "passband_min_nm": {
+      "value": 1304.5,
+      "provenance": {
+        "source_class": "proposed_standard",
+        "citation_key": "welch2023_3dj_baseline",
+        "rationale": "Lane wavelengths 1304.5 to 1317.5 nm (draft IEEE P802.3dj D3.x, not an approved standard)."
+      }
+    },
+    "passband_max_nm": {
+      "value": 1317.5,
+      "provenance": {
+        "source_class": "proposed_standard",
+        "citation_key": "welch2023_3dj_baseline",
+        "rationale": "Lane wavelengths 1304.5 to 1317.5 nm (draft IEEE P802.3dj D3.x, not an approved standard)."
+      }
+    },
+    "sensitivity_oma_max": {
+      "value": {
+        "power_dbm": {
+          "value": -4.3
+        },
+        "kind": "oma"
+      },
+      "provenance": {
+        "source_class": "proposed_standard",
+        "citation_key": "welch2023_3dj_baseline",
+        "rationale": "RX sensitivity (OMAouter) line -4.3 + TECQ at TECQ = 0, the reference of the power budget (the receiver requirement is capped at -3.4 dBm below TECQ 0.9 dB) (draft IEEE P802.3dj D3.x, not an approved standard)."
+      }
+    }
+  },
+  "channel": [
+    {
+      "name": "channel insertion loss (max)",
+      "loss_max": {
+        "value": {
+          "value": 3.0
+        },
+        "provenance": {
+          "source_class": "proposed_standard",
+          "citation_key": "johnson2025_3dj_mpidgd",
+          "rationale": "Channel insertion loss 3 dB at the Table 180-12 (0, 0) cell (draft IEEE P802.3dj D3.x, not an approved standard)."
+        }
+      },
+      "loss_distribution": null
+    }
+  ],
+  "penalties": [
+    {
+      "name": "TDECQ",
+      "value": {
+        "value": {
+          "value": 3.4
+        },
+        "provenance": {
+          "source_class": "proposed_standard",
+          "citation_key": "welch2023_3dj_baseline",
+          "rationale": "TDECQ (max) 3.4 dB, the TX OMA is taken at this TDECQ (draft IEEE P802.3dj D3.x, not an approved standard)."
+        }
+      }
+    },
+    {
+      "name": "MPI",
+      "value": {
+        "value": {
+          "value": 0.1
+        },
+        "provenance": {
+          "source_class": "proposed_standard",
+          "citation_key": "johnson2025_3dj_mpidgd",
+          "rationale": "Allocation of 0.1 dB for MPI penalty (draft IEEE P802.3dj D3.x, not an approved standard)."
+        }
+      }
+    },
+    {
+      "name": "DGD",
+      "value": {
+        "value": {
+          "value": 0.2
+        },
+        "provenance": {
+          "source_class": "proposed_standard",
+          "citation_key": "johnson2025_3dj_mpidgd",
+          "rationale": "Allocation of 0.2 dB for DGD penalty (draft IEEE P802.3dj D3.x, not an approved standard)."
+        }
+      }
+    }
+  ],
+  "reserve": {
+    "value": {
+      "value": 0.0
+    },
+    "provenance": {
+      "source_class": "synthetic",
+      "citation_key": null,
+      "rationale": "The draft budget allocates every dB (6.7 = 3.0 + 3.7), so no unallocated reserve (model card §12.1)."
+    }
+  }
+}

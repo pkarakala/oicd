@@ -1,0 +1,328 @@
+# Scale-up pod example: public facts with exact quotes (brief 05 phase 4 fact check, 2026-10-18).
+# Independent model built from public information. Not affiliated with or endorsed by
+# any company whose publications are cited.
+
+[product]
+name = "Scale-up pod example"
+family = "photonic interconnect"
+kind = "system"
+status = "Example from public talks, 2026"
+summary = "The 512-accelerator scale-up pod the vendor uses to illustrate BiDi fiber and connector savings."
+
+[[fact]]
+id = "pod.fibers_before_cpx"
+quantity = "fibers in a 512-GPU scale-up pod with conventional (non-BiDi) links"
+value = 130000.0
+bound = "approx"
+unit = "count"
+quote = "taking the pod from about 130,000 fibers to 65,000"
+cite = "vendor_pr_cpx"
+source_class = "vendor_claim"
+verified = true
+location = "paragraph 2 (attributed to 'the vendor’s analysis in a recent tech brief')"
+note = "Evidence: text."
+
+[[fact]]
+id = "pod.fibers_after_cpx"
+quantity = "fibers in the same 512-GPU pod with BiDi links"
+value = 65000.0
+bound = "approx"
+unit = "count"
+quote = "taking the pod from about 130,000 fibers to 65,000"
+cite = "vendor_pr_cpx"
+source_class = "vendor_claim"
+verified = true
+location = "paragraph 2 (attributed to 'the vendor’s analysis in a recent tech brief')"
+note = "Evidence: text. Matches. Note: 'about' in the source precedes 130,000; 65,000 is exactly half, so it is marked approx as well."
+
+[[fact]]
+id = "pod.connectors_saved_cpx"
+quantity = "connectors saved in a 512-GPU scale-up pod by BiDi"
+value = 16000.0
+bound = "approx"
+unit = "count"
+quote = "approximately 16,000 fewer connectors"
+cite = "vendor_pr_cpx"
+source_class = "vendor_claim"
+verified = true
+conflicts_with = ["pod.connectors_saved_hoti26"]
+location = "paragraph 2"
+note = "Evidence: text. Matches. Unflagged conflict with HOTI26 '20,000 Fewer connectors and failure points' for a 512 XPU cluster (pod.connectors_saved_hoti26); the Appendix lists both without marking the conflict."
+
+[[fact]]
+id = "pod.fiber_length_saved_cpx"
+quantity = "fiber length saved in a 512-GPU scale-up pod by BiDi"
+value = 200.0
+bound = "min"
+unit = "miles"
+quote = "save more than 200 miles of fiber"
+cite = "vendor_pr_cpx"
+source_class = "vendor_claim"
+verified = true
+conflicts_with = ["pod.fiber_length_saved_hoti26"]
+location = "paragraph 2"
+note = "Evidence: text. Matches. Unflagged conflict with HOTI26 '150 miles of fiber saved' for a 512 XPU cluster (pod.fiber_length_saved_hoti26); the Appendix lists both without marking the conflict."
+
+[[fact]]
+id = "pod.cost_savings_cpx"
+quantity = "share of total scale-up interconnect network cost saved by BiDi (512-GPU pod)"
+value = 15.0
+bound = "approx"
+unit = "%"
+quote = "saves about 15 percent of total scale-up interconnect network cost"
+cite = "vendor_pr_cpx"
+source_class = "vendor_claim"
+verified = true
+conflicts_with = ["pod.cost_savings_hoti26"]
+location = "paragraph 2"
+note = "Evidence: text. Source wording is 'of total scale-up interconnect network cost' (Appendix: 'of scale-up network cost'). Conflicts with HOTI26 '16% Savings in total network spend' (pod.cost_savings_hoti26)."
+
+[[fact]]
+id = "pod.size_gpus_cpx"
+quantity = "GPUs in the scale-up pod used for the CPX savings analysis"
+value = 512.0
+bound = "exact"
+unit = "count"
+quote = "In a 512-GPU scale-up pod"
+cite = "vendor_pr_cpx"
+source_class = "vendor_claim"
+verified = true
+location = "paragraph 2"
+note = "Evidence: text. Matches. Note: the release does not state per-GPU bandwidth; HOTI26 states '32 Tbps / XPU' for its 512 XPU cluster, so the two analyses may not share assumptions."
+
+[[fact]]
+id = "pod.fiber_length_saved_hoti26"
+quantity = "fiber length saved by BiDi for a typical 512 XPU scale-up cluster"
+value = 150.0
+bound = "exact"
+unit = "miles"
+quote = "150 miles of ﬁber saved"
+cite = "vendor_hoti26"
+source_class = "vendor_claim"
+verified = true
+location = "p13 (BiDi savings slide; also seen on rendered slide; text layer spells 'fiber' with the U+FB01 ligature)"
+note = "Evidence: text. Matches. Unflagged conflict with the CPX release 'more than 200 miles of fiber' for a 512-GPU pod (pod.fiber_length_saved_cpx)."
+
+[[fact]]
+id = "pod.connectors_saved_hoti26"
+quantity = "connectors (and failure points) saved by BiDi for a typical 512 XPU scale-up cluster"
+value = 20000.0
+bound = "exact"
+unit = "count"
+quote = "20,000 Fewer connectors and failure points"
+cite = "vendor_hoti26"
+source_class = "vendor_claim"
+verified = true
+location = "p13 (also seen on rendered slide)"
+note = "Evidence: text. Matches. Unflagged conflict with the CPX release 'approximately 16,000 fewer connectors' (pod.connectors_saved_cpx)."
+
+[[fact]]
+id = "pod.cost_savings_hoti26"
+quantity = "savings in total network spend from BiDi for a typical 512 XPU scale-up cluster"
+value = 16.0
+bound = "exact"
+unit = "%"
+quote = "16% Savings in total network spend"
+cite = "vendor_hoti26"
+source_class = "vendor_claim"
+verified = true
+location = "p13 (also seen on rendered slide)"
+note = "Evidence: text. Matches. Unflagged conflict with the CPX release 'about 15 percent of total scale-up interconnect network cost' (pod.cost_savings_cpx)."
+
+[[fact]]
+id = "pod.size_xpus_hoti26"
+quantity = "XPUs in the typical scale-up cluster used for the HOTI26 BiDi savings"
+value = 512.0
+bound = "exact"
+unit = "count"
+quote = "for a typical 512 XPU scale-up cluster, 32 Tbps / XPU"
+cite = "vendor_hoti26"
+source_class = "vendor_claim"
+verified = true
+location = "p13 footnote line (also seen on rendered slide)"
+note = "Evidence: text."
+
+[[fact]]
+id = "pod.bw_per_xpu_hoti26"
+quantity = "scale-up bandwidth per XPU assumed for the HOTI26 BiDi savings"
+value = 32.0
+bound = "exact"
+unit = "Tbps"
+quote = "for a typical 512 XPU scale-up cluster, 32 Tbps / XPU"
+cite = "vendor_hoti26"
+source_class = "vendor_claim"
+verified = true
+location = "p13 footnote line (also seen on rendered slide)"
+note = "Evidence: text. Matches. Note: the slide does not say whether 32 Tbps is per direction or aggregate."
+# ---- Model (brief 05 phase 6, model card §14.8) ---------------------------------------------
+
+[[assumption]]
+id = "pod.bw_per_xpu"
+nominal = 25.6
+low = 25.6
+high = 32.0
+unit = "Tbps"
+rationale = "Bandwidth per XPU each way: 25.6 Tbps (the XPU tray under H_dir) or 32 Tbps (HOTI26). Pinned by H_pod_256 or H_pod_32."
+
+[[assumption]]
+id = "pod.fibers_per_lane_duplex"
+nominal = 2.0
+low = 2.0
+high = 2.0
+unit = "count"
+rationale = "A duplex lane uses one fiber each way; a BiDi lane uses one."
+
+[[assumption]]
+id = "pod.ferrule_fibers"
+nominal = 16.0
+low = 16.0
+high = 32.0
+unit = "count"
+rationale = "Fibers per connector ferrule: 16, where PRIZM TMT starts (usconec_prizm_tmt: 1x16, scalable to 2x16)."
+
+[[assumption]]
+id = "pod.connector_ends_per_path"
+nominal = 4.0
+low = 2.0
+high = 6.0
+unit = "count"
+rationale = "Connector ends a removed fiber takes out with it: 4, about two mated pairs per path (INFERENCE that reproduces about 16,000)."
+
+[[derived]]
+id = "pod.lanes_per_xpu"
+fn = "lanes"
+inputs = ["pod.bw_per_xpu", "engine.lane_rate"]
+unit = "count"
+note = "200G lanes per XPU each way"
+
+[[derived]]
+id = "pod.bidi_fibers"
+fn = "times_count"
+inputs = ["pod.size_gpus_cpx", "pod.lanes_per_xpu"]
+unit = "count"
+note = "one BiDi fiber per lane"
+
+[[derived]]
+id = "pod.duplex_fibers"
+fn = "times_count"
+inputs = ["pod.fibers_per_lane_duplex", "pod.bidi_fibers"]
+unit = "count"
+note = "512 × 128 × 2 duplex fibers"
+
+[[derived]]
+id = "pod.length_saved_200_m"
+fn = "miles_to_m"
+inputs = ["pod.fiber_length_saved_cpx"]
+unit = "m"
+note = "200 miles of fiber saved"
+
+[[derived]]
+id = "pod.mean_length_200"
+fn = "divide_by_count"
+inputs = ["pod.length_saved_200_m", "pod.bidi_fibers"]
+unit = "m"
+note = "mean length of a removed fiber, CPX figure"
+
+[[derived]]
+id = "pod.length_saved_150_m"
+fn = "miles_to_m"
+inputs = ["pod.fiber_length_saved_hoti26"]
+unit = "m"
+note = "150 miles of fiber saved"
+
+[[derived]]
+id = "pod.mean_length_150"
+fn = "divide_by_count"
+inputs = ["pod.length_saved_150_m", "pod.bidi_fibers"]
+unit = "m"
+note = "mean length of a removed fiber, HOTI26 figure"
+
+[[derived]]
+id = "pod.connectors_per_plane"
+fn = "divide_by_count"
+inputs = ["pod.bidi_fibers", "pod.ferrule_fibers"]
+unit = "count"
+note = "16-fiber connectors per mating plane"
+
+[[derived]]
+id = "pod.connectors_saved"
+fn = "times_count"
+inputs = ["pod.connector_ends_per_path", "pod.connectors_per_plane"]
+unit = "count"
+note = "connectors removed with the fibers"
+
+[[check]]
+id = "pod.check_fibers_before"
+kind = "consistent"
+a = "pod.duplex_fibers"
+b = "pod.fibers_before_cpx"
+rel_tol = 0.01
+note = "131,072 against 'about 130,000' (0.8%)"
+
+[[check]]
+id = "pod.check_fibers_after"
+kind = "consistent"
+a = "pod.bidi_fibers"
+b = "pod.fibers_after_cpx"
+rel_tol = 0.01
+note = "65,536 against '65,000'"
+
+[[check]]
+id = "pod.check_xpu_tray"
+kind = "consistent"
+a = "pod.bw_per_xpu"
+b = "trays.xpu_bw_per_xpu"
+rel_tol = 0.001
+note = "the pod example's 25.6 Tbps per XPU each way against the XPU tray"
+
+[[check]]
+id = "pod.check_hoti_bw"
+kind = "consistent"
+a = "pod.bw_per_xpu"
+b = "pod.bw_per_xpu_hoti26"
+rel_tol = 0.01
+note = "against HOTI26's '32 Tbps / XPU'"
+
+[[check]]
+id = "pod.check_connectors_cpx"
+kind = "consistent"
+a = "pod.connectors_saved"
+b = "pod.connectors_saved_cpx"
+rel_tol = 0.05
+note = "4 × 4,096 = 16,384 against 'approximately 16,000 fewer connectors'"
+
+[[check]]
+id = "pod.check_connectors_hoti"
+kind = "consistent"
+a = "pod.connectors_saved"
+b = "pod.connectors_saved_hoti26"
+rel_tol = 0.05
+note = "16,384 against HOTI26's '20,000 Fewer connectors'"
+
+[[check]]
+id = "pod.check_length_sources"
+kind = "consistent"
+a = "pod.fiber_length_saved_cpx"
+b = "pod.fiber_length_saved_hoti26"
+rel_tol = 0.05
+note = "'more than 200 miles' (CPX release) against '150 miles' (HOTI26)"
+
+[[check]]
+id = "pod.check_cost_sources"
+kind = "consistent"
+a = "pod.cost_savings_cpx"
+b = "pod.cost_savings_hoti26"
+rel_tol = 0.10
+note = "'about 15 percent' against '16%'"
+
+[[hypothesis]]
+id = "H_pod_256"
+statement = "The 512-XPU pod example uses 25.6 Tbps per XPU each way (128 lanes at 200G), like the XPU tray."
+sets = { "pod.bw_per_xpu" = 25.6 }
+group = "pod_bw"
+
+[[hypothesis]]
+id = "H_pod_32"
+statement = "The pod example uses HOTI26's 32 Tbps per XPU (160 lanes at 200G)."
+sets = { "pod.bw_per_xpu" = 32.0 }
+group = "pod_bw"

@@ -21,6 +21,8 @@ class SourceClass(StrEnum):
     PUBLISHED_SPEC = "published_spec"
     PROPOSED_STANDARD = "proposed_standard"
     VENDOR_CLAIM = "vendor_claim"
+    PEER_REVIEWED = "peer_reviewed"  # peer-reviewed paper, including vendor-authored ones
+    THIRD_PARTY = "third_party"  # analysts and press reporting on someone else's product
     SYNTHETIC = "synthetic"
     INFERENCE = "inference"
 
@@ -40,6 +42,67 @@ def parse_bib_keys(text: str) -> frozenset[str]:
 @functools.cache
 def load_citation_keys(path: Path = DEFAULT_BIB_PATH) -> frozenset[str]:
     return parse_bib_keys(path.read_text(encoding="utf-8"))
+
+
+class BibEntry(BaseModel):
+    """One references.bib entry, for showing a citation with its source link."""
+
+    model_config = ConfigDict(frozen=True, extra="forbid")
+
+    key: str
+    entry_type: str
+    title: str
+    year: str = ""
+    url: str = ""
+    note: str = ""
+
+
+def _braced(text: str, start: int) -> tuple[str, int]:
+    """The text inside the brace group opening at text[start], and the index after it."""
+    depth, i = 0, start
+    while i < len(text):
+        if text[i] == "{":
+            depth += 1
+        elif text[i] == "}":
+            depth -= 1
+            if depth == 0:
+                return text[start + 1 : i], i + 1
+        i += 1
+    raise ValueError("unbalanced braces in references.bib")
+
+
+_FIELD_RE = re.compile(r"\s*,?\s*(\w+)\s*=\s*")
+
+
+def parse_bib_entries(text: str) -> tuple[BibEntry, ...]:
+    """Entries with their title, year, url and note; braces inside values are dropped."""
+    out = []
+    for match in _BIB_KEY_RE.finditer(text):
+        entry_type, key = match.group(1).lower(), match.group(2)
+        if entry_type in _NON_ENTRY_TYPES:
+            continue
+        body, _ = _braced(text, text.index("{", match.start()))
+        fields: dict[str, str] = {}
+        i = body.index(",") + 1
+        while (field := _FIELD_RE.match(body, i)) is not None and field.end() < len(body):
+            name, j = field.group(1).lower(), field.end()
+            if body[j] == "{":
+                value, i = _braced(body, j)
+            else:
+                end = body.find(",", j)
+                value, i = (body[j:] if end < 0 else body[j:end]), (len(body) if end < 0 else end)
+            fields[name] = " ".join(value.replace("{", "").replace("}", "").split())
+        out.append(
+            BibEntry(
+                key=key,
+                entry_type=entry_type,
+                title=fields.get("title", ""),
+                year=fields.get("year", ""),
+                url=fields.get("url", ""),
+                note=fields.get("note", ""),
+            )
+        )
+    return tuple(out)
 
 
 class Provenance(BaseModel):

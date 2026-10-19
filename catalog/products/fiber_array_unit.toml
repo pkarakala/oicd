@@ -1,0 +1,176 @@
+# detachable fiber-array unit (FAU): public facts with exact quotes (brief 05 phase 4 fact check, 2026-10-18).
+# Independent model built from public information. Not affiliated with or endorsed by
+# any company whose publications are cited.
+
+[product]
+name = "Detachable fiber-array unit (FAU)"
+family = "photonic interconnect"
+kind = "product"
+status = "Public technical material, 2026"
+summary = "Detachable fiber-array unit with vertical expanded-beam coupling to the PIC, built with SENKO (vendor and partner descriptions)."
+
+[[fact]]
+id = "fau.il_reinsertion_max"
+quantity = "FAU detachable FAU insertion and re-insertion loss, demonstrated (no wavelength, mating-cycle count or measurement conditions stated)"
+value = 1.5
+bound = "max"
+unit = "dB"
+quote = "A demonstrated insertion and re-insertion loss of less than 1.5 dB"
+cite = "vendor_pr_fau"
+source_class = "vendor_claim"
+verified = true
+conflicts_with = ["fau.il_futurum"]
+location = "'Key advantages' list, 'Field Serviceability' item; paragraph 1 also says 'demonstrating a low insertion loss of less than 1.5 dB'"
+note = "Evidence: text."
+
+[[fact]]
+id = "fau.wdm_span_nm"
+quantity = "Spectral span over which FAU supports CWDM and DWDM (the vendor wording)"
+value = 80.0
+bound = "min"
+unit = "nm"
+quote = "Supports broadband (up to 80+ nanometers) Coarse Wavelength Division Multiplexing (CWDM) and Dense Wavelength Division Multiplexing (DWDM)"
+cite = "vendor_pr_fau"
+source_class = "vendor_claim"
+verified = true
+location = "'Key advantages' list, 'High Bandwidth DWDM Compatibility' item"
+note = "Evidence: text. Wording only: the vendor writes 'up to 80+ nanometers' ('up to' qualifying an open-ended '80+'); SENKO writes 'more than 80 nm of spectrum' (fau.wdm_span_nm_senko). Recorded as min 80 nm. Neither source gives band edges or a center wavelength."
+
+[[fact]]
+id = "fau.wdm_span_nm_senko"
+quantity = "Spectral span over which FAU supports CWDM and DWDM (SENKO wording)"
+value = 80.0
+bound = "min"
+unit = "nm"
+quote = "Supports broadband CWDM and DWDM operation across more than 80 nm of spectrum"
+cite = "senko_pr_fau"
+source_class = "vendor_claim"
+verified = true
+location = "'Key Advantages of the vendor FAU Optics', 'High‑Bandwidth Optical Connectivity' item"
+note = "Evidence: text."
+
+[[fact]]
+id = "fau.mold_and_grind"
+quantity = "Compatible with mold-and-grind advanced packaging flows (the vendor: 'as demonstrated in ASE’s advanced packaging flows')"
+bound = "exact"
+unit = "text"
+quote = "The technology is mold-and-grind compatible across advanced packaging flows"
+cite = "vendor_pr_fau"
+source_class = "vendor_claim"
+verified = true
+location = "'Key advantages' list, 'Advanced Packaging Compatible' item; also paragraph 3"
+note = "Evidence: text."
+
+[[fact]]
+id = "fau.no_active_alignment"
+quantity = "No active fiber alignment needed in assembly (SENKO: 'passive expanded‑beam interface')"
+bound = "exact"
+unit = "text"
+quote = "Does not require active fiber alignment during production"
+cite = "vendor_pr_fau"
+source_class = "vendor_claim"
+verified = true
+location = "'Key advantages' list, 'Automated Assembly' item"
+note = "Evidence: text."
+
+[[fact]]
+id = "fau.senko_seat_mpc"
+quantity = "Uses SENKO SEAT optical interface and SENKO MPC (Metallic PIC Coupler) connector; MPC variant not named"
+bound = "exact"
+unit = "text"
+quote = "SENKO’s SEAT™ and MPC Connector solutions"
+cite = "vendor_pr_fau"
+source_class = "vendor_claim"
+verified = true
+location = "section 'FAU Optics: Shifting Left to Scale Photonic Interconnect Production', paragraph 1"
+note = "Evidence: text."
+
+[[fact]]
+id = "fau.vertical_expanded_beam"
+quantity = "Optical interface: the vendor vertically expanded-beam coupling between fiber array and PIC"
+bound = "exact"
+unit = "text"
+quote = "[the vendor]’s vertically expanded-beam photonic technology"
+cite = "vendor_pr_fau"
+source_class = "vendor_claim"
+verified = true
+location = "section 'FAU Optics: Shifting Left to Scale Photonic Interconnect Production', paragraph 1"
+note = "Evidence: text. Wording only: the vendor says 'vertically expanded-beam photonic technology'; the exact phrase 'vertical expanded beam architecture' is in senko_pr_fau."
+
+[[fact]]
+id = "fau.il_futurum"
+quantity = "FAU insertion loss as relayed by Futurum from the vendor (analyst report of a verbal company claim)"
+value = 1.0
+bound = "max"
+unit = "dB"
+quote = "[the vendor] told Futurum the connector demonstrates insertion loss below 1 dB"
+cite = "futurum_ocp26"
+source_class = "third_party"
+verified = true
+location = "section 'Serviceable Connectors and Laser Supply Address CPO’s Two Hardest Objections', paragraph 1; repeated in 'What to Watch' ('sub-1 dB detachable loss')"
+note = "Evidence: text. CONFLICT with both March 2026 releases (vendor_pr_fau, senko_pr_fau), which claim insertion and re-insertion loss 'less than 1.5 dB'. Futurum attributes the sub-1 dB figure to the vendor verbally and recasts ~1.5 dB as 'an industry benchmark near 1.5 dB for permanently attached fiber requiring active alignment'. No vendor document in this group states < 1 dB. The article carries a generative-AI assistance disclosure."
+
+[[fact]]
+id = "fau.count_switch_tray"
+quantity = "FAU detachable fiber connectors in the OCP 2026 1RU 204.8T CPO switch tray built with Flex (same tray: eight photonic interconnect CPO engines)"
+value = 8.0
+bound = "exact"
+unit = "count"
+quote = "eight [FAU] detachable fiber connectors"
+cite = "counterpoint_ocp26"
+source_class = "third_party"
+verified = true
+location = "first of the two reference-design bullets"
+note = "Evidence: text."
+
+[[fact]]
+id = "fau.count_xpu_tray"
+quantity = "photonic interconnect engines with FAU in the OCP 2026 102.4T XPU tray ('four photonic interconnect and FAU units'; engine and connector counts not separated)"
+value = 4.0
+bound = "exact"
+unit = "count"
+quote = "four [photonic interconnect] and [FAU] units"
+cite = "counterpoint_ocp26"
+source_class = "third_party"
+verified = true
+location = "second of the two reference-design bullets"
+note = "Evidence: text. Same bullet calls the server '2RU 102.4 Gbps' (unit presumably Tbps) with 'two ELS-DR modules'; the 2RU and ELS-DR counts conflict with other sources (A7, another group)."
+
+[[fact]]
+id = "senko.mpc20_fiber_count"
+quantity = "SENKO MPC20 Metallic PIC Coupler fiber count"
+value = 20.0
+bound = "exact"
+unit = "count"
+quote = "accommodates 20 fibers with a 127um pitch between each fibers"
+cite = "senko_mpc20"
+source_class = "published_spec"
+verified = true
+location = "product description, paragraph 2"
+note = "Evidence: text."
+
+[[fact]]
+id = "senko.mpc20_pitch_um"
+quantity = "SENKO MPC20 fiber pitch"
+value = 127.0
+bound = "exact"
+unit = "um"
+quote = "20 fibers with a 127um pitch"
+cite = "senko_mpc20"
+source_class = "published_spec"
+verified = true
+location = "product description, paragraph 2"
+note = "Evidence: text."
+
+[[fact]]
+id = "senko.mpc20_profile_mm"
+quantity = "SENKO MPC20 profile height"
+value = 1.2
+bound = "max"
+unit = "mm"
+quote = "Low Profile, less than 1.2mm"
+cite = "senko_mpc20"
+source_class = "published_spec"
+verified = true
+location = "feature list under the product description"
+note = "Evidence: text."

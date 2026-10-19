@@ -7,7 +7,17 @@ All values are SYNTHETIC. Fixtures are session-scoped because the models are imm
 import pytest
 
 from oicd.provenance import Provenance, Quantity, SourceClass
-from oicd.schema import FEC, ElectricalInterface, Link, LossElement, Penalty, Receiver, Transmitter
+from oicd.schema import (
+    FEC,
+    ElectricalInterface,
+    Link,
+    LossDistribution,
+    LossElement,
+    Penalty,
+    Receiver,
+    Transmitter,
+    UpstreamChain,
+)
 from oicd.units import DB, DBm, OpticalPower, PowerKind
 
 WORKED_EXAMPLE = Provenance(
@@ -24,12 +34,13 @@ REPRESENTATIVE_200G = Provenance(
     "FEC assumed RS(544,514); IEEE 802.3 clause not yet cited.",
 )
 
-# Model card §4 channel, TP2 to TP3.
+# Model card §4 channel, TP2 to TP3, in the §2 order (fiber as two 1 m segments).
 WORKED_EXAMPLE_CHANNEL_DB = (
     ("TX FAU mating", 1.5),
+    ("SMF 1 m (TX side)", 0.0004),
     ("patch connector", 1.0),
+    ("SMF 1 m (RX side)", 0.0004),
     ("RX FAU mating", 1.5),
-    ("2 m SMF at 0.4 dB/km", 0.0008),
 )
 
 
@@ -100,3 +111,72 @@ def worked_example() -> Link:
 @pytest.fixture(scope="session")
 def make_link():
     return build_link
+
+
+UPSTREAM_CARD = Provenance(
+    source_class=SourceClass.SYNTHETIC,
+    rationale="Model card §10 hand-case upstream input (synthetic, not a datasheet value).",
+)
+SIGMA_CARD = Provenance(
+    source_class=SourceClass.SYNTHETIC,
+    rationale="Model card §11 hand case: sigma 0.2 dB per mating (synthetic assumption).",
+)
+
+
+def build_chain(
+    *,
+    split_n: int = 16,
+    laser_dbm: float = 20.0,
+    laser_fiber_db: float = 0.5,
+    coupling_db: float = 1.5,
+    excess_db: float = 0.0,
+    modulator_db: float = 4.0,
+    coupler_db: float = 1.5,
+    er_db: float = 4.0,
+    laser_kind: PowerKind = PowerKind.AVERAGE,
+) -> UpstreamChain:
+    """Model card §10 hand-case chain (all SYNTHETIC)."""
+
+    def q(value: object) -> Quantity:
+        return Quantity(value=value, provenance=UPSTREAM_CARD)
+
+    return UpstreamChain(
+        laser_power_avg=q(OpticalPower(DBm(laser_dbm), laser_kind)),
+        laser_fiber_loss=q(DB(laser_fiber_db)),
+        coupling_loss=q(DB(coupling_db)),
+        split_n=q(split_n),
+        excess_loss=q(DB(excess_db)),
+        modulator_il=q(DB(modulator_db)),
+        output_coupler_loss=q(DB(coupler_db)),
+        extinction_ratio=q(DB(er_db)),
+    )
+
+
+def with_chain(link: Link, chain: UpstreamChain) -> Link:
+    """The link with its fixed TP2 replaced by an upstream chain."""
+    tx = link.tx.model_dump()
+    tx.update(launch_oma_min=None, upstream=chain)
+    return link.model_copy(update={"tx": Transmitter.model_validate(tx)})
+
+
+def with_sigma(link: Link, indices: tuple[int, ...], sigma_db: float) -> Link:
+    """The link with N(loss_max, sigma²) distributions on the given channel elements (§11)."""
+    channel = tuple(
+        e.model_copy(
+            update={
+                "loss_distribution": LossDistribution(
+                    mean=Quantity(value=e.loss_max.value, provenance=SIGMA_CARD),
+                    sigma=Quantity(value=DB(sigma_db), provenance=SIGMA_CARD),
+                )
+            }
+        )
+        if i in indices
+        else e
+        for i, e in enumerate(link.channel)
+    )
+    return link.model_copy(update={"channel": channel})
+
+
+@pytest.fixture(scope="session")
+def make_chain():
+    return build_chain

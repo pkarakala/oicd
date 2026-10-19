@@ -1,0 +1,1149 @@
+# external laser sources (ELS, ELS-DWDM, ELS-DR): public facts with exact quotes (brief 05 phase 4 fact check, 2026-10-18).
+# Independent model built from public information. Not affiliated with or endorsed by
+# any company whose publications are cited.
+
+[product]
+name = "External laser sources (ELS, ELS-DWDM, ELS-DR)"
+family = "ELS"
+kind = "product"
+status = "Public technical material, 2026"
+summary = "External multi-wavelength laser engines: ELS (VLSP), ELS-DWDM (DWDM for microring transmitters) and ELS-DR (liquid-cooled laser NIC for 200G DR lanes)."
+
+[[fact]]
+id = "els.modules_100t_1ru_yole"
+quantity = "ELS modules for 100 Tbps of laser supply in 1RU"
+value = 4.0
+bound = "exact"
+unit = "count"
+quote = "4 x [ELS] 100T in 1RU"
+cite = "vendor_yole_ofc26"
+source_class = "vendor_claim"
+verified = true
+location = "p12 right-hand caption under the 1RU chassis (also seen on rendered slide)"
+note = "Evidence: text. Wording: slide has no colon ('4 x [ELS]' above '100T in 1RU'); the Appendix adds one. My arithmetic: p13 of the same deck claims 51.2 Tbps per ELS module, so 4 modules would be 204.8 Tbps, about twice the '100T' shown."
+
+[[fact]]
+id = "els.elsfp_100t_4ru_yole"
+quantity = "discrete ELSFP modules for 100 Tbps of laser supply in 4RU"
+value = 18.0
+bound = "exact"
+unit = "count"
+quote = "18 x ELSFP 100T in 4RU"
+cite = "vendor_yole_ofc26"
+source_class = "vendor_claim"
+verified = true
+conflicts_with = ["els.elsfp_modules_100t_hoti26"]
+location = "p12 left-hand caption under the 4RU chassis (also seen on rendered slide)"
+note = "Evidence: text. Wording: slide has no colon; the Appendix adds one. Unflagged conflict with HOTI26 p15 which shows '16 Modules' of discrete ELSFP for '100 Tbps' (els.elsfp_modules_100t_hoti26)."
+
+[[fact]]
+id = "els.fiber_outputs_yole"
+quantity = "ELS fiber outputs per module"
+value = 32.0
+bound = "exact"
+unit = "count"
+quote = "32 ﬁber output with > 100 mW each."
+cite = "vendor_yole_ofc26"
+source_class = "vendor_claim"
+verified = true
+location = "p13 'ELS VLSP Light Engine Overview', bullet 2 (text layer spells 'fiber' with the U+FB01 ligature; also seen on rendered slide)"
+note = "Evidence: text."
+
+[[fact]]
+id = "els.power_per_fiber_yole"
+quantity = "ELS optical power per output fiber"
+value = 100.0
+bound = "min"
+unit = "mW"
+quote = "32 ﬁber output with > 100 mW each."
+cite = "vendor_yole_ofc26"
+source_class = "vendor_claim"
+verified = true
+location = "p13 'ELS VLSP Light Engine Overview', bullet 2 (also tile '100 mW+ per Fiber')"
+note = "Evidence: text. Matches. Unflagged internal tension: in the same deck, p14 'POWER IN FIBER' box plot (post 24-hr burn-in, reference lines at 100mW and 150mW) has its lower whisker at roughly 87 mW (my visual estimate), i.e. some measured fibers below 100 mW."
+
+[[fact]]
+id = "els.mrm_optimized_yole"
+quantity = "ELS design target: microring modulator transmitters"
+bound = "exact"
+unit = "text"
+quote = "Optimized for microring modulator Tx architectures."
+cite = "vendor_yole_ofc26"
+source_class = "vendor_claim"
+verified = true
+location = "p13 'ELS VLSP Light Engine Overview', bullet 3 (also seen on rendered slide)"
+note = "Evidence: text."
+
+[[fact]]
+id = "els.lasers_per_chip_hoti26"
+quantity = "lasers per ELS VLSP chip"
+value = 128.0
+bound = "min"
+unit = "count"
+quote = "128+ Lasers per chip"
+cite = "vendor_hoti26"
+source_class = "vendor_claim"
+verified = true
+location = "p18 ELS VLSP stats grid (also seen on rendered slide)"
+note = "Evidence: text. Matches. Note on the A6 conflict 'Counterpoint: 128 lasers per chip (CONFLICT with 64)': this vendor slide itself says '128+ Lasers per chip'; the A6 figure of 64 is the ELS-DR laser count (vendor_pr_els_dr, not checked by G3), so per chip vs per module may explain the difference (my inference)."
+
+[[fact]]
+id = "els.fit_hoti26"
+quantity = "ELS VLSP reliability (FIT), with self-healing"
+value = 0.1
+bound = "exact"
+unit = "FIT"
+quote = "0.1 FIT Reliability and self-healing"
+cite = "vendor_hoti26"
+source_class = "vendor_claim"
+verified = true
+location = "p18 ELS VLSP stats grid (also seen on rendered slide)"
+note = "Evidence: text. Matches. Note: the slide gives no conditions (per laser, per chip or per module; temperature; time base)."
+
+[[fact]]
+id = "els.power_accuracy_hoti26"
+quantity = "ELS VLSP optical power accuracy"
+value = 0.25
+bound = "exact"
+unit = "dB"
+quote = "0.25 dB Power Accuracy"
+cite = "vendor_hoti26"
+source_class = "vendor_claim"
+verified = true
+location = "p18 ELS VLSP stats grid (also seen on rendered slide)"
+note = "Evidence: text."
+
+[[fact]]
+id = "els.freq_accuracy_hoti26"
+quantity = "ELS VLSP frequency accuracy"
+value = 3.0
+bound = "exact"
+unit = "GHz"
+quote = "3 GHz Frequency Accuracy"
+cite = "vendor_hoti26"
+source_class = "vendor_claim"
+verified = true
+location = "p18 ELS VLSP stats grid (also seen on rendered slide)"
+note = "Evidence: text. Matches. Unflagged tension: contrasts with vendor_yole_ofc26 p14 'ACCURACY OF +/- 15 GHZ' (els.freq_accuracy_yole) and the A6 grid tolerance of ±20 GHz; the metrics may differ (tuned accuracy vs as-built spread), the slides do not say."
+
+[[fact]]
+id = "els.elsfp_modules_100t_hoti26"
+quantity = "discrete ELSFP laser modules needed for 100 Tbps (HOTI26)"
+value = 16.0
+bound = "exact"
+unit = "count"
+quote = "100 Tbps 16 Modules"
+cite = "vendor_hoti26"
+source_class = "vendor_claim"
+verified = true
+location = "p15 'Conventional Discrete Laser Bottleneck' bar chart: 16/32/64/128 Modules for 100/200/400/800 Tbps (also seen on rendered slide)"
+note = "Evidence: text. Extra. Conflicts with vendor_yole_ofc26 p12 '18 x ELSFP 100T in 4RU' (and the A6 'about 18 ELSFP in 4RU')."
+
+[[fact]]
+id = "els.wavelengths_hoti26"
+quantity = "ELS VLSP wavelengths (multi-color)"
+value = 64.0
+bound = "min"
+unit = "count"
+quote = "64λ+ multi-color"
+cite = "vendor_hoti26"
+source_class = "vendor_claim"
+verified = true
+location = "p18 ELS VLSP stats grid (also seen on rendered slide)"
+note = "Evidence: text. Extra. Related to the A6 '1 to 64 wavelengths' (press_els_2026, not checked by G3); same slide also says '300mm CMOS SOI Wafers'."
+
+[[fact]]
+id = "els.freq_accuracy_yole"
+quantity = "ELS wavelength (frequency) accuracy window shown in OFC 2026 data"
+value = 15.0
+bound = "exact"
+unit = "GHz"
+quote = "ACCURACY OF +/- 15 GHZ"
+cite = "vendor_yole_ofc26"
+source_class = "vendor_claim"
+verified = true
+conflicts_with = ["els.freq_accuracy_hoti26"]
+location = "p14 'ELS VLSP Industry-Leading Performance', fourth plot title; dashed lines at 15GHz and -15GHz (also seen on rendered slide)"
+note = "Evidence: text. Extra. Value is +/-15 GHz. Contrasts with HOTI26 '3 GHz Frequency Accuracy'. My visual estimate of the plotted data: whiskers about -16 to +11 GHz, median about -2 GHz, outliers near +14, -17.5 and -21 GHz, so a few points fall outside the +/-15 GHz lines."
+
+[[fact]]
+id = "els.bw_per_module_yole"
+quantity = "ELS data bandwidth supported per module"
+value = 51.2
+bound = "exact"
+unit = "Tbps"
+quote = "51.2 Tbps per Module"
+cite = "vendor_yole_ofc26"
+source_class = "vendor_claim"
+verified = true
+location = "p13 stat tile (also seen on rendered slide)"
+note = "Evidence: text. Extra. My arithmetic: 4 x 51.2 = 204.8 Tbps, about twice the '100T' that p12 attributes to 4 ELS modules."
+
+[[fact]]
+id = "els.wavelengths"
+quantity = "wavelengths generated with multiplexing by the ELS light engine (validation platform)"
+value = 16.0
+bound = "exact"
+unit = "count"
+quote = "Wavelengths: generates 16 wavelengths with multiplexing"
+cite = "press_els_2026"
+source_class = "vendor_claim"
+verified = true
+location = "'the vendor VLSP Technology Validation' bullet list, bullet 3 (raw.html.txt line 82)"
+note = "Evidence: text."
+
+[[fact]]
+id = "els.power_per_fiber_min"
+quantity = "optical output power per fiber (power kind, average or OMA, not stated; CW source)"
+value = 100.0
+bound = "min"
+unit = "mW"
+quote = "High Optical Output Power: Minimum of 100 mW per fiber"
+cite = "press_els_2026"
+source_class = "vendor_claim"
+verified = true
+location = "'the vendor VLSP Technology Validation' bullet list, bullet 2 (raw.html.txt line 81)"
+note = "Evidence: text."
+
+[[fact]]
+id = "els.grid_spacing_per_grid"
+quantity = "spacing of each of the two interleaved wavelength grids (bidirectional links)"
+value = 400.0
+bound = "exact"
+unit = "GHz"
+quote = "two 400 GHz-spaced wavelength grids interleave at precisely 200 GHz offset"
+cite = "press_els_2026"
+source_class = "vendor_claim"
+verified = true
+location = "'Closed-Loop Control' bullet (raw.html.txt line 83)"
+note = "Evidence: text."
+
+[[fact]]
+id = "els.grid_offset"
+quantity = "offset between the two interleaved 400 GHz grids"
+value = 200.0
+bound = "exact"
+unit = "GHz"
+quote = "two 400 GHz-spaced wavelength grids interleave at precisely 200 GHz offset"
+cite = "press_els_2026"
+source_class = "vendor_claim"
+verified = true
+location = "'Closed-Loop Control' bullet (raw.html.txt line 83)"
+note = "Evidence: text."
+
+[[fact]]
+id = "els.wavelength_accuracy"
+quantity = "accuracy of the 200 GHz interleave offset (± tolerance magnitude)"
+value = 20.0
+bound = "max"
+unit = "GHz"
+quote = "+/- 20 GHz accuracy"
+cite = "press_els_2026"
+source_class = "vendor_claim"
+verified = true
+conflicts_with = ["els.freq_accuracy_yole"]
+location = "'Closed-Loop Control' bullet (raw.html.txt line 83)"
+note = "Evidence: text. Source writes '+/- 20 GHz' (ASCII); Appendix writes '±20 GHz'. Same value."
+
+[[fact]]
+id = "els.power_uniformity"
+quantity = "optical power uniformity across the channels in fiber"
+value = 0.1
+bound = "max"
+unit = "dB"
+quote = "optical power uniformity of up to 0.1 dB across the channels in fiber"
+cite = "press_els_2026"
+source_class = "vendor_claim"
+verified = true
+location = "'Closed-Loop Control' bullet (raw.html.txt line 83)"
+note = "Evidence: text."
+
+[[fact]]
+id = "els.bw_per_module"
+quantity = "bandwidth supported per laser module (NPO and CPO applications)"
+value = 51.2
+bound = "max"
+unit = "Tbps"
+quote = "Up to 51.2 Tbps per laser module for NPO and CPO applications"
+cite = "press_els_2026"
+source_class = "vendor_claim"
+verified = true
+location = "'the vendor VLSP Technology Validation' bullet list, bullet 1 ('High Bandwidth Density') (raw.html.txt line 80)"
+note = "Evidence: text."
+
+[[fact]]
+id = "els.validation_switch_bw_1ru"
+quantity = "switch bandwidth enabled by the first-generation ELS validation platform in a 1RU chassis"
+value = 100.0
+bound = "exact"
+unit = "Tbps"
+quote = "enables 100 Tbps of switch bandwidth in a compact 1RU chassis"
+cite = "press_els_2026"
+source_class = "vendor_claim"
+verified = true
+location = "'A New Scaling Paradigm' paragraph (raw.html.txt line 75)"
+note = "Evidence: text."
+
+[[fact]]
+id = "els.elsfp_equiv_count"
+quantity = "conventional ELSFP modules that the same 100 Tbps would require"
+value = 18.0
+bound = "approx"
+unit = "count"
+quote = "would require about 18 conventional ELSFP modules, occupying 4RU of rack space"
+cite = "press_els_2026"
+source_class = "vendor_claim"
+verified = true
+conflicts_with = ["els.elsfp_modules_100t_hoti26"]
+location = "'A New Scaling Paradigm' paragraph (raw.html.txt line 75)"
+note = "Evidence: text. Conflicts with counterpoint_nvlinkfusion (ELS-DR): 'Only two units are required to power a 100T switch replacing 8 conventional ELSFP format lasers' (8 vs about 18 ELSFP for ~100T). Consistent with vendor_web_els_dwdm 'nine ELSFP' per ~51 Tbps module."
+
+[[fact]]
+id = "els.elsfp_equiv_ru"
+quantity = "rack space occupied by the ~18 ELSFP modules"
+value = 4.0
+bound = "exact"
+unit = "RU"
+quote = "occupying 4RU of rack space"
+cite = "press_els_2026"
+source_class = "vendor_claim"
+verified = true
+location = "'A New Scaling Paradigm' paragraph (raw.html.txt line 75)"
+note = "Evidence: text."
+
+[[fact]]
+id = "els.wavelength_roadmap"
+quantity = "laser roadmap wavelength count ('and beyond' after 64)"
+lo = 1.0
+hi = 64.0
+bound = "exact"
+unit = "count"
+quote = "efficiently scales from 1 to 64 wavelengths and beyond"
+cite = "press_els_2026"
+source_class = "vendor_claim"
+verified = true
+location = "'A New Scaling Paradigm' paragraph (raw.html.txt line 75)"
+note = "Evidence: text. Source adds 'and beyond' after 64, which the Appendix omits; 64 is not stated as an upper limit."
+
+[[fact]]
+id = "els.device_hours"
+quantity = "failure-free device hours cited for ELS lasers in vendor validation systems (analyst relaying a vendor claim)"
+value = 2000000.0
+bound = "approx"
+unit = "h"
+quote = "[the vendor] cites approximately 2 million failure-free device hours on [ELS] lasers"
+cite = "futurum_ocp26"
+source_class = "third_party"
+verified = true
+location = "section 'Serviceable Connectors and Laser Supply Address CPO’s Two Hardest Objections', paragraph on ELS-DR (raw.html.txt line 239)"
+note = "Evidence: text. Not in Appendix A. Third-party relay of a vendor figure; same sentence: 'approaching 1 million on photonic interconnect'."
+
+[[fact]]
+id = "els_dwdm.band_center"
+quantity = "O-band wavelength grid center"
+value = 1310.0
+bound = "exact"
+unit = "nm"
+quote = "[ELS-DWDM] features a tight O-band wavelength grid centered at 1310 nm."
+cite = "vendor_web_els_dwdm"
+source_class = "vendor_claim"
+verified = true
+location = "section '01 – Optical Architecture / 16λ DWDM Output' (raw.html.txt line 84)"
+note = "Evidence: text. Spec table also says '16λ DWDM centered at 1310 nm'."
+
+[[fact]]
+id = "els_dwdm.wavelengths_per_fiber"
+quantity = "multiplexed wavelengths per fiber (spec table; 'scales to 16')"
+value = 8.0
+bound = "exact"
+unit = "count"
+quote = "8 multiplexed wavelengths per fiber (scales to 16)"
+cite = "vendor_web_els_dwdm"
+source_class = "vendor_claim"
+verified = true
+location = "Technical Specifications, 'Wavelength count' (raw.html.txt line 105)"
+note = "Evidence: text. Same page: hero '16 λ DWDM grid', spec 'Wavelength grid 16λ DWDM', and 'interleaved sets of 16 wavelengths per pair of fibers' (16 per fiber pair = 8 per fiber)."
+
+[[fact]]
+id = "els_dwdm.channel_spacing"
+quantity = "channel spacing (spec table)"
+value = 200.0
+bound = "exact"
+unit = "GHz"
+quote = "Channel spacing 200 GHz"
+cite = "vendor_web_els_dwdm"
+source_class = "vendor_claim"
+verified = true
+location = "Technical Specifications, 'Channel spacing' (label and value on consecutive lines) (raw.html.txt line 108-109)"
+note = "Evidence: text. Ambiguity, not a contradiction: the page does not say whether 200 GHz is the spacing within one fiber or of the combined 16λ grid. press_els_2026 describes two 400 GHz-spaced grids interleaved at a 200 GHz offset, which would make the per-fiber spacing 400 GHz if each fiber carries one 8λ set (inference)."
+
+[[fact]]
+id = "els_dwdm.wavelength_stability"
+quantity = "wavelength stability (± tolerance magnitude)"
+value = 20.0
+bound = "max"
+unit = "GHz"
+quote = "Wavelength stability ±20 GHz"
+cite = "vendor_web_els_dwdm"
+source_class = "vendor_claim"
+verified = true
+location = "Technical Specifications, 'Wavelength stability' (label and value on consecutive lines) (raw.html.txt line 110-111)"
+note = "Evidence: text. Same page also says 'λ DWDM grid (±20 GHz wavelength control)' and, in the Control section, that the controller 'maintains sub-GHz wavelength precision' (see els_dwdm.wavelength_precision); the page does not reconcile the two."
+
+[[fact]]
+id = "els_dwdm.power_per_lambda"
+quantity = "optical output power per wavelength"
+value = 13.0
+bound = "exact"
+unit = "mW"
+quote = "13 mW/λ · ≥100 mW/fiber · 3.2–3.5 W/module"
+cite = "vendor_web_els_dwdm"
+source_class = "vendor_claim"
+verified = true
+location = "Technical Specifications, 'Optical output power' (raw.html.txt line 113)"
+note = "Evidence: text. Power kind (average or OMA) not stated (CW laser source). Arithmetic check (inference): 13 mW x 8 λ = 104 mW per fiber, consistent with ≥100 mW/fiber."
+
+[[fact]]
+id = "els_dwdm.power_per_fiber_min"
+quantity = "optical output power per fiber"
+value = 100.0
+bound = "min"
+unit = "mW"
+quote = "≥100 mW/fiber"
+cite = "vendor_web_els_dwdm"
+source_class = "vendor_claim"
+verified = true
+location = "Technical Specifications, 'Optical output power'; also heading '≥100 mW Per Fiber' (raw.html.txt line 113)"
+note = "Evidence: text."
+
+[[fact]]
+id = "els_dwdm.power_per_module"
+quantity = "optical output power per module"
+lo = 3.2
+hi = 3.5
+bound = "exact"
+unit = "W"
+quote = "3.2–3.5 W/module"
+cite = "vendor_web_els_dwdm"
+source_class = "vendor_claim"
+verified = true
+location = "Technical Specifications, 'Optical output power' (raw.html.txt line 113)"
+note = "Evidence: text. This is optical output power (spec label 'Optical output power'), not electrical consumption; no electrical power is given. The '02 – Power' section says '1.6W in a single package up to 3.5W in a stacked configuration', so 3.2–3.5 W/module appears to describe the stacked 32-fiber build; the page does not say so (inference: 13 mW x 8 λ x 32 fibers = 3.33 W; x 16 fibers = 1.66 W)."
+
+[[fact]]
+id = "els_dwdm.fibers_single_package"
+quantity = "output fibers, single package"
+value = 16.0
+bound = "exact"
+unit = "count"
+quote = "16 fibers (single package) / 32 fibers (stacked)"
+cite = "vendor_web_els_dwdm"
+source_class = "vendor_claim"
+verified = true
+location = "Technical Specifications, 'Fiber configuration' (raw.html.txt line 115)"
+note = "Evidence: text."
+
+[[fact]]
+id = "els_dwdm.fibers_stacked"
+quantity = "output fibers, stacked configuration"
+value = 32.0
+bound = "exact"
+unit = "count"
+quote = "16 fibers (single package) / 32 fibers (stacked)"
+cite = "vendor_web_els_dwdm"
+source_class = "vendor_claim"
+verified = true
+location = "Technical Specifications, 'Fiber configuration' (raw.html.txt line 115)"
+note = "Evidence: text. Optical Architecture section also says 'bidirectional communication layouts across 32 fibers in a stacked configuration'."
+
+[[fact]]
+id = "els_dwdm.output_power_range"
+quantity = "scalable output from a single package (low end) to a stacked configuration (high end)"
+lo = 1.6
+hi = 3.5
+bound = "exact"
+unit = "W"
+quote = "ranging from 1.6W in a single package up to 3.5W in a stacked configuration"
+cite = "vendor_web_els_dwdm"
+source_class = "vendor_claim"
+verified = true
+location = "section '02 – Power / ≥100 mW Per Fiber' (raw.html.txt line 87)"
+note = "Evidence: text. Source ties 1.6W to a single package and 'up to 3.5W' to a stacked configuration; it does not say optical or electrical, but the section heading is '≥100 mW Per Fiber' and the spec table lists 3.2–3.5 W under 'Optical output power', so these read as optical output (inference)."
+
+[[fact]]
+id = "els_dwdm.function_cw"
+quantity = "function: continuous-wave (CW) laser source for DWDM"
+bound = "exact"
+unit = "text"
+quote = "Continuous-wave (CW) laser source for DWDM"
+cite = "vendor_web_els_dwdm"
+source_class = "vendor_claim"
+verified = true
+location = "Technical Specifications, 'Function' (raw.html.txt line 103)"
+note = "Evidence: text."
+
+[[fact]]
+id = "els_dwdm.control_cmis"
+quantity = "control interface: CMIS 5.3 over I2C / I3C"
+bound = "exact"
+unit = "text"
+quote = "CMIS 5.3 over I²C / I3C"
+cite = "vendor_web_els_dwdm"
+source_class = "vendor_claim"
+verified = true
+location = "Technical Specifications, 'Control interface' (raw.html.txt line 119)"
+note = "Evidence: text. Source writes 'I²C' with a superscript 2 (U+00B2)."
+
+[[fact]]
+id = "els_dwdm.bw_per_module"
+quantity = "supported I/O per ELS-DWDM module"
+value = 51.2
+bound = "exact"
+unit = "Tbps"
+quote = "51.2 Tbps per module"
+cite = "vendor_web_els_dwdm"
+source_class = "vendor_claim"
+verified = true
+location = "hero stats 'Supported I/O' (number and unit on consecutive lines) (raw.html.txt line 69-70)"
+note = "Evidence: text. Not in Appendix A for ELS-DWDM. Same page, Performance paragraph: 'ELS-DWDM powers up to 51 Tbps of I/O' (51 vs 51.2)."
+
+[[fact]]
+id = "els_dwdm.elsfp_replaced"
+quantity = "ELSFP light sources whose output one ELS-DWDM replaces"
+value = 9.0
+bound = "exact"
+unit = "count"
+quote = "replacing the output of nine ELSFP light sources with a single [ELS] light engine"
+cite = "vendor_web_els_dwdm"
+source_class = "vendor_claim"
+verified = true
+location = "Performance paragraph ('Deep Tech and Engineering') (raw.html.txt line 81)"
+note = "Evidence: text. Not in Appendix A. Consistent with press_els_2026 (about 18 ELSFP for 100 Tbps, i.e. two modules); conflicts with counterpoint_nvlinkfusion's 8 ELSFP for a 100T switch."
+
+[[fact]]
+id = "els_dwdm.wavelength_precision"
+quantity = "wavelength precision maintained by the integrated controller ('sub-GHz', i.e. below 1 GHz)"
+value = 1.0
+bound = "max"
+unit = "GHz"
+quote = "maintains sub-GHz wavelength precision"
+cite = "vendor_web_els_dwdm"
+source_class = "vendor_claim"
+verified = true
+location = "section '03 – Control / Software-Defined Precision' (raw.html.txt line 90)"
+note = "Evidence: text. Not in Appendix A. Coexists with the '±20 GHz' wavelength stability spec on the same page; the page does not define precision versus stability."
+
+[[fact]]
+id = "els_dr.form_factor"
+quantity = "form factor: Laser Network Interface Card (LNIC) built to OCP NIC 3.0 dimensions"
+bound = "exact"
+unit = "text"
+quote = "Laser Network Interface Card (“LNIC”) form factor built to OCP NIC 3.0 dimensions"
+cite = "vendor_pr_els_dr"
+source_class = "vendor_claim"
+verified = true
+location = "paragraph 1 (raw.html.txt line 70)"
+note = "Evidence: text. Release does not say which OCP NIC 3.0 size (SFF or LFF) and gives no mm dimensions."
+
+[[fact]]
+id = "els_dr.power_per_fiber"
+quantity = "optical power supplied per fiber"
+value = 200.0
+bound = "exact"
+unit = "mW"
+quote = "supplies 200 mW of optical power per fiber across up to 64 fibers to drive 256 lanes at 200G each"
+cite = "vendor_pr_els_dr"
+source_class = "vendor_claim"
+verified = true
+location = "'Key specifications' list, 'High-Density Optical Power' bullet (raw.html.txt line 76)"
+note = "Evidence: text. Product page (vendor_web_els_dr) states '≥200 mW per fiber (12.8W total)', i.e. a minimum, while the release states 200 mW flat. Power kind (average or OMA) not stated (CW laser)."
+
+[[fact]]
+id = "els_dr.fibers_max"
+quantity = "output fibers per module"
+value = 64.0
+bound = "max"
+unit = "count"
+quote = "supplies 200 mW of optical power per fiber across up to 64 fibers to drive 256 lanes at 200G each"
+cite = "vendor_pr_els_dr"
+source_class = "vendor_claim"
+verified = true
+location = "'Key specifications' list, 'High-Density Optical Power' bullet (raw.html.txt line 76)"
+note = "Evidence: text."
+
+[[fact]]
+id = "els_dr.lanes"
+quantity = "lanes driven per module"
+value = 256.0
+bound = "exact"
+unit = "count"
+quote = "supplies 200 mW of optical power per fiber across up to 64 fibers to drive 256 lanes at 200G each"
+cite = "vendor_pr_els_dr"
+source_class = "vendor_claim"
+verified = true
+location = "'Key specifications' list, 'High-Density Optical Power' bullet (raw.html.txt line 76)"
+note = "Evidence: text. Product page agrees: '64 Lasers inside a single ELS-DR LNIC power 256 scale-up lanes at 200G'."
+
+[[fact]]
+id = "els_dr.lane_rate"
+quantity = "lane rate driven by the module ('200G')"
+value = 200.0
+bound = "exact"
+unit = "Gbps"
+quote = "supplies 200 mW of optical power per fiber across up to 64 fibers to drive 256 lanes at 200G each"
+cite = "vendor_pr_els_dr"
+source_class = "vendor_claim"
+verified = true
+location = "'Key specifications' list, 'High-Density Optical Power' bullet (raw.html.txt line 76)"
+note = "Evidence: text. Source writes '200G' (unit and modulation not spelled out; Gbps assumed)."
+
+[[fact]]
+id = "els_dr.bw_per_module"
+quantity = "total bandwidth powered by one ELS-DR LNIC"
+value = 51.2
+bound = "exact"
+unit = "Tbps"
+quote = "for a total bandwidth of 51.2 Tbps"
+cite = "vendor_web_els_dr"
+source_class = "vendor_claim"
+verified = true
+location = "section '01 – Consolidation / Optical Power Density' (raw.html.txt line 81)"
+note = "Evidence: text. Release (vendor_pr_els_dr) words it as 'designed to drive up to 51.2 Tbps of aggregate CPO or NPO scale-up bandwidth' (a maximum). Arithmetic: 256 lanes x 200G = 51.2 Tbps. Neither source says whether this counts one direction or both."
+
+[[fact]]
+id = "els_dr.optical_power_total"
+quantity = "total optical output power per module"
+value = 12.8
+bound = "exact"
+unit = "W"
+quote = "≥200 mW per fiber (12.8W total)"
+cite = "vendor_web_els_dr"
+source_class = "vendor_claim"
+verified = true
+location = "Technical Specifications, 'Output power'; hero stat 'Optical Power 12.8 W per module' (raw.html.txt line 100)"
+note = "Evidence: text. 12.8 W is optical output (= 64 x 200 mW), not electrical consumption; no electrical power is disclosed."
+
+[[fact]]
+id = "els_dr.lasers_per_module"
+quantity = "lasers per ELS-DR LNIC module"
+value = 64.0
+bound = "exact"
+unit = "count"
+quote = "64 Lasers inside a single [ELS-DR] LNIC"
+cite = "vendor_web_els_dr"
+source_class = "vendor_claim"
+verified = true
+conflicts_with = ["els_dr.lasers_per_chip_counterpoint"]
+location = "section '01 – Consolidation / Optical Power Density'; also spec table 'Wavelength count: 64 Lasers' and intro 'integrating 64 high-power lasers' (raw.html.txt line 81)"
+note = "Evidence: text. Spec table files this under 'Wavelength count' although only two wavelength ranges (1311/1331 nm) are listed; 64 is a laser count, not a wavelength count. Conflicts with counterpoint_nvlinkfusion 'a chip with 128 lasers' (els_dr.lasers_per_chip_counterpoint); note the units differ (module vs chip)."
+
+[[fact]]
+id = "els_dr.lambda_range_a"
+quantity = "wavelength range A"
+value = 1311.0
+bound = "exact"
+unit = "nm"
+quote = "Range A: 1311nm, Range B: 1331nm"
+cite = "vendor_web_els_dr"
+source_class = "vendor_claim"
+verified = true
+location = "Technical Specifications, 'Wavelength ranges' (raw.html.txt line 102)"
+note = "Evidence: text. Single nominal values are given for each 'range'; no width or tolerance."
+
+[[fact]]
+id = "els_dr.lambda_range_b"
+quantity = "wavelength range B"
+value = 1331.0
+bound = "exact"
+unit = "nm"
+quote = "Range A: 1311nm, Range B: 1331nm"
+cite = "vendor_web_els_dr"
+source_class = "vendor_claim"
+verified = true
+location = "Technical Specifications, 'Wavelength ranges' (raw.html.txt line 102)"
+note = "Evidence: text. Single nominal values are given for each 'range'; no width or tolerance."
+
+[[fact]]
+id = "els_dr.connectors"
+quantity = "optical output connectors per module (SNMT-8)"
+value = 8.0
+bound = "exact"
+unit = "count"
+quote = "8 SNMT-8 connectors"
+cite = "vendor_web_els_dr"
+source_class = "vendor_claim"
+verified = true
+location = "Technical Specifications, 'Optical connector' (raw.html.txt line 106)"
+note = "Evidence: text. Fibers per SNMT-8 connector not stated (8 x 8 = 64 would match 'up to 64 fibers', but that is inference)."
+
+[[fact]]
+id = "els_dr.modules_per_1ru_tray_release"
+quantity = "ELS-DR modules used for a 204.8 Tbps 1RU switch tray (May 2026 release)"
+value = 4.0
+bound = "exact"
+unit = "count"
+quote = "By utilizing four [ELS-DR] modules, a single 1 RU switch tray can support up to 204.8 Tbps of CPO scale-up switching bandwidth"
+cite = "vendor_pr_els_dr"
+source_class = "vendor_claim"
+verified = true
+conflicts_with = ["els_dr.lnic_per_1ru_tray_page"]
+location = "paragraph 2 (raw.html.txt line 71)"
+note = "Evidence: text. CONFLICT: release also says 'The modular architecture accommodates up to 4 ELS-DR modules supporting scale-up bandwidth of over 200 Tbps in a 1RU switch tray' (4 as the maximum), while vendor_web_els_dr says 'up to 8 LNIC in a single 1RU switch tray' (409.6 Tbps)."
+
+[[fact]]
+id = "els_dr.tray_bw_4_modules"
+quantity = "1RU switch tray bandwidth with four ELS-DR modules"
+value = 204.8
+bound = "max"
+unit = "Tbps"
+quote = "By utilizing four [ELS-DR] modules, a single 1 RU switch tray can support up to 204.8 Tbps of CPO scale-up switching bandwidth"
+cite = "vendor_pr_els_dr"
+source_class = "vendor_claim"
+verified = true
+location = "paragraph 2 (raw.html.txt line 71)"
+note = "Evidence: text. Arithmetic: 4 x 51.2 = 204.8 Tbps."
+
+[[fact]]
+id = "els_dr.lnic_per_1ru_tray_page"
+quantity = "maximum ELS-DR LNICs in one 1RU switch tray (product page)"
+value = 8.0
+bound = "max"
+unit = "count"
+quote = "allows up to 8 LNIC in a single 1RU switch tray, powering up to 409.6 Tbps scale-up bandwidth"
+cite = "vendor_web_els_dr"
+source_class = "vendor_claim"
+verified = true
+location = "section 'ENGINEERED TO SCALE'; repeated in '01 – Consolidation' ('up to 8 LNICs fit into a single 1RU tray') (raw.html.txt line 78)"
+note = "Evidence: text. CONFLICT with vendor_pr_els_dr 'accommodates up to 4 ELS-DR modules' in a 1RU switch tray."
+
+[[fact]]
+id = "els_dr.tray_bw_8_lnic"
+quantity = "1RU switch tray bandwidth with eight ELS-DR LNICs (product page)"
+value = 409.6
+bound = "max"
+unit = "Tbps"
+quote = "allows up to 8 LNIC in a single 1RU switch tray, powering up to 409.6 Tbps scale-up bandwidth"
+cite = "vendor_web_els_dr"
+source_class = "vendor_claim"
+verified = true
+location = "section 'ENGINEERED TO SCALE' (raw.html.txt line 78)"
+note = "Evidence: text. Arithmetic: 8 x 51.2 = 409.6 Tbps."
+
+[[fact]]
+id = "els_dr.liquid_cooled"
+quantity = "cooling: liquid-cooled cold plate package"
+bound = "exact"
+unit = "text"
+quote = "using a high-efficiency liquid-cooled cold plate package design"
+cite = "vendor_pr_els_dr"
+source_class = "vendor_claim"
+verified = true
+location = "'Key specifications' list, 'Thermal Efficiency' bullet; also the release title 'Industry First Liquid-Cooled Laser NIC' (raw.html.txt line 81)"
+note = "Evidence: text. Product page agrees: 'designed with an integrated cold-plate'."
+
+[[fact]]
+id = "els_dr.sampling"
+quantity = "availability: sampling start"
+bound = "exact"
+unit = "text"
+quote = "The [ELS-DR] Laser NIC will begin sampling in Q4 2026."
+cite = "vendor_pr_els_dr"
+source_class = "vendor_claim"
+verified = true
+location = "'Availability' section (raw.html.txt line 84)"
+note = "Evidence: text. futurum_ocp26 (Oct 2026) says 'the vendor’s first production sampling year is 2027' (production sampling, not necessarily the same milestone)."
+
+[[fact]]
+id = "els_dr.lasers_per_chip_counterpoint"
+quantity = "lasers on the ELS-DR chip (Counterpoint)"
+value = 128.0
+bound = "exact"
+unit = "count"
+quote = "[ELS-DR] consists of a chip with 128 lasers on it"
+cite = "counterpoint_nvlinkfusion"
+source_class = "third_party"
+verified = true
+location = "'Key Technology Differentiators', 'ELS-DR Laser Engine' paragraph (raw.html.txt line 80)"
+note = "Evidence: text. NOT in counterpoint_ocp26 (OCP article; whole raw HTML incl. embedded JSON searched, no '128' and no laser count). Found in a different Counterpoint insight that is NOT in Appendix B: 'the vendor Joins NVLink Fusion Club' (Gareth Owen, 2026-06-12), https://counterpointresearch.com/en/insights/lightmatter-joins-nvlink-fusion-club, saved as SRC/counterpoint_nvlinkfusion/ (needs an Appendix B key). Counterpoint says per chip; the vendor (vendor_web_els_dr) says '64 Lasers' per LNIC module, so the conflict may partly be chip vs module scope. Appendix A also lists '128+ lasers per chip' for vendor_hoti26 (another group's item, not checked here)."
+
+[[fact]]
+id = "els_dr.density_vs_elsfp"
+quantity = "rack density relative to conventional ELSFPs"
+value = 4.0
+bound = "approx"
+unit = "1"
+quote = "enables approximately four times the rack density of conventional External Laser Small Form Factor Pluggables (ELSFPs)"
+cite = "vendor_pr_els_dr"
+source_class = "vendor_claim"
+verified = true
+location = "paragraph 1 (raw.html.txt line 70)"
+note = "Evidence: text. Not in Appendix A. Product page states a different metric: 'deliver 4x higher optical power density than pluggable ELSFPs'."
+
+[[fact]]
+id = "els_dr.ashrae_class"
+quantity = "thermal environment: ASHRAE A2"
+bound = "exact"
+unit = "text"
+quote = "Optimized for A2 ASHRAE-compliant environments"
+cite = "vendor_pr_els_dr"
+source_class = "vendor_claim"
+verified = true
+location = "'Key specifications' list, 'Thermal Efficiency' bullet (raw.html.txt line 81)"
+note = "Evidence: text. Not in Appendix A."
+
+[[fact]]
+id = "els_dr.band_plans"
+quantity = "supported band plans: 1311 nm UniDi, 1311/1331 nm BiDi, 8λ CWDM; custom up to 16λ DWDM"
+value = 16.0
+bound = "max"
+unit = "count"
+quote = "[ELS-DR] supports all common O-band band configurations from 1311nm UniDi, 1311/1331nm BiDi to 8λ CWDM. Custom band plans up to 16λ DWDM are feasible."
+cite = "vendor_web_els_dr"
+source_class = "vendor_claim"
+verified = true
+location = "section '04 – Compatibility / Optical Link Configurations' (raw.html.txt line 90)"
+note = "Evidence: text. Not in Appendix A. The spec table lists only 'Range A: 1311nm, Range B: 1331nm'."
+
+[[fact]]
+id = "els_dr.units_per_100t_counterpoint"
+quantity = "ELS-DR units needed to power a 100T switch (Counterpoint)"
+value = 2.0
+bound = "exact"
+unit = "count"
+quote = "Only two units are required to power a 100T switch replacing 8 conventional ELSFP format lasers."
+cite = "counterpoint_nvlinkfusion"
+source_class = "third_party"
+verified = true
+location = "'ELS-DR Laser Engine' section, LNIC paragraph (raw.html.txt line 81)"
+note = "Evidence: text. Not in Appendix A; source not in Appendix B. Consistent with 51.2 Tbps per module (2 x 51.2 = 102.4), but '8 conventional ELSFP' differs from the vendor's 'about 18 conventional ELSFP modules' for 100 Tbps (press_els_2026) and 'nine ELSFP' per ELS-DWDM (vendor_web_els_dwdm)."
+# ---- Model (brief 05 phase 6, model card §14.6) ---------------------------------------------
+
+[[fact]]
+id = "els_dwdm.output_power_single"
+quantity = "optical output power, single package"
+value = 1.6
+bound = "exact"
+unit = "W"
+quote = "ranging from 1.6W in a single package up to 3.5W in"
+cite = "vendor_web_els_dwdm"
+source_class = "vendor_claim"
+verified = true
+note = "Evidence: text. Number split from els_dwdm.output_power_range."
+
+[[fact]]
+id = "els_dwdm.output_power_stacked"
+quantity = "optical output power, stacked"
+value = 3.5
+bound = "max"
+unit = "W"
+quote = "ranging from 1.6W in a single package up to 3.5W in"
+cite = "vendor_web_els_dwdm"
+source_class = "vendor_claim"
+verified = true
+note = "Evidence: text. Number split from els_dwdm.output_power_range."
+
+[[assumption]]
+id = "els_dwdm.fiber_power_assumed"
+nominal = 100.0
+low = 100.0
+high = 110.0
+unit = "mW"
+rationale = "Power per fiber between the stated 100 mW minimum and 110 mW (3.5 W / 32 fibers = 109.4 mW)."
+
+[[assumption]]
+id = "els_dr.chain_loss_db"
+nominal = 7.5
+low = 7.5
+high = 7.5
+unit = "dB"
+rationale = "Non-split chain losses of model card §10: laser fiber and connector 0.5 + coupling 1.5 + excess 0 + modulator 4.0 + output coupler 1.5 dB (all SYNTHETIC)."
+
+[[assumption]]
+id = "els_dr.er_db"
+nominal = 4.0
+low = 4.0
+high = 4.0
+unit = "dB"
+rationale = "Modulator extinction ratio of the model card §10 chain (SYNTHETIC)."
+
+[[assumption]]
+id = "els_dr.reserve_db"
+nominal = 0.0
+low = 0.0
+high = 0.0
+unit = "dB"
+rationale = "No unallocated reserve, as in the draft DR budget of model card §12.1."
+
+[[assumption]]
+id = "els_dr.chain_extra_db"
+nominal = 0.0
+low = 0.0
+high = 7.0
+unit = "dB"
+rationale = "Loss in the real chain beyond the SYNTHETIC §10 chain; pinned by H_chain_lossier."
+
+[[assumption]]
+id = "els_dr.provisioning_db"
+nominal = 0.0
+low = 0.0
+high = 7.0
+unit = "dB"
+rationale = "Laser power held back for aging, temperature and TDECQ corners; pinned by H_laser_headroom."
+
+[[derived]]
+id = "els_dwdm.fiber_power"
+fn = "times_count"
+inputs = ["els_dwdm.wavelengths_per_fiber", "els_dwdm.power_per_lambda"]
+unit = "mW"
+note = "8 × 13 mW per fiber"
+
+[[derived]]
+id = "els_dwdm.single_package_power"
+fn = "total_w_from_mw"
+inputs = ["els_dwdm.fibers_single_package", "els_dwdm.power_per_fiber_min"]
+unit = "W"
+note = "16 fibers × 100 mW"
+
+[[derived]]
+id = "els_dwdm.stacked_power"
+fn = "total_w_from_mw"
+inputs = ["els_dwdm.fibers_stacked", "els_dwdm.fiber_power_assumed"]
+unit = "W"
+note = "32 fibers × 100 to 110 mW"
+
+[[derived]]
+id = "els_dwdm.lambda_power_dbm"
+fn = "mw_to_dbm"
+inputs = ["els_dwdm.power_per_lambda"]
+unit = "dBm"
+note = "13 mW per wavelength"
+
+[[derived]]
+id = "els.module_bw_needed"
+fn = "divide_by_count"
+inputs = ["els.validation_switch_bw_1ru", "els.modules_100t_1ru_yole"]
+unit = "Tbps"
+note = "100 Tbps over 4 modules"
+
+[[derived]]
+id = "els.bw_per_elsfp"
+fn = "divide_by_count"
+inputs = ["els.validation_switch_bw_1ru", "els.elsfp_equiv_count"]
+unit = "Tbps"
+note = "100 Tbps over about 18 ELSFP"
+
+[[derived]]
+id = "els_dr.total_power"
+fn = "total_w_from_mw"
+inputs = ["els_dr.fibers_max", "els_dr.power_per_fiber"]
+unit = "W"
+note = "64 fibers × 200 mW"
+
+[[derived]]
+id = "els_dr.bw"
+fn = "aggregate_tbps"
+inputs = ["els_dr.lanes", "els_dr.lane_rate"]
+unit = "Tbps"
+note = "256 lanes × 200 Gb/s"
+
+[[derived]]
+id = "els_dr.lanes_per_fiber"
+fn = "count_ratio"
+inputs = ["els_dr.lanes", "els_dr.fibers_max"]
+unit = "count"
+note = "lanes fed by each laser fiber"
+
+[[derived]]
+id = "els_dr.power_per_lane"
+fn = "divide_by_count"
+inputs = ["els_dr.power_per_fiber", "els_dr.lanes_per_fiber"]
+unit = "mW"
+note = "even split before PIC losses (INFERENCE)"
+
+[[derived]]
+id = "els_dr.power_per_lane_dbm"
+fn = "mw_to_dbm"
+inputs = ["els_dr.power_per_lane"]
+unit = "dBm"
+note = "per lane before PIC losses (INFERENCE)"
+
+[[derived]]
+id = "els_dr.power_dbm"
+fn = "mw_to_dbm"
+inputs = ["els_dr.power_per_fiber"]
+unit = "dBm"
+note = "200 mW per fiber"
+
+[[derived]]
+id = "els_dr.hazard_headroom"
+fn = "dbm_difference_db"
+inputs = ["elsfp.hazard_l1_limit", "els_dr.power_dbm"]
+unit = "dB"
+note = "below the ELSFP Hazard Level 1 limit"
+
+[[derived]]
+id = "els_dr.margin_n4"
+fn = "chain_margin_db"
+inputs = ["els_dr.power_dbm", "els_dr.lanes_per_fiber", "els_dr.chain_loss_db", "els_dr.er_db", "ieee3dj.channel_il", "ieee3dj.rx_sens_intercept", "ieee3dj.penalty_allocation", "els_dr.reserve_db"]
+unit = "dB"
+note = "margin at 4 lanes per fiber on the draft DR budget"
+
+[[derived]]
+id = "els_dr.max_fanout"
+fn = "chain_max_fanout"
+inputs = ["els_dr.power_dbm", "els_dr.chain_loss_db", "els_dr.er_db", "ieee3dj.channel_il", "ieee3dj.rx_sens_intercept", "ieee3dj.penalty_allocation", "els_dr.reserve_db"]
+unit = "count"
+note = "largest split on the draft DR budget"
+
+[[derived]]
+id = "els_dr.margin_less_extra"
+fn = "difference"
+inputs = ["els_dr.margin_n4", "els_dr.chain_extra_db"]
+unit = "dB"
+note = "margin left after extra chain loss"
+
+[[derived]]
+id = "els_dr.unexplained_db"
+fn = "difference"
+inputs = ["els_dr.margin_less_extra", "els_dr.provisioning_db"]
+unit = "dB"
+note = "margin neither hypothesis accounts for"
+
+[[derived]]
+id = "els_dr.bw_per_module_4"
+fn = "divide_by_count"
+inputs = ["els_dr.tray_bw_4_modules", "els_dr.modules_per_1ru_tray_release"]
+unit = "Tbps"
+note = "204.8 Tbps over four modules"
+
+[[derived]]
+id = "els_dr.bw_per_module_8"
+fn = "divide_by_count"
+inputs = ["els_dr.tray_bw_8_lnic", "els_dr.lnic_per_1ru_tray_page"]
+unit = "Tbps"
+note = "409.6 Tbps over eight LNIC"
+
+[[check]]
+id = "els_dwdm.check_fiber_power"
+kind = "bound"
+a = "els_dwdm.fiber_power"
+b = "els_dwdm.power_per_fiber_min"
+rel_tol = 0.0
+note = "8 × 13 mW against '≥100 mW/fiber'"
+
+[[check]]
+id = "els_dwdm.check_single_package"
+kind = "consistent"
+a = "els_dwdm.single_package_power"
+b = "els_dwdm.output_power_single"
+rel_tol = 0.001
+note = "16 × 100 mW against 1.6 W (single package)"
+
+[[check]]
+id = "els_dwdm.check_stacked"
+kind = "consistent"
+a = "els_dwdm.stacked_power"
+b = "els_dwdm.power_per_module"
+rel_tol = 0.10
+note = "32 × 100 to 110 mW against '3.2–3.5 W/module' (stacked)"
+
+[[check]]
+id = "els_dwdm.check_elsfp_lp"
+kind = "consistent"
+a = "els_dwdm.lambda_power_dbm"
+b = "elsfp.class_lp"
+rel_tol = 0.02
+note = "13 mW = 11.14 dBm ≈ ELSFP LP class"
+
+[[check]]
+id = "els.check_module_bw"
+kind = "bound"
+a = "els.module_bw_needed"
+b = "els.bw_per_module"
+rel_tol = 0.0
+note = "25 Tbps per module against 'Up to 51.2 Tbps per laser module' (bound)"
+
+[[check]]
+id = "els.check_elsfp_count"
+kind = "consistent"
+a = "els.elsfp_equiv_count"
+b = "els.elsfp_modules_100t_hoti26"
+rel_tol = 0.05
+note = "about 18 ELSFP (release, OFC 2026) against 16 modules (HOTI26) for 100 Tbps"
+
+[[check]]
+id = "els_dr.check_total_power"
+kind = "consistent"
+a = "els_dr.total_power"
+b = "els_dr.optical_power_total"
+rel_tol = 0.001
+note = "64 × 200 mW against '12.8W total'"
+
+[[check]]
+id = "els_dr.check_bw"
+kind = "consistent"
+a = "els_dr.bw"
+b = "els_dr.bw_per_module"
+rel_tol = 0.001
+note = "256 × 200G against 51.2 Tbps"
+
+[[check]]
+id = "els_dr.check_elsfp_uhp"
+kind = "consistent"
+a = "els_dr.power_dbm"
+b = "elsfp.class_uhp"
+rel_tol = 0.01
+note = "200 mW = 23.01 dBm, the ELSFP UHP class"
+
+[[check]]
+id = "els_dr.check_hazard"
+kind = "bound"
+a = "els_dr.power_dbm"
+b = "elsfp.hazard_l1_limit"
+rel_tol = 0.0
+note = "below the 24.5 dBm Hazard Level 1 limit"
+
+[[check]]
+id = "els_dr.check_fanout"
+kind = "bound"
+a = "els_dr.max_fanout"
+b = "els_dr.lanes_per_fiber"
+rel_tol = 0.0
+relation = "ge"
+note = "the 4 lanes per fiber fit under the max fan-out of 17 with about 6.4 dB unallocated"
+
+[[check]]
+id = "els_dr.check_lasers"
+kind = "consistent"
+a = "els_dr.lasers_per_module"
+b = "els_dr.lasers_per_chip_counterpoint"
+rel_tol = 0.01
+note = "64 lasers per LNIC (product page) against 128 lasers per chip (Counterpoint); chip and module may differ"
+
+[[check]]
+id = "els_dr.check_modules_per_tray"
+kind = "consistent"
+a = "els_dr.modules_per_1ru_tray_release"
+b = "els_dr.lnic_per_1ru_tray_page"
+rel_tol = 0.01
+note = "four modules (release) against up to 8 LNIC (product page) per 1RU tray"
+
+[[check]]
+id = "els_dr.check_per_module_rates"
+kind = "consistent"
+a = "els_dr.bw_per_module_4"
+b = "els_dr.bw_per_module_8"
+rel_tol = 0.001
+note = "both tray figures give 51.2 Tbps per module"
+
+[[hypothesis]]
+id = "H_chain_lossier"
+statement = "ELS-DR's 200 mW for 4 lanes is sized for a chain that loses about 6.4 dB more than the SYNTHETIC §10 chain."
+sets = { "els_dr.chain_extra_db" = 6.4398, "els_dr.provisioning_db" = 0.0 }
+group = "guidedr_margin"
+
+[[hypothesis]]
+id = "H_laser_headroom"
+statement = "The §10 chain is about right and ELS-DR provisions about 6.4 dB for aging, temperature and TDECQ corners."
+sets = { "els_dr.chain_extra_db" = 0.0, "els_dr.provisioning_db" = 6.4398 }
+group = "guidedr_margin"

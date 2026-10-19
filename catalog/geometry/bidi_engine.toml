@@ -1,0 +1,227 @@
+# BiDi optical engine package (model card §14.2). Units: mm; x length, y width, z up.
+# The outline is the OFC 2026 slide's 37.5 x 27.6 x 4.55 mm (VENDOR); the product page says
+# 37.5 x 26.4 mm (a recorded CONFLICT). Everything inside the outline is SCHEMATIC.
+# Independent model built from public information. Not affiliated with or endorsed by
+# any company whose publications are cited.
+
+[scene]
+id = "bidi_engine"
+name = "BiDi optical engine package"
+unit = "mm"
+level = "package"
+product = "bidi_engine"
+parent = "switch_tray"
+breadcrumb = "Engine"
+summary = "BiDi optical engine: EIC stacked on PIC on an organic substrate, modulators, photodiodes, on-chip diplexers and laser input couplers, a fiber-array unit (FAU) and a BGA."
+
+[[part]]
+id = "eng.outline"
+name = "package outline (OFC 2026 slide)"
+assembly = "package"
+size = [37.5, 27.6, 4.55]
+position = [0.0, 0.0, 2.275]
+material = "outline"
+dims_class = "VENDOR"
+dims_axes = ["VENDOR", "VENDOR", "VENDOR"]
+dims_source = "engine.width_mm_yole"
+nodes = ["engine.length_mm_yole", "engine.width_mm_yole", "engine.height_mm_yole", "engine.width_mm_web", "engine.volume"]
+function = "Overall envelope 37.5 x 27.6 x 4.55 mm (OFC 2026); the product page gives 37.5 x 26.4 mm."
+label = "37.5 x 27.6 x 4.55 mm"
+
+[[part]]
+id = "eng.substrate"
+name = "organic substrate"
+assembly = "package"
+size = [37.5, 27.6, 1.0]
+position = [0.0, 0.0, 0.5]
+material = "organic_substrate"
+dims_class = "SCHEMATIC"
+dims_axes = ["VENDOR", "VENDOR", "SCHEMATIC"]
+dims_source = "engine.width_mm_yole"
+nodes = ["engine.length_mm_yole", "engine.width_mm_yole"]
+function = "Routes the 212.5 Gb/s PAM4 SerDes and power between the BGA and the dies; thickness schematic."
+explode = [0.0, 0.0, -6.0]
+
+[[part]]
+id = "eng.pic"
+name = "photonic IC (PIC)"
+assembly = "dies"
+size = [22.0, 16.0, 0.775]
+position = [-2.0, 0.0, 1.39]
+material = "silicon"
+dims_class = "SCHEMATIC"
+dims_source = "PIC size not disclosed; drawn to fit the outline."
+nodes = ["engine.optical_ports", "engine.lambda_a_nm", "engine.lambda_b_nm"]
+function = "Modulators, photodiodes, on-chip diplexers and laser input couplers for 32 BiDi lanes."
+explode = [0.0, 0.0, 4.0]
+enters = "pic_region"
+label = "PIC"
+
+[[part]]
+id = "eng.modulators"
+name = "modulator sites (32)"
+assembly = "dies"
+size = [0.5, 0.5, 0.05]
+position = [-10.5, -6.0, 1.8025]
+material = "doped_p"
+dims_class = "SCHEMATIC"
+dims_source = "Modulator type and size not disclosed; sites drawn as a 4 x 8 array."
+nodes = ["engine.optical_ports", "engine.lane_rate"]
+count = 32
+grid = [8, 4, 1]
+pitch = [1.2, 1.3, 0.0]
+explode = [0.0, 0.0, 4.0]
+label = "modulators"
+
+[[part]]
+id = "eng.photodiodes"
+name = "photodiodes (32)"
+assembly = "dies"
+size = [0.4, 0.4, 0.05]
+position = [-10.5, 2.0, 1.8025]
+material = "germanium"
+dims_class = "SCHEMATIC"
+dims_source = "Photodiode size not disclosed; drawn as a 4 x 8 array."
+count = 32
+grid = [8, 4, 1]
+pitch = [1.2, 1.3, 0.0]
+explode = [0.0, 0.0, 4.0]
+label = "photodiodes"
+
+[[part]]
+id = "eng.diplexers"
+name = "on-chip diplexers (32)"
+assembly = "dies"
+size = [0.6, 0.25, 0.05]
+position = [0.5, -4.5, 1.8025]
+material = "oxide"
+dims_class = "SCHEMATIC"
+dims_source = "Diplexer layout not disclosed; one per BiDi lane drawn in a column."
+nodes = ["engine.lambda_spacing_nm"]
+count = 32
+grid = [1, 32, 1]
+pitch = [0.0, 0.3, 0.0]
+explode = [0.0, 0.0, 4.0]
+label = "diplexers"
+
+[[part]]
+id = "eng.laser_couplers"
+name = "laser input couplers (8)"
+assembly = "dies"
+size = [0.8, 0.4, 0.05]
+position = [8.0, -5.6, 1.8025]
+material = "glass"
+dims_class = "SCHEMATIC"
+dims_source = "Coupler size not disclosed; 8 drawn for '1 ELSFP / 8 Laser Fibers'."
+nodes = ["engine.laser_fibers_yole", "engine.lanes_per_laser_fiber"]
+count = 8
+grid = [1, 8, 1]
+pitch = [0.0, 1.6, 0.0]
+explode = [0.0, 0.0, 4.0]
+label = "laser couplers"
+
+[[part]]
+id = "eng.eic"
+name = "electronic IC (EIC), 3D-stacked on the PIC"
+assembly = "dies"
+size = [14.0, 12.0, 0.5]
+position = [-4.0, 0.0, 2.05]
+material = "silicon_eic"
+dims_class = "SCHEMATIC"
+dims_source = "EIC size not disclosed; drawn to fit on the PIC."
+nodes = ["engine.serdes_line_rate", "engine.tdp_max"]
+function = "Drivers, TIAs and 212.5 Gb/s PAM4 SerDes."
+explode = [0.0, 0.0, 9.0]
+label = "EIC"
+
+[[part]]
+id = "eng.fau"
+name = "FAU fiber-array unit"
+assembly = "optics"
+size = [8.0, 14.0, 2.2]
+position = [13.0, 0.0, 2.9]
+material = "glass"
+dims_class = "SCHEMATIC"
+dims_source = "FAU size not disclosed; drawn over the PIC edge."
+nodes = ["fau.il_reinsertion_max", "fau.vertical_expanded_beam", "engine.fibers_yole"]
+function = "Detachable vertically expanded-beam attach for 32 BiDi fibers and 8 laser fibers."
+explode = [8.0, 0.0, 6.0]
+label = "FAU"
+
+[[part]]
+id = "eng.vgroove"
+name = "V-groove block"
+assembly = "optics"
+size = [6.0, 12.0, 1.0]
+position = [13.0, 0.0, 4.5]
+material = "glass"
+dims_class = "SCHEMATIC"
+dims_source = "V-groove block size not disclosed."
+explode = [8.0, 0.0, 10.0]
+
+[[part]]
+id = "eng.fibers"
+name = "fibers (32 BiDi + 8 laser)"
+assembly = "optics"
+shape = "cylinder"
+size = [0.25, 0.25, 12.0]
+position = [19.0, -5.85, 4.5]
+rotation_deg = [0.0, 90.0, 0.0]
+material = "fiber"
+dims_class = "SCHEMATIC"
+dims_source = "Coated fiber drawn at 250 um; ribbon layout schematic."
+nodes = ["engine.fibers_yole", "engine.laser_fibers_yole"]
+enters = "bidi_link"
+count = 40
+grid = [1, 40, 1]
+pitch = [0.0, 0.3, 0.0]
+explode = [12.0, 0.0, 10.0]
+
+[[part]]
+id = "eng.bga"
+name = "BGA balls (2000 per the release, 1827 per the product page)"
+assembly = "package"
+shape = "sphere"
+size = [0.45, 0.45, 0.45]
+position = [-17.64, -12.87, -0.225]
+material = "solder"
+dims_class = "SCHEMATIC"
+dims_source = "Ball size and pitch not disclosed; drawn as 50 x 40 = 2000 balls at a schematic pitch."
+nodes = ["engine.form_factor_pins", "engine.bga_balls_web"]
+count = 2000
+grid = [50, 40, 1]
+pitch = [0.72, 0.66, 0.0]
+explode = [0.0, 0.0, -10.0]
+label = "BGA"
+
+[[tour]]
+part = "eng.outline"
+node = "engine.volume_reduction_pct"
+
+[[tour]]
+part = "eng.outline"
+node = "engine.width_mm_web"
+
+[[tour]]
+part = "eng.eic"
+node = "engine.serdes_line_rate"
+
+[[tour]]
+part = "eng.pic"
+node = "engine.bw_per_direction"
+
+[[tour]]
+part = "eng.diplexers"
+node = "engine.lambda_spacing_ghz"
+
+[[tour]]
+part = "eng.fau"
+node = "fau.il_reinsertion_max"
+
+[[tour]]
+part = "eng.bga"
+node = "engine.form_factor_pins"
+
+[[tour]]
+part = "eng.eic"
+node = "engine.energy_per_bit"

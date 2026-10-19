@@ -1,0 +1,153 @@
+# The photonic processor of ahmed2025_nature (model card §15). Units: mm; x across, y along, z up.
+# Interposer, PTC and control-die footprints are the paper's (peer reviewed, shown as PUBLISHED
+# dimensions); thicknesses, the 2 x 2 arrangement and every on-chip region are SCHEMATIC. The PTCs
+# sit on the back side of the interposer and the two control dies on top.
+
+[scene]
+id = "photonic_processor"
+name = "Photonic processor (Nature 2025)"
+unit = "mm"
+level = "package"
+product = "photonic_processor"
+breadcrumb = "Processor"
+summary = "Six chips: four 128 x 128 photonic tensor cores on the back of a 54 x 56 mm organic interposer, two 12 nm control dies on top, eight laser fibres. Explode (E) lifts the interposer and control dies off the tensor cores."
+
+[[part]]
+id = "proc.interposer"
+name = "organic interposer (54 x 56 mm)"
+assembly = "package"
+size = [54.0, 56.0, 1.2]
+position = [0.0, 0.0, 0.6]
+material = "organic_substrate"
+dims_class = "SCHEMATIC"
+dims_axes = ["SCHEMATIC", "SCHEMATIC", "SCHEMATIC"]
+dims_source = "interposer footprint from ptc.interposer_width_mm, which is unverified (paywalled main text); drawn to that size, not sourced"
+nodes = ["ptc.interposer_width_mm", "ptc.interposer_length_mm", "ptc.stack_orientation", "ptc.chip_count"]
+function = "Carries the two control dies on top and the four photonic tensor cores on the back side."
+explode = [0.0, 0.0, 9.0]
+label = "54 x 56 mm interposer"
+
+[[part]]
+id = "proc.dci"
+name = "control dies (2, 12 nm)"
+assembly = "control"
+size = [31.4, 25.0, 0.775]
+position = [0.0, -13.5, 1.5875]
+material = "silicon_eic"
+dims_class = "SCHEMATIC"
+dims_axes = ["SCHEMATIC", "SCHEMATIC", "SCHEMATIC"]
+dims_source = "control-die footprint from ptc.dci_die_length_mm, which is unverified (paywalled main text); drawn to that size, not sourced"
+nodes = ["ptc.dci_die_length_mm", "ptc.dci_die_width_mm", "ptc.dci_area", "ptc.dci_area_calc", "ptc.dci_power", "ptc.dci_node", "ptc.adc_bits", "ptc.adc_enob"]
+function = "Drivers, DACs, TIAs and ADCs and the digital engine that rescales by s_w s_x / G (model card §15.3)."
+count = 2
+grid = [1, 2, 1]
+pitch = [0.0, 27.0, 0.0]
+explode = [0.0, 0.0, 18.0]
+label = "control die"
+
+[[part]]
+id = "proc.ptc"
+name = "photonic tensor cores (4, 128 x 128)"
+assembly = "tensor cores"
+size = [14.0, 24.96, 0.775]
+position = [-8.0, -13.5, -0.3875]
+material = "silicon"
+dims_class = "SCHEMATIC"
+dims_axes = ["SCHEMATIC", "SCHEMATIC", "SCHEMATIC"]
+dims_source = "PTC footprint from ptc.ptc_die_width_mm, which is unverified (paywalled main text); drawn to that size, not sourced"
+nodes = ["ptc.ptc_die_width_mm", "ptc.ptc_die_length_mm", "ptc.ptc_area", "ptc.ptc_area_calc", "ptc.ptc_power_each", "ptc.ptc_process_node", "ptc.macs_per_cycle"]
+function = "Each core multiplies a 128-long vector by a 128 x 128 weight matrix in the analog domain."
+count = 4
+grid = [2, 2, 1]
+pitch = [16.0, 27.0, 0.0]
+label = "tensor core"
+
+[[part]]
+id = "proc.weights"
+name = "weight arrays (128 x 128 cells each)"
+assembly = "tensor cores"
+size = [9.0, 18.0, 0.05]
+position = [-7.0, -13.5, 0.025]
+material = "germanium"
+dims_class = "SCHEMATIC"
+dims_source = "Array size not disclosed; drawn inside the core."
+nodes = ["ptc.ptc_matrix_size", "ptc.weight_bits", "ptc.weight_cell_photocurrent", "ptc.rowline_current_sum", "ptc.power_per_cell", "ptc.output_word_bits"]
+function = "Each cell detects light differentially and a resistive DAC sets its weight on the photocurrent; row lines sum the currents."
+count = 4
+grid = [2, 2, 1]
+pitch = [16.0, 27.0, 0.0]
+label = "128 x 128 weights"
+
+[[part]]
+id = "proc.modulators"
+name = "vector modulators (MZI, 128 per core)"
+assembly = "tensor cores"
+size = [1.4, 18.0, 0.05]
+position = [-12.3, -13.5, 0.025]
+material = "doped_p"
+dims_class = "SCHEMATIC"
+dims_source = "Modulator layout not disclosed; drawn as one strip per core."
+nodes = ["ptc.vmod_type", "ptc.vmod_bw", "ptc.vmod_il", "ptc.vmod_vpil", "ptc.activation_bits"]
+count = 4
+grid = [2, 2, 1]
+pitch = [16.0, 27.0, 0.0]
+label = "vector modulators"
+
+[[part]]
+id = "proc.trees"
+name = "16-way splitter trees"
+assembly = "tensor cores"
+size = [1.4, 18.0, 0.05]
+position = [-14.0, -13.5, 0.025]
+material = "oxide"
+dims_class = "SCHEMATIC"
+dims_source = "Tree layout not disclosed; drawn as one strip per core."
+nodes = ["ptc.fanout_tree", "ptc.loss_si_ridge", "ptc.loss_sin"]
+count = 4
+grid = [2, 2, 1]
+pitch = [16.0, 27.0, 0.0]
+
+[[part]]
+id = "proc.fibres"
+name = "laser fibres (8, 200 mW each)"
+assembly = "optics"
+shape = "cylinder"
+size = [0.25, 0.25, 16.0]
+position = [-35.0, -13.5, 0.4]
+rotation_deg = [0.0, 90.0, 0.0]
+material = "fiber"
+dims_class = "SCHEMATIC"
+dims_source = "Coated fibre drawn at 250 um, 0.4 mm apart; how the eight lasers reach the four cores is not disclosed."
+nodes = ["ptc.laser_count", "ptc.laser_power_fibre", "ptc.optical_total", "ptc.laser_grid", "ptc.vgroove_loss", "ptc.vgroove_count"]
+count = 8
+grid = [1, 8, 1]
+pitch = [0.0, 0.4, 0.0]
+label = "8 laser fibres"
+
+[[tour]]
+part = "proc.ptc"
+node = "ptc.macs_per_cycle"
+
+[[tour]]
+part = "proc.dci"
+node = "ptc.ops_500mhz"
+
+[[tour]]
+part = "proc.dci"
+node = "ptc.power_sum"
+
+[[tour]]
+part = "proc.ptc"
+node = "ptc.ptc_area_calc"
+
+[[tour]]
+part = "proc.weights"
+node = "ptc.check_output_bits"
+
+[[tour]]
+part = "proc.fibres"
+node = "ptc.optical_total"
+
+[[tour]]
+part = "proc.weights"
+node = "ptc.power_per_cell"

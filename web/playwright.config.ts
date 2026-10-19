@@ -12,7 +12,8 @@ export default defineConfig({
     baseURL: 'http://localhost:5173',
     ...devices['Desktop Chrome'],
     viewport: { width: 1440, height: 1000 },
-    launchOptions: { args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader'] },
+    // Linux runners have no GPU: render WebGL in software there.
+    launchOptions: { args: process.platform === 'linux' ? ['--use-angle=swiftshader', '--enable-unsafe-swiftshader'] : [] },
   },
   webServer: [
     {

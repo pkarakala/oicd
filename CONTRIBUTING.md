@@ -45,4 +45,4 @@ uv run ruff format . && uv run ruff check . && uv run mypy && uv run pytest -q
 cd web && npm run gen:api && npm run typecheck && npm run test:unit
 ```
 
-See [AGENTS.md](AGENTS.md) for the rules and a map of the code.
+If you use an AI assistant, point it at [AGENTS.md](AGENTS.md) and say so in the PR.

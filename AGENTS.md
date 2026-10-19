@@ -1,15 +1,16 @@
 # AGENTS.md
 
-Notes for coding agents (and people) working in this repo.
+Rules for coding agents (and people) working in this repo. Most of the code was written by an AI coding assistant following these rules, with every change reviewed by the author.
 
 ## Rules
 
-- No unsourced numbers. A physical value carries a provenance class and a key from `references.bib`. If there is no source, it is `synthetic` with a one-line reason.
-- Units in types and names. `dB` and `dBm` are separate types; optical power is OMA or average, never mixed. Names end in the unit: `loss_db`, `wavelength_nm`.
-- `docs/model_card.md` is the spec. If code and card disagree, raise it; don't change the physics to make a test pass.
-- Checks are pure and deterministic and return PASS, FAIL or NOT_EVALUATED with the numbers behind them.
-- Expected test values come from the model card's hand calculations, not from running the code.
-- Keep diffs small and on one topic.
+1. No unsourced numbers. A physical value carries a provenance class and a key from `references.bib`. If there is no source, it is `synthetic` with a one-line reason.
+2. Units in types and names. `dB` and `dBm` are separate types; optical power is OMA or average, never mixed. Names end in the unit: `loss_db`, `wavelength_nm`.
+3. `docs/model_card.md` is the spec. If code and card disagree, raise it; don't change the physics to make a test pass.
+4. Checks are pure and deterministic and return PASS, FAIL or NOT_EVALUATED with the numbers behind them.
+5. Expected test values come from the model card's hand calculations, not from running the code.
+6. Keep diffs small and on one topic.
+7. Write plainly: short sentences, no filler, no em dashes.
 
 ## Map
 

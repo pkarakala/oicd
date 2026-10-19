@@ -160,15 +160,15 @@ def test_semantic_zoom_chain_from_ring_to_rack():
     assert {p.enters for p in rack.part if p.enters} == {"switch_tray", "xpu_tray"}
 
 
-def test_engine_outline_and_lnic_classes():
+def test_engine_outline_and_lasernic_classes():
     engine = {p.id: p for p in load_geometry("bidi_engine").part}
     outline = engine["eng.outline"]
     assert outline.size == (37.5, 27.6, 4.55) and outline.dims_axes == ("VENDOR",) * 3
     assert "engine.width_mm_web" in outline.nodes  # the 26.4 mm conflict is one click away
-    lnic = {p.id: p for p in load_geometry("laser_sources").part}["elsdr.pcb"]
+    lasernic = {p.id: p for p in load_geometry("laser_sources").part}["elsdr.pcb"]
     # depth 115 mm is published for both OCP NIC 3.0 sizes; the 76 mm width is our SFF reading
-    assert lnic.size[:2] == (76.0, 115.0)
-    assert lnic.dims_axes == ("INFERENCE", "PUBLISHED", "SCHEMATIC")
+    assert lasernic.size[:2] == (76.0, 115.0)
+    assert lasernic.dims_axes == ("INFERENCE", "PUBLISHED", "SCHEMATIC")
     ring = {p.id: p for p in load_geometry("pic_region").part}["pic.mrm"]
     assert ring.shape == "ring" and ring.size[:2] == (15.0, 15.0)
     assert ring.dims_axes == ("INFERENCE", "INFERENCE", "SCHEMATIC")

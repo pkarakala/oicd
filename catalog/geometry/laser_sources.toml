@@ -15,7 +15,7 @@ summary = "External laser sources: the ELS-DR laser NIC (64 lasers, 64 fibers at
 
 [[part]]
 id = "elsdr.pcb"
-name = "ELS-DR laser NIC (LNIC) board"
+name = "ELS-DR laser NIC board"
 assembly = "ELS-DR"
 size = [76.0, 115.0, 1.6]
 position = [0.0, 0.0, 0.8]
@@ -92,7 +92,7 @@ material = "silicon"
 dims_class = "SCHEMATIC"
 dims_source = "Chip size not disclosed."
 nodes = ["els_dr.lasers_per_module", "els_dr.lasers_per_chip_counterpoint", "els_dr.band_plans", "els_dr.power_dbm", "els_dr.hazard_headroom"]
-function = "64 lasers per LNIC (product page); Counterpoint reports 128 lasers on the chip, a recorded tension."
+function = "64 lasers per laser NIC (product page); Counterpoint reports 128 lasers on the chip, a recorded tension."
 explode = [0.0, 0.0, 12.0]
 label = "laser chip"
 
@@ -240,7 +240,7 @@ label = "ELS"
 
 [[part]]
 id = "els.laser_pic"
-name = "ELS laser chip (VLSP)"
+name = "ELS laser chip"
 assembly = "ELS"
 size = [20.0, 12.0, 0.775]
 position = [120.0, 4.0, 4.39]

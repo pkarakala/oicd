@@ -147,7 +147,7 @@ Baseline before Phase 0 (brief 03 tree on `main`): pytest 147 passed, ruff check
 - [x] 10.6 docs/paper/main.md — docs/paper/main.md with [TODO Pranav] where a source is missing
 - [x] 10.7 README, docs/architecture.md, CITATION.cff — README rewritten (features, screenshots, twin section with the disclaimer, run, pipeline, limitations, AI-assistant line), docs/architecture.md, CITATION.cff (Pranav Reddy)
 - [x] 10.8 Remove the "Active run" section from CLAUDE.md; all checks one final time — removed; final checks: pytest 480 passed (98 % coverage), ruff clean, ruff format clean, mypy strict clean, hand calcs run, figures render, gen:api unchanged, typecheck ok, Vitest 21 passed, build ok, Playwright 14 passed
-- [ ] 10.9 docs/run_summary_05.md (final summary), printed
+- [x] 10.9 docs/run_summary_05.md (final summary), printed — docs/run_summary_05.md written and printed
 
 ## Check log
 
@@ -164,4 +164,4 @@ Baseline before Phase 0 (brief 03 tree on `main`): pytest 147 passed, ruff check
 | 7 | a78fb8f | 404 passed | clean | clean | ok | ok | 1 passed | n/a |
 | 8 | 58b63de | 456 passed | clean | clean | ok | ok | 13 passed | 21 passed |
 | 9 | d4eeeef | 472 passed | clean | clean | ok | ok | 14 passed | 21 passed |
-| 10 | (this commit) | 480 passed, 98 % coverage, mypy strict clean | clean | clean | ok | ok | 14 passed | 21 passed |
+| 10 | 7002ed4 | 480 passed, 98 % coverage, mypy strict clean | clean | clean | ok | ok | 14 passed | 21 passed |

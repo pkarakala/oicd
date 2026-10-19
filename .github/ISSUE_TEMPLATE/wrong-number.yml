@@ -1,0 +1,23 @@
+name: Wrong number or physics
+description: A value, source, equation or verdict looks wrong
+labels: [correction]
+body:
+  - type: input
+    id: where
+    attributes:
+      label: Where
+      description: Explorer screen, twin page, model card section or file
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What's wrong
+      description: The value shown and what it should be
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Source
+      description: Link, paper or standard clause

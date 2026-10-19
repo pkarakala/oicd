@@ -28,6 +28,8 @@ cd web && npm install --legacy-peer-deps && cd ..
 uv run oicd rack          # same numbers from the CLI
 ```
 
+In the explorer, `?` lists shortcuts, `Ctrl+K` searches every part and analysis, and the Tour button walks a scene's facts.
+
 Tests: `uv run pytest`, and `npm run test:unit` / `npm run e2e` in `web/`.
 
 ## Docs
@@ -35,6 +37,7 @@ Tests: `uv run pytest`, and `npm run test:unit` / `npm run e2e` in `web/`.
 - [Model card](docs/model_card.md): equations, reference planes, hand-checked cases ([docs/hand_calcs](docs/hand_calcs/))
 - [Paper draft](docs/paper/main.md)
 - [Twin pages](docs/twin/)
+- [Contributing](CONTRIBUTING.md): found a wrong number? Open an issue.
 
 ## Limits
 

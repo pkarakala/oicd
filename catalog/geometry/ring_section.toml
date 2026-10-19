@@ -43,7 +43,7 @@ position = [-112.5, 0.0, 110.0]
 material = "doped_p"
 dims_class = "SCHEMATIC"
 dims_source = "Waveguide cross-section not disclosed; drawn 450 x 220 nm."
-nodes = ["m1000.mrr_modulation", "ring.process"]
+nodes = ["interposer.mrr_modulation", "ring.process"]
 label = "p"
 
 [[part]]
@@ -55,7 +55,7 @@ position = [112.5, 0.0, 110.0]
 material = "doped_n"
 dims_class = "SCHEMATIC"
 dims_source = "Waveguide cross-section not disclosed; drawn 450 x 220 nm."
-nodes = ["m1000.mrr_modulation", "ring.mrm_eo_bw_ghz"]
+nodes = ["interposer.mrr_modulation", "ring.mrm_eo_bw_ghz"]
 function = "Reverse bias widens the depletion region at the junction, shifting the effective index and the resonance."
 label = "n"
 
@@ -141,17 +141,17 @@ position = [0.0, 0.0, 1300.0]
 material = "heater"
 dims_class = "SCHEMATIC"
 dims_source = "Heater geometry not disclosed; drawn above the core."
-nodes = ["m1000.mrr_heater", "ring.heater_nm_per_mw", "m1000.heater_per_ring"]
+nodes = ["interposer.mrr_heater", "ring.heater_nm_per_mw", "interposer.heater_per_ring"]
 explode = [0.0, 0.0, 2200.0]
 label = "heater"
 
 [[tour]]
 part = "rs.core_p"
-node = "m1000.mrr_modulation"
+node = "interposer.mrr_modulation"
 
 [[tour]]
 part = "rs.heater"
-node = "m1000.mrr_heater"
+node = "interposer.mrr_heater"
 
 [[tour]]
 part = "rs.heater"

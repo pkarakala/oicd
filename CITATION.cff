@@ -3,9 +3,8 @@ message: "If you use OICD, please cite it as below."
 title: "OICD: Open Interconnect Co-Design"
 abstract: >-
   A physics-grounded, provenance-tracked feasibility engine for optical AI-accelerator
-  interconnects, with a product twin reconstructed from public information and a 3D explorer.
-  Independent reconstruction from public information; not affiliated with or endorsed by
-  Lightmatter.
+  interconnects, with architecture twins built from public information and a 3D explorer.
+  Not affiliated with or endorsed by any company whose publications are cited.
 authors:
   - given-names: Pranav
     family-names: Reddy

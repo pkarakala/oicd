@@ -1,4 +1,4 @@
-# Reference rack OICD-R64 (model card §14.9): an OICD design (SYNTHETIC), never Lightmatter's.
+# Reference rack OICD-R64 (model card §14.9): an OICD design (SYNTHETIC), never the vendor's.
 # Units: mm; x width, y depth (front at -y), z up; positions are part centers.
 # Layout under H_2U (42 OU): XPU trays OU 1-16, power shelf OU 17, switch trays OU 18-25,
 # power shelf OU 26, XPU trays OU 27-42; OU 43-44 spare. OU 1 starts 87 mm above the floor.
@@ -10,7 +10,7 @@ unit = "mm"
 level = "rack"
 product = "reference_rack"
 breadcrumb = "Rack"
-summary = "ORv3 rack, single tier: 16 XPU trays and 8 switch trays wired with 8192 BiDi fibers through a rear shuffle; an OICD design, not a Lightmatter configuration."
+summary = "ORv3 rack, single tier: 16 XPU trays and 8 switch trays wired with 8192 BiDi fibers through a rear shuffle; an OICD design, not a vendor configuration."
 
 [[part]]
 id = "rack.frame_outline"
@@ -49,7 +49,7 @@ material = "aluminium"
 dims_class = "SCHEMATIC"
 dims_axes = ["PUBLISHED", "SCHEMATIC", "INFERENCE"]
 dims_source = "orv3.it_chassis_width"
-nodes = ["orv3.it_chassis_width", "orv3.chassis_1ou_max_height", "trays.xpu_bw", "trays.xpu_height_lmcom", "trays.xpu_height_prnewswire"]
+nodes = ["orv3.it_chassis_width", "orv3.chassis_1ou_max_height", "trays.xpu_bw", "trays.xpu_height_vendor_site", "trays.xpu_height_prnewswire"]
 function = "Width per the ORv3 IT gear guide; height 48 x 2 - 3.3 = 92.7 mm (2 OU, H_2U); depth schematic."
 count = 8
 grid = [1, 1, 8]

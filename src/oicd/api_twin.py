@@ -31,7 +31,7 @@ from oicd.twin.catalog import (
 )
 from oicd.twin.formulas import with_unit
 from oicd.twin.inference import CheckOutcome, EvaluatedGraph, NodeResult, evaluate_graph
-from oicd.twin.overlay import L20_CASE_ISOLATION_DB, Overlay, OverlayError, overlay_for
+from oicd.twin.overlay import ENGINE_CASE_ISOLATION_DB, Overlay, OverlayError, overlay_for
 from oicd.twin.physics import EVALUATIONS, ProductPhysics, physics_for
 
 router = APIRouter()
@@ -39,8 +39,8 @@ router = APIRouter()
 _FROZEN = ConfigDict(frozen=True, extra="forbid")
 
 INDEPENDENCE = (
-    "Independent reconstruction from public information. Not affiliated with or endorsed by "
-    "Lightmatter. Product names belong to their owners."
+    "Independent model built from public information. Not affiliated with or endorsed by "
+    "any company whose publications are cited."
 )
 
 
@@ -261,11 +261,11 @@ def get_overlay(
     scene: str,
     mode: Literal["light", "dark"] = "light",
     case: str | None = None,
-    isolation_db: float = L20_CASE_ISOLATION_DB,
+    isolation_db: float = ENGINE_CASE_ISOLATION_DB,
 ) -> Response:
     """Light paths with pulse brightness, margins with colors and heater power for a scene
     (model card §3, §13, §14). `case` picks a reference-plane case of the rack and its trays;
-    `isolation_db` sets the diplexer isolation of the L20 scenes."""
+    `isolation_db` sets the diplexer isolation of the BiDi engine scenes."""
     try:
         data = load_geometry(scene)
     except FileNotFoundError as exc:

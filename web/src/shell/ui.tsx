@@ -115,4 +115,4 @@ export function Empty({ children }: { children: ReactNode }) {
 }
 
 export const INDEPENDENCE =
-  'Independent reconstruction from public information. Not affiliated with or endorsed by Lightmatter. Product names belong to their owners.'
+  'Independent model built from public information. Not affiliated with or endorsed by any company whose publications are cited.'

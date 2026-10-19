@@ -18,18 +18,17 @@ def all_facts(catalog) -> list[Fact]:
 
 def test_catalog_loads_with_every_product(catalog):
     assert {
-        "passage_m1000",
-        "passage_l200",
-        "passage_l20",
-        "vclick",
+        "photonic_interposer",
+        "cpo_chiplet",
+        "bidi_engine",
+        "fiber_array_unit",
         "bidi_16lambda",
         "microring_ofc25",
-        "guide_family",
+        "laser_sources",
         "ocp_trays",
         "scaleup_pod",
         "standards_partners",
         "photonic_processor",
-        "lightmatter_platform",
     } <= set(catalog.files)
 
 
@@ -54,22 +53,22 @@ def test_conflicts_point_at_facts(catalog):
 @pytest.mark.parametrize(
     "fact_id, value",
     [
-        ("l20.bw_per_direction", 6.4),
-        ("l20.tdp_max", 30.0),
-        ("l20.energy_per_bit_bw", 3.0),
-        ("l20.energy_per_bit_web", 5.0),
-        ("l20.lambda_a_nm", 1311.0),
-        ("l20.lambda_b_nm", 1331.0),
-        ("m1000.fiber_count", 256.0),
-        ("m1000.bw_per_fiber", 448.0),
-        ("m1000.bw_per_fiber_ises25", 800.0),
-        ("m1000.package_area", 7735.0),
+        ("engine.bw_per_direction", 6.4),
+        ("engine.tdp_max", 30.0),
+        ("engine.energy_per_bit_bw", 3.0),
+        ("engine.energy_per_bit_web", 5.0),
+        ("engine.lambda_a_nm", 1311.0),
+        ("engine.lambda_b_nm", 1331.0),
+        ("interposer.fiber_count", 256.0),
+        ("interposer.bw_per_fiber", 448.0),
+        ("interposer.bw_per_fiber_ises25", 800.0),
+        ("interposer.package_area", 7735.0),
         ("ring.fsr_thz", 1.8),
         ("ring.heater_nm_per_mw", 0.44),
         ("ring.mrm_q", 3500.0),
         ("ring.oma_min_dbm", -9.0),
-        ("guidedr.power_per_fiber", 200.0),
-        ("guidedr.lanes", 256.0),
+        ("els_dr.power_per_fiber", 200.0),
+        ("els_dr.lanes", 256.0),
         ("trays.switch_bw", 204.8),
         ("trays.xpu_bw", 102.4),
         ("orv3.meta_frame_height", 2286.0),
@@ -89,11 +88,11 @@ def test_appendix_values(catalog, fact_id, value):
 def test_known_conflicts_are_recorded(catalog):
     # Appendix A and the fact check: both sides carried, never silently picked (brief rule 3).
     pairs = {
-        ("l20.width_mm_web", "l20.width_mm_yole"),
-        ("l20.form_factor_pins", "l20.bga_balls_web"),
-        ("m1000.bw_per_fiber", "m1000.bw_per_fiber_ises25"),
-        ("l200.l200_lane_rate", "l200.web_modulation"),
-        ("trays.xpu_height_prnewswire", "trays.xpu_height_lmcom"),
+        ("engine.width_mm_web", "engine.width_mm_yole"),
+        ("engine.form_factor_pins", "engine.bga_balls_web"),
+        ("interposer.bw_per_fiber", "interposer.bw_per_fiber_ises25"),
+        ("chiplet.chiplet_lane_rate", "chiplet.web_modulation"),
+        ("trays.xpu_height_prnewswire", "trays.xpu_height_vendor_site"),
         ("ptc.c262_web", "ptc.c262_paper"),
     }
     for a, b in pairs:

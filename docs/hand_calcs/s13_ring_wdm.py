@@ -72,7 +72,7 @@ print(f"laser accuracy +/-20 GHz = +/-{dlambda_nm(20):.5f} nm")
 grid = [F0_GHZ + (n - 7.5) * 200.0 for n in range(16)]
 lam = [C / (f * 1e9) * 1e9 for f in grid]
 print(
-    f"Guide grid: lambda_0 {lam[0]:.4f} nm, lambda_15 {lam[15]:.4f} nm, "
+    f"ELS grid: lambda_0 {lam[0]:.4f} nm, lambda_15 {lam[15]:.4f} nm, "
     f"span {lam[0] - lam[15]:.4f} nm"
 )
 print(
@@ -107,7 +107,7 @@ for name, fsr_h in (("H_fsr18", 1800.0), ("H_fsr32", 3200.0)):
     ]
     print(f"    receive rings with an image exactly on a local transmit channel: {hits}")
 
-print("§13.7 BiDi link model case: L20-style pair on the draft DR budget")
+print("§13.7 BiDi link model case: BiDi engine-style pair on the draft DR budget")
 fiber_db = 0.5 * 0.4
 channel_il = fiber_db + 0.5  # fiber plus one connector, TP2 to TP3 between the diplexers
 t_ch = 10 ** (-channel_il / 10)

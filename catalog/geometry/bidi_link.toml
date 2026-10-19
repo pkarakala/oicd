@@ -1,13 +1,13 @@
-# Two Passage L20 engines on one fiber (model card §13.7, §14.2). Units: mm. The fiber is drawn
+# Two BiDi optical engines on one fiber (model card §13.7, §14.2). Units: mm. The fiber is drawn
 # short; the link model uses its own length (0.5 km in the §13.8 case).
 
 [scene]
-id = "l20_bidi_link"
-name = "BiDi link: two L20 engines on one fiber"
+id = "bidi_link"
+name = "BiDi link: two BiDi engines on one fiber"
 unit = "mm"
 level = "package"
-product = "passage_l20"
-parent = "passage_l20"
+product = "bidi_engine"
+parent = "bidi_engine"
 breadcrumb = "BiDi link"
 summary = "Direction A at 1311 nm and direction B at 1331 nm share one fiber; each end's diplexer separates them and the local transmitter's reflections become crosstalk."
 
@@ -20,9 +20,9 @@ position = [-150.0, 0.0, 2.275]
 material = "organic_substrate"
 dims_class = "VENDOR"
 dims_axes = ["VENDOR", "VENDOR", "VENDOR"]
-dims_source = "l20.width_mm_yole"
-nodes = ["l20.lambda_a_nm", "l20.length_mm_yole", "l20.height_mm_yole"]
-enters = "passage_l20"
+dims_source = "engine.width_mm_yole"
+nodes = ["engine.lambda_a_nm", "engine.length_mm_yole", "engine.height_mm_yole"]
+enters = "bidi_engine"
 label = "engine A: TX 1311 nm"
 
 [[part]]
@@ -34,32 +34,32 @@ position = [150.0, 0.0, 2.275]
 material = "organic_substrate"
 dims_class = "VENDOR"
 dims_axes = ["VENDOR", "VENDOR", "VENDOR"]
-dims_source = "l20.width_mm_yole"
-nodes = ["l20.lambda_b_nm", "l20.length_mm_yole", "l20.height_mm_yole"]
-enters = "passage_l20"
+dims_source = "engine.width_mm_yole"
+nodes = ["engine.lambda_b_nm", "engine.length_mm_yole", "engine.height_mm_yole"]
+enters = "bidi_engine"
 label = "engine B: TX 1331 nm"
 
 [[part]]
 id = "link.fau_a"
-name = "vClick FAU, end A"
+name = "FAU, end A"
 assembly = "end A"
 size = [8.0, 14.0, 2.2]
 position = [-127.0, 0.0, 5.65]
 material = "glass"
 dims_class = "SCHEMATIC"
 dims_source = "FAU size not disclosed."
-nodes = ["vclick.il_reinsertion_max"]
+nodes = ["fau.il_reinsertion_max"]
 
 [[part]]
 id = "link.fau_b"
-name = "vClick FAU, end B"
+name = "FAU, end B"
 assembly = "end B"
 size = [8.0, 14.0, 2.2]
 position = [127.0, 0.0, 5.65]
 material = "glass"
 dims_class = "SCHEMATIC"
 dims_source = "FAU size not disclosed."
-nodes = ["vclick.il_reinsertion_max"]
+nodes = ["fau.il_reinsertion_max"]
 
 [[part]]
 id = "link.fiber"
@@ -71,26 +71,26 @@ path = [[-123.0, 0.0, 6.0], [-80.0, 0.0, 22.0], [0.0, 0.0, 30.0], [80.0, 0.0, 22
 material = "fiber"
 dims_class = "SCHEMATIC"
 dims_source = "Fiber drawn short and thick for visibility; length set in the link model."
-nodes = ["itut.g652d_atten_max", "l20.fiber_reduction_pct"]
+nodes = ["itut.g652d_atten_max", "engine.fiber_reduction_pct"]
 function = "One fiber per BiDi lane: half the fibers of a duplex DR link."
 label = "one fiber, both directions"
 
 [[tour]]
 part = "link.engine_a"
-node = "l20.lambda_a_nm"
+node = "engine.lambda_a_nm"
 
 [[tour]]
 part = "link.engine_b"
-node = "l20.lambda_b_nm"
+node = "engine.lambda_b_nm"
 
 [[tour]]
 part = "link.fiber"
-node = "l20.fiber_reduction_pct"
+node = "engine.fiber_reduction_pct"
 
 [[tour]]
 part = "link.engine_b"
-node = "l20.check_b_upper"
+node = "engine.check_b_upper"
 
 [[tour]]
 part = "link.fau_a"
-node = "vclick.il_reinsertion_max"
+node = "fau.il_reinsertion_max"

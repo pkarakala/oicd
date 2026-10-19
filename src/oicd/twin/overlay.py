@@ -39,10 +39,10 @@ SYN = SourceClass.SYNTHETIC
 UNDISCLOSED_BRIGHTNESS = 0.45
 
 # The model card §13.8 BiDi link case: SYNTHETIC diplexers, fiber and connector.
-L20_CASE_DIPLEXER_IL_DB = 1.0
-L20_CASE_ISOLATION_DB = 25.0
-L20_CASE_FIBER_KM = 0.5
-L20_CASE_CONNECTOR_DB = 0.5
+ENGINE_CASE_DIPLEXER_IL_DB = 1.0
+ENGINE_CASE_ISOLATION_DB = 25.0
+ENGINE_CASE_FIBER_KM = 0.5
+ENGINE_CASE_CONNECTOR_DB = 0.5
 MAX_ISOLATION_DB = 60.0
 _CASE = Provenance(source_class=SYN, rationale="Model card §13.8 BiDi link case (synthetic).")
 
@@ -177,13 +177,13 @@ def _fraction_nearest(path: Sequence[Sequence[float]], point: Sequence[float]) -
     return best_at
 
 
-# --- the L20-style BiDi pair (model card §13.8) -------------------------------------------
+# --- the BiDi engine-style BiDi pair (model card §13.8) -------------------------------------------
 
 
-def l20_link_request(
-    catalog: Catalog, isolation_db: float = L20_CASE_ISOLATION_DB
+def engine_link_request(
+    catalog: Catalog, isolation_db: float = ENGINE_CASE_ISOLATION_DB
 ) -> BidiLinkRequest:
-    """The §13.8 case: L20 wavelengths on the draft DR budget, SYNTHETIC diplexers and fiber."""
+    """The §13.8 case: BiDi engine wavelengths on the draft DR budget, SYNTHETIC diplexer/fiber."""
 
     def q(node: str) -> Quantity[float]:
         return Quantity(value=_value(catalog, node), provenance=_prov(catalog, node))
@@ -205,7 +205,7 @@ def l20_link_request(
             symbol_rate_gbd=_value(catalog, "ieee3dj.signaling_rate"),
             tx_oma_dbm=Quantity(value=launch, provenance=launch_prov),
             tx_center_nm=q(wavelength_node),
-            tx_tolerance_nm=q("l20.lambda_tolerance_nm"),
+            tx_tolerance_nm=q("engine.lambda_tolerance_nm"),
             rx_passband_min_nm=q("ieee3dj.lane_wl_min"),
             rx_passband_max_nm=q("ieee3dj.lane_wl_max"),
             rx_sensitivity_dbm=q("ieee3dj.rx_sens_intercept"),
@@ -215,28 +215,28 @@ def l20_link_request(
             },
         )
 
-    a_nm, b_nm = _value(catalog, "l20.lambda_a_nm"), _value(catalog, "l20.lambda_b_nm")
+    a_nm, b_nm = _value(catalog, "engine.lambda_a_nm"), _value(catalog, "engine.lambda_b_nm")
     isolation = (
         _CASE
-        if isolation_db == L20_CASE_ISOLATION_DB
+        if isolation_db == ENGINE_CASE_ISOLATION_DB
         else Provenance(source_class=SYN, rationale="Diplexer isolation set in the explorer.")
     )
     return BidiLinkRequest(
-        name="L20-style BiDi pair on the draft DR budget (model card §13.8)",
-        a_to_b=direction(f"A ({a_nm:g} nm)", "l20.lambda_a_nm"),
-        b_to_a=direction(f"B ({b_nm:g} nm)", "l20.lambda_b_nm"),
-        diplexer_il_db=syn(L20_CASE_DIPLEXER_IL_DB),
+        name="BiDi engine-style BiDi pair on the draft DR budget (model card §13.8)",
+        a_to_b=direction(f"A ({a_nm:g} nm)", "engine.lambda_a_nm"),
+        b_to_a=direction(f"B ({b_nm:g} nm)", "engine.lambda_b_nm"),
+        diplexer_il_db=syn(ENGINE_CASE_DIPLEXER_IL_DB),
         diplexer_isolation_db=Quantity(value=isolation_db, provenance=isolation),
-        fiber_length_km=syn(L20_CASE_FIBER_KM),
-        connector_losses_db=(syn(L20_CASE_CONNECTOR_DB),),
+        fiber_length_km=syn(ENGINE_CASE_FIBER_KM),
+        connector_losses_db=(syn(ENGINE_CASE_CONNECTOR_DB),),
         return_loss_db=q("ieee3dj.orl_tolerance_dr1"),
     )
 
 
-def l20_link(catalog: Catalog, isolation_db: float = L20_CASE_ISOLATION_DB) -> BidiLinkResult:
+def engine_link(catalog: Catalog, isolation_db: float = ENGINE_CASE_ISOLATION_DB) -> BidiLinkResult:
     if not 0.0 <= isolation_db <= MAX_ISOLATION_DB:
         raise OverlayError(f"diplexer isolation must be 0 to {MAX_ISOLATION_DB:g} dB")
-    return evaluate_bidi_link(l20_link_request(catalog, isolation_db))
+    return evaluate_bidi_link(engine_link_request(catalog, isolation_db))
 
 
 def _received(part: str, d: BidiDirectionResult, mode: Mode) -> PartValue:
@@ -257,7 +257,7 @@ def _received(part: str, d: BidiDirectionResult, mode: Mode) -> PartValue:
 def _bidi_link(
     catalog: Catalog, scene: GeometryScene, mode: Mode, case: str | None, isolation_db: float
 ) -> Overlay:
-    result = l20_link(catalog, isolation_db)
+    result = engine_link(catalog, isolation_db)
     a, b = result.directions
     colors = channel_colors(2)
     reference = max(a.report.power_trace[0].power_mw, b.report.power_trace[0].power_mw)
@@ -309,7 +309,7 @@ def _bidi_link(
         ghost(b, colors[0].color, "A", forward=False),
         ghost(a, colors[1].color, "B", forward=True),
     )
-    origin = "the SYNTHETIC case value" if isolation_db == L20_CASE_ISOLATION_DB else "set here"
+    origin = "the SYNTHETIC case value" if isolation_db == ENGINE_CASE_ISOLATION_DB else "set here"
     failing = [
         f"direction {d.name}: {r.constraint.value.replace('_', ' ')} fails"
         for d in (a, b)
@@ -340,14 +340,14 @@ def _bidi_link(
     )
 
 
-def _l20_package(
+def _engine_package(
     catalog: Catalog, scene: GeometryScene, mode: Mode, case: str | None, isolation_db: float
 ) -> Overlay:
-    result = l20_link(catalog, isolation_db)
+    result = engine_link(catalog, isolation_db)
     a, b = result.directions
     colors = channel_colors(2)
     reference = a.report.power_trace[0].power_mw
-    fiber = next(p for p in scene.part if p.id == "l20g.fibers")
+    fiber = next(p for p in scene.part if p.id == "eng.fibers")
     data = tuple(range(32))
     laser = tuple(range(32, fiber.count))
     # in the fiber next to this engine: A after its TX-end diplexer, B before the RX-end one
@@ -355,7 +355,7 @@ def _l20_package(
     in_power = b.report.power_trace[-2].power_mw
     paths = (
         LightPath(
-            part="l20g.fibers",
+            part="eng.fibers",
             instances=data,
             kind="signal",
             label=f"outbound {a.name}, after the on-chip diplexer",
@@ -366,7 +366,7 @@ def _l20_package(
             source_class=INF,
         ),
         LightPath(
-            part="l20g.fibers",
+            part="eng.fibers",
             instances=data,
             kind="signal",
             label=f"inbound {b.name}, before the on-chip diplexer",
@@ -377,7 +377,7 @@ def _l20_package(
             source_class=INF,
         ),
         LightPath(
-            part="l20g.fibers",
+            part="eng.fibers",
             instances=laser,
             kind="cw",
             label="laser supply from the ELSFP (power per fiber not disclosed)",
@@ -411,12 +411,12 @@ def _rack_cases(catalog: Catalog) -> list[tuple[OverlayCase, PathCase]]:
     result = evaluate_rack(rack_spec(catalog))
     out = []
     for p in result.paths:
-        if p.vclick_loss_db is None:
-            case = OverlayCase(id=p.hypothesis, label="vClick inside the module (H_vclick_module)")
+        if p.fau_loss_db is None:
+            case = OverlayCase(id=p.hypothesis, label="FAU inside the module (H_fau_module)")
         else:
             case = OverlayCase(
-                id=f"{p.hypothesis}_{p.vclick_loss_db:.1f}".replace(".", "p"),
-                label=f"vClick {p.vclick_loss_db:g} dB in the channel ({p.hypothesis})",
+                id=f"{p.hypothesis}_{p.fau_loss_db:.1f}".replace(".", "p"),
+                label=f"FAU {p.fau_loss_db:g} dB in the channel ({p.hypothesis})",
             )
         out.append((case, p))
     return out
@@ -461,8 +461,8 @@ def _rack(
     trace = report.power_trace
     reference = trace[0].power_mw
     colors = channel_colors(2)
-    a_nm = _value(catalog, "guidedr.lambda_range_a")
-    b_nm = _value(catalog, "guidedr.lambda_range_b")
+    a_nm = _value(catalog, "els_dr.lambda_range_a")
+    b_nm = _value(catalog, "els_dr.lambda_range_b")
     paths: list[LightPath] = []
     for part in ("rack.shuffle_low", "rack.shuffle_high"):
         paths += [
@@ -503,7 +503,7 @@ def _rack(
         paths=tuple(paths),
         values=tuple(_margin_value(p, label, report, mode) for p in parts),
         notes=(
-            "OICD-R64 is an OICD design (SYNTHETIC), not a Lightmatter configuration.",
+            "OICD-R64 is an OICD design (SYNTHETIC), not a vendor configuration.",
             "The reference-plane definition, not the physics, decides this rack (model card "
             "§14.9).",
         ),
@@ -520,8 +520,8 @@ def _tray(engines: str, ribbons: tuple[str, str], transmits_a: bool) -> Builder:
         out_trace, in_trace = _split(report.power_trace)
         reference = report.power_trace[0].power_mw
         a, b = channel_colors(2)
-        a_nm = _value(catalog, "guidedr.lambda_range_a")
-        b_nm = _value(catalog, "guidedr.lambda_range_b")
+        a_nm = _value(catalog, "els_dr.lambda_range_a")
+        b_nm = _value(catalog, "els_dr.lambda_range_b")
         (out_c, out_nm), (in_c, in_nm) = (
             ((a, a_nm), (b, b_nm)) if transmits_a else ((b, b_nm), (a, a_nm))
         )
@@ -675,7 +675,7 @@ def _pic_region(
         margin_db=None,
         paths=paths,
         values=(_heater(catalog, "pic.mrm_heater"), _heater(catalog, "pic.mrr_heater")),
-        notes=("Heater power: model card §13.4 at 0.44 nm/mW (lm_ofc25_paper), INFERENCE.",),
+        notes=("Heater power: model card §13.4 at 0.44 nm/mW (vendor_ofc25_paper), INFERENCE.",),
     )
 
 
@@ -694,23 +694,23 @@ def _ring_section(
         margin_db=None,
         paths=(),
         values=(_heater(catalog, "rs.heater"),),
-        notes=("Heater power: model card §13.4 at 0.44 nm/mW (lm_ofc25_paper), INFERENCE.",),
+        notes=("Heater power: model card §13.4 at 0.44 nm/mW (vendor_ofc25_paper), INFERENCE.",),
     )
 
 
-def _guide(
+def _lasers(
     catalog: Catalog, scene: GeometryScene, mode: Mode, case: str | None, isolation_db: float
 ) -> Overlay:
     cw = palette(mode).cw
-    dr_mw = _value(catalog, "guidedr.power_per_fiber")
-    g1_count = _value(catalog, "guide1.wavelengths_per_fiber")
-    g1_lambda_mw = _value(catalog, "guide1.power_per_lambda")
+    dr_mw = _value(catalog, "els_dr.power_per_fiber")
+    g1_count = _value(catalog, "els_dwdm.wavelengths_per_fiber")
+    g1_lambda_mw = _value(catalog, "els_dwdm.power_per_lambda")
     g1_mw = g1_count * g1_lambda_mw  # model card §14.6: 8 × 13 mW = 104 mW
-    guide_mw = _value(catalog, "guide.power_per_fiber_yole")
-    lasers = _value(catalog, "guidedr.lasers_per_module")
+    guide_mw = _value(catalog, "els.power_per_fiber_yole")
+    lasers = _value(catalog, "els_dr.lasers_per_module")
 
     def supply(part: str, label: str, power: float, cls: SourceClass) -> LightPath:
-        # brightness relative to the Guide DR's 200 mW per fiber
+        # brightness relative to the ELS-DR's 200 mW per fiber
         return LightPath(
             part=part,
             kind="cw",
@@ -734,28 +734,28 @@ def _guide(
         margin_db=None,
         paths=(
             supply(
-                "gdr.ribbons",
-                f"Guide DR: 8 fibers per ribbon at {dr_mw:g} mW each",
+                "elsdr.ribbons",
+                f"ELS-DR: 8 fibers per ribbon at {dr_mw:g} mW each",
                 dr_mw,
-                _class(catalog, "guidedr.power_per_fiber"),
+                _class(catalog, "els_dr.power_per_fiber"),
             ),
             supply(
-                "g1.fibers",
-                f"Guide 1: {g1_count:g} wavelengths at {g1_lambda_mw:g} mW = {g1_mw:g} mW "
+                "elsdwdm.fibers",
+                f"ELS-DWDM: {g1_count:g} wavelengths at {g1_lambda_mw:g} mW = {g1_mw:g} mW "
                 "per fiber",
                 g1_mw,
                 INF,
             ),
             supply(
-                "guide.fibers",
-                f"Guide: {guide_mw:g} mW per fiber",
+                "els.fibers",
+                f"ELS: {guide_mw:g} mW per fiber",
                 guide_mw,
-                _class(catalog, "guide.power_per_fiber_yole"),
+                _class(catalog, "els.power_per_fiber_yole"),
             ),
         ),
         values=(
             PartValue(
-                part="gdr.laser_pic",
+                part="elsdr.laser_pic",
                 label=f"{lasers:g} lasers × {dr_mw:g} mW = {lasers * dr_mw / 1000:g} W optical",
                 power_mw=lasers * dr_mw,
                 source_class=INF,
@@ -848,18 +848,18 @@ BUILDERS: dict[str, Builder] = {
     "reference_rack": _rack,
     "switch_tray": _tray("sw.engines", ("sw.ribbons_left", "sw.ribbons_right"), False),
     "xpu_tray": _tray("xpu.engines", ("xpu.fibers_left", "xpu.fibers_right"), True),
-    "passage_l20": _l20_package,
-    "l20_bidi_link": _bidi_link,
+    "bidi_engine": _engine_package,
+    "bidi_link": _bidi_link,
     "pic_region": _pic_region,
     "ring_section": _ring_section,
-    "guide_family": _guide,
-    "passage_m1000": _undisclosed(
-        ("m1k.fibers_left", "m1k.fibers_right"),
+    "laser_sources": _lasers,
+    "photonic_interposer": _undisclosed(
+        ("pi.fibers_left", "pi.fibers_right"),
         "8 wavelengths per fiber at 56 Gb/s NRZ (direction and power not disclosed)",
     ),
     "photonic_processor": _processor,
-    "passage_l200": _undisclosed(
-        ("l200g.fibers",), "16 wavelengths per fiber (direction and power not disclosed)"
+    "cpo_chiplet": _undisclosed(
+        ("cpog.fibers",), "16 wavelengths per fiber (direction and power not disclosed)"
     ),
 }
 
@@ -869,7 +869,7 @@ def overlay_for(
     scene: GeometryScene,
     mode: Mode = "light",
     case: str | None = None,
-    isolation_db: float = L20_CASE_ISOLATION_DB,
+    isolation_db: float = ENGINE_CASE_ISOLATION_DB,
 ) -> Overlay | None:
     """The overlay of a scene, or None when the scene has none."""
     build = BUILDERS.get(scene.scene.id)

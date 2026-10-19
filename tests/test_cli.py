@@ -56,10 +56,10 @@ def test_fanout(capsys):
 
 
 def test_twin(capsys):
-    assert run(["twin", "passage_l20"]) == 0
+    assert run(["twin", "bidi_engine"]) == 0
     out = capsys.readouterr().out
     assert "30 W / 6.4 Tbps = 4.6875 pJ/bit" in out  # §14.2
-    assert "Not affiliated with or endorsed by Lightmatter" in out
+    assert "Not affiliated with or endorsed by any company" in out
     assert run(["twin", "photonic_processor", "--hypothesis", "H_out_1"]) == 0
     assert "TENSION    ptc.check_output_bits" in capsys.readouterr().out  # §15.3
     assert run(["twin", "no_such_product"]) == 1

@@ -1,6 +1,6 @@
 # Microring transmitter and receiver (OFC 2025)
 
-_Independent reconstruction from public information. Not affiliated with or endorsed by Lightmatter. Product names belong to their owners._
+_Independent model built from public information. Not affiliated with or endorsed by any company whose publications are cited._
 
 Monolithic O-band microring modulator and receiver with integrated driver and front end (peer-reviewed paper; talk slides are vendor claims).
 
@@ -10,29 +10,29 @@ Status: Published at OFC 2025, paper Tu3J.6, with its talk. Catalog file `catalo
 
 | quantity | value | class | source |
 | --- | --- | --- | --- |
-| Total die area of the Tx+Rx circuits (MRM + driver 2.8e-3 mm2; MRR + PD + AFE 3.2e-3 mm2) | 0.006 mm2 | PEER_REVIEWED | [lm_ofc25_paper](https://lightmatter.co/wp-content/uploads/2025/04/OFC-2025-submission.pdf) |
-| Operating band of the MRMs and MRRs (design); measured spectra in Fig. 1(e) span about 1302-1316 nm | text | PEER_REVIEWED | [lm_ofc25_paper](https://lightmatter.co/wp-content/uploads/2025/04/OFC-2025-submission.pdf) |
-| Tx+Rx energy per bit excluding laser at 56 Gbps (talk rounds to 1.5 pJ/bit) | 1.51 pJ/bit | PEER_REVIEWED | [lm_ofc25_paper](https://lightmatter.co/wp-content/uploads/2025/04/OFC-2025-submission.pdf) |
-| Free spectral range of the MRMs and MRRs (design value) | 1.8 THz | PEER_REVIEWED | [lm_ofc25_paper](https://lightmatter.co/wp-content/uploads/2025/04/OFC-2025-submission.pdf) |
-| Integrated heater tuning efficiency (MRM) | 0.44 nm/mW | PEER_REVIEWED | [lm_ofc25_paper](https://lightmatter.co/wp-content/uploads/2025/04/OFC-2025-submission.pdf) |
-| Max NRZ rate of the monolithic microring Tx+Rx with integrated driver and analog front end; 64 Gbps needed 3-tap software Rx FFE with BER < 10^-12 only inferred on the sampling scope; open eye without equalization up to 56 Gbps | ≤ 64 Gbps | PEER_REVIEWED | [lm_ofc25_paper](https://lightmatter.co/wp-content/uploads/2025/04/OFC-2025-submission.pdf) |
-| MRM modulation insertion loss in the Tx+Rx test (input optical power to the MRM about 4 dBm) | ≈ 4.9 dB | PEER_REVIEWED | [lm_ofc25_paper](https://lightmatter.co/wp-content/uploads/2025/04/OFC-2025-submission.pdf) |
-| MRM electro-optic 3 dB bandwidth at -1 V bias (spread ±2 GHz) | ≈ 30.9 GHz | PEER_REVIEWED | [lm_ofc25_paper](https://lightmatter.co/wp-content/uploads/2025/04/OFC-2025-submission.pdf) |
-| MRM extinction ratio, stated as voltage-dependent, read from the Fig. 1(e) spectra (no modulated ER at the 1.3 Vpp drive is given) | ≥ 18 dB | PEER_REVIEWED | [lm_ofc25_paper](https://lightmatter.co/wp-content/uploads/2025/04/OFC-2025-submission.pdf) |
-| MRM quality factor (loaded or intrinsic not stated; same table: tuning efficiency 50 pm/V, EO bandwidth > 30 GHz) | 3500 | VENDOR_CLAIM | [lm_ofc25_talk](https://lightmatter.co/wp-content/uploads/2025/04/OFC-talk_Reza.pdf) |
-| Receiver microring (MRR) insertion loss (talk table; which path is not specified) | 0.1 dB | VENDOR_CLAIM | [lm_ofc25_talk](https://lightmatter.co/wp-content/uploads/2025/04/OFC-talk_Reza.pdf) |
-| Minimum received OMA (receiver sensitivity) at 56 Gbps NRZ, PRBS9, BER < 10^-12, with 4-tap FFE on the BERT (OMA, not average power) | −9 dBm | VENDOR_CLAIM | [lm_ofc25_talk](https://lightmatter.co/wp-content/uploads/2025/04/OFC-talk_Reza.pdf) |
-| Minimum received OMA at 32 Gbps NRZ, PRBS9, BER < 10^-12, no equalization | −11 dBm | VENDOR_CLAIM | [lm_ofc25_talk](https://lightmatter.co/wp-content/uploads/2025/04/OFC-talk_Reza.pdf) |
-| Ge photodetector 3 dB bandwidth at -1 V bias | 56 GHz | PEER_REVIEWED | [lm_ofc25_paper](https://lightmatter.co/wp-content/uploads/2025/04/OFC-2025-submission.pdf) |
-| PD electro-optic bandwidth per the OFC talk (bias not stated) | ≥ 46 GHz | VENDOR_CLAIM | [lm_ofc25_talk](https://lightmatter.co/wp-content/uploads/2025/04/OFC-talk_Reza.pdf) |
-| Ge PD responsivity (table value; the slide's responsivity histogram spans about 0.88 to 1.04 A/W, so not every device exceeds 0.9; wavelength not stated) | ≥ 0.9 A/W | VENDOR_CLAIM | [lm_ofc25_talk](https://lightmatter.co/wp-content/uploads/2025/04/OFC-talk_Reza.pdf) |
-| Tx+Rx power consumption excluding the laser (one wavelength, 56 Gbps) | 84.4 mW | PEER_REVIEWED | [lm_ofc25_paper](https://lightmatter.co/wp-content/uploads/2025/04/OFC-2025-submission.pdf) |
-| Fabrication platform: GF 45SPCLO (45 nm CMOS silicon photonics, monolithic) | text | PEER_REVIEWED | [lm_ofc25_paper](https://lightmatter.co/wp-content/uploads/2025/04/OFC-2025-submission.pdf) |
-| WDM plan the FSR is designed for: 8 wavelengths at 200 GHz spacing | 200 GHz | PEER_REVIEWED | [lm_ofc25_paper](https://lightmatter.co/wp-content/uploads/2025/04/OFC-2025-submission.pdf) |
+| Total die area of the Tx+Rx circuits (MRM + driver 2.8e-3 mm2; MRR + PD + AFE 3.2e-3 mm2) | 0.006 mm2 | PEER_REVIEWED | [vendor_ofc25_paper](https://lightmatter.co/wp-content/uploads/2025/04/OFC-2025-submission.pdf) |
+| Operating band of the MRMs and MRRs (design); measured spectra in Fig. 1(e) span about 1302-1316 nm | text | PEER_REVIEWED | [vendor_ofc25_paper](https://lightmatter.co/wp-content/uploads/2025/04/OFC-2025-submission.pdf) |
+| Tx+Rx energy per bit excluding laser at 56 Gbps (talk rounds to 1.5 pJ/bit) | 1.51 pJ/bit | PEER_REVIEWED | [vendor_ofc25_paper](https://lightmatter.co/wp-content/uploads/2025/04/OFC-2025-submission.pdf) |
+| Free spectral range of the MRMs and MRRs (design value) | 1.8 THz | PEER_REVIEWED | [vendor_ofc25_paper](https://lightmatter.co/wp-content/uploads/2025/04/OFC-2025-submission.pdf) |
+| Integrated heater tuning efficiency (MRM) | 0.44 nm/mW | PEER_REVIEWED | [vendor_ofc25_paper](https://lightmatter.co/wp-content/uploads/2025/04/OFC-2025-submission.pdf) |
+| Max NRZ rate of the monolithic microring Tx+Rx with integrated driver and analog front end; 64 Gbps needed 3-tap software Rx FFE with BER < 10^-12 only inferred on the sampling scope; open eye without equalization up to 56 Gbps | ≤ 64 Gbps | PEER_REVIEWED | [vendor_ofc25_paper](https://lightmatter.co/wp-content/uploads/2025/04/OFC-2025-submission.pdf) |
+| MRM modulation insertion loss in the Tx+Rx test (input optical power to the MRM about 4 dBm) | ≈ 4.9 dB | PEER_REVIEWED | [vendor_ofc25_paper](https://lightmatter.co/wp-content/uploads/2025/04/OFC-2025-submission.pdf) |
+| MRM electro-optic 3 dB bandwidth at -1 V bias (spread ±2 GHz) | ≈ 30.9 GHz | PEER_REVIEWED | [vendor_ofc25_paper](https://lightmatter.co/wp-content/uploads/2025/04/OFC-2025-submission.pdf) |
+| MRM extinction ratio, stated as voltage-dependent, read from the Fig. 1(e) spectra (no modulated ER at the 1.3 Vpp drive is given) | ≥ 18 dB | PEER_REVIEWED | [vendor_ofc25_paper](https://lightmatter.co/wp-content/uploads/2025/04/OFC-2025-submission.pdf) |
+| MRM quality factor (loaded or intrinsic not stated; same table: tuning efficiency 50 pm/V, EO bandwidth > 30 GHz) | 3500 | VENDOR_CLAIM | [vendor_ofc25_talk](https://lightmatter.co/wp-content/uploads/2025/04/OFC-talk_Reza.pdf) |
+| Receiver microring (MRR) insertion loss (talk table; which path is not specified) | 0.1 dB | VENDOR_CLAIM | [vendor_ofc25_talk](https://lightmatter.co/wp-content/uploads/2025/04/OFC-talk_Reza.pdf) |
+| Minimum received OMA (receiver sensitivity) at 56 Gbps NRZ, PRBS9, BER < 10^-12, with 4-tap FFE on the BERT (OMA, not average power) | −9 dBm | VENDOR_CLAIM | [vendor_ofc25_talk](https://lightmatter.co/wp-content/uploads/2025/04/OFC-talk_Reza.pdf) |
+| Minimum received OMA at 32 Gbps NRZ, PRBS9, BER < 10^-12, no equalization | −11 dBm | VENDOR_CLAIM | [vendor_ofc25_talk](https://lightmatter.co/wp-content/uploads/2025/04/OFC-talk_Reza.pdf) |
+| Ge photodetector 3 dB bandwidth at -1 V bias | 56 GHz | PEER_REVIEWED | [vendor_ofc25_paper](https://lightmatter.co/wp-content/uploads/2025/04/OFC-2025-submission.pdf) |
+| PD electro-optic bandwidth per the OFC talk (bias not stated) | ≥ 46 GHz | VENDOR_CLAIM | [vendor_ofc25_talk](https://lightmatter.co/wp-content/uploads/2025/04/OFC-talk_Reza.pdf) |
+| Ge PD responsivity (table value; the slide's responsivity histogram spans about 0.88 to 1.04 A/W, so not every device exceeds 0.9; wavelength not stated) | ≥ 0.9 A/W | VENDOR_CLAIM | [vendor_ofc25_talk](https://lightmatter.co/wp-content/uploads/2025/04/OFC-talk_Reza.pdf) |
+| Tx+Rx power consumption excluding the laser (one wavelength, 56 Gbps) | 84.4 mW | PEER_REVIEWED | [vendor_ofc25_paper](https://lightmatter.co/wp-content/uploads/2025/04/OFC-2025-submission.pdf) |
+| Fabrication platform: GF 45SPCLO (45 nm CMOS silicon photonics, monolithic) | text | PEER_REVIEWED | [vendor_ofc25_paper](https://lightmatter.co/wp-content/uploads/2025/04/OFC-2025-submission.pdf) |
+| WDM plan the FSR is designed for: 8 wavelengths at 200 GHz spacing | 200 GHz | PEER_REVIEWED | [vendor_ofc25_paper](https://lightmatter.co/wp-content/uploads/2025/04/OFC-2025-submission.pdf) |
 
 ## Open tensions and conflicts
 
-- CONFLICT: Ge photodetector 3 dB bandwidth at -1 V bias: 56 GHz (“The PDs exhibited 3 dB bandwidth of 56 GHz at a bias voltage of -1 V”, [lm_ofc25_paper](https://lightmatter.co/wp-content/uploads/2025/04/OFC-2025-submission.pdf)) against PD electro-optic bandwidth per the OFC talk (bias not stated): 46 GHz (“> 46 GHz”, [lm_ofc25_talk](https://lightmatter.co/wp-content/uploads/2025/04/OFC-talk_Reza.pdf)). Both are kept.
+- CONFLICT: Ge photodetector 3 dB bandwidth at -1 V bias: 56 GHz (“The PDs exhibited 3 dB bandwidth of 56 GHz at a bias voltage of -1 V”, [vendor_ofc25_paper](https://lightmatter.co/wp-content/uploads/2025/04/OFC-2025-submission.pdf)) against PD electro-optic bandwidth per the OFC talk (bias not stated): 46 GHz (“> 46 GHz”, [vendor_ofc25_talk](https://lightmatter.co/wp-content/uploads/2025/04/OFC-talk_Reza.pdf)). Both are kept.
 
 ## Physics (engine evaluations)
 
@@ -45,7 +45,7 @@ Status: Published at OFC 2025, paper Tu3J.6, with its talk. Catalog file `catalo
 | FWHM | 0.3742857 nm | INFERENCE |
 | FSR | 10.30373 nm | INFERENCE |
 | FSR in 200 GHz slots | 9 slots | INFERENCE |
-| implied group index for a ~15 µm diameter (M1000 slide) | 3.53433 | INFERENCE |
+| implied group index for a ~15 µm diameter (interposer slide) | 3.53433 | INFERENCE |
 | one neighbor at 200 GHz | −15.84609 dB | INFERENCE |
 | one neighbor at 400 GHz | −21.78109 dB | INFERENCE |
 | heater power per 200 GHz of tuning | 2.601952 mW | INFERENCE |

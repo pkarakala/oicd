@@ -2961,18 +2961,7 @@
             "title": "Channel Il Db",
             "type": "number"
           },
-          "hypothesis": {
-            "enum": [
-              "H_vclick_channel",
-              "H_vclick_module"
-            ],
-            "title": "Hypothesis",
-            "type": "string"
-          },
-          "report": {
-            "$ref": "#/components/schemas/FeasibilityReport"
-          },
-          "vclick_loss_db": {
+          "fau_loss_db": {
             "anyOf": [
               {
                 "type": "number"
@@ -2981,12 +2970,23 @@
                 "type": "null"
               }
             ],
-            "title": "Vclick Loss Db"
+            "title": "Fau Loss Db"
+          },
+          "hypothesis": {
+            "enum": [
+              "H_fau_channel",
+              "H_fau_module"
+            ],
+            "title": "Hypothesis",
+            "type": "string"
+          },
+          "report": {
+            "$ref": "#/components/schemas/FeasibilityReport"
           }
         },
         "required": [
           "hypothesis",
-          "vclick_loss_db",
+          "fau_loss_db",
           "channel_il_db",
           "report"
         ],
@@ -3718,24 +3718,24 @@
             "title": "Duplex Fibers",
             "type": "integer"
           },
+          "els_dr_per_switch_tray": {
+            "title": "Els Dr Per Switch Tray",
+            "type": "number"
+          },
+          "els_dr_per_xpu_tray": {
+            "title": "Els Dr Per Xpu Tray",
+            "type": "number"
+          },
+          "els_dr_total": {
+            "title": "Els Dr Total",
+            "type": "number"
+          },
           "fiber_db": {
             "title": "Fiber Db",
             "type": "number"
           },
           "fiber_m": {
             "title": "Fiber M",
-            "type": "number"
-          },
-          "guide_dr_per_switch_tray": {
-            "title": "Guide Dr Per Switch Tray",
-            "type": "number"
-          },
-          "guide_dr_per_xpu_tray": {
-            "title": "Guide Dr Per Xpu Tray",
-            "type": "number"
-          },
-          "guide_dr_total": {
-            "title": "Guide Dr Total",
             "type": "number"
           },
           "lanes_per_xpu_per_switch_tray": {
@@ -3844,9 +3844,9 @@
           "bidi_fibers",
           "duplex_fibers",
           "tx_lanes",
-          "guide_dr_total",
-          "guide_dr_per_xpu_tray",
-          "guide_dr_per_switch_tray",
+          "els_dr_total",
+          "els_dr_per_xpu_tray",
+          "els_dr_per_switch_tray",
           "fiber_m",
           "fiber_db",
           "paths",
@@ -5511,7 +5511,7 @@
     }
   },
   "info": {
-    "description": "Independent reconstruction from public information. Not affiliated with or endorsed by Lightmatter. Product names belong to their owners.",
+    "description": "Independent model built from public information. Not affiliated with or endorsed by any company whose publications are cited.",
     "title": "OICD feasibility engine",
     "version": "0.3.0"
   },
@@ -5917,7 +5917,7 @@
     },
     "/overlay/{scene}": {
       "get": {
-        "description": "Light paths with pulse brightness, margins with colors and heater power for a scene\n(model card §3, §13, §14). `case` picks a reference-plane case of the rack and its trays;\n`isolation_db` sets the diplexer isolation of the L20 scenes.",
+        "description": "Light paths with pulse brightness, margins with colors and heater power for a scene\n(model card §3, §13, §14). `case` picks a reference-plane case of the rack and its trays;\n`isolation_db` sets the diplexer isolation of the BiDi engine scenes.",
         "operationId": "get_overlay_overlay__scene__get",
         "parameters": [
           {
@@ -6352,7 +6352,7 @@
     },
     "/wdm/grid": {
       "post": {
-        "description": "The interleaved grid of model card §13.5 (INFERENCE for the Guide grid).",
+        "description": "The interleaved grid of model card §13.5 (INFERENCE for the ELS grid).",
         "operationId": "post_wdm_grid_wdm_grid_post",
         "requestBody": {
           "content": {

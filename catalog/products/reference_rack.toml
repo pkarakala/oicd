@@ -1,6 +1,6 @@
-# Reference rack OICD-R64: an OICD design (model card §14.9). SYNTHETIC: never Lightmatter's.
-# Independent reconstruction from public information. Not affiliated with or endorsed by
-# Lightmatter. Product names belong to their owners.
+# Reference rack OICD-R64: an OICD design (model card §14.9). SYNTHETIC: never the vendor's.
+# Independent model built from public information. Not affiliated with or endorsed by
+# any company whose publications are cited.
 
 [product]
 name = "Reference rack OICD-R64"
@@ -106,20 +106,20 @@ unit = "dB"
 rationale = "Switch-tray rear connector, TMT class (SYNTHETIC, as the PRIZM TMT figure)."
 
 [[assumption]]
-id = "rack.vclick_loss_db"
+id = "rack.fau_loss_db"
 nominal = 1.5
 low = 1.0
 high = 1.5
 unit = "dB"
-rationale = "vClick loss: 'less than 1.5 dB' (lm_pr_vclick) taken as 1.5; Futurum's 'below 1 dB' as the low end."
+rationale = "FAU loss: 'less than 1.5 dB' (vendor_pr_fau) taken as 1.5; Futurum's 'below 1 dB' as the low end."
 
 [[assumption]]
-id = "rack.vclicks_in_channel"
+id = "rack.faus_in_channel"
 nominal = 2.0
 low = 0.0
 high = 2.0
 unit = "count"
-rationale = "vClick connections counted in the TP2-TP3 channel: 2 under H_vclick_channel (model card §2), 0 under H_vclick_module."
+rationale = "FAU connections counted in the TP2-TP3 channel: 2 under H_fau_channel (model card §2), 0 under H_fau_module."
 
 [[assumption]]
 id = "rack.reserve_db"
@@ -180,11 +180,11 @@ unit = "count"
 note = "a transmitter at each end of every link"
 
 [[derived]]
-id = "rack.guidedr"
+id = "rack.els_dr"
 fn = "count_ratio"
-inputs = ["rack.tx_lanes", "guidedr.lanes"]
+inputs = ["rack.tx_lanes", "els_dr.lanes"]
 unit = "count"
-note = "Guide DR modules at 256 lanes each"
+note = "ELS-DR modules at 256 lanes each"
 
 [[derived]]
 id = "rack.ou_switch"
@@ -243,11 +243,11 @@ unit = "dB"
 note = "4 m at 0.4 dB/km"
 
 [[derived]]
-id = "rack.vclick_db"
+id = "rack.fau_db"
 fn = "times_count"
-inputs = ["rack.vclicks_in_channel", "rack.vclick_loss_db"]
+inputs = ["rack.faus_in_channel", "rack.fau_loss_db"]
 unit = "dB"
-note = "vClick loss inside the channel"
+note = "FAU loss inside the channel"
 
 [[derived]]
 id = "rack.connectors_db"
@@ -266,7 +266,7 @@ note = "connectors and fiber"
 [[derived]]
 id = "rack.channel_il"
 fn = "sum2"
-inputs = ["rack.vclick_db", "rack.passive_db"]
+inputs = ["rack.fau_db", "rack.passive_db"]
 unit = "dB"
 note = "channel insertion loss of the worst path"
 
@@ -326,15 +326,15 @@ rel_tol = 0.10
 note = "against the OCP vision's flat domains of 1,024 to 2,048 XPUs"
 
 [[hypothesis]]
-id = "H_vclick_channel"
-statement = "The vClick is a mated connection between TP2 and TP3 (model card §2), so its loss is in the channel."
-sets = { "rack.vclicks_in_channel" = 2.0 }
+id = "H_fau_channel"
+statement = "The FAU is a mated connection between TP2 and TP3 (model card §2), so its loss is in the channel."
+sets = { "rack.faus_in_channel" = 2.0 }
 group = "reference_plane"
 
 [[hypothesis]]
-id = "H_vclick_module"
-statement = "The engine's DR specification is defined after its vClick, so the vClick is inside the module."
-sets = { "rack.vclicks_in_channel" = 0.0 }
+id = "H_fau_module"
+statement = "The engine's DR specification is defined after its FAU, so the FAU is inside the module."
+sets = { "rack.faus_in_channel" = 0.0 }
 group = "reference_plane"
 
 [[hypothesis]]

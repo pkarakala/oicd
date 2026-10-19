@@ -225,7 +225,7 @@ export interface paths {
          * Get Overlay
          * @description Light paths with pulse brightness, margins with colors and heater power for a scene
          *     (model card §3, §13, §14). `case` picks a reference-plane case of the rack and its trays;
-         *     `isolation_db` sets the diplexer isolation of the L20 scenes.
+         *     `isolation_db` sets the diplexer isolation of the BiDi engine scenes.
          */
         get: operations["get_overlay_overlay__scene__get"];
         put?: never;
@@ -443,7 +443,7 @@ export interface paths {
         put?: never;
         /**
          * Post Wdm Grid
-         * @description The interleaved grid of model card §13.5 (INFERENCE for the Guide grid).
+         * @description The interleaved grid of model card §13.5 (INFERENCE for the ELS grid).
          */
         post: operations["post_wdm_grid_wdm_grid_post"];
         delete?: never;
@@ -1627,14 +1627,14 @@ export interface components {
         PathCase: {
             /** Channel Il Db */
             channel_il_db: number;
+            /** Fau Loss Db */
+            fau_loss_db: number | null;
             /**
              * Hypothesis
              * @enum {string}
              */
-            hypothesis: "H_vclick_channel" | "H_vclick_module";
+            hypothesis: "H_fau_channel" | "H_fau_module";
             report: components["schemas"]["FeasibilityReport"];
-            /** Vclick Loss Db */
-            vclick_loss_db: number | null;
         };
         /**
          * PathSample
@@ -1949,16 +1949,16 @@ export interface components {
             bidi_fibers: number;
             /** Duplex Fibers */
             duplex_fibers: number;
+            /** Els Dr Per Switch Tray */
+            els_dr_per_switch_tray: number;
+            /** Els Dr Per Xpu Tray */
+            els_dr_per_xpu_tray: number;
+            /** Els Dr Total */
+            els_dr_total: number;
             /** Fiber Db */
             fiber_db: number;
             /** Fiber M */
             fiber_m: number;
-            /** Guide Dr Per Switch Tray */
-            guide_dr_per_switch_tray: number;
-            /** Guide Dr Per Xpu Tray */
-            guide_dr_per_xpu_tray: number;
-            /** Guide Dr Total */
-            guide_dr_total: number;
             /** Lanes Per Xpu Per Switch Tray */
             lanes_per_xpu_per_switch_tray: number;
             /** Link Yield Needed */

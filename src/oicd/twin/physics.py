@@ -1,4 +1,4 @@
-"""Physics evaluations attached to the product twins (model card §13, §14).
+"""Physics evaluations attached to the architecture twins (model card §13, §14).
 
 Each product's evaluation runs the engine (oicd.physics, oicd.upstream, oicd.report, oicd.system)
 on catalog values, so every number carries its class: facts keep theirs, assumptions are
@@ -48,7 +48,7 @@ SI_DN_DT = Provenance(
     citation_key="frey2006_dndt",
     rationale="Silicon dn/dT = 1.94E-04 /K at 1.3 microns and 295 K (Table 4).",
 )
-# Model card §10 chain (all SYNTHETIC), used for the Guide DR fan-out of §14.6.
+# Model card §10 chain (all SYNTHETIC), used for the ELS-DR fan-out of §14.6.
 CHAIN_DB = {
     "laser_fiber_loss": 0.5,
     "coupling_loss": 1.5,
@@ -192,12 +192,15 @@ def dr_budget_link(catalog: Catalog, name: str = "draft 802.3dj DR budget") -> L
     )
 
 
-def _l20(catalog: Catalog) -> tuple[Section, ...]:
-    delta = _value(catalog, "l20.lambda_tolerance_nm")
+def _engine(catalog: Catalog) -> tuple[Section, ...]:
+    delta = _value(catalog, "engine.lambda_tolerance_nm")
     lo, hi = _value(catalog, "ieee3dj.lane_wl_min"), _value(catalog, "ieee3dj.lane_wl_max")
     items = []
     contained_all = True
-    for label, node in (("direction A", "l20.lambda_a_nm"), ("direction B", "l20.lambda_b_nm")):
+    for label, node in (
+        ("direction A", "engine.lambda_a_nm"),
+        ("direction B", "engine.lambda_b_nm"),
+    ):
         center = _value(catalog, node)
         lower, upper, ok = clearances_nm(center, delta, lo, hi)
         contained_all &= ok
@@ -256,7 +259,7 @@ def _windows(catalog: Catalog, q: float, f0: float, rates: tuple[float, ...]) ->
 def _ring_ofc25(catalog: Catalog) -> tuple[Section, ...]:
     q = _value(catalog, "ring.mrm_q")
     fsr_ghz = _value(catalog, "ring.fsr_thz") * 1000.0
-    diameter = _value(catalog, "m1000.mrr_diameter")
+    diameter = _value(catalog, "interposer.mrr_diameter")
     s = ring.ring_summary(1310.0, q, fsr_ghz_value=fsr_ghz, diameter_um=diameter)
     params = Section(
         title="Ring at 1310 nm (Q and FSR from the OFC 2025 talk and paper)",
@@ -269,11 +272,11 @@ def _ring_ofc25(catalog: Catalog) -> tuple[Section, ...]:
                 label="FSR in 200 GHz slots", value=fsr_ghz / 200.0, unit="slots", source_class=INF
             ),
             Item(
-                label="implied group index for a ~15 µm diameter (M1000 slide)",
+                label="implied group index for a ~15 µm diameter (interposer slide)",
                 value=s.group_index,
                 unit="",
                 source_class=INF,
-                note="cross-source INFERENCE: the OFC 2025 FSR with the M1000 ring diameter",
+                note="cross-source INFERENCE: the OFC 2025 FSR with the interposer ring diameter",
             ),
             Item(
                 label="one neighbor at 200 GHz",
@@ -301,19 +304,20 @@ def _ring_ofc25(catalog: Catalog) -> tuple[Section, ...]:
     return params, _windows(catalog, q, s.f0_ghz, (56.0, 106.25))
 
 
-def _m1000(catalog: Catalog) -> tuple[Section, ...]:
+def _interposer(catalog: Catalog) -> tuple[Section, ...]:
     q = _value(catalog, "ring.mrm_q")
     f0 = ring.resonance_frequency_ghz(1310.0)
     spacing = _value(catalog, "ring.wdm_compat_spacing_ghz")
-    window = ring.design_window(f0, spacing, _value(catalog, "m1000.lane_rate_nrz"), q=q)
+    window = ring.design_window(f0, spacing, _value(catalog, "interposer.lane_rate_nrz"), q=q)
     ng = ring.group_index_from_fsr(
         _value(catalog, "ring.fsr_thz") * 1000.0,
-        ring.circumference_um(_value(catalog, "m1000.mrr_diameter")),
+        ring.circumference_um(_value(catalog, "interposer.mrr_diameter")),
     )
     drift = ring.thermal_drift_nm_per_k(1310.0, SI_DN_DT_PER_K, ng)
     sections = [
         Section(
-            title="M1000 ring window, assuming the OFC 2025 rings (Q 3500, 200 GHz, 56 Gb/s NRZ)",
+            title="Interposer ring window, assuming the OFC 2025 rings "
+            "(Q 3500, 200 GHz, 56 Gb/s NRZ)",
             items=(
                 Item(
                     label="Q_min (−15 dB per neighbor)",
@@ -340,7 +344,7 @@ def _m1000(catalog: Catalog) -> tuple[Section, ...]:
                     source_class=INF,
                 ),
             ),
-            note="INFERENCE: the M1000 ring parameters are not disclosed "
+            note="INFERENCE: the interposer ring parameters are not disclosed "
             "(model card §13.3, §14.3).",
         )
     ]
@@ -397,8 +401,8 @@ def _m1000(catalog: Catalog) -> tuple[Section, ...]:
                     Item(
                         label="2048 rings at that power",
                         value=t.heater_power_mw
-                        * _value(catalog, "m1000.fiber_count")
-                        * _value(catalog, "m1000.wdm_lambda")
+                        * _value(catalog, "interposer.fiber_count")
+                        * _value(catalog, "interposer.wdm_lambda")
                         / 1000.0,
                         unit="W",
                         source_class=INF,
@@ -530,16 +534,16 @@ def _bidi16(catalog: Catalog) -> tuple[Section, ...]:
 
 
 def _chain_link(catalog: Catalog, laser_mw: float, n: int) -> Link:
-    base = dr_budget_link(catalog, "Guide DR fan-out on the draft DR budget")
+    base = dr_budget_link(catalog, "ELS-DR fan-out on the draft DR budget")
 
     def q(value: Any) -> Quantity[Any]:
         return Quantity(value=value, provenance=CHAIN)
 
     chain = UpstreamChain(
-        name="model card §10 chain from one Guide DR fiber",
+        name="model card §10 chain from one ELS-DR fiber",
         laser_power_avg=Quantity(
             value=OpticalPower(DBm(10.0 * math.log10(laser_mw)), PowerKind.AVERAGE),
-            provenance=_prov(catalog, "guidedr.power_per_fiber"),
+            provenance=_prov(catalog, "els_dr.power_per_fiber"),
         ),
         laser_fiber_loss=q(DB(CHAIN_DB["laser_fiber_loss"])),
         coupling_loss=q(DB(CHAIN_DB["coupling_loss"])),
@@ -554,11 +558,11 @@ def _chain_link(catalog: Catalog, laser_mw: float, n: int) -> Link:
     return base.model_copy(update={"tx": Transmitter.model_validate(tx)})
 
 
-def _guide(catalog: Catalog) -> tuple[Section, ...]:
-    laser_mw = _value(catalog, "guidedr.power_per_fiber")
+def _lasers(catalog: Catalog) -> tuple[Section, ...]:
+    laser_mw = _value(catalog, "els_dr.power_per_fiber")
     items = []
     for n in (
-        int(_value(catalog, "guidedr.lanes") / _value(catalog, "guidedr.fibers_max")),
+        int(_value(catalog, "els_dr.lanes") / _value(catalog, "els_dr.fibers_max")),
         17,
         18,
     ):
@@ -579,7 +583,7 @@ def _guide(catalog: Catalog) -> tuple[Section, ...]:
     items.append(Item(label="max fan-out", value=float(fanout), unit="", source_class=INF))
     return (
         Section(
-            title="Guide DR: 200 mW per fiber through the §10 chain into the draft DR budget",
+            title="ELS-DR: 200 mW per fiber through the §10 chain into the draft DR budget",
             items=tuple(items),
             note="4 lanes per fiber leaves about 6.4 dB unallocated: either the real chain loses "
             "about 6 dB more (H_chain_lossier) or the laser is provisioned for aging, "
@@ -596,7 +600,7 @@ def _pod(catalog: Catalog) -> tuple[Section, ...]:
             PodSpec(
                 xpus=int(_value(catalog, "pod.size_gpus_cpx")),
                 bw_per_xpu_tbps=bw,
-                lane_gbps=_value(catalog, "l20.lane_rate"),
+                lane_gbps=_value(catalog, "engine.lane_rate"),
                 ferrule_fibers=int(_value(catalog, "pod.ferrule_fibers")),
                 claimed_fibers_before=_value(catalog, "pod.fibers_before_cpx"),
                 claimed_fiber_saved_miles=(
@@ -686,10 +690,10 @@ def rack_spec(catalog: Catalog) -> RackSpec:
         xpus_per_tray=int(v("trays.xpu_accelerators")),
         lanes_per_xpu=int(v("rack.lanes_per_xpu")),
         switch_lanes=int(v("rack.switch_lanes")),
-        lane_gbps=v("l20.lane_rate"),
-        guide_dr_lanes=int(v("guidedr.lanes")),
+        lane_gbps=v("engine.lane_rate"),
+        els_dr_lanes=int(v("els_dr.lanes")),
         worst_path=(
-            PathElement(name="XPU-side vClick", kind="vclick"),
+            PathElement(name="XPU-side FAU", kind="fau"),
             PathElement(
                 name="tray fiber (XPU tray)", kind="fiber", length_m=qf("rack.tray_fiber_m")
             ),
@@ -707,11 +711,11 @@ def rack_spec(catalog: Catalog) -> RackSpec:
             PathElement(
                 name="tray fiber (switch tray)", kind="fiber", length_m=qf("rack.tray_fiber_m")
             ),
-            PathElement(name="switch-side vClick", kind="vclick"),
+            PathElement(name="switch-side FAU", kind="fau"),
         ),
-        vclick_loss_db=Quantity(
-            value=v("vclick.il_reinsertion_max"),
-            provenance=_prov(catalog, "vclick.il_reinsertion_max"),
+        fau_loss_db=Quantity(
+            value=v("fau.il_reinsertion_max"),
+            provenance=_prov(catalog, "fau.il_reinsertion_max"),
         ),
         fiber_loss_db_per_km=qf("itut.g652d_atten_max"),
         budget=dr_budget_link(catalog, "OICD-R64 worst path"),
@@ -753,10 +757,10 @@ def _rack(catalog: Catalog) -> tuple[Section, ...]:
             Item(label="BiDi fibers", value=float(r.bidi_fibers), unit="", source_class=INF),
             Item(label="duplex fibers", value=float(r.duplex_fibers), unit="", source_class=INF),
             Item(label="TX lanes", value=float(r.tx_lanes), unit="", source_class=INF),
-            Item(label="Guide DR modules", value=r.guide_dr_total, unit="", source_class=INF),
+            Item(label="ELS-DR modules", value=r.els_dr_total, unit="", source_class=INF),
             Item(
-                label="Guide DR per XPU tray / per switch tray",
-                value=f"{r.guide_dr_per_xpu_tray:g} / {r.guide_dr_per_switch_tray:g}",
+                label="ELS-DR per XPU tray / per switch tray",
+                value=f"{r.els_dr_per_xpu_tray:g} / {r.els_dr_per_switch_tray:g}",
                 unit="",
                 source_class=INF,
             ),
@@ -777,9 +781,9 @@ def _rack(catalog: Catalog) -> tuple[Section, ...]:
     paths = tuple(
         Section(
             title=(
-                f"Worst path, vClick {p.vclick_loss_db:g} dB in the channel"
-                if p.vclick_loss_db is not None
-                else "Worst path, vClick inside the module"
+                f"Worst path, FAU {p.fau_loss_db:g} dB in the channel"
+                if p.fau_loss_db is not None
+                else "Worst path, FAU inside the module"
             ),
             hypothesis=p.hypothesis,
             items=(
@@ -866,7 +870,7 @@ def _processor(catalog: Catalog) -> tuple[Section, ...]:
                 source_class=INF,
             ),
         ),
-        note="Model card §15.3; an independent re-implementation, not Lightmatter code.",
+        note="Model card §15.3; an independent re-implementation, not the vendor code.",
     )
     sweeps, mlp = _ptc_experiments()
     gain = Section(
@@ -930,11 +934,11 @@ def _processor(catalog: Catalog) -> tuple[Section, ...]:
 
 
 EVALUATIONS: dict[str, Callable[[Catalog], tuple[Section, ...]]] = {
-    "passage_l20": _l20,
-    "passage_m1000": _m1000,
+    "bidi_engine": _engine,
+    "photonic_interposer": _interposer,
     "microring_ofc25": _ring_ofc25,
     "bidi_16lambda": _bidi16,
-    "guide_family": _guide,
+    "laser_sources": _lasers,
     "scaleup_pod": _pod,
     "reference_rack": _rack,
     "photonic_processor": _processor,

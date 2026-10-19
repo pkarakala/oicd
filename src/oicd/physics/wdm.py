@@ -1,7 +1,7 @@
 """WDM grid, ring leakage and aliasing (model card §13.5, §13.6).
 
-Guide grid (INFERENCE): f_n = c/λ_c + (n − (N − 1)/2)·spacing, n = 0 … N − 1; even n on grid A, odd
-n on grid B (two grids at twice the spacing, interleaved). Lightmatter says "centered at 1310 nm"
+ELS grid (INFERENCE): f_n = c/λ_c + (n − (N − 1)/2)·spacing, n = 0 … N − 1; even n on grid A, odd
+n on grid B (two grids at twice the spacing, interleaved). The vendor says "centered at 1310 nm"
 but gives no channel frequencies, so the grid is OICD's inference.
 
 For a ring on channel n with FSR F: leakage X = Σ T_n(f_m) over the co-directional channels m ≠ n,

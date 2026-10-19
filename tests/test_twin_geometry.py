@@ -116,11 +116,11 @@ SCENES = sorted(p.stem for p in GEOMETRY_DIR.glob("*.toml"))
 
 def test_shipped_scenes():
     assert SCENES == [
-        "guide_family",
-        "l20_bidi_link",
-        "passage_l20",
-        "passage_l200",
-        "passage_m1000",
+        "bidi_engine",
+        "bidi_link",
+        "cpo_chiplet",
+        "laser_sources",
+        "photonic_interposer",
         "photonic_processor",
         "pic_region",
         "reference_rack",
@@ -160,12 +160,12 @@ def test_semantic_zoom_chain_from_ring_to_rack():
     assert {p.enters for p in rack.part if p.enters} == {"switch_tray", "xpu_tray"}
 
 
-def test_l20_outline_and_lnic_classes():
-    l20 = {p.id: p for p in load_geometry("passage_l20").part}
-    outline = l20["l20g.outline"]
+def test_engine_outline_and_lnic_classes():
+    engine = {p.id: p for p in load_geometry("bidi_engine").part}
+    outline = engine["eng.outline"]
     assert outline.size == (37.5, 27.6, 4.55) and outline.dims_axes == ("VENDOR",) * 3
-    assert "l20.width_mm_web" in outline.nodes  # the 26.4 mm conflict is one click away
-    lnic = {p.id: p for p in load_geometry("guide_family").part}["gdr.pcb"]
+    assert "engine.width_mm_web" in outline.nodes  # the 26.4 mm conflict is one click away
+    lnic = {p.id: p for p in load_geometry("laser_sources").part}["elsdr.pcb"]
     # depth 115 mm is published for both OCP NIC 3.0 sizes; the 76 mm width is our SFF reading
     assert lnic.size[:2] == (76.0, 115.0)
     assert lnic.dims_axes == ("INFERENCE", "PUBLISHED", "SCHEMATIC")

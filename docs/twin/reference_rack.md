@@ -1,6 +1,6 @@
 # Reference rack OICD-R64
 
-_Independent reconstruction from public information. Not affiliated with or endorsed by Lightmatter. Product names belong to their owners._
+_Independent model built from public information. Not affiliated with or endorsed by any company whose publications are cited._
 
 An ORv3 rack of switch and XPU trays wired single tier with BiDi engines, used to show what the public parts imply at rack scale: space, fibers, lasers, the worst optical path and rack yield.
 
@@ -11,10 +11,11 @@ Status: OICD design for analysis (SYNTHETIC), not a product. Catalog file `catal
 - channel insertion loss of the worst path: `3 dB + 1.0016 dB = 4.0016 dB`
 - PRIZM TMT blind mate plus the switch-tray connector: `0.5 dB + 0.5 dB = 1 dB`
 - fibers a duplex design would need: `2 × 8192 = 16384`
+- ELS-DR modules at 256 lanes each: `16384 / 256 = 64`
+- FAU loss inside the channel: `2 × 1.5 dB = 3 dB`
 - 4 m at 0.4 dB/km: `4 m × 0.4 dB/km = 0.0016 dB`
 - fiber on the worst path: `1 m + 3 m = 4 m`
 - fiber inside the two trays: `0.5 m + 0.5 m = 1 m`
-- Guide DR modules at 256 lanes each: `16384 / 256 = 64`
 - each XPU sends 16 lanes to each switch tray: `128 / 8 = 16`
 - 64 XPUs × 128 lanes: `64 × 128 = 8192`
 - worst-path margin on the draft DR budget: `((2.4 dBm − 4.0016 dB) − (−4.3 dBm)) − 3.7 dB − 0 dB = −1.0016 dB`
@@ -28,7 +29,6 @@ Status: OICD design for analysis (SYNTHETIC), not a product. Catalog file `catal
 - 8 × 1024 switch lanes: `8 × 1024 = 8192`
 - a transmitter at each end of every link: `2 × 8192 = 16384`
 - draft DR TX OMAouter min at max TDECQ: `(−1 dBm) + 3.4 dB = 2.4 dBm`
-- vClick loss inside the channel: `2 × 1.5 dB = 3 dB`
 - 16 trays × 4 XPUs: `16 × 4 = 64`
 
 ## Checks
@@ -47,8 +47,8 @@ Status: OICD design for analysis (SYNTHETIC), not a product. Catalog file `catal
 
 ## Hypotheses
 
-- `H_vclick_channel`: The vClick is a mated connection between TP2 and TP3 (model card §2), so its loss is in the channel. Agrees with `rack.check_links`, `rack.check_space`; not with `rack.check_margin`, `rack.check_ocp_vision`.
-- `H_vclick_module`: The engine's DR specification is defined after its vClick, so the vClick is inside the module. Agrees with `rack.check_links`, `rack.check_space`, `rack.check_margin`; not with `rack.check_ocp_vision`.
+- `H_fau_channel`: The FAU is a mated connection between TP2 and TP3 (model card §2), so its loss is in the channel. Agrees with `rack.check_links`, `rack.check_space`; not with `rack.check_margin`, `rack.check_ocp_vision`.
+- `H_fau_module`: The engine's DR specification is defined after its FAU, so the FAU is inside the module. Agrees with `rack.check_links`, `rack.check_space`, `rack.check_margin`; not with `rack.check_ocp_vision`.
 - `H_2U`: XPU trays are 2 OU high: the rack uses 42 OU. Agrees with `rack.check_links`, `rack.check_space`; not with `rack.check_margin`, `rack.check_ocp_vision`.
 - `H_1U`: XPU trays are 1 OU high: the rack uses 26 OU. Agrees with `rack.check_links`, `rack.check_space`; not with `rack.check_margin`, `rack.check_ocp_vision`.
 
@@ -56,6 +56,8 @@ Status: OICD design for analysis (SYNTHETIC), not a product. Catalog file `catal
 
 | assumption | nominal (range) | why it is needed |
 | --- | --- | --- |
+| `rack.fau_loss_db` | 1.5 dB (1 to 1.5) | FAU loss: 'less than 1.5 dB' (vendor_pr_fau) taken as 1.5; Futurum's 'below 1 dB' as the low end. |
+| `rack.faus_in_channel` | 2 (0 to 2) | FAU connections counted in the TP2-TP3 channel: 2 under H_fau_channel (model card §2), 0 under H_fau_module. |
 | `rack.lanes_per_xpu` | 128 | 200G lanes per XPU each way: 25.6 Tbps per XPU, the XPU tray under H_dir. |
 | `rack.power_shelf_ou` | 1 | The HPR V2 shelf is a 1 OU shelf (ocp_orv3_hpr72: 537 x 46.2 x 867.5 mm). |
 | `rack.power_shelves` | 2 | OICD-R64 design: 2 ORv3 HPR power shelves (ocp_orv3_hpr72). |
@@ -67,8 +69,6 @@ Status: OICD design for analysis (SYNTHETIC), not a product. Catalog file `catal
 | `rack.switch_trays` | 8 | OICD-R64 design: 8 switch trays (one switch plane each). |
 | `rack.tray_fiber_m` | 0.5 m | Fiber inside each tray on the worst path (OICD-R64 layout). |
 | `rack.two` | 2 | Two fibers per duplex link, and a transmitter at each end of a link. |
-| `rack.vclick_loss_db` | 1.5 dB (1 to 1.5) | vClick loss: 'less than 1.5 dB' (lm_pr_vclick) taken as 1.5; Futurum's 'below 1 dB' as the low end. |
-| `rack.vclicks_in_channel` | 2 (0 to 2) | vClick connections counted in the TP2-TP3 channel: 2 under H_vclick_channel (model card §2), 0 under H_vclick_module. |
 | `rack.xpu_tray_ou` | 2 (1 to 2) | XPU tray height in OpenU: 2 under H_2U, 1 under H_1U (the sources disagree). |
 | `rack.xpu_trays` | 16 | OICD-R64 design: 16 XPU trays. |
 | `rack.zero_db` | 0 dB | The margin a link needs (model card §3). |
@@ -94,12 +94,12 @@ Model card §14.9.
 | BiDi fibers | 8192 | INFERENCE |
 | duplex fibers | 16384 | INFERENCE |
 | TX lanes | 16384 | INFERENCE |
-| Guide DR modules | 64 | INFERENCE |
-| Guide DR per XPU tray / per switch tray | 2 / 4 | INFERENCE |
+| ELS-DR modules | 64 | INFERENCE |
+| ELS-DR per XPU tray / per switch tray | 2 / 4 | INFERENCE |
 | single-tier XPUs (switch lanes / lanes per XPU per plane) | 64 | INFERENCE |
 | OCP vision flat domain | 1024 to 2048 XPUs | PROPOSED_STANDARD |
 
-### Worst path, vClick 1.5 dB in the channel (H_vclick_channel)
+### Worst path, FAU 1.5 dB in the channel (H_fau_channel)
 
 Verdict: EXCLUDED.
 
@@ -112,7 +112,7 @@ Verdict: EXCLUDED.
 
 The reference-plane definition, not the physics, decides this rack.
 
-### Worst path, vClick 1 dB in the channel (H_vclick_channel)
+### Worst path, FAU 1 dB in the channel (H_fau_channel)
 
 Verdict: EXCLUDED.
 
@@ -125,7 +125,7 @@ Verdict: EXCLUDED.
 
 The reference-plane definition, not the physics, decides this rack.
 
-### Worst path, vClick inside the module (H_vclick_module)
+### Worst path, FAU inside the module (H_fau_module)
 
 Verdict: NOT_EXCLUDED.
 

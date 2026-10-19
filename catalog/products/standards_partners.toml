@@ -1,6 +1,6 @@
 # Standards and partner parts: public facts with exact quotes (brief 05 phase 4 fact check, 2026-10-18).
-# Independent reconstruction from public information. Not affiliated with or endorsed by
-# Lightmatter. Product names belong to their owners.
+# Independent model built from public information. Not affiliated with or endorsed by
+# any company whose publications are cited.
 
 [product]
 name = "Standards and partner parts"
@@ -257,7 +257,7 @@ cite = "ocp_orv3_hpr72"
 source_class = "published_spec"
 verified = true
 location = "p13, §6.1 Power Shelf Assembly Dimensions"
-note = "Evidence: text. Values match exactly (W x H x D). They come only from ocp_orv3_hpr72 (Open Rack V3 HPR V2 72kW Power Shelf, Rev 1.0.0, 12 June 2026); the base, Meta and IT-gear documents give no power-shelf dimensions. The shelf is 1 OU ('Power shelf options 1 and 2 are 1OU tall'); 46.2 mm exceeds the IT Gear Design Guide's recommended 1 OpenU IT-chassis maximum of 48 − 3.3 = 44.7 mm (that guide covers IT gear, not power shelves)."
+note = "Evidence: text. Values match exactly (W x H x D). They come only from ocp_orv3_hpr72 (Open Rack V3 HPR V2 72kW Power Shelf, Rev 1.0.0, 12 June 2026); the base, Meta and IT-gear documents give no power-shelf dimensions. The shelf is 1 OU ('Power shelf options 1 and 2 are 1OU tall'); 46.2 mm exceeds the IT Gear Design ELS's recommended 1 OpenU IT-chassis maximum of 48 − 3.3 = 44.7 mm (that guide covers IT gear, not power shelves)."
 
 [[fact]]
 id = "orv3.shelf_depth"

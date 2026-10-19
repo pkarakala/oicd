@@ -1,5 +1,5 @@
-"""Hand calculations for model card §14 (product twins and the reference rack). Standard library
-only; never imports oicd. Every number the card quotes for a product is printed here."""
+"""Hand calculations for model card §14 (architecture twins and the reference rack).
+Standard library only; never imports oicd. Every number the card quotes is printed here."""
 
 from math import erfc, log10, sqrt
 
@@ -18,7 +18,7 @@ def dbm(p_mw):
     return 10 * log10(p_mw)
 
 
-print("§14.2 Passage L20")
+print("§14.2 BiDi optical engine")
 print("  per port 6.4 Tbps / 32 =", 6.4e3 / 32, "Gb/s; line/payload 212.5/200 =", 212.5 / 200)
 print("  energy 30 W / 6.4 Tbps =", 30 / 6.4, "pJ/bit; 30 W / 12.8 Tbps =", 30 / 12.8, "pJ/bit")
 print("  3.0 pJ/bit at 6.4 Tbps needs", 3.0 * 6.4, "W")
@@ -38,7 +38,7 @@ print(f"  volumes {v_l20:.2f} vs {v_plug:.2f} mm3 -> {100 * (1 - v_l20 / v_plug)
 print("  18 x 6.4 =", round(18 * 6.4, 6), "Tbps; 6 x 6.4 =", round(6 * 6.4, 6), "Tbps")
 print(f"  savings 1 - 5/17 = {100 * (1 - 5 / 17):.2f}%, 1 - 5/20 = {100 * (1 - 5 / 20):.2f}%")
 
-print("§14.3 Passage M1000")
+print("§14.3 3D photonic interposer")
 print(
     "  256 x 448 Gb/s =",
     256 * 448 / 1000,
@@ -69,7 +69,7 @@ print(
     f"  heaters with barrel shifting: 2048 x {heater_200:.4f} mW = {2048 * heater_200 / 1000:.3f} W"
 )
 
-print("§14.4 Passage L200/L200X")
+print("§14.4 32T CPO chiplet/64T chiplet")
 print("  320 x 50 x 2 =", 320 * 50 * 2 / 1000, "Tbps; 320 x 100 x 2 =", 320 * 100 * 2 / 1000)
 print(
     "  fibers 32/0.8 =",
@@ -101,7 +101,7 @@ for name, x, xr in (("H_fsr18", 0.081869307, 1.082941278), ("H_fsr32", 0.0215083
     pen = -10 * log10(1 - x) + 10 * log10(t / (t - r * xr)) + p_mpi
     print(f"  {name}: minimum TX OMA = -9 + 3 + {pen:.4f} = {-9 + 3 + pen:.4f} dBm")
 
-print("§14.6 Guide family")
+print("§14.6 ELS family")
 print(
     "  8 x 13 mW =",
     8 * 13,
@@ -116,7 +116,7 @@ print(
 print("  100 Tbps / 4 =", 100 / 4, "Tbps per module;", end=" ")
 print("100/18 =", round(100 / 18, 3), "Tbps per ELSFP")
 print(
-    "  Guide DR: 64 x 200 mW =",
+    "  ELS-DR: 64 x 200 mW =",
     64 * 200 / 1000,
     "W; 256 x 200G =",
     256 * 200 / 1000,
@@ -147,8 +147,8 @@ print("  max fan-out", n)
 
 print("§14.7 OCP trays: 204.8/8 =", 204.8 / 8, "; 102.4/4 =", 102.4 / 4, "; /6.4 =", 25.6 / 6.4)
 for name, lanes in (("H_dir", 204.8e3 / 200), ("H_agg", 204.8e3 / 2 / 200)):
-    print(f"  {name}: {lanes:.0f} lanes per direction -> {lanes / 256:.0f} Guide DR")
-print("  XPU tray under H_dir:", 102.4e3 / 200, "lanes ->", 102.4e3 / 200 / 256, "Guide DR")
+    print(f"  {name}: {lanes:.0f} lanes per direction -> {lanes / 256:.0f} ELS-DR")
+print("  XPU tray under H_dir:", 102.4e3 / 200, "lanes ->", 102.4e3 / 200 / 256, "ELS-DR")
 
 print("§14.8 Pod example")
 duplex = 512 * 128 * 2
@@ -182,14 +182,14 @@ print(
     "OU (H_1U)",
 )
 print("  links 64 XPUs x 128 lanes =", 64 * 128, "= 8 x 1024; BiDi fibers 8192, duplex", 2 * 8192)
-print("  TX lanes 16,384 / 256 =", 16384 // 256, "Guide DR")
+print("  TX lanes 16,384 / 256 =", 16384 // 256, "ELS-DR")
 fiber = 4 * 0.4 / 1000
-for name, vclick in (
-    ("vClick 1.5 dB in channel", 1.5),
-    ("vClick 1.0 dB in channel", 1.0),
-    ("vClick in module", 0.0),
+for name, fau in (
+    ("FAU 1.5 dB in channel", 1.5),
+    ("FAU 1.0 dB in channel", 1.0),
+    ("FAU in module", 0.0),
 ):
-    il = 2 * vclick + 0.5 + 0.5 + fiber
+    il = 2 * fau + 0.5 + 0.5 + fiber
     m = (2.4 - il - (-4.3)) - 3.7 - 0.0
     print(f"  {name}: IL {il:.4f} dB, M {m:+.4f} dB")
 for y in (0.9999, 0.99999):

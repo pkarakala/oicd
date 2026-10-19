@@ -1,13 +1,13 @@
 # Scale-up pod example: public facts with exact quotes (brief 05 phase 4 fact check, 2026-10-18).
-# Independent reconstruction from public information. Not affiliated with or endorsed by
-# Lightmatter. Product names belong to their owners.
+# Independent model built from public information. Not affiliated with or endorsed by
+# any company whose publications are cited.
 
 [product]
 name = "Scale-up pod example"
-family = "Passage"
+family = "photonic interconnect"
 kind = "system"
-status = "Example in vendor releases and talks, 2026"
-summary = "The 512-accelerator scale-up pod Lightmatter uses to illustrate BiDi fiber and connector savings."
+status = "Example from public talks, 2026"
+summary = "The 512-accelerator scale-up pod the vendor uses to illustrate BiDi fiber and connector savings."
 
 [[fact]]
 id = "pod.fibers_before_cpx"
@@ -16,10 +16,10 @@ value = 130000.0
 bound = "approx"
 unit = "count"
 quote = "taking the pod from about 130,000 fibers to 65,000"
-cite = "lm_pr_cpx"
+cite = "vendor_pr_cpx"
 source_class = "vendor_claim"
 verified = true
-location = "paragraph 2 (attributed to 'Lightmatter’s analysis in a recent tech brief')"
+location = "paragraph 2 (attributed to 'the vendor’s analysis in a recent tech brief')"
 note = "Evidence: text."
 
 [[fact]]
@@ -29,10 +29,10 @@ value = 65000.0
 bound = "approx"
 unit = "count"
 quote = "taking the pod from about 130,000 fibers to 65,000"
-cite = "lm_pr_cpx"
+cite = "vendor_pr_cpx"
 source_class = "vendor_claim"
 verified = true
-location = "paragraph 2 (attributed to 'Lightmatter’s analysis in a recent tech brief')"
+location = "paragraph 2 (attributed to 'the vendor’s analysis in a recent tech brief')"
 note = "Evidence: text. Matches. Note: 'about' in the source precedes 130,000; 65,000 is exactly half, so it is marked approx as well."
 
 [[fact]]
@@ -42,7 +42,7 @@ value = 16000.0
 bound = "approx"
 unit = "count"
 quote = "approximately 16,000 fewer connectors"
-cite = "lm_pr_cpx"
+cite = "vendor_pr_cpx"
 source_class = "vendor_claim"
 verified = true
 conflicts_with = ["pod.connectors_saved_hoti26"]
@@ -56,7 +56,7 @@ value = 200.0
 bound = "min"
 unit = "miles"
 quote = "save more than 200 miles of fiber"
-cite = "lm_pr_cpx"
+cite = "vendor_pr_cpx"
 source_class = "vendor_claim"
 verified = true
 conflicts_with = ["pod.fiber_length_saved_hoti26"]
@@ -70,7 +70,7 @@ value = 15.0
 bound = "approx"
 unit = "%"
 quote = "saves about 15 percent of total scale-up interconnect network cost"
-cite = "lm_pr_cpx"
+cite = "vendor_pr_cpx"
 source_class = "vendor_claim"
 verified = true
 conflicts_with = ["pod.cost_savings_hoti26"]
@@ -84,7 +84,7 @@ value = 512.0
 bound = "exact"
 unit = "count"
 quote = "In a 512-GPU scale-up pod"
-cite = "lm_pr_cpx"
+cite = "vendor_pr_cpx"
 source_class = "vendor_claim"
 verified = true
 location = "paragraph 2"
@@ -97,7 +97,7 @@ value = 150.0
 bound = "exact"
 unit = "miles"
 quote = "150 miles of ﬁber saved"
-cite = "lm_hoti26"
+cite = "vendor_hoti26"
 source_class = "vendor_claim"
 verified = true
 location = "p13 (BiDi savings slide; also seen on rendered slide; text layer spells 'fiber' with the U+FB01 ligature)"
@@ -110,7 +110,7 @@ value = 20000.0
 bound = "exact"
 unit = "count"
 quote = "20,000 Fewer connectors and failure points"
-cite = "lm_hoti26"
+cite = "vendor_hoti26"
 source_class = "vendor_claim"
 verified = true
 location = "p13 (also seen on rendered slide)"
@@ -123,7 +123,7 @@ value = 16.0
 bound = "exact"
 unit = "%"
 quote = "16% Savings in total network spend"
-cite = "lm_hoti26"
+cite = "vendor_hoti26"
 source_class = "vendor_claim"
 verified = true
 location = "p13 (also seen on rendered slide)"
@@ -136,7 +136,7 @@ value = 512.0
 bound = "exact"
 unit = "count"
 quote = "for a typical 512 XPU scale-up cluster, 32 Tbps / XPU"
-cite = "lm_hoti26"
+cite = "vendor_hoti26"
 source_class = "vendor_claim"
 verified = true
 location = "p13 footnote line (also seen on rendered slide)"
@@ -149,7 +149,7 @@ value = 32.0
 bound = "exact"
 unit = "Tbps"
 quote = "for a typical 512 XPU scale-up cluster, 32 Tbps / XPU"
-cite = "lm_hoti26"
+cite = "vendor_hoti26"
 source_class = "vendor_claim"
 verified = true
 location = "p13 footnote line (also seen on rendered slide)"
@@ -191,7 +191,7 @@ rationale = "Connector ends a removed fiber takes out with it: 4, about two mate
 [[derived]]
 id = "pod.lanes_per_xpu"
 fn = "lanes"
-inputs = ["pod.bw_per_xpu", "l20.lane_rate"]
+inputs = ["pod.bw_per_xpu", "engine.lane_rate"]
 unit = "count"
 note = "200G lanes per XPU each way"
 

@@ -141,11 +141,11 @@ T04 note: the float result depends on summation order. The test asserts PASS and
 | 2026-10-18 | §14.1 `bound` checks may state `relation` (le, ge) against a node that is not a min or max fact | phase 6 needs requirements between derived nodes (grid span against FSR, OU used against frame capacity) | encode each requirement as a fake min or max fact: a fact must come from a source |
 | 2026-10-18 | §13.1 states that the image sum peaks 0.0047 dB above 1 (Q_L 3500, FSR 1.8 THz) | found when the API sampled the ring response; the brief's model is kept and its approximation stated | renormalize the sum to peak at 1: changes the brief's leakage values |
 | 2026-10-18 | §4 fiber note cites ITU-T G.652.D (0.40 dB/km, 1310 to 1625 nm) with its short-cable caveat | brief 05 phase 5; the source was opened | keep "typical value, to be cited" |
-| 2026-10-18 | §13 microring and WDM physics: periodic Lorentzian (k = −50 … 50), FWHM = f0/Q_L with the factor-2 lifetime caveat, crosstalk −10·log10(1 − kX) (INFERENCE) with 10·log10(1 + X) alongside, SYNTHETIC design window, thermal tuning with barrel shifting, interleaved Guide grid (INFERENCE), aliasing and the worst-channel rule, BiDi link model | brief 05 phase 5 | single-neighbor Lorentzian without images: misses the FSR aliasing that decides the 16λ BiDi result |
+| 2026-10-18 | §13 microring and WDM physics: periodic Lorentzian (k = −50 … 50), FWHM = f0/Q_L with the factor-2 lifetime caveat, crosstalk −10·log10(1 − kX) (INFERENCE) with 10·log10(1 + X) alongside, SYNTHETIC design window, thermal tuning with barrel shifting, interleaved ELS grid (INFERENCE), aliasing and the worst-channel rule, BiDi link model | brief 05 phase 5 | single-neighbor Lorentzian without images: misses the FSR aliasing that decides the 16λ BiDi result |
 | 2026-10-18 | §3 trace points carry power_mw = 10^(P_plane,OMA/10) and relative_power | brief 05 phase 8: pulse brightness follows the API's linear power | convert dBm to mW in the browser: the web would compute physics |
 | 2026-10-18 | §13.7 BiDi directions report the crosstalk power at the receiver, 10^(P_TX,local/10)·R | brief 05 phase 8: the ghost pulse's brightness is the API's crosstalk power | let the web scale the ghost from the penalty: the web would compute physics |
 | 2026-10-18 | §15 photonic processor: facts, derived values, the ABFP data path with two readings of the ADC range (H_out_n, H_out_1), the bfloat16 round-up rule, seeded experiments and per-cell optical power under two laser mappings | brief 05 phase 9 | read the SI's Q_11 on the N-term sum literally only: it contradicts the 24-bit output word and the gain-window figure |
-| 2026-10-18 | §14.2 to §14.10 product twins, the 16λ BiDi ring-FSR hypotheses, the Guide DR fan-out, tray and pod hypotheses and the reference rack OICD-R64 with its reference-plane hypotheses | brief 05 phase 6, written before the catalog graphs | per-product prose without derivations: nothing a test could check |
+| 2026-10-18 | §14.2 to §14.10 architecture twins, the 16λ BiDi ring-FSR hypotheses, the ELS-DR fan-out, tray and pod hypotheses and the reference rack OICD-R64 with its reference-plane hypotheses | brief 05 phase 6, written before the catalog graphs | per-product prose without derivations: nothing a test could check |
 
 ## 8. Design-space sweep
 
@@ -335,7 +335,7 @@ Why: a BiDi link puts its own transmitter's reflections into its receiver, so it
 
 ## 13. Microring and WDM link physics
 
-Sources, all opened 2026-10-18: hu2025_arxiv (photon-lifetime bandwidth), geravand2025_mrm (its caution), decort2011 (resonance shift), frey2006_dndt (silicon dn/dT), xu2014_thermo (a measured ring drift), sun2015_nature (precedent: microring WDM optical I/O on a processor chip), andre2000_xtalk (an open source for the alternative crosstalk form) and bogaerts2012_mrr (review, abstract only). Every relation here is a model of a generic silicon microring; nothing in this section is a Lightmatter specification.
+Sources, all opened 2026-10-18: hu2025_arxiv (photon-lifetime bandwidth), geravand2025_mrm (its caution), decort2011 (resonance shift), frey2006_dndt (silicon dn/dT), xu2014_thermo (a measured ring drift), sun2015_nature (precedent: microring WDM optical I/O on a processor chip), andre2000_xtalk (an open source for the alternative crosstalk form) and bogaerts2012_mrr (review, abstract only). Every relation here is a model of a generic silicon microring; nothing in this section is a the vendor specification.
 
 ### 13.1 Ring relations
 
@@ -385,14 +385,14 @@ heater power     = range/η
 
 Heaters only red-shift a ring. With barrel shifting, a ring locks to the nearest channel on its heater side and the electrical lanes are rotated to match, so no ring ever tunes more than one co-directional spacing. Without it, a ring must reach its assigned channel, which can take up to one FSR. The report also flags when the required tuning exceeds the worst-case range.
 
-### 13.5 Guide grid (INFERENCE)
+### 13.5 ELS grid (INFERENCE)
 
 ```
 f_n = c/1310 nm + (n − 7.5)·200 GHz,   n = 0 … 15
 even n: grid A; odd n: grid B   (two 400 GHz grids interleaved at 200 GHz)
 ```
 
-Lightmatter says "centered at 1310 nm", two 400 GHz grids interleaved at a 200 GHz offset and ±20 GHz accuracy, but gives no channel frequencies, so this grid is OICD's inference.
+The vendor says "centered at 1310 nm", two 400 GHz grids interleaved at a 200 GHz offset and ±20 GHz accuracy, but gives no channel frequencies, so this grid is OICD's inference.
 
 ### 13.6 Aliasing and the worst receive channel
 
@@ -428,31 +428,31 @@ Each direction's TX wavelength range must also sit inside its own receiver's pas
 | Case | Expected |
 | --- | --- |
 | f0 at 1310 nm | 228.8492 THz |
-| Q_L 3500 (lm_ofc25_talk): FWHM | 65.3855 GHz |
+| Q_L 3500 (vendor_ofc25_talk): FWHM | 65.3855 GHz |
 | one neighbor at 400 GHz; at 200 GHz | −21.781 dB; −15.846 dB, so interleaved BiDi gains 5.935 dB of isolation |
 | two nearest neighbors at 400 GHz (single Lorentzian, images excluded) | X400 = 0.013272 → NRZ 0.0580 dB, PAM4 0.1764 dB |
 | two nearest neighbors at 200 GHz | X200 = 0.052050 → NRZ 0.2321 dB, PAM4 0.7373 dB |
 | alternative form 10·log10(1 + X) | 0.0573 dB (X400), 0.2204 dB (X200) |
-| FSR 1.8 THz (lm_ofc25_paper) | 10.3037 nm = 9 slots of 200 GHz |
-| implied n_g for a 15 µm diameter (lm_hc25_m1000) | 3.5343 (cross-source INFERENCE) |
+| FSR 1.8 THz (vendor_ofc25_paper) | 10.3037 nm = 9 slots of 200 GHz |
+| implied n_g for a 15 µm diameter (vendor_hc25_interposer) | 3.5343 (cross-source INFERENCE) |
 | window 56 GBd at 200 GHz | [3166.0, 5448.8], open, Q 3500 inside |
 | window 56 GBd at 400 GHz | [1583.0, 5448.8], open |
 | window 106.25 GBd at 200 GHz | [3166.0, 2871.8], closed |
 | window 106.25 GBd at 400 GHz | [1583.0, 2871.8], open, Q 3500 outside |
-| heater at 0.44 nm/mW (lm_ofc25_paper) | 200 GHz = 1.1449 nm = 2.6020 mW; 400 GHz 5.2039 mW; full FSR 23.4176 mW |
+| heater at 0.44 nm/mW (vendor_ofc25_paper) | 200 GHz = 1.1449 nm = 2.6020 mW; 400 GHz 5.2039 mW; full FSR 23.4176 mW |
 | unique channel within one FSR for 16 × 200 GHz = 3.2 THz | L ≤ c/(n_g·3.2 THz), so R ≤ 3.5501 µm at n_g 4.2 (SYNTHETIC n_g) |
-| Guide grid | λ_0 1318.6431 nm, λ_15 1301.4695 nm, outer span 17.1736 nm; ±20 GHz = ±0.11449 nm |
+| ELS grid | λ_0 1318.6431 nm, λ_15 1301.4695 nm, outer span 17.1736 nm; ±20 GHz = ±0.11449 nm |
 | ring on channel 0 with FSR 1.8 THz | image on channel 9 (grid B, counter-directional) |
 
-BiDi link model case (`docs/hand_calcs/s13_ring_wdm.py`): an L20-style BiDi pair on the draft DR budget of §12.1. TX OMA 2.4 dBm, diplexer IL 1.0 dB at each end (SYNTHETIC), 0.5 km of fiber at 0.4 dB/km (0.2 dB), one 0.5 dB connector (SYNTHETIC), S_RX −4.3 dBm, TDECQ 3.4 dB and MPI 0.1 dB as named extras, return loss 15.5 dB and diplexer isolation 25 dB (SYNTHETIC), R = 0. The reflection crosstalk at channel IL 0.7 dB is 0.000455 dB, so each direction has M_net = 0.49955 dB. Direction A at 1311 nm (δ = 0) clears the 1304.5 to 1317.5 nm passband by 6.5 nm on each side; direction B at 1331 nm misses it by 13.5 nm, so the link is EXCLUDED on wavelength alone. Power at TP3 −0.3 dBm OMA = 0.933254 mW; reflected local TX 2.4 dBm × 10^(−40.5/10) = 1.548817e-4 mW, 37.80 dB below the signal; with no diplexer isolation (I = 0) it would be 0.048978 mW.
+BiDi link model case (`docs/hand_calcs/s13_ring_wdm.py`): an BiDi engine-style BiDi pair on the draft DR budget of §12.1. TX OMA 2.4 dBm, diplexer IL 1.0 dB at each end (SYNTHETIC), 0.5 km of fiber at 0.4 dB/km (0.2 dB), one 0.5 dB connector (SYNTHETIC), S_RX −4.3 dBm, TDECQ 3.4 dB and MPI 0.1 dB as named extras, return loss 15.5 dB and diplexer isolation 25 dB (SYNTHETIC), R = 0. The reflection crosstalk at channel IL 0.7 dB is 0.000455 dB, so each direction has M_net = 0.49955 dB. Direction A at 1311 nm (δ = 0) clears the 1304.5 to 1317.5 nm passband by 6.5 nm on each side; direction B at 1331 nm misses it by 13.5 nm, so the link is EXCLUDED on wavelength alone. Power at TP3 −0.3 dBm OMA = 0.933254 mW; reflected local TX 2.4 dBm × 10^(−40.5/10) = 1.548817e-4 mW, 37.80 dB below the signal; with no diplexer isolation (I = 0) it would be 0.048978 mW.
 
 Properties tested: crosstalk falls with spacing, the penalty rises with X, heater power is linear in the tuning.
 
-## 14. Product twin
+## 14. Architecture twins
 
 ### 14.1 Method
 
-The twin reconstructs a product from what its maker and others have published, and labels every number by where it came from. It is not Lightmatter's specification and is not affiliated with or endorsed by Lightmatter.
+The twin models an architecture class from what has been published about it, and labels every number by where it came from. It is not any vendor's specification and is not affiliated with or endorsed by any company whose publications are cited.
 
 - **Facts** (`catalog/products/*.toml`, `[[fact]]`): a public statement with its exact quote, citation key and class (VENDOR_CLAIM, PEER_REVIEWED, THIRD_PARTY, PUBLISHED_SPEC or PROPOSED_STANDARD). `verified` is true only if the value was confirmed in the opened source in this run; otherwise the Appendix wording is kept and a note says why. A fact is a point (`value`) or a range (`lo`, `hi`); `bound` records whether the source says exact, approximately, at least (min) or at most (max). Non-numeric facts (a modulation format) carry no number.
 - **Assumptions** (`[[assumption]]`): SYNTHETIC values with nominal, low, high and a rationale.
@@ -488,9 +488,9 @@ Hand case (`docs/hand_calcs/s14_toy_graph.py`, the toy graph of `tests/data/cata
 
 With 13 interval ancestors the node is evaluated by Monte Carlo and flagged.
 
-### 14.2 Passage L20
+### 14.2 BiDi optical engine
 
-Facts (VENDOR_CLAIM unless marked): 6.4 Tbps each direction, 32 optical ports at 200 Gb/s per lane DR, 212.5 Gb/s PAM4 SerDes line rate, BiDi at 1311 and 1331 nm, TDP 30 W max (lm_pr_l20); "30W (3.0 pJ/bit)" (lm_pr_l20_bw only); "5 pJ/bit" (lm_web_l20, lm_yole_ofc26); 37.5 × 26.4 mm and 1827-ball BGA (lm_web_l20) against 37.5 × 27.6 × 4.55 mm (lm_yole_ofc26) and 2000-pin BGA (lm_pr_l20).
+Facts (VENDOR_CLAIM unless marked): 6.4 Tbps each direction, 32 optical ports at 200 Gb/s per lane DR, 212.5 Gb/s PAM4 SerDes line rate, BiDi at 1311 and 1331 nm, TDP 30 W max (vendor_pr_engine); "30W (3.0 pJ/bit)" (vendor_pr_engine_bw only); "5 pJ/bit" (vendor_web_engine, vendor_yole_ofc26); 37.5 × 26.4 mm and 1827-ball BGA (vendor_web_engine) against 37.5 × 27.6 × 4.55 mm (vendor_yole_ofc26) and 2000-pin BGA (vendor_pr_engine).
 
 | Derived (INFERENCE) | Value | Check |
 | --- | --- | --- |
@@ -504,14 +504,14 @@ Facts (VENDOR_CLAIM unless marked): 6.4 Tbps each direction, 32 optical ports at
 | lanes per laser fiber = 32/8 | 4 | |
 | fiber reduction = 1 − 32/64 | 50% | CONSISTENT with "−50%" |
 | volumes 37.5 × 27.6 × 4.55 vs 108.8 × 22.93 × 15.5 mm | 4709.25 vs 38669.15 mm³, 87.82% smaller | CONSISTENT with "~88%" |
-| 18 × 6.4; 6 × 6.4 | 115.2 Tbps; 38.4 Tbps | CONSISTENT with "115.2 Tbps (18 x L20)" and "38 Tbps (6 x L20)" |
+| 18 × 6.4; 6 × 6.4 | 115.2 Tbps; 38.4 Tbps | CONSISTENT with "115.2 Tbps (18 x BiDi engine)" and "38 Tbps (6 x BiDi engine)" |
 | savings 1 − 5/17; 1 − 5/20 | 70.59%; 75% | CONSISTENT with "Up to 75%" |
 
 "DR compatible" cannot mean draft-DR wavelength compliance in both directions: 1331 nm lies 13.5 nm outside the draft range. That is an open question (INFERENCE), not a finding against the product: the phrase may refer to the electrical interface, the reach or one direction. The package-size and pin-count disagreements stay CONFLICTs, both sides carried.
 
-Hypotheses: H_l20_one_dir (the energy figure divides by one direction: agrees with "5 pJ/bit") and H_l20_both_dirs (both directions: agrees with neither "5" nor "3.0" within 10%).
+Hypotheses: H_engine_one_dir (the energy figure divides by one direction: agrees with "5 pJ/bit") and H_engine_both_dirs (both directions: agrees with neither "5" nor "3.0" within 10%).
 
-### 14.3 Passage M1000
+### 14.3 3D photonic interposer
 
 | Derived (INFERENCE) | Value | Check |
 | --- | --- | --- |
@@ -523,25 +523,25 @@ Hypotheses: H_l20_one_dir (the energy figure divides by one direction: agrees wi
 | 91 × 85 mm | 7735 mm² | CONSISTENT with the 7,735 mm² package |
 | ceiling 4000 mm² × 1.4 W/mm² | 5.6 kW | against 1.5 kW delivered |
 | 1.5 kW over 7735 mm²; over 4000 mm² | 0.194 W/mm²; 0.375 W/mm² | so ">1.4 W/mm²" reads as a local or capability figure (INFERENCE) |
-| I/O power at 2.3 pJ/bit | 263.78 W if the rate counts Tx + Rx (17.6% of 1.5 kW); 131.89 W per direction | hypotheses H_m1000_txrx and H_m1000_per_dir |
+| I/O power at 2.3 pJ/bit | 263.78 W if the rate counts Tx + Rx (17.6% of 1.5 kW); 131.89 W per direction | hypotheses H_interposer_txrx and H_interposer_per_dir |
 | λ-channels = 256 × 8 | 2048, one ring per channel (INFERENCE) | |
-| heaters, worst case with barrel shifting at 0.44 nm/mW | 2048 × 2.6020 mW = 5.329 W | assumes the M1000 rings resemble the OFC 2025 rings (INFERENCE) |
+| heaters, worst case with barrel shifting at 0.44 nm/mW | 2048 × 2.6020 mW = 5.329 W | assumes the interposer rings resemble the OFC 2025 rings (INFERENCE) |
 
 The ISES 2025 slide's "800 Gbps / fiber (Tx+Rx)" against 448 Gb/s stays a CONFLICT. The physics evaluation also shows why barrel shifting matters: with ±20 GHz laser accuracy, a SYNTHETIC ±1 nm fabrication offset and a 10 K swing, a ring needs 1.83 nm of tuning, more than one 200 GHz spacing (1.145 nm); without barrel shifting the worst case is a full FSR, 23.4 mW per ring and about 48 W for 2048 rings.
 
-### 14.4 Passage L200 and L200X
+### 14.4 CPO chiplet (32T and 64T)
 
 | Derived (INFERENCE) | Value | Check |
 | --- | --- | --- |
-| L200: 320 SerDes × 50 Gb/s payload × 2 | 32 Tbps | CONSISTENT with "32 Tbps total (Tx+Rx)"; 50 Gb/s payload on a 56 Gb/s line (INFERENCE) |
-| L200X: 320 × 100 × 2 | 64 Tbps | CONSISTENT with "64 Tbps total (Tx+Rx)" |
+| 32T chiplet: 320 SerDes × 50 Gb/s payload × 2 | 32 Tbps | CONSISTENT with "32 Tbps total (Tx+Rx)"; 50 Gb/s payload on a 56 Gb/s line (INFERENCE) |
+| 64T chiplet: 320 × 100 × 2 | 64 Tbps | CONSISTENT with "64 Tbps total (Tx+Rx)" |
 | fibers 32/0.8; 64/1.6 | 40; 40 | |
 | 4 × 64 Tbps | 256 Tbps per package | CONSISTENT with the product page |
 | 32 Tbps / 40 | 800 Gb/s per pluggable equivalent | |
 
-NRZ (lm_pr_l200) against PAM4 (lm_web_l200) stays a CONFLICT.
+NRZ (vendor_pr_chiplet) against PAM4 (vendor_web_chiplet) stays a CONFLICT.
 
-### 14.5 16λ BiDi link (EVK50, OFC 2026)
+### 14.5 16λ BiDi link (OFC 2026)
 
 16 × 50 Gb/s = 800 Gb/s per fiber, 8 × 50 = 400 Gb/s each way. Channel plan: the §13.5 grid, one direction on even n and the other on odd n (the OFC 2026 link diagram shows laser module A on λ0, λ2 … λ14 and module B on λ1, λ3 … λ15); the end analysed here receives on odd n. Ring model: Q_L 3500 and FWHM 65.3855 GHz for every channel, images k = −50 … 50 (§13.6). The rings' FSR is not disclosed, so two hypotheses are carried:
 
@@ -557,23 +557,23 @@ Worst receive channel (§13.6), IL 3 dB (vendor) and RL 15.5 dB (SYNTHETIC, the 
 
 A 1.8 THz ring erases most of the interleaving gain (worst-channel co-directional crosstalk 5.8 dB higher), so the 16λ BiDi link wants an FSR of at least 3.2 THz: the headline ring inference, labeled INFERENCE. MPI (§12.3, bhatt2016_mpi) with NRZ m = 2, ER 6 dB, Rt = Rr = −26 dB, Rc = −45 dB and n = 6 (all SYNTHETIC) = 0.1503 dB.
 
-TX OMA is not public, so the twin reports the minimum TX OMA the link needs, S_RX + IL + penalties, with S_RX = −9 dBm OMA (lm_ofc25_talk, a cross-source assumption): H_fsr18 −5.2059 dBm, H_fsr32 −5.7395 dBm. The vendor's BER < 1e-9 without FEC stays a VENDOR_CLAIM, not something OICD checks.
+TX OMA is not public, so the twin reports the minimum TX OMA the link needs, S_RX + IL + penalties, with S_RX = −9 dBm OMA (vendor_ofc25_talk, a cross-source assumption): H_fsr18 −5.2059 dBm, H_fsr32 −5.7395 dBm. The vendor's BER < 1e-9 without FEC stays a VENDOR_CLAIM, not something OICD checks.
 
-### 14.6 Guide, Guide 1 and Guide DR
+### 14.6 External laser sources (ELS, ELS-DWDM, ELS-DR)
 
 | Derived (INFERENCE) | Value | Check |
 | --- | --- | --- |
-| Guide 1: 8 × 13 mW | 104 mW | CONSISTENT with "≥100 mW/fiber" (bound) |
+| ELS-DWDM: 8 × 13 mW | 104 mW | CONSISTENT with "≥100 mW/fiber" (bound) |
 | 16 fibers × 100 mW | 1.6 W | CONSISTENT (single package) |
 | 32 × 100 to 110 mW | 3.2 to 3.52 W | CONSISTENT with 3.2–3.5 W (stacked); 110 mW per fiber is SYNTHETIC |
 | 100 Tbps / 4 modules | 25 Tbps per module | BOUND OK against "up to 51.2" |
 | 100 Tbps / 18 ELSFP | 5.556 Tbps per ELSFP | |
-| Guide DR: 64 × 200 mW | 12.8 W | CONSISTENT with "12.8W total" |
+| ELS-DR: 64 × 200 mW | 12.8 W | CONSISTENT with "12.8W total" |
 | 256 lanes × 200 Gb/s | 51.2 Tbps | CONSISTENT |
 | 256/64 | 4 lanes per laser fiber | |
 | 200 mW / 4 lanes | 50 mW = 16.99 dBm per lane before PIC losses (even split, INFERENCE) | |
 | 200 mW | 23.01 dBm = ELSFP UHP class (oif_elsfp_02), 1.49 dB under the 24.5 dBm Hazard Level 1 limit | |
-| Guide 1: 13 mW | 11.14 dBm ≈ ELSFP LP class | |
+| ELS-DWDM: 13 mW | 11.14 dBm ≈ ELSFP LP class | |
 
 Fan-out: §10 with 200 mW per fiber, the §10 chain losses (0.5, 1.5, 4.0 and 1.5 dB, excess 0, ER 4 dB; SYNTHETIC) and the §12 DR budget:
 
@@ -587,14 +587,14 @@ Max fan-out 17. So 4 lanes per fiber leaves about 6.4 dB unallocated in this cha
 
 ### 14.7 OCP 2026 trays
 
-204.8/8 = 102.4/4 = 25.6 Tbps per engine (CONSISTENT across the two trays) = 4 × the L20's 6.4 Tbps per direction, so each tray engine carries four L20s' worth of lanes; the release does not name the engine (INFERENCE). Hypotheses for the switch tray's 204.8 Tbps:
+204.8/8 = 102.4/4 = 25.6 Tbps per engine (CONSISTENT across the two trays) = 4 × the BiDi engine's 6.4 Tbps per direction, so each tray engine carries four BiDi engines' worth of lanes; the release does not name the engine (INFERENCE). Hypotheses for the switch tray's 204.8 Tbps:
 
-- H_dir (per direction): 1024 lanes, 4 Guide DR; agrees with lm_pr_guidedr's "four Guide DR modules … 204.8 Tbps".
-- H_agg (aggregate): 512 lanes per direction, 2 Guide DR; agrees with counterpoint_ocp26's "two" and ine_ocp26's "aggregate".
+- H_dir (per direction): 1024 lanes, 4 ELS-DR; agrees with vendor_pr_els_dr's "four ELS-DR modules … 204.8 Tbps".
+- H_agg (aggregate): 512 lanes per direction, 2 ELS-DR; agrees with counterpoint_ocp26's "two" and ine_ocp26's "aggregate".
 
-The XPU tray under H_dir: 512 lanes, 2 Guide DR, which agrees with Counterpoint's two for that tray. Tray height 1RU against 2U: both carried (H_xpu_1u, H_xpu_2u). The support matrix shows each hypothesis against each claim.
+The XPU tray under H_dir: 512 lanes, 2 ELS-DR, which agrees with Counterpoint's two for that tray. Tray height 1RU against 2U: both carried (H_xpu_1u, H_xpu_2u). The support matrix shows each hypothesis against each claim.
 
-### 14.8 Scale-up pod example (lm_pr_cpx, lm_hoti26)
+### 14.8 Scale-up pod example (vendor_pr_cpx, vendor_hoti26)
 
 ```
 duplex fibers = XPUs × lanes per XPU × 2 = 512 × 128 × 2 = 131,072     (≈ "about 130,000", 0.8%)
@@ -608,18 +608,18 @@ HOTI26 "20,000" → TENSION
 
 Under H_pod_32 the same arithmetic gives 163,840 fibers and 20,480 connectors, so HOTI26's "20,000" becomes CONSISTENT: each source is internally consistent with its own per-XPU bandwidth (the CPX release with 25.6 Tbps, HOTI26 with 32 Tbps).
 
-### 14.9 Reference rack OICD-R64 (an OICD design: SYNTHETIC, never Lightmatter's)
+### 14.9 Reference rack OICD-R64 (an OICD design: SYNTHETIC, never a vendor configuration)
 
 - Frame: ORv3, 600 × 1068 × 2286 mm, 44 OU of 48 mm (ocp_orv3_meta). 8 switch trays (1 OU), 16 XPU trays (2 OU under H_2U, 1 OU under H_1U), 2 power shelves (537 × 46.2 × 867.5 mm, ocp_orv3_hpr72): 42 OU (H_2U) or 26 OU (H_1U).
-- Single tier: each XPU sends 16 lanes to each switch tray (H_dir): 64 XPUs × 128 lanes = 8192 links = 8 × 1024. BiDi fibers 8192 against duplex 16,384. TX lanes 16,384 → 64 Guide DR (2 per XPU tray, 4 per switch tray).
-- Worst path: XPU engine → vClick → 0.5 m tray fiber → PRIZM TMT blind mate (0.5 dB, corning_tmt_lan3581) → 3 m rack fiber → switch-tray connector (SYNTHETIC 0.5 dB, TMT class) → 0.5 m → vClick → switch engine; 4 m of fiber at 0.4 dB/km = 0.0016 dB.
-- Reference-plane hypotheses: H_vclick_channel (the vClick is a mated connection between TP2 and TP3, per §2) and H_vclick_module (the engine's DR spec is defined after its vClick). With the §12 DR budget:
+- Single tier: each XPU sends 16 lanes to each switch tray (H_dir): 64 XPUs × 128 lanes = 8192 links = 8 × 1024. BiDi fibers 8192 against duplex 16,384. TX lanes 16,384 → 64 ELS-DR (2 per XPU tray, 4 per switch tray).
+- Worst path: XPU engine → FAU → 0.5 m tray fiber → PRIZM TMT blind mate (0.5 dB, corning_tmt_lan3581) → 3 m rack fiber → switch-tray connector (SYNTHETIC 0.5 dB, TMT class) → 0.5 m → FAU → switch engine; 4 m of fiber at 0.4 dB/km = 0.0016 dB.
+- Reference-plane hypotheses: H_fau_channel (the FAU is a mated connection between TP2 and TP3, per §2) and H_fau_module (the engine's DR spec is defined after its FAU). With the §12 DR budget:
 
 | Case | Channel IL | M_net | Verdict |
 | --- | --- | --- | --- |
-| vClick 1.5 dB in the channel | 4.0016 dB | −1.0016 dB | EXCLUDED |
-| vClick 1.0 dB (futurum_ocp26 "below 1 dB") in the channel | 3.0016 dB | −0.0016 dB | EXCLUDED |
-| vClick in the module | 1.0016 dB | +1.9984 dB | NOT_EXCLUDED |
+| FAU 1.5 dB in the channel | 4.0016 dB | −1.0016 dB | EXCLUDED |
+| FAU 1.0 dB (futurum_ocp26 "below 1 dB") in the channel | 3.0016 dB | −0.0016 dB | EXCLUDED |
+| FAU in the module | 1.0016 dB | +1.9984 dB | NOT_EXCLUDED |
 
 The reference-plane definition, not the physics, decides this rack.
 
@@ -632,7 +632,7 @@ All numbers in §14.2 to §14.9 are printed by `docs/hand_calcs/s14_products.py`
 
 ## 15. Photonic processor (ahmed2025_nature)
 
-A twin of the photonic processor published in Nature in 2025 (ahmed2025_nature: PEER_REVIEWED, vendor-authored; Nature main text paywalled, so the facts come from the open Supplementary Information, Table 1 and figure pages, as each catalog note states) and an independent re-implementation of its adaptive block floating-point (ABFP) data path. It is not Lightmatter code. The paper's measured accuracies (Table 1) are cited as measured results; nothing here reproduces them.
+A twin of the photonic processor published in Nature in 2025 (ahmed2025_nature: PEER_REVIEWED, vendor-authored; Nature main text paywalled, so the facts come from the open Supplementary Information, Table 1 and figure pages, as each catalog note states) and an independent re-implementation of its adaptive block floating-point (ABFP) data path. It is not the vendor code. The paper's measured accuracies (Table 1) are cited as measured results; nothing here reproduces them.
 
 ### 15.1 Facts
 

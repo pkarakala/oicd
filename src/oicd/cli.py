@@ -23,8 +23,8 @@ from oicd.twin.physics import physics_for, rack_spec
 from oicd.upstream import max_fanout
 
 INDEPENDENCE = (
-    "Independent reconstruction from public information. Not affiliated with or endorsed by "
-    "Lightmatter. Product names belong to their owners."
+    "Independent model built from public information. Not affiliated with or endorsed by "
+    "any company whose publications are cited."
 )
 
 
@@ -135,16 +135,12 @@ def _rack(args: argparse.Namespace) -> int:
     ]
     lines.append(
         f"  {result.xpus} XPUs, {result.links} links, {result.bidi_fibers} BiDi fibers "
-        f"({result.duplex_fibers} duplex), {result.guide_dr_total:g} Guide DR"
+        f"({result.duplex_fibers} duplex), {result.els_dr_total:g} ELS-DR"
     )
     for p in result.paths:
-        where = (
-            "in the module"
-            if p.vclick_loss_db is None
-            else f"{p.vclick_loss_db:g} dB in the channel"
-        )
+        where = "in the module" if p.fau_loss_db is None else f"{p.fau_loss_db:g} dB in the channel"
         lines.append(
-            f"  worst path, vClick {where}: IL {p.channel_il_db:.4f} dB, "
+            f"  worst path, FAU {where}: IL {p.channel_il_db:.4f} dB, "
             f"M {p.report.margin_db:+.4f} dB, {p.report.verdict}"
         )
     lines += [
@@ -173,7 +169,7 @@ def parser() -> argparse.ArgumentParser:
     p = sub.add_parser("fanout", help="maximum laser fan-out of an upstream chain (§10)")
     p.add_argument("link")
     p.set_defaults(run=_fanout)
-    p = sub.add_parser("twin", help="a product twin: derivations, checks, conflicts, physics")
+    p = sub.add_parser("twin", help="an architecture twin: derivations, checks, conflicts, physics")
     p.add_argument("product")
     p.add_argument("--hypothesis", action="append", default=[], metavar="H_ID")
     p.add_argument("--json", action="store_true")

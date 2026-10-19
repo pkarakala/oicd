@@ -11,7 +11,7 @@ from oicd.twin.formulas import FORMULAS, format_number, render, resolve_out_unit
 @pytest.mark.parametrize(
     "name, args, expected",
     [
-        ("pj_per_bit", (30.0, 6.4), 4.6875),  # §14 L20: 30 W / 6.4 Tbps
+        ("pj_per_bit", (30.0, 6.4), 4.6875),  # §14 BiDi engine: 30 W / 6.4 Tbps
         ("pj_per_bit", (30.0, 12.8), 2.34375),
         ("power_w_at_pj_per_bit", (3.0, 6.4), 19.2),
         ("lanes", (204.8, 200.0), 1024.0),
@@ -42,7 +42,7 @@ def test_formula_values(name, args, expected):
 
 
 def test_frequency_and_spacing():
-    # §14 L20: 1311 and 1331 nm are 20 nm = 3436.1 GHz apart; f0 at 1310 nm = 228.8492 THz.
+    # §14 BiDi engine: 1311 and 1331 nm are 20 nm = 3436.1 GHz apart; f0 at 1310 nm = 228.8492 THz.
     assert f.nm_pair_spacing_ghz(1311.0, 1331.0) == pytest.approx(3436.1, abs=0.05)
     assert f.frequency_ghz_from_nm(1310.0) == pytest.approx(228849.2, abs=0.05)
     assert f.ghz_span_to_nm(20.0, 1310.0) == pytest.approx(0.11449, abs=5e-6)

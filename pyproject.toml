@@ -1,7 +1,7 @@
 [project]
 name = "oicd"
 version = "0.3.0"
-description = "Provenance-tracked feasibility engine and product twin for optical AI-accelerator interconnects"
+description = "Provenance-tracked feasibility engine with architecture twins for optical AI-accelerator interconnects"
 readme = "README.md"
 authors = [
     { name = "Pranav Reddy", email = "preddy@ucsb.edu" }

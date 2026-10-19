@@ -1,4 +1,4 @@
-"""Generate docs/twin/<product>.md and docs/lightmatter_public_spec_sheet.md from the catalog.
+"""Generate docs/twin/<architecture>.md from the catalog.
 
 Every number comes from the engine's evaluation of the catalog (oicd.twin), with its class.
 Run: uv run python scripts/make_twin_docs.py
@@ -16,8 +16,8 @@ from oicd.twin.physics import physics_for
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "docs" / "twin"
 INDEPENDENCE = (
-    "Independent reconstruction from public information. Not affiliated with or endorsed by "
-    "Lightmatter. Product names belong to their owners."
+    "Independent model built from public information. Not affiliated with or endorsed by "
+    "any company whose publications are cited."
 )
 CLASS = {
     "published_spec": "PUBLISHED_SPEC",
@@ -153,43 +153,6 @@ def product_page(catalog: Catalog, stem: str) -> str:
     return "\n".join(lines).rstrip() + "\n"
 
 
-def spec_sheet(catalog: Catalog) -> str:
-    lines = [
-        "# Lightmatter public spec sheet (as reconstructed by OICD)",
-        "",
-        f"_{INDEPENDENCE}_",
-        "",
-        "One reading document generated from the catalog by `scripts/make_twin_docs.py`: every "
-        "public number with its class (VENDOR_CLAIM, PEER_REVIEWED, THIRD_PARTY, ...) and source. "
-        "Derived values, checks and hypotheses are in the per-product pages under docs/twin/.",
-        "",
-    ]
-    for stem in sorted(catalog.files):
-        f = catalog.files[stem]
-        if f.product.kind != "product":
-            continue
-        graph = evaluate_graph(catalog, stem)
-        facts = [n for n in graph.nodes if n.file == stem and n.kind == "fact"]
-        if not facts:
-            continue
-        lines += [
-            f"## {f.product.name}",
-            "",
-            f.product.summary,
-            "",
-            "| quantity | value | class | source |",
-            "| --- | --- | --- | --- |",
-        ]
-        for n in sorted(facts, key=lambda x: x.id):
-            mark = "" if n.verified else " (not verified)"
-            lines.append(
-                f"| {cell(n.label)} | {cell(value(n))} | {CLASS[n.source_class.value]}"
-                f"{mark} | {cite(n.cite)} |"
-            )
-        lines += ["", f"Details: [docs/twin/{stem}.md](twin/{stem}.md).", ""]
-    return "\n".join(lines).rstrip() + "\n"
-
-
 def main() -> int:
     catalog = load_catalog()
     OUT.mkdir(parents=True, exist_ok=True)
@@ -197,9 +160,6 @@ def main() -> int:
         path = OUT / f"{stem}.md"
         path.write_text(product_page(catalog, stem), encoding="utf-8")
         print(path.relative_to(ROOT))
-    sheet = ROOT / "docs" / "lightmatter_public_spec_sheet.md"
-    sheet.write_text(spec_sheet(catalog), encoding="utf-8")
-    print(sheet.relative_to(ROOT))
     return 0
 
 

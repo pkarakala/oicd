@@ -89,7 +89,7 @@ def test_channel_hue_follows_direction():
     # lightness runs across each direction's channels: first and last steps of each ramp
     assert (channels[0].color, channels[14].color) == (BLUE[0], BLUE[7])
     assert (channels[1].color, channels[15].color) == (ORANGE[0], ORANGE[7])
-    # one channel per direction (the L20's 1311 / 1331 nm): the ramps' middle step
+    # one channel per direction (the BiDi engine's 1311 / 1331 nm): the ramps' middle step
     assert [c.color for c in channel_colors(2)] == [BLUE[3], ORANGE[3]]
     assert len(channel_colors(1)) == 1 and channel_colors(2)[1].direction == "B"
 

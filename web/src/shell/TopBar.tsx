@@ -180,7 +180,7 @@ function ExportMenu({ view, report }: { view: SceneView | undefined; report: Fea
               download(JSON.stringify(data, null, 2), `oicd-${product}.json`, 'application/json')
             }}
           >
-            Product twin JSON (GET /catalog/{product || '…'})
+            Architecture twin JSON (GET /catalog/{product || '…'})
           </Menu.Item>
           <Menu.Item
             className="menu-item"

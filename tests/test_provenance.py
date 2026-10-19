@@ -12,7 +12,7 @@ from oicd.provenance import (
 )
 from oicd.units import DB
 
-KNOWN_KEY = "lightmatter_guide_2026"
+KNOWN_KEY = "press_els_2026"
 
 SAMPLE_BIB = """
 % a comment line mentioning @misc{not_a_key, ...}

@@ -1,5 +1,5 @@
 # XPU tray 102.4T (model card §14.7). Units: mm; x width, y depth (front at -y), z up.
-# Drawn 2 OU (H_2U: lightmatter.com copy, Counterpoint, IN Electronics); the PR Newswire copy and
+# Drawn 2 OU (H_2U: vendor-site copy, Counterpoint, IN Electronics); the PR Newswire copy and
 # Futurum say 1 RU. Every internal part is SCHEMATIC.
 
 [scene]
@@ -10,7 +10,7 @@ level = "tray"
 product = "ocp_trays"
 parent = "reference_rack"
 breadcrumb = "XPU tray"
-summary = "Four accelerators and two CPUs on a DC-MHS host, four Passage BiDi engines, Guide DR lasers and rear expanded-beam blind-mate connectors."
+summary = "Four accelerators and two CPUs on a DC-MHS host, four BiDi engines, ELS-DR lasers and rear expanded-beam blind-mate connectors."
 
 [[part]]
 id = "xpu.outline"
@@ -22,7 +22,7 @@ material = "outline"
 dims_class = "SCHEMATIC"
 dims_axes = ["PUBLISHED", "SCHEMATIC", "INFERENCE"]
 dims_source = "orv3.it_chassis_width"
-nodes = ["orv3.it_chassis_width", "trays.xpu_height_lmcom", "trays.xpu_height_prnewswire", "trays.xpu_bw"]
+nodes = ["orv3.it_chassis_width", "trays.xpu_height_vendor_site", "trays.xpu_height_prnewswire", "trays.xpu_bw"]
 function = "Height 48 x 2 - 3.3 mm under H_2U; the sources disagree (1 RU or 2U)."
 label = "2U chassis"
 
@@ -124,24 +124,24 @@ label = "CPU"
 
 [[part]]
 id = "xpu.engines"
-name = "Passage BiDi engines (4)"
+name = "BiDi engines (4)"
 assembly = "optics"
 size = [37.5, 27.6, 4.55]
 position = [-215.0, -200.0, 3.775]
 material = "organic_substrate"
 dims_class = "SCHEMATIC"
-dims_source = "Engine not named; drawn at the Passage L20 outline (INFERENCE)."
-nodes = ["trays.xpu_engines", "trays.xpu_per_engine", "trays.engine_in_l20s"]
+dims_source = "Engine not named; drawn at the BiDi optical engine outline (INFERENCE)."
+nodes = ["trays.xpu_engines", "trays.xpu_per_engine", "trays.engine_in_bidi_engines"]
 count = 4
 grid = [2, 2, 1]
 pitch = [430.0, 220.0, 0.0]
 explode = [0.0, 0.0, 25.0]
-enters = "passage_l20"
+enters = "bidi_engine"
 label = "BiDi engine"
 
 [[part]]
 id = "xpu.lnics"
-name = "Guide DR laser NICs (2 under H_dir)"
+name = "ELS-DR laser NICs (2 under H_dir)"
 assembly = "lasers"
 size = [76.0, 115.0, 1.6]
 position = [-60.0, -337.5, 9.0]
@@ -149,14 +149,14 @@ material = "pcb"
 dims_class = "SCHEMATIC"
 dims_axes = ["INFERENCE", "PUBLISHED", "SCHEMATIC"]
 dims_source = "nic3.sff_depth"
-nodes = ["guidedr.form_factor", "nic3.sff_width", "nic3.lff_width", "nic3.sff_depth", "trays.xpu_guidedr_count_cp", "trays.xpu_blind_mate"]
-function = "Guide DR modules that blind mate as the tray slides in. OCP NIC 3.0 size not named: drawn as SFF (76 x 115 mm); LFF would be 139 x 115 mm."
+nodes = ["els_dr.form_factor", "nic3.sff_width", "nic3.lff_width", "nic3.sff_depth", "trays.xpu_els_dr_count_cp", "trays.xpu_blind_mate"]
+function = "ELS-DR modules that blind mate as the tray slides in. OCP NIC 3.0 size not named: drawn as SFF (76 x 115 mm); LFF would be 139 x 115 mm."
 count = 2
 grid = [2, 1, 1]
 pitch = [120.0, 0.0, 0.0]
 explode = [0.0, -120.0, 20.0]
-enters = "guide_family"
-label = "Guide DR LNIC"
+enters = "laser_sources"
+label = "ELS-DR LNIC"
 
 [[part]]
 id = "xpu.rear_connectors"
@@ -221,4 +221,4 @@ node = "trays.prizm_tmt"
 
 [[tour]]
 part = "xpu.outline"
-node = "trays.xpu_height_lmcom"
+node = "trays.xpu_height_vendor_site"

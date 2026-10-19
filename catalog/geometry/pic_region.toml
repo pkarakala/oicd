@@ -1,7 +1,7 @@
 # A representative microring BiDi lane on a PIC (model card §13). Units: um; x along the bus,
 # y across, z up (device layer top at z = 0.22). The ring diameter is the ~15 um that the Hot
-# Chips 2025 slides give for Passage microrings, applied here across sources (INFERENCE). The
-# layout is SCHEMATIC: the L20's PIC layout and modulator type are not disclosed.
+# Chips 2025 slides give for photonic interconnect microrings, applied here across sources (INFERENCE). The
+# layout is SCHEMATIC: the BiDi engine's PIC layout and modulator type are not disclosed.
 
 [scene]
 id = "pic_region"
@@ -9,7 +9,7 @@ name = "PIC region: a microring BiDi lane"
 unit = "um"
 level = "pic"
 product = "microring_ofc25"
-parent = "passage_l20"
+parent = "bidi_engine"
 breadcrumb = "PIC"
 summary = "Representative layout: fiber coupler, on-chip diplexer, a transmit bus with a ring modulator fed by the laser input coupler, a receive bus with an add-drop ring and a germanium photodiode, heaters over both rings."
 
@@ -25,14 +25,14 @@ dims_source = "A 240 x 120 um window of the die."
 
 [[part]]
 id = "pic.fiber_coupler"
-name = "fiber coupler (vertical, toward the vClick)"
+name = "fiber coupler (vertical, toward the FAU)"
 assembly = "optics"
 size = [12.0, 12.0, 0.22]
 position = [-105.0, 0.0, 0.11]
 material = "oxide"
 dims_class = "SCHEMATIC"
 dims_source = "Coupler type and size not disclosed."
-nodes = ["vclick.vertical_expanded_beam", "vclick.il_reinsertion_max"]
+nodes = ["fau.vertical_expanded_beam", "fau.il_reinsertion_max"]
 label = "fiber coupler"
 
 [[part]]
@@ -55,7 +55,7 @@ position = [-75.0, 0.0, 0.11]
 material = "oxide"
 dims_class = "SCHEMATIC"
 dims_source = "Diplexer type and size not disclosed."
-nodes = ["l20.lambda_a_nm", "l20.lambda_b_nm", "l20.lambda_spacing_nm", "l20.lambda_spacing_ghz"]
+nodes = ["engine.lambda_a_nm", "engine.lambda_b_nm", "engine.lambda_spacing_nm", "engine.lambda_spacing_ghz"]
 function = "Separates the two directions of one fiber: transmit at one wavelength, receive at the other."
 label = "diplexer"
 
@@ -81,8 +81,8 @@ position = [0.0, 32.9, 0.11]
 material = "silicon"
 dims_class = "SCHEMATIC"
 dims_axes = ["INFERENCE", "INFERENCE", "SCHEMATIC"]
-dims_source = "m1000.mrr_diameter"
-nodes = ["m1000.mrr_diameter", "m1000.mrr_modulation", "ring.mrm_q", "ring.fsr_thz", "ring.mrm_eo_bw_ghz", "ring.mrm_er_db", "ring.mod_il_db"]
+dims_source = "interposer.mrr_diameter"
+nodes = ["interposer.mrr_diameter", "interposer.mrr_modulation", "ring.mrm_q", "ring.fsr_thz", "ring.mrm_eo_bw_ghz", "ring.mrm_er_db", "ring.mod_il_db"]
 function = "Depletion PN-junction ring modulator on the transmit bus (all-pass)."
 enters = "ring_section"
 label = "MRM"
@@ -98,7 +98,7 @@ position = [0.0, 32.9, 1.2]
 material = "heater"
 dims_class = "SCHEMATIC"
 dims_source = "Heater geometry not disclosed; drawn over the ring."
-nodes = ["m1000.mrr_heater", "ring.heater_nm_per_mw"]
+nodes = ["interposer.mrr_heater", "ring.heater_nm_per_mw"]
 explode = [0.0, 0.0, 6.0]
 label = "heater"
 
@@ -111,7 +111,7 @@ position = [108.0, 25.0, 0.11]
 material = "oxide"
 dims_class = "SCHEMATIC"
 dims_source = "Coupler type and size not disclosed."
-nodes = ["l20.laser_fibers_yole", "l20.lanes_per_laser_fiber"]
+nodes = ["engine.laser_fibers_yole", "engine.lanes_per_laser_fiber"]
 label = "laser in"
 
 [[part]]
@@ -136,8 +136,8 @@ position = [0.0, -32.9, 0.11]
 material = "silicon"
 dims_class = "SCHEMATIC"
 dims_axes = ["INFERENCE", "INFERENCE", "SCHEMATIC"]
-dims_source = "m1000.mrr_diameter"
-nodes = ["m1000.mrr_diameter", "ring.fsr_thz", "ring.mrr_il_db", "ring.wdm_compat_spacing_ghz"]
+dims_source = "interposer.mrr_diameter"
+nodes = ["interposer.mrr_diameter", "ring.fsr_thz", "ring.mrr_il_db", "ring.wdm_compat_spacing_ghz"]
 function = "Drops its channel from the receive bus to the photodiode."
 enters = "ring_section"
 label = "MRR"
@@ -153,7 +153,7 @@ position = [0.0, -32.9, 1.2]
 material = "heater"
 dims_class = "SCHEMATIC"
 dims_source = "Heater geometry not disclosed; drawn over the ring."
-nodes = ["m1000.mrr_heater", "ring.heater_nm_per_mw"]
+nodes = ["interposer.mrr_heater", "ring.heater_nm_per_mw"]
 explode = [0.0, 0.0, 6.0]
 
 [[part]]
@@ -193,11 +193,11 @@ node = "ring.heater_nm_per_mw"
 
 [[tour]]
 part = "pic.mrr"
-node = "m1000.mrr_diameter"
+node = "interposer.mrr_diameter"
 
 [[tour]]
 part = "pic.diplexer"
-node = "l20.lambda_spacing_nm"
+node = "engine.lambda_spacing_nm"
 
 [[tour]]
 part = "pic.pd"

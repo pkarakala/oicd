@@ -151,7 +151,7 @@ function OverlayPanel({ overlay, palette }: { overlay: Overlay; palette: Palette
   const showsMargins = overlay.values.some((v) => v.margin_db !== null && v.margin_db !== undefined)
   const legend = [...new Map(overlay.paths.map((p) => [`${p.color}|${p.kind}|${p.label}`, p])).values()].slice(0, 6)
   const others = overlay.values.filter((v) => v.margin_db === null || v.margin_db === undefined)
-  const bidi = overlay.scene === 'l20_bidi_link' || overlay.scene === 'passage_l20'
+  const bidi = overlay.scene === 'bidi_link' || overlay.scene === 'bidi_engine'
   return (
     <div className="overlay-panel" data-testid="overlay-panel">
       <div className="overlay-head">

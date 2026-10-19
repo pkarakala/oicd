@@ -1,5 +1,5 @@
-"""Model card §14: product twins and the reference rack. Expected values are copied from §14.2 to
-§14.9 (and through them from the brief), never from running the code."""
+"""Model card §14: architecture twins and the reference rack. Expected values are copied from
+§14.2 to §14.9 (and through them from the brief), never from running the code."""
 
 import pytest
 
@@ -36,117 +36,122 @@ def item(physics, title_part, label_part, hypothesis=None):
     raise KeyError((title_part, label_part))
 
 
-# ---- §14.2 Passage L20 ------------------------------------------------------------------------
+# ---- §14.2 BiDi optical engine -------------------------------------------------------------------
 
 
-def test_l20_values(catalog):
-    g = graph(catalog, "passage_l20")
-    assert nominal(g, "l20.rate_per_port") == pytest.approx(200.0)
-    assert nominal(g, "l20.line_payload_ratio") == pytest.approx(1.0625)
-    assert nominal(g, "l20.energy_per_bit") == pytest.approx(4.6875)
-    assert nominal(g, "l20.energy_per_bit_both") == pytest.approx(2.34375)
-    assert nominal(g, "l20.power_for_3pj") == pytest.approx(19.2)
-    assert nominal(g, "l20.lambda_spacing_nm") == pytest.approx(20.0)
-    assert nominal(g, "l20.lambda_spacing_ghz") == pytest.approx(3436.1, abs=0.05)
-    assert nominal(g, "l20.lanes_per_laser_fiber") == pytest.approx(4.0)
-    assert nominal(g, "l20.fiber_reduction_pct") == pytest.approx(50.0)
-    assert nominal(g, "l20.volume") == pytest.approx(4709.25)
-    assert nominal(g, "l20.pluggable_volume") == pytest.approx(38669.15)
-    assert nominal(g, "l20.volume_reduction_pct") == pytest.approx(87.82, abs=0.005)
-    assert nominal(g, "l20.switch_bw_18") == pytest.approx(115.2)
-    assert nominal(g, "l20.xpu_bw_6") == pytest.approx(38.4)
-    assert nominal(g, "l20.savings_vs_17_pct") == pytest.approx(70.59, abs=0.005)
-    assert nominal(g, "l20.savings_vs_20_pct") == pytest.approx(75.0)
+def test_engine_values(catalog):
+    g = graph(catalog, "bidi_engine")
+    assert nominal(g, "engine.rate_per_port") == pytest.approx(200.0)
+    assert nominal(g, "engine.line_payload_ratio") == pytest.approx(1.0625)
+    assert nominal(g, "engine.energy_per_bit") == pytest.approx(4.6875)
+    assert nominal(g, "engine.energy_per_bit_both") == pytest.approx(2.34375)
+    assert nominal(g, "engine.power_for_3pj") == pytest.approx(19.2)
+    assert nominal(g, "engine.lambda_spacing_nm") == pytest.approx(20.0)
+    assert nominal(g, "engine.lambda_spacing_ghz") == pytest.approx(3436.1, abs=0.05)
+    assert nominal(g, "engine.lanes_per_laser_fiber") == pytest.approx(4.0)
+    assert nominal(g, "engine.fiber_reduction_pct") == pytest.approx(50.0)
+    assert nominal(g, "engine.volume") == pytest.approx(4709.25)
+    assert nominal(g, "engine.pluggable_volume") == pytest.approx(38669.15)
+    assert nominal(g, "engine.volume_reduction_pct") == pytest.approx(87.82, abs=0.005)
+    assert nominal(g, "engine.switch_bw_18") == pytest.approx(115.2)
+    assert nominal(g, "engine.xpu_bw_6") == pytest.approx(38.4)
+    assert nominal(g, "engine.savings_vs_17_pct") == pytest.approx(70.59, abs=0.005)
+    assert nominal(g, "engine.savings_vs_20_pct") == pytest.approx(75.0)
 
 
-def test_l20_checks(catalog):
-    g = graph(catalog, "passage_l20")
+def test_engine_checks(catalog):
+    g = graph(catalog, "bidi_engine")
     expected = {
-        "l20.check_port_rate": "CONSISTENT",
-        "l20.check_energy_web": "CONSISTENT",
-        "l20.check_energy_yole": "CONSISTENT",
-        "l20.check_energy_bw": "TENSION",
-        "l20.check_tdp_for_3pj": "TENSION",
-        "l20.check_energy_copies": "CONFLICT",
-        "l20.check_cwdm_spacing": "CONSISTENT",
-        "l20.check_a_lower": "CONSISTENT",
-        "l20.check_a_upper": "CONSISTENT",
-        "l20.check_b_upper": "TENSION",
-        "l20.check_fiber_reduction": "CONSISTENT",
-        "l20.check_volume": "CONSISTENT",
-        "l20.check_switch_bw": "CONSISTENT",
-        "l20.check_xpu_bw": "CONSISTENT",
-        "l20.check_savings": "CONSISTENT",
-        "l20.check_widths": "CONFLICT",
-        "l20.check_pins": "CONFLICT",
+        "engine.check_port_rate": "CONSISTENT",
+        "engine.check_energy_web": "CONSISTENT",
+        "engine.check_energy_yole": "CONSISTENT",
+        "engine.check_energy_bw": "TENSION",
+        "engine.check_tdp_for_3pj": "TENSION",
+        "engine.check_energy_copies": "CONFLICT",
+        "engine.check_cwdm_spacing": "CONSISTENT",
+        "engine.check_a_lower": "CONSISTENT",
+        "engine.check_a_upper": "CONSISTENT",
+        "engine.check_b_upper": "TENSION",
+        "engine.check_fiber_reduction": "CONSISTENT",
+        "engine.check_volume": "CONSISTENT",
+        "engine.check_switch_bw": "CONSISTENT",
+        "engine.check_xpu_bw": "CONSISTENT",
+        "engine.check_savings": "CONSISTENT",
+        "engine.check_widths": "CONFLICT",
+        "engine.check_pins": "CONFLICT",
     }
     for check_id, want in expected.items():
         assert status(g, check_id) == want, check_id
     rows = {r.hypothesis: r for r in g.support}
-    assert "l20.check_energy_web" in rows["H_l20_one_dir"].agrees
-    assert "l20.check_energy_web" in rows["H_l20_both_dirs"].disagrees
+    assert "engine.check_energy_web" in rows["H_engine_one_dir"].agrees
+    assert "engine.check_energy_web" in rows["H_engine_both_dirs"].disagrees
 
 
-def test_l20_dr_wavelength_physics(catalog):
+def test_engine_dr_wavelength_physics(catalog):
     # §14.2: 1311 nm passes with 6.5 nm clearance each side; 1331 nm fails by 13.5 nm.
-    p = physics_for(catalog, "passage_l20")
+    p = physics_for(catalog, "bidi_engine")
     assert item(p, "DR wavelength", "direction A at 1311 nm: lower") == pytest.approx(6.5)
     assert item(p, "DR wavelength", "direction A at 1311 nm: upper") == pytest.approx(6.5)
     assert item(p, "DR wavelength", "direction B at 1331 nm: upper") == pytest.approx(-13.5)
     assert p.sections[0].verdict == "EXCLUDED"
 
 
-# ---- §14.3 Passage M1000 ----------------------------------------------------------------------
+# ---- §14.3 3D photonic interposer ----------------------------------------------------------------
 
 
-def test_m1000_values(catalog):
-    g = graph(catalog, "passage_m1000")
-    assert nominal(g, "m1000.bw_fibers") == pytest.approx(114.688)
-    assert nominal(g, "m1000.per_fiber_lambdas") == pytest.approx(448.0)
-    assert nominal(g, "m1000.bw_serdes") == pytest.approx(114.688)
-    assert nominal(g, "m1000.links_total") == 256.0
-    assert nominal(g, "m1000.serdes_total") == 1024.0
-    assert nominal(g, "m1000.package_area_dims") == pytest.approx(7735.0)
-    assert nominal(g, "m1000.power_ceiling") == pytest.approx(5600.0)
-    assert nominal(g, "m1000.density_package") == pytest.approx(0.194, abs=5e-4)
-    assert nominal(g, "m1000.density_interposer") == pytest.approx(0.375)
-    assert nominal(g, "m1000.lambda_channels") == 2048.0
-    assert nominal(g, "m1000.heater_per_ring") == pytest.approx(2.6020, abs=T)
-    assert nominal(g, "m1000.heater_total") == pytest.approx(5.329, abs=5e-4)
-    for check_id in ("m1000.check_bw_pr", "m1000.check_bw_evk", "m1000.check_serdes_txrx"):
+def test_interposer_values(catalog):
+    g = graph(catalog, "photonic_interposer")
+    assert nominal(g, "interposer.bw_fibers") == pytest.approx(114.688)
+    assert nominal(g, "interposer.per_fiber_lambdas") == pytest.approx(448.0)
+    assert nominal(g, "interposer.bw_serdes") == pytest.approx(114.688)
+    assert nominal(g, "interposer.links_total") == 256.0
+    assert nominal(g, "interposer.serdes_total") == 1024.0
+    assert nominal(g, "interposer.package_area_dims") == pytest.approx(7735.0)
+    assert nominal(g, "interposer.power_ceiling") == pytest.approx(5600.0)
+    assert nominal(g, "interposer.density_package") == pytest.approx(0.194, abs=5e-4)
+    assert nominal(g, "interposer.density_interposer") == pytest.approx(0.375)
+    assert nominal(g, "interposer.lambda_channels") == 2048.0
+    assert nominal(g, "interposer.heater_per_ring") == pytest.approx(2.6020, abs=T)
+    assert nominal(g, "interposer.heater_total") == pytest.approx(5.329, abs=5e-4)
+    for check_id in (
+        "interposer.check_bw_pr",
+        "interposer.check_bw_evk",
+        "interposer.check_serdes_txrx",
+    ):
         assert status(g, check_id) == "CONSISTENT"
-    assert status(g, "m1000.check_fiber_rate_ises") == "CONFLICT"
-    assert status(g, "m1000.check_density_claim") == "TENSION"
+    assert status(g, "interposer.check_fiber_rate_ises") == "CONFLICT"
+    assert status(g, "interposer.check_density_claim") == "TENSION"
 
 
 @pytest.mark.parametrize(
-    "hypothesis, watts, share", [("H_m1000_txrx", 263.78, 17.6), ("H_m1000_per_dir", 131.89, 8.8)]
+    "hypothesis, watts, share",
+    [("H_interposer_txrx", 263.78, 17.6), ("H_interposer_per_dir", 131.89, 8.8)],
 )
-def test_m1000_io_power_hypotheses(catalog, hypothesis, watts, share):
-    g = graph(catalog, "passage_m1000", hypothesis)
-    assert nominal(g, "m1000.io_power") == pytest.approx(watts, abs=0.005)
-    assert nominal(g, "m1000.io_power_share_pct") == pytest.approx(share, abs=0.05)
+def test_interposer_io_power_hypotheses(catalog, hypothesis, watts, share):
+    g = graph(catalog, "photonic_interposer", hypothesis)
+    assert nominal(g, "interposer.io_power") == pytest.approx(watts, abs=0.005)
+    assert nominal(g, "interposer.io_power_share_pct") == pytest.approx(share, abs=0.05)
 
 
-# ---- §14.4 Passage L200 -----------------------------------------------------------------------
+# ---- §14.4 32T CPO chiplet -----------------------------------------------------------------------
 
 
-def test_l200_values_and_readings(catalog):
-    g = graph(catalog, "passage_l200")
-    assert nominal(g, "l200.bw_l200") == pytest.approx(32.0)
-    assert nominal(g, "l200.bw_l200x") == pytest.approx(64.0)
-    assert nominal(g, "l200.fibers_l200") == pytest.approx(40.0)
-    assert nominal(g, "l200.fibers_l200x") == pytest.approx(40.0)
-    assert nominal(g, "l200.package_bw") == pytest.approx(256.0)
-    assert nominal(g, "l200.per_pluggable") == pytest.approx(800.0)
+def test_chiplet_values_and_readings(catalog):
+    g = graph(catalog, "cpo_chiplet")
+    assert nominal(g, "chiplet.bw_chiplet") == pytest.approx(32.0)
+    assert nominal(g, "chiplet.bw_chiplet64") == pytest.approx(64.0)
+    assert nominal(g, "chiplet.fibers_chiplet") == pytest.approx(40.0)
+    assert nominal(g, "chiplet.fibers_chiplet64") == pytest.approx(40.0)
+    assert nominal(g, "chiplet.package_bw") == pytest.approx(256.0)
+    assert nominal(g, "chiplet.per_pluggable") == pytest.approx(800.0)
     rows = {r.hypothesis: r for r in g.support}
-    assert {"l200.check_32", "l200.check_64", "l200.check_256"} <= set(
-        rows["H_l200_payload"].agrees
+    assert {"chiplet.check_32", "chiplet.check_64", "chiplet.check_256"} <= set(
+        rows["H_chiplet_payload"].agrees
     )
-    assert {"l200.check_32", "l200.check_64"} <= set(rows["H_l200_line"].disagrees)
+    assert {"chiplet.check_32", "chiplet.check_64"} <= set(rows["H_chiplet_line"].disagrees)
 
 
-# ---- §14.5 16λ BiDi link ----------------------------------------------------------------------
+# ---- §14.5 16λ BiDi link -------------------------------------------------------------------------
 
 
 @pytest.mark.parametrize(
@@ -188,72 +193,72 @@ def test_bidi16_hypothesis_support(catalog):
     assert nominal(g, "bidi16.bw_per_dir") == pytest.approx(400.0)
 
 
-# ---- §14.6 Guide family -----------------------------------------------------------------------
+# ---- §14.6 ELS family ----------------------------------------------------------------------------
 
 
 def test_guide_values(catalog):
-    g = graph(catalog, "guide_family")
-    assert nominal(g, "guide1.fiber_power") == pytest.approx(104.0)
-    assert nominal(g, "guide1.single_package_power") == pytest.approx(1.6)
-    stacked = next(n for n in g.nodes if n.id == "guide1.stacked_power")
+    g = graph(catalog, "laser_sources")
+    assert nominal(g, "els_dwdm.fiber_power") == pytest.approx(104.0)
+    assert nominal(g, "els_dwdm.single_package_power") == pytest.approx(1.6)
+    stacked = next(n for n in g.nodes if n.id == "els_dwdm.stacked_power")
     assert (stacked.lo, stacked.hi) == pytest.approx((3.2, 3.52))
-    assert nominal(g, "guide.module_bw_needed") == pytest.approx(25.0)
-    assert nominal(g, "guide.bw_per_elsfp") == pytest.approx(5.556, abs=5e-4)
-    assert nominal(g, "guidedr.total_power") == pytest.approx(12.8)
-    assert nominal(g, "guidedr.bw") == pytest.approx(51.2)
-    assert nominal(g, "guidedr.lanes_per_fiber") == pytest.approx(4.0)
-    assert nominal(g, "guidedr.power_per_lane_dbm") == pytest.approx(16.99, abs=0.005)
-    assert nominal(g, "guidedr.power_dbm") == pytest.approx(23.01, abs=0.005)
-    assert nominal(g, "guidedr.hazard_headroom") == pytest.approx(1.49, abs=0.005)
-    assert nominal(g, "guide1.lambda_power_dbm") == pytest.approx(11.14, abs=0.005)
-    assert nominal(g, "guidedr.margin_n4") == pytest.approx(6.4398, abs=T)
-    assert nominal(g, "guidedr.max_fanout") == 17.0
-    for check_id in ("guide1.check_fiber_power", "guide.check_module_bw", "guidedr.check_hazard"):
+    assert nominal(g, "els.module_bw_needed") == pytest.approx(25.0)
+    assert nominal(g, "els.bw_per_elsfp") == pytest.approx(5.556, abs=5e-4)
+    assert nominal(g, "els_dr.total_power") == pytest.approx(12.8)
+    assert nominal(g, "els_dr.bw") == pytest.approx(51.2)
+    assert nominal(g, "els_dr.lanes_per_fiber") == pytest.approx(4.0)
+    assert nominal(g, "els_dr.power_per_lane_dbm") == pytest.approx(16.99, abs=0.005)
+    assert nominal(g, "els_dr.power_dbm") == pytest.approx(23.01, abs=0.005)
+    assert nominal(g, "els_dr.hazard_headroom") == pytest.approx(1.49, abs=0.005)
+    assert nominal(g, "els_dwdm.lambda_power_dbm") == pytest.approx(11.14, abs=0.005)
+    assert nominal(g, "els_dr.margin_n4") == pytest.approx(6.4398, abs=T)
+    assert nominal(g, "els_dr.max_fanout") == 17.0
+    for check_id in ("els_dwdm.check_fiber_power", "els.check_module_bw", "els_dr.check_hazard"):
         assert status(g, check_id) == "CONSISTENT"
-    assert status(g, "guidedr.check_lasers") == "CONFLICT"
+    assert status(g, "els_dr.check_lasers") == "CONFLICT"
 
 
 def test_guide_dr_fanout_physics(catalog):
     # §14.6: N = 4: 9.4897 / 8.8398 dBm, +6.4398 dB; N = 17: +0.1559; N = 18: -0.0923; max 17.
-    p = physics_for(catalog, "guide_family")
-    assert item(p, "Guide DR", "N = 4").startswith(
+    p = physics_for(catalog, "laser_sources")
+    assert item(p, "ELS-DR", "N = 4").startswith(
         "P_TP2,avg 9.4897 dBm, P_TP2,OMA 8.8398 dBm, M +6.4398 dB, NOT_EXCLUDED"
     )
-    assert "M +0.1559 dB, NOT_EXCLUDED" in item(p, "Guide DR", "N = 17")
-    assert "M -0.0923 dB, EXCLUDED" in item(p, "Guide DR", "N = 18")
-    assert item(p, "Guide DR", "max fan-out") == 17.0
+    assert "M +0.1559 dB, NOT_EXCLUDED" in item(p, "ELS-DR", "N = 17")
+    assert "M -0.0923 dB, EXCLUDED" in item(p, "ELS-DR", "N = 18")
+    assert item(p, "ELS-DR", "max fan-out") == 17.0
 
 
-# ---- §14.7 OCP trays --------------------------------------------------------------------------
+# ---- §14.7 OCP trays -----------------------------------------------------------------------------
 
 
 def test_tray_hypotheses(catalog):
     g = graph(catalog, "ocp_trays")
     assert nominal(g, "trays.switch_per_engine") == pytest.approx(25.6)
-    assert nominal(g, "trays.engine_in_l20s") == pytest.approx(4.0)
+    assert nominal(g, "trays.engine_in_bidi_engines") == pytest.approx(4.0)
     rows = {r.hypothesis: r for r in g.support}
-    assert {"trays.check_guidedr_release", "trays.check_xpu_guidedr_counterpoint"} <= set(
+    assert {"trays.check_els_dr_release", "trays.check_xpu_els_dr_counterpoint"} <= set(
         rows["H_dir"].agrees
     )
-    assert {"trays.check_guidedr_counterpoint", "trays.check_ine_aggregate"} <= set(
+    assert {"trays.check_els_dr_counterpoint", "trays.check_ine_aggregate"} <= set(
         rows["H_agg"].agrees
     )
     assert {"trays.check_height_prnewswire", "trays.check_height_futurum"} <= set(
         rows["H_xpu_1u"].agrees
     )
-    assert {"trays.check_height_lmcom", "trays.check_height_counterpoint"} <= set(
+    assert {"trays.check_height_vendor_site", "trays.check_height_counterpoint"} <= set(
         rows["H_xpu_2u"].agrees
     )
     h_dir = graph(catalog, "ocp_trays", "H_dir")
     assert nominal(h_dir, "trays.switch_lanes") == 1024.0
-    assert nominal(h_dir, "trays.switch_guidedr_needed") == 4.0
-    assert nominal(h_dir, "trays.xpu_guidedr_needed") == 2.0
+    assert nominal(h_dir, "trays.switch_els_dr_needed") == 4.0
+    assert nominal(h_dir, "trays.xpu_els_dr_needed") == 2.0
     h_agg = graph(catalog, "ocp_trays", "H_agg")
     assert nominal(h_agg, "trays.switch_lanes") == 512.0
-    assert nominal(h_agg, "trays.switch_guidedr_needed") == 2.0
+    assert nominal(h_agg, "trays.switch_els_dr_needed") == 2.0
 
 
-# ---- §14.8 Pod --------------------------------------------------------------------------------
+# ---- §14.8 Pod -----------------------------------------------------------------------------------
 
 
 def test_pod(catalog):
@@ -274,19 +279,19 @@ def test_pod(catalog):
     assert fibers.status == "TENSION" and fibers.gap_rel == pytest.approx(0.26, abs=0.005)
 
 
-# ---- §14.9 Reference rack ---------------------------------------------------------------------
+# ---- §14.9 Reference rack ------------------------------------------------------------------------
 
 
 def test_rack_graph(catalog):
     g = graph(catalog, "reference_rack")
     assert nominal(g, "rack.links") == 8192.0
     assert nominal(g, "rack.duplex_fibers") == 16384.0
-    assert nominal(g, "rack.guidedr") == 64.0
+    assert nominal(g, "rack.els_dr") == 64.0
     assert nominal(g, "rack.fiber_db") == pytest.approx(0.0016)
     assert nominal(graph(catalog, "reference_rack", "H_2U"), "rack.ou_used") == 42.0
     assert nominal(graph(catalog, "reference_rack", "H_1U"), "rack.ou_used") == 26.0
-    channel = graph(catalog, "reference_rack", "H_vclick_channel")
-    module = graph(catalog, "reference_rack", "H_vclick_module")
+    channel = graph(catalog, "reference_rack", "H_fau_channel")
+    module = graph(catalog, "reference_rack", "H_fau_module")
     assert nominal(channel, "rack.margin") == pytest.approx(-1.0016, abs=T)
     assert nominal(module, "rack.margin") == pytest.approx(1.9984, abs=T)
     assert status(channel, "rack.check_margin") == "TENSION"
@@ -310,7 +315,7 @@ def test_rack_physics(catalog):
     assert item(p, "Rack yield", "link yield 0.99999") == pytest.approx(0.9213, abs=T)
     assert item(p, "Rack yield", "99% rack") == pytest.approx(0.99999877, abs=5e-9)
     assert item(p, "Rack yield", "one-sided z") == pytest.approx(4.712, abs=5e-4)
-    assert item(p, "Single-tier", "Guide DR modules") == 64.0
+    assert item(p, "Single-tier", "ELS-DR modules") == 64.0
 
 
 def test_every_product_evaluates(catalog):
@@ -332,4 +337,4 @@ def test_every_physics_evaluation_runs_and_labels_its_numbers():
         for section in physics.sections:
             assert section.title and section.items, (product, section.title)
             assert all(isinstance(i.source_class, SourceClass) for i in section.items)
-    assert physics_for(catalog, "vclick") is None
+    assert physics_for(catalog, "fiber_array_unit") is None

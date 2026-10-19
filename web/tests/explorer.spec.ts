@@ -17,11 +17,11 @@ const SCENES: [string, string][] = [
   ['reference_rack', 'Rack'],
   ['switch_tray', 'Rack › Switch tray'],
   ['xpu_tray', 'Rack › XPU tray'],
-  ['passage_l20', 'Rack › Switch tray › Engine'],
-  ['l20_bidi_link', 'Rack › Switch tray › Engine › BiDi link'],
-  ['passage_m1000', 'M1000'],
-  ['passage_l200', 'L200'],
-  ['guide_family', 'Rack › Switch tray › Guide DR'],
+  ['bidi_engine', 'Rack › Switch tray › Engine'],
+  ['bidi_link', 'Rack › Switch tray › Engine › BiDi link'],
+  ['photonic_interposer', 'interposer'],
+  ['cpo_chiplet', '32T chiplet'],
+  ['laser_sources', 'Rack › Switch tray › ELS-DR'],
   ['pic_region', 'Rack › Switch tray › Engine › PIC'],
   ['ring_section', 'Rack › Switch tray › Engine › PIC › Ring'],
   ['photonic_processor', 'Processor'],
@@ -34,19 +34,19 @@ test('every scene renders from the API with its breadcrumb, spec sheet and indep
     await expect(page.getByTestId('breadcrumb')).toHaveText(crumbs.replaceAll(' › ', ''))
     await expect(page.getByTestId('spec-sheet')).toBeVisible()
     await expect(page.getByTestId('independence')).toHaveText(
-      'Independent reconstruction from public information. Not affiliated with or endorsed by Lightmatter. Product names belong to their owners.',
+      'Independent model built from public information. Not affiliated with or endorsed by any company whose publications are cited.',
     )
     await page.screenshot({ path: img(`scene_${scene}`) })
   }
 })
 
-test('L20: exploded view, then section view with caps', async ({ page }) => {
+test('BiDi engine: exploded view, then section view with caps', async ({ page }) => {
   test.setTimeout(300_000)
-  await open(page, 'scene=passage_l20&tab=physics')
+  await open(page, 'scene=bidi_engine&tab=physics')
   await page.keyboard.press('e')
   await expect(page.getByRole('slider', { name: 'Explode' })).toHaveAttribute('aria-valuenow', '1', { timeout: 10_000 })
   await settle(page)
-  await page.screenshot({ path: img('l20_exploded') })
+  await page.screenshot({ path: img('engine_exploded') })
   await page.keyboard.press('e')
   await expect(page.getByRole('slider', { name: 'Explode' })).toHaveAttribute('aria-valuenow', '0', { timeout: 10_000 })
   await page.keyboard.press('s')
@@ -57,12 +57,12 @@ test('L20: exploded view, then section view with caps', async ({ page }) => {
   await page.screenshot({ path: img('section') })
 })
 
-test('measure the L20 outline: 37.5 mm, the OFC 2026 length', async ({ page }) => {
+test('measure the BiDi engine outline: 37.5 mm, the OFC 2026 length', async ({ page }) => {
   test.setTimeout(300_000)
-  await open(page, 'scene=passage_l20&tab=physics')
+  await open(page, 'scene=bidi_engine&tab=physics')
   await page.keyboard.press('m')
   const corner = (signs: number[]) =>
-    page.evaluate((s) => (window as unknown as { __oicd: { corner: (p: string, s: number[]) => { x: number; y: number } } }).__oicd.corner('l20g.outline', s), signs)
+    page.evaluate((s) => (window as unknown as { __oicd: { corner: (p: string, s: number[]) => { x: number; y: number } } }).__oicd.corner('eng.outline', s), signs)
   const a = await corner([-1, -1, 1])
   const b = await corner([1, -1, 1])
   await page.mouse.click(a.x + 4, a.y + 2)
@@ -80,7 +80,7 @@ test('semantic zoom from the rack down to the ring cross-section', async ({ page
     await settle(page)
   }
   await zoomInto(/^CPO switch trays/, 'switch_tray')
-  await zoomInto(/^Passage BiDi engines/, 'passage_l20')
+  await zoomInto(/^BiDi engines/, 'bidi_engine')
   await zoomInto(/^photonic IC \(PIC\)/, 'pic_region')
   await zoomInto(/^ring modulator \(MRM\)/, 'ring_section')
   await expect(page.getByTestId('breadcrumb')).toHaveText('RackSwitch trayEnginePICRing')
@@ -95,21 +95,21 @@ test('command palette reaches products and analyses', async ({ page }) => {
   test.setTimeout(300_000)
   await open(page, 'scene=reference_rack')
   await page.keyboard.press('ControlOrMeta+k')
-  await page.keyboard.type('Guide, Guide 1')
+  await page.keyboard.type('external laser sources')
   await page.keyboard.press('Enter')
-  await expect(page.locator('.viewport')).toHaveAttribute('data-scene', 'guide_family', { timeout: 120_000 })
+  await expect(page.locator('.viewport')).toHaveAttribute('data-scene', 'laser_sources', { timeout: 120_000 })
   await page.keyboard.press('ControlOrMeta+k')
   await page.keyboard.type('analysis spectrum')
   await page.keyboard.press('Enter')
   await expect(page.getByTestId('tab-spectrum')).toHaveAttribute('data-state', 'active')
 })
 
-test('rack reference plane: the vClick in the module flips EXCLUDED to NOT_EXCLUDED', async ({ page }) => {
+test('rack reference plane: the FAU in the module flips EXCLUDED to NOT_EXCLUDED', async ({ page }) => {
   test.setTimeout(300_000)
   await open(page, 'scene=reference_rack&tab=physics')
   await expect(page.getByTestId('overlay-verdict')).toHaveAttribute('data-status', 'EXCLUDED')
   await expect(page.getByTestId('overlay-margin')).toHaveText('−1.0016')
-  await page.getByTestId('case-H_vclick_module').click()
+  await page.getByTestId('case-H_fau_module').click()
   await expect(page.getByTestId('overlay-verdict')).toHaveAttribute('data-status', 'NOT_EXCLUDED')
   await expect(page.getByTestId('overlay-margin')).toHaveText('+1.9984')
   await settle(page)
@@ -162,7 +162,7 @@ test('yield: the model card §11 case', async ({ page }) => {
 
 test('spectrum: the worst receive channel moves with the ring FSR hypothesis', async ({ page }) => {
   test.setTimeout(300_000)
-  await open(page, 'scene=l20_bidi_link&tab=spectrum')
+  await open(page, 'scene=bidi_link&tab=spectrum')
   await expect(page.getByTestId('spectrum-worst')).toContainText('3:')
   await page.getByRole('radio', { name: 'H_fsr32' }).click()
   await expect(page.getByTestId('spectrum-worst')).toContainText('7:')

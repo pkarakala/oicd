@@ -36,7 +36,9 @@ P = palette("light")
 STATUS = {s.key: s.color for s in P.status}
 CLASS = {c.key: c.color for c in P.classes}
 INK, MUTED, GRID = P.ink, P.muted, P.grid
-FOOT = "OICD (independent reconstruction from public information; not affiliated with Lightmatter)"
+FOOT = (
+    "OICD: independent model built from public information; not affiliated with any cited company"
+)
 
 plt.rcParams.update(
     {
@@ -296,9 +298,7 @@ def fig_rack_planes(fig: plt.Figure) -> str:
     labels, margins = [], []
     for p in result.paths:
         labels.append(
-            "vClick in module"
-            if p.vclick_loss_db is None
-            else f"vClick {p.vclick_loss_db:g} dB in channel"
+            "FAU in module" if p.fau_loss_db is None else f"FAU {p.fau_loss_db:g} dB in channel"
         )
         margins.append(p.report.margin_db)
     ax = fig.add_subplot()

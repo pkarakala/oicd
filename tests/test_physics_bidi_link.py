@@ -29,7 +29,7 @@ def card_case():
     return evaluate_bidi_link(
         BidiLinkRequest.model_validate(
             {
-                "name": "L20-style pair on the draft DR budget",
+                "name": "BiDi engine-style pair on the draft DR budget",
                 "a_to_b": _direction("A (1311 nm)", 1311.0),
                 "b_to_a": _direction("B (1331 nm)", 1331.0),
                 "diplexer_il_db": 1.0,

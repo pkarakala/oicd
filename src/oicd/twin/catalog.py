@@ -2,7 +2,7 @@
 per product, loaded from catalog/products/*.toml with tomllib, and part geometry from
 catalog/geometry/*.toml.
 
-Node ids are global across files, so a product can derive from another file's facts (the L20
+Node ids are global across files, so a product can derive from another file's facts (the BiDi engine
 twin uses the draft IEEE 802.3dj wavelength range, for example). Validation covers unique ids,
 every citation key in references.bib, inputs that resolve to numeric nodes, formula arity and
 units, no cycles, checks between nodes of the same unit, and hypotheses that pin assumptions
@@ -527,13 +527,10 @@ def validate_geometry_sources(scene: GeometryScene, catalog: Catalog) -> list[st
         for p in scene.part
         if p.sourced and p.dims_source not in catalog.nodes
     ]
-    issues += [
-        f"{p.id}: dims_axes claim a source but {p.dims_source!r} is unverified"
-        for p in scene.part
-        if p.sourced
-        and isinstance(catalog.nodes.get(p.dims_source), Fact)
-        and not catalog.nodes[p.dims_source].verified
-    ]
+    for p in scene.part:
+        source = catalog.nodes.get(p.dims_source)
+        if p.sourced and isinstance(source, Fact) and not source.verified:
+            issues.append(f"{p.id}: dims_axes claim a source but {p.dims_source!r} is unverified")
     issues += [
         f"tour stop at {t.part}: node {t.node!r} is not in the catalog"
         for t in scene.tour

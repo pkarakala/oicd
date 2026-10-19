@@ -46,7 +46,7 @@ def test_overlays_name_real_parts_and_stay_on_their_paths(scene):
 
 
 def test_bidi_link_case():
-    o = overlay("l20_bidi_link")
+    o = overlay("bidi_link")
     assert o.verdict == "EXCLUDED"
     assert o.margin_db == pytest.approx(0.49955, abs=5e-6)
     a, b, ghost_a, ghost_b = o.paths
@@ -69,27 +69,27 @@ def test_bidi_link_case():
 
 
 def test_bidi_link_ghost_grows_without_isolation():
-    o = overlay("l20_bidi_link", isolation_db=0.0)
+    o = overlay("bidi_link", isolation_db=0.0)
     assert o.paths[2].samples[0].power_mw == pytest.approx(0.048978, abs=1e-6)
     with pytest.raises(OverlayError):
-        overlay("l20_bidi_link", isolation_db=61.0)
+        overlay("bidi_link", isolation_db=61.0)
 
 
 @pytest.mark.parametrize(
     "case, margin, verdict",
     [
-        ("H_vclick_channel_1p5", -1.0016, "EXCLUDED"),
-        ("H_vclick_channel_1p0", -0.0016, "EXCLUDED"),
-        ("H_vclick_module", 1.9984, "NOT_EXCLUDED"),
+        ("H_fau_channel_1p5", -1.0016, "EXCLUDED"),
+        ("H_fau_channel_1p0", -0.0016, "EXCLUDED"),
+        ("H_fau_module", 1.9984, "NOT_EXCLUDED"),
     ],
 )
 def test_rack_reference_plane_cases(case, margin, verdict):
     for scene in ("reference_rack", "switch_tray", "xpu_tray"):
         o = overlay(scene, case=case)
         assert [c.id for c in o.cases] == [
-            "H_vclick_channel_1p5",
-            "H_vclick_channel_1p0",
-            "H_vclick_module",
+            "H_fau_channel_1p5",
+            "H_fau_channel_1p0",
+            "H_fau_module",
         ]
         assert o.case == case and o.verdict == verdict
         assert o.margin_db == pytest.approx(margin, abs=1e-9)
@@ -97,7 +97,7 @@ def test_rack_reference_plane_cases(case, margin, verdict):
 
 
 def test_rack_default_case_and_unknown_case():
-    assert overlay("reference_rack").case == "H_vclick_channel_1p5"
+    assert overlay("reference_rack").case == "H_fau_channel_1p5"
     with pytest.raises(OverlayError, match="unknown case"):
         overlay("reference_rack", case="H_nowhere")
 
@@ -108,11 +108,11 @@ def test_heaters_and_lasers():
         heater = next(v for v in overlay(scene).values if v.part == part)
         assert heater.power_mw == pytest.approx(2.6020, abs=5e-5)
         assert heater.intensity == pytest.approx(2.6020 / 23.4176, abs=1e-5)
-    guide = overlay("guide_family")
-    assert guide.reference_mw == 200.0 and guide.reference_kind == "AVERAGE"
-    # §14.6: Guide 1 8 × 13 mW = 104 mW, Guide 100 mW, both against the Guide DR's 200 mW
-    assert [p.samples[0].brightness for p in guide.paths] == pytest.approx([1.0, 0.52, 0.5])
-    assert guide.values[0].power_mw == pytest.approx(12800.0)
+    lasers = overlay("laser_sources")
+    assert lasers.reference_mw == 200.0 and lasers.reference_kind == "AVERAGE"
+    # §14.6: ELS-DWDM 8 × 13 mW = 104 mW, ELS-DWDM00 mW, both against the ELS-DR's 200 mW
+    assert [p.samples[0].brightness for p in lasers.paths] == pytest.approx([1.0, 0.52, 0.5])
+    assert lasers.values[0].power_mw == pytest.approx(12800.0)
 
 
 def test_processor_overlay():
@@ -125,14 +125,14 @@ def test_processor_overlay():
 
 def test_overlay_endpoint(client):
     rack = client.get("/overlay/reference_rack").json()
-    assert rack["verdict"] == "EXCLUDED" and rack["case"] == "H_vclick_channel_1p5"
-    flipped = client.get("/overlay/reference_rack", params={"case": "H_vclick_module"}).json()
+    assert rack["verdict"] == "EXCLUDED" and rack["case"] == "H_fau_channel_1p5"
+    flipped = client.get("/overlay/reference_rack", params={"case": "H_fau_module"}).json()
     assert flipped["verdict"] == "NOT_EXCLUDED"
     assert flipped["margin_db"] == pytest.approx(1.9984, abs=1e-9)
     dark = client.get("/overlay/reference_rack", params={"mode": "dark"}).json()
     assert dark["mode"] == "dark"
     assert client.get("/overlay/reference_rack", params={"case": "H_x"}).status_code == 422
-    assert client.get("/overlay/l20_bidi_link", params={"isolation_db": 99}).status_code == 422
+    assert client.get("/overlay/bidi_link", params={"isolation_db": 99}).status_code == 422
     assert client.get("/overlay/no_such_scene").status_code == 404
-    first = client.get("/overlay/l20_bidi_link").content
-    assert client.get("/overlay/l20_bidi_link").content == first
+    first = client.get("/overlay/bidi_link").content
+    assert client.get("/overlay/bidi_link").content == first

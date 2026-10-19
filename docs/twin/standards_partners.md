@@ -1,6 +1,6 @@
 # Standards and partner parts
 
-_Independent reconstruction from public information. Not affiliated with or endorsed by Lightmatter. Product names belong to their owners._
+_Independent model built from public information. Not affiliated with or endorsed by any company whose publications are cited._
 
 ORv3 rack and power shelf, OCP NIC 3.0, OIF ELSFP and 3.2T CPO, ITU-T grids and fiber, the draft IEEE 802.3dj DR budget, PRIZM TMT and the OCP open silicon photonics vision.
 

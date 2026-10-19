@@ -43,8 +43,8 @@ ALLOWED_ORIGINS = ["http://localhost:5173"]
 app = FastAPI(
     title="OICD feasibility engine",
     version="0.3.0",
-    description="Independent reconstruction from public information. Not affiliated with or "
-    "endorsed by Lightmatter. Product names belong to their owners.",
+    description="Independent model built from public information. Not affiliated with or "
+    "endorsed by any company whose publications are cited.",
 )
 app.add_middleware(
     CORSMiddleware,

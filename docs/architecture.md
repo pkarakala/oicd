@@ -1,6 +1,6 @@
 # Architecture
 
-_Independent reconstruction from public information. Not affiliated with or endorsed by Lightmatter. Product names belong to their owners._
+_Independent model built from public information. Not affiliated with or endorsed by any company whose publications are cited._
 
 ```
 references.bib ─┐                      docs/model_card.md (the spec: equations, hand cases)

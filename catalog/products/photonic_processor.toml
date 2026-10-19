@@ -1,6 +1,6 @@
 # Photonic processor (Nature 2025): public facts with exact quotes (brief 05 phase 4 fact check, 2026-10-18).
-# Independent reconstruction from public information. Not affiliated with or endorsed by
-# Lightmatter. Product names belong to their owners.
+# Independent model built from public information. Not affiliated with or endorsed by
+# any company whose publications are cited.
 
 [product]
 name = "Photonic processor (Nature 2025)"
@@ -16,11 +16,11 @@ value = 6.0
 bound = "exact"
 unit = "count"
 quote = "The processor integrates six chips within a single package"
-cite = "lm_blog_newcomputer"
+cite = "vendor_blog_newcomputer"
 source_class = "vendor_claim"
 verified = true
 location = "blog section 'A Fundamental Departure', paragraph 4"
-note = "Evidence: text. Appendix attributes this to ahmed2025_nature (PEER_REVIEWED), whose main text is paywalled and was not seen. The word 'six' was found only in the Lightmatter blog (vendor_claim, Nick Harris, 2025-04-09). Peer-reviewed material agrees on the parts: Fig. 1b caption 'two 12-nm control chiplets ... and four 349-mm2 photonic chiplets' and SI p.5 'two DCIs ... four PTCs' (2 + 4 = 6)."
+note = "Evidence: text. Appendix attributes this to ahmed2025_nature (PEER_REVIEWED), whose main text is paywalled and was not seen. The word 'six' was found only in the vendor blog (vendor_claim, Nick Harris, 2025-04-09). Peer-reviewed material agrees on the parts: Fig. 1b caption 'two 12-nm control chiplets ... and four 349-mm2 photonic chiplets' and SI p.5 'two DCIs ... four PTCs' (2 + 4 = 6)."
 
 [[fact]]
 id = "ptc.ptc_count"
@@ -215,7 +215,7 @@ cite = "ahmed2025_nature"
 source_class = "peer_reviewed"
 verified = true
 location = "Supplementary Information; SI Table S3, row 'This work (2024)', p.10"
-note = "Evidence: text. The Appendix quotes a main-text sentence that could not be checked (main text paywalled). The values are in SI Table S3, and the Lightmatter blog (lm_blog_newcomputer) words it as 'the processor performs 65.5 trillion Adaptive Block Floating-Point 16-bit (ABFP) operations per second, consuming only 78 watts of electrical power and 1.6 watts of optical power'. Arithmetic check (inference): 65,536 MACs/cycle x 2 ops x 500 MHz = 65.5 TOPS."
+note = "Evidence: text. The Appendix quotes a main-text sentence that could not be checked (main text paywalled). The values are in SI Table S3, and the vendor blog (vendor_blog_newcomputer) words it as 'the processor performs 65.5 trillion Adaptive Block Floating-Point 16-bit (ABFP) operations per second, consuming only 78 watts of electrical power and 1.6 watts of optical power'. Arithmetic check (inference): 65,536 MACs/cycle x 2 ops x 500 MHz = 65.5 TOPS."
 
 [[fact]]
 id = "ptc.power_electrical"
@@ -228,7 +228,7 @@ cite = "ahmed2025_nature"
 source_class = "peer_reviewed"
 verified = true
 location = "Supplementary Information; SI Table S3, row 'This work (2024)', p.10"
-note = "Evidence: text. The Appendix quotes a main-text sentence that could not be checked (main text paywalled). The values are in SI Table S3, and the Lightmatter blog (lm_blog_newcomputer) words it as 'the processor performs 65.5 trillion Adaptive Block Floating-Point 16-bit (ABFP) operations per second, consuming only 78 watts of electrical power and 1.6 watts of optical power'. SI Table S4 lists TDP '78 avg, 150 peak'."
+note = "Evidence: text. The Appendix quotes a main-text sentence that could not be checked (main text paywalled). The values are in SI Table S3, and the vendor blog (vendor_blog_newcomputer) words it as 'the processor performs 65.5 trillion Adaptive Block Floating-Point 16-bit (ABFP) operations per second, consuming only 78 watts of electrical power and 1.6 watts of optical power'. SI Table S4 lists TDP '78 avg, 150 peak'."
 
 [[fact]]
 id = "ptc.power_optical"
@@ -241,7 +241,7 @@ cite = "ahmed2025_nature"
 source_class = "peer_reviewed"
 verified = true
 location = "Supplementary Information; SI Table S3, row 'This work (2024)', p.10"
-note = "Evidence: text. The Appendix quotes a main-text sentence that could not be checked (main text paywalled). The values are in SI Table S3, and the Lightmatter blog (lm_blog_newcomputer) words it as 'the processor performs 65.5 trillion Adaptive Block Floating-Point 16-bit (ABFP) operations per second, consuming only 78 watts of electrical power and 1.6 watts of optical power'."
+note = "Evidence: text. The Appendix quotes a main-text sentence that could not be checked (main text paywalled). The values are in SI Table S3, and the vendor blog (vendor_blog_newcomputer) words it as 'the processor performs 65.5 trillion Adaptive Block Floating-Point 16-bit (ABFP) operations per second, consuming only 78 watts of electrical power and 1.6 watts of optical power'."
 
 [[fact]]
 id = "ptc.clock_sustained"
@@ -658,7 +658,7 @@ cite = "ahmed2025_nature"
 source_class = "peer_reviewed"
 verified = true
 location = "Figure 3 page; Fig. 3b caption"
-note = "Evidence: text. Supports multiplication on photocurrent: each weight cell detects light differentially and a resistive (R-2R ladder in the Fig. 3b image) DAC sets the weight on the current; the MZI appears only in the vector encoder (Fig. 3c caption), so this is not an MZI mesh. Contrast: the Lightmatter Vision page (lm_web_ptc) describes Envise as 'when light passes through an optical system, interference naturally computes linear transformations', which does not match this architecture."
+note = "Evidence: text. Supports multiplication on photocurrent: each weight cell detects light differentially and a resistive (R-2R ladder in the Fig. 3b image) DAC sets the weight on the current; the MZI appears only in the vector encoder (Fig. 3c caption), so this is not an MZI mesh. Contrast: the vendor Vision page (vendor_web_ptc) describes photonic processor as 'when light passes through an optical system, interference naturally computes linear transformations', which does not match this architecture."
 
 [[fact]]
 id = "ptc.rowline_current_sum"
@@ -804,17 +804,17 @@ note = "Evidence: text."
 
 [[fact]]
 id = "ptc.c262_web"
-quantity = "vendor web: Envise efficiency, operations per watt"
+quantity = "vendor web: photonic processor efficiency, operations per watt"
 value = 262.0
 bound = "exact"
 unit = "TOPS/W"
 quote = "262T Ops/Watt"
-cite = "lm_web_ptc"
+cite = "vendor_web_ptc"
 source_class = "vendor_claim"
 verified = true
 conflicts_with = ["ptc.c262_paper"]
-location = "Vision page, Envise block 'A new kind of computer', stat 'Efficiency'"
-note = "Evidence: text. The exact phrase '262 trillion operations per watt' is in Lightmatter's llms.txt (see ptc.c262_llms); the Vision page shows '262T Ops/Watt'. The SI of the paper contains BOTH 262 figures: '262 TOPS of ABFP16 throughput' at the 2 GHz peak clock, and '262 TOPS/Watt' for the PTC vector/weight encoding energy only (0.25 W; see ptc.ptc_only_tops_per_w). The web figure has the same value as that PTC-only encoding efficiency (inference that it is the same metric) and is far from whole-processor efficiency, which SI Table S4 gives as '0.81 avg, 1.75 peak' TOPS/W. The web page does not state any scope."
+location = "Vision page, photonic processor block 'A new kind of computer', stat 'Efficiency'"
+note = "Evidence: text. The exact phrase '262 trillion operations per watt' is in the vendor's llms.txt (see ptc.c262_llms); the Vision page shows '262T Ops/Watt'. The SI of the paper contains BOTH 262 figures: '262 TOPS of ABFP16 throughput' at the 2 GHz peak clock, and '262 TOPS/Watt' for the PTC vector/weight encoding energy only (0.25 W; see ptc.ptc_only_tops_per_w). The web figure has the same value as that PTC-only encoding efficiency (inference that it is the same metric) and is far from whole-processor efficiency, which SI Table S4 gives as '0.81 avg, 1.75 peak' TOPS/W. The web page does not state any scope."
 
 [[fact]]
 id = "ptc.c262_paper"
@@ -836,7 +836,7 @@ value = 1000000.0
 bound = "approx"
 unit = "count"
 quote = "50 billion transistors spanning 6 chips with 1 million photonic components"
-cite = "lm_blog_newcomputer"
+cite = "vendor_blog_newcomputer"
 source_class = "vendor_claim"
 verified = true
 conflicts_with = ["ptc.components_200k"]
@@ -850,11 +850,11 @@ value = 200000.0
 bound = "min"
 unit = "count"
 quote = "four photonic chips manipulate 512 light beams through over 200,000 optical components"
-cite = "lm_web_ptc"
+cite = "vendor_web_ptc"
 source_class = "vendor_claim"
 verified = true
-location = "Vision page, Envise block 'A new kind of computer', paragraph 1"
-note = "Evidence: text. Same page's stat block: 'Photonics 200K+ Components'; llms.txt: 'more than 200,000 photonic components'. Both counts are Lightmatter's own and differ by about 5x; neither appears in the accessible peer-reviewed material, and neither page defines what is counted."
+location = "Vision page, photonic processor block 'A new kind of computer', paragraph 1"
+note = "Evidence: text. Same page's stat block: 'Photonics 200K+ Components'; llms.txt: 'more than 200,000 photonic components'. Both counts are the vendor's own and differ by about 5x; neither appears in the accessible peer-reviewed material, and neither page defines what is counted."
 
 [[fact]]
 id = "ptc.abfp_ref_title_authors"
@@ -866,14 +866,14 @@ cite = "basumallik2022_abfp"
 source_class = "vendor_claim"
 verified = true
 location = "p.1, title and author line (arXiv:2205.06287v1, 12 May 2022)"
-note = "Evidence: text. Classed vendor_claim: arXiv preprint (v1) by Lightmatter authors; peer-review status not established in this run. ahmed2025_nature cites it as a preprint."
+note = "Evidence: text. Classed vendor_claim: arXiv preprint (v1) by the vendor authors; peer-review status not established in this run. ahmed2025_nature cites it as a preprint."
 
 [[fact]]
 id = "ptc.abfp_ref_affiliation"
 quantity = "basumallik2022_abfp authors' affiliation"
 bound = "exact"
 unit = "text"
-quote = "All the authors are afﬁliated with Lightmatter, Inc., Boston, Massachusetts, USA"
+quote = "All the authors are afﬁliated with [the vendor], Inc., Boston, Massachusetts, USA"
 cite = "basumallik2022_abfp"
 source_class = "vendor_claim"
 verified = true
@@ -905,8 +905,8 @@ location = "p.1, title and author line (arXiv:1610.02365v1)"
 note = "Evidence: text. Harris is joint first author, not just a co-author: '⋆These authors contributed equally to this work.' (marks Shen and Harris); author contributions: 'N.H., M.P., and Y.S. performed the experiment.'"
 
 [[fact]]
-id = "ptc.shen2017_not_lightmatter"
-quantity = "shen2017 affiliations (no Lightmatter)"
+id = "ptc.shen2017_not_this_design"
+quantity = "shen2017 affiliations (no the vendor)"
 bound = "exact"
 unit = "text"
 quote = "1Research Laboratory of Electronics, Massachusetts Institute of Technology, Cambridge, MA 02139, USA"
@@ -914,21 +914,21 @@ cite = "shen2017"
 source_class = "peer_reviewed"
 verified = true
 location = "p.1, affiliation list"
-note = "Evidence: text. Affiliations are MIT (Research Laboratory of Electronics, Mathematics, Biology), Coriant Advanced Technology and Twitter Inc.; Lightmatter does not appear. 'Not Lightmatter work' is supported by the affiliations, not by an explicit statement."
+note = "Evidence: text. Affiliations are MIT (Research Laboratory of Electronics, Mathematics, Biology), Coriant Advanced Technology and Twitter Inc.; the vendor does not appear. 'Not the vendor work' is supported by the affiliations, not by an explicit statement."
 
 [[fact]]
 id = "ptc.c262_llms"
-quantity = "vendor llms.txt: Envise operations per watt (exact Appendix phrase)"
+quantity = "vendor llms.txt: photonic processor operations per watt (exact Appendix phrase)"
 value = 262.0
 bound = "exact"
 unit = "TOPS/W"
-quote = "Envise demonstrates 262 trillion operations per watt, 200 picoseconds of latency per matrix-vector product, more than 200,000 photonic components, and 50 billion electronic transistors."
-cite = "lm_llms_txt"
+quote = "[photonic processor] demonstrates 262 trillion operations per watt, 200 picoseconds of latency per matrix-vector product, more than 200,000 photonic components, and 50 billion electronic transistors."
+cite = "vendor_llms_txt"
 source_class = "vendor_claim"
 verified = true
 conflicts_with = ["ptc.c262_paper"]
 location = "llms.txt, section 'Industry Leadership', entry 'Photonic AI Acceleration Performance'"
-note = "Evidence: text. Source of the exact Appendix wording. llms.txt links this entry to https://lightmatter.co/, but the current home page no longer carries it (saved as SRC/lm_web_home); the claims are on /vision/ (lm_web_ptc)."
+note = "Evidence: text. Source of the exact Appendix wording. llms.txt links this entry to https://lightmatter.co/, but the current home page no longer carries it (saved as SRC/lm_web_home); the claims are on /vision/ (vendor_web_ptc)."
 
 [[fact]]
 id = "ptc.ptc_only_tops_per_w"
@@ -993,7 +993,7 @@ cite = "ahmed2025_nature"
 source_class = "peer_reviewed"
 verified = true
 location = "Supplementary Information; SI section VI, p.11"
-note = "Evidence: text. The Vision page (lm_web_ptc) shows this as 'Latency 200ps Per matrix-vector product', but the SI says computational latency 'is currently dominated by the communication latency of the PCIe 4.0 IP (milliseconds) and digital pipeline'."
+note = "Evidence: text. The Vision page (vendor_web_ptc) shows this as 'Latency 200ps Per matrix-vector product', but the SI says computational latency 'is currently dominated by the communication latency of the PCIe 4.0 IP (milliseconds) and digital pipeline'."
 
 [[fact]]
 id = "ptc.ptc_area"
@@ -1274,7 +1274,7 @@ quantity = "vendor wording: analog signal amplified by G before the ADC, G divid
 bound = "exact"
 unit = "text"
 quote = "physically amplified by a gain factor, G, before it hits the ADC"
-cite = "lm_blog_newcomputer"
+cite = "vendor_blog_newcomputer"
 source_class = "vendor_claim"
 verified = true
 location = "blog section 'Behind the Scenes', paragraph 2"
@@ -1290,7 +1290,7 @@ cite = "basumallik2022_abfp"
 source_class = "vendor_claim"
 verified = true
 location = "Section III.A, p.3"
-note = "Evidence: text. From the 2022 Lightmatter preprint; the Nature SI writes only 'round' with no tie rule, so this may or may not match the hardware or emulator used for the Nature paper."
+note = "Evidence: text. From the 2022 the vendor preprint; the Nature SI writes only 'round' with no tie rule, so this may or may not match the hardware or emulator used for the Nature paper."
 
 [[fact]]
 id = "ptc.abfp_output_norm"

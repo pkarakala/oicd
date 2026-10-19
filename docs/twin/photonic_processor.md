@@ -1,6 +1,6 @@
 # Photonic processor (Nature 2025)
 
-_Independent reconstruction from public information. Not affiliated with or endorsed by Lightmatter. Product names belong to their owners._
+_Independent model built from public information. Not affiliated with or endorsed by any company whose publications are cited._
 
 Six-chip photonic processor: four photonic tensor cores under two control dies, running neural networks in adaptive block floating point (peer-reviewed, vendor-authored).
 
@@ -33,17 +33,17 @@ Status: Published in Nature 640, 368 to 374 (2025). Catalog file `catalog/produc
 | output ADC sample rate | ≤ 2 GS/s | PEER_REVIEWED (not verified) | [ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x) |
 | bumps per control die (top side of the interposer) | 25000 | PEER_REVIEWED | [ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x) |
 | bumps per PTC (bottom side of the interposer) | 6000 | PEER_REVIEWED | [ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x) |
-| vendor llms.txt: Envise operations per watt (exact Appendix phrase) | 262 TOPS/W | VENDOR_CLAIM | [lm_llms_txt](https://lightmatter.co/llms.txt) |
+| vendor llms.txt: photonic processor operations per watt (exact Appendix phrase) | 262 TOPS/W | VENDOR_CLAIM | [vendor_llms_txt](https://lightmatter.co/llms.txt) |
 | paper: throughput at the 2 GHz peak clock (operations per second) | 262 TOPS | PEER_REVIEWED | [ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x) |
-| vendor web: Envise efficiency, operations per watt | 262 TOPS/W | VENDOR_CLAIM | [lm_web_ptc](https://lightmatter.co/vision/) |
-| chips in the photonic processor package | 6 | VENDOR_CLAIM | [lm_blog_newcomputer](https://lightmatter.com/blog/a-new-kind-of-computer/) |
+| vendor web: photonic processor efficiency, operations per watt | 262 TOPS/W | VENDOR_CLAIM | [vendor_web_ptc](https://lightmatter.co/vision/) |
+| chips in the photonic processor package | 6 | VENDOR_CLAIM | [vendor_blog_newcomputer](https://lightmatter.com/blog/a-new-kind-of-computer/) |
 | clements2016 claim: half the footprint of the Reck design, more loss tolerant | text | PEER_REVIEWED | [clements2016](https://arxiv.org/abs/1603.08788) |
 | clements2016: optical depth N vs 2N-3 (Reck), same N(N-1)/2 beam splitters | text | PEER_REVIEWED | [clements2016](https://arxiv.org/abs/1603.08788) |
 | clements2016 title and authors | text | PEER_REVIEWED | [clements2016](https://arxiv.org/abs/1603.08788) |
 | PTC clock frequency, peak | 2 GHz | PEER_REVIEWED | [ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x) |
 | PTC clock frequency, sustained | 500 MHz | PEER_REVIEWED | [ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x) |
-| photonic components in the processor (vendor blog) | ≈ 1000000 | VENDOR_CLAIM | [lm_blog_newcomputer](https://lightmatter.com/blog/a-new-kind-of-computer/) |
-| optical components in the processor (vendor web) | ≥ 200000 | VENDOR_CLAIM | [lm_web_ptc](https://lightmatter.co/vision/) |
+| photonic components in the processor (vendor blog) | ≈ 1000000 | VENDOR_CLAIM | [vendor_blog_newcomputer](https://lightmatter.com/blog/a-new-kind-of-computer/) |
+| optical components in the processor (vendor web) | ≥ 200000 | VENDOR_CLAIM | [vendor_web_ptc](https://lightmatter.co/vision/) |
 | control chiplet (DCI) area | ≈ 780 mm2 | PEER_REVIEWED | [ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x) |
 | control dies (digital control interface, DCI) per processor | 2 | PEER_REVIEWED | [ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x) |
 | control die dimensions (Appendix: 31.4 x 25.0 mm) | text | PEER_REVIEWED (not verified) | [ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x) |
@@ -55,7 +55,7 @@ Status: Published in Nature 640, 368 to 374 (2025). Catalog file `catalog/produc
 | effect of gain: ADC reads lower bits, upper bits may saturate | text | PEER_REVIEWED | [ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x) |
 | ADC 11-bit window within the 24-bit output word versus gain | text | PEER_REVIEWED | [ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x) |
 | position of gain G in the signal chain: after the PTC, before the ADC | text | PEER_REVIEWED | [ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x) |
-| vendor wording: analog signal amplified by G before the ADC, G divided out digitally | text | VENDOR_CLAIM | [lm_blog_newcomputer](https://lightmatter.com/blog/a-new-kind-of-computer/) |
+| vendor wording: analog signal amplified by G before the ADC, G divided out digitally | text | VENDOR_CLAIM | [vendor_blog_newcomputer](https://lightmatter.com/blog/a-new-kind-of-computer/) |
 | how G = 1.86 was measured | text | PEER_REVIEWED | [ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x) |
 | design target for the gain factor G | 4 | PEER_REVIEWED (not verified) | [ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x) |
 | achieved overamplification (gain) factor G | 1.86 | PEER_REVIEWED | [ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x) |
@@ -91,7 +91,7 @@ Status: Published in Nature 640, 368 to 374 (2025). Catalog file `catalog/produc
 | weighted products summed as current on row lines | text | PEER_REVIEWED | [ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x) |
 | shen2017 authors (Harris is a co-author) | text | PEER_REVIEWED | [shen2017](https://arxiv.org/abs/1610.02365) |
 | shen2017 processor: MZI mesh size | 56 | PEER_REVIEWED | [shen2017](https://arxiv.org/abs/1610.02365) |
-| shen2017 affiliations (no Lightmatter) | text | PEER_REVIEWED | [shen2017](https://arxiv.org/abs/1610.02365) |
+| shen2017 affiliations (no the vendor) | text | PEER_REVIEWED | [shen2017](https://arxiv.org/abs/1610.02365) |
 | PTCs under the control dies: DCIs on the top side of the interposer, PTCs on the bottom side | text | PEER_REVIEWED | [ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x) |
 | Table 1 BERT-Tiny IMDb, FP32 reference | 86.2 % | PEER_REVIEWED | [ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x) |
 | Table 1 BERT-Tiny IMDb, on the photonic processor | 83.2 % | PEER_REVIEWED | [ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x) |
@@ -162,9 +162,9 @@ Status: Published in Nature 640, 368 to 374 (2025). Catalog file `catalog/produc
 
 ## Open tensions and conflicts
 
-- CONFLICT: vendor llms.txt: Envise operations per watt (exact Appendix phrase): 262 TOPS/W (“Envise demonstrates 262 trillion operations per watt, 200 picoseconds of latency per matrix-vector product, more than 200,000 photonic components, and 50 billion electronic transistors.”, [lm_llms_txt](https://lightmatter.co/llms.txt)) against paper: throughput at the 2 GHz peak clock (operations per second): 262 TOPS (“the peak clock frequency of 2 GHz results in 262 TOPS of ABFP16 throughput”, [ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x)). Both are kept.
-- CONFLICT: paper: throughput at the 2 GHz peak clock (operations per second): 262 TOPS (“the peak clock frequency of 2 GHz results in 262 TOPS of ABFP16 throughput”, [ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x)) against vendor web: Envise efficiency, operations per watt: 262 TOPS/W (“262T Ops/Watt”, [lm_web_ptc](https://lightmatter.co/vision/)). Both are kept.
-- CONFLICT: photonic components in the processor (vendor blog): 1000000 (“50 billion transistors spanning 6 chips with 1 million photonic components”, [lm_blog_newcomputer](https://lightmatter.com/blog/a-new-kind-of-computer/)) against optical components in the processor (vendor web): 200000 (“four photonic chips manipulate 512 light beams through over 200,000 optical components”, [lm_web_ptc](https://lightmatter.co/vision/)). Both are kept.
+- CONFLICT: vendor llms.txt: photonic processor operations per watt (exact Appendix phrase): 262 TOPS/W (“[photonic processor] demonstrates 262 trillion operations per watt, 200 picoseconds of latency per matrix-vector product, more than 200,000 photonic components, and 50 billion electronic transistors.”, [vendor_llms_txt](https://lightmatter.co/llms.txt)) against paper: throughput at the 2 GHz peak clock (operations per second): 262 TOPS (“the peak clock frequency of 2 GHz results in 262 TOPS of ABFP16 throughput”, [ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x)). Both are kept.
+- CONFLICT: paper: throughput at the 2 GHz peak clock (operations per second): 262 TOPS (“the peak clock frequency of 2 GHz results in 262 TOPS of ABFP16 throughput”, [ahmed2025_nature](https://doi.org/10.1038/s41586-025-08854-x)) against vendor web: photonic processor efficiency, operations per watt: 262 TOPS/W (“262T Ops/Watt”, [vendor_web_ptc](https://lightmatter.co/vision/)). Both are kept.
+- CONFLICT: photonic components in the processor (vendor blog): 1000000 (“50 billion transistors spanning 6 chips with 1 million photonic components”, [vendor_blog_newcomputer](https://lightmatter.com/blog/a-new-kind-of-computer/)) against optical components in the processor (vendor web): 200000 (“four photonic chips manipulate 512 light beams through over 200,000 optical components”, [vendor_web_ptc](https://lightmatter.co/vision/)). Both are kept.
 
 ## Hypotheses
 
@@ -227,7 +227,7 @@ Status: Published in Nature 640, 368 to 374 (2025). Catalog file `catalog/produc
 | codes, bfloat16 scale | [16, -63, 3, 47] | INFERENCE |
 | max abs error, bfloat16 scale | 0.007291667 | INFERENCE |
 
-Model card §15.3; an independent re-implementation, not Lightmatter code.
+Model card §15.3; an independent re-implementation, not the vendor code.
 
 ### y = Wx error versus gain G (128-long, ENOB 9.8; SYNTHETIC Gaussian data, seed 0)
 
@@ -240,7 +240,7 @@ Model card §15.3; an independent re-implementation, not Lightmatter code.
 | G = 32 | error 5.85 %, 3.80 effective bits, 1.4 % clipped | INFERENCE |
 | G = 128 | error 54.30 %, 0.59 effective bits, 45.9 % clipped | INFERENCE |
 
-G = 1.86 measured, 4 the design target (ahmed2025_nature); model card §15.4.
+G = 1.86 measured; G = 4 is the SI's emulation setting, not a verified design target (ahmed2025_nature); model card §15.4.
 
 ### One scale per 128-block against one global scale (1024-long, G = 4)
 

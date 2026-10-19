@@ -1,4 +1,4 @@
-"""Reference rack OICD-R64 (model card §14.9). An OICD design, SYNTHETIC: never Lightmatter's.
+"""Reference rack OICD-R64 (model card §14.9). An OICD design, SYNTHETIC: never the vendor's.
 
 Space in OpenU (OU), single-tier topology, laser count, the worst optical path evaluated with the
 draft IEEE 802.3dj DR budget under the two reference-plane hypotheses, rack yield and the
@@ -18,23 +18,23 @@ from oicd.units import DB
 
 _FROZEN = ConfigDict(frozen=True, extra="forbid")
 
-ReferencePlane = Literal["H_vclick_channel", "H_vclick_module"]
+ReferencePlane = Literal["H_fau_channel", "H_fau_module"]
 TrayHeight = Literal["H_2U", "H_1U"]
 
 SYNTHETIC_DESIGN = Provenance(
     source_class=SourceClass.SYNTHETIC,
-    rationale="OICD-R64 design choice (model card §14.9), not a Lightmatter configuration.",
+    rationale="OICD-R64 design choice (model card §14.9), not a vendor configuration.",
 )
 
 
 class PathElement(BaseModel):
-    """One element of the worst path. kind 'vclick' moves between channel and module with the
+    """One element of the worst path. kind 'fau' moves between channel and module with the
     reference-plane hypothesis; 'fiber' carries a length and is priced at fiber_loss_db_per_km."""
 
     model_config = _FROZEN
 
     name: str
-    kind: Literal["vclick", "connector", "fiber"]
+    kind: Literal["fau", "connector", "fiber"]
     loss_db: Quantity[float] | None = None
     length_m: Quantity[float] | None = None
 
@@ -55,9 +55,9 @@ class RackSpec(BaseModel):
     lanes_per_xpu: int = Field(ge=1)
     switch_lanes: int = Field(ge=1)
     lane_gbps: float = Field(gt=0)
-    guide_dr_lanes: int = Field(ge=1)
+    els_dr_lanes: int = Field(ge=1)
     worst_path: tuple[PathElement, ...]
-    vclick_loss_db: Quantity[float]
+    fau_loss_db: Quantity[float]
     fiber_loss_db_per_km: Quantity[float]
     budget: Link  # the DR budget link; its channel is replaced by the worst path
     link_yields: tuple[float, ...] = (0.9999, 0.99999)
@@ -78,7 +78,7 @@ class PathCase(BaseModel):
     model_config = _FROZEN
 
     hypothesis: ReferencePlane
-    vclick_loss_db: float | None  # None when the vClick sits inside the module
+    fau_loss_db: float | None  # None when the FAU sits inside the module
     channel_il_db: float
     report: FeasibilityReport
 
@@ -103,9 +103,9 @@ class RackResult(BaseModel):
     bidi_fibers: int
     duplex_fibers: int
     tx_lanes: int
-    guide_dr_total: float
-    guide_dr_per_xpu_tray: float
-    guide_dr_per_switch_tray: float
+    els_dr_total: float
+    els_dr_per_xpu_tray: float
+    els_dr_per_switch_tray: float
     fiber_m: float
     fiber_db: float
     paths: tuple[PathCase, ...]
@@ -135,14 +135,14 @@ def _fiber_element(e: PathElement, db_per_km: Quantity[float]) -> tuple[LossElem
     return LossElement(name=e.name, loss_max=_q(loss, provenance)), length.value
 
 
-def _path_link(spec: RackSpec, plane: ReferencePlane, vclick_db: float) -> tuple[Link, float]:
-    """The worst path as a §3 link; a vClick is a channel element only under H_vclick_channel."""
+def _path_link(spec: RackSpec, plane: ReferencePlane, fau_db: float) -> tuple[Link, float]:
+    """The worst path as a §3 link; a FAU is a channel element only under H_fau_channel."""
     elements: list[LossElement] = []
     fiber_m = 0.0
     for e in spec.worst_path:
-        if e.kind == "vclick":
-            if plane == "H_vclick_channel":
-                q = _q(vclick_db, spec.vclick_loss_db.provenance)
+        if e.kind == "fau":
+            if plane == "H_fau_channel":
+                q = _q(fau_db, spec.fau_loss_db.provenance)
                 elements.append(LossElement(name=e.name, loss_max=q))
         elif e.kind == "connector":
             assert e.loss_db is not None
@@ -178,17 +178,17 @@ def evaluate_rack(spec: RackSpec, name: str = "OICD-R64") -> RackResult:
     paths = []
     fiber_m = 0.0
     cases: tuple[tuple[ReferencePlane, float | None], ...] = (
-        ("H_vclick_channel", spec.vclick_loss_db.value),
-        ("H_vclick_channel", 1.0),
-        ("H_vclick_module", None),
+        ("H_fau_channel", spec.fau_loss_db.value),
+        ("H_fau_channel", 1.0),
+        ("H_fau_module", None),
     )
-    for plane, vclick in cases:
-        link, fiber_m = _path_link(spec, plane, vclick if vclick is not None else 0.0)
+    for plane, fau in cases:
+        link, fiber_m = _path_link(spec, plane, fau if fau is not None else 0.0)
         report = evaluate(link)
         paths.append(
             PathCase(
                 hypothesis=plane,
-                vclick_loss_db=vclick,
+                fau_loss_db=fau,
                 channel_il_db=float(report.results[2].evidence["total_loss_db"]),
                 report=report,
             )
@@ -205,9 +205,9 @@ def evaluate_rack(spec: RackSpec, name: str = "OICD-R64") -> RackResult:
         bidi_fibers=links,
         duplex_fibers=2 * links,
         tx_lanes=tx_lanes,
-        guide_dr_total=tx_lanes / spec.guide_dr_lanes,
-        guide_dr_per_xpu_tray=spec.xpus_per_tray * spec.lanes_per_xpu / spec.guide_dr_lanes,
-        guide_dr_per_switch_tray=spec.switch_lanes / spec.guide_dr_lanes,
+        els_dr_total=tx_lanes / spec.els_dr_lanes,
+        els_dr_per_xpu_tray=spec.xpus_per_tray * spec.lanes_per_xpu / spec.els_dr_lanes,
+        els_dr_per_switch_tray=spec.switch_lanes / spec.els_dr_lanes,
         fiber_m=fiber_m,
         fiber_db=fiber_m / 1000.0 * spec.fiber_loss_db_per_km.value,
         paths=tuple(paths),

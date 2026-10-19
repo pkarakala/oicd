@@ -1,4 +1,4 @@
-"""OICD: Open Interconnect Co-Design, a physics-grounded feasibility engine and product twin."""
+"""OICD: Open Interconnect Co-Design, a feasibility engine with architecture twins."""
 
 
 def main() -> None:

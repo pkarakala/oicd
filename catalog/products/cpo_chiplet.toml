@@ -1,0 +1,612 @@
+# CPO chiplet (32T and 64T): public facts with exact quotes (brief 05 phase 4 fact check, 2026-10-18).
+# Independent model built from public information. Not affiliated with or endorsed by
+# any company whose publications are cited.
+
+[product]
+name = "CPO chiplet (32T and 64T)"
+family = "photonic interconnect"
+kind = "product"
+status = "Public technical material, 2025 to 2026"
+summary = "Co-packaged optics chiplet with 3D-integrated SerDes for edgeless I/O beside an XPU die, and a 16-wavelength link kit (vendor descriptions)."
+
+[[fact]]
+id = "chiplet.chiplet_lane_rate"
+quantity = "32T chiplet lane rate and modulation (56 Gbps NRZ)"
+value = 56.0
+bound = "exact"
+unit = "Gbps"
+quote = "[32T chiplet]: 56 Gbps NRZ"
+cite = "vendor_pr_chiplet"
+source_class = "vendor_claim"
+verified = true
+conflicts_with = ["chiplet.web_modulation"]
+location = "Key features, 'photonic interconnect PIC' bullets (raw.html.txt line 83)"
+note = "Evidence: text. Conflicts with vendor_web_chiplet 'PAM4 (56G, 112G)' (entry chiplet.web_modulation). Consistent with vendor_web_kit16 '56G NRZ, 112G PAM4' and vendor_ofc26_kumar slide 17 '56 Gbps NRZ'."
+
+[[fact]]
+id = "chiplet.chiplet_bw_total"
+quantity = "32T chiplet total optical bandwidth per engine (Tx+Rx)"
+value = 32.0
+bound = "exact"
+unit = "Tbps"
+quote = "[32T chiplet]: 56 Gbps NRZ, 32 Tbps total (Tx+Rx)"
+cite = "vendor_pr_chiplet"
+source_class = "vendor_claim"
+verified = true
+location = "Key features, 'photonic interconnect PIC' bullets (line 83); SKU sentence 'the 32T chiplet (32Tbps) and 64T chiplet (64Tbps) 3D CPO engines' (line 77)"
+note = "Evidence: text."
+
+[[fact]]
+id = "chiplet.chiplet64_lane_rate"
+quantity = "64T chiplet lane rate, PAM4: two supported rates, 106 and 112 Gbps (not a continuous range)"
+lo = 106.0
+hi = 112.0
+bound = "exact"
+unit = "Gbps"
+quote = "[64T chiplet]: 106/112 Gbps PAM4"
+cite = "vendor_pr_chiplet"
+source_class = "vendor_claim"
+verified = true
+location = "Key features, 'photonic interconnect PIC' bullets (line 84)"
+note = "Evidence: text."
+
+[[fact]]
+id = "chiplet.chiplet64_bw_total"
+quantity = "64T chiplet total optical bandwidth per engine (Tx+Rx)"
+value = 64.0
+bound = "exact"
+unit = "Tbps"
+quote = "[64T chiplet]: 106/112 Gbps PAM4, 64 Tbps total (Tx+Rx)"
+cite = "vendor_pr_chiplet"
+source_class = "vendor_claim"
+verified = true
+location = "Key features, 'photonic interconnect PIC' bullets (line 84)"
+note = "Evidence: text."
+
+[[fact]]
+id = "chiplet.serdes_count"
+quantity = "SerDes per engine ('Optically-optimized multi-rate/multi-protocol'), listed for both 32T and 64T CPO chiplets"
+value = 320.0
+bound = "exact"
+unit = "count"
+quote = "320 Optically-optimized multi-rate/multi-protocol SerDes"
+cite = "vendor_pr_chiplet"
+source_class = "vendor_claim"
+verified = true
+location = "Key features of the 32T and 64T CPO chiplets, 'Advanced node CMOS EIC' bullets (line 81)"
+note = "Evidence: text."
+
+[[fact]]
+id = "chiplet.ucie_d2d_rate"
+quantity = "UCIe die-to-die interface rate (per-lane basis not stated)"
+value = 32.0
+bound = "exact"
+unit = "Gbps"
+quote = "32Gbps UCIe D2D interface"
+cite = "vendor_pr_chiplet"
+source_class = "vendor_claim"
+verified = true
+location = "Key features, 'Advanced node CMOS EIC' bullets (line 80); full bullet: '32Gbps UCIe D2D interface (IP offered royalty-free by Alphawave Semi for accompanying XPU/Switch die)'"
+note = "Evidence: text. Wording only: the source writes '32Gbps' without a space and does not say whether the rate is per lane."
+
+[[fact]]
+id = "chiplet.eic_partner"
+quantity = "EIC (UCIe and SerDes chiplet) supplier: Alphawave Semi; EIC 3D-integrated on the photonic interconnect PIC (chip-on-wafer)"
+bound = "exact"
+unit = "text"
+quote = "Alphawave Semi’s advanced-node electrical integrated circuit (EIC) is 3D integrated on the [photonic interconnect] PIC"
+cite = "vendor_pr_chiplet"
+source_class = "vendor_claim"
+verified = true
+location = "Paragraph 3 (line 72); UCIe IP note on line 80"
+note = "Evidence: text."
+
+[[fact]]
+id = "chiplet.eic_partner_now_qualcomm"
+quantity = "Ownership of the 32T chiplet EIC/SerDes partner: Alphawave Semi is now part of Qualcomm Technologies (stated 2026-03-11)"
+bound = "exact"
+unit = "text"
+quote = "Alphawave Semi—now part of Qualcomm Technologies"
+cite = "vendor_pr_1p6t"
+source_class = "vendor_claim"
+verified = true
+location = "Paragraph 3 (raw.html.txt line 72)"
+note = "Evidence: text."
+
+[[fact]]
+id = "chiplet.wdm_lambda_count"
+quantity = "WDM wavelengths per waveguide/fiber (32T and 64T CPO chiplets)"
+value = 16.0
+bound = "exact"
+unit = "count"
+quote = "16 wavelength WDM per waveguide/fiber"
+cite = "vendor_pr_chiplet"
+source_class = "vendor_claim"
+verified = true
+location = "Key features, 'photonic interconnect PIC' bullets (line 85); also '16 WDM wavelengths per waveguide/fiber' (line 77)"
+note = "Evidence: text."
+
+[[fact]]
+id = "chiplet.bw_per_fiber"
+quantity = "Bandwidth per fiber: 800 Gbps / 1.6 Tbps (by list order presumably 32T chiplet / 64T chiplet; direction not stated)"
+lo = 800.0
+hi = 1600.0
+bound = "exact"
+unit = "Gbps"
+quote = "800Gbps/1.6Tbps per fiber"
+cite = "vendor_pr_chiplet"
+source_class = "vendor_claim"
+verified = true
+location = "Key features, 'photonic interconnect PIC' bullets (line 85)"
+note = "Evidence: text. No difference from the Appendix. The release does not say which SKU gets which value (the 32T chiplet = 800 Gbps, 64T chiplet = 1.6 Tbps mapping is an inference from list order) or whether it is per direction. 16 x 56 Gbps = 896 Gbps and 16 x 112 Gbps = 1.792 Tbps, so the figures correspond to 50/100 Gbps payload per wavelength (inference)."
+
+[[fact]]
+id = "chiplet.package_bw_min"
+quantity = "Total I/O bandwidth per chip package (multiple 32T chiplets per package)"
+value = 200.0
+bound = "min"
+unit = "Tbps"
+quote = "over 200 Tbps of total I/O bandwidth per chip package"
+cite = "vendor_pr_chiplet"
+source_class = "vendor_claim"
+verified = true
+location = "Paragraph 1 (line 70)"
+note = "Evidence: text. Source says 'per chip package'. Related figures: vendor_web_chiplet meta description '256 Tbps (Tx+Rx) of total bandwidth per package' (entry chiplet.web_package_bw) and visible '200+ Tbps / Chip' (entry chiplet.web_package_bw_body). vendor_pr_1p6t (2026) instead names 'a clear path to 100 Tbps of total I/O per package' (entry chiplet.package_bw_target_2026)."
+
+[[fact]]
+id = "chiplet.pluggable_equiv"
+quantity = "Equivalent number of pluggable optical transceivers (bandwidth) per 32T chiplet"
+value = 40.0
+bound = "exact"
+unit = "count"
+quote = "the equivalent bandwidth of 40 pluggable optical transceivers per [32T chiplet]"
+cite = "vendor_pr_chiplet"
+source_class = "vendor_claim"
+verified = true
+location = "Paragraph 3 (line 72)"
+note = "Evidence: text."
+
+[[fact]]
+id = "chiplet.edgeless_io"
+quantity = "I/O topology: edgeless I/O (area-array I/O across the die, enabled by 3D stacking)"
+bound = "exact"
+unit = "text"
+quote = "the world’s first edgeless I/O, scaling bandwidth across the entire die area"
+cite = "vendor_pr_chiplet"
+source_class = "vendor_claim"
+verified = true
+location = "Paragraph 2 (line 71); product page spec table also says 'Edgeless I/O (area-array)'"
+note = "Evidence: text."
+
+[[fact]]
+id = "chiplet.availability"
+quantity = "Availability year of 32T and 64T CPO chiplets"
+value = 2026.0
+bound = "exact"
+unit = "year"
+quote = "Available in 2026"
+cite = "vendor_pr_chiplet"
+source_class = "vendor_claim"
+verified = true
+location = "Closing paragraph (line 87)"
+note = "Evidence: text. No difference from the Appendix. Product page (vendor_web_chiplet) adds: '32T chiplet design partnerships are open for 2026 roadmaps.'"
+
+[[fact]]
+id = "chiplet.web_package_bw"
+quantity = "Total bandwidth per package (Tx+Rx), product page metadata"
+value = 256.0
+bound = "exact"
+unit = "Tbps"
+quote = "enabling 256 Tbps (Tx+Rx) of total bandwidth per package"
+cite = "vendor_web_chiplet"
+source_class = "vendor_claim"
+verified = true
+conflicts_with = ["chiplet.package_bw_target_2026"]
+location = "HTML meta description, og:description and twitter:description only (raw.html.txt lines 2 and 4); NOT in the visible page body"
+note = "Evidence: text. The value appears only in page metadata. The visible body says 'Total I/O 200+ Tbps / Chip' (entry chiplet.web_package_bw_body). It is more specific than vendor_pr_chiplet's 'over 200 Tbps of total I/O bandwidth per chip package'; 256 = 4 x 64 Tbps or 8 x 32 Tbps (inference). vendor_pr_1p6t (2026) names 100 Tbps per package as the next milestone."
+
+[[fact]]
+id = "chiplet.web_modulation"
+quantity = "Modulation and lane rates per product page: PAM4 at 56G and 112G"
+lo = 56.0
+hi = 112.0
+bound = "exact"
+unit = "Gbps"
+quote = "PAM4 (56G, 112G)"
+cite = "vendor_web_chiplet"
+source_class = "vendor_claim"
+verified = true
+location = "Technical Specifications, 'Modulation' row (line 105)"
+note = "Evidence: text. CONFLICT: vendor_pr_chiplet says '32T chiplet: 56 Gbps NRZ' (PAM4 only for 64T chiplet at 106/112 Gbps). vendor_web_kit16 lists '56G NRZ, 112G PAM4', and vendor_ofc26_kumar slide 17 shows '56 Gbps NRZ' and '112 Gbps PAM4'. The product page is the outlier."
+
+[[fact]]
+id = "chiplet.web_energy"
+quantity = "Energy efficiency, '(Optical)' (scope, e.g. laser or SerDes included, not defined)"
+value = 5.0
+bound = "max"
+unit = "pJ/bit"
+quote = "< 5 pJ/bit (Optical)"
+cite = "vendor_web_chiplet"
+source_class = "vendor_claim"
+verified = true
+location = "Technical Specifications, 'Energy efficiency' row (line 109)"
+note = "Evidence: text."
+
+[[fact]]
+id = "chiplet.web_reach"
+quantity = "Direct drive reach (DR/FR)"
+lo = 10.0
+hi = 2000.0
+bound = "exact"
+unit = "m"
+quote = "10m to 2km (DR/FR)"
+cite = "vendor_web_chiplet"
+source_class = "vendor_claim"
+verified = true
+location = "Technical Specifications, 'Direct drive reach' row (line 115)"
+note = "Evidence: text. No difference from the Appendix. vendor_ofc26_kumar slide 17 says 'up to 1 km', and its demos use 1 km fiber, so 2 km is not demonstrated there."
+
+[[fact]]
+id = "kit16.wdm_lambda_count"
+quantity = "16λ link kit DWDM wavelengths per fiber"
+value = 16.0
+bound = "exact"
+unit = "count"
+quote = "16λ DWDM"
+cite = "vendor_web_kit16"
+source_class = "vendor_claim"
+verified = true
+location = "Technical Specifications, 'Link architecture' row (line 99); also '16λ link kit uses a 16-wavelength 112G PAM4 DWDM architecture' (line 80)"
+note = "Evidence: text."
+
+[[fact]]
+id = "kit16.lane_rate"
+quantity = "16λ link kit lane rate per wavelength (PAM4), product page"
+value = 112.0
+bound = "exact"
+unit = "Gbps"
+quote = "16-wavelength 112G PAM4 DWDM architecture"
+cite = "vendor_web_kit16"
+source_class = "vendor_claim"
+verified = true
+conflicts_with = ["kit16.lane_rate_talk"]
+location = "Architecture paragraph (line 80); spec table 'SerDes modulation formats 56G NRZ, 112G PAM4'"
+note = "Evidence: text. vendor_ofc26_kumar slides 14-15 (16λ link kit) give 106 Gbps per wavelength (entry kit16.lane_rate_talk)."
+
+[[fact]]
+id = "kit16.bw_per_fiber"
+quantity = "16λ link kit throughput per fiber, unidirectional (separate Tx and Rx fibers)"
+value = 1.6
+bound = "exact"
+unit = "Tbps"
+quote = "1.6 Tbps unidirectional (separate Tx/Rx fibers)"
+cite = "vendor_web_kit16"
+source_class = "vendor_claim"
+verified = true
+location = "Architecture paragraph (line 80); also '1,600 Gbps per fiber enabled by a 16-channel DWDM O-band link architecture' (line 83) and spec 'Throughput modes 1.6 Tbps UniDi' (line 103)"
+note = "Evidence: text. The page does not state the equation '16 lambda x 112 Gbps = 1.6 Tbps'. 16 x 112 Gbps = 1.792 Tbps, so 1.6 Tbps implies 100 Gbps payload per wavelength (inference). The page specifies unidirectional transmission with separate Tx/Rx fibers."
+
+[[fact]]
+id = "kit16.grid_spacing"
+quantity = "16λ link kit DWDM channel spacing"
+value = 200.0
+bound = "exact"
+unit = "GHz"
+quote = "200 GHz spacing centered at 1310 nm (O-band)"
+cite = "vendor_web_kit16"
+source_class = "vendor_claim"
+verified = true
+location = "Technical Specifications, 'Wavelength grid' row (line 101)"
+note = "Evidence: text."
+
+[[fact]]
+id = "kit16.grid_center"
+quantity = "16λ link kit DWDM grid centre wavelength"
+value = 1310.0
+bound = "exact"
+unit = "nm"
+quote = "200 GHz spacing centered at 1310 nm (O-band)"
+cite = "vendor_web_kit16"
+source_class = "vendor_claim"
+verified = true
+location = "Technical Specifications, 'Wavelength grid' row (line 101)"
+note = "Evidence: text."
+
+[[fact]]
+id = "kit16.energy_incl_laser"
+quantity = "16λ link kit link energy efficiency at 112G PAM4, including laser (hero tile calls it a target)"
+value = 3.2
+bound = "exact"
+unit = "pJ/bit"
+quote = "3.2 pJ/bit @112G PAM4 including laser"
+cite = "vendor_web_kit16"
+source_class = "vendor_claim"
+verified = true
+conflicts_with = ["kit16.energy_total_talk"]
+location = "Technical Specifications, 'Efficiency' row (line 107); hero tile '3.2 pJ/bit target link efficiency @ 112G PAM4' (lines 73-74)"
+note = "Evidence: text. The hero tile labels 3.2 pJ/bit a 'target link efficiency'. vendor_ofc26_kumar (16λ link kit) gives '3pJ/bit PIC + Laser (1.8 pJ/bit PIC, 1.1 pJ/bit laser)' on slide 15 (the components sum to 2.9) and '<3 pJ/bit (PIC + Laser)' on slide 14. Whether SerDes power is included is not stated."
+
+[[fact]]
+id = "kit16.energy_pic"
+quantity = "PIC energy per bit, 16λ link kit (16λ link kit) 16-lambda 106G PAM4 unidirectional link, 1600 Gbps per fiber (slide does not name 32T chiplet/64T chiplet)"
+value = 1.8
+bound = "exact"
+unit = "pJ/bit"
+quote = "1.8 pJ/bit PIC"
+cite = "vendor_ofc26_kumar"
+source_class = "vendor_claim"
+verified = true
+location = "Page 15 ('Eye diagrams 16λ 106G PAM4'), 4th bullet; in the PDF text layer and confirmed on the rendered slide"
+note = "Evidence: text. Value matches. Context: slides 14-15 are about the 16λ link kit, so this is filed under prefix kit16, not chiplet. The same bullet gives '3pJ/bit PIC + Laser' as the total, but 1.8 + 1.1 = 2.9 pJ/bit. vendor_web_kit16 gives 3.2 pJ/bit including laser."
+
+[[fact]]
+id = "kit16.energy_laser"
+quantity = "Laser energy per bit, 16λ link kit (16λ link kit) 16-lambda 106G PAM4 unidirectional link (slide does not name 32T chiplet/64T chiplet)"
+value = 1.1
+bound = "exact"
+unit = "pJ/bit"
+quote = "1.1 pJ/bit laser"
+cite = "vendor_ofc26_kumar"
+source_class = "vendor_claim"
+verified = true
+location = "Page 15, 4th bullet (wraps over two lines in the text layer); confirmed on the rendered slide"
+note = "Evidence: text. Value matches. Same context note as kit16.energy_pic (16λ link kit, not a named 32T chiplet part)."
+
+[[fact]]
+id = "chiplet.web_package_bw_body"
+quantity = "Total I/O per chip, visible body of the 32T chiplet product page"
+value = 200.0
+bound = "min"
+unit = "Tbps"
+quote = "200+ Tbps / Chip"
+cite = "vendor_web_chiplet"
+source_class = "vendor_claim"
+verified = true
+location = "Hero spec bar 'Total I/O' (lines 71-73)"
+note = "Evidence: text. This is the visible counterpart of the metadata-only '256 Tbps (Tx+Rx)' claim, and it matches vendor_pr_chiplet's 'over 200 Tbps'. The same page also says 'we deliver 32-64 Tbps of optical I/O per chip'."
+
+[[fact]]
+id = "chiplet.package_bw_target_2026"
+quantity = "Per-package total I/O target for photonic interconnect L-Series, stated in 2026 ('clear path to'; Qualcomm EVP quote; release body: 'on track to deliver 100 Tbps and beyond')"
+value = 100.0
+bound = "exact"
+unit = "Tbps"
+quote = "a clear path to 100 Tbps of total I/O per package"
+cite = "vendor_pr_1p6t"
+source_class = "vendor_claim"
+verified = true
+location = "Tony Pialis quote (raw.html.txt line 73); release body line 72"
+note = "Evidence: text. TENSION with vendor_pr_chiplet (2025) 'over 200 Tbps of total I/O bandwidth per chip package' and vendor_web_chiplet meta '256 Tbps (Tx+Rx)'."
+
+[[fact]]
+id = "kit16.bw_aggregate"
+quantity = "16λ link kit aggregate bandwidth (spec table: 'Port count 2 fibers', 'Throughput modes 1.6 Tbps UniDi')"
+value = 3.2
+bound = "exact"
+unit = "Tbps"
+quote = "3.2 Tbps aggregate bandwidth @ 112G PAM4"
+cite = "vendor_web_kit16"
+source_class = "vendor_claim"
+verified = true
+location = "Hero tile 'Aggregate I/O' (lines 70-71); spec table 'Port count 2 fibers' (lines 104-105)"
+note = "Evidence: text."
+
+[[fact]]
+id = "kit16.ber_prefec_target"
+quantity = "16λ link kit pre-FEC BER target"
+value = 1e-05
+bound = "max"
+unit = "BER"
+quote = "Pre-FEC BER target < 1e-5"
+cite = "vendor_web_kit16"
+source_class = "vendor_claim"
+verified = true
+location = "Technical Specifications, 'Pre-FEC BER target' row (lines 108-109)"
+note = "Evidence: text. vendor_ofc26_kumar 16λ link kit slides report measured 'BER < 1E-6' (slide 14) and '1e-7 BER' (slide 15)."
+
+[[fact]]
+id = "kit16.lane_rate_talk"
+quantity = "16λ link kit lane rate per wavelength, 16-lambda unidirectional PAM4 link (OFC 2026 talk)"
+value = 106.0
+bound = "exact"
+unit = "Gbps"
+quote = "16λ UNIDIRECTIONAL @ 106 GBPS/λ"
+cite = "vendor_ofc26_kumar"
+source_class = "vendor_claim"
+verified = true
+location = "Page 14 ('16λ link kit The first 16λ PAM4 Link'); page 15 title 'Eye diagrams 16λ 106G PAM4'"
+note = "Evidence: text. CONFLICT with vendor_web_kit16's 112G PAM4 (entry kit16.lane_rate). vendor_pr_chiplet lists 64T chiplet as '106/112 Gbps PAM4', so both rates are within the family. 16 x 106 Gbps = 1.696 Tbps for the stated '1.6 TBPS / FIBER'."
+
+[[fact]]
+id = "kit16.energy_total_talk"
+quantity = "16λ link kit energy per bit, PIC + laser (OFC 2026 talk)"
+value = 3.0
+bound = "exact"
+unit = "pJ/bit"
+quote = "3pJ/bit PIC + Laser"
+cite = "vendor_ofc26_kumar"
+source_class = "vendor_claim"
+verified = true
+location = "Page 15, 4th bullet"
+note = "Evidence: text. Slide 14 states '<3 pJ/bit (PIC + Laser)'. The slide 15 components sum to 1.8 + 1.1 = 2.9 pJ/bit. vendor_web_kit16 states 3.2 pJ/bit including laser."
+# ---- Model (brief 05 phase 6, model card §14.4) ---------------------------------------------
+
+[[fact]]
+id = "chiplet.bw_per_fiber_chiplet"
+quantity = "bandwidth per fiber, first figure"
+value = 800.0
+bound = "exact"
+unit = "Gbps"
+quote = "800Gbps/1.6Tbps per fiber"
+cite = "vendor_pr_chiplet"
+source_class = "vendor_claim"
+verified = true
+note = "Evidence: text. Number split from chiplet.bw_per_fiber; the release does not say which figure belongs to the 32T chiplet and which to the 64T chiplet, nor whether they are per direction."
+
+[[fact]]
+id = "chiplet.bw_per_fiber_chiplet64"
+quantity = "bandwidth per fiber, second figure"
+value = 1600.0
+bound = "exact"
+unit = "Gbps"
+quote = "800Gbps/1.6Tbps per fiber"
+cite = "vendor_pr_chiplet"
+source_class = "vendor_claim"
+verified = true
+note = "Evidence: text. Number split from chiplet.bw_per_fiber (1.6 Tbps written as 1600 Gb/s)."
+
+[[assumption]]
+id = "chiplet.payload_56"
+nominal = 50.0
+low = 50.0
+high = 56.0
+unit = "Gbps"
+rationale = "Payload carried by a 56 Gb/s lane: 50 Gb/s reproduces '32 Tbps total' (line overhead, INFERENCE), 56 Gb/s if the total counted line rate. Pinned by H_chiplet_payload or H_chiplet_line."
+
+[[assumption]]
+id = "chiplet.payload_112"
+nominal = 100.0
+low = 100.0
+high = 112.0
+unit = "Gbps"
+rationale = "Payload carried by a 106/112 Gb/s PAM4 lane: 100 Gb/s reproduces '64 Tbps total'."
+
+[[assumption]]
+id = "chiplet.two_directions"
+nominal = 2.0
+low = 2.0
+high = 2.0
+unit = "count"
+rationale = "'Total (Tx+Rx)' counts each SerDes lane in both directions."
+
+[[assumption]]
+id = "chiplet.chiplets_per_package"
+nominal = 4.0
+low = 1.0
+high = 4.0
+unit = "count"
+rationale = "64T chiplets per package implied by 256 Tbps / 64 Tbps (INFERENCE); not disclosed."
+
+[[derived]]
+id = "chiplet.bw_chiplet_one_dir"
+fn = "aggregate_tbps"
+inputs = ["chiplet.serdes_count", "chiplet.payload_56"]
+unit = "Tbps"
+note = "320 SerDes × payload, one direction"
+
+[[derived]]
+id = "chiplet.bw_chiplet"
+fn = "times_count"
+inputs = ["chiplet.two_directions", "chiplet.bw_chiplet_one_dir"]
+unit = "Tbps"
+note = "32T chiplet total (Tx + Rx)"
+
+[[derived]]
+id = "chiplet.bw_chiplet64_one_dir"
+fn = "aggregate_tbps"
+inputs = ["chiplet.serdes_count", "chiplet.payload_112"]
+unit = "Tbps"
+note = "320 SerDes × payload, one direction"
+
+[[derived]]
+id = "chiplet.bw_chiplet64"
+fn = "times_count"
+inputs = ["chiplet.two_directions", "chiplet.bw_chiplet64_one_dir"]
+unit = "Tbps"
+note = "64T chiplet total (Tx + Rx)"
+
+[[derived]]
+id = "chiplet.fibers_chiplet"
+fn = "lanes"
+inputs = ["chiplet.bw_chiplet", "chiplet.bw_per_fiber_chiplet"]
+unit = "count"
+note = "fibers at 800 Gb/s each"
+
+[[derived]]
+id = "chiplet.fibers_chiplet64"
+fn = "lanes"
+inputs = ["chiplet.bw_chiplet64", "chiplet.bw_per_fiber_chiplet64"]
+unit = "count"
+note = "fibers at 1.6 Tb/s each"
+
+[[derived]]
+id = "chiplet.package_bw"
+fn = "times_count"
+inputs = ["chiplet.chiplets_per_package", "chiplet.bw_chiplet64"]
+unit = "Tbps"
+note = "4 × 64 Tbps per package"
+
+[[derived]]
+id = "chiplet.per_pluggable"
+fn = "rate_per_unit_gbps"
+inputs = ["chiplet.bw_chiplet", "chiplet.pluggable_equiv"]
+unit = "Gbps"
+note = "32 Tbps over 40 pluggable equivalents"
+
+[[check]]
+id = "chiplet.check_32"
+kind = "consistent"
+a = "chiplet.bw_chiplet"
+b = "chiplet.chiplet_bw_total"
+rel_tol = 0.001
+note = "against '32T chiplet ... 32 Tbps total (Tx+Rx)'"
+
+[[check]]
+id = "chiplet.check_64"
+kind = "consistent"
+a = "chiplet.bw_chiplet64"
+b = "chiplet.chiplet64_bw_total"
+rel_tol = 0.001
+note = "against '64T chiplet ... 64 Tbps total (Tx+Rx)'"
+
+[[check]]
+id = "chiplet.check_fibers"
+kind = "consistent"
+a = "chiplet.fibers_chiplet"
+b = "chiplet.fibers_chiplet64"
+rel_tol = 0.0
+note = "32/0.8 = 64/1.6 = 40 fibers"
+
+[[check]]
+id = "chiplet.check_fibers_pluggables"
+kind = "consistent"
+a = "chiplet.fibers_chiplet"
+b = "chiplet.pluggable_equiv"
+rel_tol = 0.0
+note = "40 fibers against '40 pluggable transceivers' equivalent"
+
+[[check]]
+id = "chiplet.check_256"
+kind = "consistent"
+a = "chiplet.package_bw"
+b = "chiplet.web_package_bw"
+rel_tol = 0.001
+note = "against '256 Tbps (Tx+Rx)' (in the product page metadata only)"
+
+[[check]]
+id = "chiplet.check_over_200"
+kind = "bound"
+a = "chiplet.package_bw"
+b = "chiplet.package_bw_min"
+rel_tol = 0.0
+note = "against 'over 200 Tbps ... per chip package'"
+
+[[check]]
+id = "chiplet.check_path_to_100"
+kind = "consistent"
+a = "chiplet.package_bw"
+b = "chiplet.package_bw_target_2026"
+rel_tol = 0.10
+note = "against the 2026 release's 'a clear path to 100 Tbps of total I/O per package'"
+
+[[hypothesis]]
+id = "H_chiplet_payload"
+statement = "The 32T chiplet totals count payload: 50 Gb/s on each 56 Gb/s NRZ lane and 100 Gb/s on each 106/112 Gb/s PAM4 lane."
+sets = { "chiplet.payload_56" = 50.0, "chiplet.payload_112" = 100.0 }
+group = "chiplet_rate"
+
+[[hypothesis]]
+id = "H_chiplet_line"
+statement = "The 32T chiplet totals count the line rate: 56 and 112 Gb/s per lane."
+sets = { "chiplet.payload_56" = 56.0, "chiplet.payload_112" = 112.0 }
+group = "chiplet_rate"

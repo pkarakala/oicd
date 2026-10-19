@@ -1,13 +1,13 @@
 # OCP 2026 CPO switch and XPU trays: public facts with exact quotes (brief 05 phase 4 fact check, 2026-10-18).
-# Independent reconstruction from public information. Not affiliated with or endorsed by
-# Lightmatter. Product names belong to their owners.
+# Independent model built from public information. Not affiliated with or endorsed by
+# any company whose publications are cited.
 
 [product]
 name = "OCP 2026 CPO switch and XPU trays"
-family = "Passage"
+family = "photonic interconnect"
 kind = "product"
 status = "Shown at the OCP Global Summit 2026 (vendor releases and third-party reports)"
-summary = "An ORv3 CPO switch tray built with Flex and an XPU scale-up tray, both with Passage BiDi engines and Guide DR lasers."
+summary = "An ORv3 CPO switch tray built with Flex and an XPU scale-up tray, both with BiDi engines and ELS-DR lasers."
 
 [[fact]]
 id = "trays.switch_bw"
@@ -16,7 +16,7 @@ value = 204.8
 bound = "exact"
 unit = "Tbps"
 quote = "Next gen 204.8 Tbps CPO switch tray in 1RU developed with Flex as a production validation system"
-cite = "lightmatter_openrack_2026"
+cite = "press_openrack_2026"
 source_class = "vendor_claim"
 verified = true
 location = "release sub-headline bullet 2 (raw.html.txt line 443)"
@@ -29,7 +29,7 @@ value = 1.0
 bound = "exact"
 unit = "RU"
 quote = "Next gen 204.8 Tbps CPO switch tray in 1RU developed with Flex as a production validation system"
-cite = "lightmatter_openrack_2026"
+cite = "press_openrack_2026"
 source_class = "vendor_claim"
 verified = true
 location = "release sub-headline bullet 2 (raw.html.txt line 443)"
@@ -37,28 +37,28 @@ note = "Evidence: text. All five tray sources agree on 1RU for the switch tray."
 
 [[fact]]
 id = "trays.switch_engines"
-quantity = "Passage CPO BiDi engines in the switch tray"
+quantity = "photonic interconnect CPO BiDi engines in the switch tray"
 value = 8.0
 bound = "exact"
 unit = "count"
-quote = "integrating eight Passage CPO BiDi engines powered by Guide DR laser modules in a liquid-cooled chassis"
-cite = "lightmatter_openrack_2026"
+quote = "integrating eight [photonic interconnect] CPO BiDi engines powered by [ELS-DR] laser modules in a liquid-cooled chassis"
+cite = "press_openrack_2026"
 source_class = "vendor_claim"
 verified = true
 location = "paragraph 2 (raw.html.txt line 446)"
 note = "Evidence: text. counterpoint_ocp26 and ine_ocp26 also say eight."
 
 [[fact]]
-id = "trays.switch_guidedr"
-quantity = "switch tray laser source: Guide DR laser modules (count not stated in the release)"
+id = "trays.switch_els_dr"
+quantity = "switch tray laser source: ELS-DR laser modules (count not stated in the release)"
 bound = "exact"
 unit = "text"
-quote = "powered by Guide DR laser modules"
-cite = "lightmatter_openrack_2026"
+quote = "powered by [ELS-DR] laser modules"
+cite = "press_openrack_2026"
 source_class = "vendor_claim"
 verified = true
 location = "paragraph 2 (raw.html.txt line 446)"
-note = "Evidence: text. The release gives no Guide DR count for either tray (see trays.switch_guidedr_count_cp vs trays.switch_guidedr_count_lm)."
+note = "Evidence: text. The release gives no ELS-DR count for either tray (see trays.switch_els_dr_count_cp vs trays.switch_els_dr_count_lm)."
 
 [[fact]]
 id = "trays.switch_liquid_cooled"
@@ -66,7 +66,7 @@ quantity = "switch tray cooling: liquid-cooled chassis"
 bound = "exact"
 unit = "text"
 quote = "in a liquid-cooled chassis"
-cite = "lightmatter_openrack_2026"
+cite = "press_openrack_2026"
 source_class = "vendor_claim"
 verified = true
 location = "paragraph 2 (raw.html.txt line 446)"
@@ -79,7 +79,7 @@ value = 4.0
 bound = "exact"
 unit = "count"
 quote = "The XPU tray houses four accelerator ASICs and two CPUs with 102.4 Tbps of combined scale-up bandwidth"
-cite = "lightmatter_openrack_2026"
+cite = "press_openrack_2026"
 source_class = "vendor_claim"
 verified = true
 location = "paragraph 5 (raw.html.txt line 449)"
@@ -92,7 +92,7 @@ value = 2.0
 bound = "exact"
 unit = "count"
 quote = "The XPU tray houses four accelerator ASICs and two CPUs with 102.4 Tbps of combined scale-up bandwidth"
-cite = "lightmatter_openrack_2026"
+cite = "press_openrack_2026"
 source_class = "vendor_claim"
 verified = true
 location = "paragraph 5 (raw.html.txt line 449)"
@@ -105,7 +105,7 @@ value = 102.4
 bound = "exact"
 unit = "Tbps"
 quote = "The XPU tray houses four accelerator ASICs and two CPUs with 102.4 Tbps of combined scale-up bandwidth"
-cite = "lightmatter_openrack_2026"
+cite = "press_openrack_2026"
 source_class = "vendor_claim"
 verified = true
 location = "paragraph 5; also sub-headline bullet 3 (raw.html.txt line 449)"
@@ -113,28 +113,28 @@ note = "Evidence: text. Release qualifies it as 'combined'; no direction convent
 
 [[fact]]
 id = "trays.xpu_engines"
-quantity = "BiDi Passage CPO engines in the XPU tray"
+quantity = "BiDi photonic interconnect CPO engines in the XPU tray"
 value = 4.0
 bound = "exact"
 unit = "count"
-quote = "interconnected by four BiDi Passage CPO engines and Guide DR laser modules that blind mate as they slide into the rack"
-cite = "lightmatter_openrack_2026"
+quote = "interconnected by four BiDi [photonic interconnect] CPO engines and [ELS-DR] laser modules that blind mate as they slide into the rack"
+cite = "press_openrack_2026"
 source_class = "vendor_claim"
 verified = true
 location = "paragraph 5 (raw.html.txt line 449)"
-note = "Evidence: text. counterpoint_ocp26 ('four Passage and vClick units') and ine_ocp26 ('Its four bidirectional Passage engines') agree."
+note = "Evidence: text. counterpoint_ocp26 ('four photonic interconnect and FAU units') and ine_ocp26 ('Its four bidirectional photonic interconnect engines') agree."
 
 [[fact]]
 id = "trays.xpu_blind_mate"
-quantity = "XPU tray: engines and Guide DR modules blind mate as they slide into the rack"
+quantity = "XPU tray: engines and ELS-DR modules blind mate as they slide into the rack"
 bound = "exact"
 unit = "text"
-quote = "Guide DR laser modules that blind mate as they slide into the rack"
-cite = "lightmatter_openrack_2026"
+quote = "[ELS-DR] laser modules that blind mate as they slide into the rack"
+cite = "press_openrack_2026"
 source_class = "vendor_claim"
 verified = true
 location = "paragraph 5 (raw.html.txt line 449)"
-note = "Evidence: text. The release sentence is ambiguous about what blind-mates. futurum_ocp26: 'with Guide DR laser modules that blind mate as the tray slides into the rack'; ine_ocp26: 'The compute prototype demonstrates blind-mating optical connections when inserted into the rack.'"
+note = "Evidence: text. The release sentence is ambiguous about what blind-mates. futurum_ocp26: 'with ELS-DR laser modules that blind mate as the tray slides into the rack'; ine_ocp26: 'The compute prototype demonstrates blind-mating optical connections when inserted into the rack.'"
 
 [[fact]]
 id = "trays.orv3_mhs"
@@ -142,7 +142,7 @@ quantity = "both trays based on ORv3 and MHS"
 bound = "exact"
 unit = "text"
 quote = "both designs are based on Open Rack Version 3 (ORv3) and Modular Hardware System (MHS)"
-cite = "lightmatter_openrack_2026"
+cite = "press_openrack_2026"
 source_class = "vendor_claim"
 verified = true
 location = "paragraph 1 (raw.html.txt line 445)"
@@ -154,7 +154,7 @@ quantity = "XPU tray uses DC-MHS infrastructure from an unnamed major ODM"
 bound = "exact"
 unit = "text"
 quote = "leveraging Data Center Modular Hardware (DC-MHS) Infrastructure provided by another major ODM"
-cite = "lightmatter_openrack_2026"
+cite = "press_openrack_2026"
 source_class = "vendor_claim"
 verified = true
 location = "paragraph 1; sub-headline bullet 3 says 'leveraging DC-MHS chassis infrastructure provided by a major ODM partner' (raw.html.txt line 445)"
@@ -166,7 +166,7 @@ quantity = "XPU tray uses Corning expanded-beam PRIZM TMT connector technology"
 bound = "exact"
 unit = "text"
 quote = "expanded beam PRIZM® TMT optical connector technology from Corning Incorporated"
-cite = "lightmatter_openrack_2026"
+cite = "press_openrack_2026"
 source_class = "vendor_claim"
 verified = true
 location = "paragraph 1 (raw.html.txt line 445)"
@@ -174,15 +174,15 @@ note = "Evidence: text. Release ties PRIZM TMT to the XPU tray. counterpoint_ocp
 
 [[fact]]
 id = "trays.senko_seat_mpc"
-quantity = "vClick incorporates SENKO SEAT detachable interface and Metallic Pic Coupler (MPC)"
+quantity = "FAU incorporates SENKO SEAT detachable interface and Metallic Pic Coupler (MPC)"
 bound = "exact"
 unit = "text"
 quote = "SENKO's SEAT™ detachable optical interface and Metallic Pic Coupler (MPC) technologies"
-cite = "lightmatter_openrack_2026"
+cite = "press_openrack_2026"
 source_class = "vendor_claim"
 verified = true
 location = "paragraph 6 (raw.html.txt line 450)"
-note = "Evidence: text. This describes the vClick solution, which per the release 'connects the fiber to the XPU inside the compute tray'. The lightmatter.com copy has a curly apostrophe (SENKO’s)."
+note = "Evidence: text. This describes the FAU solution, which per the release 'connects the fiber to the XPU inside the compute tray'. The vendor-site copy has a curly apostrophe (SENKO’s)."
 
 [[fact]]
 id = "trays.faceplate_density"
@@ -192,11 +192,11 @@ hi = 4.0
 bound = "exact"
 unit = "1"
 quote = "are 2-4x more efficient in rack faceplate density"
-cite = "lightmatter_openrack_2026"
+cite = "press_openrack_2026"
 source_class = "vendor_claim"
 verified = true
 location = "paragraph 2 (raw.html.txt line 446)"
-note = "Evidence: text. Claim is for 'next-generation switch systems, powered by Lightmatter Passage and Guide'. CEO quote: 'packs the optical bandwidth of a two-to-four rack unit design into one'. ine_ocp26 calls it 'a company claim about packaging density, not a measured reduction in total system energy consumption'."
+note = "Evidence: text. Claim is for 'next-generation switch systems, powered by the vendor photonic interconnect and ELS'. CEO quote: 'packs the optical bandwidth of a two-to-four rack unit design into one'. ine_ocp26 calls it 'a company claim about packaging density, not a measured reduction in total system energy consumption'."
 
 [[fact]]
 id = "trays.xpu_height_prnewswire"
@@ -205,12 +205,12 @@ value = 1.0
 bound = "exact"
 unit = "RU"
 quote = "102.4 Tbps of scale-up optical bandwidth in a single rack unit"
-cite = "lightmatter_openrack_2026"
+cite = "press_openrack_2026"
 source_class = "vendor_claim"
 verified = true
-conflicts_with = ["trays.xpu_height_lmcom", "trays.xpu_height_ine"]
+conflicts_with = ["trays.xpu_height_vendor_site", "trays.xpu_height_ine"]
 location = "paragraph 5, last sentence (raw.html.txt line 449)"
-note = "Evidence: text. CONFLICT with lm_pr_openrack ('in a 2U rack height'), counterpoint_ocp26 ('2RU') and ine_ocp26 ('2RU'). Both release copies also say in paragraph 2 'ultra-high bandwidth designs in 1 rack unit (RU) height: ... an OCP, MGX-like 102.4T XPU tray'."
+note = "Evidence: text. CONFLICT with vendor_pr_openrack ('in a 2U rack height'), counterpoint_ocp26 ('2RU') and ine_ocp26 ('2RU'). Both release copies also say in paragraph 2 'ultra-high bandwidth designs in 1 rack unit (RU) height: ... an OCP, MGX-like 102.4T XPU tray'."
 
 [[fact]]
 id = "trays.xpu_height_futurum"
@@ -227,31 +227,31 @@ location = "section 'Flex Turns a Demo Into a Production Validation Exercise', p
 note = "Evidence: text. Follows the PR Newswire wording; Futurum's analyst is quoted in the release itself, so this is not independent."
 
 [[fact]]
-id = "trays.xpu_height_lmcom"
-quantity = "XPU tray height (lightmatter.com copy of the release)"
+id = "trays.xpu_height_vendor_site"
+quantity = "XPU tray height (vendor-site copy of the release)"
 value = 2.0
 bound = "exact"
 unit = "RU"
 quote = "102.4 Tbps of scale-up optical bandwidth in a 2U rack height"
-cite = "lm_pr_openrack"
+cite = "vendor_pr_openrack"
 source_class = "vendor_claim"
 verified = true
-conflicts_with = ["trays.xpu_height_lmcom_para2"]
+conflicts_with = ["trays.xpu_height_vendor_site_para2"]
 location = "paragraph 5, last sentence (raw.html.txt line 77)"
-note = "Evidence: text. New key lm_pr_openrack (not in Appendix B): https://lightmatter.com/press-release/lightmatter-delivers-open-rack-cpo-switch-and-xpu-scale-up-server-through-independent-collaborations-with-flex-and-other-industry-partners/ (same text at lightmatter.co). Full sentence: 'Making its public debut at the summit, it is the industry’s first compute tray to carry four XPUs connected with 102.4 Tbps of scale-up optical bandwidth in a 2U rack height.' This is the only sentence that differs from the PR Newswire copy. The same lightmatter.com page is internally inconsistent: paragraph 2 still says '1 rack unit (RU) height' for the 102.4T XPU tray (see trays.xpu_height_lmcom_para2). Page dateModified 2026-10-13T04:36:38Z is about 2 h after the PR Newswire timestamp (Oct 12, 2026, 22:17 ET = 2026-10-13T02:17Z), consistent with a post-wire edit (inference)."
+note = "Evidence: text. New key vendor_pr_openrack (not in Appendix B): https://lightmatter.com/press-release/lightmatter-delivers-open-rack-cpo-switch-and-xpu-scale-up-server-through-independent-collaborations-with-flex-and-other-industry-partners/ (same text at lightmatter.co). Full sentence: 'Making its public debut at the summit, it is the industry’s first compute tray to carry four XPUs connected with 102.4 Tbps of scale-up optical bandwidth in a 2U rack height.' This is the only sentence that differs from the PR Newswire copy. The same lightmatter.com page is internally inconsistent: paragraph 2 still says '1 rack unit (RU) height' for the 102.4T XPU tray (see trays.xpu_height_vendor_site_para2). Page dateModified 2026-10-13T04:36:38Z is about 2 h after the PR Newswire timestamp (Oct 12, 2026, 22:17 ET = 2026-10-13T02:17Z), consistent with a post-wire edit (inference)."
 
 [[fact]]
-id = "trays.xpu_height_lmcom_para2"
-quantity = "both trays in 1 RU height (lightmatter.com copy, paragraph 2)"
+id = "trays.xpu_height_vendor_site_para2"
+quantity = "both trays in 1 RU height (vendor-site copy, paragraph 2)"
 value = 1.0
 bound = "exact"
 unit = "RU"
 quote = "Together, they enable ultra-high bandwidth designs in 1 rack unit (RU) height: next gen scale-up 204.8T switch tray and an OCP, MGX-like 102.4T XPU tray."
-cite = "lm_pr_openrack"
+cite = "vendor_pr_openrack"
 source_class = "vendor_claim"
 verified = true
 location = "paragraph 2 (raw.html.txt line 74)"
-note = "Evidence: text. Contradicts the same page's 'in a 2U rack height' for the XPU tray. Identical sentence in the PR Newswire copy (lightmatter_openrack_2026)."
+note = "Evidence: text. Contradicts the same page's 'in a 2U rack height' for the XPU tray. Identical sentence in the PR Newswire copy (press_openrack_2026)."
 
 [[fact]]
 id = "trays.xpu_height_counterpoint"
@@ -280,27 +280,27 @@ location = "'IN Brief' bullet 2; body also says 'a two-rack-unit accelerator tra
 note = "Evidence: text."
 
 [[fact]]
-id = "trays.switch_guidedr_count_cp"
-quantity = "Guide DR modules in the 1RU switch tray (Counterpoint)"
+id = "trays.switch_els_dr_count_cp"
+quantity = "ELS-DR modules in the 1RU switch tray (Counterpoint)"
 value = 2.0
 bound = "exact"
 unit = "count"
-quote = "containing two Lightmatter Guide DR laser modules, eight Passage CPO optical engines, and eight vClick detachable fiber connectors"
+quote = "containing two [the vendor] [ELS-DR] laser modules, eight [photonic interconnect] CPO optical engines, and eight [FAU] detachable fiber connectors"
 cite = "counterpoint_ocp26"
 source_class = "third_party"
 verified = true
-conflicts_with = ["trays.switch_guidedr_count_lm"]
+conflicts_with = ["trays.switch_els_dr_count_lm"]
 location = "opening bullet list, bullet 1 (raw.html.txt line 71)"
-note = "Evidence: text. CONFLICT: the release gives no count; lm_pr_guidedr says four modules support 204.8 Tbps in a 1RU switch tray, and at 51.2 Tbps per module (lm_web_guidedr) two would cover 102.4 Tbps (arithmetic). Counterpoint also gives 'the two Guide DR modules' for the 2RU XPU server, and puts 'eight vClick' in the switch tray although the release places vClick in the compute tray."
+note = "Evidence: text. CONFLICT: the release gives no count; vendor_pr_els_dr says four modules support 204.8 Tbps in a 1RU switch tray, and at 51.2 Tbps per module (vendor_web_els_dr) two would cover 102.4 Tbps (arithmetic). Counterpoint also gives 'the two ELS-DR modules' for the 2RU XPU server, and puts 'eight FAU' in the switch tray although the release places FAU in the compute tray."
 
 [[fact]]
-id = "trays.switch_guidedr_count_lm"
-quantity = "Guide DR modules for a 204.8 Tbps 1RU switch tray (Lightmatter, May 2026)"
+id = "trays.switch_els_dr_count_lm"
+quantity = "ELS-DR modules for a 204.8 Tbps 1RU switch tray (the vendor, May 2026)"
 value = 4.0
 bound = "exact"
 unit = "count"
-quote = "By utilizing four Guide DR modules, a single 1 RU switch tray can support up to 204.8 Tbps of CPO scale-up switching bandwidth"
-cite = "lm_pr_guidedr"
+quote = "By utilizing four [ELS-DR] modules, a single 1 RU switch tray can support up to 204.8 Tbps of CPO scale-up switching bandwidth"
+cite = "vendor_pr_els_dr"
 source_class = "vendor_claim"
 verified = true
 location = "paragraph 2 (raw.html.txt line 71)"
@@ -317,20 +317,20 @@ cite = "ine_ocp26"
 source_class = "third_party"
 verified = true
 location = "'IN Brief' bullet 1 (raw.html.txt line 32)"
-note = "Evidence: text. ine_ocp26 also says 'The 204.8Tbps and 102.4Tbps figures describe specified aggregate optical bandwidth in the respective demonstrators.' The release uses no qualifier for 204.8 Tbps and 'combined' for the XPU tray; lm_pr_guidedr uses 'aggregate' for the 51.2 Tbps per module. No source says whether 'aggregate' sums both directions."
+note = "Evidence: text. ine_ocp26 also says 'The 204.8Tbps and 102.4Tbps figures describe specified aggregate optical bandwidth in the respective demonstrators.' The release uses no qualifier for 204.8 Tbps and 'combined' for the XPU tray; vendor_pr_els_dr uses 'aggregate' for the 51.2 Tbps per module. No source says whether 'aggregate' sums both directions."
 
 [[fact]]
-id = "trays.xpu_guidedr_count_cp"
-quantity = "Guide DR modules in the 2RU XPU server (Counterpoint)"
+id = "trays.xpu_els_dr_count_cp"
+quantity = "ELS-DR modules in the 2RU XPU server (Counterpoint)"
 value = 2.0
 bound = "exact"
 unit = "count"
-quote = "with the two Guide DR modules, four Passage and vClick units, four XPUs and two CPUs"
+quote = "with the two [ELS-DR] modules, four [photonic interconnect] and [FAU] units, four XPUs and two CPUs"
 cite = "counterpoint_ocp26"
 source_class = "third_party"
 verified = true
 location = "opening bullet list, bullet 2 (raw.html.txt line 72)"
-note = "Evidence: text. Not in Appendix A. The release gives no Guide DR count for the XPU tray."
+note = "Evidence: text. Not in Appendix A. The release gives no ELS-DR count for the XPU tray."
 
 [[fact]]
 id = "trays.fiber_count_counterpoint"
@@ -351,22 +351,22 @@ quantity = "NOT DISCLOSED (absence confirmed by full-text search): per-lane data
 bound = "exact"
 unit = "text"
 quote = "Not disclosed: lane rate, fibers per engine, wavelengths, power, switch ASIC"
-cite = "lightmatter_openrack_2026"
+cite = "press_openrack_2026"
 source_class = "vendor_claim"
 verified = false
-location = "searched full text of lightmatter_openrack_2026, lm_pr_openrack, counterpoint_ocp26, futurum_ocp26, ine_ocp26"
-note = "Evidence: none. Absence confirmed, not a failed lookup. No lane rate (G/Gbps per lane, 'lane', PAM4, NRZ, SerDes) appears in any of the five tray sources. counterpoint_ocp26's '204.8 Gbps' and '102.4 Gbps' are the tray totals with a unit error, not lane rates. Related but not tray-specific: lm_pr_guidedr says each Guide DR drives '256 lanes at 200G each'. Appendix A wording: Not disclosed: lane rate, fibers per engine, wavelengths, power, switch ASIC"
+location = "searched full text of press_openrack_2026, vendor_pr_openrack, counterpoint_ocp26, futurum_ocp26, ine_ocp26"
+note = "Evidence: none. Absence confirmed, not a failed lookup. No lane rate (G/Gbps per lane, 'lane', PAM4, NRZ, SerDes) appears in any of the five tray sources. counterpoint_ocp26's '204.8 Gbps' and '102.4 Gbps' are the tray totals with a unit error, not lane rates. Related but not tray-specific: vendor_pr_els_dr says each ELS-DR drives '256 lanes at 200G each'. Appendix A wording: Not disclosed: lane rate, fibers per engine, wavelengths, power, switch ASIC"
 
 [[fact]]
 id = "trays.nd_fibers_per_engine"
-quantity = "NOT DISCLOSED (absence confirmed by full-text search): fibers per Passage engine in the trays"
+quantity = "NOT DISCLOSED (absence confirmed by full-text search): fibers per photonic interconnect engine in the trays"
 bound = "exact"
 unit = "text"
 quote = "Not disclosed: lane rate, fibers per engine, wavelengths, power, switch ASIC"
-cite = "lightmatter_openrack_2026"
+cite = "press_openrack_2026"
 source_class = "vendor_claim"
 verified = false
-location = "searched full text of lightmatter_openrack_2026, lm_pr_openrack, counterpoint_ocp26, futurum_ocp26, ine_ocp26"
+location = "searched full text of press_openrack_2026, vendor_pr_openrack, counterpoint_ocp26, futurum_ocp26, ine_ocp26"
 note = "Evidence: none. Absence confirmed. No per-engine fiber count in any of the five tray sources. The only fiber count is counterpoint_ocp26's 'routing 1,925 optical fibers in a confined space' (trays.fiber_count_counterpoint), which is not per engine and not clearly tied to either tray. Appendix A wording: Not disclosed: lane rate, fibers per engine, wavelengths, power, switch ASIC"
 
 [[fact]]
@@ -375,11 +375,11 @@ quantity = "NOT DISCLOSED (absence confirmed by full-text search): wavelengths o
 bound = "exact"
 unit = "text"
 quote = "Not disclosed: lane rate, fibers per engine, wavelengths, power, switch ASIC"
-cite = "lightmatter_openrack_2026"
+cite = "press_openrack_2026"
 source_class = "vendor_claim"
 verified = false
-location = "searched full text of lightmatter_openrack_2026, lm_pr_openrack, counterpoint_ocp26, futurum_ocp26, ine_ocp26"
-note = "Evidence: none. Absence confirmed. The tray sources say only 'BiDi'. futurum_ocp26 mentions Lightmatter's '16-wavelength demo' at OFC, unrelated to the trays. Guide DR in general (lm_web_guidedr) lists 'Range A: 1311nm, Range B: 1331nm'. Appendix A wording: Not disclosed: lane rate, fibers per engine, wavelengths, power, switch ASIC"
+location = "searched full text of press_openrack_2026, vendor_pr_openrack, counterpoint_ocp26, futurum_ocp26, ine_ocp26"
+note = "Evidence: none. Absence confirmed. The tray sources say only 'BiDi'. futurum_ocp26 mentions the vendor's '16-wavelength demo' at OFC, unrelated to the trays. ELS-DR in general (vendor_web_els_dr) lists 'Range A: 1311nm, Range B: 1331nm'. Appendix A wording: Not disclosed: lane rate, fibers per engine, wavelengths, power, switch ASIC"
 
 [[fact]]
 id = "trays.nd_power"
@@ -387,11 +387,11 @@ quantity = "NOT DISCLOSED (absence confirmed by full-text search): tray, engine 
 bound = "exact"
 unit = "text"
 quote = "Not disclosed: lane rate, fibers per engine, wavelengths, power, switch ASIC"
-cite = "lightmatter_openrack_2026"
+cite = "press_openrack_2026"
 source_class = "vendor_claim"
 verified = false
-location = "searched full text of lightmatter_openrack_2026, lm_pr_openrack, counterpoint_ocp26, futurum_ocp26, ine_ocp26"
-note = "Evidence: none. Absence confirmed. No W or pJ/bit figure for the trays in lightmatter_openrack_2026, lm_pr_openrack, futurum_ocp26 or ine_ocp26. counterpoint_ocp26's '<5 pj/bit power consumption for interconnects' is a generic analyst remark about CPO, not a tray spec. ine_ocp26 notes the 2-4x claim is 'not a measured reduction in total system energy consumption'. Appendix A wording: Not disclosed: lane rate, fibers per engine, wavelengths, power, switch ASIC"
+location = "searched full text of press_openrack_2026, vendor_pr_openrack, counterpoint_ocp26, futurum_ocp26, ine_ocp26"
+note = "Evidence: none. Absence confirmed. No W or pJ/bit figure for the trays in press_openrack_2026, vendor_pr_openrack, futurum_ocp26 or ine_ocp26. counterpoint_ocp26's '<5 pj/bit power consumption for interconnects' is a generic analyst remark about CPO, not a tray spec. ine_ocp26 notes the 2-4x claim is 'not a measured reduction in total system energy consumption'. Appendix A wording: Not disclosed: lane rate, fibers per engine, wavelengths, power, switch ASIC"
 
 [[fact]]
 id = "trays.nd_switch_asic"
@@ -399,11 +399,11 @@ quantity = "NOT DISCLOSED (absence confirmed by full-text search): switch ASIC i
 bound = "exact"
 unit = "text"
 quote = "Not disclosed: lane rate, fibers per engine, wavelengths, power, switch ASIC"
-cite = "lightmatter_openrack_2026"
+cite = "press_openrack_2026"
 source_class = "vendor_claim"
 verified = false
-location = "searched full text of lightmatter_openrack_2026, lm_pr_openrack, counterpoint_ocp26, futurum_ocp26, ine_ocp26"
-note = "Evidence: none. Absence confirmed. No switch ASIC is named, and the XPU tray's accelerator is described only as 'four accelerator ASICs'. futurum_ocp26 names Broadcom Tomahawk 6 Davisson and NVIDIA Quantum-X/Spectrum-X Photonics only as competitors. ine_ocp26 adds that the XPU-tray ODM's name 'Lightmatter has not disclosed'. Appendix A wording: Not disclosed: lane rate, fibers per engine, wavelengths, power, switch ASIC"
+location = "searched full text of press_openrack_2026, vendor_pr_openrack, counterpoint_ocp26, futurum_ocp26, ine_ocp26"
+note = "Evidence: none. Absence confirmed. No switch ASIC is named, and the XPU tray's accelerator is described only as 'four accelerator ASICs'. futurum_ocp26 names Broadcom Tomahawk 6 Davisson and NVIDIA Quantum-X/Spectrum-X Photonics only as competitors. ine_ocp26 adds that the XPU-tray ODM's name 'the vendor has not disclosed'. Appendix A wording: Not disclosed: lane rate, fibers per engine, wavelengths, power, switch ASIC"
 # ---- Model (brief 05 phase 6, model card §14.7) ---------------------------------------------
 
 [[assumption]]
@@ -428,7 +428,7 @@ nominal = 1.0
 low = 1.0
 high = 2.0
 unit = "RU"
-rationale = "XPU tray height: 1 RU (PR Newswire copy, Futurum) or 2 RU (lightmatter.com copy, Counterpoint, IN Electronics). Pinned by H_xpu_1u or H_xpu_2u."
+rationale = "XPU tray height: 1 RU (PR Newswire copy, Futurum) or 2 RU (vendor-site copy, Counterpoint, IN Electronics). Pinned by H_xpu_1u or H_xpu_2u."
 
 [[derived]]
 id = "trays.switch_per_engine"
@@ -445,11 +445,11 @@ unit = "Tbps"
 note = "102.4 Tbps over 4 engines"
 
 [[derived]]
-id = "trays.engine_in_l20s"
+id = "trays.engine_in_bidi_engines"
 fn = "ratio"
-inputs = ["trays.switch_per_engine", "l20.bw_per_direction"]
+inputs = ["trays.switch_per_engine", "engine.bw_per_direction"]
 unit = "1"
-note = "tray engine bandwidth in L20s per direction (the release does not name the engine, INFERENCE)"
+note = "tray engine bandwidth in BiDi engines per direction (the release does not name the engine, INFERENCE)"
 
 [[derived]]
 id = "trays.switch_bw_per_dir"
@@ -461,16 +461,16 @@ note = "switch tray bandwidth each way"
 [[derived]]
 id = "trays.switch_lanes"
 fn = "lanes"
-inputs = ["trays.switch_bw_per_dir", "l20.lane_rate"]
+inputs = ["trays.switch_bw_per_dir", "engine.lane_rate"]
 unit = "count"
-note = "200G lanes each way (lane rate not disclosed; the L20's, INFERENCE)"
+note = "200G lanes each way (lane rate not disclosed; the BiDi engine's, INFERENCE)"
 
 [[derived]]
-id = "trays.switch_guidedr_needed"
+id = "trays.switch_els_dr_needed"
 fn = "count_ratio"
-inputs = ["trays.switch_lanes", "guidedr.lanes"]
+inputs = ["trays.switch_lanes", "els_dr.lanes"]
 unit = "count"
-note = "Guide DR modules at 256 lanes each"
+note = "ELS-DR modules at 256 lanes each"
 
 [[derived]]
 id = "trays.xpu_bw_per_dir"
@@ -482,16 +482,16 @@ note = "XPU tray bandwidth each way"
 [[derived]]
 id = "trays.xpu_lanes"
 fn = "lanes"
-inputs = ["trays.xpu_bw_per_dir", "l20.lane_rate"]
+inputs = ["trays.xpu_bw_per_dir", "engine.lane_rate"]
 unit = "count"
 note = "200G lanes each way"
 
 [[derived]]
-id = "trays.xpu_guidedr_needed"
+id = "trays.xpu_els_dr_needed"
 fn = "count_ratio"
-inputs = ["trays.xpu_lanes", "guidedr.lanes"]
+inputs = ["trays.xpu_lanes", "els_dr.lanes"]
 unit = "count"
-note = "Guide DR modules for the XPU tray"
+note = "ELS-DR modules for the XPU tray"
 
 [[derived]]
 id = "trays.xpu_bw_per_xpu"
@@ -509,28 +509,28 @@ rel_tol = 0.0
 note = "25.6 Tbps per engine in both trays"
 
 [[check]]
-id = "trays.check_guidedr_release"
+id = "trays.check_els_dr_release"
 kind = "consistent"
-a = "trays.switch_guidedr_needed"
-b = "trays.switch_guidedr_count_lm"
+a = "trays.switch_els_dr_needed"
+b = "trays.switch_els_dr_count_lm"
 rel_tol = 0.01
-note = "against lm_pr_guidedr: four Guide DR modules for a 204.8 Tbps 1 RU switch tray"
+note = "against vendor_pr_els_dr: four ELS-DR modules for a 204.8 Tbps 1 RU switch tray"
 
 [[check]]
-id = "trays.check_guidedr_counterpoint"
+id = "trays.check_els_dr_counterpoint"
 kind = "consistent"
-a = "trays.switch_guidedr_needed"
-b = "trays.switch_guidedr_count_cp"
+a = "trays.switch_els_dr_needed"
+b = "trays.switch_els_dr_count_cp"
 rel_tol = 0.01
-note = "against Counterpoint: two Guide DR modules in the switch tray"
+note = "against Counterpoint: two ELS-DR modules in the switch tray"
 
 [[check]]
-id = "trays.check_xpu_guidedr_counterpoint"
+id = "trays.check_xpu_els_dr_counterpoint"
 kind = "consistent"
-a = "trays.xpu_guidedr_needed"
-b = "trays.xpu_guidedr_count_cp"
+a = "trays.xpu_els_dr_needed"
+b = "trays.xpu_els_dr_count_cp"
 rel_tol = 0.01
-note = "against Counterpoint: two Guide DR modules in the XPU tray"
+note = "against Counterpoint: two ELS-DR modules in the XPU tray"
 
 [[check]]
 id = "trays.check_ine_aggregate"
@@ -549,12 +549,12 @@ rel_tol = 0.0
 note = "against the PR Newswire copy: XPU tray in a single rack unit"
 
 [[check]]
-id = "trays.check_height_lmcom"
+id = "trays.check_height_vendor_site"
 kind = "consistent"
 a = "trays.xpu_height_ru"
-b = "trays.xpu_height_lmcom"
+b = "trays.xpu_height_vendor_site"
 rel_tol = 0.0
-note = "against the lightmatter.com copy: 2U rack height"
+note = "against the vendor-site copy: 2U rack height"
 
 [[check]]
 id = "trays.check_height_counterpoint"
@@ -576,19 +576,19 @@ note = "against Futurum: a single rack unit"
 id = "trays.check_height_sources"
 kind = "consistent"
 a = "trays.xpu_height_prnewswire"
-b = "trays.xpu_height_lmcom"
+b = "trays.xpu_height_vendor_site"
 rel_tol = 0.0
 note = "the two copies of the same release disagree"
 
 [[hypothesis]]
 id = "H_dir"
-statement = "The trays' 204.8 and 102.4 Tbps are per direction: 1024 lanes and 4 Guide DR in the switch tray, 512 lanes and 2 Guide DR in the XPU tray."
+statement = "The trays' 204.8 and 102.4 Tbps are per direction: 1024 lanes and 4 ELS-DR in the switch tray, 512 lanes and 2 ELS-DR in the XPU tray."
 sets = { "trays.bw_divisor" = 1.0 }
 group = "switch_bw"
 
 [[hypothesis]]
 id = "H_agg"
-statement = "The trays' totals are aggregate (both directions): 512 lanes and 2 Guide DR in the switch tray."
+statement = "The trays' totals are aggregate (both directions): 512 lanes and 2 ELS-DR in the switch tray."
 sets = { "trays.bw_divisor" = 2.0 }
 group = "switch_bw"
 

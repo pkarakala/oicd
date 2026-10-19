@@ -10,7 +10,7 @@ level = "tray"
 product = "ocp_trays"
 parent = "reference_rack"
 breadcrumb = "Switch tray"
-summary = "1RU liquid-cooled switch tray built with Flex: a central switch package, eight Passage BiDi engines with vClick FAUs, and Guide DR laser NICs."
+summary = "1RU liquid-cooled switch tray built with Flex: a central switch package, eight BiDi engines with FAUs, and ELS-DR laser NICs."
 
 [[part]]
 id = "sw.outline"
@@ -115,37 +115,37 @@ explode = [0.0, 0.0, 45.0]
 
 [[part]]
 id = "sw.engines"
-name = "Passage BiDi engines (8)"
+name = "BiDi engines (8)"
 assembly = "optics"
 size = [37.5, 27.6, 4.55]
 position = [-130.0, -25.0, 3.775]
 material = "organic_substrate"
 dims_class = "SCHEMATIC"
-dims_source = "The release does not name the engine; drawn at the Passage L20 outline (INFERENCE: 25.6 Tbps per engine = 4 L20s per direction)."
-nodes = ["trays.switch_engines", "trays.switch_per_engine", "trays.engine_in_l20s"]
+dims_source = "The release does not name the engine; drawn at the BiDi optical engine outline (INFERENCE: 25.6 Tbps per engine = 4 BiDi engines per direction)."
+nodes = ["trays.switch_engines", "trays.switch_per_engine", "trays.engine_in_bidi_engines"]
 function = "Each engine carries 25.6 Tbps of the switch's 204.8 Tbps."
 count = 8
 grid = [2, 4, 1]
 pitch = [260.0, 50.0, 0.0]
 explode = [0.0, 0.0, 25.0]
-enters = "passage_l20"
+enters = "bidi_engine"
 label = "BiDi engine"
 
 [[part]]
 id = "sw.faus"
-name = "vClick fiber-array units"
+name = "FAU fiber-array units"
 assembly = "optics"
 size = [8.0, 14.0, 2.2]
 position = [-117.0, -25.0, 7.15]
 material = "glass"
 dims_class = "SCHEMATIC"
 dims_source = "FAU size not disclosed."
-nodes = ["vclick.count_switch_tray", "vclick.il_reinsertion_max"]
+nodes = ["fau.count_switch_tray", "fau.il_reinsertion_max"]
 count = 8
 grid = [2, 4, 1]
 pitch = [260.0, 50.0, 0.0]
 explode = [0.0, 0.0, 40.0]
-label = "vClick"
+label = "FAU"
 
 [[part]]
 id = "sw.ribbons_left"
@@ -172,7 +172,7 @@ dims_source = "Ribbon routing schematic."
 
 [[part]]
 id = "sw.lnics"
-name = "Guide DR laser NICs (4 under H_dir, 2 under H_agg)"
+name = "ELS-DR laser NICs (4 under H_dir, 2 under H_agg)"
 assembly = "lasers"
 size = [76.0, 115.0, 1.6]
 position = [-180.0, -337.5, 7.5]
@@ -180,14 +180,14 @@ material = "pcb"
 dims_class = "SCHEMATIC"
 dims_axes = ["INFERENCE", "PUBLISHED", "SCHEMATIC"]
 dims_source = "nic3.sff_depth"
-nodes = ["guidedr.form_factor", "nic3.sff_width", "nic3.lff_width", "nic3.sff_depth", "trays.switch_guidedr_count_lm", "trays.switch_guidedr_count_cp"]
-function = "Built to OCP NIC 3.0 dimensions, size not named: drawn as SFF (76 x 115 mm); LFF would be 139 x 115 mm. Four modules for 204.8 Tbps per the Guide DR release."
+nodes = ["els_dr.form_factor", "nic3.sff_width", "nic3.lff_width", "nic3.sff_depth", "trays.switch_els_dr_count_lm", "trays.switch_els_dr_count_cp"]
+function = "Built to OCP NIC 3.0 dimensions, size not named: drawn as SFF (76 x 115 mm); LFF would be 139 x 115 mm. Four modules for 204.8 Tbps per the ELS-DR release."
 count = 4
 grid = [4, 1, 1]
 pitch = [120.0, 0.0, 0.0]
 explode = [0.0, -120.0, 20.0]
-enters = "guide_family"
-label = "Guide DR LNIC"
+enters = "laser_sources"
+label = "ELS-DR LNIC"
 
 [[part]]
 id = "sw.rear_connectors"
@@ -214,15 +214,15 @@ node = "trays.switch_per_engine"
 
 [[tour]]
 part = "sw.engines"
-node = "trays.engine_in_l20s"
+node = "trays.engine_in_bidi_engines"
 
 [[tour]]
 part = "sw.faus"
-node = "vclick.il_reinsertion_max"
+node = "fau.il_reinsertion_max"
 
 [[tour]]
 part = "sw.lnics"
-node = "trays.switch_guidedr_count_lm"
+node = "trays.switch_els_dr_count_lm"
 
 [[tour]]
 part = "sw.cold_plate"

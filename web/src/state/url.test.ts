@@ -9,15 +9,15 @@ describe('URL state', () => {
   it('round-trips every field', () => {
     const state = {
       ...URL_DEFAULTS,
-      scene: 'passage_l20',
-      selection: 'l20g.eic',
+      scene: 'bidi_engine',
+      selection: 'eng.eic',
       dockTab: 'inference' as const,
       projection: 'orthographic' as const,
       theme: 'dark' as const,
       explode: 0.75,
       sectionAxis: 'y' as const,
       sectionOffset: -0.125,
-      overlayCase: 'H_vclick_module',
+      overlayCase: 'H_fau_module',
       isolationDb: 12.5,
       spectrumHypothesis: 'H_fsr32' as const,
       tint: true,

@@ -6,9 +6,9 @@ const link = (name: string) => ({ name }) as unknown as Link
 
 describe('explorer store', () => {
   it('starts from the URL', () => {
-    const store = createExplorerStore('?scene=passage_l20&sel=l20g.eic&tab=inference')
+    const store = createExplorerStore('?scene=bidi_engine&sel=eng.eic&tab=inference')
     const s = store.getState()
-    expect([s.scene, s.selection, s.dockTab]).toEqual(['passage_l20', 'l20g.eic', 'inference'])
+    expect([s.scene, s.selection, s.dockTab]).toEqual(['bidi_engine', 'eng.eic', 'inference'])
   })
 
   it('changing scene clears selection, visibility, tour and section, and fits the view', () => {

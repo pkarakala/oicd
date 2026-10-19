@@ -1,6 +1,6 @@
 """The adaptive block floating-point (ABFP) data path of the photonic processor in ahmed2025_nature,
 re-implemented independently from its Supplementary Information and basumallik2022_abfp (model
-card §15.3). This is not Lightmatter code and does not reproduce the paper's measured results.
+card §15.3). This is not the vendor code and does not reproduce the paper's measured results.
 
     s_x = max|x| per 128-long block, s_w,i = max|w_i| per row and block, both rounded up to bfloat16
     y_i = (s_w,i · s_x / G) · Q_ADC{ G · Σ_j Q_7(ŵ_ij) · Q_10(x̂_j) + ν }

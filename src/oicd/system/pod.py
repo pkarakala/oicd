@@ -1,5 +1,5 @@
 """Scale-up pod example (model card §14.8): fibers, fiber length and connectors of a BiDi pod
-against the public claims (lm_pr_cpx, lm_hoti26). Pure functions; INFERENCE throughout."""
+against the public claims (vendor_pr_cpx, vendor_hoti26). Pure functions; INFERENCE throughout."""
 
 from typing import Literal
 

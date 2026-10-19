@@ -140,7 +140,7 @@ class GridRequest(BaseModel):
 
 @router.post("/wdm/grid", response_model=wdm.Grid)
 def post_wdm_grid(request: GridRequest) -> Response:
-    """The interleaved grid of model card §13.5 (INFERENCE for the Guide grid)."""
+    """The interleaved grid of model card §13.5 (INFERENCE for the ELS grid)."""
     return _json(wdm.interleaved_grid(request.center_nm, request.spacing_ghz, request.count))
 
 
@@ -257,7 +257,7 @@ class SpectrumView(BaseModel):
     hypotheses: tuple[str, ...]
     q_loaded: float
     fsr_ghz: float
-    accuracy_ghz: float  # the Guide grid's ± wavelength accuracy, drawn as bars per channel
+    accuracy_ghz: float  # the ELS grid's ± wavelength accuracy, drawn as bars per channel
     inputs: tuple[str, ...]  # catalog nodes the inputs come from
     crosstalk: CrosstalkResponse
 
@@ -276,7 +276,7 @@ def get_spectrum(hypothesis: Literal["H_fsr18", "H_fsr32"] = "H_fsr18") -> Respo
         "bidi16.txrx_spacing_ghz",
         "bidi16.lambda_count",
         "ring.mrm_q",
-        "guide.wavelength_accuracy",
+        "els.wavelength_accuracy",
         "bidi16.channel_loss",
         "bidi16.return_loss_db",
     )
@@ -300,7 +300,7 @@ def get_spectrum(hypothesis: Literal["H_fsr18", "H_fsr32"] = "H_fsr18") -> Respo
             hypotheses=SPECTRUM_HYPOTHESES,
             q_loaded=request.q_loaded,
             fsr_ghz=fsr_ghz,
-            accuracy_ghz=v["guide.wavelength_accuracy"],
+            accuracy_ghz=v["els.wavelength_accuracy"],
             inputs=(*inputs, "bidi16.ring_fsr_thz"),
             crosstalk=crosstalk(request),
         )

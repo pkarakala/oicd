@@ -1,0 +1,53 @@
+# Continuous integration: engine checks with coverage, generated API types, web build and tests.
+# Runs on pushes and pull requests; it never pushes anything itself.
+name: ci
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  engine:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: "3.12"
+      - run: uv sync --all-groups
+      - run: uv run ruff check .
+      - run: uv run ruff format --check .
+      - run: uv run mypy
+      - run: uv run pytest -q --cov=oicd --cov-report=term-missing --cov-fail-under=95
+      - name: hand calculations run with the standard library only
+        run: for f in docs/hand_calcs/*.py; do python3 -I "$f" > /dev/null; done
+      - name: figures regenerate
+        run: uv run python scripts/make_figures.py --check
+
+  web:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - run: uv sync
+      - run: npm ci --legacy-peer-deps
+      - name: generated API types are current
+        run: npm run gen:api && git diff --exit-code openapi.json src/api/schema.ts
+      - run: npm run typecheck
+      - run: npm run test:unit
+      - run: npm run build
+      - run: npm run e2e:install
+      - run: npm run e2e

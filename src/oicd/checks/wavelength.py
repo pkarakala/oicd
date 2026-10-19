@@ -5,6 +5,15 @@ from oicd.registry import EPSILON_NM, ConstraintId
 from oicd.schema import Link
 
 
+def clearances_nm(
+    center_nm: float, tolerance_nm: float, rx_min_nm: float, rx_max_nm: float
+) -> tuple[float, float, bool]:
+    """(lower clearance, upper clearance, contained) of [λ − δ, λ + δ] in [min, max] (§3)."""
+    lower = (center_nm - tolerance_nm) - rx_min_nm
+    upper = rx_max_nm - (center_nm + tolerance_nm)
+    return lower, upper, lower >= -EPSILON_NM and upper >= -EPSILON_NM
+
+
 def check_wavelength(link: Link) -> CheckResult:
     center_nm = link.tx.center_wavelength_nm.value
     tolerance_nm = link.tx.wavelength_tolerance_nm.value
@@ -13,8 +22,9 @@ def check_wavelength(link: Link) -> CheckResult:
 
     tx_lower_nm = center_nm - tolerance_nm
     tx_upper_nm = center_nm + tolerance_nm
-    lower_clearance_nm = tx_lower_nm - rx_min_nm
-    upper_clearance_nm = rx_max_nm - tx_upper_nm
+    lower_clearance_nm, upper_clearance_nm, passed = clearances_nm(
+        center_nm, tolerance_nm, rx_min_nm, rx_max_nm
+    )
 
     evidence: dict[str, float | str] = {
         "tx_center_nm": center_nm,
@@ -27,7 +37,6 @@ def check_wavelength(link: Link) -> CheckResult:
         "upper_clearance_nm": upper_clearance_nm,
         "epsilon_nm": EPSILON_NM,
     }
-    passed = lower_clearance_nm >= -EPSILON_NM and upper_clearance_nm >= -EPSILON_NM
     span = f"TX [{tx_lower_nm}, {tx_upper_nm}] nm into RX [{rx_min_nm}, {rx_max_nm}] nm"
     clearances = f"clearance lower {lower_clearance_nm} nm, upper {upper_clearance_nm} nm"
     return CheckResult(

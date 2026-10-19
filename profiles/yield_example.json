@@ -1,0 +1,236 @@
+{
+  "name": "Model card §11 statistical budget (worked example, three matings with sigma 0.2 dB)",
+  "tx": {
+    "name": "TX optical engine",
+    "electrical": {
+      "modulation": "PAM4",
+      "symbol_rate_gbd": 106.25,
+      "lanes": 1,
+      "fec": "RS(544,514)",
+      "provenance": {
+        "source_class": "synthetic",
+        "citation_key": null,
+        "rationale": "Model card §4 electrical line: PAM4, 106.25 GBd, 1 lane, RS(544,514) (synthetic)."
+      }
+    },
+    "center_wavelength_nm": {
+      "value": 1310.0,
+      "provenance": {
+        "source_class": "synthetic",
+        "citation_key": null,
+        "rationale": "Model card §4 wavelength line: TX 1310 ± 2 nm, RX 1300 to 1320 nm (synthetic)."
+      }
+    },
+    "wavelength_tolerance_nm": {
+      "value": 2.0,
+      "provenance": {
+        "source_class": "synthetic",
+        "citation_key": null,
+        "rationale": "Model card §4 wavelength line: TX 1310 ± 2 nm, RX 1300 to 1320 nm (synthetic)."
+      }
+    },
+    "launch_oma_min": {
+      "value": {
+        "power_dbm": {
+          "value": 0.0
+        },
+        "kind": "oma"
+      },
+      "provenance": {
+        "source_class": "synthetic",
+        "citation_key": null,
+        "rationale": "Model card §4 worked example input (synthetic, not a datasheet value)."
+      }
+    },
+    "upstream": null
+  },
+  "rx": {
+    "name": "RX optical engine",
+    "electrical": {
+      "modulation": "PAM4",
+      "symbol_rate_gbd": 106.25,
+      "lanes": 1,
+      "fec": "RS(544,514)",
+      "provenance": {
+        "source_class": "synthetic",
+        "citation_key": null,
+        "rationale": "Model card §4 electrical line: PAM4, 106.25 GBd, 1 lane, RS(544,514) (synthetic)."
+      }
+    },
+    "passband_min_nm": {
+      "value": 1300.0,
+      "provenance": {
+        "source_class": "synthetic",
+        "citation_key": null,
+        "rationale": "Model card §4 wavelength line: TX 1310 ± 2 nm, RX 1300 to 1320 nm (synthetic)."
+      }
+    },
+    "passband_max_nm": {
+      "value": 1320.0,
+      "provenance": {
+        "source_class": "synthetic",
+        "citation_key": null,
+        "rationale": "Model card §4 wavelength line: TX 1310 ± 2 nm, RX 1300 to 1320 nm (synthetic)."
+      }
+    },
+    "sensitivity_oma_max": {
+      "value": {
+        "power_dbm": {
+          "value": -6.0
+        },
+        "kind": "oma"
+      },
+      "provenance": {
+        "source_class": "synthetic",
+        "citation_key": null,
+        "rationale": "Model card §4 worked example input (synthetic, not a datasheet value)."
+      }
+    }
+  },
+  "channel": [
+    {
+      "name": "TX FAU mating",
+      "loss_max": {
+        "value": {
+          "value": 1.5
+        },
+        "provenance": {
+          "source_class": "synthetic",
+          "citation_key": null,
+          "rationale": "Model card §4 worked example input (synthetic, not a datasheet value)."
+        }
+      },
+      "loss_distribution": {
+        "mean": {
+          "value": {
+            "value": 1.5
+          },
+          "provenance": {
+            "source_class": "synthetic",
+            "citation_key": null,
+            "rationale": "Model card §11 hand case: sigma 0.2 dB per mating (synthetic assumption)."
+          }
+        },
+        "sigma": {
+          "value": {
+            "value": 0.2
+          },
+          "provenance": {
+            "source_class": "synthetic",
+            "citation_key": null,
+            "rationale": "Model card §11 hand case: sigma 0.2 dB per mating (synthetic assumption)."
+          }
+        }
+      }
+    },
+    {
+      "name": "SMF 1 m (TX side)",
+      "loss_max": {
+        "value": {
+          "value": 0.0004
+        },
+        "provenance": {
+          "source_class": "synthetic",
+          "citation_key": null,
+          "rationale": "Model card §4: 2 m SMF at 0.4 dB/km = 0.0008 dB, split into two 1 m segments (0.0004 dB each) placed as in the §2 channel order (synthetic; G.652 not yet cited)."
+        }
+      },
+      "loss_distribution": null
+    },
+    {
+      "name": "patch connector",
+      "loss_max": {
+        "value": {
+          "value": 1.0
+        },
+        "provenance": {
+          "source_class": "synthetic",
+          "citation_key": null,
+          "rationale": "Model card §4 worked example input (synthetic, not a datasheet value)."
+        }
+      },
+      "loss_distribution": {
+        "mean": {
+          "value": {
+            "value": 1.0
+          },
+          "provenance": {
+            "source_class": "synthetic",
+            "citation_key": null,
+            "rationale": "Model card §11 hand case: sigma 0.2 dB per mating (synthetic assumption)."
+          }
+        },
+        "sigma": {
+          "value": {
+            "value": 0.2
+          },
+          "provenance": {
+            "source_class": "synthetic",
+            "citation_key": null,
+            "rationale": "Model card §11 hand case: sigma 0.2 dB per mating (synthetic assumption)."
+          }
+        }
+      }
+    },
+    {
+      "name": "SMF 1 m (RX side)",
+      "loss_max": {
+        "value": {
+          "value": 0.0004
+        },
+        "provenance": {
+          "source_class": "synthetic",
+          "citation_key": null,
+          "rationale": "Model card §4: 2 m SMF at 0.4 dB/km = 0.0008 dB, split into two 1 m segments (0.0004 dB each) placed as in the §2 channel order (synthetic; G.652 not yet cited)."
+        }
+      },
+      "loss_distribution": null
+    },
+    {
+      "name": "RX FAU mating",
+      "loss_max": {
+        "value": {
+          "value": 1.5
+        },
+        "provenance": {
+          "source_class": "synthetic",
+          "citation_key": null,
+          "rationale": "Model card §4 worked example input (synthetic, not a datasheet value)."
+        }
+      },
+      "loss_distribution": {
+        "mean": {
+          "value": {
+            "value": 1.5
+          },
+          "provenance": {
+            "source_class": "synthetic",
+            "citation_key": null,
+            "rationale": "Model card §11 hand case: sigma 0.2 dB per mating (synthetic assumption)."
+          }
+        },
+        "sigma": {
+          "value": {
+            "value": 0.2
+          },
+          "provenance": {
+            "source_class": "synthetic",
+            "citation_key": null,
+            "rationale": "Model card §11 hand case: sigma 0.2 dB per mating (synthetic assumption)."
+          }
+        }
+      }
+    }
+  ],
+  "penalties": [],
+  "reserve": {
+    "value": {
+      "value": 1.5
+    },
+    "provenance": {
+      "source_class": "synthetic",
+      "citation_key": null,
+      "rationale": "Model card §4 worked example input (synthetic, not a datasheet value)."
+    }
+  }
+}

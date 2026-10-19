@@ -10,7 +10,9 @@ _FIELDS = ("modulation", "symbol_rate_gbd", "lanes", "fec")
 def _evidence_value(value: object) -> float | str:
     if isinstance(value, str):
         return str(value)
-    return float(value)
+    if isinstance(value, (int, float)):
+        return float(value)
+    raise TypeError(f"unexpected evidence value {value!r}")
 
 
 def check_electrical(link: Link) -> CheckResult:

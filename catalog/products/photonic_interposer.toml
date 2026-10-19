@@ -1,0 +1,872 @@
+# 3D photonic interposer: public facts with exact quotes (fact check, 2026-10-18).
+# Independent model built from public information. Not affiliated with or endorsed by
+# any company whose publications are cited.
+
+[product]
+name = "3D photonic interposer"
+family = "photonic interconnect"
+kind = "product"
+status = "Public technical material and Hot Chips 2025 talk"
+summary = "3D photonic superchip: a multi-tile active photonic interposer under a large package, with edge-attached fibers carrying WDM microring links (vendor description)."
+
+[[fact]]
+id = "interposer.bw_total_pr"
+quantity = "total optical bandwidth (press release; Tx/Rx counting not stated)"
+value = 114.0
+bound = "exact"
+unit = "Tbps"
+quote = "114 Tbps total optical bandwidth"
+cite = "vendor_pr_interposer"
+source_class = "vendor_claim"
+verified = true
+location = "paragraph 1 (dateline paragraph)"
+note = "Evidence: text. Matches. The PR says 'total' but not whether it counts Tx + Rx; HC25 slide 11 says '(Tx + Rx)' and the EVK page says 'Total bi-directional'. Arithmetic, not a source statement: 256 fibers x 448 Gbps = 1024 SerDes x 56 Gbps x 2 directions = 114.688 Tbps."
+
+[[fact]]
+id = "interposer.bw_total_hc25"
+quantity = "bandwidth counting Tx + Rx (Specifications table)"
+value = 114.0
+bound = "max"
+unit = "Tbps"
+quote = "Bandwidth (Tx + Rx) Up to 114 Tbps"
+cite = "vendor_hc25_interposer"
+source_class = "vendor_claim"
+verified = true
+location = "page 11 (slide 'Unprecedented performance and scale', Specifications table); also checked on the rendered slide"
+note = "Evidence: text. Matches. Explicitly counts Tx + Rx. ISES 2025 slide 11 also gives '114 Tbps' for the M-series."
+
+[[fact]]
+id = "interposer.bw_total_evk"
+quantity = "total bi-directional bandwidth (EVK technical specifications)"
+value = 114.6
+bound = "exact"
+unit = "Tbps"
+quote = "Total bi-directional bandwidth 114.6 Tbps"
+cite = "vendor_web_interposerevk"
+source_class = "vendor_claim"
+verified = true
+location = "Technical Specifications list; hero also reads 'Data rate 114.6 Tbps Total Bi-Directional'"
+note = "Evidence: text. Matches. The same page's meta description says '114 Tbps of interconnect bandwidth'. Arithmetic: 114.6 equals 114.688 Tbps (1024 x 56 Gbps x 2) truncated; rounding would give 114.7."
+
+[[fact]]
+id = "interposer.interposer_area"
+quantity = "multi-reticle active photonic interposer area"
+value = 4000.0
+bound = "min"
+unit = "mm2"
+quote = "At more than 4,000 square millimeters, the [interposer] reference platform is a multi-reticle active photonic interposer"
+cite = "vendor_pr_interposer"
+source_class = "vendor_claim"
+verified = true
+location = "paragraph 1"
+note = "Evidence: text. Only the PR says 'more than'. HC25 slide 11: 'Silicon die Complex 4,000 mm2' (the die complex, no '>'); EVK: 'Active interposer area 4,000 mm²'; product page: 'A 4000 mm2 photonic interposer' and icon '4,000 MM²' labelled 'Biggest die complexes in a package'."
+
+[[fact]]
+id = "interposer.tile_count"
+quantity = "number of tiles in the active interposer"
+value = 8.0
+bound = "exact"
+unit = "count"
+quote = "8-tile 3D active interposer with integrated programmable waveguide network"
+cite = "vendor_pr_interposer"
+source_class = "vendor_claim"
+verified = true
+location = "Key features list, item 1"
+note = "Evidence: text. Matches. EVK also: 'Form factor 2x4 tile matrix (8 tiles total)'."
+
+[[fact]]
+id = "interposer.tile_arrangement"
+quantity = "tile arrangement, 2 rows x 4 columns"
+bound = "exact"
+unit = "text"
+quote = "A dynamic, programmable optical fabric in the 2x4 tile design"
+cite = "vendor_hc25_interposer"
+source_class = "vendor_claim"
+verified = true
+location = "page 22 (slide 'Reconfigurable connectivity'); slide image labels '3D photonic interposer 2x4 tile' with tiles 00-03 and 10-13"
+note = "Evidence: text. Matches (source writes '2x4' with a letter x). EVK page: '2x4 tile matrix (8 tiles total)'."
+
+[[fact]]
+id = "interposer.reticle_count"
+quantity = "number of reticles in the multi-reticle interposer (initial list: not disclosed)"
+bound = "exact"
+unit = "text"
+quote = "multi-reticle active photonic interposer"
+cite = "vendor_pr_interposer"
+source_class = "vendor_claim"
+verified = true
+location = "paragraph 1"
+note = "Evidence: text. Confirmed: no G1 source states a reticle count; the PR says only 'multi-reticle'. ISES slide 11 labels the M-series PIC 'multi-reticle photonic die'. HC25 slide 22 marks 'Photonic cross-reticle stitching' at a tile boundary and slide 24 shows 'Cross reticle metal stitching' between neighbouring tiles, which suggests one reticle per tile (8); inference only. HC25 slide 24 annotates a two-tile layout with '16.4 mm' (arrow spans the left of the two layouts) and '28.2 mm' (height) without naming the object; 8 x 16.4 x 28.2 mm = 3,700 mm2, below the stated 4,000 mm2 (arithmetic)."
+
+[[fact]]
+id = "interposer.power_delivery"
+quantity = "power delivery in the integrated advanced package"
+value = 1.5
+bound = "exact"
+unit = "kW"
+quote = "1.5 kW power delivery in integrated advanced package (7,735 mm2)"
+cite = "vendor_pr_interposer"
+source_class = "vendor_claim"
+verified = true
+location = "Key features list, item 6"
+note = "Evidence: text. Sources differ: product page says 'supports 1.5kW+ power delivery' (a minimum) and its icon reads '1,500 WATT'; the EVK page says 'Supports >1 kW of power delivery for XPUs and switches' (see interposer.power_delivery_evk); HC25 gives only a density, '>1.4 W/mm2'."
+
+[[fact]]
+id = "interposer.package_area"
+quantity = "integrated advanced package area"
+value = 7735.0
+bound = "exact"
+unit = "mm2"
+quote = "integrated advanced package (7,735 mm2)"
+cite = "vendor_pr_interposer"
+source_class = "vendor_claim"
+verified = true
+location = "Key features list, item 6"
+note = "Evidence: text. Matches. Consistent with the product page icon '91×85 MM': 91 mm x 85 mm = 7,735 mm2 (arithmetic)."
+
+[[fact]]
+id = "interposer.package_dims"
+quantity = "package outline, 91 mm x 85 mm (two values; icon labelled '3D photonic chip-on-wafer package')"
+bound = "exact"
+unit = "text"
+quote = "91×85 MM"
+cite = "vendor_web_interposer"
+source_class = "vendor_claim"
+verified = true
+location = "Specifications grid, icon 91-85-mm2.svg (downloaded to SRC/vendor_web_interposer_assets/, rendered), label '3D photonic chip-on-wafer package'; raw.html alt text 'Icon representing 91 mm x 85 mm dimensions for the vendor modules'"
+note = "Evidence: image. Value matches. The exact wording '91 mm x 85 mm' is only in the image alt attribute in raw.html (not in raw.html.txt); the visible icon reads '91×85 MM'. The page labels it '3D photonic chip-on-wafer package', not explicitly 'package size'. 91 x 85 = 7,735 mm2 matches the PR."
+
+[[fact]]
+id = "interposer.package_length_mm"
+quantity = "package length"
+value = 91.0
+bound = "exact"
+unit = "mm"
+quote = "91×85 MM"
+cite = "vendor_web_interposer"
+source_class = "vendor_claim"
+verified = true
+location = "Specifications grid, icon 91-85-mm2.svg (downloaded to SRC/vendor_web_interposer_assets/, rendered), label '3D photonic chip-on-wafer package'; raw.html alt text 'Icon representing 91 mm x 85 mm dimensions for the vendor modules'"
+note = "Evidence: image. Value matches. The exact wording '91 mm x 85 mm' is only in the image alt attribute in raw.html (not in raw.html.txt); the visible icon reads '91×85 MM'. The page labels it '3D photonic chip-on-wafer package', not explicitly 'package size'. 91 x 85 = 7,735 mm2 matches the PR. Number split from interposer.package_dims."
+
+[[fact]]
+id = "interposer.package_width_mm"
+quantity = "package width"
+value = 85.0
+bound = "exact"
+unit = "mm"
+quote = "91×85 MM"
+cite = "vendor_web_interposer"
+source_class = "vendor_claim"
+verified = true
+location = "Specifications grid, icon 91-85-mm2.svg (downloaded to SRC/vendor_web_interposer_assets/, rendered), label '3D photonic chip-on-wafer package'; raw.html alt text 'Icon representing 91 mm x 85 mm dimensions for the vendor modules'"
+note = "Evidence: image. Value matches. The exact wording '91 mm x 85 mm' is only in the image alt attribute in raw.html (not in raw.html.txt); the visible icon reads '91×85 MM'. The page labels it '3D photonic chip-on-wafer package', not explicitly 'package size'. 91 x 85 = 7,735 mm2 matches the PR. Number split from interposer.package_dims."
+
+[[fact]]
+id = "interposer.power_density"
+quantity = "power delivery density"
+value = 1.4
+bound = "min"
+unit = "W/mm2"
+quote = "Power delivery >1.4 W/mm2 density"
+cite = "vendor_hc25_interposer"
+source_class = "vendor_claim"
+verified = true
+location = "page 11, Specifications table"
+note = "Evidence: text. Matches. Slide 26 reports a '369mm2 thermal test chip, power density 1.47W/mm2' (see interposer.thermal_test_density)."
+
+[[fact]]
+id = "interposer.fiber_count"
+quantity = "optical fibers, edge attached"
+value = 256.0
+bound = "exact"
+unit = "count"
+quote = "256 optical fibers edge attached with 448 Gbps bandwidth per fiber"
+cite = "vendor_pr_interposer"
+source_class = "vendor_claim"
+verified = true
+location = "Key features list, item 5"
+note = "Evidence: text. Matches. Also HC25 slide 11 'Fibers 256', EVK 'Optical fibers 256 total', product page icon '256 TOTAL FIBERS'. No source says whether laser-supply fibers are inside or outside the 256 (HC25 slide 13 labels 'Fiber Attach Data & Laser')."
+
+[[fact]]
+id = "interposer.bw_per_fiber"
+quantity = "bandwidth per fiber (direction counting not stated)"
+value = 448.0
+bound = "exact"
+unit = "Gbps"
+quote = "256 optical fibers edge attached with 448 Gbps bandwidth per fiber"
+cite = "vendor_pr_interposer"
+source_class = "vendor_claim"
+verified = true
+conflicts_with = ["interposer.bw_per_fiber_ises25"]
+location = "Key features list, item 5"
+note = "Evidence: text. Conflicts with ISES 2025 '800 Gbps / fiber (Tx+Rx)' for the M-series (see interposer.bw_per_fiber_ises25). The PR does not say per direction or Tx+Rx. Arithmetic: 8 λ x 56 Gbps = 448 Gbps and 256 x 448 Gbps = 114.688 Tbps, the HC25 '(Tx + Rx)' total, which fits unidirectional fibers (half Tx, half Rx) at 448 Gbps each; inference. The HOTI 2025 paper's generic 56G 8λ design point uses separate fibers ('two TX and two RX fibers per 5 sqmm')."
+
+[[fact]]
+id = "interposer.wdm_lambda"
+quantity = "WDM wavelengths per waveguide and fiber"
+value = 8.0
+bound = "exact"
+unit = "count"
+quote = "8 wavelength WDM transmission on waveguides and fibers"
+cite = "vendor_pr_interposer"
+source_class = "vendor_claim"
+verified = true
+location = "Key features list, item 4"
+note = "Evidence: text. Matches. Product page: '8 wavelength DWDM' and icon '8λ' (Wavelengths per fiber); EVK: '8-wavelength DWDM'; HC25 slide 23: '8λ @ 56Gbps/λ per link'. The ELS laser in HC25 offers 'Up to 16 wavelengths per fiber, 200 GHz grid' (slide 17) and '16λ 100 mW/fiber' (slide 32); interposer uses 8."
+
+[[fact]]
+id = "interposer.lane_rate_nrz"
+quantity = "per-wavelength lane rate, NRZ"
+value = 56.0
+bound = "exact"
+unit = "Gbps"
+quote = "56 Gbps NRZ modulation"
+cite = "vendor_pr_interposer"
+source_class = "vendor_claim"
+verified = true
+conflicts_with = ["interposer.serdes_rate_web"]
+location = "Key features list, item 3"
+note = "Evidence: text. Matches. EVK: 'Signaling protocol 56 Gbps NRZ'; HC25 slide 30: '56 Gbps, NRZ' with 'PAM4 also enabled'; product page icon reads '56/112 Gbps' (Power efficient SerDes; see interposer.serdes_rate_web)."
+
+[[fact]]
+id = "interposer.serdes_count"
+quantity = "electrical SerDes count"
+value = 1024.0
+bound = "exact"
+unit = "count"
+quote = "containing a total of 1024 Electrical SerDes"
+cite = "vendor_pr_interposer"
+source_class = "vendor_claim"
+verified = true
+location = "Key features list, item 2"
+note = "Evidence: text. Matches. HC25 slide 11 '# of SerDes 1024'; EVK 'SerDes lane count 1024'; product page icon '1024 SERDES'."
+
+[[fact]]
+id = "interposer.serdes_per_tile"
+quantity = "SerDes per tile"
+value = 128.0
+bound = "exact"
+unit = "count"
+quote = "128 SerDes per tile"
+cite = "vendor_hc25_interposer"
+source_class = "vendor_claim"
+verified = true
+location = "page 30 (slide 'Bandwidth density leadership'; shows a 16 x 8 grid of eye diagrams); repeated on ISES slide 17"
+note = "Evidence: text. Matches. 128 x 8 tiles = 1024 (arithmetic)."
+
+[[fact]]
+id = "interposer.chiplets"
+quantity = "chiplets stacked on the interposer"
+value = 34.0
+bound = "exact"
+unit = "count"
+quote = "34 chiplets with 1024 SerDes"
+cite = "vendor_hc25_interposer"
+source_class = "vendor_claim"
+verified = true
+location = "page 11 (callout on the package image; also in text layer)"
+note = "Evidence: text. Matches. Consistent with EVK '32 I/O chiplets and two thermal load chips' (32 + 2 = 34). If the thermal load chips carry no SerDes, 1024 / 32 = 32 SerDes per I/O chiplet (inference)."
+
+[[fact]]
+id = "interposer.buses_per_tile"
+quantity = "horizontal optical buses per tile"
+value = 16.0
+bound = "exact"
+unit = "count"
+quote = "16 horizontal buses"
+cite = "vendor_hc25_interposer"
+source_class = "vendor_claim"
+verified = true
+location = "page 23 (slide 'Tile design')"
+note = "Evidence: text. Matches. The slide image also labels '4 buses (16 waveguides)' and '64 waveguides' per tile."
+
+[[fact]]
+id = "interposer.links_per_bus"
+quantity = "full-duplex TX-RX links per bus (capacity)"
+value = 2.0
+bound = "max"
+unit = "count"
+quote = "Each bus supports up to 2 full-duplex TX-RX links"
+cite = "vendor_hc25_interposer"
+source_class = "vendor_claim"
+verified = true
+location = "page 23 (slide 'Tile design')"
+note = "Evidence: text. Matches. Arithmetic (inference): 8 tiles x 16 buses x 2 links x 8λ x 56 Gbps = 114.688 Tbps per direction (229 Tbps Tx+Rx), twice the stated 114 Tbps (Tx + Rx) and twice 128 SerDes per tile; the numbers agree only if one link per bus is populated, so 'up to 2' reads as capacity."
+
+[[fact]]
+id = "interposer.link_lane_rate"
+quantity = "per-link configuration: 8 wavelengths at 56 Gbps each (value = Gbps per wavelength)"
+value = 56.0
+bound = "exact"
+unit = "Gbps"
+quote = "8λ @ 56Gbps/λ per link"
+cite = "vendor_hc25_interposer"
+source_class = "vendor_claim"
+verified = true
+location = "page 23 (slide 'Tile design')"
+note = "Evidence: text. Matches. 8 x 56 = 448 Gbps per link per direction (arithmetic), equal to the PR's 448 Gbps per fiber."
+
+[[fact]]
+id = "interposer.pam4_tdecq"
+quantity = "TDECQ of the 112 Gbps PAM4 eye ('PAM4 also enabled')"
+value = 0.83
+bound = "exact"
+unit = "dB"
+quote = "112 Gbps, TDECQ = 0.83 dB"
+cite = "vendor_hc25_interposer"
+source_class = "vendor_claim"
+verified = true
+location = "page 30 (inset eye diagram under 'SerDes eye diagrams'); repeated on ISES slide 17"
+note = "Evidence: text. Matches. The slide does not state the measurement reference plane (TDECQ is normally an optical transmitter metric, but the slide says 'SerDes eye diagrams') and the EVK specifies 56 Gbps NRZ only."
+
+[[fact]]
+id = "interposer.io_chiplets"
+quantity = "I/O chiplets 3D stacked on the interposer (EVK)"
+value = 32.0
+bound = "exact"
+unit = "count"
+quote = "An array of 32 I/O chiplets and two thermal load chips"
+cite = "vendor_web_interposerevk"
+source_class = "vendor_claim"
+verified = true
+location = "intro paragraph"
+note = "Evidence: text."
+
+[[fact]]
+id = "interposer.thermal_load_chips"
+quantity = "thermal load chips 3D stacked on the interposer (EVK)"
+value = 2.0
+bound = "exact"
+unit = "count"
+quote = "An array of 32 I/O chiplets and two thermal load chips"
+cite = "vendor_web_interposerevk"
+source_class = "vendor_claim"
+verified = true
+location = "intro paragraph"
+note = "Evidence: text. Matches; the page spells the number 'two'."
+
+[[fact]]
+id = "interposer.energy_system"
+quantity = "system-level energy efficiency including laser (EVK)"
+value = 2.3
+bound = "exact"
+unit = "pJ/bit"
+quote = "System-level efficiency 2.3 pJ/bit (including laser)"
+cite = "vendor_web_interposerevk"
+source_class = "vendor_claim"
+verified = true
+conflicts_with = ["interposer.energy_pic_laser_hoti"]
+location = "Technical Specifications; hero also reads 'System Efficiency 2.3 pJ/bit incl. laser power; SerDes ~2.0 pJ/bit'"
+note = "Evidence: text. Matches. Ambiguity: the page calls 2.3 pJ/bit 'System-level' and lists SerDes 2.0 pJ/bit separately; the HOTI 2025 paper treats 2.3 pJ/bit as 'PIC and laser' with SerDes added on top (photonic interconnect total 4.3 pJ/bit in its Table III). Whether 2.3 includes SerDes is not settled by this page."
+
+[[fact]]
+id = "interposer.energy_serdes"
+quantity = "SerDes energy efficiency (EVK)"
+value = 2.0
+bound = "exact"
+unit = "pJ/bit"
+quote = "SerDes efficiency 2.0 pJ/bit"
+cite = "vendor_web_interposerevk"
+source_class = "vendor_claim"
+verified = true
+location = "Technical Specifications"
+note = "Evidence: text. Matches the spec table; the hero line says 'SerDes ~2.0 pJ/bit' (approximate). The HOTI 2025 paper uses '2 pJ/bit for 56G NRZ' as an assumption (doubling a 1 pJ/bit 112G PAM-4 XSR figure from its ref [23]), not a measurement."
+
+[[fact]]
+id = "interposer.energy_pic_laser_hoti"
+quantity = "PIC + laser energy efficiency of 'current photonic interconnect products' (SerDes excluded)"
+value = 2.3
+bound = "exact"
+unit = "pJ/bit"
+quote = "2.3 pJ/bit for PIC and laser"
+cite = "vendor_hoti25_paper"
+source_class = "peer_reviewed"
+verified = true
+location = "page 5, Section III (photonic interconnect), first paragraph; repeated page 7, Section IV.A d)"
+note = "Evidence: text. Value matches, but the paper never names the interposer ('current photonic interconnect products') and cites the figure to its ref [22], 'N. Harris, the vendor InterConnect Launch Event at OFC 2025' (a vendor event): a vendor claim restated in a conference paper, not an independent measurement. The paper does not itself state that it was peer reviewed (venue: 2025 IEEE Symposium on High-Performance Interconnects (HotI)); PEER_REVIEWED rests on the venue."
+
+[[fact]]
+id = "interposer.mrr_diameter"
+quantity = "microring diameter"
+value = 15.0
+bound = "approx"
+unit = "um"
+quote = "Diameter ~ 15um"
+cite = "vendor_hc25_interposer"
+source_class = "vendor_claim"
+verified = true
+location = "page 14 (slide 'The heart of the engine: silicon microrings')"
+note = "Evidence: text. Matches. Slide 16 also says 'Yes, ~15µm in diameter.' The slides describe photonic interconnect microrings generally, not an interposer-specific design value."
+
+[[fact]]
+id = "interposer.mrr_heater"
+quantity = "microring tuning element: resistive heater"
+bound = "exact"
+unit = "text"
+quote = "Resistive heater for tuning"
+cite = "vendor_hc25_interposer"
+source_class = "vendor_claim"
+verified = true
+location = "page 14"
+note = "Evidence: text."
+
+[[fact]]
+id = "interposer.mrr_modulation"
+quantity = "microring modulation mechanism: depletion PN junction"
+bound = "exact"
+unit = "text"
+quote = "Depletion PN junction for modulation"
+cite = "vendor_hc25_interposer"
+source_class = "vendor_claim"
+verified = true
+location = "page 14"
+note = "Evidence: text."
+
+[[fact]]
+id = "interposer.bump_pitch"
+quantity = "chip-to-interposer bump pitch"
+value = 120.0
+bound = "approx"
+unit = "um"
+quote = "Bump pitch: ~120 µm"
+cite = "vendor_hc25_interposer"
+source_class = "vendor_claim"
+verified = true
+location = "page 13 (slide '3D stacking requires compact optical Tx and Rx')"
+note = "Evidence: text. Matches. Listed under 'Standard processes today' (a generic process figure, not a stated interposer design value); the same slide gives 'Bump size: ~80 µm'. Repeated on ISES slides 12 and 15."
+
+[[fact]]
+id = "interposer.txrx_area"
+quantity = "area for an optical transmitter/receiver"
+value = 0.015
+bound = "exact"
+unit = "mm2"
+quote = "Area for a transmitter/receiver: 0.015 mm²"
+cite = "vendor_hc25_interposer"
+source_class = "vendor_claim"
+verified = true
+conflicts_with = ["interposer.txrx_area_p15"]
+location = "page 13 (slide '3D stacking requires compact optical Tx and Rx')"
+note = "Evidence: text. Internal tension in HC25: slide 15 says microrings with inductorless driver and analog front end 'enable 0.006 mm² Tx + Rx area' (see interposer.txrx_area_p15). Slide 13 lists 0.015 mm² under 'Standard processes today'; 'transmitter/receiver' does not say whether it is each or a Tx+Rx pair. Repeated on ISES slides 12 and 15."
+
+[[fact]]
+id = "interposer.pic_platform"
+quantity = "silicon photonics platform of the PIC"
+bound = "exact"
+unit = "text"
+quote = "The [3D photonic interposer] utilizes the GF Fotonix™ silicon photonics platform"
+cite = "vendor_pr_interposer"
+source_class = "vendor_claim"
+verified = true
+location = "paragraph 3"
+note = "Evidence: text. Matches. HC25 slide 32 (image) shows the photonic interconnect PIC with GF, tsmc and Tower logos, i.e. several PIC fabs for photonic interconnect generally (see interposer.supply_chain_hc25)."
+
+[[fact]]
+id = "interposer.partners"
+quantity = "foundry and assembly partners named for interposer production readiness"
+bound = "exact"
+unit = "text"
+quote = "including GlobalFoundries (GF) and Amkor"
+cite = "vendor_pr_interposer"
+source_class = "vendor_claim"
+verified = true
+location = "paragraph 3"
+note = "Evidence: text. Matches. HC25 slide 32 (image) additionally shows tsmc and ASE for packaging and tsmc for the photonic interconnect EIC."
+
+[[fact]]
+id = "interposer.bw_per_fiber_ises25"
+quantity = "bandwidth per fiber counting Tx + Rx, M-series (ISES slide)"
+value = 800.0
+bound = "exact"
+unit = "Gbps"
+quote = "800 Gbps / fiber (Tx+Rx)"
+cite = "vendor_ises25"
+source_class = "vendor_claim"
+verified = true
+location = "page 11 (slide 'Beyond the Limit of 2D'), under 'GEN 4 3D Interposer M-series' below '114 Tbps'; column mapping checked on the rendered slide"
+note = "Evidence: text. Confirmed conflict with the PR's '448 Gbps bandwidth per fiber'. 256 fibers x 800 Gbps = 204.8 Tbps, inconsistent with the '114 Tbps' printed above it (arithmetic). The slide says 'M-series', not interposer. 800 Gbps per fiber matches the separate '16 wavelength Bi-Directional link' demonstration on ISES slide 9 ('800 Gbps per fiber'), so the slide may mix link generations (inference)."
+
+[[fact]]
+id = "interposer.txrx_area_p15"
+quantity = "Tx + Rx area with microrings, inductorless driver and analog front end"
+value = 0.006
+bound = "exact"
+unit = "mm2"
+quote = "0.006 mm² Tx + Rx area"
+cite = "vendor_hc25_interposer"
+source_class = "vendor_claim"
+verified = true
+location = "page 15 (slide 'Ultracompact transmitter and receiver')"
+note = "Evidence: text. Conflicts with slide 13 'Area for a transmitter/receiver: 0.015 mm²' in the same deck (interposer.txrx_area). The initial fact list5 lists 0.006 mm² for vendor_ofc25_paper (not checked by G1)."
+
+[[fact]]
+id = "interposer.thermal_test_density"
+quantity = "power density of a 369 mm2 thermal test chip on photonic interconnect"
+value = 1.47
+bound = "exact"
+unit = "W/mm2"
+quote = "369mm2 thermal test chip, power density 1.47W/mm2."
+cite = "vendor_hc25_interposer"
+source_class = "vendor_claim"
+verified = true
+location = "page 26 (slide 'Power delivery and thermal load')"
+note = "Evidence: text. Supports the '>1.4 W/mm2' spec. The heat map image labels four regions '170W' each; the slide does not say how they relate to the 369 mm2 chip (4 x 170 W = 680 W vs 369 mm2 x 1.47 W/mm2 = 542 W, arithmetic)."
+
+[[fact]]
+id = "interposer.tsv_current_density"
+quantity = "photonic interconnect TSV current density capability"
+value = 2.5
+bound = "min"
+unit = "A/mm2"
+quote = "[photonic interconnect] TSVs support >2.5A/mm2."
+cite = "vendor_hc25_interposer"
+source_class = "vendor_claim"
+verified = true
+location = "page 26 (slide 'Power delivery and thermal load')"
+note = "Evidence: text."
+
+[[fact]]
+id = "interposer.power_delivery_evk"
+quantity = "power delivery for XPUs and switches (EVK page)"
+value = 1.0
+bound = "min"
+unit = "kW"
+quote = "Supports >1 kW of power delivery for XPUs and switches"
+cite = "vendor_web_interposerevk"
+source_class = "vendor_claim"
+verified = true
+location = "Technical Specifications, 'Power delivery'"
+note = "Evidence: text. Lower than the PR's '1.5 kW power delivery' and the product page's '1.5kW+' / '1,500 WATT'. Not strictly contradictory (>1 kW includes 1.5 kW) but the EVK states a lower figure."
+
+[[fact]]
+id = "interposer.serdes_rate_web"
+quantity = "SerDes rate options on the product page (56 and 112 Gbps)"
+bound = "exact"
+unit = "text"
+quote = "56/112 Gbps"
+cite = "vendor_web_interposer"
+source_class = "vendor_claim"
+verified = true
+location = "Specifications grid, icon 56-112-gbps2.svg labelled 'Power efficient SerDes' (downloaded to SRC/vendor_web_interposer_assets/, rendered); alt text 'Icon showing the comparison between 56 Gbps and 112 Gbps speeds'"
+note = "Evidence: image. PR and EVK state 56 Gbps NRZ only; HC25 slide 30 shows a 112 Gbps PAM4 eye ('PAM4 also enabled'). The product page does not say 112 Gbps is PAM4."
+
+[[fact]]
+id = "interposer.mrm_eo_bw"
+quantity = "microring modulator measured EO S21 bandwidth at -1 V bias (35.4 GHz at -2 V)"
+value = 31.8
+bound = "exact"
+unit = "GHz"
+quote = "Bias V: -1V, 31.8 GHz"
+cite = "vendor_hc25_interposer"
+source_class = "vendor_claim"
+verified = true
+location = "page 15, 'Measured EO S21' plot legend (image only)"
+note = "Evidence: image. Image-only. The second legend entry reads 'Bias V: -2V, 35.4 GHz'. The slide does not say these are -3 dB bandwidths, though the plot draws a dashed line at -3 dB where the curves cross near those frequencies."
+
+[[fact]]
+id = "interposer.supply_chain_hc25"
+quantity = "photonic interconnect supply chain on HC25 slide: EIC fab, PIC fabs, packaging"
+bound = "exact"
+unit = "text"
+quote = "[photonic interconnect] EIC: [tsmc logo]; [photonic interconnect] PIC: [GF logo] [tsmc logo] [Tower Semiconductor logo]; package: [tsmc logo] [ASE logo] [Amkor Technology logo]; Customer ASIC with UCIe IP: Multiple fabs; Pluggable fiber coupler: Strategic partner"
+cite = "vendor_hc25_interposer"
+source_class = "vendor_claim"
+verified = true
+location = "page 32 (slide 'Optimized end-to-end and production-ready'; logos are images)"
+note = "Evidence: image. Broader than the PR's 'GlobalFoundries (GF) and Amkor' and 'GF Fotonix': the slide shows three PIC fabs and three packaging houses for photonic interconnect generally, without saying which built the interposer."
+
+[[fact]]
+id = "interposer.evk_chassis"
+quantity = "EVK server form factor"
+value = 3.0
+bound = "exact"
+unit = "RU"
+quote = "Integrated into a liquid-cooled 19” 3U server environment to manage high-density thermal loads"
+cite = "vendor_web_interposerevk"
+source_class = "vendor_claim"
+verified = true
+location = "SDK section, 'Liquid-Cooling Ready'"
+note = "Evidence: text. HC25 slide 28 photo (image only, not a stated spec) shows the chassis front panel with 16 ports labelled DATA 1 to DATA 16."
+
+[[fact]]
+id = "interposer.energy_split_hoti"
+quantity = "authors' split of the 2.3 pJ/bit: laser (off-package) 1.1, PIC (in-package) 1.2 (value = laser share)"
+value = 1.1
+bound = "exact"
+unit = "pJ/bit"
+quote = "We further split this into 1.1 pJ/bit for the laser (off- package power) and 1.2 pJ/bit for the PIC (in-package power)"
+cite = "vendor_hoti25_paper"
+source_class = "peer_reviewed"
+verified = true
+location = "page 7, Section IV.A d) (photonic interconnect)"
+note = "Evidence: text. Authors' modelling assumption, not a measurement. Quote keeps the text file's line-break hyphen 'off- package'. Table III lists photonic interconnect in-package 3.2, off-package 1.1, total 4.3 pJ/bit."
+
+[[fact]]
+id = "interposer.fiber_array_bidir"
+quantity = "fiber array described as bi-directional, pluggable, high-density"
+bound = "exact"
+unit = "text"
+quote = "Bi-directional, pluggable, high-density fiber array"
+cite = "vendor_hc25_interposer"
+source_class = "vendor_claim"
+verified = true
+location = "page 10 (exploded-view label; not in the text layer)"
+note = "Evidence: image. Image-only label. Does not say whether each fiber carries Tx and Rx (BiDi) or the array holds separate Tx and Rx fibers; relevant to the 448 Gbps per fiber vs '800 Gbps / fiber (Tx+Rx)' conflict."
+# ---- Model (model card §14.3) ---------------------------------------------
+
+[[assumption]]
+id = "interposer.two_directions"
+nominal = 2.0
+low = 2.0
+high = 2.0
+unit = "count"
+rationale = "Each SerDes has a transmitter and a receiver, so 'Tx + Rx' counts every SerDes lane twice."
+
+[[assumption]]
+id = "interposer.energy_rate_divisor"
+nominal = 1.0
+low = 1.0
+high = 2.0
+unit = "count"
+rationale = "Whether 2.3 pJ/bit applies to the Tx + Rx total (divisor 1) or to one direction (divisor 2); not disclosed. Pinned by H_interposer_txrx or H_interposer_per_dir."
+
+[[assumption]]
+id = "interposer.center_nm"
+nominal = 1310.0
+low = 1300.0
+high = 1320.0
+unit = "nm"
+rationale = "O-band operating point taken as 1310 nm, as for the vendor's other WDM grids; the interposer grid is not disclosed."
+
+[[derived]]
+id = "interposer.bw_fibers"
+fn = "aggregate_tbps"
+inputs = ["interposer.fiber_count", "interposer.bw_per_fiber"]
+unit = "Tbps"
+note = "256 fibers × 448 Gb/s"
+
+[[derived]]
+id = "interposer.per_fiber_lambdas"
+fn = "times_count"
+inputs = ["interposer.wdm_lambda", "interposer.lane_rate_nrz"]
+unit = "Gbps"
+note = "8 λ × 56 Gb/s"
+
+[[derived]]
+id = "interposer.serdes_one_dir"
+fn = "aggregate_tbps"
+inputs = ["interposer.serdes_count", "interposer.lane_rate_nrz"]
+unit = "Tbps"
+note = "1024 SerDes × 56 Gb/s"
+
+[[derived]]
+id = "interposer.bw_serdes"
+fn = "times_count"
+inputs = ["interposer.two_directions", "interposer.serdes_one_dir"]
+unit = "Tbps"
+note = "1024 × 56 × 2, Tx + Rx"
+
+[[derived]]
+id = "interposer.links_per_tile"
+fn = "times_count"
+inputs = ["interposer.buses_per_tile", "interposer.links_per_bus"]
+unit = "count"
+note = "16 buses × 2 links"
+
+[[derived]]
+id = "interposer.links_total"
+fn = "times_count"
+inputs = ["interposer.tile_count", "interposer.links_per_tile"]
+unit = "count"
+note = "links over 8 tiles (= fibers)"
+
+[[derived]]
+id = "interposer.serdes_total"
+fn = "times_count"
+inputs = ["interposer.tile_count", "interposer.serdes_per_tile"]
+unit = "count"
+note = "128 SerDes × 8 tiles"
+
+[[derived]]
+id = "interposer.package_area_dims"
+fn = "area_mm2"
+inputs = ["interposer.package_length_mm", "interposer.package_width_mm"]
+unit = "mm2"
+note = "91 × 85 mm"
+
+[[derived]]
+id = "interposer.power_ceiling"
+fn = "power_w_from_density"
+inputs = ["interposer.interposer_area", "interposer.power_density"]
+unit = "W"
+note = "4000 mm² × 1.4 W/mm² ceiling"
+
+[[derived]]
+id = "interposer.power_delivery_w"
+fn = "kw_to_w"
+inputs = ["interposer.power_delivery"]
+unit = "W"
+note = "1.5 kW delivered"
+
+[[derived]]
+id = "interposer.density_package"
+fn = "power_density_w_per_mm2"
+inputs = ["interposer.power_delivery_w", "interposer.package_area"]
+unit = "W/mm2"
+note = "1.5 kW over the 7,735 mm² package"
+
+[[derived]]
+id = "interposer.density_interposer"
+fn = "power_density_w_per_mm2"
+inputs = ["interposer.power_delivery_w", "interposer.interposer_area"]
+unit = "W/mm2"
+note = "1.5 kW over 4,000 mm² of interposer"
+
+[[derived]]
+id = "interposer.io_rate_counted"
+fn = "divide_by_count"
+inputs = ["interposer.bw_fibers", "interposer.energy_rate_divisor"]
+unit = "Tbps"
+note = "rate the 2.3 pJ/bit applies to"
+
+[[derived]]
+id = "interposer.io_power"
+fn = "power_w_at_pj_per_bit"
+inputs = ["interposer.energy_system", "interposer.io_rate_counted"]
+unit = "W"
+note = "optical I/O power at 2.3 pJ/bit"
+
+[[derived]]
+id = "interposer.io_power_share"
+fn = "ratio"
+inputs = ["interposer.io_power", "interposer.power_delivery_w"]
+unit = "1"
+note = "I/O share of the delivered power"
+
+[[derived]]
+id = "interposer.io_power_share_pct"
+fn = "percent"
+inputs = ["interposer.io_power_share"]
+unit = "%"
+note = "I/O share of the delivered power, percent"
+
+[[derived]]
+id = "interposer.lambda_channels"
+fn = "times_count"
+inputs = ["interposer.fiber_count", "interposer.wdm_lambda"]
+unit = "count"
+note = "λ-channels, one ring each (INFERENCE)"
+
+[[derived]]
+id = "interposer.spacing_nm"
+fn = "ghz_span_to_nm"
+inputs = ["ring.wdm_compat_spacing_ghz", "interposer.center_nm"]
+unit = "nm"
+note = "one 200 GHz channel spacing in wavelength (assumes the OFC 2025 ring's grid)"
+
+[[derived]]
+id = "interposer.heater_per_ring"
+fn = "heater_power_mw"
+inputs = ["interposer.spacing_nm", "ring.heater_nm_per_mw"]
+unit = "mW"
+note = "worst case per ring with barrel shifting (one spacing at 0.44 nm/mW)"
+
+[[derived]]
+id = "interposer.heater_total"
+fn = "total_w_from_mw"
+inputs = ["interposer.lambda_channels", "interposer.heater_per_ring"]
+unit = "W"
+note = "worst-case heater power, assuming interposer rings resemble the OFC 2025 rings (INFERENCE)"
+
+[[check]]
+id = "interposer.check_bw_pr"
+kind = "consistent"
+a = "interposer.bw_fibers"
+b = "interposer.bw_total_pr"
+rel_tol = 0.01
+note = "114.688 against '114 Tbps' (0.6%)"
+
+[[check]]
+id = "interposer.check_bw_evk"
+kind = "consistent"
+a = "interposer.bw_fibers"
+b = "interposer.bw_total_evk"
+rel_tol = 0.01
+note = "114.688 against '114.6 Tbps' (a truncation, not a rounding)"
+
+[[check]]
+id = "interposer.check_per_fiber"
+kind = "consistent"
+a = "interposer.per_fiber_lambdas"
+b = "interposer.bw_per_fiber"
+rel_tol = 0.001
+note = "8 × 56 against 448 Gb/s per fiber"
+
+[[check]]
+id = "interposer.check_serdes_txrx"
+kind = "consistent"
+a = "interposer.bw_serdes"
+b = "interposer.bw_total_hc25"
+rel_tol = 0.01
+note = "1024 × 56 × 2 against 'Bandwidth (Tx + Rx) Up to 114 Tbps'"
+
+[[check]]
+id = "interposer.check_links_fibers"
+kind = "consistent"
+a = "interposer.links_total"
+b = "interposer.fiber_count"
+rel_tol = 0.0
+note = "16 buses × 2 × 8 tiles = 256 fibers (one link per bus populated would halve it)"
+
+[[check]]
+id = "interposer.check_serdes_count"
+kind = "consistent"
+a = "interposer.serdes_total"
+b = "interposer.serdes_count"
+rel_tol = 0.0
+note = "128 × 8 = 1024"
+
+[[check]]
+id = "interposer.check_package_area"
+kind = "consistent"
+a = "interposer.package_area_dims"
+b = "interposer.package_area"
+rel_tol = 0.001
+note = "91 × 85 mm against 7,735 mm²"
+
+[[check]]
+id = "interposer.check_density_claim"
+kind = "bound"
+a = "interposer.density_package"
+b = "interposer.power_density"
+rel_tol = 0.0
+note = "1.5 kW over the package is 0.194 W/mm², so '>1.4 W/mm2' reads as a local or capability figure (INFERENCE)"
+
+[[check]]
+id = "interposer.check_fiber_rate_ises"
+kind = "consistent"
+a = "interposer.bw_per_fiber_ises25"
+b = "interposer.bw_per_fiber"
+rel_tol = 0.01
+note = "ISES 2025 '800 Gbps / fiber (Tx+Rx)' against 448 Gb/s per fiber"
+
+[[check]]
+id = "interposer.check_txrx_area"
+kind = "consistent"
+a = "interposer.txrx_area"
+b = "interposer.txrx_area_p15"
+rel_tol = 0.01
+note = "Hot Chips slide 13 against slide 15"
+
+[[hypothesis]]
+id = "H_interposer_txrx"
+statement = "The interposer's 2.3 pJ/bit applies to the 114.688 Tbps Tx + Rx total (I/O power 263.78 W)."
+sets = { "interposer.energy_rate_divisor" = 1.0 }
+group = "interposer_energy"
+
+[[hypothesis]]
+id = "H_interposer_per_dir"
+statement = "The interposer's 2.3 pJ/bit applies to one direction, 57.344 Tbps (I/O power 131.89 W)."
+sets = { "interposer.energy_rate_divisor" = 2.0 }
+group = "interposer_energy"

@@ -1,0 +1,208 @@
+# A representative microring BiDi lane on a PIC (model card §13). Units: um; x along the bus,
+# y across, z up (device layer top at z = 0.22). The ring diameter is the ~15 um that the Hot
+# Chips 2025 slides give for photonic interconnect microrings, applied here across sources (INFERENCE). The
+# layout is SCHEMATIC: the BiDi engine's PIC layout and modulator type are not disclosed.
+
+[scene]
+id = "pic_region"
+name = "PIC region: a microring BiDi lane"
+unit = "um"
+level = "pic"
+product = "microring_ofc25"
+parent = "bidi_engine"
+breadcrumb = "PIC"
+summary = "Representative layout: fiber coupler, on-chip diplexer, a transmit bus with a ring modulator fed by the laser input coupler, a receive bus with an add-drop ring and a germanium photodiode, heaters over both rings."
+
+[[part]]
+id = "pic.die"
+name = "PIC die (region)"
+assembly = "die"
+size = [240.0, 120.0, 2.0]
+position = [0.0, 0.0, -1.0]
+material = "silicon"
+dims_class = "SCHEMATIC"
+dims_source = "A 240 x 120 um window of the die."
+
+[[part]]
+id = "pic.fiber_coupler"
+name = "fiber coupler (vertical, toward the FAU)"
+assembly = "optics"
+size = [12.0, 12.0, 0.22]
+position = [-105.0, 0.0, 0.11]
+material = "oxide"
+dims_class = "SCHEMATIC"
+dims_source = "Coupler type and size not disclosed."
+nodes = ["fau.vertical_expanded_beam", "fau.il_reinsertion_max"]
+label = "fiber coupler"
+
+[[part]]
+id = "pic.fiber_bus"
+name = "fiber-side waveguide"
+assembly = "waveguides"
+shape = "tube"
+size = [0.4, 0.4, 0.4]
+path = [[-99.0, 0.0, 0.11], [-90.0, 0.0, 0.11]]
+material = "silicon"
+dims_class = "SCHEMATIC"
+dims_source = "Waveguide drawn 0.4 um round for visibility; cross-section in the Ring scene."
+
+[[part]]
+id = "pic.diplexer"
+name = "on-chip diplexer (1311 / 1331 nm)"
+assembly = "optics"
+size = [30.0, 10.0, 0.22]
+position = [-75.0, 0.0, 0.11]
+material = "oxide"
+dims_class = "SCHEMATIC"
+dims_source = "Diplexer type and size not disclosed."
+nodes = ["engine.lambda_a_nm", "engine.lambda_b_nm", "engine.lambda_spacing_nm", "engine.lambda_spacing_ghz"]
+function = "Separates the two directions of one fiber: transmit at one wavelength, receive at the other."
+label = "diplexer"
+
+[[part]]
+id = "pic.tx_bus"
+name = "transmit bus waveguide"
+assembly = "waveguides"
+shape = "tube"
+size = [0.4, 0.4, 0.4]
+path = [[-60.0, 3.0, 0.11], [-50.0, 25.0, 0.11], [100.0, 25.0, 0.11]]
+material = "silicon"
+dims_class = "SCHEMATIC"
+dims_source = "Waveguide drawn 0.4 um round for visibility."
+
+[[part]]
+id = "pic.mrm"
+name = "ring modulator (MRM)"
+assembly = "transmit"
+shape = "ring"
+size = [15.0, 15.0, 0.22]
+wall = 0.4
+position = [0.0, 32.9, 0.11]
+material = "silicon"
+dims_class = "SCHEMATIC"
+dims_axes = ["INFERENCE", "INFERENCE", "SCHEMATIC"]
+dims_source = "interposer.mrr_diameter"
+nodes = ["interposer.mrr_diameter", "interposer.mrr_modulation", "ring.mrm_q", "ring.fsr_thz", "ring.mrm_eo_bw_ghz", "ring.mrm_er_db", "ring.mod_il_db"]
+function = "Depletion PN-junction ring modulator on the transmit bus (all-pass)."
+enters = "ring_section"
+label = "MRM"
+
+[[part]]
+id = "pic.mrm_heater"
+name = "MRM heater"
+assembly = "transmit"
+shape = "ring"
+size = [13.0, 13.0, 0.12]
+wall = 1.0
+position = [0.0, 32.9, 1.2]
+material = "heater"
+dims_class = "SCHEMATIC"
+dims_source = "Heater geometry not disclosed; drawn over the ring."
+nodes = ["interposer.mrr_heater", "ring.heater_nm_per_mw"]
+explode = [0.0, 0.0, 6.0]
+label = "heater"
+
+[[part]]
+id = "pic.laser_coupler"
+name = "laser input coupler"
+assembly = "optics"
+size = [10.0, 8.0, 0.22]
+position = [108.0, 25.0, 0.11]
+material = "oxide"
+dims_class = "SCHEMATIC"
+dims_source = "Coupler type and size not disclosed."
+nodes = ["engine.laser_fibers_yole", "engine.lanes_per_laser_fiber"]
+label = "laser in"
+
+[[part]]
+id = "pic.rx_bus"
+name = "receive bus waveguide"
+assembly = "waveguides"
+shape = "tube"
+size = [0.4, 0.4, 0.4]
+path = [[-60.0, -3.0, 0.11], [-50.0, -25.0, 0.11], [60.0, -25.0, 0.11]]
+material = "silicon"
+dims_class = "SCHEMATIC"
+dims_source = "Waveguide drawn 0.4 um round for visibility."
+
+[[part]]
+id = "pic.mrr"
+name = "receive ring (MRR, add-drop)"
+assembly = "receive"
+shape = "ring"
+size = [15.0, 15.0, 0.22]
+wall = 0.4
+position = [0.0, -32.9, 0.11]
+material = "silicon"
+dims_class = "SCHEMATIC"
+dims_axes = ["INFERENCE", "INFERENCE", "SCHEMATIC"]
+dims_source = "interposer.mrr_diameter"
+nodes = ["interposer.mrr_diameter", "ring.fsr_thz", "ring.mrr_il_db", "ring.wdm_compat_spacing_ghz"]
+function = "Drops its channel from the receive bus to the photodiode."
+enters = "ring_section"
+label = "MRR"
+
+[[part]]
+id = "pic.mrr_heater"
+name = "MRR heater"
+assembly = "receive"
+shape = "ring"
+size = [13.0, 13.0, 0.12]
+wall = 1.0
+position = [0.0, -32.9, 1.2]
+material = "heater"
+dims_class = "SCHEMATIC"
+dims_source = "Heater geometry not disclosed; drawn over the ring."
+nodes = ["interposer.mrr_heater", "ring.heater_nm_per_mw"]
+explode = [0.0, 0.0, 6.0]
+
+[[part]]
+id = "pic.drop_bus"
+name = "drop waveguide"
+assembly = "waveguides"
+shape = "tube"
+size = [0.4, 0.4, 0.4]
+path = [[-12.0, -40.8, 0.11], [49.0, -40.8, 0.11]]
+material = "silicon"
+dims_class = "SCHEMATIC"
+dims_source = "Waveguide drawn 0.4 um round for visibility."
+
+[[part]]
+id = "pic.pd"
+name = "germanium photodiode"
+assembly = "receive"
+size = [12.0, 5.0, 0.5]
+position = [55.0, -40.8, 0.25]
+material = "germanium"
+dims_class = "SCHEMATIC"
+dims_source = "Photodiode size not disclosed."
+nodes = ["ring.pd_responsivity_a_per_w", "ring.pd_bw_ghz", "ring.pd_bw_talk_ghz", "ring.oma_min_dbm"]
+label = "Ge PD"
+
+[[tour]]
+part = "pic.mrm"
+node = "ring.mrm_q"
+
+[[tour]]
+part = "pic.mrm"
+node = "ring.fsr_thz"
+
+[[tour]]
+part = "pic.mrm_heater"
+node = "ring.heater_nm_per_mw"
+
+[[tour]]
+part = "pic.mrr"
+node = "interposer.mrr_diameter"
+
+[[tour]]
+part = "pic.diplexer"
+node = "engine.lambda_spacing_nm"
+
+[[tour]]
+part = "pic.pd"
+node = "ring.pd_responsivity_a_per_w"
+
+[[tour]]
+part = "pic.pd"
+node = "ring.oma_min_dbm"

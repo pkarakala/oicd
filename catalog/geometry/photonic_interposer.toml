@@ -1,0 +1,151 @@
+# 3D photonic interposer (model card §14.3). Units: mm; x, y in the package plane, z up.
+# Package footprint 91 x 85 mm (VENDOR); the interposer tiling and every die are SCHEMATIC.
+
+[scene]
+id = "photonic_interposer"
+name = "3D photonic interposer"
+unit = "mm"
+level = "package"
+product = "photonic_interposer"
+breadcrumb = "interposer"
+summary = "An 8-tile active photonic interposer under a 91 x 85 mm package: 34 chiplets on top, 256 edge-attached fibers, optical I/O sites across the area."
+
+[[part]]
+id = "pi.package"
+name = "package (91 x 85 mm)"
+assembly = "package"
+size = [91.0, 85.0, 2.0]
+position = [0.0, 0.0, 1.0]
+material = "organic_substrate"
+dims_class = "SCHEMATIC"
+dims_axes = ["VENDOR", "VENDOR", "SCHEMATIC"]
+dims_source = "interposer.package_length_mm"
+nodes = ["interposer.package_length_mm", "interposer.package_width_mm", "interposer.package_area", "interposer.power_delivery"]
+function = "7,735 mm2 package with 1.5 kW power delivery; thickness schematic."
+explode = [0.0, 0.0, -8.0]
+label = "91 x 85 mm"
+
+[[part]]
+id = "pi.tiles"
+name = "interposer tiles (8, 2 x 4)"
+assembly = "interposer"
+size = [25.0, 20.0, 0.8]
+position = [-12.5, -30.0, 2.4]
+material = "silicon"
+dims_class = "SCHEMATIC"
+dims_source = "Tile size not disclosed; drawn 25 x 20 mm so 8 tiles total 4000 mm2 (INFERENCE area)."
+nodes = ["interposer.interposer_area", "interposer.tile_count", "interposer.tile_arrangement", "interposer.serdes_per_tile"]
+function = "Active photonic interposer: waveguides, modulators and photodiodes under the chiplets."
+count = 8
+grid = [2, 4, 1]
+pitch = [25.0, 20.0, 0.0]
+label = "interposer tile"
+
+[[part]]
+id = "pi.io_chiplets"
+name = "I/O chiplets (32)"
+assembly = "chiplets"
+size = [9.0, 7.0, 0.8]
+position = [-18.75, -35.0, 3.2]
+material = "silicon_eic"
+dims_class = "SCHEMATIC"
+dims_source = "Chiplet size not disclosed; 4 per tile drawn."
+nodes = ["interposer.io_chiplets", "interposer.chiplets", "interposer.serdes_count"]
+count = 32
+grid = [4, 8, 1]
+pitch = [12.5, 10.0, 0.0]
+explode = [0.0, 0.0, 10.0]
+label = "I/O chiplets"
+
+[[part]]
+id = "pi.thermal_chips"
+name = "thermal load chips (2)"
+assembly = "chiplets"
+size = [6.0, 30.0, 0.8]
+position = [-36.0, 0.0, 3.2]
+material = "silicon_eic"
+dims_class = "SCHEMATIC"
+dims_source = "Thermal load chips' size not disclosed."
+nodes = ["interposer.thermal_load_chips"]
+count = 2
+grid = [2, 1, 1]
+pitch = [72.0, 0.0, 0.0]
+explode = [0.0, 0.0, 10.0]
+
+[[part]]
+id = "pi.io_sites"
+name = "optical I/O sites"
+assembly = "interposer"
+size = [1.0, 1.0, 0.05]
+position = [-22.5, -37.5, 2.825]
+material = "doped_p"
+dims_class = "SCHEMATIC"
+dims_source = "One mark per I/O site, schematic positions across the area."
+nodes = ["interposer.lambda_channels", "interposer.links_total"]
+count = 256
+grid = [16, 16, 1]
+pitch = [3.0, 5.0, 0.0]
+label = "optical I/O sites"
+
+[[part]]
+id = "pi.fibers_left"
+name = "edge-attached fibers, left (128)"
+assembly = "fibers"
+shape = "cylinder"
+size = [0.25, 0.25, 18.0]
+position = [-34.0, -38.1, 2.6]
+rotation_deg = [0.0, 90.0, 0.0]
+material = "fiber"
+dims_class = "SCHEMATIC"
+dims_source = "Coated fiber at 250 um; edge placement schematic."
+nodes = ["interposer.fiber_count", "interposer.bw_per_fiber", "interposer.wdm_lambda"]
+count = 128
+grid = [1, 128, 1]
+pitch = [0.0, 0.6, 0.0]
+explode = [-12.0, 0.0, 0.0]
+label = "256 fibers"
+
+[[part]]
+id = "pi.fibers_right"
+name = "edge-attached fibers, right (128)"
+assembly = "fibers"
+shape = "cylinder"
+size = [0.25, 0.25, 18.0]
+position = [34.0, -38.1, 2.6]
+rotation_deg = [0.0, 90.0, 0.0]
+material = "fiber"
+dims_class = "SCHEMATIC"
+dims_source = "Coated fiber at 250 um; edge placement schematic."
+nodes = ["interposer.fiber_count"]
+count = 128
+grid = [1, 128, 1]
+pitch = [0.0, 0.6, 0.0]
+explode = [12.0, 0.0, 0.0]
+
+[[tour]]
+part = "pi.package"
+node = "interposer.package_area_dims"
+
+[[tour]]
+part = "pi.tiles"
+node = "interposer.interposer_area"
+
+[[tour]]
+part = "pi.io_chiplets"
+node = "interposer.serdes_total"
+
+[[tour]]
+part = "pi.fibers_left"
+node = "interposer.bw_fibers"
+
+[[tour]]
+part = "pi.io_sites"
+node = "interposer.heater_total"
+
+[[tour]]
+part = "pi.package"
+node = "interposer.density_package"
+
+[[tour]]
+part = "pi.package"
+node = "interposer.io_power"

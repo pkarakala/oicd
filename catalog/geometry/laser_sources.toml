@@ -1,0 +1,327 @@
+# external laser sources (ELS, ELS-DWDM, ELS-DR) (model card §14.5). Units: mm; x across, y depth
+# (faceplate at -y), z up. Only the ELS-DR card's depth is a published dimension (OCP NIC 3.0,
+# 115 mm for both sizes); its width is our SFF reading of "built to OCP NIC 3.0 dimensions".
+# Every package, chip, laser and fiber position is SCHEMATIC.
+
+[scene]
+id = "laser_sources"
+name = "External laser sources (ELS, ELS-DWDM, ELS-DR)"
+unit = "mm"
+level = "package"
+product = "laser_sources"
+parent = "switch_tray"
+breadcrumb = "ELS-DR"
+summary = "External laser sources: the ELS-DR laser NIC (64 lasers, 64 fibers at 200 mW), an ELS-DWDM package (8 wavelengths per fiber, 16 fibers, stackable) and the first ELS validation module (32 fibers)."
+
+[[part]]
+id = "elsdr.pcb"
+name = "ELS-DR laser NIC (LNIC) board"
+assembly = "ELS-DR"
+size = [76.0, 115.0, 1.6]
+position = [0.0, 0.0, 0.8]
+material = "pcb"
+dims_class = "SCHEMATIC"
+dims_axes = ["INFERENCE", "PUBLISHED", "SCHEMATIC"]
+dims_source = "nic3.sff_depth"
+nodes = ["els_dr.form_factor", "nic3.sff_width", "nic3.lff_width", "nic3.sff_depth", "els_dr.bw_per_module"]
+function = "Built to OCP NIC 3.0 dimensions, size not named: drawn as SFF (76 x 115 mm); LFF would be 139 x 115 mm. Board thickness schematic."
+label = "OCP NIC 3.0 card"
+
+[[part]]
+id = "elsdr.faceplate"
+name = "faceplate"
+assembly = "ELS-DR"
+size = [76.0, 1.5, 12.0]
+position = [0.0, -58.25, 6.0]
+material = "aluminium"
+dims_class = "SCHEMATIC"
+dims_axes = ["INFERENCE", "SCHEMATIC", "SCHEMATIC"]
+dims_source = "nic3.sff_width"
+function = "Front bracket; width follows the board."
+
+[[part]]
+id = "elsdr.connectors"
+name = "optical output connectors (8 x SNMT-8)"
+assembly = "ELS-DR"
+size = [7.0, 6.0, 5.0]
+position = [-29.75, -54.0, 4.1]
+material = "polymer"
+dims_class = "SCHEMATIC"
+dims_source = "Connector size not taken from a source; 8 connectors drawn per the product page."
+nodes = ["els_dr.connectors", "els_dr.fibers_max", "els_dr.lanes_per_fiber", "els_dr.power_per_lane_dbm"]
+count = 8
+grid = [8, 1, 1]
+pitch = [8.5, 0.0, 0.0]
+label = "8 x SNMT-8"
+
+[[part]]
+id = "elsdr.ribbons"
+name = "output fiber ribbons (8 x 8 fibers)"
+assembly = "ELS-DR"
+shape = "tube"
+size = [1.2, 1.2, 1.2]
+path = [[0.0, 6.0, 5.4], [0.0, -20.0, 5.0], [0.0, -51.0, 4.1]]
+position = [-29.75, 0.0, 0.0]
+material = "fiber"
+dims_class = "SCHEMATIC"
+dims_source = "Fiber routing schematic; one tube per 8-fiber ribbon."
+nodes = ["els_dr.fibers_max", "els_dr.power_per_fiber"]
+count = 8
+grid = [8, 1, 1]
+pitch = [8.5, 0.0, 0.0]
+
+[[part]]
+id = "elsdr.package"
+name = "laser package"
+assembly = "ELS-DR"
+size = [40.0, 45.0, 3.0]
+position = [0.0, 15.0, 3.1]
+material = "organic_substrate"
+dims_class = "SCHEMATIC"
+dims_source = "Package size not disclosed."
+nodes = ["els_dr.optical_power_total", "els_dr.total_power"]
+explode = [0.0, 0.0, 6.0]
+
+[[part]]
+id = "elsdr.laser_pic"
+name = "laser chip"
+assembly = "ELS-DR"
+size = [20.0, 12.0, 0.775]
+position = [0.0, 20.0, 4.99]
+material = "silicon"
+dims_class = "SCHEMATIC"
+dims_source = "Chip size not disclosed."
+nodes = ["els_dr.lasers_per_module", "els_dr.lasers_per_chip_counterpoint", "els_dr.band_plans", "els_dr.power_dbm", "els_dr.hazard_headroom"]
+function = "64 lasers per LNIC (product page); Counterpoint reports 128 lasers on the chip, a recorded tension."
+explode = [0.0, 0.0, 12.0]
+label = "laser chip"
+
+[[part]]
+id = "elsdr.lasers"
+name = "lasers (64)"
+assembly = "ELS-DR"
+size = [0.3, 2.0, 0.05]
+position = [-8.525, 18.0, 5.4025]
+material = "gain"
+dims_class = "SCHEMATIC"
+dims_source = "One stripe per laser; size and layout not disclosed."
+nodes = ["els_dr.lasers_per_module", "els_dr.power_per_fiber", "els_dr.total_power"]
+count = 64
+grid = [32, 2, 1]
+pitch = [0.55, 4.0, 0.0]
+explode = [0.0, 0.0, 12.0]
+label = "64 lasers"
+
+[[part]]
+id = "elsdr.combiner"
+name = "splitter and combiner region (band-plan dependent)"
+assembly = "ELS-DR"
+size = [16.0, 3.0, 0.05]
+position = [0.0, 15.0, 5.4025]
+material = "oxide"
+dims_class = "SCHEMATIC"
+dims_source = "On-chip routing not disclosed; drawn as one region."
+nodes = ["els_dr.band_plans", "els_dr.lanes_per_fiber"]
+explode = [0.0, 0.0, 12.0]
+
+[[part]]
+id = "elsdr.cold_plate"
+name = "liquid cold plate"
+assembly = "ELS-DR"
+size = [44.0, 50.0, 6.0]
+position = [0.0, 15.0, 8.6]
+material = "copper"
+dims_class = "SCHEMATIC"
+dims_source = "Cold plate size not disclosed."
+nodes = ["els_dr.liquid_cooled", "els_dr.ashrae_class"]
+explode = [0.0, 0.0, 24.0]
+
+[[part]]
+id = "elsdr.edge_fingers"
+name = "OCP NIC 3.0 card-edge contacts"
+assembly = "ELS-DR"
+size = [60.0, 6.0, 1.6]
+position = [0.0, 54.5, 0.8]
+material = "copper"
+dims_class = "SCHEMATIC"
+dims_source = "Card-edge contact layout drawn schematically."
+
+[[part]]
+id = "elsdwdm.package"
+name = "ELS-DWDM package (single)"
+assembly = "ELS-DWDM"
+size = [30.0, 36.0, 4.0]
+position = [-120.0, 0.0, 2.0]
+material = "organic_substrate"
+dims_class = "SCHEMATIC"
+dims_source = "Package size not disclosed."
+nodes = ["els_dwdm.fibers_single_package", "els_dwdm.output_power_single", "els_dwdm.single_package_power", "els_dwdm.control_cmis"]
+label = "ELS-DWDM"
+
+[[part]]
+id = "elsdwdm.laser_pic"
+name = "ELS-DWDM laser chip"
+assembly = "ELS-DWDM"
+size = [16.0, 10.0, 0.775]
+position = [-120.0, 4.0, 4.39]
+material = "silicon"
+dims_class = "SCHEMATIC"
+dims_source = "Chip size not disclosed."
+nodes = ["els_dwdm.wavelengths_per_fiber", "els_dwdm.channel_spacing", "els_dwdm.wavelength_stability", "els_dwdm.wavelength_precision"]
+explode = [0.0, 0.0, 6.0]
+
+[[part]]
+id = "elsdwdm.lasers"
+name = "ELS-DWDM lasers (8 wavelengths)"
+assembly = "ELS-DWDM"
+size = [0.3, 2.0, 0.05]
+position = [-124.2, 6.0, 4.8025]
+material = "gain"
+dims_class = "SCHEMATIC"
+dims_source = "One stripe per wavelength; layout not disclosed."
+nodes = ["els_dwdm.power_per_lambda", "els_dwdm.lambda_power_dbm", "els_dwdm.band_center"]
+count = 8
+grid = [8, 1, 1]
+pitch = [1.2, 0.0, 0.0]
+explode = [0.0, 0.0, 6.0]
+
+[[part]]
+id = "elsdwdm.mux"
+name = "ELS-DWDM wavelength multiplexer"
+assembly = "ELS-DWDM"
+size = [5.0, 3.0, 0.05]
+position = [-120.0, 1.0, 4.8025]
+material = "oxide"
+dims_class = "SCHEMATIC"
+dims_source = "Multiplexer layout not disclosed."
+nodes = ["els_dwdm.channel_spacing", "els_dwdm.wavelengths_per_fiber"]
+explode = [0.0, 0.0, 6.0]
+label = "mux"
+
+[[part]]
+id = "elsdwdm.fibers"
+name = "ELS-DWDM output fibers (16)"
+assembly = "ELS-DWDM"
+shape = "cylinder"
+size = [0.25, 0.25, 20.0]
+position = [-124.5, -28.0, 3.0]
+rotation_deg = [90.0, 0.0, 0.0]
+material = "fiber"
+dims_class = "SCHEMATIC"
+dims_source = "Coated fiber drawn at 250 um."
+nodes = ["els_dwdm.fibers_single_package", "els_dwdm.power_per_fiber_min", "els_dwdm.fiber_power"]
+count = 16
+grid = [16, 1, 1]
+pitch = [0.6, 0.0, 0.0]
+
+[[part]]
+id = "elsdwdm.stacked"
+name = "ELS-DWDM second package (stacked configuration)"
+assembly = "ELS-DWDM"
+size = [30.0, 36.0, 4.0]
+position = [-120.0, 0.0, 9.0]
+material = "organic_substrate"
+dims_class = "SCHEMATIC"
+dims_source = "As the single package."
+nodes = ["els_dwdm.fibers_stacked", "els_dwdm.output_power_stacked", "els_dwdm.stacked_power"]
+explode = [0.0, 0.0, 14.0]
+
+[[part]]
+id = "els.package"
+name = "ELS validation module"
+assembly = "ELS"
+size = [34.0, 40.0, 4.0]
+position = [120.0, 0.0, 2.0]
+material = "organic_substrate"
+dims_class = "SCHEMATIC"
+dims_source = "Module size not disclosed."
+nodes = ["els.fiber_outputs_yole", "els.power_per_fiber_min", "els.bw_per_module", "els.validation_switch_bw_1ru"]
+label = "ELS"
+
+[[part]]
+id = "els.laser_pic"
+name = "ELS laser chip (VLSP)"
+assembly = "ELS"
+size = [20.0, 12.0, 0.775]
+position = [120.0, 4.0, 4.39]
+material = "silicon"
+dims_class = "SCHEMATIC"
+dims_source = "Chip size not disclosed."
+nodes = ["els.lasers_per_chip_hoti26", "els.wavelengths", "els.fit_hoti26"]
+explode = [0.0, 0.0, 6.0]
+
+[[part]]
+id = "els.lasers"
+name = "ELS lasers (16 wavelengths)"
+assembly = "ELS"
+size = [0.3, 2.0, 0.05]
+position = [112.5, 6.0, 4.8025]
+material = "gain"
+dims_class = "SCHEMATIC"
+dims_source = "One stripe per wavelength; layout not disclosed."
+nodes = ["els.wavelengths", "els.power_uniformity"]
+count = 16
+grid = [16, 1, 1]
+pitch = [1.0, 0.0, 0.0]
+explode = [0.0, 0.0, 6.0]
+
+[[part]]
+id = "els.mux"
+name = "ELS interleaved-grid multiplexer"
+assembly = "ELS"
+size = [6.0, 3.0, 0.05]
+position = [120.0, 0.5, 4.8025]
+material = "oxide"
+dims_class = "SCHEMATIC"
+dims_source = "Multiplexer layout not disclosed."
+nodes = ["els.grid_spacing_per_grid", "els.grid_offset", "els.wavelength_accuracy"]
+explode = [0.0, 0.0, 6.0]
+label = "two 400 GHz grids"
+
+[[part]]
+id = "els.fibers"
+name = "ELS output fibers (32)"
+assembly = "ELS"
+shape = "cylinder"
+size = [0.25, 0.25, 20.0]
+position = [110.7, -30.0, 3.0]
+rotation_deg = [90.0, 0.0, 0.0]
+material = "fiber"
+dims_class = "SCHEMATIC"
+dims_source = "Coated fiber drawn at 250 um."
+nodes = ["els.fiber_outputs_yole", "els.power_per_fiber_yole"]
+count = 32
+grid = [32, 1, 1]
+pitch = [0.6, 0.0, 0.0]
+
+[[tour]]
+part = "elsdr.pcb"
+node = "els_dr.form_factor"
+
+[[tour]]
+part = "elsdr.lasers"
+node = "els_dr.total_power"
+
+[[tour]]
+part = "elsdr.connectors"
+node = "els_dr.lanes_per_fiber"
+
+[[tour]]
+part = "elsdr.connectors"
+node = "els_dr.power_per_lane_dbm"
+
+[[tour]]
+part = "elsdr.laser_pic"
+node = "els_dr.hazard_headroom"
+
+[[tour]]
+part = "elsdr.laser_pic"
+node = "els_dr.max_fanout"
+
+[[tour]]
+part = "elsdwdm.lasers"
+node = "els_dwdm.lambda_power_dbm"
+
+[[tour]]
+part = "els.mux"
+node = "els.grid_spacing_per_grid"

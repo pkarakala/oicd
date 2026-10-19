@@ -1,0 +1,225 @@
+# Reference rack OICD-R64 (model card §14.9): an OICD design (SYNTHETIC), never the vendor's.
+# Units: mm; x width, y depth (front at -y), z up; positions are part centers.
+# Layout under H_2U (42 OU): XPU trays OU 1-16, power shelf OU 17, switch trays OU 18-25,
+# power shelf OU 26, XPU trays OU 27-42; OU 43-44 spare. OU 1 starts 87 mm above the floor.
+
+[scene]
+id = "reference_rack"
+name = "Reference rack OICD-R64"
+unit = "mm"
+level = "rack"
+product = "reference_rack"
+breadcrumb = "Rack"
+summary = "ORv3 rack, single tier: 16 XPU trays and 8 switch trays wired with 8192 BiDi fibers through a rear shuffle; an OICD design, not a vendor configuration."
+
+[[part]]
+id = "rack.frame_outline"
+name = "Meta ORv3 frame (nominal envelope)"
+assembly = "frame"
+size = [600.0, 1068.0, 2286.0]
+position = [0.0, 0.0, 1143.0]
+material = "outline"
+dims_class = "PUBLISHED"
+dims_axes = ["PUBLISHED", "PUBLISHED", "PUBLISHED"]
+dims_source = "orv3.meta_frame_height"
+nodes = ["orv3.meta_frame_width", "orv3.meta_frame_depth", "orv3.meta_frame_height", "orv3.meta_capacity_openu"]
+function = "Frame envelope: 600 mm wide, 1068 mm deep, 2286 mm high, 44 OpenU."
+label = "ORv3 frame"
+
+[[part]]
+id = "rack.posts"
+name = "frame posts"
+assembly = "frame"
+size = [40.0, 40.0, 2286.0]
+position = [-280.0, -514.0, 1143.0]
+material = "aluminium_dark"
+dims_class = "SCHEMATIC"
+dims_source = "Post section not modeled from the specification; drawn 40 x 40 mm inside the envelope."
+count = 4
+grid = [2, 2, 1]
+pitch = [560.0, 1028.0, 0.0]
+
+[[part]]
+id = "rack.xpu_trays_low"
+name = "XPU trays 1-8 (2 OU each)"
+assembly = "xpu trays"
+size = [537.0, 800.0, 92.7]
+position = [0.0, -114.0, 135.0]
+material = "aluminium"
+dims_class = "SCHEMATIC"
+dims_axes = ["PUBLISHED", "SCHEMATIC", "INFERENCE"]
+dims_source = "orv3.it_chassis_width"
+nodes = ["orv3.it_chassis_width", "orv3.chassis_1ou_max_height", "trays.xpu_bw", "trays.xpu_height_vendor_site", "trays.xpu_height_prnewswire"]
+function = "Width per the ORv3 IT gear guide; height 48 x 2 - 3.3 = 92.7 mm (2 OU, H_2U); depth schematic."
+count = 8
+grid = [1, 1, 8]
+pitch = [0.0, 0.0, 96.0]
+explode = [0.0, -300.0, 0.0]
+enters = "xpu_tray"
+label = "XPU tray"
+
+[[part]]
+id = "rack.power_shelves"
+name = "ORv3 HPR V2 power shelves"
+assembly = "power"
+size = [537.0, 867.5, 46.2]
+position = [0.0, -80.25, 879.0]
+material = "aluminium_dark"
+dims_class = "PUBLISHED"
+dims_axes = ["PUBLISHED", "PUBLISHED", "PUBLISHED"]
+dims_source = "orv3.shelf_width"
+nodes = ["orv3.shelf_width", "orv3.shelf_depth", "orv3.shelf_height", "orv3.shelf_output_n1", "orv3.shelf_capacity"]
+function = "1 OU shelf, 60 kW with N+1 and dual cords (72 kW installed)."
+count = 2
+grid = [1, 1, 2]
+pitch = [0.0, 0.0, 432.0]
+explode = [0.0, -250.0, 0.0]
+label = "power shelf"
+
+[[part]]
+id = "rack.switch_trays"
+name = "CPO switch trays (1 OU each)"
+assembly = "switch trays"
+size = [537.0, 800.0, 44.7]
+position = [0.0, -114.0, 927.0]
+material = "aluminium"
+dims_class = "SCHEMATIC"
+dims_axes = ["PUBLISHED", "SCHEMATIC", "PUBLISHED"]
+dims_source = "orv3.it_chassis_width"
+nodes = ["orv3.it_chassis_width", "orv3.chassis_1ou_max_height", "trays.switch_bw", "trays.switch_height"]
+function = "1 OU chassis at most 48 - 3.3 = 44.7 mm high; depth schematic."
+count = 8
+grid = [1, 1, 8]
+pitch = [0.0, 0.0, 48.0]
+explode = [0.0, -350.0, 0.0]
+enters = "switch_tray"
+label = "switch tray"
+
+[[part]]
+id = "rack.xpu_trays_high"
+name = "XPU trays 9-16 (2 OU each)"
+assembly = "xpu trays"
+size = [537.0, 800.0, 92.7]
+position = [0.0, -114.0, 1383.0]
+material = "aluminium"
+dims_class = "SCHEMATIC"
+dims_axes = ["PUBLISHED", "SCHEMATIC", "INFERENCE"]
+dims_source = "orv3.it_chassis_width"
+nodes = ["orv3.it_chassis_width", "orv3.chassis_1ou_max_height", "trays.xpu_bw"]
+function = "As XPU trays 1-8."
+count = 8
+grid = [1, 1, 8]
+pitch = [0.0, 0.0, 96.0]
+explode = [0.0, -300.0, 0.0]
+enters = "xpu_tray"
+label = "XPU tray"
+
+[[part]]
+id = "rack.busbar"
+name = "48V busbar"
+assembly = "power"
+size = [60.0, 20.0, 2112.0]
+position = [0.0, 474.0, 1143.0]
+material = "copper"
+dims_class = "SCHEMATIC"
+dims_source = "Busbar geometry per the ORv3 base specification not reproduced; drawn as a bar."
+nodes = ["orv3.busbar_48v", "orv3.it_input_nominal_v"]
+function = "Rear power distribution; '48V' is the busbar's name, the nominal input is 51 or 54 VDC."
+label = "busbar"
+
+[[part]]
+id = "rack.xpu_connectors_low"
+name = "rear blind-mate connectors, XPU trays 1-8"
+assembly = "fiber"
+size = [120.0, 30.0, 20.0]
+position = [0.0, 301.0, 135.0]
+material = "polymer"
+dims_class = "SCHEMATIC"
+dims_source = "PRIZM TMT class connector, size not disclosed."
+nodes = ["trays.prizm_tmt", "prizm.usconec_insertion_loss", "trays.xpu_blind_mate"]
+count = 8
+grid = [1, 1, 8]
+pitch = [0.0, 0.0, 96.0]
+
+[[part]]
+id = "rack.switch_connectors"
+name = "rear blind-mate connectors, switch trays"
+assembly = "fiber"
+size = [240.0, 30.0, 20.0]
+position = [0.0, 301.0, 927.0]
+material = "polymer"
+dims_class = "SCHEMATIC"
+dims_source = "Switch-tray rear connector, TMT class (SYNTHETIC 0.5 dB), size not disclosed."
+nodes = ["rack.switch_connector_db"]
+count = 8
+grid = [1, 1, 8]
+pitch = [0.0, 0.0, 48.0]
+
+[[part]]
+id = "rack.xpu_connectors_high"
+name = "rear blind-mate connectors, XPU trays 9-16"
+assembly = "fiber"
+size = [120.0, 30.0, 20.0]
+position = [0.0, 301.0, 1383.0]
+material = "polymer"
+dims_class = "SCHEMATIC"
+dims_source = "PRIZM TMT class connector, size not disclosed."
+nodes = ["trays.prizm_tmt", "prizm.usconec_insertion_loss"]
+count = 8
+grid = [1, 1, 8]
+pitch = [0.0, 0.0, 96.0]
+
+[[part]]
+id = "rack.shuffle_low"
+name = "fiber shuffle, lower XPU trays to switch trays"
+assembly = "fiber"
+shape = "tube"
+size = [36.0, 36.0, 36.0]
+path = [[-150.0, 340.0, 135.0], [-150.0, 380.0, 135.0], [-150.0, 380.0, 927.0], [-120.0, 340.0, 1095.0]]
+material = "fiber"
+dims_class = "SCHEMATIC"
+dims_source = "Bundle drawn as one tube; real routing not disclosed (OICD design)."
+nodes = ["rack.links", "rack.duplex_fibers"]
+function = "Single tier: each XPU sends 16 lanes to each switch tray; 8192 BiDi fibers in all."
+label = "fiber shuffle"
+
+[[part]]
+id = "rack.shuffle_high"
+name = "fiber shuffle, upper XPU trays to switch trays"
+assembly = "fiber"
+shape = "tube"
+size = [36.0, 36.0, 36.0]
+path = [[150.0, 340.0, 2055.0], [150.0, 380.0, 2055.0], [150.0, 380.0, 1095.0], [120.0, 340.0, 927.0]]
+material = "fiber"
+dims_class = "SCHEMATIC"
+dims_source = "Bundle drawn as one tube; real routing not disclosed (OICD design)."
+nodes = ["rack.links"]
+label = "fiber shuffle"
+
+[[tour]]
+part = "rack.frame_outline"
+node = "orv3.meta_capacity_openu"
+
+[[tour]]
+part = "rack.switch_trays"
+node = "trays.switch_bw"
+
+[[tour]]
+part = "rack.xpu_trays_low"
+node = "trays.xpu_bw"
+
+[[tour]]
+part = "rack.shuffle_low"
+node = "rack.links"
+
+[[tour]]
+part = "rack.power_shelves"
+node = "orv3.shelf_output_n1"
+
+[[tour]]
+part = "rack.xpu_connectors_low"
+node = "prizm.usconec_insertion_loss"
+
+[[tour]]
+part = "rack.switch_trays"
+node = "rack.margin"

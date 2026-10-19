@@ -3,16 +3,20 @@
 P_TP3,OMA = P_TP2,OMA,min − Σ L_i,max
 M_net     = (P_TP3,OMA − S_RX,OMA,max) − Σ Π_j − R
 PASS iff M_net ≥ −ε
+
+P_TP2 is the fixed launch_oma_min or, when the transmitter has an upstream chain, the TP2
+derived from the laser (model card §10).
 """
 
 from oicd.checks import CheckResult, Status
 from oicd.registry import EPSILON_DB, ConstraintId
 from oicd.schema import Link
 from oicd.units import DB, PowerKind, UnitMismatchError
+from oicd.upstream import tp2_launch
 
 
 def check_power_budget(link: Link) -> CheckResult:
-    launch = link.tx.launch_oma_min.value
+    launch = tp2_launch(link.tx)
     sensitivity = link.rx.sensitivity_oma_max.value
     # The schema already enforces OMA; this guard keeps the check correct on its own.
     if launch.kind is not PowerKind.OMA or sensitivity.kind is not PowerKind.OMA:
@@ -37,6 +41,7 @@ def check_power_budget(link: Link) -> CheckResult:
         "margin_db": margin.value,
         "epsilon_db": EPSILON_DB,
         "penalty_names": ", ".join(p.name for p in link.penalties),
+        "tp2_source": "fixed" if link.tx.upstream is None else "upstream chain",
     }
     named = ", ".join(f"{p.name} {p.value.value.value} dB" for p in link.penalties) or "none"
     return CheckResult(

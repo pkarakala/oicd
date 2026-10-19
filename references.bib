@@ -7,7 +7,7 @@
   year         = {2026},
   month        = aug,
   url          = {https://convergedigest.com/ocp-open-silicon-photonics-ai-systems-initiative/},
-  note         = {Read. Class: proposed architecture vision (news summary). Formal OCP workstream; first specs expected Q4 2026.}
+  note         = {Read (brief 03) and re-read 2026-10-18 (brief 05 fact check). Class: third party (news summary of a proposed architecture vision). Flat domains of approximately 1,024 to 2,048 XPUs; CPO-class around 5 to 7 pJ/bit against approximately 15 to 20 for pluggables; approximately 3 pJ/bit next-generation target.}
 }
 
 @techreport{ocp_osp_vision_2026,
@@ -15,33 +15,33 @@
   institution  = {Open Compute Project},
   year         = {2026},
   url          = {https://www.opencompute.org/documents/vision-opensiphforaisystems-final-pdf},
-  note         = {NOT YET READ (PDF blocked from the build environment). Class: proposed architecture vision. Top-priority read.}
+  note         = {Read 2026-10-18 (brief 05 fact check): pages 1 and 12 of 294 (Target Outcomes table). Class: proposed standard (non-normative OCP architecture vision; first author Bijan Nowroozi of Lightmatter, so not independent of Lightmatter). Flat domains of 1,024 to 2,048 XPUs; about 5 to 7 pJ/bit for CPO-class, 15 to 20 for pluggables, about 10 for FEI-class, about 3 aspirational.}
 }
 
-@misc{lightmatter_guide_2026,
+@misc{press_els_2026,
   title        = {Lightmatter Introduces Guide Light Engine for AI, Featuring VLSP Technology},
   author       = {{Lightmatter}},
   year         = {2026},
   month        = jan,
   url          = {https://lightmatter.co/press-release/lightmatter-introduces-guide-light-engine-for-ai-featuring-vlsp-technology/},
-  note         = {Read. Class: vendor claim. 16 wavelengths; >=100 mW per fiber; two 400 GHz grids interleaved at 200 GHz, +/-20 GHz; up to 51.2 Tbps per module.}
+  note         = {Read (brief 03) and re-read in full 2026-10-18 (brief 05 fact check). Class: vendor claim. 16 wavelengths; minimum of 100 mW per fiber; two 400 GHz grids interleaved at a 200 GHz offset, +/-20 GHz; power uniformity up to 0.1 dB; up to 51.2 Tbps per laser module; 100 Tbps in 1RU against about 18 ELSFP in 4RU; 1 to 64 wavelengths and beyond.}
 }
 
-@misc{lightmatter_l20_2026,
+@misc{press_engine_2026,
   title        = {Lightmatter unveils Passage L20 photonic interconnect, announces vClick Optics},
   howpublished = {DatacenterDynamics},
   year         = {2026},
   url          = {https://www.datacenterdynamics.com/en/news/lightmatter-unveils-passage-l20-photonic-interconnect-announces-vclick-optics-offering-for-high-volume-cpo-manufacturing/},
-  note         = {Read. Class: vendor claim. 6.4 Tbps; 212.5 Gb/s PAM4 host; 32 ports at 200 Gb/s DR; two-wavelength BiDi; 30 W max TDP.}
+  note         = {Read (brief 03); re-read 2026-10-18 through an Internet Archive capture of 2026-03-12 (the site returned HTTP 403). Class: third party (press article reporting vendor claims). 6.4 Tbps; 212.5 Gb/s PAM4 interfaces; 32 ports at 200 Gb/s DR; two-wavelength BiDi; 30 W maximum TDP; omits 'each direction'.}
 }
 
-@misc{lightmatter_openrack_2026,
+@misc{press_openrack_2026,
   title        = {Lightmatter Delivers Open Rack CPO Switch and XPU Scale-Up Server},
   author       = {{Lightmatter}},
   year         = {2026},
   month        = oct,
   url          = {http://www.prnewswire.com/news-releases/lightmatter-delivers-open-rack-cpo-switch-and-xpu-scale-up-server-through-independent-collaborations-with-flex-and-other-industry-partners-302906361.html},
-  note         = {Read. Class: vendor claim. 204.8 Tbps 1RU switch tray (8 Passage BiDi engines, Guide DR lasers); 102.4 Tbps 4-XPU tray. No lane, fiber or power specs disclosed.}
+  note         = {Read (brief 03) and re-read in full 2026-10-18 (PR Newswire copy, diffed against vendor_pr_openrack). Class: vendor claim. 204.8 Tbps 1RU switch tray with Flex: eight Passage CPO BiDi engines, Guide DR, liquid cooled; 102.4 Tbps XPU tray with four accelerators, two CPUs and four BiDi engines 'in a single rack unit'; ORv3, DC-MHS, PRIZM TMT, SENKO SEAT and MPC; 2-4x faceplate density. Lane rate, fibers per engine, wavelengths, power and switch ASIC are not disclosed.}
 }
 
 @misc{oif_elsfp_2023,
@@ -61,6 +61,691 @@
   archivePrefix= {arXiv},
   primaryClass = {quant-ph},
   note         = {Read partially (HTML, 2 of 8 tasks). Method reference for Milestone 3.5 design search.}
+}
+
+% ---- Draft IEEE P802.3dj (PROPOSED_STANDARD: draft D3.x, not approved) and reflection analyses.
+% Opened and read 2026-10-18 (brief 05 phase 3).
+
+@techreport{welch2023_3dj_baseline,
+  title        = {Baseline proposals for 200G/L PMD 500 m and 2 km objectives},
+  author       = {Welch, Brian and Ingham, Jonathan and Bernier, Eric and Dawe, Piers and Johnson, John},
+  institution  = {IEEE P802.3dj Task Force},
+  number       = {welch\_3dj\_02b\_2311},
+  year         = {2023},
+  month        = nov,
+  url          = {https://www.ieee802.org/3/dj/public/23_11/welch_3dj_02b_2311.pdf},
+  note         = {Read in full 2026-10-18 (PDF, 27 slides). Class: proposed standard (task-force baseline, later revised). 200GBASE-DR1-FECo: 106.25 GBd PAM4; lane wavelengths 1304.5 to 1317.5 nm; TDECQ max 3.4 dB; ER min 3.5 dB; RX sensitivity (OMAouter) -4.3 + TECQ for 0.9 dB <= TECQ <= SECQ (-3.4 dBm below 0.9 dB); channel insertion loss 3 dB; 500 m; ORL tolerance 21.4 dB (15.5 for DR1); TX and RX reflectance -26 dB; FECo = RS(544,514). This 2023 version still has OMAouter min -1.2 + MAX(TECQ,TDECQ), power budget 6.5 dB and penalties 3.5 dB, superseded by johnson2025_3dj_mpidgd.}
+}
+
+@techreport{johnson2025_3dj_mpidgd,
+  title        = {Proposed changes to {P802.3dj} {MPI} and {DGD} penalty specifications},
+  author       = {Johnson, John},
+  institution  = {IEEE P802.3dj Task Force},
+  number       = {johnson\_3dj\_01\_2507},
+  year         = {2025},
+  month        = jul,
+  url          = {https://ieee802.org/3/dj/public/25_07/johnson_3dj_01_2507.pdf},
+  note         = {Read in full 2026-10-18 (PDF, 27 slides). Class: proposed standard (D2.0 comment resolution). Clause 180 DRn: power budget (for max TDECQ) 6.7 dB; allocation for penalties 3.7 dB including 0.1 dB MPI and 0.2 dB DGD; TX OMAouter min -1 + TDECQ; channel insertion loss may be reduced by up to 0.5 dB depending on discrete reflectances; Table 180-12 maximum channel insertion loss versus reflectance counts (values copied into the model card section 12).}
+}
+
+@techreport{dawe2026_3dj_er199,
+  title        = {Extinction ratio in {DR} links (comment 199)},
+  author       = {Dawe, Piers},
+  institution  = {IEEE P802.3dj Task Force},
+  number       = {dawe\_3dj\_01\_2609},
+  year         = {2026},
+  month        = sep,
+  url          = {https://www.ieee802.org/3/dj/public/26_09/dawe_3dj_01_2609.pdf},
+  note         = {Read in full 2026-10-18 (PDF, 14 slides; footer dated Aug 2026). Class: proposed standard (open comment R2-199 against the D3.x draft). States the current draft values: ER min 3.5 dB, RX sensitivity -3.4 and -4.3 + TECQ, power budget 6.7 dB, penalties 3.7 dB, MPI allocation 0.1 dB, Table 180-12 unchanged. Proposes ER 3 dB, sensitivity -4.5 + TECQ, budget 6.9 dB, penalties 3.9 dB (MPI up to 0.3 dB). The source does not say whether the change was adopted.}
+}
+
+@techreport{simms2026_3dj_tt,
+  title        = {Transition time in {DR} transmitters},
+  author       = {Simms, Bill and Dawe, Piers},
+  institution  = {IEEE P802.3dj Task Force},
+  number       = {simms\_3dj\_01a\_2609},
+  year         = {2026},
+  month        = sep,
+  url          = {https://www.ieee802.org/3/dj/public/26_09/simms_3dj_01a_2609.pdf},
+  note         = {Read slides 1 to 14 of 23 on 2026-10-18 (PDF). Class: proposed standard (comments R2-195 and R2-200 against D3.2, 2nd SA recirculation ballot). Confirms the draft is D3.2 in recirculation; Table 180-7 200GBASE-DR1 at 106.25 GBd with TDECQ max 3.4 dB and TECQ max 3.4 dB; proposes transmitter transition time 8 ps to 10 ps.}
+}
+
+@techreport{bhatt2016_mpi,
+  title        = {Estimating {MPI} Penalty},
+  author       = {Bhatt, Vipul and Smith, Benjamin},
+  institution  = {IEEE 802.3bs SMF Ad Hoc},
+  year         = {2016},
+  month        = jan,
+  url          = {https://www.ieee802.org/3/bs/public/adhoc/smf/16_01_07/bhatt_01_0116_smf.pdf},
+  note         = {Read in full 2026-10-18 (PDF, 25 slides). Class: proposed standard (task-force contribution). Deterministic MPI upper bound: penalty = 10 log10(1/(1 - x)), x = (m - 1) 4 S E/(E - 1), S = sqrt(Rt Rr) + n sqrt(Rt Rc) + n sqrt(Rr Rc) + n(n - 1)/2 Rc. Table 1, DR4 D1.0 (Tx 20, Rx 26, connector 35 dB reflectance; PAM4; ER 6 dB): 0.81, 1.44 and 2.31 dB for 2, 4 and 6 connectors. Discount factors D = 0.5 to 0.7 discussed as less pessimistic.}
+}
+
+@techreport{anslow2017_drrefl,
+  title        = {{100GBASE-DR} optical reflection limits},
+  author       = {Anslow, Pete},
+  institution  = {IEEE P802.3cd Task Force},
+  year         = {2017},
+  month        = may,
+  url          = {https://www.ieee802.org/3/cd/public/May17/anslow_3cd_01_0517.pdf},
+  note         = {Read in full 2026-10-18 (PDF, 10 slides). Class: proposed standard (task-force contribution). States that during P802.3bs the MPI penalty allocation was agreed to equal the 1E-6 cumulative probability point of the Monte Carlo spreadsheet king_02a_0116_smf.}
+}
+
+@techreport{bhatt2001_bidixtalk,
+  title        = {Cross-talk in bi-directional, single wavelength, single fiber {Gigabit Ethernet} links},
+  author       = {Bhatt, Vipul},
+  institution  = {IEEE 802.3 EFM Study Group},
+  year         = {2001},
+  month        = jun,
+  url          = {https://www.ieee802.org/3/efm/public/jul01/presentations/bhatt_1_0701.pdf},
+  note         = {Read in full 2026-10-18 (PDF, 10 pages, dated June 28, 2001). Class: proposed standard (study-group contribution). For single-wavelength BiDi with non-WDM couplers, NRZ and an adjusted receiver threshold: crosstalk penalty approx. 10 log(channel_loss/(channel_loss - return_loss)), both as fractions; example IL 7 dB, RL 12 dB gives 1.65 dB; thumb rule: return loss at least 5 dB greater than channel insertion loss.}
+}
+
+@techreport{itut_g652_2024,
+  title        = {Characteristics of a single-mode optical fibre and cable},
+  institution  = {International Telecommunication Union, ITU-T},
+  type         = {Recommendation},
+  number       = {ITU-T G.652 (08/2024)},
+  year         = {2024},
+  month        = aug,
+  url          = {https://www.itu.int/rec/T-REC-G.652-202408-I/en},
+  note         = {Read 2026-10-18 (PDF): clause 7.1 and Table 2 (G.652.D attributes). Class: published specification. Cable attenuation coefficient, maximum from 1310 nm to 1625 nm: 0.40 dB/km (0.30 dB/km at 1530 to 1565 nm). Note 1: these values should not be applied to short cables such as jumper, indoor and drop cables; IEC 60794-2-11 (not read) gives 1.0 dB/km or less for indoor cable at 1310 and 1550 nm.}
+}
+
+% ---- Microring and WDM physics (brief 05 phase 5). Opened and read 2026-10-18.
+
+@misc{hu2025_arxiv,
+  title        = {400-{Gbps}/$\lambda$ Ultrafast Silicon Microring Modulator for Scalable Optical Compute Interconnects},
+  author       = {Hu, Fangchen and Yu, Fengxin and Liu, Xingyu and Wang, Aoxue and Hu, Xiao and Cai, Haiwen and Chu, Wei},
+  year         = {2025},
+  eprint       = {2509.01555},
+  archivePrefix= {arXiv},
+  url          = {https://arxiv.org/abs/2509.01555},
+  note         = {Read 2026-10-18 (arXiv PDF): Device design (Eqs. 1 to 3), the measured FWHM, FSR and Q paragraph, and the outlook. Class: preprint, used for a relation only. States 1/f_EO^2 = 1/f_ph^2 + 1/f_e^2 and Q = omega tau_ph, with the photon-lifetime-limited bandwidth f_ph = 1/(2 pi tau_ph) approx. c/(lambda Q).}
+}
+
+@article{geravand2025_mrm,
+  title        = {Ultrafast Coherent Dynamics of Microring Modulators},
+  author       = {Geravand, Alireza and Zheng, Zibo and Shateri, Farshid and Levasseur, Simon and Rusch, Leslie A. and Shi, Wei},
+  journal      = {Nature Photonics},
+  year         = {2025},
+  doi          = {10.1038/s41566-025-01686-1},
+  eprint       = {2412.17986},
+  archivePrefix= {arXiv},
+  url          = {https://arxiv.org/abs/2412.17986},
+  note         = {Read 2026-10-18 (arXiv version): abstract and the EO-bandwidth discussion around their Eq. 2. Class: peer reviewed (Nature Photonics; arXiv text read). Caution used in the model card: the two-pole estimate 1/f_EO^2 = (2 pi Rs Cj)^2 + (2 pi tau)^2, with tau the optical field lifetime, "does not provide an accurate estimation of EO bandwidth of a solitary MRM, and is often misleading" because it ignores detuning.}
+}
+
+@article{decort2011,
+  title        = {Wide tuning of silicon-on-insulator ring resonators with a liquid crystal cladding},
+  author       = {De Cort, Wout and Beeckman, Jeroen and Claes, Tom and Neyts, Kristiaan and Baets, Roel},
+  journal      = {Optics Letters},
+  volume       = {36},
+  number       = {19},
+  pages        = {3876--3878},
+  year         = {2011},
+  url          = {https://photonics.intec.ugent.be/download/pub_2826.pdf},
+  note         = {Read in full 2026-10-18 (PDF). Class: peer reviewed. Resonance shift: Delta lambda / lambda = Delta n_eff / n_g, n_g the group index of the mode.}
+}
+
+@inproceedings{frey2006_dndt,
+  title        = {Temperature-dependent refractive index of silicon and germanium},
+  author       = {Frey, Bradley J. and Leviton, Douglas B. and Madison, Timothy J.},
+  booktitle    = {Proc. SPIE 6273},
+  year         = {2006},
+  doi          = {10.1117/12.672850},
+  eprint       = {physics/0606168},
+  archivePrefix= {arXiv},
+  url          = {https://arxiv.org/abs/physics/0606168},
+  note         = {Read 2026-10-18 (arXiv PDF): abstract and the silicon tables. Class: peer reviewed (SPIE proceedings). Table 4, measured thermo-optic coefficient of silicon: dn/dT = 1.94E-04 /K at 1.3 microns and 295 K; absolute index 3.50616 at 1.3 microns and 295 K.}
+}
+
+@article{xu2014_thermo,
+  title        = {Ultra-sensitive chip-based photonic temperature sensor using ring resonator structures},
+  author       = {Xu, Haitan and Hafezi, Mohammad and Fan, J. and Taylor, J. M. and Strouse, G. F. and Ahmed, Zeeshan},
+  journal      = {Optics Express},
+  volume       = {22},
+  pages        = {3098},
+  year         = {2014},
+  eprint       = {1312.5252},
+  archivePrefix= {arXiv},
+  url          = {https://arxiv.org/abs/1312.5252},
+  note         = {Read 2026-10-18 (arXiv PDF): device and results paragraphs. Class: peer reviewed. A silicon ring of 11 um diameter, FSR ca. 9.2 nm, Q 52000 and group index 4.2 (COMSOL estimate) shifts its resonance by 77 pm/K.}
+}
+
+@article{sun2015_nature,
+  title        = {Single-chip microprocessor that communicates directly using light},
+  author       = {Sun, Chen and Wade, Mark T. and Lee, Yunsup and Orcutt, Jason S. and Alloatti, Luca and Georgas, Michael S. and Waterman, Andrew S. and Shainline, Jeffrey M. and Avizienis, Rimas R. and Lin, Sen and Moss, Benjamin R. and Kumar, Rajesh and Pavanello, Fabio and Atabaki, Amir H. and Cook, Henry M. and Ou, Albert J. and Leu, Jonathan C. and Chen, Yu-Hsin and Asanovi{\'c}, Krste and Ram, Rajeev J. and Popovi{\'c}, Milo{\v s} A. and Stojanovi{\'c}, Vladimir M.},
+  journal      = {Nature},
+  volume       = {528},
+  pages        = {534--538},
+  year         = {2015},
+  doi          = {10.1038/nature16454},
+  url          = {https://people.eecs.berkeley.edu/~krste/papers/nature16454.pdf},
+  note         = {Read 2026-10-18 (PDF): abstract and the link description. Class: peer reviewed. Precedent for microring-based optical I/O on a processor chip: over 70 million transistors and 850 photonic components; one wavelength demonstrated at 2.5 Gb/s each way, each additional wavelength adding 5 Gb/s up to 55 Gb/s without more fibres.}
+}
+
+@article{andre2000_xtalk,
+  title        = {Performance Degradations due to Crosstalk in Multiwavelength Optical Networks Using Optical Add Drop Multiplexers Based on Fibre {Bragg} Gratings},
+  author       = {Andr{\'e}, P. S. and Pinto, J. L. and Nolasco Pinto, A. and Almeida, T.},
+  journal      = {Revista do DETUA},
+  volume       = {3},
+  number       = {2},
+  year         = {2000},
+  month        = oct,
+  url          = {https://proa.ua.pt/index.php/revdeti/article/download/18288/13182},
+  note         = {Read 2026-10-18 (PDF), section II. Class: peer reviewed (university journal). Heterodyne (out-of-band, incoherent) crosstalk power penalty Px approx. 10 Log(1 + X), X the total fraction of power leaked into a channel from all others, for NRZ with infinite extinction ratio, an optimally adjusted decision level and all interferers at 1 (their eq. 8); homodyne penalty -10 log(1 - Q^2 X).}
+}
+
+@article{bogaerts2012_mrr,
+  title        = {Silicon microring resonators},
+  author       = {Bogaerts, Wim and De Heyn, Peter and Van Vaerenbergh, Thomas and De Vos, Katrien and Selvaraja, Shankar Kumar and Claes, Tom and Dumon, Pieter and Bienstman, Peter and Van Thourhout, Dries and Baets, Roel},
+  journal      = {Laser \& Photonics Reviews},
+  volume       = {6},
+  number       = {1},
+  pages        = {47--73},
+  year         = {2012},
+  doi          = {10.1002/lpor.201100017},
+  url          = {https://research.tue.nl/en/publications/silicon-microring-resonators/},
+  note         = {Abstract only, read 2026-10-18 on the TU/e research portal (the publisher page returned HTTP 403). Class: peer reviewed review. Cited only as a general review of ring resonator theory and silicon ring applications, never for a number.}
+}
+
+% ---- Sources opened by the brief 05 fact check (phase 4), 2026-10-18.
+
+@misc{vendor_pr_interposer,
+  title        = {Lightmatter Unveils Passage M1000 Photonic Superchip, World's Fastest AI Interconnect},
+  author       = {{Lightmatter}},
+  year         = {2025},
+  month        = {mar},
+  url          = {https://lightmatter.co/press-release/lightmatter-unveils-passage-m1000-photonic-superchip-worlds-fastest-ai-interconnect/},
+  note         = {Opened 2026-10-18 (brief 05 fact check): full text. Class: vendor claim. 114 Tbps total; >4,000 mm2 8-tile interposer; 1.5 kW in a 7,735 mm2 package; 256 fibers at 448 Gbps; 8-wavelength WDM; 56 Gbps NRZ; 1024 SerDes; GF Fotonix; GF and Amkor.}
+}
+
+@misc{vendor_hc25_interposer,
+  title        = {Passage {M1000}: A {3D} Photonic Interposer for {AI} (Hot Chips 2025)},
+  author       = {Bunandar, Darius},
+  howpublished = {Hot Chips 2025 slides},
+  year         = {2025},
+  url          = {https://www.hc2025.hotchips.org/assets/program/conference/day2/57-lightmatter_hotchips_2025_final.pdf},
+  note         = {Opened 2026-10-18 (brief 05 fact check): all 34 slides (text layer, slides 3 to 34 also read as images). Class: vendor claim. Bandwidth (Tx + Rx) up to 114 Tbps; 2x4 tiles; 128 SerDes per tile; 34 chiplets; 16 buses per tile; 8 lambda at 56 Gbps per link; microring diameter ~15 um; bump pitch ~120 um; Tx/Rx area 0.015 mm2 (slide 13) and 0.006 mm2 Tx + Rx (slide 15).}
+}
+
+@misc{vendor_web_interposer,
+  title        = {Passage {M}-Series Photonic Superchip},
+  author       = {{Lightmatter}},
+  howpublished = {Product page},
+  year         = {2026},
+  url          = {https://lightmatter.co/products/m1000/},
+  note         = {Opened 2026-10-18 (brief 05 fact check): page text and its specification icons (SVG images rendered). Class: vendor claim. 91 x 85 mm package; 56/112 Gbps SerDes icon. Undated.}
+}
+
+@misc{vendor_web_interposerevk,
+  title        = {Passage {M1000} {EVK}},
+  author       = {{Lightmatter}},
+  howpublished = {Product page},
+  year         = {2026},
+  url          = {https://lightmatter.co/products/passage-m1000-evk/},
+  note         = {Opened 2026-10-18 (brief 05 fact check): full page. Class: vendor claim. 114.6 Tbps total bi-directional; 32 I/O chiplets and two thermal load chips; system-level efficiency 2.3 pJ/bit including laser; SerDes 2.0 pJ/bit; >1 kW power delivery. Undated.}
+}
+
+@misc{vendor_ises25,
+  title        = {From Electrons to Photons: A {Lightmatter} Perspective on {3D} Photonic Integration},
+  author       = {Jain, Ritesh},
+  howpublished = {I.S.E.S. Korea slides},
+  year         = {2025},
+  month        = {aug},
+  url          = {https://lightmatter.co/wp-content/uploads/2025/08/ISES-Korea-08-2025_Ritesh-Jain.pdf},
+  note         = {Opened 2026-10-18 (brief 05 fact check): all 21 slides (text and images). Class: vendor claim. Gives '800 Gbps / fiber (Tx+Rx)' for the M series, against 448 Gbps per fiber in vendor_pr_interposer.}
+}
+
+@inproceedings{vendor_hoti25_paper,
+  title        = {Accelerating Frontier {MoE} Training with {3D} Integrated Optics},
+  author       = {Bernadskiy, Mikhail and Carson, Peter and others},
+  booktitle    = {2025 IEEE Symposium on High-Performance Interconnects (HotI)},
+  year         = {2025},
+  eprint       = {2510.15893},
+  archivePrefix= {arXiv},
+  url          = {https://arxiv.org/abs/2510.15893},
+  note         = {Opened 2026-10-18 (brief 05 fact check): all 12 pages (arXiv PDF). Class: peer reviewed. (IEEE HotI 2025; the paper does not itself state its review). '2.3 pJ/bit for PIC and laser', split 1.1 laser and 1.2 PIC as the authors' assumption, with 2 pJ/bit SerDes on top; the value is taken from a Lightmatter launch event, not measured in the paper.}
+}
+
+@misc{vendor_pr_chiplet,
+  title        = {Lightmatter Announces Passage {L200}, the Fastest Co-Packaged Optics for {AI}},
+  author       = {{Lightmatter}},
+  year         = {2025},
+  month        = {mar},
+  url          = {https://lightmatter.co/press-release/lightmatter-announces-passage-l200-the-fastest-co-packaged-optics-for-ai/},
+  note         = {Opened 2026-10-18 (brief 05 fact check): full text. Class: vendor claim. L200 56 Gbps NRZ, 32 Tbps total (Tx+Rx); L200X 106/112 Gbps PAM4, 64 Tbps; 320 SerDes; 32 Gbps UCIe D2D; 16-wavelength WDM per waveguide/fiber for 800 Gbps/1.6 Tbps per fiber; over 200 Tbps per package; 40 pluggables equivalent; available 2026.}
+}
+
+@misc{vendor_web_chiplet,
+  title        = {Passage {L200}: {3D} Co-Packaged Optics},
+  author       = {{Lightmatter}},
+  howpublished = {Product page},
+  year         = {2026},
+  url          = {https://lightmatter.co/products/l200/},
+  note         = {Opened 2026-10-18 (brief 05 fact check): full page and its metadata. Class: vendor claim. 'PAM4 (56G, 112G)' (conflicts with NRZ in vendor_pr_chiplet); '< 5 pJ/bit (Optical)'; '10m to 2km (DR/FR)'; '256 Tbps (Tx+Rx)' appears only in the page metadata, the visible page says '200+ Tbps / Chip'.}
+}
+
+@misc{vendor_pr_1p6t,
+  title        = {Lightmatter Achieves Record 1.6 {Tbps} Per Fiber to Accelerate {AI} Optical Interconnect},
+  author       = {{Lightmatter}},
+  year         = {2026},
+  month        = {mar},
+  url          = {https://lightmatter.com/press-release/lightmatter-achieves-record-1-6-tbps-per-fiber-to-accelerate-ai-optical-interconnect/},
+  note         = {Opened 2026-10-18 (brief 05 fact check): full text. Class: vendor claim. Alphawave Semi 'now part of Qualcomm Technologies'; 'a clear path to 100 Tbps of total I/O per package'.}
+}
+
+@misc{vendor_web_kit16,
+  title        = {Passage {EVK100}},
+  author       = {{Lightmatter}},
+  howpublished = {Product page},
+  year         = {2026},
+  url          = {https://lightmatter.co/products/passage-evk100/},
+  note         = {Opened 2026-10-18 (brief 05 fact check): full page. Class: vendor claim. 16-wavelength 112G PAM4 DWDM, 1.6 Tbps unidirectional per fiber, 200 GHz spacing centered at 1310 nm, 3.2 pJ/bit including laser (called a target), pre-FEC BER target < 1e-5.}
+}
+
+@misc{vendor_ofc26_kumar,
+  title        = {16-Wavelength 800-{Gbps} Bidirectional Link over Single-Mode Fiber},
+  author       = {Kumar, Nikhil},
+  howpublished = {OFC 2026 slides},
+  year         = {2026},
+  url          = {https://lightmatter.co/wp-content/uploads/2026/04/OFC-2026-16-lambda-Bidi_PAM4-Nikhil-Kumar.pdf},
+  note         = {Opened 2026-10-18 (brief 05 fact check): all 18 slides (text layer and images). Class: vendor claim. 800 Gbps per fiber, BER < 1e-9 without FEC, 2.6 pJ/bit photonics, 1 km fiber, 3 dB channel loss, 6 connectors, 2 pJ/bit XSR SerDes; slide 5 shows laser module A on lambda 0, 2 ... 14 and B on 1, 3 ... 15; Passage 100 slides give 106 Gbps per lambda and 1.8 pJ/bit PIC plus 1.1 pJ/bit laser.}
+}
+
+@misc{vendor_pr_engine,
+  title        = {Lightmatter Expands Photonic Interconnect Roadmap with Passage {L20} Unified Optical Engine for {NPO} and {OBO} Applications},
+  author       = {{Lightmatter}},
+  year         = {2026},
+  month        = {mar},
+  url          = {https://lightmatter.co/press-release/lightmatter-expands-photonic-interconnect-roadmap-with-passage-l20-unified-optical-engine-for-npo-and-obo-applications/},
+  note         = {Opened 2026-10-18 (brief 05 fact check): full text. Class: vendor claim. 6.4 Tbps each direction; 32 ports at 200 Gbps per lane DR; 212.5 Gbps PAM4 SerDes line rate; 2-wavelength BiDi (1311, 1331 nm), IEEE 802.3dj, DR compatible; TDP (max) 30W; 2000-pin BGA; -50% fiber management; sampling late 2026.}
+}
+
+@misc{vendor_pr_engine_bw,
+  title        = {Lightmatter Expands Photonic Interconnect Roadmap with Passage {L20} (Business Wire)},
+  author       = {{Lightmatter}},
+  howpublished = {Business Wire},
+  year         = {2026},
+  month        = {mar},
+  url          = {https://www.businesswire.com/news/home/20260311102347/en},
+  note         = {Opened 2026-10-18 (brief 05 fact check) through an Internet Archive capture of the businesswire.com page (2026-03-11 14:08 UTC); the direct URL returned HTTP 403. Class: vendor claim. The only copy that reads 'TDP (max): 30W (3.0 pJ/bit)'.}
+}
+
+@misc{vendor_web_engine,
+  title        = {Passage {L20}},
+  author       = {{Lightmatter}},
+  howpublished = {Product page},
+  year         = {2026},
+  url          = {https://lightmatter.co/products/passage-l20/},
+  note         = {Opened 2026-10-18 (brief 05 fact check): full page. Class: vendor claim. 1827-ball BGA; 37.5 mm x 26.4 mm; 32 data fibers with Corning CPO Flexconnect; cold plate; efficiency 5 pJ/bit; 88% smaller by volume than OSFP.}
+}
+
+@misc{vendor_yole_ofc26,
+  title        = {Advancing {AI} Performance with {3D} Photonic Interconnects},
+  author       = {Kumar, Nikhil},
+  howpublished = {OFC 2026 slides (Yole Group market session)},
+  year         = {2026},
+  url          = {https://lightmatter.co/wp-content/uploads/2026/04/OFC-2026-Yole-Nikhil-Kumar.pdf},
+  note         = {Opened 2026-10-18 (brief 05 fact check): 22 slides (text layer; slides 8, 9 and 12 to 14 also as images). Class: vendor claim. 37.5 x 27.6 x 4.55 mm vs 108.8 x 22.93 x 15.5 mm, ~88% smaller; 1 ELSFP / 8 laser fibers; up to 115.2 Tbps (18 x L20); XPU 38 Tbps (6 x L20); 17-20 vs 5 pJ/bit; up to 75% savings; 4 x Guide 100T in 1RU vs 18 x ELSFP in 4RU.}
+}
+
+@misc{vendor_pr_cpx,
+  title        = {Lightmatter Joins Open {CPX} {MSA}, Introduces the Industry's First Bidirectional {CPX} Optical Engine},
+  author       = {{Lightmatter}},
+  year         = {2026},
+  month        = {sep},
+  url          = {https://lightmatter.com/press-release/lightmatter-joins-open-cpx-msa-introduces-the-industrys-first-bidirectional-cpx-optical-engine/},
+  note         = {Opened 2026-10-18 (brief 05 fact check): full text. Class: vendor claim. 12.8 Tbps total; 32 lanes per direction at 212.5 Gbps; >500 m; 512-GPU pod from about 130,000 fibers to 65,000; approximately 16,000 fewer connectors; more than 200 miles of fiber; about 15 percent of scale-up network cost.}
+}
+
+@misc{vendor_hoti26,
+  title        = {The Interconnect Foundation for High-Performance {AI} Training and Inference},
+  author       = {Harris, Nick},
+  howpublished = {Hot Interconnects 2026 slides},
+  year         = {2026},
+  month        = {aug},
+  url          = {https://lightmatter.com/wp-content/uploads/2026/08/Nick-Harris_Lightmatter_The-Interconnect-Foundation-for-High-Performance-AI-Training-and-Inference_HotI2026.pdf},
+  note         = {Opened 2026-10-18 (brief 05 fact check): 22 slides (text layer; several also as images). Class: vendor claim. 512 XPU cluster at 32 Tbps per XPU; 150 miles; 20,000 connectors; 16%; L20 30 W TDP max, Q1 2027; Guide 128+ lasers per chip, 0.25 dB power accuracy, 3 GHz frequency accuracy.}
+}
+
+@misc{vendor_pr_fau,
+  title        = {Lightmatter Unveils {vClick} Optics, Industry-First Detachable Fiber Array Unit for {CPO} Advanced Packaging and High-Volume Production},
+  author       = {{Lightmatter}},
+  year         = {2026},
+  month        = {mar},
+  url          = {https://lightmatter.co/press-release/lightmatter-unveils-vclick-optics-industry-first-detachable-fiber-array-unit-for-cpo-advanced-packaging-and-high-volume-production},
+  note         = {Opened 2026-10-18 (brief 05 fact check): full text. Class: vendor claim. Insertion and re-insertion loss less than 1.5 dB; up to 80+ nm CWDM/DWDM; mold-and-grind compatible; no active fiber alignment; SENKO SEAT and MPC; vertically expanded beam.}
+}
+
+@misc{senko_pr_fau,
+  title        = {{SENKO} Collaborates with Lightmatter on Detachable Connectivity to the {PIC} for {3D} Co-Packaged Optics},
+  author       = {{SENKO Advanced Components}},
+  year         = {2026},
+  month        = {mar},
+  url          = {https://www.senko.com/senko-collaborates-with-lightmatter-on-detachable-connectivity-to-the-pic-for-3d-co-packaged-optics/},
+  note         = {Opened 2026-10-18 (brief 05 fact check): article body. Class: vendor claim. (partner release) CWDM and DWDM across more than 80 nm; vertical expanded beam.}
+}
+
+@misc{senko_mpc20,
+  title        = {Metallic {PIC} Coupler, {MPC20}},
+  author       = {{SENKO Advanced Components}},
+  howpublished = {Product page},
+  year         = {2026},
+  url          = {https://senko.com/product/mpc-20},
+  note         = {Opened 2026-10-18 (brief 05 fact check): product section. Class: published specification. (manufacturer product data) 20 fibers at 127 um pitch; profile less than 1.2 mm. No source links the MPC20 to vClick.}
+}
+
+@misc{futurum_ocp26,
+  title        = {Lightmatter and Flex Bring 204.8 {Tbps} Co-Packaged Optics Into Open Racks},
+  author       = {Burke, Brendan},
+  howpublished = {The Futurum Group},
+  year         = {2026},
+  month        = {oct},
+  url          = {https://futurumgroup.com/insights/lightmatter-and-flex-bring-2048-tbps-co-packaged-optics-into-open-racks/},
+  note         = {Opened 2026-10-18 (brief 05 fact check): full article. Class: third party. Its analyst is quoted in the release, so not independent. vClick loss 'below 1 dB' (as told by Lightmatter); XPU tray as a single rack unit; production sampling year 2027.}
+}
+
+@misc{counterpoint_ocp26,
+  title        = {Lightmatter Links with {ODMs} to Pave a Glide Path for {CPO}},
+  author       = {Kanellos, Michael},
+  howpublished = {Counterpoint Research},
+  year         = {2026},
+  month        = {oct},
+  url          = {https://counterpointresearch.com/en/insights/lightmatter-links-with-odms-to-pave-a-glide-path-for-cpo-co-packaged-optics},
+  note         = {Opened 2026-10-18 (brief 05 fact check): full article. Class: third party. Two Guide DR modules in the switch tray; eight vClick connectors; a 2RU compute tray; writes Gbps where Tbps is meant and 'PRISM TMT'; does not contain '128 lasers per chip' (that is counterpoint_nvlinkfusion).}
+}
+
+@misc{vendor_blog_doubling,
+  title        = {Doubling Down: World's First 16-$\lambda$ Single Fiber Bidirectional Link for {AI}},
+  author       = {Bunandar, Darius},
+  howpublished = {Lightmatter blog},
+  year         = {2025},
+  month        = {aug},
+  url          = {https://lightmatter.co/blog/doubling-down-worlds-first-16-%CE%BB-single-fiber-bidirectional-link-for-ai/},
+  note         = {Opened 2026-10-18 (brief 05 fact check): full text. Class: vendor claim. 16 wavelengths centered on the 1310 nm band; 400 GHz between channels going the same way; 200 GHz between adjacent transmit and receive channels; 50 Gbps per channel; eight micro-ring modulators.}
+}
+
+@misc{vendor_blog_seeing,
+  title        = {Seeing is Believing: A Technical Deep Dive into Lightmatter's Hardware},
+  author       = {Harris, Nick},
+  howpublished = {Lightmatter blog},
+  year         = {2025},
+  month        = {sep},
+  url          = {https://lightmatter.co/blog/seeing-is-believing-a-technical-deep-dive-into-lightmatters-hardware/},
+  note         = {Opened 2026-10-18 (brief 05 fact check): full text. Class: vendor claim. 4.6 pJ/bit wall plug; an 800 C/s temperature aggressor (a 50 nm/s laser sweep over 4 nm); MRMs 5 to 15 um in diameter.}
+}
+
+@misc{vendor_web_kitbidi,
+  title        = {Passage {EVK50}},
+  author       = {{Lightmatter}},
+  howpublished = {Product page},
+  year         = {2026},
+  url          = {https://lightmatter.co/products/passage-evk50/},
+  note         = {Opened 2026-10-18 (brief 05 fact check): full page. Class: vendor claim. 800 Gbps per fiber with 400 Gbps Tx and 400 Gbps Rx; 56 Gbps NRZ; total link efficiency 2.6 pJ/bit including laser (SerDes excluded).}
+}
+
+@inproceedings{vendor_ofc25_paper,
+  title        = {Monolithically Integrated Microring Transmitter and Receiver for High-Density {3D} Co-Packaged Optics},
+  author       = {Baghdadi, Reza and Dorta-Quinones, Carlos and Sludds, Alexander and Gupta, Shashank and Ciccarella, Pietro and Gardiner, Clinton and Poon, Andrew and Bunandar, Darius and Harris, Nicholas},
+  booktitle    = {Optical Fiber Communication Conference (OFC) 2025},
+  number       = {Tu3J.6},
+  year         = {2025},
+  doi          = {10.1364/OFC.2025.Tu3J.6},
+  url          = {https://lightmatter.co/wp-content/uploads/2025/04/OFC-2025-submission.pdf},
+  note         = {Opened 2026-10-18 (brief 05 fact check): all 3 pages (authors' submission version). Class: peer reviewed. Up to 64 Gbps NRZ; O-band; 1.8 THz FSR, compatible with 200 GHz spacing 8-lambda WDM; heaters 0.44 nm/mW; MRM ER > 18 dB (voltage-dependent); 56 GHz Ge PD; 84.4 mW excluding laser, 1.51 pJ/bit at 56 Gbps; 0.006 mm2; GF 45SPCLO. Venue and DOI confirmed on the Optica page.}
+}
+
+@misc{vendor_ofc25_talk,
+  title        = {Monolithically Integrated Microring Transmitter and Receiver for High-Density {3D} Co-Packaged Optics (talk)},
+  author       = {Baghdadi, Reza},
+  howpublished = {OFC 2025 slides},
+  year         = {2025},
+  url          = {https://lightmatter.co/wp-content/uploads/2025/04/OFC-talk_Reza.pdf},
+  note         = {Opened 2026-10-18 (brief 05 fact check): all 17 slides (text and images). Class: vendor claim. Q 3500 (loaded or intrinsic not stated); PD responsivity > 0.9 A/W; minimum OMA -9 dBm (56 Gbps, 4-tap FFE on the BERT); PD bandwidth > 46 GHz.}
+}
+
+@misc{vendor_web_els_dwdm,
+  title        = {Guide 1},
+  author       = {{Lightmatter}},
+  howpublished = {Product page},
+  year         = {2026},
+  url          = {https://lightmatter.co/products/guide-1/},
+  note         = {Opened 2026-10-18 (brief 05 fact check): full page (the EVK URL redirects here). Class: vendor claim. O-band centered at 1310 nm; 8 wavelengths per fiber (scales to 16); 200 GHz; +/-20 GHz; 13 mW per lambda, >=100 mW per fiber, 3.2 to 3.5 W per module; 16 or 32 fibers; CW; CMIS 5.3.}
+}
+
+@misc{vendor_pr_els_dr,
+  title        = {Lightmatter Unveils Guide {DR}: Industry First Liquid-Cooled Laser {NIC} that Quadruples Rack Density},
+  author       = {{Lightmatter}},
+  year         = {2026},
+  month        = {may},
+  url          = {https://lightmatter.co/press-release/lightmatter-unveils-guide-dr-industry-first-liquid-cooled-laser-nic-that-quadruples-rack-density/},
+  note         = {Opened 2026-10-18 (brief 05 fact check): full text. Class: vendor claim. LNIC form factor; 200 mW per fiber across up to 64 fibers to drive 256 lanes at 200G; four Guide DR modules for a 204.8 Tbps 1 RU switch tray; liquid cooled; sampling Q4 2026.}
+}
+
+@misc{vendor_web_els_dr,
+  title        = {Guide {DR}},
+  author       = {{Lightmatter}},
+  howpublished = {Product page},
+  year         = {2026},
+  url          = {https://lightmatter.co/products/guide-dr/},
+  note         = {Opened 2026-10-18 (brief 05 fact check): full page. Class: vendor claim. >=200 mW per fiber (12.8 W total); 51.2 Tbps; 64 lasers per LNIC; Range A 1311 nm, Range B 1331 nm; 8 SNMT-8 connectors; up to 8 LNIC in a 1RU switch tray for 409.6 Tbps.}
+}
+
+@misc{vendor_pr_openrack,
+  title        = {Lightmatter Delivers Open Rack {CPO} Switch and {XPU} Scale-Up Server (lightmatter.com copy)},
+  author       = {{Lightmatter}},
+  year         = {2026},
+  month        = {oct},
+  url          = {https://lightmatter.com/press-release/lightmatter-delivers-open-rack-cpo-switch-and-xpu-scale-up-server-through-independent-collaborations-with-flex-and-other-industry-partners/},
+  note         = {Opened 2026-10-18 (brief 05 fact check): full text, diffed sentence by sentence against the PR Newswire copy. Class: vendor claim. Not in Appendix B. Says the XPU tray has 102.4 Tbps 'in a 2U rack height', while its own paragraph 2 still says '1 rack unit (RU) height'; page modified about two hours after the wire time.}
+}
+
+@misc{ine_ocp26,
+  title        = {Lightmatter integrates optical engines into open rack hardware},
+  howpublished = {IN Electronics and Design},
+  author       = {{IN Electronics}},
+  year         = {2026},
+  month        = {oct},
+  url          = {https://www.inelectronics.co.uk/lightmatter-integrates-optical-engines-into-open-rack-hardware/},
+  note         = {Opened 2026-10-18 (brief 05 fact check): full article. Class: third party. 204.8 Tbps of 'aggregate' switching bandwidth; a separate 2RU prototype compute tray.}
+}
+
+@misc{counterpoint_nvlinkfusion,
+  title        = {Lightmatter Joins {NVLink} Fusion Club},
+  author       = {Owen, Gareth},
+  howpublished = {Counterpoint Research},
+  year         = {2026},
+  month        = {jun},
+  url          = {https://counterpointresearch.com/en/insights/lightmatter-joins-nvlink-fusion-club},
+  note         = {Opened 2026-10-18 (brief 05 fact check): full article. Class: third party. Not in Appendix B; the source of 'Guide DR consists of a chip with 128 lasers on it' and 'only two units are required to power a 100T switch'.}
+}
+
+@techreport{ocp_orv3_base,
+  title        = {Open Rack {V3} Base Specification, Revision 1.0},
+  institution  = {Open Compute Project},
+  year         = {2022},
+  url          = {https://opencompute.org/documents/open-rack-base-specification-version-3-pdf},
+  note         = {Opened 2026-10-18 (brief 05 fact check): pages 1 to 19 and 24 to 27. Class: published specification. 48 mm OpenU or 44.45 mm EIA RU spacing; '48V Busbar' is a name, the nominal IT input is 51 VDC (46 to 52 V) or 54 VDC; no outer frame dimensions.}
+}
+
+@techreport{ocp_orv3_meta,
+  title        = {Meta Open Rack Frame {V3} Specification, Revision 1.3},
+  institution  = {Open Compute Project},
+  year         = {2024},
+  month        = {jun},
+  url          = {https://www.opencompute.org/documents/open-rack-version-meta-v3-rev1pt3-june032024-pdf},
+  note         = {Opened 2026-10-18 (brief 05 fact check): pages 1, 10 to 13 and 23 to 25 of 46. Class: published specification. Height 2286 mm, width 600 mm, depth 1068 mm (nominal, Meta frame); 44 OpenU or 47 RU.}
+}
+
+@techreport{ocp_orv3_itgear,
+  title        = {Open Rack {V3} {IT} Gear Design Guide},
+  institution  = {Open Compute Project},
+  year         = {2024},
+  month        = {jun},
+  url          = {https://www.opencompute.org/documents/ocp-orv3-it-gear-design-guide-rev-02-june032024-pdf},
+  note         = {Opened 2026-10-18 (brief 05 fact check): pages 1 to 5 and the chassis tables. Class: published specification. (a design guide, not a requirement) recommended chassis height 48 x OpenU - 3.3 mm for 1 to 4 OpenU, so 44.7 mm for 1 OU (computed, not printed); chassis width 537 +/- 0.5 mm.}
+}
+
+@techreport{ocp_orv3_hpr72,
+  title        = {Open Rack {V3} {HPR} {V2} 72kW Power Shelf, Rev 1.0.0},
+  institution  = {Open Compute Project},
+  year         = {2026},
+  month        = {jun},
+  url          = {https://www.opencompute.org/documents/open-rack-v3-hpr-v2-72kw-power-shelf-spec-v1-0-0-pdf/},
+  note         = {Opened 2026-10-18 (brief 05 fact check): pages 1 to 2, 6 to 8 and 13 of 43. Class: published specification. 1 OU shelf 537 mm x 46.2 mm x 867.5 mm (W x H x D); 6 x 12 kW PSU slots (72 kW installed); output 60 kW with N+1 and dual cords.}
+}
+
+@techreport{ocp_nic3,
+  title        = {{OCP} {NIC} 3.0 Design Specification, Version 1.00},
+  institution  = {Open Compute Project},
+  year         = {2019},
+  month        = {dec},
+  url          = {https://opencompute.org/documents/ocp-nic-3-0-r1v00-20191219a-tn-no-cb-pdf},
+  note         = {Opened 2026-10-18 (brief 05 fact check): page 1, the form-factor and power sections. Class: published specification. SFF 76 x 115 mm, LFF 139 x 115 mm; up to 80 W (SFF) and 150 W (LFF) delivered.}
+}
+
+@techreport{oif_elsfp_01,
+  title        = {External Laser Small Form Factor Pluggable ({ELSFP}) Implementation Agreement, {OIF-ELSFP-01.0}},
+  institution  = {OIF},
+  year         = {2023},
+  month        = {aug},
+  url          = {https://www.oiforum.com/wp-content/uploads/OIF-ELSFP-01.0.pdf},
+  note         = {Opened 2026-10-18 (brief 05 fact check): pages 1, 29 to 30, 36 to 39, 44 and 56 to 57. Class: published specification. The six power classes are the same as in oif_elsfp_02, which is cited instead; its examples use a VLP8 class its Table 6 does not list.}
+}
+
+@techreport{oif_elsfp_02,
+  title        = {External Laser Small Form Factor Pluggable ({ELSFP}) Implementation Agreement, {OIF-ELSFP-02.0}},
+  institution  = {OIF},
+  year         = {2025},
+  month        = {jan},
+  url          = {https://www.oiforum.com/wp-content/uploads/OIF-ELSFP-02.0.pdf},
+  note         = {Opened 2026-10-18 (brief 05 fact check): page 1 and the optical tables (pages 37 to 38 as images). Class: published specification. Power per lambda per core (+/-1.5 dB): LP 11, MP 14, HP 17, VHP 20, UHP 23, SHP 26 dBm; at most 24.5 dBm per fiber for Hazard Level 1 (systems without interlock that reduce power within 250 ms); MT-12 blind mate (MT-24 and MT-36 also allowed); DR 1311 nm; FR 1271/1291/1311/1331 nm.}
+}
+
+@techreport{oif_cpo32,
+  title        = {Implementation Agreement for a 3.2Tb/s Co-Packaged ({CPO}) Module, {OIF-Co-Packaging-3.2T-Module-01.0}},
+  institution  = {OIF},
+  year         = {2023},
+  month        = {mar},
+  url          = {https://www.oiforum.com/wp-content/uploads/OIF-Co-Packaging-3.2T-Module-01.0.pdf},
+  note         = {Opened 2026-10-18 (brief 05 fact check): pages 1 and 10, pages 13 and 18 as images. Class: published specification. Power at most 56 W with an integrated laser and 48 W without (max case temperature, end of life); external laser capability at least 18.5 dBm per fiber (8PMF) or 22 dBm (4PMF).}
+}
+
+@techreport{itut_g6941_2020,
+  title        = {Spectral grids for {WDM} applications: {DWDM} frequency grid},
+  institution  = {International Telecommunication Union, ITU-T},
+  type         = {Recommendation},
+  number       = {ITU-T G.694.1 (10/2020)},
+  year         = {2020},
+  month        = {oct},
+  url          = {https://www.itu.int/rec/T-REC-G.694.1-202010-I/en},
+  note         = {Opened 2026-10-18 (brief 05 fact check): pages 1 and 3 and the grid tables. Class: published specification. The DWDM frequency grid is anchored to 193.1 THz; the tables cover the C and L bands only.}
+}
+
+@techreport{itut_g6942_2003,
+  title        = {Spectral grids for {WDM} applications: {CWDM} wavelength grid},
+  institution  = {International Telecommunication Union, ITU-T},
+  type         = {Recommendation},
+  number       = {ITU-T G.694.2 (12/2003)},
+  year         = {2003},
+  month        = {dec},
+  url          = {https://www.itu.int/rec/T-REC-G.694.2/en},
+  note         = {Opened 2026-10-18 (brief 05 fact check): page 1 and the grid clause. Class: published specification. 20 nm channel spacing; grid wavelengths from 1271 to 1611 nm (endpoints illustrative).}
+}
+
+@misc{usconec_prizm_tmt,
+  title        = {{PRIZM} {TMT} / {MMC} Connectors with {PRIZM} {TMT} Expanded Beam Ferrule Technology},
+  author       = {{US Conec}},
+  howpublished = {Product sheet},
+  year         = {2026},
+  url          = {https://www.usconec.com/media/bmgdecdq/prizm-tmt.pdf},
+  note         = {Opened 2026-10-18 (brief 05 fact check): both pages. Class: published specification. (manufacturer product data) '0.5 dB insertion loss' (not stated as maximum or typical); 1x16 fiber, scalable to 2x16. Not in Appendix B: replaces the Corning LAN-3581 datasheet, which could not be opened (HTTP 403).}
+}
+
+@article{ahmed2025_nature,
+  title        = {Universal photonic artificial intelligence acceleration},
+  author       = {Ahmed, Sufi R. and Baghdadi, Reza and others},
+  journal      = {Nature},
+  volume       = {640},
+  pages        = {368--374},
+  year         = {2025},
+  doi          = {10.1038/s41586-025-08854-x},
+  url          = {https://doi.org/10.1038/s41586-025-08854-x},
+  note         = {Opened 2026-10-18 (brief 05 fact check): abstract, figure pages 1 to 4 with captions, the Table 1 page and the full Supplementary Information; the main text and Methods are paywalled and were not read. Class: peer reviewed. (vendor-authored). 65.5 TOPS at 500 MHz, 262 TOPS at a 2 GHz peak; 78 W electrical and 1.6 W optical; 4 x 128 x 128 PTCs; 7-bit weights, 10-bit activations, 11-bit ADC; gain 1.86 measured; ABFP with bfloat16 scales; SI: 262 TOPS/W counting only the 0.25 W of PTC encoding.}
+}
+
+@misc{vendor_web_ptc,
+  title        = {Vision},
+  author       = {{Lightmatter}},
+  howpublished = {Web page},
+  year         = {2026},
+  url          = {https://lightmatter.co/vision/},
+  note         = {Opened 2026-10-18 (brief 05 fact check): full page. Class: vendor claim. '262T Ops/Watt' and 'over 200,000' photonic components for the photonic processor.}
+}
+
+@misc{vendor_web_about,
+  title        = {About},
+  author       = {{Lightmatter}},
+  howpublished = {Web page},
+  year         = {2026},
+  url          = {https://lightmatter.co/about/},
+  note         = {Opened 2026-10-18 (brief 05 fact check): full page. Class: vendor claim. Lists Nicholas Harris, Darius Bunandar and Thomas Graham as founders.}
+}
+
+@misc{vendor_blog_newcomputer,
+  title        = {Photonic {AI} Acceleration: A New Kind of Computer},
+  author       = {Harris, Nick},
+  howpublished = {Lightmatter blog},
+  year         = {2025},
+  month        = {apr},
+  url          = {https://lightmatter.com/blog/a-new-kind-of-computer/},
+  note         = {Opened 2026-10-18 (brief 05 fact check): full text. Class: vendor claim. 'six chips'; '1 million photonic components'; the gain is applied before the ADC.}
+}
+
+@misc{vendor_llms_txt,
+  title        = {lightmatter.co llms.txt},
+  author       = {{Lightmatter}},
+  howpublished = {Site summary file},
+  year         = {2026},
+  url          = {https://lightmatter.co/llms.txt},
+  note         = {Opened 2026-10-18 (brief 05 fact check): full file. Class: vendor claim. 'Envise demonstrates 262 trillion operations per watt'.}
+}
+
+@misc{basumallik2022_abfp,
+  title        = {Adaptive Block Floating-Point for Analog Deep Learning Hardware},
+  author       = {Basumallik, Ayon and Bunandar, Darius and Dronen, Nicholas and others},
+  year         = {2022},
+  eprint       = {2205.06287},
+  archivePrefix= {arXiv},
+  url          = {https://arxiv.org/abs/2205.06287},
+  note         = {Opened 2026-10-18 (brief 05 fact check): pages 1 to 4 (abstract, sections I to III.B). Class: vendor claim. (preprint, all authors at Lightmatter). Defines ABFP: one scale per vector of length n; round half to even; the output quantizer clamps at n; partial outputs accumulated in FLOAT32.}
+}
+
+@article{shen2017,
+  title        = {Deep learning with coherent nanophotonic circuits},
+  author       = {Shen, Yichen and Harris, Nicholas C. and others},
+  journal      = {Nature Photonics},
+  volume       = {11},
+  pages        = {441--446},
+  year         = {2017},
+  eprint       = {1610.02365},
+  archivePrefix= {arXiv},
+  url          = {https://arxiv.org/abs/1610.02365},
+  note         = {Opened 2026-10-18 (brief 05 fact check): pages 1 to 3 and the author contributions (arXiv version). Class: peer reviewed. MIT work, not Lightmatter's; an array of 56 Mach-Zehnder interferometers; Harris is joint first author.}
+}
+
+@article{clements2016,
+  title        = {Optimal design for universal multiport interferometers},
+  author       = {Clements, William R. and Humphreys, Peter C. and Metcalf, Benjamin J. and Kolthammer, W. Steven and Walmsley, Ian A.},
+  journal      = {Optica},
+  volume       = {3},
+  pages        = {1460--1465},
+  year         = {2016},
+  eprint       = {1603.08788},
+  archivePrefix= {arXiv},
+  url          = {https://arxiv.org/abs/1603.08788},
+  note         = {Opened 2026-10-18 (brief 05 fact check): pages 1 to 3 (arXiv version). Class: peer reviewed. A mesh of half the footprint of the Reck design, more loss tolerant; optical depth N against 2N - 3.}
 }
 
 % TODO before citing: IEEE 802.3 200 Gb/s-per-lane DR PMD clauses (TP2/TP3, OMA, TDECQ); OIF CEI-224G.

@@ -1,0 +1,118 @@
+# 32T CPO chiplet/64T chiplet (model card §14.4). Units: mm. Every dimension is SCHEMATIC: the release
+# gives rates and counts, not sizes. Four chiplets per package is the INFERENCE 256 / 64.
+
+[scene]
+id = "cpo_chiplet"
+name = "64T CPO chiplet co-packaged optics"
+unit = "mm"
+level = "package"
+product = "cpo_chiplet"
+breadcrumb = "32T chiplet"
+summary = "CPO chiplets beside an XPU die on one package, joined by a UCIe die-to-die interface, each feeding fibers at 16 wavelengths."
+
+[[part]]
+id = "cpog.substrate"
+name = "package substrate"
+assembly = "package"
+size = [100.0, 80.0, 2.0]
+position = [0.0, 0.0, 1.0]
+material = "organic_substrate"
+dims_class = "SCHEMATIC"
+dims_source = "Package size not disclosed."
+explode = [0.0, 0.0, -8.0]
+
+[[part]]
+id = "cpog.xpu"
+name = "XPU die"
+assembly = "dies"
+size = [26.0, 33.0, 0.8]
+position = [0.0, 0.0, 2.4]
+material = "silicon"
+dims_class = "SCHEMATIC"
+dims_source = "Drawn at about reticle size; the XPU is the customer's."
+explode = [0.0, 0.0, 6.0]
+label = "XPU die"
+
+[[part]]
+id = "cpog.chiplets"
+name = "64T chiplets (4, INFERENCE from 256 / 64 Tbps)"
+assembly = "dies"
+size = [12.0, 30.0, 0.8]
+position = [-24.0, 0.0, 2.4]
+material = "silicon_eic"
+dims_class = "SCHEMATIC"
+dims_source = "Chiplet size not disclosed; count from chiplet.chiplets_per_package (assumption)."
+nodes = ["chiplet.chiplets_per_package", "chiplet.serdes_count", "chiplet.bw_chiplet64", "chiplet.package_bw"]
+count = 2
+grid = [2, 1, 1]
+pitch = [48.0, 0.0, 0.0]
+explode = [0.0, 0.0, 6.0]
+label = "64T chiplet"
+
+[[part]]
+id = "cpog.chiplets_outer"
+name = "64T chiplets, outer pair"
+assembly = "dies"
+size = [12.0, 30.0, 0.8]
+position = [-40.0, 0.0, 2.4]
+material = "silicon_eic"
+dims_class = "SCHEMATIC"
+dims_source = "As the inner pair."
+nodes = ["chiplet.chiplets_per_package"]
+count = 2
+grid = [2, 1, 1]
+pitch = [80.0, 0.0, 0.0]
+explode = [0.0, 0.0, 6.0]
+
+[[part]]
+id = "cpog.d2d"
+name = "UCIe die-to-die interface regions"
+assembly = "dies"
+size = [1.0, 26.0, 0.05]
+position = [-15.0, 0.0, 2.825]
+material = "copper"
+dims_class = "SCHEMATIC"
+dims_source = "D2D region drawn as a strip between dies."
+nodes = ["chiplet.ucie_d2d_rate", "chiplet.eic_partner"]
+count = 2
+grid = [2, 1, 1]
+pitch = [30.0, 0.0, 0.0]
+label = "UCIe D2D"
+
+[[part]]
+id = "cpog.fibers"
+name = "fibers (40 per chiplet at 1.6 Tb/s, INFERENCE)"
+assembly = "fibers"
+shape = "cylinder"
+size = [0.25, 0.25, 14.0]
+position = [-49.0, -11.7, 3.0]
+rotation_deg = [0.0, 90.0, 0.0]
+material = "fiber"
+dims_class = "SCHEMATIC"
+dims_source = "Coated fiber at 250 um; 40 fibers from 64 Tbps / 1.6 Tb/s (INFERENCE)."
+nodes = ["chiplet.fibers_chiplet64", "chiplet.bw_per_fiber_chiplet64", "chiplet.wdm_lambda_count"]
+count = 40
+grid = [1, 40, 1]
+pitch = [0.0, 0.6, 0.0]
+explode = [-10.0, 0.0, 0.0]
+label = "40 fibers"
+
+[[tour]]
+part = "cpog.chiplets"
+node = "chiplet.bw_chiplet64"
+
+[[tour]]
+part = "cpog.d2d"
+node = "chiplet.ucie_d2d_rate"
+
+[[tour]]
+part = "cpog.fibers"
+node = "chiplet.fibers_chiplet64"
+
+[[tour]]
+part = "cpog.chiplets"
+node = "chiplet.package_bw"
+
+[[tour]]
+part = "cpog.chiplets"
+node = "chiplet.web_modulation"

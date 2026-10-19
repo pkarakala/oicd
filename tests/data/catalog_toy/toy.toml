@@ -1,0 +1,188 @@
+# Toy twin for the inference-engine tests (model card §14.1 hand case). Not a real product.
+[product]
+name = "Toy engine"
+family = "Toy"
+status = "test fixture"
+summary = "A made-up engine whose numbers mirror the model card §14.1 hand case."
+
+[[fact]]
+id = "toy.power"
+quantity = "maximum power"
+value = 30.0
+unit = "W"
+quote = "TDP (max): 30W"
+cite = "toy_source"
+source_class = "vendor_claim"
+verified = true
+
+[[fact]]
+id = "toy.rate"
+quantity = "bandwidth, each direction"
+value = 6.4
+unit = "Tbps"
+quote = "6.4 Tbps (each direction)"
+cite = "toy_source"
+source_class = "vendor_claim"
+verified = true
+
+[[fact]]
+id = "toy.energy_claim"
+quantity = "energy per bit"
+value = 5.0
+bound = "approx"
+unit = "pJ/bit"
+quote = "5 pJ/bit"
+cite = "toy_source"
+source_class = "vendor_claim"
+verified = true
+
+[[fact]]
+id = "toy.energy_copy"
+quantity = "energy per bit, wire copy"
+value = 3.0
+unit = "pJ/bit"
+quote = "30W (3.0 pJ/bit)"
+cite = "toy_other"
+source_class = "vendor_claim"
+verified = false
+note = "Toy: stands for a copy that could not be opened."
+
+[[fact]]
+id = "toy.width_a"
+quantity = "package width, product page"
+value = 26.4
+unit = "mm"
+quote = "37.5 mm x 26.4 mm"
+cite = "toy_source"
+source_class = "vendor_claim"
+verified = true
+conflicts_with = ["toy.width_b"]
+
+[[fact]]
+id = "toy.width_b"
+quantity = "package width, slides"
+value = 27.6
+unit = "mm"
+quote = "37.5 x 27.6 x 4.55mm"
+cite = "toy_other"
+source_class = "vendor_claim"
+verified = true
+
+[[fact]]
+id = "toy.min_fiber_power"
+quantity = "power per fiber"
+value = 100.0
+bound = "min"
+unit = "mW"
+quote = "Minimum of 100 mW per fiber"
+cite = "toy_source"
+source_class = "vendor_claim"
+verified = true
+
+[[fact]]
+id = "toy.per_lambda"
+quantity = "power per wavelength"
+value = 13.0
+unit = "mW"
+quote = "13 mW/λ"
+cite = "toy_source"
+source_class = "vendor_claim"
+verified = true
+
+[[fact]]
+id = "toy.lambdas"
+quantity = "wavelengths per fiber"
+value = 8.0
+unit = "count"
+quote = "8 multiplexed wavelengths per fiber"
+cite = "toy_source"
+source_class = "vendor_claim"
+verified = true
+
+[[fact]]
+id = "toy.modulation"
+quantity = "modulation: NRZ"
+unit = "text"
+quote = "56 Gbps NRZ"
+cite = "toy_source"
+source_class = "vendor_claim"
+verified = true
+conflicts_with = ["toy.modulation_page"]
+
+[[fact]]
+id = "toy.modulation_page"
+quantity = "modulation: PAM4"
+unit = "text"
+quote = "PAM4 (56G, 112G)"
+cite = "toy_other"
+source_class = "vendor_claim"
+verified = true
+
+[[assumption]]
+id = "toy.direction_factor"
+nominal = 1.0
+low = 1.0
+high = 2.0
+unit = "count"
+rationale = "Toy: 1 if the rate counts one direction, 2 if it counts both."
+
+[[derived]]
+id = "toy.rate_counted"
+fn = "times_count"
+inputs = ["toy.direction_factor", "toy.rate"]
+unit = "Tbps"
+note = "rate the energy figure divides by"
+
+[[derived]]
+id = "toy.energy"
+fn = "pj_per_bit"
+inputs = ["toy.power", "toy.rate_counted"]
+unit = "pJ/bit"
+note = "energy per bit at maximum power"
+
+[[derived]]
+id = "toy.fiber_power"
+fn = "times_count"
+inputs = ["toy.lambdas", "toy.per_lambda"]
+unit = "mW"
+note = "power per fiber"
+
+[[check]]
+id = "toy.check_5pj"
+kind = "consistent"
+a = "toy.energy"
+b = "toy.energy_claim"
+rel_tol = 0.10
+
+[[check]]
+id = "toy.check_3pj"
+kind = "consistent"
+a = "toy.energy"
+b = "toy.energy_copy"
+rel_tol = 0.25
+
+[[check]]
+id = "toy.check_widths"
+kind = "consistent"
+a = "toy.width_a"
+b = "toy.width_b"
+rel_tol = 0.01
+
+[[check]]
+id = "toy.check_fiber_power"
+kind = "bound"
+a = "toy.fiber_power"
+b = "toy.min_fiber_power"
+rel_tol = 0.0
+
+[[hypothesis]]
+id = "H_one_direction"
+statement = "The energy figure divides by one direction."
+sets = { "toy.direction_factor" = 1.0 }
+group = "direction"
+
+[[hypothesis]]
+id = "H_two_directions"
+statement = "The energy figure divides by both directions."
+sets = { "toy.direction_factor" = 2.0 }
+group = "direction"

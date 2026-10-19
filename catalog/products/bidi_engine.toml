@@ -1,0 +1,1058 @@
+# BiDi optical engine: public facts with exact quotes (fact check, 2026-10-18).
+# Independent model built from public information. Not affiliated with or endorsed by
+# any company whose publications are cited.
+
+[product]
+name = "BiDi optical engine"
+family = "photonic interconnect"
+kind = "product"
+status = "Public technical material, 2026"
+summary = "Unified optical engine for near-package and on-board optics with two-wavelength BiDi on 200G lanes, and the bidirectional CPX engine (vendor descriptions)."
+
+[[fact]]
+id = "engine.bw_per_direction"
+quantity = "BiDi engine total bandwidth, each direction"
+value = 6.4
+bound = "exact"
+unit = "Tbps"
+quote = "Total Bandwidth: 6.4 Tbps (each direction)"
+cite = "vendor_pr_engine"
+source_class = "vendor_claim"
+verified = true
+location = "Preliminary Specifications list (also first paragraph)"
+note = "Evidence: text."
+
+[[fact]]
+id = "engine.optical_ports"
+quantity = "BiDi engine optical ports per module"
+value = 32.0
+bound = "exact"
+unit = "count"
+quote = "32 optical ports at 200 Gbps per lane DR"
+cite = "vendor_pr_engine"
+source_class = "vendor_claim"
+verified = true
+location = "paragraph before Preliminary Specifications"
+note = "Evidence: text."
+
+[[fact]]
+id = "engine.lane_rate"
+quantity = "BiDi engine optical data rate per lane (DR)"
+value = 200.0
+bound = "exact"
+unit = "Gbps"
+quote = "32 optical ports at 200 Gbps per lane DR"
+cite = "vendor_pr_engine"
+source_class = "vendor_claim"
+verified = true
+location = "paragraph before Preliminary Specifications"
+note = "Evidence: text."
+
+[[fact]]
+id = "engine.serdes_line_rate"
+quantity = "BiDi engine SerDes line rate (PAM4)"
+value = 212.5
+bound = "exact"
+unit = "Gbps"
+quote = "SerDes Line Rate: 212.5 Gbps PAM4"
+cite = "vendor_pr_engine"
+source_class = "vendor_claim"
+verified = true
+location = "Preliminary Specifications list"
+note = "Evidence: text."
+
+[[fact]]
+id = "engine.bidi_wavelengths"
+quantity = "BiDi engine transmission: 2 BiDi wavelengths, 1311 nm and 1331 nm; IEEE 802.3dj, DR compatible"
+bound = "exact"
+unit = "text"
+quote = "Transmission: 2 wavelength BiDi (1311, 1331nm), IEEE 802.3dj, DR compatible"
+cite = "vendor_pr_engine"
+source_class = "vendor_claim"
+verified = true
+location = "Preliminary Specifications list"
+note = "Evidence: text."
+
+[[fact]]
+id = "engine.lambda_a_nm"
+quantity = "BiDi wavelength A"
+value = 1311.0
+bound = "exact"
+unit = "nm"
+quote = "Transmission: 2 wavelength BiDi (1311, 1331nm), IEEE 802.3dj, DR compatible"
+cite = "vendor_pr_engine"
+source_class = "vendor_claim"
+verified = true
+location = "Preliminary Specifications list"
+note = "Evidence: text. Number split from engine.bidi_wavelengths."
+
+[[fact]]
+id = "engine.lambda_b_nm"
+quantity = "BiDi wavelength B"
+value = 1331.0
+bound = "exact"
+unit = "nm"
+quote = "Transmission: 2 wavelength BiDi (1311, 1331nm), IEEE 802.3dj, DR compatible"
+cite = "vendor_pr_engine"
+source_class = "vendor_claim"
+verified = true
+location = "Preliminary Specifications list"
+note = "Evidence: text. Number split from engine.bidi_wavelengths."
+
+[[fact]]
+id = "engine.tdp_max"
+quantity = "BiDi engine thermal design power, maximum"
+value = 30.0
+bound = "max"
+unit = "W"
+quote = "TDP (max): 30W"
+cite = "vendor_pr_engine"
+source_class = "vendor_claim"
+verified = true
+location = "Preliminary Specifications list"
+note = "Evidence: text. Matches. Note: the Business Wire copy of the same release reads 'TDP (max): 30W (3.0 pJ/bit)' (see engine.energy_per_bit_bw); this vendor-site copy has no pJ/bit."
+
+[[fact]]
+id = "engine.form_factor_pins"
+quantity = "BiDi engine form factor: BGA pin count (BiDi variant)"
+value = 2000.0
+bound = "exact"
+unit = "count"
+quote = "Form Factor: 2000-pin BGA (BiDi)"
+cite = "vendor_pr_engine"
+source_class = "vendor_claim"
+verified = true
+conflicts_with = ["engine.bga_balls_web"]
+location = "Preliminary Specifications list"
+note = "Evidence: text. Matches. Unflagged conflict: the product page says '1827-ball BGA' (vendor_web_engine); the initial fact list lists both without marking them as a conflict."
+
+[[fact]]
+id = "engine.fiber_mgmt_reduction"
+quantity = "reduction in fiber management requirements vs unidirectional DR optics"
+value = 50.0
+bound = "exact"
+unit = "%"
+quote = "reduce fiber management requirements by 50% as compared to existing unidirectional Data center Reach (DR) optical standards"
+cite = "vendor_pr_engine"
+source_class = "vendor_claim"
+verified = true
+location = "paragraph 2"
+note = "Evidence: text."
+
+[[fact]]
+id = "engine.sampling"
+quantity = "BiDi engine sampling start"
+bound = "exact"
+unit = "text"
+quote = "The [BiDi optical engine] module is expected to begin sampling in late 2026."
+cite = "vendor_pr_engine"
+source_class = "vendor_claim"
+verified = true
+conflicts_with = ["engine.availability_hoti26"]
+location = "Availability section"
+note = "Evidence: text. Matches. Later the vendor sources move the date: HOTI26 BiDi engine slide shows 'Q1 2027' (engine.availability_hoti26) and the CPX release says CPX BiDi engine evaluation kits ship in 'the first quarter of 2027' (cpx.evk_ship)."
+
+[[fact]]
+id = "engine.energy_per_bit_bw"
+quantity = "BiDi engine energy per bit stated beside max TDP (Business Wire copy)"
+value = 3.0
+bound = "exact"
+unit = "pJ/bit"
+quote = "TDP (max): 30W (3.0 pJ/bit)"
+cite = "vendor_pr_engine_bw"
+source_class = "vendor_claim"
+verified = true
+conflicts_with = ["engine.energy_per_bit_web", "engine.energy_per_bit_yole"]
+location = "Preliminary Specifications list (Wayback capture of businesswire.com, SRC/lm_pr_l20_bw_retry/raw.html.txt; same line in Yahoo Finance syndication)"
+note = "Evidence: text. Exact wording is 'TDP (max): 30W (3.0 pJ/bit)'. businesswire.com returned 403 to curl and WebFetch; verified from an Internet Archive capture of the businesswire.com page and from the Yahoo Finance syndication of the same Business Wire release. The vendor-site copy (vendor_pr_engine) and the vendor's PDF of it say only 'TDP (max): 30W'. Conflicts with '5 pJ/bit' (vendor_web_engine, vendor_yole_ofc26). My arithmetic: 30 W / 6.4 Tbps = 4.69 pJ/bit and 30 W / 12.8 Tbps = 2.34 pJ/bit, so 3.0 does not follow from 30 W."
+
+[[fact]]
+id = "engine.energy_per_bit_web"
+quantity = "BiDi engine power efficiency (product page)"
+value = 5.0
+bound = "exact"
+unit = "pJ/bit"
+quote = "Efficiency 5 pJ/bit"
+cite = "vendor_web_engine"
+source_class = "vendor_claim"
+verified = true
+location = "hero tiles near top of page ('Efficiency / 5 pJ/bit / Industry Leading'); also meta description '200G per lane and 5 pJ/bit power efficiency'"
+note = "Evidence: text."
+
+[[fact]]
+id = "engine.energy_per_bit_yole"
+quantity = "BiDi engine (NPO/OBO) power efficiency (OFC 2026 Yole slides)"
+value = 5.0
+bound = "exact"
+unit = "pJ/bit"
+quote = "Power Efﬁciency 17–20 pJ/bit 5 pJ/bit"
+cite = "vendor_yole_ofc26"
+source_class = "vendor_claim"
+verified = true
+location = "p20 table 'BiDi optical engine NPO Summary', row 'Power Efficiency', column 'BiDi engine (NPO/OBO)' (also seen on rendered slide)"
+note = "Evidence: text."
+
+[[fact]]
+id = "engine.bga_balls_web"
+quantity = "BiDi engine form factor: BGA ball count (product page)"
+value = 1827.0
+bound = "exact"
+unit = "count"
+quote = "Form factor 1827-ball BGA"
+cite = "vendor_web_engine"
+source_class = "vendor_claim"
+verified = true
+location = "Technical Specifications table, 'Form factor' (adds 'Reflow compatible')"
+note = "Evidence: text. Matches. Unflagged conflict with '2000-pin BGA (BiDi)' in vendor_pr_engine and vendor_pr_engine_bw; the initial fact list lists both without marking the conflict."
+
+[[fact]]
+id = "engine.length_mm_web"
+quantity = "BiDi engine package length (product page)"
+value = 37.5
+bound = "exact"
+unit = "mm"
+quote = "Dimensions 37.5 mm x 26.4 mm"
+cite = "vendor_web_engine"
+source_class = "vendor_claim"
+verified = true
+location = "Technical Specifications table, 'Dimensions'"
+note = "Evidence: text."
+
+[[fact]]
+id = "engine.width_mm_web"
+quantity = "BiDi engine package width (product page)"
+value = 26.4
+bound = "exact"
+unit = "mm"
+quote = "Dimensions 37.5 mm x 26.4 mm"
+cite = "vendor_web_engine"
+source_class = "vendor_claim"
+verified = true
+conflicts_with = ["engine.width_mm_yole"]
+location = "Technical Specifications table, 'Dimensions'"
+note = "Evidence: text. Matches. Unflagged conflict: vendor_yole_ofc26 p20 gives width 27.6 mm ('37.5 x 27.6 x 4.55mm'); the initial fact list lists both without marking the 26.4 vs 27.6 difference."
+
+[[fact]]
+id = "engine.data_fibers_web"
+quantity = "BiDi engine data fibers (Corning CPO Flexconnect)"
+value = 32.0
+bound = "exact"
+unit = "count"
+quote = "Data fibers 32 Corning CPO Flexconnect"
+cite = "vendor_web_engine"
+source_class = "vendor_claim"
+verified = true
+location = "Technical Specifications table, 'Data fibers'"
+note = "Evidence: text."
+
+[[fact]]
+id = "engine.cooling_web"
+quantity = "BiDi engine cooling: cold plate, A2 ASHRAE compliant"
+bound = "exact"
+unit = "text"
+quote = "Cooling Cold plate A2 ASHRAE compliant"
+cite = "vendor_web_engine"
+source_class = "vendor_claim"
+verified = true
+location = "Technical Specifications table, 'Cooling'"
+note = "Evidence: text. Wording: source adds 'A2 ASHRAE compliant' (not in the initial fact list)."
+
+[[fact]]
+id = "engine.length_mm_yole"
+quantity = "BiDi engine form factor length (L of L x W x H)"
+value = 37.5
+bound = "exact"
+unit = "mm"
+quote = "37.5 x 27.6 x 4.55mm"
+cite = "vendor_yole_ofc26"
+source_class = "vendor_claim"
+verified = true
+location = "p20 table, row 'Form Factor (L x W x H)', column 'BiDi engine (NPO/OBO)' (also seen on rendered slide)"
+note = "Evidence: text."
+
+[[fact]]
+id = "engine.width_mm_yole"
+quantity = "BiDi engine form factor width (W of L x W x H)"
+value = 27.6
+bound = "exact"
+unit = "mm"
+quote = "37.5 x 27.6 x 4.55mm"
+cite = "vendor_yole_ofc26"
+source_class = "vendor_claim"
+verified = true
+location = "p20 table, row 'Form Factor (L x W x H)', column 'BiDi engine (NPO/OBO)' (also seen on rendered slide)"
+note = "Evidence: text. Matches. Unflagged conflict with 26.4 mm on the product page (vendor_web_engine 'Dimensions 37.5 mm x 26.4 mm')."
+
+[[fact]]
+id = "engine.height_mm_yole"
+quantity = "BiDi engine form factor height (H of L x W x H)"
+value = 4.55
+bound = "exact"
+unit = "mm"
+quote = "37.5 x 27.6 x 4.55mm"
+cite = "vendor_yole_ofc26"
+source_class = "vendor_claim"
+verified = true
+location = "p20 table, row 'Form Factor (L x W x H)', column 'BiDi engine (NPO/OBO)' (also seen on rendered slide)"
+note = "Evidence: text."
+
+[[fact]]
+id = "engine.pluggable_length_mm_yole"
+quantity = "comparison pluggable optics length (L of L x W x H)"
+value = 108.8
+bound = "exact"
+unit = "mm"
+quote = "108.8 x 22.93 x 15.5mm"
+cite = "vendor_yole_ofc26"
+source_class = "vendor_claim"
+verified = true
+location = "p20 table, row 'Form Factor (L x W x H)', column 'Pluggable Optics' (also seen on rendered slide)"
+note = "Evidence: text."
+
+[[fact]]
+id = "engine.pluggable_width_mm_yole"
+quantity = "comparison pluggable optics width (W of L x W x H)"
+value = 22.93
+bound = "exact"
+unit = "mm"
+quote = "108.8 x 22.93 x 15.5mm"
+cite = "vendor_yole_ofc26"
+source_class = "vendor_claim"
+verified = true
+location = "p20 table, row 'Form Factor (L x W x H)', column 'Pluggable Optics' (also seen on rendered slide)"
+note = "Evidence: text."
+
+[[fact]]
+id = "engine.pluggable_height_mm_yole"
+quantity = "comparison pluggable optics height (H of L x W x H)"
+value = 15.5
+bound = "exact"
+unit = "mm"
+quote = "108.8 x 22.93 x 15.5mm"
+cite = "vendor_yole_ofc26"
+source_class = "vendor_claim"
+verified = true
+location = "p20 table, row 'Form Factor (L x W x H)', column 'Pluggable Optics' (also seen on rendered slide)"
+note = "Evidence: text."
+
+[[fact]]
+id = "engine.volume_reduction_yole"
+quantity = "BiDi engine volume reduction vs pluggable optics"
+value = 88.0
+bound = "approx"
+unit = "%"
+quote = "~88% Smaller Form Factor (by Vol)"
+cite = "vendor_yole_ofc26"
+source_class = "vendor_claim"
+verified = true
+location = "p20 table, row 'Form Factor', column 'Advantages' (also seen on rendered slide)"
+note = "Evidence: text."
+
+[[fact]]
+id = "engine.fibers_yole"
+quantity = "BiDi engine BiDi data fibers (each carries TX and RX)"
+value = 32.0
+bound = "exact"
+unit = "count"
+quote = "32 BiDi TX + RX Fibers"
+cite = "vendor_yole_ofc26"
+source_class = "vendor_claim"
+verified = true
+location = "p18 'BiDi engine Deployment Options for Multi-Rack Scale-up' diagrams (NPO and OBO; text layer has two spaces before 'Fibers')"
+note = "Evidence: text."
+
+[[fact]]
+id = "engine.laser_fibers_yole"
+quantity = "external laser feed per BiDi engine: 1 ELSFP with 8 laser fibers"
+value = 8.0
+bound = "exact"
+unit = "count"
+quote = "1 ELSFP / 8 Laser Fibers"
+cite = "vendor_yole_ofc26"
+source_class = "vendor_claim"
+verified = true
+location = "p18 'BiDi engine Deployment Options for Multi-Rack Scale-up' diagrams (also seen on rendered slide)"
+note = "Evidence: text."
+
+[[fact]]
+id = "engine.switch_bw_yole"
+quantity = "switch application bandwidth per direction with 18 x BiDi engine"
+value = 115.2
+bound = "max"
+unit = "Tbps"
+quote = "Switch: Up to 115.2 Tbps (18 x [BiDi engine])"
+cite = "vendor_yole_ofc26"
+source_class = "vendor_claim"
+verified = true
+location = "p19 'Applications (total bandwidth per direction)'; slide note: bandwidths are per direction (UniDi), i.e. Tx or Rx"
+note = "Evidence: text."
+
+[[fact]]
+id = "engine.xpu_bw_yole"
+quantity = "XPU application bandwidth per direction with 6 x BiDi engine"
+value = 38.0
+bound = "exact"
+unit = "Tbps"
+quote = "XPU: 38 Tbps (6 x [BiDi engine])"
+cite = "vendor_yole_ofc26"
+source_class = "vendor_claim"
+verified = true
+location = "p19 'Applications (total bandwidth per direction)'; slide note: bandwidths are per direction (UniDi), i.e. Tx or Rx"
+note = "Evidence: text. Matches. Note (my arithmetic): 6 x 6.4 Tbps = 38.4 Tbps, so the slide rounds down to 38."
+
+[[fact]]
+id = "engine.pluggable_energy_per_bit_yole"
+quantity = "pluggable optics power efficiency (comparison)"
+lo = 17.0
+hi = 20.0
+bound = "exact"
+unit = "pJ/bit"
+quote = "Power Efﬁciency 17–20 pJ/bit 5 pJ/bit"
+cite = "vendor_yole_ofc26"
+source_class = "vendor_claim"
+verified = true
+location = "p20 table, row 'Power Efficiency', column 'Pluggable Optics' (also seen on rendered slide)"
+note = "Evidence: text."
+
+[[fact]]
+id = "engine.power_savings_yole"
+quantity = "power savings of BiDi engine vs pluggable optics"
+value = 75.0
+bound = "max"
+unit = "%"
+quote = "Up to 75% Power Savings"
+cite = "vendor_yole_ofc26"
+source_class = "vendor_claim"
+verified = true
+location = "p20 table, row 'Power Efficiency', column 'Advantages' (also seen on rendered slide)"
+note = "Evidence: text. Matches. Unflagged internal tension: p19 of the same deck says 'cutting interconnect power by 70%'. My arithmetic: 1 - 5/20 = 75% and 1 - 5/17 = 70.6%, i.e. the two ends of the 17–20 pJ/bit range."
+
+[[fact]]
+id = "cpx.bw_total"
+quantity = "CPX BiDi engine total bandwidth (6.4 Tbps transmit + 6.4 Tbps receive)"
+value = 12.8
+bound = "exact"
+unit = "Tbps"
+quote = "12.8 Tbps of total bandwidth (6.4 Tbps transmit and 6.4 Tbps receive)"
+cite = "vendor_pr_cpx"
+source_class = "vendor_claim"
+verified = true
+location = "paragraph 6 ('Built on the photonic interconnect L-Series optical engine platform...')"
+note = "Evidence: text."
+
+[[fact]]
+id = "cpx.lanes_per_direction"
+quantity = "CPX BiDi engine optical lanes per direction"
+value = 32.0
+bound = "exact"
+unit = "count"
+quote = "32 optical lanes per direction at a 212.5 Gbps PAM4 line rate"
+cite = "vendor_pr_cpx"
+source_class = "vendor_claim"
+verified = true
+location = "paragraph 6"
+note = "Evidence: text."
+
+[[fact]]
+id = "cpx.line_rate"
+quantity = "CPX BiDi engine lane line rate (PAM4)"
+value = 212.5
+bound = "exact"
+unit = "Gbps"
+quote = "32 optical lanes per direction at a 212.5 Gbps PAM4 line rate"
+cite = "vendor_pr_cpx"
+source_class = "vendor_claim"
+verified = true
+location = "paragraph 6"
+note = "Evidence: text."
+
+[[fact]]
+id = "cpx.reach"
+quantity = "CPX BiDi engine reach over single-mode fiber"
+value = 500.0
+bound = "min"
+unit = "m"
+quote = "reaches beyond 500 meters over single-mode fiber"
+cite = "vendor_pr_cpx"
+source_class = "vendor_claim"
+verified = true
+location = "paragraph 6"
+note = "Evidence: text."
+
+[[fact]]
+id = "engine.tdp_max_hoti26"
+quantity = "BiDi engine thermal design power, maximum (HOTI26 slide)"
+value = 30.0
+bound = "max"
+unit = "W"
+quote = "30 W TDP max"
+cite = "vendor_hoti26"
+source_class = "vendor_claim"
+verified = true
+location = "p12 'BiDi engine' spec list (also seen on rendered slide)"
+note = "Evidence: text."
+
+[[fact]]
+id = "engine.bw_aggregate_hoti26"
+quantity = "BiDi engine aggregate bandwidth (Tx + Rx)"
+value = 12.8
+bound = "exact"
+unit = "Tbps"
+quote = "12.8 Tbps aggregate"
+cite = "vendor_hoti26"
+source_class = "vendor_claim"
+verified = true
+location = "p12 'BiDi engine' spec list (also seen on rendered slide)"
+note = "Evidence: text. Extra. Consistent with 6.4 Tbps each direction and with the CPX release '12.8 Tbps of total bandwidth'."
+
+[[fact]]
+id = "engine.serdes_rate_hoti26"
+quantity = "BiDi engine SerDes rate as stated on HOTI26 slide"
+value = 200.0
+bound = "exact"
+unit = "Gbps"
+quote = "200 Gbps PAM4 SerDes · IEEE 802.3dj"
+cite = "vendor_hoti26"
+source_class = "vendor_claim"
+verified = true
+location = "p12 'BiDi engine' spec list (also seen on rendered slide)"
+note = "Evidence: text. Extra. Press release says 'SerDes Line Rate: 212.5 Gbps PAM4' and Yole p19 says '212G PAM4 per port'; 200 Gbps here is likely the data rate rather than the line rate (my inference)."
+
+[[fact]]
+id = "engine.availability_hoti26"
+quantity = "BiDi engine availability date shown on HOTI26 slide"
+bound = "exact"
+unit = "text"
+quote = "Q1 2027"
+cite = "vendor_hoti26"
+source_class = "vendor_claim"
+verified = true
+location = "p12 'BiDi engine' slide header (also seen on rendered slide)"
+note = "Evidence: text. Extra. Differs from vendor_pr_engine 'expected to begin sampling in late 2026'; the slide does not say whether Q1 2027 means sampling, evaluation kits or production."
+
+[[fact]]
+id = "engine.volume_vs_osfp_web"
+quantity = "BiDi engine volume reduction vs OSFP (product page)"
+value = 88.0
+bound = "exact"
+unit = "%"
+quote = "88% smaller By volume compared to OSFP"
+cite = "vendor_web_engine"
+source_class = "vendor_claim"
+verified = true
+location = "hero tile 'Density' near top of page"
+note = "Evidence: text. Extra. Names OSFP as the comparison form factor, which the Yole p20 table (pluggable 108.8 x 22.93 x 15.5mm) does not."
+
+[[fact]]
+id = "cpx.evk_ship"
+quantity = "CPX BiDi engine evaluation kit shipping date"
+bound = "exact"
+unit = "text"
+quote = "[CPX BiDi engine] module evaluation kits are anticipated to ship to customers in the first quarter of 2027."
+cite = "vendor_pr_cpx"
+source_class = "vendor_claim"
+verified = true
+location = "paragraph 7"
+note = "Evidence: text. Extra. Consistent with the HOTI26 BiDi engine slide 'Q1 2027'; later than the March release's 'sampling in late 2026' for the BiDi engine module."
+
+[[fact]]
+id = "engine.bw_dcd"
+quantity = "BiDi engine optical bandwidth as reported by DCD"
+value = 6.4
+bound = "exact"
+unit = "Tbps"
+quote = "The [BiDi engine] offers 6.4Tbps optical bandwidth"
+cite = "press_engine_2026"
+source_class = "third_party"
+verified = true
+location = "paragraph 7"
+note = "Evidence: text. Extra (verifies references.bib note for press_engine_2026). DCD omits 'each direction'."
+
+[[fact]]
+id = "engine.serdes_dcd"
+quantity = "BiDi engine SerDes line rate as reported by DCD"
+value = 212.5
+bound = "exact"
+unit = "Gbps"
+quote = "line rate based on 212.5Gbps PA 4 interfaces"
+cite = "press_engine_2026"
+source_class = "third_party"
+verified = true
+location = "paragraph 7"
+note = "Evidence: text. Extra (verifies references.bib note). DCD has the typo 'PA 4' for PAM4."
+
+[[fact]]
+id = "engine.ports_dcd"
+quantity = "BiDi engine optical ports at 200 Gbps per lane DR, as reported by DCD"
+value = 32.0
+bound = "exact"
+unit = "count"
+quote = "32 optical ports at 200Gbps per lane DR data rates"
+cite = "press_engine_2026"
+source_class = "third_party"
+verified = true
+location = "paragraph 8"
+note = "Evidence: text. Extra (verifies references.bib note)."
+
+[[fact]]
+id = "engine.bidi_dcd"
+quantity = "BiDi engine two-wavelength bidirectional transmission, as reported by DCD"
+bound = "exact"
+unit = "text"
+quote = "two wavelength bidirectional transmission on waveguides and fibers"
+cite = "press_engine_2026"
+source_class = "third_party"
+verified = true
+location = "paragraph 7"
+note = "Evidence: text. Extra (verifies references.bib note). DCD gives no wavelengths (1311, 1331 nm) and adds 'on waveguides and fibers'."
+
+[[fact]]
+id = "engine.tdp_max_dcd"
+quantity = "BiDi engine maximum TDP as reported by DCD"
+value = 30.0
+bound = "max"
+unit = "W"
+quote = "a maximum TDP of 30W"
+cite = "press_engine_2026"
+source_class = "third_party"
+verified = true
+location = "paragraph 7"
+note = "Evidence: text. Extra (verifies references.bib note). DCD gives no pJ/bit figure."
+# ---- Model (model card §14.2) ---------------------------------------------
+
+[[fact]]
+id = "engine.switch_engine_count"
+quantity = "BiDi engines in the switch example"
+value = 18.0
+bound = "exact"
+unit = "count"
+quote = "Switch: Up to 115.2 Tbps (18 x [BiDi engine])"
+cite = "vendor_yole_ofc26"
+source_class = "vendor_claim"
+verified = true
+location = "slide 20"
+note = "Evidence: text. Number split from engine.switch_bw_yole."
+
+[[fact]]
+id = "engine.xpu_engine_count"
+quantity = "BiDi engines in the XPU example"
+value = 6.0
+bound = "exact"
+unit = "count"
+quote = "XPU: 38 Tbps (6 x [BiDi engine])"
+cite = "vendor_yole_ofc26"
+source_class = "vendor_claim"
+verified = true
+location = "slide 20"
+note = "Evidence: text. Number split from engine.xpu_bw_yole."
+
+[[fact]]
+id = "engine.pluggable_energy_lo"
+quantity = "pluggable energy per bit, low end"
+value = 17.0
+bound = "exact"
+unit = "pJ/bit"
+quote = "Power Efﬁciency 17–20 pJ/bit 5 pJ/bit"
+cite = "vendor_yole_ofc26"
+source_class = "vendor_claim"
+verified = true
+location = "slide 20"
+note = "Evidence: text. Number split from engine.pluggable_energy_per_bit_yole."
+
+[[fact]]
+id = "engine.pluggable_energy_hi"
+quantity = "pluggable energy per bit, high end"
+value = 20.0
+bound = "exact"
+unit = "pJ/bit"
+quote = "Power Efﬁciency 17–20 pJ/bit 5 pJ/bit"
+cite = "vendor_yole_ofc26"
+source_class = "vendor_claim"
+verified = true
+location = "slide 20"
+note = "Evidence: text. Number split from engine.pluggable_energy_per_bit_yole."
+
+[[assumption]]
+id = "engine.energy_direction_factor"
+nominal = 1.0
+low = 1.0
+high = 2.0
+unit = "count"
+rationale = "Directions the energy-per-bit figure divides the 30 W TDP by: 1 if per direction (as pluggables quote it), 2 if both. Not disclosed; pinned by H_engine_one_dir or H_engine_both_dirs."
+
+[[assumption]]
+id = "engine.two_directions"
+nominal = 2.0
+low = 2.0
+high = 2.0
+unit = "count"
+rationale = "A BiDi engine carries both directions on each fiber; used to state the both-directions rate."
+
+[[assumption]]
+id = "engine.fibers_per_lane_duplex"
+nominal = 2.0
+low = 2.0
+high = 2.0
+unit = "count"
+rationale = "A unidirectional DR lane uses one fiber each way, so two fibers per lane; the BiDi engine uses one."
+
+[[assumption]]
+id = "engine.lambda_tolerance_nm"
+nominal = 0.0
+low = 0.0
+high = 6.5
+unit = "nm"
+rationale = "TX wavelength tolerance δ, not disclosed: 0 as in model card §14.2, at most the half-width of the draft DR range."
+
+[[derived]]
+id = "engine.rate_per_port"
+fn = "rate_per_unit_gbps"
+inputs = ["engine.bw_per_direction", "engine.optical_ports"]
+unit = "Gbps"
+note = "rate per optical port"
+
+[[derived]]
+id = "engine.line_payload_ratio"
+fn = "ratio"
+inputs = ["engine.serdes_line_rate", "engine.lane_rate"]
+unit = "1"
+note = "SerDes line rate over lane payload rate (draft 802.3dj FEC and transcoding overhead)"
+
+[[derived]]
+id = "engine.rate_counted"
+fn = "times_count"
+inputs = ["engine.energy_direction_factor", "engine.bw_per_direction"]
+unit = "Tbps"
+note = "rate the energy figure divides by"
+
+[[derived]]
+id = "engine.energy_per_bit"
+fn = "pj_per_bit"
+inputs = ["engine.tdp_max", "engine.rate_counted"]
+unit = "pJ/bit"
+note = "energy per bit at maximum TDP"
+
+[[derived]]
+id = "engine.bw_both"
+fn = "times_count"
+inputs = ["engine.two_directions", "engine.bw_per_direction"]
+unit = "Tbps"
+note = "both directions"
+
+[[derived]]
+id = "engine.energy_per_bit_both"
+fn = "pj_per_bit"
+inputs = ["engine.tdp_max", "engine.bw_both"]
+unit = "pJ/bit"
+note = "energy per bit counting both directions"
+
+[[derived]]
+id = "engine.power_for_3pj"
+fn = "power_w_at_pj_per_bit"
+inputs = ["engine.energy_per_bit_bw", "engine.bw_per_direction"]
+unit = "W"
+note = "power that 3.0 pJ/bit implies at 6.4 Tbps"
+
+[[derived]]
+id = "engine.lambda_spacing_nm"
+fn = "difference"
+inputs = ["engine.lambda_b_nm", "engine.lambda_a_nm"]
+unit = "nm"
+note = "spacing of the two BiDi wavelengths"
+
+[[derived]]
+id = "engine.lambda_spacing_ghz"
+fn = "nm_pair_spacing_ghz"
+inputs = ["engine.lambda_a_nm", "engine.lambda_b_nm"]
+unit = "GHz"
+note = "spacing of the two BiDi wavelengths in frequency"
+
+[[derived]]
+id = "engine.a_lower_edge"
+fn = "difference"
+inputs = ["engine.lambda_a_nm", "engine.lambda_tolerance_nm"]
+unit = "nm"
+note = "direction A lower edge"
+
+[[derived]]
+id = "engine.a_upper_edge"
+fn = "sum2"
+inputs = ["engine.lambda_a_nm", "engine.lambda_tolerance_nm"]
+unit = "nm"
+note = "direction A upper edge"
+
+[[derived]]
+id = "engine.b_lower_edge"
+fn = "difference"
+inputs = ["engine.lambda_b_nm", "engine.lambda_tolerance_nm"]
+unit = "nm"
+note = "direction B lower edge"
+
+[[derived]]
+id = "engine.b_upper_edge"
+fn = "sum2"
+inputs = ["engine.lambda_b_nm", "engine.lambda_tolerance_nm"]
+unit = "nm"
+note = "direction B upper edge"
+
+[[derived]]
+id = "engine.lanes_per_laser_fiber"
+fn = "count_ratio"
+inputs = ["engine.optical_ports", "engine.laser_fibers_yole"]
+unit = "count"
+note = "lanes fed by each laser fiber"
+
+[[derived]]
+id = "engine.duplex_fibers"
+fn = "times_count"
+inputs = ["engine.fibers_per_lane_duplex", "engine.optical_ports"]
+unit = "count"
+note = "fibers a unidirectional DR engine with the same lanes would need"
+
+[[derived]]
+id = "engine.fiber_reduction"
+fn = "reduction_fraction"
+inputs = ["engine.fibers_yole", "engine.duplex_fibers"]
+unit = "1"
+note = "fiber reduction from BiDi"
+
+[[derived]]
+id = "engine.fiber_reduction_pct"
+fn = "percent"
+inputs = ["engine.fiber_reduction"]
+unit = "%"
+note = "fiber reduction from BiDi, percent"
+
+[[derived]]
+id = "engine.volume"
+fn = "volume_mm3"
+inputs = ["engine.length_mm_yole", "engine.width_mm_yole", "engine.height_mm_yole"]
+unit = "mm3"
+note = "BiDi engine package volume"
+
+[[derived]]
+id = "engine.pluggable_volume"
+fn = "volume_mm3"
+inputs = ["engine.pluggable_length_mm_yole", "engine.pluggable_width_mm_yole", "engine.pluggable_height_mm_yole"]
+unit = "mm3"
+note = "pluggable volume"
+
+[[derived]]
+id = "engine.volume_reduction"
+fn = "reduction_fraction"
+inputs = ["engine.volume", "engine.pluggable_volume"]
+unit = "1"
+note = "volume reduction against the pluggable"
+
+[[derived]]
+id = "engine.volume_reduction_pct"
+fn = "percent"
+inputs = ["engine.volume_reduction"]
+unit = "%"
+note = "volume reduction, percent"
+
+[[derived]]
+id = "engine.switch_bw_18"
+fn = "times_count"
+inputs = ["engine.switch_engine_count", "engine.bw_per_direction"]
+unit = "Tbps"
+note = "18 × BiDi engine"
+
+[[derived]]
+id = "engine.xpu_bw_6"
+fn = "times_count"
+inputs = ["engine.xpu_engine_count", "engine.bw_per_direction"]
+unit = "Tbps"
+note = "6 × BiDi engine"
+
+[[derived]]
+id = "engine.savings_vs_17"
+fn = "reduction_fraction"
+inputs = ["engine.energy_per_bit_yole", "engine.pluggable_energy_lo"]
+unit = "1"
+note = "energy saving against a 17 pJ/bit pluggable"
+
+[[derived]]
+id = "engine.savings_vs_17_pct"
+fn = "percent"
+inputs = ["engine.savings_vs_17"]
+unit = "%"
+note = "energy saving against a 17 pJ/bit pluggable, percent"
+
+[[derived]]
+id = "engine.savings_vs_20"
+fn = "reduction_fraction"
+inputs = ["engine.energy_per_bit_yole", "engine.pluggable_energy_hi"]
+unit = "1"
+note = "energy saving against a 20 pJ/bit pluggable"
+
+[[derived]]
+id = "engine.savings_vs_20_pct"
+fn = "percent"
+inputs = ["engine.savings_vs_20"]
+unit = "%"
+note = "energy saving against a 20 pJ/bit pluggable, percent"
+
+[[check]]
+id = "engine.check_port_rate"
+kind = "consistent"
+a = "engine.rate_per_port"
+b = "engine.lane_rate"
+rel_tol = 0.001
+note = "6.4 Tbps / 32 against '200 Gbps per lane'"
+
+[[check]]
+id = "engine.check_energy_web"
+kind = "consistent"
+a = "engine.energy_per_bit"
+b = "engine.energy_per_bit_web"
+rel_tol = 0.10
+note = "against '5 pJ/bit' (product page)"
+
+[[check]]
+id = "engine.check_energy_yole"
+kind = "consistent"
+a = "engine.energy_per_bit"
+b = "engine.energy_per_bit_yole"
+rel_tol = 0.10
+note = "against '5 pJ/bit' (OFC 2026 slides)"
+
+[[check]]
+id = "engine.check_energy_bw"
+kind = "consistent"
+a = "engine.energy_per_bit"
+b = "engine.energy_per_bit_bw"
+rel_tol = 0.10
+note = "against '3.0 pJ/bit' (Business Wire copy only)"
+
+[[check]]
+id = "engine.check_tdp_for_3pj"
+kind = "consistent"
+a = "engine.power_for_3pj"
+b = "engine.tdp_max"
+rel_tol = 0.10
+note = "3.0 pJ/bit would need 19.2 W at 6.4 Tbps; both sources kept"
+
+[[check]]
+id = "engine.check_energy_copies"
+kind = "consistent"
+a = "engine.energy_per_bit_bw"
+b = "engine.energy_per_bit_web"
+rel_tol = 0.10
+note = "two published energy figures"
+
+[[check]]
+id = "engine.check_cwdm_spacing"
+kind = "consistent"
+a = "engine.lambda_spacing_nm"
+b = "itut.cwdm_spacing"
+rel_tol = 0.001
+note = "1311 and 1331 nm are two adjacent CWDM channels (INFERENCE)"
+
+[[check]]
+id = "engine.check_a_lower"
+kind = "bound"
+a = "engine.a_lower_edge"
+b = "ieee3dj.lane_wl_min"
+rel_tol = 0.0
+note = "direction A against the draft DR range, lower edge"
+
+[[check]]
+id = "engine.check_a_upper"
+kind = "bound"
+a = "engine.a_upper_edge"
+b = "ieee3dj.lane_wl_max"
+rel_tol = 0.0
+note = "direction A against the draft DR range, upper edge"
+
+[[check]]
+id = "engine.check_b_lower"
+kind = "bound"
+a = "engine.b_lower_edge"
+b = "ieee3dj.lane_wl_min"
+rel_tol = 0.0
+note = "direction B against the draft DR range, lower edge"
+
+[[check]]
+id = "engine.check_b_upper"
+kind = "bound"
+a = "engine.b_upper_edge"
+b = "ieee3dj.lane_wl_max"
+rel_tol = 0.0
+note = "direction B against the draft DR range, upper edge: 'DR compatible' cannot mean DR wavelength compliance in both directions (open question, INFERENCE)"
+
+[[check]]
+id = "engine.check_fiber_reduction"
+kind = "consistent"
+a = "engine.fiber_reduction_pct"
+b = "engine.fiber_mgmt_reduction"
+rel_tol = 0.01
+note = "against '-50%' fiber management"
+
+[[check]]
+id = "engine.check_volume"
+kind = "consistent"
+a = "engine.volume_reduction_pct"
+b = "engine.volume_reduction_yole"
+rel_tol = 0.01
+note = "against '~88% Smaller'"
+
+[[check]]
+id = "engine.check_switch_bw"
+kind = "consistent"
+a = "engine.switch_bw_18"
+b = "engine.switch_bw_yole"
+rel_tol = 0.001
+note = "18 × BiDi engine against 'Up to 115.2 Tbps'"
+
+[[check]]
+id = "engine.check_xpu_bw"
+kind = "consistent"
+a = "engine.xpu_bw_6"
+b = "engine.xpu_bw_yole"
+rel_tol = 0.02
+note = "6 × BiDi engine against '38 Tbps' (rounded down from 38.4)"
+
+[[check]]
+id = "engine.check_savings"
+kind = "consistent"
+a = "engine.savings_vs_20_pct"
+b = "engine.power_savings_yole"
+rel_tol = 0.001
+note = "against 'Up to 75% Power Savings'"
+
+[[check]]
+id = "engine.check_cpx_total"
+kind = "consistent"
+a = "engine.bw_both"
+b = "cpx.bw_total"
+rel_tol = 0.001
+note = "both directions against the CPX engine's 12.8 Tbps total"
+
+[[check]]
+id = "engine.check_widths"
+kind = "consistent"
+a = "engine.width_mm_web"
+b = "engine.width_mm_yole"
+rel_tol = 0.001
+note = "package width: product page against OFC 2026 slides"
+
+[[check]]
+id = "engine.check_pins"
+kind = "consistent"
+a = "engine.form_factor_pins"
+b = "engine.bga_balls_web"
+rel_tol = 0.001
+note = "BGA count: release against product page"
+
+[[hypothesis]]
+id = "H_engine_one_dir"
+statement = "The BiDi engine's energy per bit divides the 30 W TDP by one direction (6.4 Tbps), as pluggables quote it."
+sets = { "engine.energy_direction_factor" = 1.0 }
+group = "engine_energy"
+
+[[hypothesis]]
+id = "H_engine_both_dirs"
+statement = "The BiDi engine's energy per bit divides the 30 W TDP by both directions (12.8 Tbps)."
+sets = { "engine.energy_direction_factor" = 2.0 }
+group = "engine_energy"

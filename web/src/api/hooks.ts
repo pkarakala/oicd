@@ -13,6 +13,8 @@ import {
   type SceneList,
   type SceneView,
   type SpectrumView,
+  type PtcSimulateRequest,
+  type PtcSimulateResponse,
   type SweepResult,
   type TrayReport,
   type YieldResponse,
@@ -180,5 +182,16 @@ export function useSpectrum(hypothesis: string, enabled: boolean) {
     enabled,
     placeholderData: keepPreviousData,
     staleTime: Infinity,
+  })
+}
+
+export function usePtcSimulate(request: PtcSimulateRequest, enabled: boolean) {
+  const debounced = useDebounced(request, 200)
+  return useQuery({
+    queryKey: ['ptc', debounced],
+    queryFn: ({ signal }) => postJson<PtcSimulateResponse>('/ptc/simulate', debounced, signal),
+    enabled,
+    placeholderData: keepPreviousData,
+    retry: false,
   })
 }

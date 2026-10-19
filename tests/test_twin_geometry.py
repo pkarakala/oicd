@@ -111,6 +111,7 @@ def test_shipped_scenes():
         "passage_l20",
         "passage_l200",
         "passage_m1000",
+        "photonic_processor",
         "pic_region",
         "reference_rack",
         "ring_section",

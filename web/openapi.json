@@ -3381,6 +3381,193 @@
         "title": "Provenance",
         "type": "object"
       },
+      "PtcConfig": {
+        "additionalProperties": false,
+        "description": "Data-path parameters; defaults are the paper's (ahmed2025_nature) except where marked.",
+        "properties": {
+          "activation_bits": {
+            "default": 10,
+            "maximum": 16.0,
+            "minimum": 2.0,
+            "title": "Activation Bits",
+            "type": "integer"
+          },
+          "adc_bits": {
+            "default": 11,
+            "maximum": 24.0,
+            "minimum": 2.0,
+            "title": "Adc Bits",
+            "type": "integer"
+          },
+          "bfloat16_scales": {
+            "default": true,
+            "title": "Bfloat16 Scales",
+            "type": "boolean"
+          },
+          "block": {
+            "default": 128,
+            "maximum": 4096.0,
+            "minimum": 1.0,
+            "title": "Block",
+            "type": "integer"
+          },
+          "enob": {
+            "anyOf": [
+              {
+                "exclusiveMinimum": 0.0,
+                "maximum": 24.0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": 9.8,
+            "title": "Enob"
+          },
+          "gain": {
+            "default": 1.86,
+            "exclusiveMinimum": 0.0,
+            "maximum": 1024.0,
+            "title": "Gain",
+            "type": "number"
+          },
+          "output_range": {
+            "default": "n",
+            "enum": [
+              "n",
+              "1"
+            ],
+            "title": "Output Range",
+            "type": "string"
+          },
+          "scale": {
+            "default": "abfp",
+            "enum": [
+              "abfp",
+              "global"
+            ],
+            "title": "Scale",
+            "type": "string"
+          },
+          "weight_bits": {
+            "default": 7,
+            "maximum": 16.0,
+            "minimum": 2.0,
+            "title": "Weight Bits",
+            "type": "integer"
+          }
+        },
+        "title": "PtcConfig",
+        "type": "object"
+      },
+      "PtcSimulateRequest": {
+        "additionalProperties": false,
+        "description": "One seeded run of the ABFP data path (model card §15.3, §15.4).",
+        "properties": {
+          "config": {
+            "$ref": "#/components/schemas/PtcConfig",
+            "default": {
+              "activation_bits": 10,
+              "adc_bits": 11,
+              "bfloat16_scales": true,
+              "block": 128,
+              "enob": 9.8,
+              "gain": 1.86,
+              "output_range": "n",
+              "scale": "abfp",
+              "weight_bits": 7
+            }
+          },
+          "distribution": {
+            "default": "gaussian",
+            "enum": [
+              "gaussian",
+              "student_t"
+            ],
+            "title": "Distribution",
+            "type": "string"
+          },
+          "length": {
+            "default": 128,
+            "maximum": 4096.0,
+            "minimum": 1.0,
+            "title": "Length",
+            "type": "integer"
+          },
+          "rows": {
+            "default": 64,
+            "maximum": 512.0,
+            "minimum": 1.0,
+            "title": "Rows",
+            "type": "integer"
+          },
+          "seed": {
+            "default": 0,
+            "minimum": 0.0,
+            "title": "Seed",
+            "type": "integer"
+          },
+          "trials": {
+            "default": 8,
+            "maximum": 64.0,
+            "minimum": 1.0,
+            "title": "Trials",
+            "type": "integer"
+          }
+        },
+        "title": "PtcSimulateRequest",
+        "type": "object"
+      },
+      "PtcSimulateResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "clipped_fraction": {
+            "title": "Clipped Fraction",
+            "type": "number"
+          },
+          "effective_bits": {
+            "title": "Effective Bits",
+            "type": "number"
+          },
+          "hand_cases": {
+            "maxItems": 2,
+            "minItems": 2,
+            "prefixItems": [
+              {
+                "$ref": "#/components/schemas/Quantized"
+              },
+              {
+                "$ref": "#/components/schemas/Quantized"
+              }
+            ],
+            "title": "Hand Cases",
+            "type": "array"
+          },
+          "label": {
+            "const": "SYNTHETIC inputs (seeded); INFERENCE about an independent re-implementation, not the paper's measurements",
+            "default": "SYNTHETIC inputs (seeded); INFERENCE about an independent re-implementation, not the paper's measurements",
+            "title": "Label",
+            "type": "string"
+          },
+          "relative_error": {
+            "title": "Relative Error",
+            "type": "number"
+          },
+          "request": {
+            "$ref": "#/components/schemas/PtcSimulateRequest"
+          }
+        },
+        "required": [
+          "request",
+          "relative_error",
+          "effective_bits",
+          "clipped_fraction",
+          "hand_cases"
+        ],
+        "title": "PtcSimulateResponse",
+        "type": "object"
+      },
       "Quantity_DB_": {
         "additionalProperties": false,
         "properties": {
@@ -3449,6 +3636,41 @@
           "provenance"
         ],
         "title": "Quantity[int]",
+        "type": "object"
+      },
+      "Quantized": {
+        "additionalProperties": false,
+        "properties": {
+          "codes": {
+            "items": {
+              "type": "integer"
+            },
+            "title": "Codes",
+            "type": "array"
+          },
+          "dequantized": {
+            "items": {
+              "type": "number"
+            },
+            "title": "Dequantized",
+            "type": "array"
+          },
+          "max_abs_error": {
+            "title": "Max Abs Error",
+            "type": "number"
+          },
+          "scale": {
+            "title": "Scale",
+            "type": "number"
+          }
+        },
+        "required": [
+          "scale",
+          "codes",
+          "dequantized",
+          "max_abs_error"
+        ],
+        "title": "Quantized",
         "type": "object"
       },
       "RackRequest": {
@@ -5867,6 +6089,45 @@
           }
         },
         "summary": "Get Profile"
+      }
+    },
+    "/ptc/simulate": {
+      "post": {
+        "description": "Relative error and effective bits of y = Wx through the ABFP data path, with the §15.3\nhand cases for the configured weight width.",
+        "operationId": "post_ptc_simulate_ptc_simulate_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PtcSimulateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PtcSimulateResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Post Ptc Simulate"
       }
     },
     "/rack": {

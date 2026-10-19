@@ -115,6 +115,14 @@ def test_heaters_and_lasers():
     assert guide.values[0].power_mw == pytest.approx(12800.0)
 
 
+def test_processor_overlay():
+    o = overlay("photonic_processor")
+    assert o.reference_mw == 200.0 and o.reference_kind == "AVERAGE"
+    cell = o.values[0]
+    # §15.5: 9.6971 µW per cell under H_lasers_dedicated
+    assert cell.power_mw == pytest.approx(9.6971e-3, abs=1e-7)
+
+
 def test_overlay_endpoint(client):
     rack = client.get("/overlay/reference_rack").json()
     assert rack["verdict"] == "EXCLUDED" and rack["case"] == "H_vclick_channel_1p5"

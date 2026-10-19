@@ -290,6 +290,27 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/ptc/simulate": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Post Ptc Simulate
+         * @description Relative error and effective bits of y = Wx through the ABFP data path, with the §15.3
+         *     hand cases for the configured weight width.
+         */
+        post: operations["post_ptc_simulate_ptc_simulate_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/rack": {
         parameters: {
             query?: never;
@@ -1759,6 +1780,126 @@ export interface components {
             rationale: string;
             source_class: components["schemas"]["SourceClass"];
         };
+        /**
+         * PtcConfig
+         * @description Data-path parameters; defaults are the paper's (ahmed2025_nature) except where marked.
+         */
+        PtcConfig: {
+            /**
+             * Activation Bits
+             * @default 10
+             */
+            activation_bits: number;
+            /**
+             * Adc Bits
+             * @default 11
+             */
+            adc_bits: number;
+            /**
+             * Bfloat16 Scales
+             * @default true
+             */
+            bfloat16_scales: boolean;
+            /**
+             * Block
+             * @default 128
+             */
+            block: number;
+            /**
+             * Enob
+             * @default 9.8
+             */
+            enob: number | null;
+            /**
+             * Gain
+             * @default 1.86
+             */
+            gain: number;
+            /**
+             * Output Range
+             * @default n
+             * @enum {string}
+             */
+            output_range: "n" | "1";
+            /**
+             * Scale
+             * @default abfp
+             * @enum {string}
+             */
+            scale: "abfp" | "global";
+            /**
+             * Weight Bits
+             * @default 7
+             */
+            weight_bits: number;
+        };
+        /**
+         * PtcSimulateRequest
+         * @description One seeded run of the ABFP data path (model card §15.3, §15.4).
+         */
+        PtcSimulateRequest: {
+            /**
+             * @default {
+             *       "activation_bits": 10,
+             *       "adc_bits": 11,
+             *       "bfloat16_scales": true,
+             *       "block": 128,
+             *       "enob": 9.8,
+             *       "gain": 1.86,
+             *       "output_range": "n",
+             *       "scale": "abfp",
+             *       "weight_bits": 7
+             *     }
+             */
+            config: components["schemas"]["PtcConfig"];
+            /**
+             * Distribution
+             * @default gaussian
+             * @enum {string}
+             */
+            distribution: "gaussian" | "student_t";
+            /**
+             * Length
+             * @default 128
+             */
+            length: number;
+            /**
+             * Rows
+             * @default 64
+             */
+            rows: number;
+            /**
+             * Seed
+             * @default 0
+             */
+            seed: number;
+            /**
+             * Trials
+             * @default 8
+             */
+            trials: number;
+        };
+        /** PtcSimulateResponse */
+        PtcSimulateResponse: {
+            /** Clipped Fraction */
+            clipped_fraction: number;
+            /** Effective Bits */
+            effective_bits: number;
+            /** Hand Cases */
+            hand_cases: [
+                components["schemas"]["Quantized"],
+                components["schemas"]["Quantized"]
+            ];
+            /**
+             * Label
+             * @default SYNTHETIC inputs (seeded); INFERENCE about an independent re-implementation, not the paper's measurements
+             * @constant
+             */
+            label: "SYNTHETIC inputs (seeded); INFERENCE about an independent re-implementation, not the paper's measurements";
+            /** Relative Error */
+            relative_error: number;
+            request: components["schemas"]["PtcSimulateRequest"];
+        };
         /** Quantity[DB] */
         Quantity_DB_: {
             provenance: components["schemas"]["Provenance"];
@@ -1780,6 +1921,17 @@ export interface components {
             provenance: components["schemas"]["Provenance"];
             /** Value */
             value: number;
+        };
+        /** Quantized */
+        Quantized: {
+            /** Codes */
+            codes: number[];
+            /** Dequantized */
+            dequantized: number[];
+            /** Max Abs Error */
+            max_abs_error: number;
+            /** Scale */
+            scale: number;
         };
         /** RackRequest */
         RackRequest: {
@@ -2900,6 +3052,39 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["Link"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    post_ptc_simulate_ptc_simulate_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PtcSimulateRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PtcSimulateResponse"];
                 };
             };
             /** @description Validation Error */

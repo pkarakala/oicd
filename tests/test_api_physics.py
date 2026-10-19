@@ -162,3 +162,19 @@ def test_spectrum_bidi16_from_the_catalog(client, hypothesis, fsr_ghz, channel, 
 
 def test_spectrum_rejects_unknown_hypothesis(client):
     assert client.get("/spectrum/bidi16", params={"hypothesis": "H_fsr99"}).status_code == 422
+
+
+def test_ptc_simulate(client):
+    body = client.post("/ptc/simulate", json={"config": {"gain": 4.0}}).json()
+    assert body["label"].startswith("SYNTHETIC inputs (seeded)")
+    exact, bf16 = body["hand_cases"]
+    # model card §15.3 hand cases
+    assert exact["codes"] == [16, -63, 3, 47] and exact["scale"] == 1.2
+    assert bf16["scale"] == 1.203125
+    assert bf16["max_abs_error"] == pytest.approx(0.007292, abs=5e-7)
+    low = client.post("/ptc/simulate", json={"config": {"gain": 1.0}}).json()
+    assert body["relative_error"] < low["relative_error"]
+    again = client.post("/ptc/simulate", json={"config": {"gain": 4.0}}).content
+    assert client.post("/ptc/simulate", json={"config": {"gain": 4.0}}).content == again
+    for bad in ({"config": {"gain": 0}}, {"length": 0}, {"config": {"output_range": "2"}}):
+        assert client.post("/ptc/simulate", json=bad).status_code == 422

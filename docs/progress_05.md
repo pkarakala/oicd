@@ -129,12 +129,12 @@ Baseline before Phase 0 (brief 03 tree on `main`): pytest 147 passed, ruff check
 
 ## Phase 9: photonic processor
 
-- [ ] 9.1 Open ahmed2025_nature (and basumallik2022_abfp); card §15 with the A9 facts and derived values
-- [ ] 9.2 Processor catalog entry with checks and conflicts
-- [ ] 9.3 src/oicd/compute/ptc.py ABFP data path with the hand cases
-- [ ] 9.4 Seeded experiments: error vs length, gain and ENOB; ABFP vs global scale; 3-layer MLP accuracy vs G
-- [ ] 9.5 Stretch: per-weight-cell optical power under two laser-mapping hypotheses
-- [ ] 9.6 POST /ptc/simulate and scene 8
+- [x] 9.1 Open ahmed2025_nature (and basumallik2022_abfp); card §15 with the A9 facts and derived values — ahmed2025_nature (SI, Table 1 and figure pages; main text paywalled) and basumallik2022_abfp were opened in phase 4; card §15 with facts, derived values (65.536 / 262.144 TOPS, 77.8 W, 0.8402 / 0.7447 TOPS/W, 349.44 / 785 mm2) and hand_calcs/s15_processor.py
+- [x] 9.2 Processor catalog entry with checks and conflicts — catalog: 3 assumptions, 20 derived, 8 checks, hypotheses H_out_n/H_out_1 and H_lasers_dedicated/H_lasers_shared; conflicts 262 TOPS/W vs 262 TOPS and 1 million vs 200,000 kept
+- [x] 9.3 src/oicd/compute/ptc.py ABFP data path with the hand cases — src/oicd/compute/ptc.py: bfloat16 round-up, Q_n with round half to even, per-block scales, gain, ENOB noise, 11-bit ADC over ±n or ±1; hand cases exact
+- [x] 9.4 Seeded experiments: error vs length, gain and ENOB; ABFP vs global scale; 3-layer MLP accuracy vs G — src/oicd/compute/experiments.py: error vs length, gain, ENOB; ABFP vs global scale (Student-t); 3-layer MLP accuracy vs G; seeded; trends tested
+- [x] 9.5 Stretch: per-weight-cell optical power under two laser-mapping hypotheses — per-cell power 9.6971 uW (H_lasers_dedicated) and 8.6425 uW (H_lasers_shared), catalog node ptc.power_per_cell
+- [x] 9.6 POST /ptc/simulate and scene 8 — POST /ptc/simulate; scene 8 catalog/geometry/photonic_processor.toml with overlay; Physics tab simulator panel; e2e
 - [ ] 9.7 Phase 9 checks green and commit
 
 ## Phase 10: refinement, figures, paper, docs

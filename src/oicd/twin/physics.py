@@ -5,6 +5,7 @@ on catalog values, so every number carries its class: facts keep theirs, assumpt
 SYNTHETIC and computed results are INFERENCE. Pure: the catalog is passed in, nothing is read.
 """
 
+import functools
 import math
 from collections.abc import Callable
 from typing import Literal
@@ -12,6 +13,8 @@ from typing import Literal
 from pydantic import BaseModel, ConfigDict
 
 from oicd.checks.wavelength import clearances_nm
+from oicd.compute.experiments import error_sweeps, mlp_accuracy_vs_gain
+from oicd.compute.ptc import quantize_vector
 from oicd.physics import ring, wdm
 from oicd.physics.mpi import mpi_penalty_db
 from oicd.provenance import Provenance, Quantity, SourceClass
@@ -29,6 +32,7 @@ from oicd.schema import (
 from oicd.system.pod import PodSpec, evaluate_pod
 from oicd.system.rack import PathElement, RackSpec, evaluate_rack
 from oicd.twin.catalog import Assumption, Catalog, Fact
+from oicd.twin.inference import evaluate_graph
 from oicd.units import DB, DBm, OpticalPower, PowerKind
 from oicd.upstream import derive_tp2, max_fanout
 
@@ -823,6 +827,106 @@ def _rack(catalog: Catalog) -> tuple[Section, ...]:
     return (space, topology, *paths, yields)
 
 
+@functools.lru_cache(maxsize=1)
+def _ptc_experiments():
+    """The seeded §15.4 experiments (pure, so computed once)."""
+    return error_sweeps(seed=0), mlp_accuracy_vs_gain(seed=0)
+
+
+def _processor(catalog: Catalog) -> tuple[Section, ...]:
+    exact = quantize_vector([0.3, -1.2, 0.05, 0.9], 7, bfloat16_scale=False)
+    bf16 = quantize_vector([0.3, -1.2, 0.05, 0.9], 7)
+    hand = Section(
+        title="ABFP quantization hand cases, x = [0.3, −1.2, 0.05, 0.9], 7 bits",
+        items=(
+            Item(
+                label="codes, exact scale 1.2",
+                value=str(list(exact.codes)),
+                unit="",
+                source_class=INF,
+            ),
+            Item(
+                label="max abs error, exact scale",
+                value=exact.max_abs_error,
+                unit="",
+                source_class=INF,
+            ),
+            Item(label="bfloat16 scale (rounded up)", value=bf16.scale, unit="", source_class=INF),
+            Item(
+                label="codes, bfloat16 scale",
+                value=str(list(bf16.codes)),
+                unit="",
+                source_class=INF,
+            ),
+            Item(
+                label="max abs error, bfloat16 scale",
+                value=bf16.max_abs_error,
+                unit="",
+                source_class=INF,
+            ),
+        ),
+        note="Model card §15.3; an independent re-implementation, not Lightmatter code.",
+    )
+    sweeps, mlp = _ptc_experiments()
+    gain = Section(
+        title="y = Wx error versus gain G (128-long, ENOB 9.8; SYNTHETIC Gaussian data, seed 0)",
+        items=tuple(
+            Item(
+                label=f"G = {r.gain:g}",
+                value=f"error {100 * r.relative_error:.2f} %, {r.effective_bits:.2f} effective bits"
+                + (f", {100 * r.clipped_fraction:.1f} % clipped" if r.clipped_fraction else ""),
+                unit="",
+                source_class=INF,
+            )
+            for r in sweeps["gain"]
+        ),
+        note="G = 1.86 measured, 4 the design target (ahmed2025_nature); model card §15.4.",
+    )
+    scale = Section(
+        title="One scale per 128-block against one global scale (1024-long, G = 4)",
+        items=tuple(
+            Item(
+                label=f"{r.scale}, {r.distribution.replace('_', '-')} activations",
+                value=f"error {100 * r.relative_error:.2f} %",
+                unit="",
+                source_class=INF,
+            )
+            for r in sweeps["scale"]
+        ),
+        note="Student-t activations (ν = 3) stand in for outliers (SYNTHETIC).",
+    )
+    accuracy = Section(
+        title="3-layer MLP on a synthetic 10-class set: accuracy versus G",
+        items=(
+            Item(label="float64", value=100 * mlp.float_accuracy, unit="%", source_class=INF),
+            *(
+                Item(label=f"ABFP, G = {g:g}", value=100 * a, unit="%", source_class=INF)
+                for g, a in zip(mlp.gains, mlp.abfp_accuracy, strict=True)
+            ),
+        ),
+        note="Not the paper's Table 1, which is cited as its measured result (model card §15.4).",
+    )
+    cells = []
+    for h_id in ("H_lasers_dedicated", "H_lasers_shared"):
+        graph = evaluate_graph(catalog, "photonic_processor", hypotheses=(h_id,))
+        node = next(n for n in graph.nodes if n.id == "ptc.power_per_cell")
+        cells.append(
+            Item(
+                label=h_id,
+                value=node.nominal,
+                unit="µW per cell",
+                source_class=INF,
+                note=node.derivation,
+            )
+        )
+    power = Section(
+        title="Optical power per weight cell (stretch; the laser mapping is not disclosed)",
+        items=tuple(cells),
+        note="Model card §15.5: about 9 µW per cell under either mapping.",
+    )
+    return (hand, gain, scale, accuracy, power)
+
+
 EVALUATIONS: dict[str, Callable[[Catalog], tuple[Section, ...]]] = {
     "passage_l20": _l20,
     "passage_m1000": _m1000,
@@ -831,6 +935,7 @@ EVALUATIONS: dict[str, Callable[[Catalog], tuple[Section, ...]]] = {
     "guide_family": _guide,
     "scaleup_pod": _pod,
     "reference_rack": _rack,
+    "photonic_processor": _processor,
 }
 
 

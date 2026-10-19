@@ -27,6 +27,7 @@ from oicd.provenance import Provenance, Quantity, SourceClass
 from oicd.report import TracePoint
 from oicd.system.rack import PathCase, evaluate_rack
 from oicd.twin.catalog import Catalog, GeometryScene
+from oicd.twin.inference import evaluate_graph
 from oicd.twin.physics import _class, _prov, _value, rack_spec
 
 _FROZEN = ConfigDict(frozen=True, extra="forbid")
@@ -780,6 +781,48 @@ def _undisclosed(parts: tuple[str, ...], label: str):
     return build
 
 
+def _processor(catalog, scene, mode, case, isolation_db) -> Overlay:
+    """Laser supply into the processor and the optical power per weight cell (§15.5)."""
+    per_fibre = _value(catalog, "ptc.laser_power_fibre")
+    eta = evaluate_graph(catalog, "photonic_processor", hypotheses=("H_lasers_dedicated",))
+    cell = next(n for n in eta.nodes if n.id == "ptc.power_per_cell")
+    assert cell.nominal is not None
+    return Overlay(
+        scene=scene.scene.id,
+        mode=mode,
+        case=None,
+        cases=(),
+        legend="Unmodulated laser supply, average power in fibre (false color).",
+        reference_mw=per_fibre,
+        reference_kind="AVERAGE",
+        verdict=None,
+        margin_db=None,
+        paths=(
+            LightPath(
+                part="proc.fibres",
+                kind="cw",
+                label=f"8 lasers at {per_fibre:g} mW in fibre (CWDM grid; mapping to cores not "
+                "disclosed)",
+                color=palette(mode).cw,
+                direction="forward",
+                power_kind="AVERAGE",
+                samples=_steady(0.0, 1.0, "laser output", per_fibre, per_fibre),
+                source_class=_class(catalog, "ptc.laser_power_fibre"),
+            ),
+        ),
+        values=(
+            PartValue(
+                part="proc.weights",
+                label=f"{cell.nominal:.4g} µW per weight cell under H_lasers_dedicated "
+                "(model card §15.5)",
+                power_mw=cell.nominal / 1000.0,
+                source_class=INF,
+            ),
+        ),
+        notes=("Per-cell power: 1.6 W after the fibre-to-cell losses, shared by 65,536 cells.",),
+    )
+
+
 Builder = Callable[[Catalog, GeometryScene, Mode, str | None, float], Overlay]
 
 BUILDERS: dict[str, Builder] = {
@@ -795,6 +838,7 @@ BUILDERS: dict[str, Builder] = {
         ("m1k.fibers_left", "m1k.fibers_right"),
         "8 wavelengths per fiber at 56 Gb/s NRZ (direction and power not disclosed)",
     ),
+    "photonic_processor": _processor,
     "passage_l200": _undisclosed(
         ("l200g.fibers",), "16 wavelengths per fiber (direction and power not disclosed)"
     ),

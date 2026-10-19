@@ -141,6 +141,21 @@ def tops_per_w(rate_tops: float, power_w: float) -> float:
     return rate_tops / power_w
 
 
+def ops_tops_at_ghz(macs_per_cycle: float, clock_ghz: float) -> float:
+    """Operations per second at a clock in GHz, 2 operations per MAC, in tera-ops/s."""
+    return 2.0 * macs_per_cycle * clock_ghz * 1e9 / 1e12
+
+
+def abfp_output_bits(weight_bits: float, activation_bits: float, range_count: float) -> float:
+    """Bits of an ABFP dot-product word: b_W + b_X + log2(range) − 1 (model card §15.2)."""
+    return weight_bits + activation_bits + math.log2(range_count) - 1.0
+
+
+def power_per_cell_uw(total_w: float, loss_db: float, cells_count: float) -> float:
+    """Optical power per cell, µW: total after loss_db shared by cells (model card §15.5)."""
+    return total_w * 1e6 * 10.0 ** (-loss_db / 10.0) / cells_count
+
+
 def heater_power_mw(tuning_nm: float, efficiency_nm_per_mw: float) -> float:
     """Heater power for a thermal tuning range at a tuning efficiency (Δλ = η·P)."""
     return tuning_nm / efficiency_nm_per_mw
@@ -330,6 +345,24 @@ FORMULAS: dict[str, Formula] = {
             (("rate_tops", "TOPS"), ("power_w", "W")),
             "TOPS/W",
             "{rate_tops} / {power_w}",
+        ),
+        _f(
+            ops_tops_at_ghz,
+            (("macs_per_cycle", "count"), ("clock_ghz", "GHz")),
+            "TOPS",
+            "2 × {macs_per_cycle} × {clock_ghz}",
+        ),
+        _f(
+            abfp_output_bits,
+            (("weight_bits", "bits"), ("activation_bits", "bits"), ("range_count", "count")),
+            "bits",
+            "{weight_bits} + {activation_bits} + log2({range_count}) − 1",
+        ),
+        _f(
+            power_per_cell_uw,
+            (("total_w", "W"), ("loss_db", "dB"), ("cells_count", "count")),
+            "uW",
+            "{total_w} × 10^(−{loss_db}/10) / {cells_count}",
         ),
         _f(
             heater_power_mw,

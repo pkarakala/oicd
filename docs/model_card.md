@@ -144,6 +144,7 @@ T04 note: the float result depends on summation order. The test asserts PASS and
 | 2026-10-18 | §13 microring and WDM physics: periodic Lorentzian (k = −50 … 50), FWHM = f0/Q_L with the factor-2 lifetime caveat, crosstalk −10·log10(1 − kX) (INFERENCE) with 10·log10(1 + X) alongside, SYNTHETIC design window, thermal tuning with barrel shifting, interleaved Guide grid (INFERENCE), aliasing and the worst-channel rule, BiDi link model | brief 05 phase 5 | single-neighbor Lorentzian without images: misses the FSR aliasing that decides the 16λ BiDi result |
 | 2026-10-18 | §3 trace points carry power_mw = 10^(P_plane,OMA/10) and relative_power | brief 05 phase 8: pulse brightness follows the API's linear power | convert dBm to mW in the browser: the web would compute physics |
 | 2026-10-18 | §13.7 BiDi directions report the crosstalk power at the receiver, 10^(P_TX,local/10)·R | brief 05 phase 8: the ghost pulse's brightness is the API's crosstalk power | let the web scale the ghost from the penalty: the web would compute physics |
+| 2026-10-18 | §15 photonic processor: facts, derived values, the ABFP data path with two readings of the ADC range (H_out_n, H_out_1), the bfloat16 round-up rule, seeded experiments and per-cell optical power under two laser mappings | brief 05 phase 9 | read the SI's Q_11 on the N-term sum literally only: it contradicts the 24-bit output word and the gain-window figure |
 | 2026-10-18 | §14.2 to §14.10 product twins, the 16λ BiDi ring-FSR hypotheses, the Guide DR fan-out, tray and pod hypotheses and the reference rack OICD-R64 with its reference-plane hypotheses | brief 05 phase 6, written before the catalog graphs | per-product prose without derivations: nothing a test could check |
 
 ## 8. Design-space sweep
@@ -628,3 +629,73 @@ The reference-plane definition, not the physics, decides this rack.
 ### 14.10 Hand cases
 
 All numbers in §14.2 to §14.9 are printed by `docs/hand_calcs/s14_products.py` (the ring numbers of §14.5 by `s13_ring_wdm.py`), and the tests take them from this section.
+
+## 15. Photonic processor (ahmed2025_nature)
+
+A twin of the photonic processor published in Nature in 2025 (ahmed2025_nature: PEER_REVIEWED, vendor-authored; Nature main text paywalled, so the facts come from the open Supplementary Information, Table 1 and figure pages, as each catalog note states) and an independent re-implementation of its adaptive block floating-point (ABFP) data path. It is not Lightmatter code. The paper's measured accuracies (Table 1) are cited as measured results; nothing here reproduces them.
+
+### 15.1 Facts
+
+Six chips: four 128 × 128 photonic tensor cores (PTCs, GF 90 nm photonics) and two 12 nm control dies on an organic interposer, 54 × 56 mm. PTC 14.00 × 24.96 mm, control die 31.4 × 25.0 mm. 65.5 trillion ABFP16 operations per second at 78 W electrical and 1.6 W optical; 500 MHz sustained (2 GHz with intermittent errors, 262 trillion). PTC 3.2 W each, control dies 65 W. Every 128-long vector shares one bfloat16 scale; weights 7 bits, activations 10 bits; ADC 11 bits, ENOB 9.8; measured gain 1.86 against a design target of 4. Eight DFB lasers, 200 mW in fibre each, 1.25 W wall power each including the TEC. A 16-way tree feeds the vector channels; multiplication happens on photocurrent inside each weight cell, summed as current on row lines (not an MZI mesh). The catalog (`catalog/products/photonic_processor.toml`) holds each fact with its quote; two conflicts stay recorded: the web's "262T Ops/Watt" against the paper's 262 TOPS (at 2 GHz) and 0.81 TOPS/W system average, and "1 million" against "over 200,000" photonic components.
+
+### 15.2 Derived values (INFERENCE)
+
+```
+MAC per cycle      = PTCs × 128 × 128                        = 65,536
+throughput         = MAC per cycle × 2 ops × clock           = 65.536 TOPS at 500 MHz, 262.144 TOPS at 2 GHz
+electrical power   = 4 × 3.2 W + 65 W                        = 77.8 W   (lasers excluded: 8 × 1.25 W = 10 W)
+efficiency         = 65.536 TOPS / 78 W                      = 0.8402 TOPS/W; / 88 W with lasers = 0.7447 TOPS/W
+areas              = 14.00 × 24.96 mm = 349.44 mm²;  31.4 × 25.0 mm = 785 mm²
+optical power      = 8 × 200 mW                              = 1.6 W
+output word bits   = b_W + b_X + log2(range) − 1             (basumallik2022_abfp's count)
+```
+
+Checks: 65.536 against 65.5 T and 262.144 against 262 T (CONSISTENT within 1 %), 77.8 W against 78 W (CONSISTENT; the 78 W excludes laser wall power), 349.44 mm² against "349 mm²" and 785 mm² against "approximately 780 mm²" (CONSISTENT), 1.6 W against "1.6 W of optical power" (CONSISTENT). Why: each published figure is a product of disclosed counts and rates, so the arithmetic tests whether the figures describe the same machine.
+
+### 15.3 ABFP data path
+
+From the SI (ptc.abfp_scale_formulas, ptc.abfp_qn_formula, ptc.abfp_gain_formula) and basumallik2022_abfp (rounding, output range):
+
+```
+s_x = max|x| (one bfloat16 scale per 128-long block), s_w,i = max|w_i| per weight row and block
+x̂ = x / s_x,  ŵ = w / s_w,i                                   (values in [−1, 1])
+Q_n(α) = clamp[−1,+1](round(α/δ_n) · δ_n),   δ_n = 1/(2^(n−1) − 1),   round half to even
+y_i = (s_w,i · s_x / G) · Q_ADC{ G · Σ_j Q_7(ŵ_ij) · Q_10(x̂_j) + ν }
+Q_ADC: 11 bits over the range ±r, so its step is r · δ_11 and it clamps at ±r
+ν ~ N(0, σ²),  σ = (r/√2) / 10^(SNR/20),  SNR = 6.02 · ENOB + 1.76 dB      (ADC noise, referred to its input)
+partial sums of 128-blocks accumulate in float (basumallik2022_abfp: FLOAT32)
+```
+
+Two readings of the output range r carry through as hypotheses (integrity rule 3): H_out_n, r = n = 128, the summation range of basumallik2022_abfp Eq. 3 (the sum of n products lies in [−n, n]); H_out_1, r = 1, the SI's equation read literally (Q_11 with its [−1, 1] clamp on the N-term sum). H_out_n agrees with the SI's 24-bit output word (7 + 10 + 7 − 1 = 23 bits, within one sign bit) and with its gain figure, where each doubling of G moves the 11-bit window one bit down a 24-bit word; H_out_1 gives a 16-bit word and clips any sum beyond ±1. The simulations use H_out_n; the API accepts either. The noise model (additive Gaussian on the analog result, SI) is sized by the ADC's ENOB here, an OICD assumption (SYNTHETIC): the SI notes that the measured error tails fit a logistic better than a Gaussian. Gain G multiplies the analog sum before the ADC (the SI raises the TIA gain and the laser power), and the NCE divides it out digitally.
+
+Scales in bfloat16 (OICD rule, SYNTHETIC): the scale max|x| is rounded up to the next bfloat16 value, so no normalized value exceeds 1 and no code exceeds L = 2^(b−1) − 1. bfloat16 keeps 8 significant bits, so for s with s = m·2^e (0.5 ≤ m < 1) the step is 2^(e−8).
+
+Hand cases (`docs/hand_calcs/s15_processor.py`), x = [0.3, −1.2, 0.05, 0.9], b = 7 (L = 63):
+
+| scale | codes | dequantized | max abs error |
+| --- | --- | --- | --- |
+| exact, s = 1.2 | [16, −63, 3, 47] | [0.304762, −1.2, 0.057143, 0.895238] | 0.007143 |
+| bfloat16 rounded up, 1.2 → 1.203125 | [16, −63, 3, 47] | [0.305556, −1.203125, 0.057292, 0.897569] | 0.007292 |
+
+ENOB 9.8 gives SNR 60.756 dB and σ = 6.481641e-4 of the ADC range r.
+
+### 15.4 Experiments (SYNTHETIC inputs, seeded; results INFERENCE)
+
+`src/oicd/compute/experiments.py` with fixed seeds, no downloads:
+
+- error of y = Wx against the float64 product: relative RMS error e = ‖ŷ − y‖₂ / ‖y‖₂ and effective bits = (20·log10(1/e) − 1.76) / 6.02, versus vector length (128 to 1024, in 128-blocks), gain G (1, 1.86, 4, 8) and ENOB (6 to 11), for Gaussian weights and activations;
+- ABFP against one global scale over the whole vector, for activations with outliers (a Student-t, ν = 3, SYNTHETIC);
+- a 3-layer MLP (128-128-128-10, ReLU) trained in float64 on a synthetic 10-class Gaussian-mixture dataset, then evaluated with every matrix-vector product through the ABFP data path, accuracy versus G.
+
+The expected shape, which the tests check: error falls as G rises from 1 toward the design target of 4 (more ADC levels on the signal) until clipping sets in; error falls with ENOB; ABFP beats a global scale on data with outliers; the MLP's accuracy approaches its float64 accuracy as G rises from 1.86 to 4. The tables are generated, not hand-computed, and are labelled INFERENCE on synthetic data; they are not the paper's Table 1.
+
+### 15.5 Optical power per weight cell (stretch, INFERENCE)
+
+The paper does not say how the eight lasers map onto the four PTCs. Each PTC has 128 vector channels feeding 128 weight cells each, so 65,536 weight cells share 1.6 W of laser power in fibre whatever the mapping:
+
+```
+P_cell = 8 × 200 mW × 10^(−L/10) / (4 × 128 × 128)
+L = V-groove 1.56 dB + vector modulator IL 1.1 dB + on-chip path (SYNTHETIC 1 cm of Si ridge at 1.35 dB/cm) [+ splitter excess]
+```
+
+H_lasers_dedicated (two lasers per PTC): L = 4.01 dB, 9.6971 µW per cell. H_lasers_shared (each laser split four ways to all PTCs, one more splitter stage, SYNTHETIC 0.5 dB excess): L = 4.51 dB, 8.6425 µW per cell. Before any loss: 24.4141 µW per cell. The mapping changes only the splitter count, so the per-cell power is about 9 µW under either; the gain G of §15.3 raises it (the SI raises laser power with G).

@@ -1806,3 +1806,20 @@ body.is-transitioning .viewport canvas {
   padding: 14px;
   color: var(--muted);
 }
+
+.seg-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 4px 0 8px;
+}
+
+.seg-row select {
+  padding: 3px 6px;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  background: var(--raised);
+  color: var(--ink);
+  font: inherit;
+  font-size: 12px;
+}

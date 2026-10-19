@@ -12,6 +12,8 @@ from fastapi.responses import JSONResponse, Response
 from pydantic import BaseModel, ConfigDict, Field
 
 from oicd.api_twin import catalog
+from oicd.compute.experiments import matvec_error_for
+from oicd.compute.ptc import PtcConfig, Quantized, quantize_vector
 from oicd.physics import ring, wdm
 from oicd.physics.bidi import BidiLinkRequest, BidiLinkResult, evaluate_bidi_link
 from oicd.physics.mpi import MpiResult, mpi_penalty_db
@@ -383,3 +385,67 @@ def post_rack(request: RackRequest) -> Response:
 def post_pod(request: PodSpec) -> Response:
     """Pod fibers, fiber length and connectors against the claims (model card §14.8)."""
     return _json(evaluate_pod(request))
+
+
+class PtcSimulateRequest(BaseModel):
+    """One seeded run of the ABFP data path (model card §15.3, §15.4)."""
+
+    model_config = _FROZEN
+
+    length: int = Field(default=128, ge=1, le=4096)
+    rows: int = Field(default=64, ge=1, le=512)
+    trials: int = Field(default=8, ge=1, le=64)
+    seed: int = Field(default=0, ge=0)
+    distribution: Literal["gaussian", "student_t"] = "gaussian"
+    config: PtcConfig = PtcConfig()
+
+
+class PtcSimulateResponse(BaseModel):
+    model_config = _FROZEN
+
+    label: Literal[
+        "SYNTHETIC inputs (seeded); INFERENCE about an independent re-implementation, not the "
+        "paper's measurements"
+    ] = (
+        "SYNTHETIC inputs (seeded); INFERENCE about an independent re-implementation, not the "
+        "paper's measurements"
+    )
+    request: PtcSimulateRequest
+    relative_error: float
+    effective_bits: float
+    clipped_fraction: float
+    hand_cases: tuple[Quantized, Quantized]  # x = [0.3, −1.2, 0.05, 0.9], exact and bfloat16
+
+
+HAND_CASE_X = [0.3, -1.2, 0.05, 0.9]
+
+
+@router.post("/ptc/simulate", response_model=PtcSimulateResponse)
+def post_ptc_simulate(request: PtcSimulateRequest) -> Response:
+    """Relative error and effective bits of y = Wx through the ABFP data path, with the §15.3
+    hand cases for the configured weight width."""
+    try:
+        row = matvec_error_for(
+            request.config,
+            request.length,
+            request.seed,
+            request.rows,
+            request.trials,
+            request.distribution,
+        )
+        bits = request.config.weight_bits
+        hand = (
+            quantize_vector(HAND_CASE_X, bits, bfloat16_scale=False),
+            quantize_vector(HAND_CASE_X, bits),
+        )
+    except ValueError as exc:
+        return _invalid(exc)
+    return _json(
+        PtcSimulateResponse(
+            request=request,
+            relative_error=row.relative_error,
+            effective_bits=row.effective_bits,
+            clipped_fraction=row.clipped_fraction,
+            hand_cases=hand,
+        )
+    )

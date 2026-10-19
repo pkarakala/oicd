@@ -24,6 +24,7 @@ const SCENES: [string, string][] = [
   ['guide_family', 'Rack › Switch tray › Guide DR'],
   ['pic_region', 'Rack › Switch tray › Engine › PIC'],
   ['ring_section', 'Rack › Switch tray › Engine › PIC › Ring'],
+  ['photonic_processor', 'Processor'],
 ]
 
 test('every scene renders from the API with its breadcrumb, spec sheet and independence line', async ({ page }) => {
@@ -178,4 +179,26 @@ test('inference: graph, hypotheses and support matrix for the switch tray', asyn
   await expect(page).toHaveURL(/hyp=H_dir/)
   await page.waitForTimeout(800)
   await page.screenshot({ path: img('inference') })
+})
+
+test('photonic processor: the ABFP simulator answers from the API', async ({ page }) => {
+  test.setTimeout(300_000)
+  await open(page, 'scene=photonic_processor&tab=physics')
+  const simulator = page.getByTestId('ptc-simulator')
+  await expect(simulator).toBeVisible()
+  // model card §15.4: the error falls as G rises from 1 to the design target of 4
+  const errorAt = async (gain: string) => {
+    await page.getByLabel('gain G ()', { exact: true }).fill(gain)
+    await expect(page.getByTestId('ptc-simulator')).toContainText(`gain G`)
+    await page.waitForTimeout(800)
+    return Number((await page.getByTestId('ptc-error').textContent())?.replace(' %', ''))
+  }
+  const atOne = await errorAt('1')
+  const atFour = await errorAt('4')
+  expect(atFour).toBeLessThan(atOne)
+  await page.getByTestId('tab-physics').click() // leave the number box, so E reaches the viewport
+  await page.keyboard.press('e')
+  await expect(page.getByRole('slider', { name: 'Explode' })).toHaveAttribute('aria-valuenow', '1', { timeout: 10_000 })
+  await settle(page)
+  await page.screenshot({ path: img('processor_exploded') })
 })

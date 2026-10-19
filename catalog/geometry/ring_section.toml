@@ -1,0 +1,166 @@
+# Cross-section through a ring waveguide (model card §13). Units: nm; x radial, y along the
+# waveguide (a short extrusion), z up (top of the buried oxide at z = 0). Only the mechanisms are
+# public (depletion PN junction, resistive heater; Hot Chips 2025): every layer thickness and
+# width here is SCHEMATIC, drawn for orientation, not a disclosed process.
+
+[scene]
+id = "ring_section"
+name = "Ring cross-section"
+unit = "nm"
+level = "device"
+product = "microring_ofc25"
+parent = "pic_region"
+breadcrumb = "Ring"
+summary = "Silicon rib waveguide on buried oxide with a lateral PN junction for depletion modulation, contacts, oxide cladding and a resistive heater above."
+
+[[part]]
+id = "rs.handle"
+name = "silicon handle wafer (truncated)"
+assembly = "substrate"
+size = [6000.0, 1500.0, 600.0]
+position = [0.0, 0.0, -2300.0]
+material = "silicon"
+dims_class = "SCHEMATIC"
+dims_source = "Handle drawn truncated."
+
+[[part]]
+id = "rs.box"
+name = "buried oxide"
+assembly = "substrate"
+size = [6000.0, 1500.0, 2000.0]
+position = [0.0, 0.0, -1000.0]
+material = "oxide"
+dims_class = "SCHEMATIC"
+dims_source = "Oxide thickness not disclosed."
+explode = [0.0, 0.0, -800.0]
+
+[[part]]
+id = "rs.core_p"
+name = "rib core, p side"
+assembly = "waveguide"
+size = [225.0, 1500.0, 220.0]
+position = [-112.5, 0.0, 110.0]
+material = "doped_p"
+dims_class = "SCHEMATIC"
+dims_source = "Waveguide cross-section not disclosed; drawn 450 x 220 nm."
+nodes = ["m1000.mrr_modulation", "ring.process"]
+label = "p"
+
+[[part]]
+id = "rs.core_n"
+name = "rib core, n side"
+assembly = "waveguide"
+size = [225.0, 1500.0, 220.0]
+position = [112.5, 0.0, 110.0]
+material = "doped_n"
+dims_class = "SCHEMATIC"
+dims_source = "Waveguide cross-section not disclosed; drawn 450 x 220 nm."
+nodes = ["m1000.mrr_modulation", "ring.mrm_eo_bw_ghz"]
+function = "Reverse bias widens the depletion region at the junction, shifting the effective index and the resonance."
+label = "n"
+
+[[part]]
+id = "rs.slab_p"
+name = "p-doped slab"
+assembly = "waveguide"
+size = [1500.0, 1500.0, 90.0]
+position = [-975.0, 0.0, 45.0]
+material = "doped_p"
+dims_class = "SCHEMATIC"
+dims_source = "Slab thickness and doping extent not disclosed."
+
+[[part]]
+id = "rs.slab_n"
+name = "n-doped slab"
+assembly = "waveguide"
+size = [1500.0, 1500.0, 90.0]
+position = [975.0, 0.0, 45.0]
+material = "doped_n"
+dims_class = "SCHEMATIC"
+dims_source = "Slab thickness and doping extent not disclosed."
+
+[[part]]
+id = "rs.contact_p"
+name = "p+ contact region"
+assembly = "contacts"
+size = [600.0, 1500.0, 90.0]
+position = [-2025.0, 0.0, 45.0]
+material = "doped_p"
+dims_class = "SCHEMATIC"
+dims_source = "Contact layout not disclosed."
+
+[[part]]
+id = "rs.contact_n"
+name = "n+ contact region"
+assembly = "contacts"
+size = [600.0, 1500.0, 90.0]
+position = [2025.0, 0.0, 45.0]
+material = "doped_n"
+dims_class = "SCHEMATIC"
+dims_source = "Contact layout not disclosed."
+
+[[part]]
+id = "rs.via_p"
+name = "via to the p contact"
+assembly = "contacts"
+size = [200.0, 400.0, 1300.0]
+position = [-2025.0, 0.0, 740.0]
+material = "copper"
+dims_class = "SCHEMATIC"
+dims_source = "Via size not disclosed."
+explode = [0.0, 0.0, 600.0]
+
+[[part]]
+id = "rs.via_n"
+name = "via to the n contact"
+assembly = "contacts"
+size = [200.0, 400.0, 1300.0]
+position = [2025.0, 0.0, 740.0]
+material = "copper"
+dims_class = "SCHEMATIC"
+dims_source = "Via size not disclosed."
+explode = [0.0, 0.0, 600.0]
+
+[[part]]
+id = "rs.cladding"
+name = "oxide cladding"
+assembly = "cladding"
+size = [6000.0, 1500.0, 1800.0]
+position = [0.0, 0.0, 900.0]
+material = "oxide"
+dims_class = "SCHEMATIC"
+dims_source = "Cladding thickness not disclosed."
+explode = [0.0, 0.0, 1400.0]
+
+[[part]]
+id = "rs.heater"
+name = "resistive heater"
+assembly = "heater"
+size = [1500.0, 1500.0, 120.0]
+position = [0.0, 0.0, 1300.0]
+material = "heater"
+dims_class = "SCHEMATIC"
+dims_source = "Heater geometry not disclosed; drawn above the core."
+nodes = ["m1000.mrr_heater", "ring.heater_nm_per_mw", "m1000.heater_per_ring"]
+explode = [0.0, 0.0, 2200.0]
+label = "heater"
+
+[[tour]]
+part = "rs.core_p"
+node = "m1000.mrr_modulation"
+
+[[tour]]
+part = "rs.heater"
+node = "m1000.mrr_heater"
+
+[[tour]]
+part = "rs.heater"
+node = "ring.heater_nm_per_mw"
+
+[[tour]]
+part = "rs.core_n"
+node = "ring.mrm_eo_bw_ghz"
+
+[[tour]]
+part = "rs.core_p"
+node = "ring.process"

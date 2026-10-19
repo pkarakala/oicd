@@ -120,6 +120,11 @@ def test_power_trace_worked_example(profile_report):
     assert trace[-1].headroom_db == pytest.approx(0.4992, abs=1e-12)
     assert [p.channel_index for p in trace] == [None, 0, 1, 2, 3, 4, None]
     assert sum(p.loss_fraction for p in trace if p.loss_fraction is not None) == pytest.approx(1.0)
+    # §3: power_mw = 10^(P/10); TP2 1.0 mW, TP3 0.398034 mW
+    assert trace[0].power_mw == pytest.approx(1.0, abs=1e-12)
+    assert trace[-1].power_mw == pytest.approx(0.398034, abs=1e-6)
+    assert trace[0].relative_power == 1.0
+    assert trace[-1].relative_power == pytest.approx(0.398034, abs=1e-6)
 
 
 def test_report_and_evidence_name_the_penalty(make_link):

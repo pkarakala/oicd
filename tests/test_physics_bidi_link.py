@@ -62,6 +62,29 @@ def test_bidi_case_min_tx_oma(card_case):
     assert a.min_tx_oma_dbm == pytest.approx(2.4 - 0.49955, abs=5e-6)
 
 
+def test_bidi_case_signal_and_crosstalk_power(card_case):
+    # §13.8: power at TP3 -0.3 dBm OMA = 0.933254 mW; reflected local TX 1.548817e-4 mW
+    for direction in card_case.directions:
+        assert direction.report.power_trace[-1].power_mw == pytest.approx(0.933254, abs=1e-6)
+        assert direction.crosstalk_power_mw == pytest.approx(1.548817e-4, rel=1e-6)
+
+
+def test_crosstalk_power_uses_the_local_transmitter():
+    request = {
+        "a_to_b": {**_direction("A", 1311.0), "tx_oma_dbm": 2.4},
+        "b_to_a": {**_direction("B", 1311.0), "tx_oma_dbm": -7.6},
+        "diplexer_il_db": 1.0,
+        "diplexer_isolation_db": 25.0,
+        "fiber_length_km": 0.5,
+        "connector_losses_db": [0.5],
+        "return_loss_db": 15.5,
+    }
+    a, b = evaluate_bidi_link(BidiLinkRequest.model_validate(request)).directions
+    # A's receiver sits next to B's transmitter, 10 dB weaker than A's
+    assert a.crosstalk_power_mw == pytest.approx(1.548817e-5, rel=1e-6)
+    assert b.crosstalk_power_mw == pytest.approx(1.548817e-4, rel=1e-6)
+
+
 def test_bidi_inputs_carry_provenance(card_case):
     report = card_case.directions[0].report
     classes = {r.path: r.source_class for r in report.inputs}

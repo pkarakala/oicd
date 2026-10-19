@@ -141,3 +141,24 @@ def test_pod(client):
 def test_ring_invalid_is_422(client):
     assert client.post("/ring", json={"q_loaded": 0}).status_code == 422
     assert client.post("/ring", json={"q_loaded": 3500}).status_code == 422  # no FSR or n_g + D
+
+
+@pytest.mark.parametrize(
+    "hypothesis, fsr_ghz, channel, leakage",
+    [("H_fsr18", 1800.0, 3, 0.081869), ("H_fsr32", 3200.0, 7, 0.021508)],
+)
+def test_spectrum_bidi16_from_the_catalog(client, hypothesis, fsr_ghz, channel, leakage):
+    # model card §14.5: worst receive channel and its co-directional leakage per hypothesis
+    view = client.get("/spectrum/bidi16", params={"hypothesis": hypothesis}).json()
+    assert (view["hypothesis"], view["fsr_ghz"], view["q_loaded"]) == (hypothesis, fsr_ghz, 3500.0)
+    assert view["accuracy_ghz"] == 20.0
+    worst = view["crosstalk"]["worst"]
+    assert worst["channel"] == channel
+    assert worst["leakage"] == pytest.approx(leakage, abs=5e-7)
+    assert view["crosstalk"]["receive_channels"] == [1, 3, 5, 7, 9, 11, 13, 15]
+    assert len(view["crosstalk"]["spectra"]) == 8
+    assert len(view["crosstalk"]["frequency_ghz"]) == 1601
+
+
+def test_spectrum_rejects_unknown_hypothesis(client):
+    assert client.get("/spectrum/bidi16", params={"hypothesis": "H_fsr99"}).status_code == 422

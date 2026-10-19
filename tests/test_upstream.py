@@ -106,3 +106,23 @@ def test_invalid_chain_physics(bad):
 def test_laser_power_must_be_average():
     with pytest.raises(UnitMismatchError):
         build_chain(laser_kind=PowerKind.OMA)
+
+
+def test_upstream_profile_is_the_card_case():
+    # profiles/upstream_example.json: the worked example with the §10 chain at N = 16
+    from oicd.profiles import load_link, profile_path
+
+    link = load_link(profile_path("upstream_example"))
+    report = evaluate(link)
+    assert report.margin_db == pytest.approx(0.3081, abs=TOL)
+    assert report.upstream.max_fanout == 17
+    assert all(
+        r.source_class is SourceClass.SYNTHETIC
+        for r in report.inputs
+        if r.path.startswith("tx.upstream")
+    )
+    data = link.model_dump()
+    data["tx"]["upstream"]["split_n"]["value"] = 18
+    eighteen = evaluate(type(link).model_validate(data))
+    assert eighteen.verdict == "EXCLUDED"
+    assert eighteen.margin_db == pytest.approx(-0.2034, abs=TOL)

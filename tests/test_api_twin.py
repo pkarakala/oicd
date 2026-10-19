@@ -87,7 +87,11 @@ def test_catalog_json_is_deterministic(client):
 
 
 def test_geometry(client):
-    assert "passage_l20" in client.get("/geometry").json()["scenes"]
+    listing = client.get("/geometry").json()
+    assert "passage_l20" in listing["scenes"]
+    assert [i["id"] for i in listing["info"]] == listing["scenes"]
+    ring = listing["info"][listing["scenes"].index("ring_section")]
+    assert (ring["unit"], ring["parent"], ring["breadcrumb"]) == ("nm", "pic_region", "Ring")
     scene = client.get("/geometry/passage_l20").json()
     assert scene["source_issues"] == []
     outline = next(p for p in scene["scene"]["part"] if p["id"] == "l20g.outline")
@@ -96,3 +100,27 @@ def test_geometry(client):
     assert {p["dims_class"] for p in scene["scene"]["part"]} == {"VENDOR", "SCHEMATIC"}
     for bad in ("no_such_scene", "..%2Fpyproject", "Passage_L20"):
         assert client.get(f"/geometry/{bad}").status_code == 404
+
+
+def test_geometry_serves_evaluated_nodes_and_captions(client):
+    scene = client.get("/geometry/passage_l20").json()
+    nodes = {n["id"]: n for n in scene["nodes"]}
+    # the Inspector shows both package widths: the conflict stays visible
+    assert nodes["l20.width_mm_yole"]["nominal"] == 27.6
+    assert nodes["l20.width_mm_web"]["nominal"] == 26.4
+    assert nodes["l20.energy_per_bit"]["derivation"] == "30 W / 6.4 Tbps = 4.6875 pJ/bit"
+    captions = scene["captions"]
+    assert len(captions) == len(scene["scene"]["tour"]) == 8
+    energy = next(c for c in captions if c["ref"] == "l20.energy_per_bit")
+    assert energy == {
+        "part": "l20g.eic",
+        "ref": "l20.energy_per_bit",
+        "text": "energy per bit at maximum TDP: 30 W / 6.4 Tbps = 4.6875 pJ/bit",
+        "badge": "inference",
+    }
+    link = client.get("/geometry/l20_bidi_link").json()
+    b_upper = next(c for c in link["captions"] if c["ref"] == "l20.check_b_upper")
+    assert b_upper["badge"] == "TENSION"
+    assert b_upper["text"].startswith("1331 nm ≤ 1317.5 nm (max) fails → TENSION, gap 13.5 nm.")
+    assert [c["id"] for c in link["checks"]] == ["l20.check_b_upper"]
+    assert link["checks"][0]["gap_abs"] == pytest.approx(13.5)

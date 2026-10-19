@@ -41,6 +41,8 @@ above_threshold(plane) iff headroom_db(plane) ≥ −ε
 
 M_net decides the verdict. At TP3, headroom_db(TP3) = P_TP3,OMA − threshold_dbm = M_net. The engine evaluates every headroom in the order of M_net, (P_plane,OMA − S_RX,OMA,max) − Σ Π_j − R, so headroom_db(TP3) equals M_net bit for bit and above_threshold(TP3) always agrees with the power-budget verdict. Why: a display that compares headroom with 0 on its own can contradict the verdict at an exact boundary, where float sums land a few ulps below zero (T04, T16).
 
+Each trace point also carries power_mw = 10^(P_plane,OMA/10), the same OMA in mW, and relative_power = power_mw(plane) / power_mw(TP2), the fraction of the launched OMA left, for displays whose brightness follows linear power (the explorer's pulses). Why: the web never converts units itself. Hand case (`docs/hand_calcs/s04_s05_budget.py`): in the worked example TP2 at 0 dBm OMA is 1.0 mW and TP3 at −4.0008 dBm OMA is 0.398034 mW, so relative_power(TP3) = 0.398034.
+
 OMA from average power (only to convert inputs, never mixed in the budget):
 
 ```
@@ -140,6 +142,8 @@ T04 note: the float result depends on summation order. The test asserts PASS and
 | 2026-10-18 | §13.1 states that the image sum peaks 0.0047 dB above 1 (Q_L 3500, FSR 1.8 THz) | found when the API sampled the ring response; the brief's model is kept and its approximation stated | renormalize the sum to peak at 1: changes the brief's leakage values |
 | 2026-10-18 | §4 fiber note cites ITU-T G.652.D (0.40 dB/km, 1310 to 1625 nm) with its short-cable caveat | brief 05 phase 5; the source was opened | keep "typical value, to be cited" |
 | 2026-10-18 | §13 microring and WDM physics: periodic Lorentzian (k = −50 … 50), FWHM = f0/Q_L with the factor-2 lifetime caveat, crosstalk −10·log10(1 − kX) (INFERENCE) with 10·log10(1 + X) alongside, SYNTHETIC design window, thermal tuning with barrel shifting, interleaved Guide grid (INFERENCE), aliasing and the worst-channel rule, BiDi link model | brief 05 phase 5 | single-neighbor Lorentzian without images: misses the FSR aliasing that decides the 16λ BiDi result |
+| 2026-10-18 | §3 trace points carry power_mw = 10^(P_plane,OMA/10) and relative_power | brief 05 phase 8: pulse brightness follows the API's linear power | convert dBm to mW in the browser: the web would compute physics |
+| 2026-10-18 | §13.7 BiDi directions report the crosstalk power at the receiver, 10^(P_TX,local/10)·R | brief 05 phase 8: the ghost pulse's brightness is the API's crosstalk power | let the web scale the ghost from the penalty: the web would compute physics |
 | 2026-10-18 | §14.2 to §14.10 product twins, the 16λ BiDi ring-FSR hypotheses, the Guide DR fan-out, tray and pod hypotheses and the reference rack OICD-R64 with its reference-plane hypotheses | brief 05 phase 6, written before the catalog graphs | per-product prose without derivations: nothing a test could check |
 
 ## 8. Design-space sweep
@@ -411,7 +415,10 @@ penalties = reflection crosstalk (§12.4, from the fiber-plus-connector IL, the 
 α         = 0.40 dB/km at most from 1310 to 1625 nm for G.652.D cable (itut_g652_2024)
 link NOT_EXCLUDED iff both directions are; margin = the smaller direction margin
 minimum TX OMA of a direction = S_RX + Σ Π + R + Σ L   (the launch at which its M_net = 0)
+crosstalk power at a receiver  = 10^(P_TX,local,OMA/10) · R  mW   (R of §12.4, with isolation)
 ```
+
+The crosstalk power is the local transmitter's light that reaches the receiver by reflection, in the same OMA terms as the signal's power at TP3 (§3 power_mw). Why: the explorer's ghost pulse shows it next to the signal pulse. The §12.4 penalty assumes, as its source does, that the local and remote transmitters launch the same OMA; the crosstalk power uses the local transmitter's own OMA.
 
 Each direction's TX wavelength range must also sit inside its own receiver's passband (§3). G.652 notes that its attenuation values should not be applied to short jumper, indoor or drop cables (IEC 60794-2-11, cited there and not read, gives 1.0 dB/km or less for indoor cable); at the metre lengths inside a rack the difference is below 0.01 dB.
 
@@ -436,7 +443,7 @@ Each direction's TX wavelength range must also sit inside its own receiver's pas
 | Guide grid | λ_0 1318.6431 nm, λ_15 1301.4695 nm, outer span 17.1736 nm; ±20 GHz = ±0.11449 nm |
 | ring on channel 0 with FSR 1.8 THz | image on channel 9 (grid B, counter-directional) |
 
-BiDi link model case (`docs/hand_calcs/s13_ring_wdm.py`): an L20-style BiDi pair on the draft DR budget of §12.1. TX OMA 2.4 dBm, diplexer IL 1.0 dB at each end (SYNTHETIC), 0.5 km of fiber at 0.4 dB/km (0.2 dB), one 0.5 dB connector (SYNTHETIC), S_RX −4.3 dBm, TDECQ 3.4 dB and MPI 0.1 dB as named extras, return loss 15.5 dB and diplexer isolation 25 dB (SYNTHETIC), R = 0. The reflection crosstalk at channel IL 0.7 dB is 0.000455 dB, so each direction has M_net = 0.49955 dB. Direction A at 1311 nm (δ = 0) clears the 1304.5 to 1317.5 nm passband by 6.5 nm on each side; direction B at 1331 nm misses it by 13.5 nm, so the link is EXCLUDED on wavelength alone.
+BiDi link model case (`docs/hand_calcs/s13_ring_wdm.py`): an L20-style BiDi pair on the draft DR budget of §12.1. TX OMA 2.4 dBm, diplexer IL 1.0 dB at each end (SYNTHETIC), 0.5 km of fiber at 0.4 dB/km (0.2 dB), one 0.5 dB connector (SYNTHETIC), S_RX −4.3 dBm, TDECQ 3.4 dB and MPI 0.1 dB as named extras, return loss 15.5 dB and diplexer isolation 25 dB (SYNTHETIC), R = 0. The reflection crosstalk at channel IL 0.7 dB is 0.000455 dB, so each direction has M_net = 0.49955 dB. Direction A at 1311 nm (δ = 0) clears the 1304.5 to 1317.5 nm passband by 6.5 nm on each side; direction B at 1331 nm misses it by 13.5 nm, so the link is EXCLUDED on wavelength alone. Power at TP3 −0.3 dBm OMA = 0.933254 mW; reflected local TX 2.4 dBm × 10^(−40.5/10) = 1.548817e-4 mW, 37.80 dB below the signal; with no diplexer isolation (I = 0) it would be 0.048978 mW.
 
 Properties tested: crosstalk falls with spacing, the penalty rises with X, heater power is linear in the tuning.
 

@@ -18,7 +18,9 @@ from pydantic import BaseModel, ConfigDict, Field, ValidationError, model_valida
 
 from oicd.api_physics import router as physics_router
 from oicd.api_twin import router as twin_router
+from oicd.display import Palette, palette
 from oicd.profiles import PROFILES_DIR, load_link, profile_path
+from oicd.provenance import DEFAULT_BIB_PATH, BibEntry, parse_bib_entries
 from oicd.report import FeasibilityReport, evaluate
 from oicd.schema import Link
 from oicd.serialize import canonical_json
@@ -94,6 +96,27 @@ def _json(model: BaseModel) -> Response:
 
 app.include_router(twin_router)
 app.include_router(physics_router)
+
+
+@app.get("/display", response_model=Palette)
+def get_display(mode: Literal["light", "dark"] = "light", channels: int = 16) -> Response:
+    """Every color the explorer uses: classes, status, margin scale, wavelength channels."""
+    if not 1 <= channels <= 128:
+        raise HTTPException(status_code=422, detail="channels must be 1 to 128")
+    return _json(palette(mode, channels))
+
+
+class ReferenceList(BaseModel):
+    model_config = _REQUEST
+
+    entries: tuple[BibEntry, ...]
+
+
+@app.get("/references", response_model=ReferenceList)
+def get_references() -> Response:
+    """references.bib entries (title, year, url, note), so citations can link to their source."""
+    entries = parse_bib_entries(DEFAULT_BIB_PATH.read_text(encoding="utf-8"))
+    return _json(ReferenceList(entries=entries))
 
 
 @app.get("/health")

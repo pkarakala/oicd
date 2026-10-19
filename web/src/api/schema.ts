@@ -61,6 +61,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/display": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get Display
+         * @description Every color the explorer uses: classes, status, margin scale, wavelength channels.
+         */
+        get: operations["get_display_display_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/evaluate": {
         parameters: {
             query?: never;
@@ -194,6 +214,28 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/overlay/{scene}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get Overlay
+         * @description Light paths with pulse brightness, margins with colors and heater power for a scene
+         *     (model card §3, §13, §14). `case` picks a reference-plane case of the rack and its trays;
+         *     `isolation_db` sets the diplexer isolation of the L20 scenes.
+         */
+        get: operations["get_overlay_overlay__scene__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/pod": {
         parameters: {
             query?: never;
@@ -268,6 +310,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/references": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get References
+         * @description references.bib entries (title, year, url, note), so citations can link to their source.
+         */
+        get: operations["get_references_references_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/ring": {
         parameters: {
             query?: never;
@@ -282,6 +344,26 @@ export interface paths {
          * @description Ring parameters (model card §13.1), design windows (§13.3) and a sampled drop response.
          */
         post: operations["post_ring_ring_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/spectrum/bidi16": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get Spectrum
+         * @description Spectrum tab data: interleaved grid, ±accuracy, receive-ring responses (from the catalog).
+         */
+        get: operations["get_spectrum_spectrum_bidi16_get"];
+        put?: never;
+        post?: never;
         delete?: never;
         options?: never;
         head?: never;
@@ -419,6 +501,33 @@ export interface components {
             values?: number[] | null;
         };
         /**
+         * BibEntry
+         * @description One references.bib entry, for showing a citation with its source link.
+         */
+        BibEntry: {
+            /** Entry Type */
+            entry_type: string;
+            /** Key */
+            key: string;
+            /**
+             * Note
+             * @default
+             */
+            note: string;
+            /** Title */
+            title: string;
+            /**
+             * Url
+             * @default
+             */
+            url: string;
+            /**
+             * Year
+             * @default
+             */
+            year: string;
+        };
+        /**
          * BidiDirection
          * @description One direction of a BiDi link, as the engine at each end specifies it.
          */
@@ -453,6 +562,8 @@ export interface components {
         BidiDirectionResult: {
             /** Channel Il Db */
             channel_il_db: number;
+            /** Crosstalk Power Mw */
+            crosstalk_power_mw: number;
             /** Min Tx Oma Dbm */
             min_tx_oma_dbm: number;
             /** Mpi Db */
@@ -521,6 +632,20 @@ export interface components {
              */
             verdict: "NOT_EXCLUDED" | "EXCLUDED";
         };
+        /**
+         * Caption
+         * @description A tour stop's caption, written by the engine from the catalog.
+         */
+        Caption: {
+            /** Badge */
+            badge: string;
+            /** Part */
+            part: string;
+            /** Ref */
+            ref: string;
+            /** Text */
+            text: string;
+        };
         /** CatalogIndex */
         CatalogIndex: {
             /** Independence */
@@ -541,6 +666,18 @@ export interface components {
             index: number;
             /** Wavelength Nm */
             wavelength_nm: number;
+        };
+        /** ChannelColor */
+        ChannelColor: {
+            /** Channel */
+            channel: number;
+            /** Color */
+            color: string;
+            /**
+             * Direction
+             * @enum {string}
+             */
+            direction: "A" | "B";
         };
         /** CheckOutcome */
         CheckOutcome: {
@@ -587,6 +724,13 @@ export interface components {
             /** Message */
             message: string;
             status: components["schemas"]["Status"];
+        };
+        /** ColorStop */
+        ColorStop: {
+            /** Color */
+            color: string;
+            /** Value Db */
+            value_db: number;
         };
         /** ConflictPair */
         ConflictPair: {
@@ -803,6 +947,11 @@ export interface components {
             /** Part */
             part: components["schemas"]["Part"][];
             scene: components["schemas"]["SceneInfo"];
+            /**
+             * Tour
+             * @default []
+             */
+            tour: components["schemas"]["TourStop"][];
         };
         /** Grid */
         Grid: {
@@ -953,6 +1102,35 @@ export interface components {
              */
             verdict: "NOT_EXCLUDED" | "EXCLUDED";
         };
+        /** LightPath */
+        LightPath: {
+            /** Color */
+            color: string;
+            /**
+             * Direction
+             * @enum {string}
+             */
+            direction: "forward" | "backward" | "none";
+            /**
+             * Instances
+             * @default []
+             */
+            instances: number[];
+            /**
+             * Kind
+             * @enum {string}
+             */
+            kind: "signal" | "ghost" | "cw";
+            /** Label */
+            label: string;
+            /** Part */
+            part: string;
+            /** Power Kind */
+            power_kind: ("OMA" | "AVERAGE") | null;
+            /** Samples */
+            samples: components["schemas"]["PathSample"][];
+            source_class: components["schemas"]["SourceClass"];
+        };
         /** Link */
         Link: {
             /** Channel */
@@ -985,6 +1163,54 @@ export interface components {
             loss_max: components["schemas"]["Quantity_DB_"];
             /** Name */
             name: string;
+        };
+        /**
+         * MarginBin
+         * @description lo_db ≤ M < hi_db; None is unbounded.
+         */
+        MarginBin: {
+            /** Color */
+            color: string;
+            /** Hi Db */
+            hi_db: number | null;
+            /** Lo Db */
+            lo_db: number | null;
+        };
+        /**
+         * Material
+         * @description Physically based look of a part material (restrained; no neon outside light paths).
+         */
+        Material: {
+            /** Color */
+            color: string;
+            /**
+             * Edge
+             * @description Feature-edge color: a shade darker than the face.
+             */
+            readonly edge: string;
+            /**
+             * Ior
+             * @default 1.5
+             */
+            ior: number;
+            /** Key */
+            key: string;
+            /** Label */
+            label: string;
+            /** Metalness */
+            metalness: number;
+            /**
+             * Opacity
+             * @default 1
+             */
+            opacity: number;
+            /** Roughness */
+            roughness: number;
+            /**
+             * Transmission
+             * @default 0
+             */
+            transmission: number;
         };
         /** MonteCarloYield */
         MonteCarloYield: {
@@ -1128,6 +1354,90 @@ export interface components {
             kind: components["schemas"]["PowerKind"];
             power_dbm: components["schemas"]["DBm"];
         };
+        /** Overlay */
+        Overlay: {
+            /** Case */
+            case: string | null;
+            /** Cases */
+            cases: components["schemas"]["OverlayCase"][];
+            /** Legend */
+            legend: string;
+            /** Margin Db */
+            margin_db: number | null;
+            /**
+             * Mode
+             * @enum {string}
+             */
+            mode: "light" | "dark";
+            /** Notes */
+            notes: string[];
+            /** Paths */
+            paths: components["schemas"]["LightPath"][];
+            /** Reference Kind */
+            reference_kind: ("OMA" | "AVERAGE") | null;
+            /** Reference Mw */
+            reference_mw: number | null;
+            /** Scene */
+            scene: string;
+            /** Values */
+            values: components["schemas"]["PartValue"][];
+            /** Verdict */
+            verdict: ("NOT_EXCLUDED" | "EXCLUDED") | null;
+            /**
+             * Verdict Note
+             * @default
+             */
+            verdict_note: string;
+        };
+        /** OverlayCase */
+        OverlayCase: {
+            /** Id */
+            id: string;
+            /** Label */
+            label: string;
+        };
+        /** Palette */
+        Palette: {
+            /** Background Bottom */
+            background_bottom: string;
+            /** Background Top */
+            background_top: string;
+            /** Channel Legend */
+            channel_legend: string;
+            /** Channels */
+            channels: components["schemas"]["ChannelColor"][];
+            /** Classes */
+            classes: components["schemas"]["Swatch"][];
+            /** Cw */
+            cw: string;
+            /** Dims Classes */
+            dims_classes: components["schemas"]["Swatch"][];
+            /** Grid */
+            grid: string;
+            /** Ink */
+            ink: string;
+            /** Margin Bins */
+            margin_bins: components["schemas"]["MarginBin"][];
+            /** Margin Range Db */
+            margin_range_db: number;
+            /** Margin Scale */
+            margin_scale: components["schemas"]["ColorStop"][];
+            /** Materials */
+            materials: components["schemas"]["Material"][];
+            /**
+             * Mode
+             * @enum {string}
+             */
+            mode: "light" | "dark";
+            /** Muted */
+            muted: string;
+            /** Schematic Tint */
+            schematic_tint: string;
+            /** Status */
+            status: components["schemas"]["StatusSwatch"][];
+            /** Surface */
+            surface: string;
+        };
         /**
          * Part
          * @description One part of a scene, in the scene's unit. size is the bounding box (x, y, z).
@@ -1143,6 +1453,12 @@ export interface components {
              * @default 1
              */
             count: number;
+            /** Dims Axes */
+            dims_axes?: [
+                "PUBLISHED" | "VENDOR" | "INFERENCE" | "SCHEMATIC",
+                "PUBLISHED" | "VENDOR" | "INFERENCE" | "SCHEMATIC",
+                "PUBLISHED" | "VENDOR" | "INFERENCE" | "SCHEMATIC"
+            ] | null;
             /**
              * Dims Class
              * @enum {string}
@@ -1150,6 +1466,11 @@ export interface components {
             dims_class: "PUBLISHED" | "VENDOR" | "INFERENCE" | "SCHEMATIC";
             /** Dims Source */
             dims_source: string;
+            /**
+             * Enters
+             * @default
+             */
+            enters: string;
             /**
              * Explode
              * @default [
@@ -1183,10 +1504,29 @@ export interface components {
             ];
             /** Id */
             id: string;
+            /**
+             * Label
+             * @default
+             */
+            label: string;
             /** Material */
             material: string;
             /** Name */
             name: string;
+            /**
+             * Nodes
+             * @default []
+             */
+            nodes: string[];
+            /**
+             * Path
+             * @default []
+             */
+            path: [
+                number,
+                number,
+                number
+            ][];
             /**
              * Pitch
              * @default [
@@ -1231,13 +1571,36 @@ export interface components {
              * @default box
              * @enum {string}
              */
-            shape: "box" | "cylinder" | "sphere" | "tube" | "ring" | "array";
+            shape: "box" | "cylinder" | "sphere" | "tube" | "ring";
             /** Size */
             size: [
                 number,
                 number,
                 number
             ];
+            /** Wall */
+            wall?: number | null;
+        };
+        /**
+         * PartValue
+         * @description A number shown on a part: a margin with its color, or a heater power with its glow.
+         */
+        PartValue: {
+            /** Color */
+            color?: string | null;
+            /** Intensity */
+            intensity?: number | null;
+            /** Label */
+            label: string;
+            /** Margin Db */
+            margin_db?: number | null;
+            /** Part */
+            part: string;
+            /** Power Mw */
+            power_mw?: number | null;
+            source_class: components["schemas"]["SourceClass"];
+            /** Verdict */
+            verdict?: ("NOT_EXCLUDED" | "EXCLUDED") | null;
         };
         /** PathCase */
         PathCase: {
@@ -1251,6 +1614,20 @@ export interface components {
             report: components["schemas"]["FeasibilityReport"];
             /** Vclick Loss Db */
             vclick_loss_db: number | null;
+        };
+        /**
+         * PathSample
+         * @description Light just after `label` (an element of the trace) at fraction `at` of the centerline.
+         */
+        PathSample: {
+            /** At */
+            at: number;
+            /** Brightness */
+            brightness: number;
+            /** Label */
+            label: string;
+            /** Power Mw */
+            power_mw: number | null;
         };
         /** Penalty */
         Penalty: {
@@ -1479,6 +1856,11 @@ export interface components {
             passband_min_nm: components["schemas"]["Quantity_float_"];
             sensitivity_oma_max: components["schemas"]["Quantity_OpticalPower_"];
         };
+        /** ReferenceList */
+        ReferenceList: {
+            /** Entries */
+            entries: components["schemas"]["BibEntry"][];
+        };
         /** ReflectionCrosstalk */
         ReflectionCrosstalk: {
             /** Meets Return Loss Rule */
@@ -1604,6 +1986,11 @@ export interface components {
         };
         /** SceneInfo */
         SceneInfo: {
+            /**
+             * Breadcrumb
+             * @default
+             */
+            breadcrumb: string;
             /** Id */
             id: string;
             /**
@@ -1613,6 +2000,16 @@ export interface components {
             level: "rack" | "tray" | "package" | "pic" | "device";
             /** Name */
             name: string;
+            /**
+             * Parent
+             * @default
+             */
+            parent: string;
+            /**
+             * Product
+             * @default
+             */
+            product: string;
             /** Summary */
             summary: string;
             /**
@@ -1623,13 +2020,21 @@ export interface components {
         };
         /** SceneList */
         SceneList: {
+            /** Info */
+            info: components["schemas"]["SceneInfo"][];
             /** Scenes */
             scenes: string[];
         };
         /** SceneView */
         SceneView: {
+            /** Captions */
+            captions: components["schemas"]["Caption"][];
+            /** Checks */
+            checks: components["schemas"]["CheckOutcome"][];
             /** Independence */
             independence: string;
+            /** Nodes */
+            nodes: components["schemas"]["NodeResult"][];
             scene: components["schemas"]["GeometryScene"];
             /** Source Issues */
             source_issues: string[];
@@ -1682,10 +2087,43 @@ export interface components {
             frequency_ghz: number[];
         };
         /**
+         * SpectrumView
+         * @description The 16λ BiDi grid and its receive rings under one ring-FSR hypothesis, all inputs from
+         *     the catalog (model card §13.5, §13.6, §14.5).
+         */
+        SpectrumView: {
+            /** Accuracy Ghz */
+            accuracy_ghz: number;
+            crosstalk: components["schemas"]["CrosstalkResponse"];
+            /** Fsr Ghz */
+            fsr_ghz: number;
+            /** Hypotheses */
+            hypotheses: string[];
+            /** Hypothesis */
+            hypothesis: string;
+            /** Inputs */
+            inputs: string[];
+            /** Q Loaded */
+            q_loaded: number;
+            /** Statement */
+            statement: string;
+        };
+        /**
          * Status
          * @enum {string}
          */
         Status: "pass" | "fail" | "not_evaluated";
+        /** StatusSwatch */
+        StatusSwatch: {
+            /** Color */
+            color: string;
+            /** Icon */
+            icon: string;
+            /** Key */
+            key: string;
+            /** Label */
+            label: string;
+        };
         /** SupportCell */
         SupportCell: {
             /** Gap Rel */
@@ -1712,6 +2150,15 @@ export interface components {
             hypothesis: string;
             /** Statement */
             statement: string;
+        };
+        /** Swatch */
+        Swatch: {
+            /** Color */
+            color: string;
+            /** Key */
+            key: string;
+            /** Label */
+            label: string;
         };
         /** SweepAxis */
         SweepAxis: {
@@ -1800,6 +2247,25 @@ export interface components {
             nominal: number;
         };
         /**
+         * TourStop
+         * @description A guided-tour camera stop: frame `part`; the caption comes from `node`, a catalog node or
+         *     check id, or else from the written `caption`.
+         */
+        TourStop: {
+            /**
+             * Caption
+             * @default
+             */
+            caption: string;
+            /**
+             * Node
+             * @default
+             */
+            node: string;
+            /** Part */
+            part: string;
+        };
+        /**
          * TracePoint
          * @description OMA at TP2, after each channel element in order, and at TP3.
          *
@@ -1831,6 +2297,10 @@ export interface components {
             name: string;
             /** Power Dbm */
             power_dbm: number;
+            /** Power Mw */
+            power_mw: number;
+            /** Relative Power */
+            relative_power: number;
         };
         /** Transmitter */
         Transmitter: {
@@ -2085,6 +2555,38 @@ export interface operations {
             };
         };
     };
+    get_display_display_get: {
+        parameters: {
+            query?: {
+                mode?: "light" | "dark";
+                channels?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Palette"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     evaluate_link_evaluate_post: {
         parameters: {
             query?: never;
@@ -2292,6 +2794,41 @@ export interface operations {
             };
         };
     };
+    get_overlay_overlay__scene__get: {
+        parameters: {
+            query?: {
+                mode?: "light" | "dark";
+                case?: string | null;
+                isolation_db?: number;
+            };
+            header?: never;
+            path: {
+                scene: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Overlay"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     post_pod_pod_post: {
         parameters: {
             query?: never;
@@ -2409,6 +2946,26 @@ export interface operations {
             };
         };
     };
+    get_references_references_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ReferenceList"];
+                };
+            };
+        };
+    };
     post_ring_ring_post: {
         parameters: {
             query?: never;
@@ -2429,6 +2986,37 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["RingResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_spectrum_spectrum_bidi16_get: {
+        parameters: {
+            query?: {
+                hypothesis?: "H_fsr18" | "H_fsr32";
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SpectrumView"];
                 };
             };
             /** @description Validation Error */

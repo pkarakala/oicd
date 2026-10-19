@@ -71,3 +71,12 @@ def test_normal_cdf_values():
 def test_invalid_monte_carlo_arguments(card_link, kwargs):
     with pytest.raises(ValueError):
         monte_carlo_yield(card_link, **kwargs)
+
+
+def test_yield_profile_is_the_card_case():
+    # profiles/yield_example.json: §11 hand case, the three matings with sigma 0.2 dB
+    from oicd.profiles import load_link, profile_path
+
+    result = analytic_yield(load_link(profile_path("yield_example")))
+    assert result.sigma_total_db == pytest.approx(0.34641, abs=1e-5)
+    assert result.yield_fraction == pytest.approx(0.92522, abs=1e-5)

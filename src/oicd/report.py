@@ -16,7 +16,7 @@ from oicd.checks.wavelength import check_wavelength
 from oicd.provenance import Provenance, SourceClass
 from oicd.registry import EPSILON_DB, NOT_EVALUATED, ConstraintId
 from oicd.schema import Link, UpstreamChain
-from oicd.units import DB, DBm, oma_offset_db
+from oicd.units import DB, DBm, dbm_to_mw, oma_offset_db
 from oicd.upstream import UpstreamStep, derive_tp2, max_fanout, tp2_launch
 
 _FROZEN = ConfigDict(frozen=True, extra="forbid")
@@ -70,6 +70,8 @@ class TracePoint(BaseModel):
     loss_fraction: float | None
     headroom_db: float
     above_threshold: bool
+    power_mw: float  # the same OMA in mW, for displays that scale with linear power
+    relative_power: float  # power_mw / power_mw at TP2: the fraction of the launch left
 
 
 class UpstreamSection(BaseModel):
@@ -322,6 +324,8 @@ def power_trace(link: Link) -> tuple[TracePoint, ...]:
             loss_fraction=fraction,
             headroom_db=headroom.value,
             above_threshold=headroom.value >= -EPSILON_DB,
+            power_mw=dbm_to_mw(power),
+            relative_power=dbm_to_mw(power) / dbm_to_mw(launch),
         )
 
     points = [point("reference_plane", "TP2", launch)]

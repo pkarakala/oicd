@@ -380,6 +380,8 @@ def load_catalog(
 # ---- Geometry ------------------------------------------------------------------------------
 
 DimsClass = Literal["PUBLISHED", "VENDOR", "INFERENCE", "SCHEMATIC"]
+# Strength of a dimension's source, strongest first; a part's dims_class is its weakest axis.
+DIMS_STRENGTH: dict[str, int] = {"PUBLISHED": 3, "VENDOR": 2, "INFERENCE": 1, "SCHEMATIC": 0}
 
 
 class Part(BaseModel):
@@ -390,18 +392,24 @@ class Part(BaseModel):
     id: str = Field(pattern=_ID)
     name: str
     assembly: str = ""
-    shape: Literal["box", "cylinder", "sphere", "tube", "ring", "array"] = "box"
+    shape: Literal["box", "cylinder", "sphere", "tube", "ring"] = "box"
     size: tuple[float, float, float]
     position: tuple[float, float, float] = (0.0, 0.0, 0.0)
     rotation_deg: tuple[float, float, float] = (0.0, 0.0, 0.0)
     material: str
     dims_class: DimsClass
     dims_source: str  # a fact or derived id, or the reason a SCHEMATIC size was chosen
+    dims_axes: tuple[DimsClass, DimsClass, DimsClass] | None = None  # per axis (x, y, z)
     function: str = ""
     explode: tuple[float, float, float] = (0.0, 0.0, 0.0)
     count: int = Field(default=1, ge=1)
     pitch: tuple[float, float, float] = (0.0, 0.0, 0.0)
     grid: tuple[int, int, int] = (1, 1, 1)
+    path: tuple[tuple[float, float, float], ...] = ()  # centerline of a "tube", in scene units
+    enters: str = ""  # scene id a double-click opens (semantic zoom)
+    nodes: tuple[str, ...] = ()  # catalog nodes the Inspector shows for this part
+    label: str = ""  # short leader-line label
+    wall: float | None = None  # radial width of a "ring" (annulus); size x and y are its diameter
 
     @model_validator(mode="after")
     def _check(self) -> Self:
@@ -411,7 +419,25 @@ class Part(BaseModel):
             raise ValueError(f"{self.id}: grid {self.grid} does not hold count {self.count}")
         if not self.dims_source.strip():
             raise ValueError(f"{self.id}: dims_source must say where the size comes from")
+        if self.shape == "tube" and len(self.path) < 2:
+            raise ValueError(f"{self.id}: a tube needs a path of at least two points")
+        if (self.shape == "ring") != (self.wall is not None):
+            raise ValueError(f"{self.id}: a ring needs a wall, and only a ring has one")
+        if self.wall is not None and not 0 < self.wall < min(self.size[0], self.size[1]) / 2:
+            raise ValueError(f"{self.id}: a ring's wall must be positive and under its radius")
+        if self.dims_axes is not None:
+            weakest = min(self.dims_axes, key=DIMS_STRENGTH.__getitem__)
+            if weakest != self.dims_class:
+                raise ValueError(
+                    f"{self.id}: dims_class {self.dims_class} must be the weakest axis ({weakest})"
+                )
         return self
+
+    @property
+    def sourced(self) -> bool:
+        """True when any axis has a source (its dims_source must then be a catalog node)."""
+        axes = self.dims_axes or (self.dims_class,) * 3
+        return any(a != "SCHEMATIC" for a in axes)
 
 
 class SceneInfo(BaseModel):
@@ -422,6 +448,26 @@ class SceneInfo(BaseModel):
     unit: Literal["m", "mm", "um", "nm"]
     summary: str
     level: Literal["rack", "tray", "package", "pic", "device"]
+    product: str = ""  # catalog product whose spec sheet, inference and physics apply
+    parent: str = ""  # scene one level up (breadcrumb)
+    breadcrumb: str = ""  # short name in the breadcrumb
+
+
+class TourStop(BaseModel):
+    """A guided-tour camera stop: frame `part`; the caption comes from `node`, a catalog node or
+    check id, or else from the written `caption`."""
+
+    model_config = _FROZEN
+
+    part: str
+    node: str = ""
+    caption: str = ""
+
+    @model_validator(mode="after")
+    def _has_text(self) -> Self:
+        if not self.node and not self.caption.strip():
+            raise ValueError(f"tour stop at {self.part}: give a catalog node or a caption")
+        return self
 
 
 class GeometryScene(BaseModel):
@@ -429,12 +475,16 @@ class GeometryScene(BaseModel):
 
     scene: SceneInfo
     part: tuple[Part, ...]
+    tour: tuple[TourStop, ...] = ()
 
     @model_validator(mode="after")
     def _unique(self) -> Self:
         ids = [p.id for p in self.part]
         if len(ids) != len(set(ids)):
             raise ValueError(f"{self.scene.id}: duplicate part ids")
+        for stop in self.tour:
+            if stop.part not in ids:
+                raise ValueError(f"{self.scene.id}: tour stop names unknown part {stop.part!r}")
         return self
 
 
@@ -457,9 +507,24 @@ def load_geometry(scene: str, directory: Path = GEOMETRY_DIR) -> GeometryScene:
 
 
 def validate_geometry_sources(scene: GeometryScene, catalog: Catalog) -> list[str]:
-    """Parts whose dims_class claims a source but whose dims_source is not a catalog node."""
-    return [
+    """Parts whose dims_class claims a source that is not a catalog node, and part nodes or a
+    scene product that the catalog does not have."""
+    issues = [
         f"{p.id}: dims_source {p.dims_source!r} is not a catalog node"
         for p in scene.part
-        if p.dims_class != "SCHEMATIC" and p.dims_source not in catalog.nodes
+        if p.sourced and p.dims_source not in catalog.nodes
     ]
+    issues += [
+        f"tour stop at {t.part}: node {t.node!r} is not in the catalog"
+        for t in scene.tour
+        if t.node and t.node not in catalog.nodes and t.node not in catalog.checks
+    ]
+    issues += [
+        f"{p.id}: node {n!r} is not in the catalog"
+        for p in scene.part
+        for n in p.nodes
+        if n not in catalog.nodes
+    ]
+    if scene.scene.product and scene.scene.product not in catalog.files:
+        issues.append(f"product {scene.scene.product!r} is not a catalog file")
+    return issues

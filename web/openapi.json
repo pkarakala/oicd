@@ -134,6 +134,46 @@
         "title": "AxisRequest",
         "type": "object"
       },
+      "BibEntry": {
+        "additionalProperties": false,
+        "description": "One references.bib entry, for showing a citation with its source link.",
+        "properties": {
+          "entry_type": {
+            "title": "Entry Type",
+            "type": "string"
+          },
+          "key": {
+            "title": "Key",
+            "type": "string"
+          },
+          "note": {
+            "default": "",
+            "title": "Note",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "url": {
+            "default": "",
+            "title": "Url",
+            "type": "string"
+          },
+          "year": {
+            "default": "",
+            "title": "Year",
+            "type": "string"
+          }
+        },
+        "required": [
+          "key",
+          "entry_type",
+          "title"
+        ],
+        "title": "BibEntry",
+        "type": "object"
+      },
       "BidiDirection": {
         "additionalProperties": false,
         "description": "One direction of a BiDi link, as the engine at each end specifies it.",
@@ -217,6 +257,10 @@
             "title": "Channel Il Db",
             "type": "number"
           },
+          "crosstalk_power_mw": {
+            "title": "Crosstalk Power Mw",
+            "type": "number"
+          },
           "min_tx_oma_dbm": {
             "title": "Min Tx Oma Dbm",
             "type": "number"
@@ -261,7 +305,8 @@
           "reflection",
           "mpi_db",
           "wdm_crosstalk_db",
-          "min_tx_oma_dbm"
+          "min_tx_oma_dbm",
+          "crosstalk_power_mw"
         ],
         "title": "BidiDirectionResult",
         "type": "object"
@@ -384,6 +429,36 @@
         "title": "BidiLinkResult",
         "type": "object"
       },
+      "Caption": {
+        "additionalProperties": false,
+        "description": "A tour stop's caption, written by the engine from the catalog.",
+        "properties": {
+          "badge": {
+            "title": "Badge",
+            "type": "string"
+          },
+          "part": {
+            "title": "Part",
+            "type": "string"
+          },
+          "ref": {
+            "title": "Ref",
+            "type": "string"
+          },
+          "text": {
+            "title": "Text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "part",
+          "ref",
+          "text",
+          "badge"
+        ],
+        "title": "Caption",
+        "type": "object"
+      },
       "CatalogIndex": {
         "additionalProperties": false,
         "properties": {
@@ -437,6 +512,34 @@
           "grid"
         ],
         "title": "Channel",
+        "type": "object"
+      },
+      "ChannelColor": {
+        "additionalProperties": false,
+        "properties": {
+          "channel": {
+            "title": "Channel",
+            "type": "integer"
+          },
+          "color": {
+            "title": "Color",
+            "type": "string"
+          },
+          "direction": {
+            "enum": [
+              "A",
+              "B"
+            ],
+            "title": "Direction",
+            "type": "string"
+          }
+        },
+        "required": [
+          "channel",
+          "direction",
+          "color"
+        ],
+        "title": "ChannelColor",
         "type": "object"
       },
       "CheckOutcome": {
@@ -564,6 +667,25 @@
           "message"
         ],
         "title": "CheckResult",
+        "type": "object"
+      },
+      "ColorStop": {
+        "additionalProperties": false,
+        "properties": {
+          "color": {
+            "title": "Color",
+            "type": "string"
+          },
+          "value_db": {
+            "title": "Value Db",
+            "type": "number"
+          }
+        },
+        "required": [
+          "value_db",
+          "color"
+        ],
+        "title": "ColorStop",
         "type": "object"
       },
       "ConflictPair": {
@@ -1137,6 +1259,14 @@
           },
           "scene": {
             "$ref": "#/components/schemas/SceneInfo"
+          },
+          "tour": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/TourStop"
+            },
+            "title": "Tour",
+            "type": "array"
           }
         },
         "required": [
@@ -1493,6 +1623,86 @@
         "title": "LaneSummary",
         "type": "object"
       },
+      "LightPath": {
+        "additionalProperties": false,
+        "properties": {
+          "color": {
+            "title": "Color",
+            "type": "string"
+          },
+          "direction": {
+            "enum": [
+              "forward",
+              "backward",
+              "none"
+            ],
+            "title": "Direction",
+            "type": "string"
+          },
+          "instances": {
+            "default": [],
+            "items": {
+              "type": "integer"
+            },
+            "title": "Instances",
+            "type": "array"
+          },
+          "kind": {
+            "enum": [
+              "signal",
+              "ghost",
+              "cw"
+            ],
+            "title": "Kind",
+            "type": "string"
+          },
+          "label": {
+            "title": "Label",
+            "type": "string"
+          },
+          "part": {
+            "title": "Part",
+            "type": "string"
+          },
+          "power_kind": {
+            "anyOf": [
+              {
+                "enum": [
+                  "OMA",
+                  "AVERAGE"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Power Kind"
+          },
+          "samples": {
+            "items": {
+              "$ref": "#/components/schemas/PathSample"
+            },
+            "title": "Samples",
+            "type": "array"
+          },
+          "source_class": {
+            "$ref": "#/components/schemas/SourceClass"
+          }
+        },
+        "required": [
+          "part",
+          "kind",
+          "label",
+          "color",
+          "direction",
+          "power_kind",
+          "samples",
+          "source_class"
+        ],
+        "title": "LightPath",
+        "type": "object"
+      },
       "Link": {
         "additionalProperties": false,
         "properties": {
@@ -1579,6 +1789,102 @@
           "loss_max"
         ],
         "title": "LossElement",
+        "type": "object"
+      },
+      "MarginBin": {
+        "additionalProperties": false,
+        "description": "lo_db ≤ M < hi_db; None is unbounded.",
+        "properties": {
+          "color": {
+            "title": "Color",
+            "type": "string"
+          },
+          "hi_db": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Hi Db"
+          },
+          "lo_db": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lo Db"
+          }
+        },
+        "required": [
+          "lo_db",
+          "hi_db",
+          "color"
+        ],
+        "title": "MarginBin",
+        "type": "object"
+      },
+      "Material": {
+        "additionalProperties": false,
+        "description": "Physically based look of a part material (restrained; no neon outside light paths).",
+        "properties": {
+          "color": {
+            "title": "Color",
+            "type": "string"
+          },
+          "edge": {
+            "description": "Feature-edge color: a shade darker than the face.",
+            "readOnly": true,
+            "title": "Edge",
+            "type": "string"
+          },
+          "ior": {
+            "default": 1.5,
+            "title": "Ior",
+            "type": "number"
+          },
+          "key": {
+            "title": "Key",
+            "type": "string"
+          },
+          "label": {
+            "title": "Label",
+            "type": "string"
+          },
+          "metalness": {
+            "title": "Metalness",
+            "type": "number"
+          },
+          "opacity": {
+            "default": 1.0,
+            "title": "Opacity",
+            "type": "number"
+          },
+          "roughness": {
+            "title": "Roughness",
+            "type": "number"
+          },
+          "transmission": {
+            "default": 0.0,
+            "title": "Transmission",
+            "type": "number"
+          }
+        },
+        "required": [
+          "key",
+          "label",
+          "color",
+          "metalness",
+          "roughness",
+          "edge"
+        ],
+        "title": "Material",
         "type": "object"
       },
       "MonteCarloYield": {
@@ -1999,6 +2305,282 @@
         "title": "OpticalPower",
         "type": "object"
       },
+      "Overlay": {
+        "additionalProperties": false,
+        "properties": {
+          "case": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Case"
+          },
+          "cases": {
+            "items": {
+              "$ref": "#/components/schemas/OverlayCase"
+            },
+            "title": "Cases",
+            "type": "array"
+          },
+          "legend": {
+            "title": "Legend",
+            "type": "string"
+          },
+          "margin_db": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Margin Db"
+          },
+          "mode": {
+            "enum": [
+              "light",
+              "dark"
+            ],
+            "title": "Mode",
+            "type": "string"
+          },
+          "notes": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Notes",
+            "type": "array"
+          },
+          "paths": {
+            "items": {
+              "$ref": "#/components/schemas/LightPath"
+            },
+            "title": "Paths",
+            "type": "array"
+          },
+          "reference_kind": {
+            "anyOf": [
+              {
+                "enum": [
+                  "OMA",
+                  "AVERAGE"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reference Kind"
+          },
+          "reference_mw": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reference Mw"
+          },
+          "scene": {
+            "title": "Scene",
+            "type": "string"
+          },
+          "values": {
+            "items": {
+              "$ref": "#/components/schemas/PartValue"
+            },
+            "title": "Values",
+            "type": "array"
+          },
+          "verdict": {
+            "anyOf": [
+              {
+                "enum": [
+                  "NOT_EXCLUDED",
+                  "EXCLUDED"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Verdict"
+          },
+          "verdict_note": {
+            "default": "",
+            "title": "Verdict Note",
+            "type": "string"
+          }
+        },
+        "required": [
+          "scene",
+          "mode",
+          "case",
+          "cases",
+          "legend",
+          "reference_mw",
+          "reference_kind",
+          "verdict",
+          "margin_db",
+          "paths",
+          "values",
+          "notes"
+        ],
+        "title": "Overlay",
+        "type": "object"
+      },
+      "OverlayCase": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "label": {
+            "title": "Label",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "label"
+        ],
+        "title": "OverlayCase",
+        "type": "object"
+      },
+      "Palette": {
+        "additionalProperties": false,
+        "properties": {
+          "background_bottom": {
+            "title": "Background Bottom",
+            "type": "string"
+          },
+          "background_top": {
+            "title": "Background Top",
+            "type": "string"
+          },
+          "channel_legend": {
+            "title": "Channel Legend",
+            "type": "string"
+          },
+          "channels": {
+            "items": {
+              "$ref": "#/components/schemas/ChannelColor"
+            },
+            "title": "Channels",
+            "type": "array"
+          },
+          "classes": {
+            "items": {
+              "$ref": "#/components/schemas/Swatch"
+            },
+            "title": "Classes",
+            "type": "array"
+          },
+          "cw": {
+            "title": "Cw",
+            "type": "string"
+          },
+          "dims_classes": {
+            "items": {
+              "$ref": "#/components/schemas/Swatch"
+            },
+            "title": "Dims Classes",
+            "type": "array"
+          },
+          "grid": {
+            "title": "Grid",
+            "type": "string"
+          },
+          "ink": {
+            "title": "Ink",
+            "type": "string"
+          },
+          "margin_bins": {
+            "items": {
+              "$ref": "#/components/schemas/MarginBin"
+            },
+            "title": "Margin Bins",
+            "type": "array"
+          },
+          "margin_range_db": {
+            "title": "Margin Range Db",
+            "type": "number"
+          },
+          "margin_scale": {
+            "items": {
+              "$ref": "#/components/schemas/ColorStop"
+            },
+            "title": "Margin Scale",
+            "type": "array"
+          },
+          "materials": {
+            "items": {
+              "$ref": "#/components/schemas/Material"
+            },
+            "title": "Materials",
+            "type": "array"
+          },
+          "mode": {
+            "enum": [
+              "light",
+              "dark"
+            ],
+            "title": "Mode",
+            "type": "string"
+          },
+          "muted": {
+            "title": "Muted",
+            "type": "string"
+          },
+          "schematic_tint": {
+            "title": "Schematic Tint",
+            "type": "string"
+          },
+          "status": {
+            "items": {
+              "$ref": "#/components/schemas/StatusSwatch"
+            },
+            "title": "Status",
+            "type": "array"
+          },
+          "surface": {
+            "title": "Surface",
+            "type": "string"
+          }
+        },
+        "required": [
+          "mode",
+          "classes",
+          "dims_classes",
+          "status",
+          "margin_scale",
+          "margin_bins",
+          "margin_range_db",
+          "channels",
+          "channel_legend",
+          "cw",
+          "background_top",
+          "background_bottom",
+          "surface",
+          "ink",
+          "muted",
+          "grid",
+          "materials",
+          "schematic_tint"
+        ],
+        "title": "Palette",
+        "type": "object"
+      },
       "Part": {
         "additionalProperties": false,
         "description": "One part of a scene, in the scene's unit. size is the bounding box (x, y, z).",
@@ -2014,6 +2596,48 @@
             "title": "Count",
             "type": "integer"
           },
+          "dims_axes": {
+            "anyOf": [
+              {
+                "maxItems": 3,
+                "minItems": 3,
+                "prefixItems": [
+                  {
+                    "enum": [
+                      "PUBLISHED",
+                      "VENDOR",
+                      "INFERENCE",
+                      "SCHEMATIC"
+                    ],
+                    "type": "string"
+                  },
+                  {
+                    "enum": [
+                      "PUBLISHED",
+                      "VENDOR",
+                      "INFERENCE",
+                      "SCHEMATIC"
+                    ],
+                    "type": "string"
+                  },
+                  {
+                    "enum": [
+                      "PUBLISHED",
+                      "VENDOR",
+                      "INFERENCE",
+                      "SCHEMATIC"
+                    ],
+                    "type": "string"
+                  }
+                ],
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Dims Axes"
+          },
           "dims_class": {
             "enum": [
               "PUBLISHED",
@@ -2026,6 +2650,11 @@
           },
           "dims_source": {
             "title": "Dims Source",
+            "type": "string"
+          },
+          "enters": {
+            "default": "",
+            "title": "Enters",
             "type": "string"
           },
           "explode": {
@@ -2082,6 +2711,11 @@
             "title": "Id",
             "type": "string"
           },
+          "label": {
+            "default": "",
+            "title": "Label",
+            "type": "string"
+          },
           "material": {
             "title": "Material",
             "type": "string"
@@ -2089,6 +2723,35 @@
           "name": {
             "title": "Name",
             "type": "string"
+          },
+          "nodes": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "title": "Nodes",
+            "type": "array"
+          },
+          "path": {
+            "default": [],
+            "items": {
+              "maxItems": 3,
+              "minItems": 3,
+              "prefixItems": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "number"
+                }
+              ],
+              "type": "array"
+            },
+            "title": "Path",
+            "type": "array"
           },
           "pitch": {
             "default": [
@@ -2163,8 +2826,7 @@
               "cylinder",
               "sphere",
               "tube",
-              "ring",
-              "array"
+              "ring"
             ],
             "title": "Shape",
             "type": "string"
@@ -2185,6 +2847,17 @@
             ],
             "title": "Size",
             "type": "array"
+          },
+          "wall": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Wall"
           }
         },
         "required": [
@@ -2196,6 +2869,89 @@
           "dims_source"
         ],
         "title": "Part",
+        "type": "object"
+      },
+      "PartValue": {
+        "additionalProperties": false,
+        "description": "A number shown on a part: a margin with its color, or a heater power with its glow.",
+        "properties": {
+          "color": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Color"
+          },
+          "intensity": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Intensity"
+          },
+          "label": {
+            "title": "Label",
+            "type": "string"
+          },
+          "margin_db": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Margin Db"
+          },
+          "part": {
+            "title": "Part",
+            "type": "string"
+          },
+          "power_mw": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Power Mw"
+          },
+          "source_class": {
+            "$ref": "#/components/schemas/SourceClass"
+          },
+          "verdict": {
+            "anyOf": [
+              {
+                "enum": [
+                  "NOT_EXCLUDED",
+                  "EXCLUDED"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Verdict"
+          }
+        },
+        "required": [
+          "part",
+          "label",
+          "source_class"
+        ],
+        "title": "PartValue",
         "type": "object"
       },
       "PathCase": {
@@ -2235,6 +2991,43 @@
           "report"
         ],
         "title": "PathCase",
+        "type": "object"
+      },
+      "PathSample": {
+        "additionalProperties": false,
+        "description": "Light just after `label` (an element of the trace) at fraction `at` of the centerline.",
+        "properties": {
+          "at": {
+            "title": "At",
+            "type": "number"
+          },
+          "brightness": {
+            "title": "Brightness",
+            "type": "number"
+          },
+          "label": {
+            "title": "Label",
+            "type": "string"
+          },
+          "power_mw": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Power Mw"
+          }
+        },
+        "required": [
+          "at",
+          "power_mw",
+          "brightness",
+          "label"
+        ],
+        "title": "PathSample",
         "type": "object"
       },
       "Penalty": {
@@ -2876,6 +3669,23 @@
         "title": "Receiver",
         "type": "object"
       },
+      "ReferenceList": {
+        "additionalProperties": false,
+        "properties": {
+          "entries": {
+            "items": {
+              "$ref": "#/components/schemas/BibEntry"
+            },
+            "title": "Entries",
+            "type": "array"
+          }
+        },
+        "required": [
+          "entries"
+        ],
+        "title": "ReferenceList",
+        "type": "object"
+      },
       "ReflectionCrosstalk": {
         "additionalProperties": false,
         "properties": {
@@ -3219,6 +4029,11 @@
       "SceneInfo": {
         "additionalProperties": false,
         "properties": {
+          "breadcrumb": {
+            "default": "",
+            "title": "Breadcrumb",
+            "type": "string"
+          },
           "id": {
             "title": "Id",
             "type": "string"
@@ -3236,6 +4051,16 @@
           },
           "name": {
             "title": "Name",
+            "type": "string"
+          },
+          "parent": {
+            "default": "",
+            "title": "Parent",
+            "type": "string"
+          },
+          "product": {
+            "default": "",
+            "title": "Product",
             "type": "string"
           },
           "summary": {
@@ -3266,6 +4091,13 @@
       "SceneList": {
         "additionalProperties": false,
         "properties": {
+          "info": {
+            "items": {
+              "$ref": "#/components/schemas/SceneInfo"
+            },
+            "title": "Info",
+            "type": "array"
+          },
           "scenes": {
             "items": {
               "type": "string"
@@ -3275,7 +4107,8 @@
           }
         },
         "required": [
-          "scenes"
+          "scenes",
+          "info"
         ],
         "title": "SceneList",
         "type": "object"
@@ -3283,9 +4116,30 @@
       "SceneView": {
         "additionalProperties": false,
         "properties": {
+          "captions": {
+            "items": {
+              "$ref": "#/components/schemas/Caption"
+            },
+            "title": "Captions",
+            "type": "array"
+          },
+          "checks": {
+            "items": {
+              "$ref": "#/components/schemas/CheckOutcome"
+            },
+            "title": "Checks",
+            "type": "array"
+          },
           "independence": {
             "title": "Independence",
             "type": "string"
+          },
+          "nodes": {
+            "items": {
+              "$ref": "#/components/schemas/NodeResult"
+            },
+            "title": "Nodes",
+            "type": "array"
           },
           "scene": {
             "$ref": "#/components/schemas/GeometryScene"
@@ -3301,7 +4155,10 @@
         "required": [
           "independence",
           "scene",
-          "source_issues"
+          "source_issues",
+          "nodes",
+          "checks",
+          "captions"
         ],
         "title": "SceneView",
         "type": "object"
@@ -3439,6 +4296,61 @@
         "title": "Spectrum",
         "type": "object"
       },
+      "SpectrumView": {
+        "additionalProperties": false,
+        "description": "The 16λ BiDi grid and its receive rings under one ring-FSR hypothesis, all inputs from\nthe catalog (model card §13.5, §13.6, §14.5).",
+        "properties": {
+          "accuracy_ghz": {
+            "title": "Accuracy Ghz",
+            "type": "number"
+          },
+          "crosstalk": {
+            "$ref": "#/components/schemas/CrosstalkResponse"
+          },
+          "fsr_ghz": {
+            "title": "Fsr Ghz",
+            "type": "number"
+          },
+          "hypotheses": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Hypotheses",
+            "type": "array"
+          },
+          "hypothesis": {
+            "title": "Hypothesis",
+            "type": "string"
+          },
+          "inputs": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Inputs",
+            "type": "array"
+          },
+          "q_loaded": {
+            "title": "Q Loaded",
+            "type": "number"
+          },
+          "statement": {
+            "title": "Statement",
+            "type": "string"
+          }
+        },
+        "required": [
+          "hypothesis",
+          "statement",
+          "hypotheses",
+          "q_loaded",
+          "fsr_ghz",
+          "accuracy_ghz",
+          "inputs",
+          "crosstalk"
+        ],
+        "title": "SpectrumView",
+        "type": "object"
+      },
       "Status": {
         "enum": [
           "pass",
@@ -3447,6 +4359,35 @@
         ],
         "title": "Status",
         "type": "string"
+      },
+      "StatusSwatch": {
+        "additionalProperties": false,
+        "properties": {
+          "color": {
+            "title": "Color",
+            "type": "string"
+          },
+          "icon": {
+            "title": "Icon",
+            "type": "string"
+          },
+          "key": {
+            "title": "Key",
+            "type": "string"
+          },
+          "label": {
+            "title": "Label",
+            "type": "string"
+          }
+        },
+        "required": [
+          "key",
+          "label",
+          "color",
+          "icon"
+        ],
+        "title": "StatusSwatch",
+        "type": "object"
       },
       "SupportCell": {
         "additionalProperties": false,
@@ -3525,6 +4466,30 @@
           "disagrees"
         ],
         "title": "SupportRow",
+        "type": "object"
+      },
+      "Swatch": {
+        "additionalProperties": false,
+        "properties": {
+          "color": {
+            "title": "Color",
+            "type": "string"
+          },
+          "key": {
+            "title": "Key",
+            "type": "string"
+          },
+          "label": {
+            "title": "Label",
+            "type": "string"
+          }
+        },
+        "required": [
+          "key",
+          "label",
+          "color"
+        ],
+        "title": "Swatch",
         "type": "object"
       },
       "SweepAxis": {
@@ -3785,6 +4750,31 @@
         "title": "TornadoEntry",
         "type": "object"
       },
+      "TourStop": {
+        "additionalProperties": false,
+        "description": "A guided-tour camera stop: frame `part`; the caption comes from `node`, a catalog node or\ncheck id, or else from the written `caption`.",
+        "properties": {
+          "caption": {
+            "default": "",
+            "title": "Caption",
+            "type": "string"
+          },
+          "node": {
+            "default": "",
+            "title": "Node",
+            "type": "string"
+          },
+          "part": {
+            "title": "Part",
+            "type": "string"
+          }
+        },
+        "required": [
+          "part"
+        ],
+        "title": "TourStop",
+        "type": "object"
+      },
       "TracePoint": {
         "additionalProperties": false,
         "description": "OMA at TP2, after each channel element in order, and at TP3.\n\nloss_db and loss_fraction (share of the total channel loss) are set for loss elements and\nare None at the reference planes. headroom_db = power_dbm − threshold_dbm (model card §3),\ncomputed in the same order as M_net, so the TP3 value equals margin_db exactly.\nabove_threshold = headroom_db ≥ −ε, the verdict's pass rule; displays use only this flag to\ndecide above or below threshold.",
@@ -3856,6 +4846,14 @@
           "power_dbm": {
             "title": "Power Dbm",
             "type": "number"
+          },
+          "power_mw": {
+            "title": "Power Mw",
+            "type": "number"
+          },
+          "relative_power": {
+            "title": "Relative Power",
+            "type": "number"
           }
         },
         "required": [
@@ -3867,7 +4865,9 @@
           "loss_db",
           "loss_fraction",
           "headroom_db",
-          "above_threshold"
+          "above_threshold",
+          "power_mw",
+          "relative_power"
         ],
         "title": "TracePoint",
         "type": "object"
@@ -4392,6 +5392,61 @@
         "summary": "Get Product"
       }
     },
+    "/display": {
+      "get": {
+        "description": "Every color the explorer uses: classes, status, margin scale, wavelength channels.",
+        "operationId": "get_display_display_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "mode",
+            "required": false,
+            "schema": {
+              "default": "light",
+              "enum": [
+                "light",
+                "dark"
+              ],
+              "title": "Mode",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "channels",
+            "required": false,
+            "schema": {
+              "default": 16,
+              "title": "Channels",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Palette"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Display"
+      }
+    },
     "/evaluate": {
       "post": {
         "description": "Link JSON in, FeasibilityReport JSON out. TP2 is the transmitter's fixed launch_oma_min\nor is derived from its upstream chain (model card §10).",
@@ -4638,6 +5693,86 @@
         "summary": "Post Mpi"
       }
     },
+    "/overlay/{scene}": {
+      "get": {
+        "description": "Light paths with pulse brightness, margins with colors and heater power for a scene\n(model card §3, §13, §14). `case` picks a reference-plane case of the rack and its trays;\n`isolation_db` sets the diplexer isolation of the L20 scenes.",
+        "operationId": "get_overlay_overlay__scene__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "scene",
+            "required": true,
+            "schema": {
+              "title": "Scene",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "mode",
+            "required": false,
+            "schema": {
+              "default": "light",
+              "enum": [
+                "light",
+                "dark"
+              ],
+              "title": "Mode",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "case",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Case"
+            }
+          },
+          {
+            "in": "query",
+            "name": "isolation_db",
+            "required": false,
+            "schema": {
+              "default": 25.0,
+              "title": "Isolation Db",
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Overlay"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Overlay"
+      }
+    },
     "/pod": {
       "post": {
         "description": "Pod fibers, fiber length and connectors against the claims (model card §14.8).",
@@ -4773,6 +5908,25 @@
         "summary": "Post Rack"
       }
     },
+    "/references": {
+      "get": {
+        "description": "references.bib entries (title, year, url, note), so citations can link to their source.",
+        "operationId": "get_references_references_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReferenceList"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Get References"
+      }
+    },
     "/ring": {
       "post": {
         "description": "Ring parameters (model card §13.1), design windows (§13.3) and a sampled drop response.",
@@ -4810,6 +5964,51 @@
           }
         },
         "summary": "Post Ring"
+      }
+    },
+    "/spectrum/bidi16": {
+      "get": {
+        "description": "Spectrum tab data: interleaved grid, ±accuracy, receive-ring responses (from the catalog).",
+        "operationId": "get_spectrum_spectrum_bidi16_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "hypothesis",
+            "required": false,
+            "schema": {
+              "default": "H_fsr18",
+              "enum": [
+                "H_fsr18",
+                "H_fsr32"
+              ],
+              "title": "Hypothesis",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpectrumView"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Spectrum"
       }
     },
     "/sweep": {

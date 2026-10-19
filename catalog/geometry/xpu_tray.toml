@@ -1,0 +1,224 @@
+# XPU tray 102.4T (model card §14.7). Units: mm; x width, y depth (front at -y), z up.
+# Drawn 2 OU (H_2U: lightmatter.com copy, Counterpoint, IN Electronics); the PR Newswire copy and
+# Futurum say 1 RU. Every internal part is SCHEMATIC.
+
+[scene]
+id = "xpu_tray"
+name = "XPU scale-up tray 102.4T"
+unit = "mm"
+level = "tray"
+product = "ocp_trays"
+parent = "reference_rack"
+breadcrumb = "XPU tray"
+summary = "Four accelerators and two CPUs on a DC-MHS host, four Passage BiDi engines, Guide DR lasers and rear expanded-beam blind-mate connectors."
+
+[[part]]
+id = "xpu.outline"
+name = "2 OU chassis envelope (H_2U)"
+assembly = "chassis"
+size = [537.0, 800.0, 92.7]
+position = [0.0, 0.0, 46.35]
+material = "outline"
+dims_class = "SCHEMATIC"
+dims_axes = ["PUBLISHED", "SCHEMATIC", "INFERENCE"]
+dims_source = "orv3.it_chassis_width"
+nodes = ["orv3.it_chassis_width", "trays.xpu_height_lmcom", "trays.xpu_height_prnewswire", "trays.xpu_bw"]
+function = "Height 48 x 2 - 3.3 mm under H_2U; the sources disagree (1 RU or 2U)."
+label = "2U chassis"
+
+[[part]]
+id = "xpu.floor"
+name = "chassis floor"
+assembly = "chassis"
+size = [537.0, 800.0, 1.5]
+position = [0.0, 0.0, 0.75]
+material = "aluminium"
+dims_class = "SCHEMATIC"
+dims_source = "Sheet thickness schematic."
+explode = [0.0, 0.0, -40.0]
+
+[[part]]
+id = "xpu.walls"
+name = "chassis side walls"
+assembly = "chassis"
+size = [1.5, 800.0, 92.7]
+position = [-267.75, 0.0, 46.35]
+material = "aluminium"
+dims_class = "SCHEMATIC"
+dims_source = "Sheet thickness schematic."
+count = 2
+grid = [2, 1, 1]
+pitch = [535.5, 0.0, 0.0]
+
+[[part]]
+id = "xpu.packages"
+name = "XPU packages (4; accelerator not named)"
+assembly = "compute"
+size = [75.0, 75.0, 5.0]
+position = [-100.0, -200.0, 4.0]
+material = "organic_substrate"
+dims_class = "SCHEMATIC"
+dims_source = "Accelerator and package not disclosed."
+nodes = ["trays.xpu_accelerators", "trays.xpu_bw_per_xpu"]
+count = 4
+grid = [2, 2, 1]
+pitch = [200.0, 220.0, 0.0]
+label = "XPU"
+
+[[part]]
+id = "xpu.dies"
+name = "XPU dies"
+assembly = "compute"
+size = [33.0, 26.0, 1.0]
+position = [-100.0, -200.0, 7.0]
+material = "silicon"
+dims_class = "SCHEMATIC"
+dims_source = "Drawn at about reticle size; not disclosed."
+count = 4
+grid = [2, 2, 1]
+pitch = [200.0, 220.0, 0.0]
+explode = [0.0, 0.0, 20.0]
+
+[[part]]
+id = "xpu.hbm_left"
+name = "memory stacks (left of each XPU)"
+assembly = "compute"
+size = [11.0, 50.0, 0.8]
+position = [-127.0, -200.0, 6.9]
+material = "hbm"
+dims_class = "SCHEMATIC"
+dims_source = "HBM-like stacks drawn as one block per side; not disclosed."
+count = 4
+grid = [2, 2, 1]
+pitch = [200.0, 220.0, 0.0]
+explode = [0.0, 0.0, 18.0]
+
+[[part]]
+id = "xpu.hbm_right"
+name = "memory stacks (right of each XPU)"
+assembly = "compute"
+size = [11.0, 50.0, 0.8]
+position = [-73.0, -200.0, 6.9]
+material = "hbm"
+dims_class = "SCHEMATIC"
+dims_source = "HBM-like stacks drawn as one block per side; not disclosed."
+count = 4
+grid = [2, 2, 1]
+pitch = [200.0, 220.0, 0.0]
+explode = [0.0, 0.0, 18.0]
+
+[[part]]
+id = "xpu.cpus"
+name = "CPUs (2; DC-MHS host)"
+assembly = "compute"
+size = [70.0, 70.0, 5.0]
+position = [-100.0, 250.0, 4.0]
+material = "organic_substrate"
+dims_class = "SCHEMATIC"
+dims_source = "CPUs not named; drawn generic."
+nodes = ["trays.xpu_cpus", "trays.xpu_dcmhs"]
+count = 2
+grid = [2, 1, 1]
+pitch = [200.0, 0.0, 0.0]
+label = "CPU"
+
+[[part]]
+id = "xpu.engines"
+name = "Passage BiDi engines (4)"
+assembly = "optics"
+size = [37.5, 27.6, 4.55]
+position = [-215.0, -200.0, 3.775]
+material = "organic_substrate"
+dims_class = "SCHEMATIC"
+dims_source = "Engine not named; drawn at the Passage L20 outline (INFERENCE)."
+nodes = ["trays.xpu_engines", "trays.xpu_per_engine", "trays.engine_in_l20s"]
+count = 4
+grid = [2, 2, 1]
+pitch = [430.0, 220.0, 0.0]
+explode = [0.0, 0.0, 25.0]
+enters = "passage_l20"
+label = "BiDi engine"
+
+[[part]]
+id = "xpu.lnics"
+name = "Guide DR laser NICs (2 under H_dir)"
+assembly = "lasers"
+size = [76.0, 115.0, 1.6]
+position = [-60.0, -337.5, 9.0]
+material = "pcb"
+dims_class = "SCHEMATIC"
+dims_axes = ["INFERENCE", "PUBLISHED", "SCHEMATIC"]
+dims_source = "nic3.sff_depth"
+nodes = ["guidedr.form_factor", "nic3.sff_width", "nic3.lff_width", "nic3.sff_depth", "trays.xpu_guidedr_count_cp", "trays.xpu_blind_mate"]
+function = "Guide DR modules that blind mate as the tray slides in. OCP NIC 3.0 size not named: drawn as SFF (76 x 115 mm); LFF would be 139 x 115 mm."
+count = 2
+grid = [2, 1, 1]
+pitch = [120.0, 0.0, 0.0]
+explode = [0.0, -120.0, 20.0]
+enters = "guide_family"
+label = "Guide DR LNIC"
+
+[[part]]
+id = "xpu.rear_connectors"
+name = "rear expanded-beam blind-mate connectors (PRIZM TMT class)"
+assembly = "optics"
+size = [40.0, 20.0, 15.0]
+position = [-150.0, 390.0, 9.0]
+material = "polymer"
+dims_class = "SCHEMATIC"
+dims_source = "Connector size not disclosed."
+nodes = ["trays.prizm_tmt", "prizm.usconec_insertion_loss", "prizm.usconec_fibers_1x16"]
+count = 4
+grid = [4, 1, 1]
+pitch = [100.0, 0.0, 0.0]
+label = "PRIZM TMT"
+
+[[part]]
+id = "xpu.fibers_left"
+name = "fibers from the left engines"
+assembly = "optics"
+shape = "tube"
+size = [4.0, 4.0, 4.0]
+path = [[-215.0, -180.0, 8.0], [-215.0, 300.0, 8.0], [-150.0, 382.0, 8.0]]
+material = "fiber"
+dims_class = "SCHEMATIC"
+dims_source = "Routing schematic."
+
+[[part]]
+id = "xpu.fibers_right"
+name = "fibers from the right engines"
+assembly = "optics"
+shape = "tube"
+size = [4.0, 4.0, 4.0]
+path = [[215.0, -180.0, 8.0], [215.0, 300.0, 8.0], [150.0, 382.0, 8.0]]
+material = "fiber"
+dims_class = "SCHEMATIC"
+dims_source = "Routing schematic."
+
+[[tour]]
+part = "xpu.outline"
+node = "trays.xpu_bw"
+
+[[tour]]
+part = "xpu.packages"
+node = "trays.xpu_accelerators"
+
+[[tour]]
+part = "xpu.cpus"
+node = "trays.xpu_cpus"
+
+[[tour]]
+part = "xpu.engines"
+node = "trays.xpu_per_engine"
+
+[[tour]]
+part = "xpu.lnics"
+node = "trays.xpu_blind_mate"
+
+[[tour]]
+part = "xpu.rear_connectors"
+node = "trays.prizm_tmt"
+
+[[tour]]
+part = "xpu.outline"
+node = "trays.xpu_height_lmcom"

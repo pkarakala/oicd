@@ -40,3 +40,7 @@ print(
 )
 print("T09 clearances:", (1310 - 2) - 1300, 1320 - (1310 + 2), "nm")
 print("T10 upper edge and clearance:", 1318 + 3, 1320 - (1318 + 3), "nm")
+
+print("§3 power_mw = 10^(P/10) on the worked example")
+print("  TP2 at 0 dBm OMA      =", round(10 ** (0 / 10), 6), "mW")
+print("  TP3 at -4.0008 dBm OMA =", round(10 ** (-4.0008 / 10), 6), "mW")

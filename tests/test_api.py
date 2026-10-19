@@ -183,3 +183,13 @@ def test_responses_are_canonical_json(client, worked_example_json):
     assert text == json.dumps(
         json.loads(text), sort_keys=True, separators=(",", ":"), ensure_ascii=False
     )
+
+
+def test_references_list_every_bib_entry_with_its_link(client):
+    entries = {e["key"]: e for e in client.get("/references").json()["entries"]}
+    from oicd.provenance import load_citation_keys
+
+    assert set(entries) == load_citation_keys()
+    g652 = entries["itut_g652_2024"]
+    assert g652["url"].startswith("https://") and g652["title"]
+    assert "{" not in "".join(e["title"] for e in entries.values())

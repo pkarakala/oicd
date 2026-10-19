@@ -1,0 +1,233 @@
+# Switch tray 204.8T (model card §14.7). Units: mm; x width, y depth (front at -y), z up.
+# Width and height from the ORv3 IT gear guide; every internal part is SCHEMATIC: the release
+# discloses no layout, lane rate, fibers per engine, wavelengths, power or switch ASIC.
+
+[scene]
+id = "switch_tray"
+name = "CPO switch tray 204.8T"
+unit = "mm"
+level = "tray"
+product = "ocp_trays"
+parent = "reference_rack"
+breadcrumb = "Switch tray"
+summary = "1RU liquid-cooled switch tray built with Flex: a central switch package, eight Passage BiDi engines with vClick FAUs, and Guide DR laser NICs."
+
+[[part]]
+id = "sw.outline"
+name = "1 OU chassis envelope"
+assembly = "chassis"
+size = [537.0, 800.0, 44.7]
+position = [0.0, 0.0, 22.35]
+material = "outline"
+dims_class = "SCHEMATIC"
+dims_axes = ["PUBLISHED", "SCHEMATIC", "PUBLISHED"]
+dims_source = "orv3.it_chassis_width"
+nodes = ["orv3.it_chassis_width", "orv3.chassis_1ou_max_height", "trays.switch_height", "trays.switch_bw"]
+function = "1 OU (48 mm pitch); chassis at most 44.7 mm high; depth schematic."
+label = "1RU chassis"
+
+[[part]]
+id = "sw.floor"
+name = "chassis floor"
+assembly = "chassis"
+size = [537.0, 800.0, 1.5]
+position = [0.0, 0.0, 0.75]
+material = "aluminium"
+dims_class = "SCHEMATIC"
+dims_source = "Sheet thickness schematic."
+explode = [0.0, 0.0, -30.0]
+
+[[part]]
+id = "sw.walls"
+name = "chassis side walls"
+assembly = "chassis"
+size = [1.5, 800.0, 44.7]
+position = [-267.75, 0.0, 22.35]
+material = "aluminium"
+dims_class = "SCHEMATIC"
+dims_source = "Sheet thickness schematic."
+count = 2
+grid = [2, 1, 1]
+pitch = [535.5, 0.0, 0.0]
+
+[[part]]
+id = "sw.switch_package"
+name = "switch package (ASIC not disclosed)"
+assembly = "switch"
+size = [100.0, 100.0, 3.0]
+position = [0.0, 50.0, 3.0]
+material = "organic_substrate"
+dims_class = "SCHEMATIC"
+dims_source = "The switch ASIC and its package are not disclosed."
+nodes = ["trays.nd_switch_asic", "trays.switch_bw"]
+function = "Switch ASIC whose 204.8 Tbps the eight engines carry."
+label = "switch package"
+
+[[part]]
+id = "sw.switch_die"
+name = "switch die"
+assembly = "switch"
+size = [50.0, 50.0, 1.0]
+position = [0.0, 50.0, 5.0]
+material = "silicon"
+dims_class = "SCHEMATIC"
+dims_source = "Die size not disclosed."
+explode = [0.0, 0.0, 20.0]
+
+[[part]]
+id = "sw.cold_plate"
+name = "cold plate over the switch"
+assembly = "cooling"
+size = [140.0, 140.0, 12.0]
+position = [0.0, 50.0, 11.5]
+material = "aluminium"
+dims_class = "SCHEMATIC"
+dims_source = "Cold plate size not disclosed."
+nodes = ["trays.switch_liquid_cooled"]
+function = "Liquid cooling (the release says liquid-cooled chassis)."
+explode = [0.0, 0.0, 45.0]
+label = "cold plate"
+
+[[part]]
+id = "sw.hoses"
+name = "manifold hoses"
+assembly = "cooling"
+shape = "tube"
+size = [10.0, 10.0, 10.0]
+path = [[-40.0, 50.0, 17.5], [-40.0, -250.0, 17.5], [-40.0, -398.0, 17.5]]
+material = "rubber"
+dims_class = "SCHEMATIC"
+dims_source = "Hose routing schematic."
+explode = [0.0, 0.0, 45.0]
+label = "manifold hoses"
+
+[[part]]
+id = "sw.hoses_return"
+name = "manifold hoses (return)"
+assembly = "cooling"
+shape = "tube"
+size = [10.0, 10.0, 10.0]
+path = [[40.0, 50.0, 17.5], [40.0, -250.0, 17.5], [40.0, -398.0, 17.5]]
+material = "rubber"
+dims_class = "SCHEMATIC"
+dims_source = "Hose routing schematic."
+explode = [0.0, 0.0, 45.0]
+
+[[part]]
+id = "sw.engines"
+name = "Passage BiDi engines (8)"
+assembly = "optics"
+size = [37.5, 27.6, 4.55]
+position = [-130.0, -25.0, 3.775]
+material = "organic_substrate"
+dims_class = "SCHEMATIC"
+dims_source = "The release does not name the engine; drawn at the Passage L20 outline (INFERENCE: 25.6 Tbps per engine = 4 L20s per direction)."
+nodes = ["trays.switch_engines", "trays.switch_per_engine", "trays.engine_in_l20s"]
+function = "Each engine carries 25.6 Tbps of the switch's 204.8 Tbps."
+count = 8
+grid = [2, 4, 1]
+pitch = [260.0, 50.0, 0.0]
+explode = [0.0, 0.0, 25.0]
+enters = "passage_l20"
+label = "BiDi engine"
+
+[[part]]
+id = "sw.faus"
+name = "vClick fiber-array units"
+assembly = "optics"
+size = [8.0, 14.0, 2.2]
+position = [-117.0, -25.0, 7.15]
+material = "glass"
+dims_class = "SCHEMATIC"
+dims_source = "FAU size not disclosed."
+nodes = ["vclick.count_switch_tray", "vclick.il_reinsertion_max"]
+count = 8
+grid = [2, 4, 1]
+pitch = [260.0, 50.0, 0.0]
+explode = [0.0, 0.0, 40.0]
+label = "vClick"
+
+[[part]]
+id = "sw.ribbons_left"
+name = "fiber ribbons to the rear connectors (left engines)"
+assembly = "optics"
+shape = "tube"
+size = [4.0, 4.0, 4.0]
+path = [[-117.0, 150.0, 8.0], [-117.0, 300.0, 8.0], [-180.0, 388.0, 8.0]]
+material = "fiber"
+dims_class = "SCHEMATIC"
+dims_source = "Ribbon routing schematic; fibers per engine not disclosed."
+nodes = ["trays.nd_fibers_per_engine"]
+
+[[part]]
+id = "sw.ribbons_right"
+name = "fiber ribbons to the rear connectors (right engines)"
+assembly = "optics"
+shape = "tube"
+size = [4.0, 4.0, 4.0]
+path = [[143.0, 150.0, 8.0], [143.0, 300.0, 8.0], [180.0, 388.0, 8.0]]
+material = "fiber"
+dims_class = "SCHEMATIC"
+dims_source = "Ribbon routing schematic."
+
+[[part]]
+id = "sw.lnics"
+name = "Guide DR laser NICs (4 under H_dir, 2 under H_agg)"
+assembly = "lasers"
+size = [76.0, 115.0, 1.6]
+position = [-180.0, -337.5, 7.5]
+material = "pcb"
+dims_class = "SCHEMATIC"
+dims_axes = ["INFERENCE", "PUBLISHED", "SCHEMATIC"]
+dims_source = "nic3.sff_depth"
+nodes = ["guidedr.form_factor", "nic3.sff_width", "nic3.lff_width", "nic3.sff_depth", "trays.switch_guidedr_count_lm", "trays.switch_guidedr_count_cp"]
+function = "Built to OCP NIC 3.0 dimensions, size not named: drawn as SFF (76 x 115 mm); LFF would be 139 x 115 mm. Four modules for 204.8 Tbps per the Guide DR release."
+count = 4
+grid = [4, 1, 1]
+pitch = [120.0, 0.0, 0.0]
+explode = [0.0, -120.0, 20.0]
+enters = "guide_family"
+label = "Guide DR LNIC"
+
+[[part]]
+id = "sw.rear_connectors"
+name = "rear blind-mate connectors"
+assembly = "optics"
+size = [30.0, 20.0, 15.0]
+position = [-210.0, 390.0, 9.0]
+material = "polymer"
+dims_class = "SCHEMATIC"
+dims_source = "Connector type and count not disclosed; TMT class assumed (SYNTHETIC)."
+nodes = ["rack.switch_connector_db"]
+count = 8
+grid = [8, 1, 1]
+pitch = [60.0, 0.0, 0.0]
+label = "rear connector"
+
+[[tour]]
+part = "sw.outline"
+node = "trays.switch_bw"
+
+[[tour]]
+part = "sw.engines"
+node = "trays.switch_per_engine"
+
+[[tour]]
+part = "sw.engines"
+node = "trays.engine_in_l20s"
+
+[[tour]]
+part = "sw.faus"
+node = "vclick.il_reinsertion_max"
+
+[[tour]]
+part = "sw.lnics"
+node = "trays.switch_guidedr_count_lm"
+
+[[tour]]
+part = "sw.cold_plate"
+node = "trays.switch_liquid_cooled"
+
+[[tour]]
+part = "sw.switch_package"
+node = "trays.nd_switch_asic"

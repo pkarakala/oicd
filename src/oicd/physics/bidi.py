@@ -24,7 +24,7 @@ from oicd.schema import (
     Receiver,
     Transmitter,
 )
-from oicd.units import DB, DBm, OpticalPower, PowerKind
+from oicd.units import DB, DBm, OpticalPower, PowerKind, dbm_to_mw
 
 _FROZEN = ConfigDict(frozen=True, extra="forbid")
 
@@ -200,6 +200,8 @@ class BidiDirectionResult(BaseModel):
     mpi_db: float | None
     wdm_crosstalk_db: float | None
     min_tx_oma_dbm: float  # the TX OMA at which this direction's margin is 0 dB
+    # §13.7: the local transmitter's light reaching this receiver by reflection, OMA in mW
+    crosstalk_power_mw: float
 
 
 class BidiLinkResult(BaseModel):
@@ -226,7 +228,9 @@ def _penalty(name: str, value_db: float, rationale: str) -> Penalty:
     )
 
 
-def _direction(request: BidiLinkRequest, d: BidiDirection) -> BidiDirectionResult:
+def _direction(
+    request: BidiLinkRequest, d: BidiDirection, local_tx: BidiDirection
+) -> BidiDirectionResult:
     fiber_db = request.fiber_length_km.value * request.fiber_loss_db_per_km.value
     fiber = LossElement(
         name=f"fiber {request.fiber_length_km.value:g} km",
@@ -324,12 +328,16 @@ def _direction(request: BidiLinkRequest, d: BidiDirection) -> BidiDirectionResul
         mpi_db=mpi_db,
         wdm_crosstalk_db=wdm_db,
         min_tx_oma_dbm=report.threshold_dbm + total_loss,
+        crosstalk_power_mw=dbm_to_mw(DBm(local_tx.tx_oma_dbm.value)) * reflection.r_linear,
     )
 
 
 def evaluate_bidi_link(request: BidiLinkRequest) -> BidiLinkResult:
     """Both directions of a BiDi link (model card §13.7)."""
-    results = (_direction(request, request.a_to_b), _direction(request, request.b_to_a))
+    results = (
+        _direction(request, request.a_to_b, local_tx=request.b_to_a),
+        _direction(request, request.b_to_a, local_tx=request.a_to_b),
+    )
     deciding = min(results, key=lambda r: (r.report.verdict != "EXCLUDED", r.report.margin_db))
     return BidiLinkResult(
         name=request.name,

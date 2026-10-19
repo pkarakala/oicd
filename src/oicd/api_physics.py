@@ -178,63 +178,129 @@ class CrosstalkResponse(BaseModel):
     spectra: tuple[RingSpectrum, ...]
 
 
+def crosstalk(request: CrosstalkRequest) -> CrosstalkResponse:
+    """Per-ring leakage and penalties for a BiDi grid (model card §13.2, §13.6), the worst
+    receive channel, and sampled drop responses of every receive ring. ValueError if invalid."""
+    grid = wdm.interleaved_grid(request.center_nm, request.spacing_ghz, request.count)
+    first = 1 if request.receive == "odd" else 0
+    receive = tuple(range(first, request.count, 2))
+    transmit = tuple(range(1 - first, request.count, 2))
+    fwhm = ring.fwhm_ghz(ring.resonance_frequency_ghz(request.center_nm), request.q_loaded)
+    rings = tuple(
+        wdm.ring_leakage(
+            grid,
+            n,
+            fwhm,
+            request.fsr_ghz,
+            receive,
+            transmit,
+            request.modulation,
+            request.il_db,
+            request.rl_db,
+        )
+        for n in receive
+    )
+    worst = wdm.worst_channel(grid, rings)
+    freqs: tuple[float, ...] = ()
+    spectra: tuple[RingSpectrum, ...] = ()
+    if request.spectrum_points:
+        f_lo = grid.channels[0].frequency_ghz - request.margin_ghz
+        f_hi = grid.channels[-1].frequency_ghz + request.margin_ghz
+        freqs = tuple(float(f) for f in np.linspace(f_lo, f_hi, request.spectrum_points))
+        spectra = tuple(
+            RingSpectrum(
+                channel=n,
+                drop_db=tuple(
+                    ring.db(
+                        ring.drop_response(
+                            f - grid.channels[n].frequency_ghz, fwhm, request.fsr_ghz
+                        )
+                    )
+                    for f in freqs
+                ),
+            )
+            for n in receive
+        )
+    return CrosstalkResponse(
+        grid=grid,
+        fwhm_ghz=fwhm,
+        receive_channels=receive,
+        transmit_channels=transmit,
+        rings=rings,
+        worst=worst,
+        frequency_ghz=freqs,
+        spectra=spectra,
+    )
+
+
 @router.post("/wdm/crosstalk", response_model=CrosstalkResponse)
 def post_wdm_crosstalk(request: CrosstalkRequest) -> Response:
     """Per-ring leakage and penalties for a BiDi grid (model card §13.2, §13.6), the worst
     receive channel, and sampled drop responses of every receive ring for display."""
     try:
-        grid = wdm.interleaved_grid(request.center_nm, request.spacing_ghz, request.count)
-        first = 1 if request.receive == "odd" else 0
-        receive = tuple(range(first, request.count, 2))
-        transmit = tuple(range(1 - first, request.count, 2))
-        fwhm = ring.fwhm_ghz(ring.resonance_frequency_ghz(request.center_nm), request.q_loaded)
-        rings = tuple(
-            wdm.ring_leakage(
-                grid,
-                n,
-                fwhm,
-                request.fsr_ghz,
-                receive,
-                transmit,
-                request.modulation,
-                request.il_db,
-                request.rl_db,
-            )
-            for n in receive
-        )
-        worst = wdm.worst_channel(grid, rings)
-        freqs: tuple[float, ...] = ()
-        spectra: tuple[RingSpectrum, ...] = ()
-        if request.spectrum_points:
-            f_lo = grid.channels[0].frequency_ghz - request.margin_ghz
-            f_hi = grid.channels[-1].frequency_ghz + request.margin_ghz
-            freqs = tuple(float(f) for f in np.linspace(f_lo, f_hi, request.spectrum_points))
-            spectra = tuple(
-                RingSpectrum(
-                    channel=n,
-                    drop_db=tuple(
-                        ring.db(
-                            ring.drop_response(
-                                f - grid.channels[n].frequency_ghz, fwhm, request.fsr_ghz
-                            )
-                        )
-                        for f in freqs
-                    ),
-                )
-                for n in receive
-            )
+        result = crosstalk(request)
     except ValueError as exc:
         return _invalid(exc)
+    return _json(result)
+
+
+class SpectrumView(BaseModel):
+    """The 16λ BiDi grid and its receive rings under one ring-FSR hypothesis, all inputs from
+    the catalog (model card §13.5, §13.6, §14.5)."""
+
+    model_config = _FROZEN
+
+    hypothesis: str
+    statement: str
+    hypotheses: tuple[str, ...]
+    q_loaded: float
+    fsr_ghz: float
+    accuracy_ghz: float  # the Guide grid's ± wavelength accuracy, drawn as bars per channel
+    inputs: tuple[str, ...]  # catalog nodes the inputs come from
+    crosstalk: CrosstalkResponse
+
+
+SPECTRUM_HYPOTHESES = ("H_fsr18", "H_fsr32")
+
+
+@router.get("/spectrum/bidi16", response_model=SpectrumView)
+def get_spectrum(hypothesis: Literal["H_fsr18", "H_fsr32"] = "H_fsr18") -> Response:
+    """Spectrum tab data: interleaved grid, ±accuracy, receive-ring responses (from the catalog)."""
+    cat = catalog()
+    h = cat.hypotheses[hypothesis]
+    fsr_ghz = h.sets["bidi16.ring_fsr_thz"] * 1000.0
+    inputs = (
+        "bidi16.center_nm",
+        "bidi16.txrx_spacing_ghz",
+        "bidi16.lambda_count",
+        "ring.mrm_q",
+        "guide.wavelength_accuracy",
+        "bidi16.channel_loss",
+        "bidi16.return_loss_db",
+    )
+    v = {i: cat.nodes[i].nominal for i in inputs}  # type: ignore[union-attr]
+    request = CrosstalkRequest(
+        center_nm=v["bidi16.center_nm"],
+        spacing_ghz=v["bidi16.txrx_spacing_ghz"],
+        count=int(v["bidi16.lambda_count"]),
+        q_loaded=v["ring.mrm_q"],
+        fsr_ghz=fsr_ghz,
+        receive="odd",
+        il_db=v["bidi16.channel_loss"],
+        rl_db=v["bidi16.return_loss_db"],
+        spectrum_points=1601,
+        margin_ghz=400.0,
+    )
     return _json(
-        CrosstalkResponse(
-            grid=grid,
-            fwhm_ghz=fwhm,
-            receive_channels=receive,
-            transmit_channels=transmit,
-            rings=rings,
-            worst=worst,
-            frequency_ghz=freqs,
-            spectra=spectra,
+        SpectrumView(
+            hypothesis=hypothesis,
+            statement=h.statement,
+            hypotheses=SPECTRUM_HYPOTHESES,
+            q_loaded=request.q_loaded,
+            fsr_ghz=fsr_ghz,
+            accuracy_ghz=v["guide.wavelength_accuracy"],
+            inputs=(*inputs, "bidi16.ring_fsr_thz"),
+            crosstalk=crosstalk(request),
         )
     )
 

@@ -124,6 +124,14 @@ for name, lam in (("A", 1311.0), ("B", 1331.0)):
         f"  direction {name} at {lam} nm: lower clearance {lam - 1304.5:+.1f} nm, "
         f"upper clearance {1317.5 - lam:+.1f} nm"
     )
+signal_mw = 10 ** ((2.4 - total_loss) / 10)
+ghost_mw = 10 ** (2.4 / 10) * r_eff
+print(
+    f"  power at TP3 {2.4 - total_loss:.1f} dBm OMA = {signal_mw:.6f} mW; reflected local TX "
+    f"{ghost_mw:.6e} mW ({10 * log10(signal_mw / ghost_mw):.2f} dB below the signal)"
+)
+ghost_no_isolation_mw = 10 ** (2.4 / 10) * 10 ** (-15.5 / 10)
+print(f"  with isolation 0 dB the reflected local TX is {ghost_no_isolation_mw:.6f} mW")
 
 peak = ring_drop(0.0, 0.0, fwhm, 1800.0)
 print(f"§13.1 image-sum peak at Q 3500, FSR 1.8 THz: {peak:.6f} = +{10 * log10(peak):.4f} dB")

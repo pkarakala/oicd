@@ -106,25 +106,25 @@ Baseline before Phase 0 (brief 03 tree on `main`): pytest 147 passed, ruff check
 - [x] 7.2 POST /ring, /wdm/grid, /wdm/crosstalk, /bidi/link, /mpi, /rack, /pod, /ptc/simulate; existing endpoints kept — phase 7 commit; /ptc/simulate arrives with its model in phase 9 (D05-59)
 - [x] 7.3 web/src/api/schema.ts from OpenAPI via openapi-typescript (npm run gen:api), regenerated in CI — phase 7 commit; /ptc/simulate arrives with its model in phase 9 (D05-59)
 - [x] 7.4 Tests per endpoint with hand values; 422 on invalid physics; deterministic JSON — phase 7 commit; /ptc/simulate arrives with its model in phase 9 (D05-59)
-- [ ] 7.5 Phase 7 checks green and commit
+- [x] 7.5 Phase 7 checks green and commit — a78fb8f; pytest 404 passed, ruff clean, npm run build ok, typecheck ok, e2e 1 passed
 
 ## Phase 8: CAD-grade 3D explorer
 
-- [ ] 8.1 Stack additions installed (tailwindcss, zustand, react-query, react-resizable-panels, cmdk, radix, lucide-react, postprocessing, three-mesh-bvh, elkjs, vitest, testing-library)
-- [ ] 8.2 Layout: top bar, model tree, viewport, Inspector, bottom dock tabs, Cmd/Ctrl+K palette
-- [ ] 8.3 Viewport: perspective/orthographic, ViewCube, keys 1-4, F, Shift+F, damped controls
-- [ ] 8.4 CAD rendering: feature edges, N8AO, SMAA, tone mapping, Lightformer studio, contact shadows, mm grid and scale bar, gradient background, selective bloom
-- [ ] 8.5 PBR materials (silicon, substrate, copper, steel, aluminium, glass fibre, polymer)
-- [ ] 8.6 Tools: hover/select outlines, Esc; section view with caps; exploded view; measure tool; undo/redo
-- [ ] 8.7 Semantic zoom Rack → Tray → Engine → PIC → Ring with transitions
-- [ ] 8.8 Physics overlays from the API (false-color light paths, pulses, BiDi ghost, margin colormap, heater overlay, leader labels)
-- [ ] 8.9 Geometry from catalog/geometry via the API, dims_class in the Inspector, SCHEMATIC tint toggle
-- [ ] 8.10 Inference tab (elkjs graph, derivation chain, hypothesis toggle, support matrix, tornado, conflicts)
-- [ ] 8.11 Brief 04 views: Design space, Tray, Upstream, Yield, Export report; footer captions
-- [ ] 8.12 Performance: demand frameloop, instancing, merged geometry, BVH, code-split scenes, dev fps meter
-- [ ] 8.13 Ease of use: guided tours, shortcut sheet, tooltips, URL state, PNG export 2×, themes, ARIA and focus
-- [ ] 8.14 Scenes 1 to 7 (rack, switch tray, XPU tray, L20 + BiDi link, M1000, L200, Guide family) with Spec sheet, Inference and Physics tabs
-- [ ] 8.15 Playwright suite and screenshots; Vitest for store and URL state
+- [x] 8.1 Stack additions installed (tailwindcss, zustand, react-query, react-resizable-panels, cmdk, radix, lucide-react, postprocessing, three-mesh-bvh, elkjs, vitest, testing-library) — installed via npm (--legacy-peer-deps, D05-60); test:unit script
+- [x] 8.2 Layout: top bar, model tree, viewport, Inspector, bottom dock tabs, Cmd/Ctrl+K palette — top bar (scene switcher, breadcrumb, View menu, tour, undo/redo, theme, Export), model tree (eye, isolate, search), viewport, Inspector, dock tabs, cmdk palette
+- [x] 8.3 Viewport: perspective/orthographic, ViewCube, keys 1-4, F, Shift+F, damped controls — camera-controls (damped, zoom to cursor), perspective/orthographic, drei GizmoViewcube, keys 1-4, F, Shift+F via fitToSphere (D05-84)
+- [x] 8.4 CAD rendering: feature edges, N8AO, SMAA, tone mapping, Lightformer studio, contact shadows, mm grid and scale bar, gradient background, selective bloom — EdgesGeometry 25° merged per part, N8AO, SMAA, AgX, Lightformer environment, contact shadows, infinite grid with labels + scale bar, gradient background from the API, bloom only above luminance 1 (D05-82)
+- [x] 8.5 PBR materials (silicon, substrate, copper, steel, aluminium, glass fibre, polymer) — materials served by GET /display (display.py), edge shade from the engine
+- [x] 8.6 Tools: hover/select outlines, Esc; section view with caps; exploded view; measure tool; undo/redo — hover lift, Outline select, Esc; section X/Y/Z with TransformControls gizmo and hatched stencil caps (D05-86); animated explode; measure with vertex/edge snapping and auto units; undo/redo of design edits (D05-87)
+- [x] 8.7 Semantic zoom Rack → Tray → Engine → PIC → Ring with transitions — parent/enters chain Rack > Switch tray > Engine > PIC > Ring; double-click, Enter/Backspace, breadcrumb; fly-to + fade
+- [x] 8.8 Physics overlays from the API (false-color light paths, pulses, BiDi ghost, margin colormap, heater overlay, leader labels) — GET /overlay/{scene} (D05-74 to D05-78): false-color channel lines, pulses at linear power, BiDi ghosts with isolation control, margin colormap + color bar, heater glow, leader labels (D05-85)
+- [x] 8.9 Geometry from catalog/geometry via the API, dims_class in the Inspector, SCHEMATIC tint toggle — GET /geometry/{scene} with evaluated nodes and captions; per-axis dims badges; SCHEMATIC tint toggle
+- [x] 8.10 Inference tab (elkjs graph, derivation chain, hypothesis toggle, support matrix, tornado, conflicts) — elkjs layered graph colored by class, derivation chain on click, hypothesis toggles (POST /inference), support matrix, tornado, conflicts side by side
+- [x] 8.11 Brief 04 views: Design space, Tray, Upstream, Yield, Export report; footer captions — Design space (/sweep + engine 0 dB contour, click loads), Tray (deciding lane, margin bars), Upstream (§10 profile, N slider, max fan-out marker, laser in the link scene), Yield (§11 profile, sigma sliders, histogram); Export JSON; footer caption + independence line
+- [x] 8.12 Performance: demand frameloop, instancing, merged geometry, BVH, code-split scenes, dev fps meter — frameloop demand (continuous only while pulses play), InstancedMesh per part, merged edge geometry, drei Bvh, lazy views, StatsGl in dev; the 60 fps rack target is not measurable under SwiftShader (D05-88)
+- [x] 8.13 Ease of use: guided tours, shortcut sheet, tooltips, URL state, PNG export 2×, themes, ARIA and focus — tours from catalog captions with class/status badges (D05-72), shortcut sheet, tooltips on tools, URL state, PNG 2x clean export, light/dark from the API, ARIA labels and focus rings
+- [x] 8.14 Scenes 1 to 7 (rack, switch tray, XPU tray, L20 + BiDi link, M1000, L200, Guide family) with Spec sheet, Inference and Physics tabs — 10 scenes (rack, switch tray, XPU tray, L20, BiDi link, M1000, L200, Guide family, PIC region um, ring section nm), each with Spec sheet, Inference and Physics tabs
+- [x] 8.15 Playwright suite and screenshots; Vitest for store and URL state — Playwright 13 tests (smoke moved; per-scene screenshots; L20 exploded; section; measure 37.5 mm; zoom to ring; palette; rack plane flip; sweep, tray, upstream N=18, yield, spectrum, inference); Vitest 21 tests (store, URL state, format, link edits)
 - [ ] 8.16 Phase 8 checks green and commit
 
 ## Phase 9: photonic processor
@@ -161,3 +161,4 @@ Baseline before Phase 0 (brief 03 tree on `main`): pytest 147 passed, ruff check
 | 5 | 5558b7e | 335 passed | clean | clean | n/a | n/a | n/a | n/a |
 | 4 (facts) | 9e8da7d | 364 passed | clean | clean | n/a | n/a | n/a | n/a |
 | 6 | 24aa45a | 382 passed | clean | clean | n/a | n/a | n/a | n/a |
+| 7 | a78fb8f | 404 passed | clean | clean | ok | ok | 1 passed | n/a |

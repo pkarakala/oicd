@@ -135,7 +135,7 @@ Baseline before Phase 0 (brief 03 tree on `main`): pytest 147 passed, ruff check
 - [x] 9.4 Seeded experiments: error vs length, gain and ENOB; ABFP vs global scale; 3-layer MLP accuracy vs G — src/oicd/compute/experiments.py: error vs length, gain, ENOB; ABFP vs global scale (Student-t); 3-layer MLP accuracy vs G; seeded; trends tested
 - [x] 9.5 Stretch: per-weight-cell optical power under two laser-mapping hypotheses — per-cell power 9.6971 uW (H_lasers_dedicated) and 8.6425 uW (H_lasers_shared), catalog node ptc.power_per_cell
 - [x] 9.6 POST /ptc/simulate and scene 8 — POST /ptc/simulate; scene 8 catalog/geometry/photonic_processor.toml with overlay; Physics tab simulator panel; e2e
-- [ ] 9.7 Phase 9 checks green and commit
+- [x] 9.7 Phase 9 checks green and commit — commit d4eeeef; pytest 472 passed, ruff clean, build ok, typecheck ok, Vitest 21 passed, Playwright 14 passed
 
 ## Phase 10: refinement, figures, paper, docs
 
@@ -163,3 +163,4 @@ Baseline before Phase 0 (brief 03 tree on `main`): pytest 147 passed, ruff check
 | 6 | 24aa45a | 382 passed | clean | clean | n/a | n/a | n/a | n/a |
 | 7 | a78fb8f | 404 passed | clean | clean | ok | ok | 1 passed | n/a |
 | 8 | 58b63de | 456 passed | clean | clean | ok | ok | 13 passed | 21 passed |
+| 9 | d4eeeef | 472 passed | clean | clean | ok | ok | 14 passed | 21 passed |

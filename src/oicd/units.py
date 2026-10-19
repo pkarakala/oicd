@@ -15,6 +15,7 @@ import math
 from dataclasses import dataclass
 from enum import StrEnum
 from numbers import Real
+from typing import overload
 
 # Speed of light in vacuum. Exact by definition of the SI metre (2019 SI).
 C_M_PER_S = 299_792_458
@@ -70,6 +71,10 @@ class DBm:
             return DBm(self.value + other.value)
         return NotImplemented
 
+    @overload
+    def __sub__(self, other: DB) -> DBm: ...
+    @overload
+    def __sub__(self, other: DBm) -> DB: ...
     def __sub__(self, other: object) -> DBm | DB:
         if type(other) is DB:
             return DBm(self.value - other.value)
@@ -111,6 +116,10 @@ class OpticalPower:
             self._require_same_kind(other)
         return NotImplemented
 
+    @overload
+    def __sub__(self, other: DB) -> OpticalPower: ...
+    @overload
+    def __sub__(self, other: OpticalPower) -> DB: ...
     def __sub__(self, other: object) -> OpticalPower | DB:
         if type(other) is DB:
             return OpticalPower(self.power_dbm - other, self.kind)
@@ -130,7 +139,7 @@ def mw_to_dbm(p_mw: float) -> DBm:
 def dbm_to_mw(p: DBm) -> float:
     if type(p) is not DBm:
         raise TypeError(f"expected DBm, got {p!r}")
-    return 10.0 ** (p.value / 10.0)
+    return float(10.0 ** (p.value / 10.0))
 
 
 def avg_to_oma(p_avg: OpticalPower, er_db: DB) -> OpticalPower:

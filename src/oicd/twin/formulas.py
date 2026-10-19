@@ -153,7 +153,7 @@ def abfp_output_bits(weight_bits: float, activation_bits: float, range_count: fl
 
 def power_per_cell_uw(total_w: float, loss_db: float, cells_count: float) -> float:
     """Optical power per cell, µW: total after loss_db shared by cells (model card §15.5)."""
-    return total_w * 1e6 * 10.0 ** (-loss_db / 10.0) / cells_count
+    return float(total_w * 1e6 * 10.0 ** (-loss_db / 10.0) / cells_count)
 
 
 def heater_power_mw(tuning_nm: float, efficiency_nm_per_mw: float) -> float:
@@ -248,7 +248,9 @@ class Formula:
     template: str  # uses {parameter name}
 
 
-def _f(fn: Callable[..., float], params: tuple[tuple[str, str], ...], out: str, template: str):
+def _f(
+    fn: Callable[..., float], params: tuple[tuple[str, str], ...], out: str, template: str
+) -> Formula:
     return Formula(fn.__name__, fn, params, out, template)
 
 

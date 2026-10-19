@@ -7,6 +7,7 @@ here changes the worst-case verdict, which evaluate() decides with every loss at
 """
 
 import math
+from collections.abc import Sequence
 from typing import Literal
 
 import numpy as np
@@ -20,7 +21,7 @@ from oicd.upstream import tp2_launch
 
 _FROZEN = ConfigDict(frozen=True, extra="forbid")
 
-LABEL = "statistical, assumption-dependent"
+LABEL: Literal["statistical, assumption-dependent"] = "statistical, assumption-dependent"
 MAX_SAMPLES = 1_000_000
 MAX_BINS = 400
 
@@ -94,7 +95,7 @@ def _distributed(link: Link) -> tuple[DistributedLoss, ...]:
     )
 
 
-def _margin(link: Link, losses: list) -> float | np.ndarray:  # list of float | ndarray
+def _margin(link: Link, losses: Sequence[float | np.ndarray]) -> float | np.ndarray:
     """M_net with the given per-element losses, in the §3 order."""
     total: float | np.ndarray = 0.0
     for loss in losses:

@@ -3,6 +3,8 @@ Student-t data, a Gaussian-mixture classification set); results are INFERENCE ab
 re-implementation, never the paper's measured Table 1. Pure: every function takes its seed.
 """
 
+from collections.abc import Callable
+
 import numpy as np
 from pydantic import BaseModel, ConfigDict
 
@@ -41,7 +43,9 @@ def matvec_error(
     output_range: str = "n",
 ) -> ErrorRow:
     """Relative RMS error of y = Wx over `trials` vectors, against the float64 product."""
-    cfg = PtcConfig(gain=gain, enob=enob, scale=scale, output_range=output_range)  # type: ignore[arg-type]
+    cfg = PtcConfig.model_validate(
+        {"gain": gain, "enob": enob, "scale": scale, "output_range": output_range}
+    )
     return matvec_error_for(cfg, length, seed, rows, trials, distribution)
 
 
@@ -100,14 +104,21 @@ class MlpResult(BaseModel):
     seed: int
 
 
-def _dataset(rng: np.random.Generator, n: int, dims: int, classes: int, spread: float):
+Params = list[tuple[np.ndarray, np.ndarray]]
+
+
+def _dataset(
+    rng: np.random.Generator, n: int, dims: int, classes: int, spread: float
+) -> tuple[np.ndarray, np.ndarray]:
     means = rng.normal(scale=spread, size=(classes, dims))
     labels = rng.integers(0, classes, size=n)
     x = means[labels] + rng.normal(size=(n, dims))
     return x, labels
 
 
-def _forward(params, x, matmul):
+def _forward(
+    params: Params, x: np.ndarray, matmul: Callable[[np.ndarray, np.ndarray], np.ndarray]
+) -> np.ndarray:
     h = x
     for i, (w, b) in enumerate(params):
         h = matmul(w, h.T).T + b
@@ -125,7 +136,7 @@ def train_mlp(
     n_test: int = 1000,
     epochs: int = 150,
     spread: float = 0.35,
-):
+) -> tuple[Params, tuple[np.ndarray, np.ndarray]]:
     """A 3-layer ReLU MLP trained full-batch with Adam in float64 on a Gaussian mixture."""
     rng = np.random.default_rng(seed)
     x_all, y_all = _dataset(rng, n_train + n_test, dims, classes, spread)
@@ -173,7 +184,9 @@ def train_mlp(
     return params, (x_te, y_te)
 
 
-def mlp_accuracy_vs_gain(seed: int = 0, gains: tuple[float, ...] = MLP_GAINS, **sizes) -> MlpResult:
+def mlp_accuracy_vs_gain(
+    seed: int = 0, gains: tuple[float, ...] = MLP_GAINS, **sizes: int
+) -> MlpResult:
     """Accuracy of the float64-trained MLP when every matrix-vector product runs through ABFP."""
     params, (x_te, y_te) = train_mlp(seed=seed, **sizes)
     exact = _forward(params, x_te, lambda w, h: w @ h)
@@ -183,7 +196,9 @@ def mlp_accuracy_vs_gain(seed: int = 0, gains: tuple[float, ...] = MLP_GAINS, **
         rng = np.random.default_rng(seed + 7)
         cfg = PtcConfig(gain=g)
 
-        def matmul(w, h, cfg=cfg, rng=rng):
+        def matmul(
+            w: np.ndarray, h: np.ndarray, cfg: PtcConfig = cfg, rng: np.random.Generator = rng
+        ) -> np.ndarray:
             return abfp_matmul(w, h, cfg, rng)[0]
 
         out = _forward(params, x_te, matmul)

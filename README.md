@@ -1,58 +1,69 @@
 # OICD: Open Interconnect Co-Design
 
-OICD is a physics-grounded feasibility engine for optical AI-accelerator interconnects: it checks whether a point-to-point optical lane is excluded by its electrical interface, wavelength plan or worst-case OMA power budget, and records the provenance of every number it uses. An interactive 3D explorer shows the link, its power waterfall and the verdict, all computed by the Python engine.
+OICD is a physics-grounded feasibility engine for optical AI-accelerator interconnects, with a product twin of one company's public interconnect line and a CAD-grade 3D explorer. It checks whether an optical link is excluded by its electrical interface, wavelength plan or worst-case OMA power budget, and it records where every number came from: each value carries a class (PUBLISHED_SPEC, PROPOSED_STANDARD, VENDOR_CLAIM, PEER_REVIEWED, THIRD_PARTY, SYNTHETIC or INFERENCE) and, when it is cited, a source in [references.bib](references.bib).
 
-![OICD link explorer: the model card worked example with the patch connector raised to 2 dB, EXCLUDED at -0.5008 dB margin](docs/img/explorer.png)
+![The OICD twin explorer: the reference rack's worst path flips from EXCLUDED to NOT_EXCLUDED with the reference plane](docs/img/rack_reference_plane.png)
+
+## Features
+
+- **Link engine.** Worst-case OMA budget between named reference planes (TP2 to TP3), dB and dBm as distinct types, OMA and average power as distinct kinds, three-state checks (PASS, FAIL, NOT_EVALUATED) with evidence. A PASS means "not excluded by the modeled constraints", never "the link works".
+- **Analyses.** Design-space sweeps with the engine's 0 dB contour, multi-lane trays, an upstream laser chain with maximum fan-out, statistical yield, the draft IEEE 802.3dj 200G DR budget, worst-case MPI, BiDi reflection crosstalk, microring and WDM physics, a reference rack and a scale-up pod.
+- **Product twin.** A catalog of public facts with their exact quotes, SYNTHETIC assumptions, derived values with derivations, consistency checks, and competing hypotheses carried side by side with a support matrix ([docs/twin/](docs/twin/), [public spec sheet](docs/lightmatter_public_spec_sheet.md)).
+- **Photonic processor.** An independent re-implementation of the adaptive block floating-point data path of the 2025 Nature photonic processor, with seeded experiments.
+- **Explorer.** Rack › tray › engine › PIC › ring at their own scales, PBR materials, feature edges, sections with hatched caps, exploded views, a snapping measure tool, guided tours, physics overlays (false-color light, pulses at the engine's linear power, margin colormaps, heater power) and analysis tabs, every number from the API.
+
+| | |
+| --- | --- |
+| ![L20 exploded](docs/img/l20_exploded.png) | ![Spectrum tab](docs/img/spectrum.png) |
+| ![Design space](docs/img/sweep.png) | ![Ring cross-section reached by semantic zoom](docs/img/semantic_zoom_ring.png) |
+
+## The product twin
+
+The twin reconstructs Lightmatter's public interconnect products (Passage M1000, L200 and L200X, L20, the OCP 2026 switch and XPU trays, Guide, Guide 1 and Guide DR, vClick, a 16-wavelength BiDi link and the 2025 photonic processor) from public sources only, reverse-engineers what the public numbers imply, and labels every number by where it came from. Inferences are never presented as specifications; where two sources disagree, both are kept as a recorded conflict, and where a claim has two readings, both are carried as hypotheses.
+
+> **Independent reconstruction from public information. Not affiliated with or endorsed by Lightmatter. Product names belong to their owners.**
 
 ## Run it
 
 ```bash
-uv sync
-cd web && npm install && cd ..
+uv sync --all-groups
+cd web && npm install --legacy-peer-deps && cd ..
 ./scripts/dev.sh
 ```
 
-`scripts/dev.sh` starts the API on http://127.0.0.1:8000 and the explorer on http://localhost:5173. Ctrl+C stops both.
-
-Checks:
+`scripts/dev.sh` starts the API on http://127.0.0.1:8000 and the explorer on http://localhost:5173. The command line gives the same numbers without the browser:
 
 ```bash
-uv run pytest -q && uv run ruff check .
-cd web && npm run typecheck && npm run build && npm run e2e
+uv run oicd evaluate worked_example
+uv run oicd sweep worked_example --x "channel[2].loss_max" 0 2 21 --y tx.launch_oma_min -1 1 21
+uv run oicd fanout upstream_example
+uv run oicd twin passage_l20
+uv run oicd rack
 ```
+
+Checks: `uv run pytest -q`, `uv run ruff check .`, `uv run mypy`, and in web/ `npm run typecheck`, `npm run test:unit`, `npm run build`, `npm run e2e`. Figures: `uv run python scripts/make_figures.py`; twin pages: `uv run python scripts/make_twin_docs.py`.
 
 ## Pipeline
 
 ```
-profiles/*.json ──► schema (Link) ──► checks ──► report ──► API ──► 3D explorer
-  synthetic or       units, OMA vs     electrical,  verdict,     FastAPI     React, three.js,
-  cited inputs       average, invalid  wavelength,  power trace, /evaluate   Plotly; display
-                     physics rejected  power budget provenance   /profiles   only, no physics
+references.bib, catalog/*.toml, profiles/*.json
+        │
+        ▼
+schema and catalog validation ──► checks, analyses, physics, inference graph, hypotheses
+        │                                       │
+        ▼                                       ▼
+FastAPI (canonical JSON, generated TypeScript types) ──► explorer, CLI, figures, twin docs
 ```
 
-The engine is the only place physics is computed. The explorer sends the edited Link to `POST /evaluate` and displays the report it gets back. It never computes dB, margins or verdicts. The equations, reference planes (TP2 to TP3) and expected test values are in [docs/model_card.md](docs/model_card.md).
+The engine is the only place physics or inference is computed; the explorer displays API responses, including colors. The equations, reference planes and expected test values are in [docs/model_card.md](docs/model_card.md), and docs/hand_calcs/ reproduces every number it quotes with the Python standard library. More: [architecture](docs/architecture.md), [paper draft](docs/paper/main.md), [five-minute demo](docs/demo_script.md), [figures](docs/figures/).
 
 ## Limitations
 
-- **Synthetic values.** Every value in the shipped profile is synthetic, not taken from a datasheet. Each input says so in its provenance.
-- **Single lane.** A link is one point-to-point lane. There is no multi-lane, breakout or WDM aggregation.
-- **No BER prediction.** BER, TDECQ, dispersion, reflections/MPI, thermal behavior and reliability are always reported as `NOT_EVALUATED`. A PASS means "not excluded by the modeled constraints", never "the link works".
-- **Not a compliance tool.** OICD is not an OCP or IEEE 802.3 compliance tool, and its results do not certify conformance to any specification.
-- **Schematic 3D.** The explorer is schematic and not to scale.
-
-## References
-
-From [references.bib](references.bib). Each entry's note records whether it was read and its information class.
-
-- `ocp_osp_initiative_2026`: OCP Launches Open Silicon Photonics for AI Systems Initiative, Converge Digest, 2026 (proposed architecture vision, news summary).
-- `ocp_osp_vision_2026`: Architecture Vision: Open Silicon Photonics for AI Systems, Open Compute Project, 2026 (listed, not yet read).
-- `lightmatter_guide_2026`: Lightmatter Introduces Guide Light Engine for AI, Featuring VLSP Technology, Lightmatter, 2026 (vendor claim).
-- `lightmatter_l20_2026`: Lightmatter unveils Passage L20 photonic interconnect, announces vClick Optics, DatacenterDynamics, 2026 (vendor claim).
-- `lightmatter_openrack_2026`: Lightmatter Delivers Open Rack CPO Switch and XPU Scale-Up Server, Lightmatter, 2026 (vendor claim).
-- `oif_elsfp_2023`: OIF serves up external laser small form-factor pluggable (ELSFP) implementation agreement, Lightwave, 2023 (article about a published specification).
-- `gu2026llmcircuits`: Gu, Kemeny, Yelin and Lukin, Discovering state-of-the-art quantum circuits with large language models, arXiv:2610.22367, 2026 (method reference).
-
-No value in the current engine or profiles cites these yet. They are background for later milestones.
+- **Worst case on a subset of constraints.** BER, TDECQ, dispersion, thermal behavior and reliability are NOT_EVALUATED.
+- **Public information only.** The twin knows what sources say, not what the products are; inferences are labelled INFERENCE and assumptions SYNTHETIC. The reference rack is an OICD design.
+- **Draft standards.** IEEE P802.3dj values are a draft (PROPOSED_STANDARD), not an approved standard.
+- **Schematic geometry.** Wherever a dimension is not public, the explorer draws a SCHEMATIC part and says so.
+- **Not a compliance tool.** OICD does not certify conformance to any specification.
 
 ---
 

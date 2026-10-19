@@ -17,7 +17,7 @@ Pure and deterministic: the Monte Carlo uses a fixed seed.
 
 import itertools
 import math
-from collections.abc import Mapping
+from collections.abc import Mapping, Sequence
 from typing import Literal
 
 import numpy as np
@@ -35,6 +35,10 @@ MC_SEED = 20261018
 
 Status = Literal["CONSISTENT", "TENSION", "CONFLICT"]
 Method = Literal["point", "corners", "monte_carlo"]
+
+
+# (nominal, lo, hi, method, interval parents) of one node; all None for a non-numeric fact
+Evaluation = tuple[float | None, float | None, float | None, Method, tuple[str, ...]]
 
 
 class NodeResult(BaseModel):
@@ -203,7 +207,7 @@ class _Graph:
         cache[node_id] = result
         return result
 
-    def evaluate(self, node_id: str, memo: dict[str, frozenset[str]]):
+    def evaluate(self, node_id: str, memo: dict[str, frozenset[str]]) -> Evaluation:
         """(nominal, lo, hi, method, interval parents); all None for a non-numeric fact."""
         node = self.catalog.nodes[node_id]
         if isinstance(node, Fact) and not node.numeric:
@@ -244,7 +248,9 @@ def _ancestors(catalog: Catalog, roots: list[str]) -> set[str]:
     return out
 
 
-def _check(graph: _Graph, check: Check, values: Mapping[str, tuple[float, float, float]]):
+def _check(
+    graph: _Graph, check: Check, values: Mapping[str, tuple[float, float, float]]
+) -> CheckOutcome:
     catalog = graph.catalog
     a_nom, a_lo, a_hi = values[check.a]
     b_nom, b_lo, b_hi = values[check.b]
@@ -306,7 +312,9 @@ def _scope(catalog: Catalog, product: str | None) -> tuple[list[str], list[Check
     return reported, checks, hypotheses
 
 
-def _run(catalog: Catalog, pins: Mapping[str, tuple[float, str]], node_ids: list[str]):
+def _run(
+    catalog: Catalog, pins: Mapping[str, tuple[float, str]], node_ids: list[str]
+) -> tuple[_Graph, dict[str, Evaluation]]:
     graph = _Graph(catalog, pins)
     memo: dict[str, frozenset[str]] = {}
     return graph, {i: graph.evaluate(i, memo) for i in node_ids}
@@ -347,7 +355,7 @@ def evaluate_graph(
 
     graph, values = _run(catalog, pins, node_ids)
     nodes = tuple(_node_result(catalog, graph, i, values[i]) for i in node_ids)
-    simple = {i: (v[0], v[1], v[2]) for i, v in values.items() if v[0] is not None}
+    simple = _numeric(values)
     outcomes = tuple(_check(graph, c, simple) for c in checks)
 
     support = [_support_row(catalog, "baseline", "", "No hypothesis applied.", outcomes)]
@@ -355,7 +363,7 @@ def evaluate_graph(
         h = catalog.hypotheses[h_id]
         h_pins = {**pins, **{t: (v, h_id) for t, v in h.sets.items()}}
         h_graph, h_values = _run(catalog, h_pins, node_ids)
-        h_simple = {i: (v[0], v[1], v[2]) for i, v in h_values.items() if v[0] is not None}
+        h_simple = _numeric(h_values)
         h_out = tuple(_check(h_graph, c, h_simple) for c in checks)
         support.append(_support_row(catalog, h_id, h.group, h.statement, h_out))
 
@@ -373,11 +381,20 @@ def evaluate_graph(
     )
 
 
+def _numeric(values: Mapping[str, Evaluation]) -> dict[str, tuple[float, float, float]]:
+    """(nominal, lo, hi) of every numeric node."""
+    out = {}
+    for i, (nominal, lo, hi, _, _) in values.items():
+        if nominal is not None and lo is not None and hi is not None:
+            out[i] = (nominal, lo, hi)
+    return out
+
+
 def _is_derived(catalog: Catalog, node_id: str) -> bool:
     return isinstance(catalog.nodes[node_id], Derived)
 
 
-def _node_result(catalog: Catalog, graph: _Graph, node_id: str, value) -> NodeResult:
+def _node_result(catalog: Catalog, graph: _Graph, node_id: str, value: Evaluation) -> NodeResult:
     nominal, lo, hi, method, parents = value
     node = catalog.nodes[node_id]
     pinned_by = graph.pins.get(node_id, (None, None))[1]
@@ -394,6 +411,7 @@ def _node_result(catalog: Catalog, graph: _Graph, node_id: str, value) -> NodeRe
         "file": catalog.owner[node_id],
     }
     if isinstance(node, Derived):
+        assert nominal is not None  # derived nodes are numeric
         formula = FORMULAS[node.fn]
         args = tuple(graph.value(i, {}, {}) for i in node.inputs)
         units = tuple(catalog.unit_of(i) for i in node.inputs)
@@ -407,6 +425,7 @@ def _node_result(catalog: Catalog, graph: _Graph, node_id: str, value) -> NodeRe
             **common,
         )
     if isinstance(node, Assumption):
+        assert nominal is not None  # assumptions are numeric
         pinned = f", pinned by {pinned_by}" if pinned_by else ""
         return NodeResult(
             kind="assumption",
@@ -434,7 +453,9 @@ def _node_result(catalog: Catalog, graph: _Graph, node_id: str, value) -> NodeRe
     )
 
 
-def _support_row(catalog, h_id, group, statement, outcomes) -> SupportRow:
+def _support_row(
+    catalog: Catalog, h_id: str, group: str, statement: str, outcomes: Sequence[CheckOutcome]
+) -> SupportRow:
     cells = {o.id: SupportCell(status=o.status, gap_rel=o.gap_rel) for o in outcomes}
     return SupportRow(
         hypothesis=h_id,

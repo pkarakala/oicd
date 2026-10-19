@@ -139,14 +139,14 @@ Baseline before Phase 0 (brief 03 tree on `main`): pytest 147 passed, ruff check
 
 ## Phase 10: refinement, figures, paper, docs
 
-- [ ] 10.1 .github/workflows/ci.yml; strict type check on src/oicd with no errors; pre-commit config
-- [ ] 10.2 CLI: oicd evaluate | sweep | fanout | twin <product> | rack
-- [ ] 10.3 Coverage ≥ 95% on src/oicd; uncovered lines listed
-- [ ] 10.4 scripts/make_figures.py (11 figures, PDF and PNG in docs/figures/)
-- [ ] 10.5 docs/twin/<product>.md, docs/lightmatter_public_spec_sheet.md, docs/demo_script.md
-- [ ] 10.6 docs/paper/main.md
-- [ ] 10.7 README, docs/architecture.md, CITATION.cff
-- [ ] 10.8 Remove the "Active run" section from CLAUDE.md; all checks one final time
+- [x] 10.1 .github/workflows/ci.yml; strict type check on src/oicd with no errors; pre-commit config — .github/workflows/ci.yml (uv sync, ruff, ruff format, mypy, pytest --cov-fail-under=95, hand calcs, figures --check; web gen:api diff, typecheck, Vitest, build, Playwright; never pushes); mypy --strict with the pydantic plugin: no issues in 40 files; .pre-commit-config.yaml (ruff, ruff-format)
+- [x] 10.2 CLI: oicd evaluate | sweep | fanout | twin <product> | rack — src/oicd/cli.py: oicd evaluate | sweep | fanout | twin <product> [--hypothesis] | rack, --json; tests/test_cli.py
+- [x] 10.3 Coverage ≥ 95% on src/oicd; uncovered lines listed — 98 % on src/oicd (3769 statements, 80 missed); uncovered: defensive branches and error paths in api_physics (422 paths), bidi (invalid inputs), sweep (axis validation), upstream (fan-out search edges), units (type errors), catalog (rare validation messages), the __init__ entry point
+- [x] 10.4 scripts/make_figures.py (11 figures, PDF and PNG in docs/figures/) — scripts/make_figures.py: 11 figures, PDF and PNG in docs/figures/, colors from oicd.display, --check
+- [x] 10.5 docs/twin/<product>.md, docs/lightmatter_public_spec_sheet.md, docs/demo_script.md — scripts/make_twin_docs.py -> docs/twin/<product>.md (13) and docs/lightmatter_public_spec_sheet.md; docs/demo_script.md
+- [x] 10.6 docs/paper/main.md — docs/paper/main.md with [TODO Pranav] where a source is missing
+- [x] 10.7 README, docs/architecture.md, CITATION.cff — README rewritten (features, screenshots, twin section with the disclaimer, run, pipeline, limitations, AI-assistant line), docs/architecture.md, CITATION.cff (Pranav Reddy)
+- [x] 10.8 Remove the "Active run" section from CLAUDE.md; all checks one final time — removed; final checks: pytest 480 passed (98 % coverage), ruff clean, ruff format clean, mypy strict clean, hand calcs run, figures render, gen:api unchanged, typecheck ok, Vitest 21 passed, build ok, Playwright 14 passed
 - [ ] 10.9 docs/run_summary_05.md (final summary), printed
 
 ## Check log
@@ -164,3 +164,4 @@ Baseline before Phase 0 (brief 03 tree on `main`): pytest 147 passed, ruff check
 | 7 | a78fb8f | 404 passed | clean | clean | ok | ok | 1 passed | n/a |
 | 8 | 58b63de | 456 passed | clean | clean | ok | ok | 13 passed | 21 passed |
 | 9 | d4eeeef | 472 passed | clean | clean | ok | ok | 14 passed | 21 passed |
+| 10 | (this commit) | 480 passed, 98 % coverage, mypy strict clean | clean | clean | ok | ok | 14 passed | 21 passed |

@@ -1,7 +1,7 @@
 [project]
 name = "oicd"
-version = "0.1.0"
-description = "Add your description here"
+version = "0.3.0"
+description = "Provenance-tracked feasibility engine and product twin for optical AI-accelerator interconnects"
 readme = "README.md"
 authors = [
     { name = "Pranav Reddy", email = "preddy@ucsb.edu" }
@@ -25,7 +25,10 @@ build-backend = "uv_build"
 dev = [
     "httpx>=0.28.1",
     "hypothesis>=6.170.1",
+    "matplotlib>=3.11.2",
+    "mypy>=2.4.0",
     "pytest>=9.1.1",
+    "pytest-cov>=7.1.0",
     "ruff>=0.17.1",
 ]
 
@@ -34,3 +37,23 @@ line-length = 100
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "B", "UP"]
+
+[tool.mypy]
+strict = true
+plugins = ["pydantic.mypy"]
+files = ["src/oicd"]
+
+[[tool.mypy.overrides]]
+module = ["scipy.*"]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+addopts = "-p no:cacheprovider"
+
+[tool.coverage.run]
+source = ["oicd"]
+branch = false
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = true

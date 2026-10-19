@@ -8,12 +8,12 @@ SYNTHETIC and computed results are INFERENCE. Pure: the catalog is passed in, no
 import functools
 import math
 from collections.abc import Callable
-from typing import Literal
+from typing import Any, Literal
 
 from pydantic import BaseModel, ConfigDict
 
 from oicd.checks.wavelength import clearances_nm
-from oicd.compute.experiments import error_sweeps, mlp_accuracy_vs_gain
+from oicd.compute.experiments import ErrorRow, MlpResult, error_sweeps, mlp_accuracy_vs_gain
 from oicd.compute.ptc import quantize_vector
 from oicd.physics import ring, wdm
 from oicd.physics.mpi import mpi_penalty_db
@@ -122,7 +122,7 @@ def _class(catalog: Catalog, node_id: str) -> SourceClass:
 def dr_budget_link(catalog: Catalog, name: str = "draft 802.3dj DR budget") -> Link:
     """The model card §12.1 DR link, built from the catalog's draft 802.3dj facts."""
 
-    def q(value: float, node_id: str) -> Quantity:
+    def q(value: float, node_id: str) -> Quantity[float]:
         return Quantity(value=value, provenance=_prov(catalog, node_id))
 
     electrical = ElectricalInterface(
@@ -531,7 +531,7 @@ def _bidi16(catalog: Catalog) -> tuple[Section, ...]:
 def _chain_link(catalog: Catalog, laser_mw: float, n: int) -> Link:
     base = dr_budget_link(catalog, "Guide DR fan-out on the draft DR budget")
 
-    def q(value: object) -> Quantity:
+    def q(value: Any) -> Quantity[Any]:
         return Quantity(value=value, provenance=CHAIN)
 
     chain = UpstreamChain(
@@ -828,7 +828,7 @@ def _rack(catalog: Catalog) -> tuple[Section, ...]:
 
 
 @functools.lru_cache(maxsize=1)
-def _ptc_experiments():
+def _ptc_experiments() -> tuple[dict[str, tuple[ErrorRow, ...]], MlpResult]:
     """The seeded §15.4 experiments (pure, so computed once)."""
     return error_sweeps(seed=0), mlp_accuracy_vs_gain(seed=0)
 

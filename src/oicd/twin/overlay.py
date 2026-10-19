@@ -24,7 +24,7 @@ from oicd.physics.bidi import (
     evaluate_bidi_link,
 )
 from oicd.provenance import Provenance, Quantity, SourceClass
-from oicd.report import TracePoint
+from oicd.report import FeasibilityReport, TracePoint
 from oicd.system.rack import PathCase, evaluate_rack
 from oicd.twin.catalog import Catalog, GeometryScene
 from oicd.twin.inference import evaluate_graph
@@ -115,6 +115,9 @@ class Overlay(BaseModel):
     paths: tuple[LightPath, ...]
     values: tuple[PartValue, ...]
     notes: tuple[str, ...]
+
+
+Builder = Callable[[Catalog, GeometryScene, Mode, str | None, float], Overlay]
 
 
 class OverlayError(ValueError):
@@ -251,7 +254,9 @@ def _received(part: str, d: BidiDirectionResult, mode: Mode) -> PartValue:
     )
 
 
-def _bidi_link(catalog, scene, mode, case, isolation_db) -> Overlay:
+def _bidi_link(
+    catalog: Catalog, scene: GeometryScene, mode: Mode, case: str | None, isolation_db: float
+) -> Overlay:
     result = l20_link(catalog, isolation_db)
     a, b = result.directions
     colors = channel_colors(2)
@@ -335,7 +340,9 @@ def _bidi_link(catalog, scene, mode, case, isolation_db) -> Overlay:
     )
 
 
-def _l20_package(catalog, scene, mode, case, isolation_db) -> Overlay:
+def _l20_package(
+    catalog: Catalog, scene: GeometryScene, mode: Mode, case: str | None, isolation_db: float
+) -> Overlay:
     result = l20_link(catalog, isolation_db)
     a, b = result.directions
     colors = channel_colors(2)
@@ -434,7 +441,7 @@ def _split(trace: Sequence[TracePoint]) -> tuple[list[TracePoint], list[TracePoi
     return list(trace[:xpu_end]), list(trace[switch_start:])
 
 
-def _margin_value(part: str, label: str, report, mode: Mode) -> PartValue:
+def _margin_value(part: str, label: str, report: FeasibilityReport, mode: Mode) -> PartValue:
     return PartValue(
         part=part,
         label=label,
@@ -445,7 +452,9 @@ def _margin_value(part: str, label: str, report, mode: Mode) -> PartValue:
     )
 
 
-def _rack(catalog, scene, mode, case, isolation_db) -> Overlay:
+def _rack(
+    catalog: Catalog, scene: GeometryScene, mode: Mode, case: str | None, isolation_db: float
+) -> Overlay:
     cases = _rack_cases(catalog)
     chosen, path = _pick_case(cases, case)
     report = path.report
@@ -501,8 +510,10 @@ def _rack(catalog, scene, mode, case, isolation_db) -> Overlay:
     )
 
 
-def _tray(engines: str, ribbons: tuple[str, str], transmits_a: bool):
-    def build(catalog, scene, mode, case, isolation_db) -> Overlay:
+def _tray(engines: str, ribbons: tuple[str, str], transmits_a: bool) -> Builder:
+    def build(
+        catalog: Catalog, scene: GeometryScene, mode: Mode, case: str | None, isolation_db: float
+    ) -> Overlay:
         cases = _rack_cases(catalog)
         chosen, path = _pick_case(cases, case)
         report = path.report
@@ -581,7 +592,9 @@ def _heater(catalog: Catalog, part: str) -> PartValue:
     )
 
 
-def _pic_region(catalog, scene, mode, case, isolation_db) -> Overlay:
+def _pic_region(
+    catalog: Catalog, scene: GeometryScene, mode: Mode, case: str | None, isolation_db: float
+) -> Overlay:
     parts = {p.id: p for p in scene.part}
     a, b = channel_colors(2)
     tx_path, rx_path = parts["pic.tx_bus"].path, parts["pic.rx_bus"].path
@@ -666,7 +679,9 @@ def _pic_region(catalog, scene, mode, case, isolation_db) -> Overlay:
     )
 
 
-def _ring_section(catalog, scene, mode, case, isolation_db) -> Overlay:
+def _ring_section(
+    catalog: Catalog, scene: GeometryScene, mode: Mode, case: str | None, isolation_db: float
+) -> Overlay:
     return Overlay(
         scene=scene.scene.id,
         mode=mode,
@@ -683,7 +698,9 @@ def _ring_section(catalog, scene, mode, case, isolation_db) -> Overlay:
     )
 
 
-def _guide(catalog, scene, mode, case, isolation_db) -> Overlay:
+def _guide(
+    catalog: Catalog, scene: GeometryScene, mode: Mode, case: str | None, isolation_db: float
+) -> Overlay:
     cw = palette(mode).cw
     dr_mw = _value(catalog, "guidedr.power_per_fiber")
     g1_count = _value(catalog, "guide1.wavelengths_per_fiber")
@@ -748,8 +765,10 @@ def _guide(catalog, scene, mode, case, isolation_db) -> Overlay:
     )
 
 
-def _undisclosed(parts: tuple[str, ...], label: str):
-    def build(catalog, scene, mode, case, isolation_db) -> Overlay:
+def _undisclosed(parts: tuple[str, ...], label: str) -> Builder:
+    def build(
+        catalog: Catalog, scene: GeometryScene, mode: Mode, case: str | None, isolation_db: float
+    ) -> Overlay:
         a = channel_colors(2)[0]
         return Overlay(
             scene=scene.scene.id,
@@ -781,7 +800,9 @@ def _undisclosed(parts: tuple[str, ...], label: str):
     return build
 
 
-def _processor(catalog, scene, mode, case, isolation_db) -> Overlay:
+def _processor(
+    catalog: Catalog, scene: GeometryScene, mode: Mode, case: str | None, isolation_db: float
+) -> Overlay:
     """Laser supply into the processor and the optical power per weight cell (§15.5)."""
     per_fibre = _value(catalog, "ptc.laser_power_fibre")
     eta = evaluate_graph(catalog, "photonic_processor", hypotheses=("H_lasers_dedicated",))
@@ -822,8 +843,6 @@ def _processor(catalog, scene, mode, case, isolation_db) -> Overlay:
         notes=("Per-cell power: 1.6 W after the fibre-to-cell losses, shared by 65,536 cells.",),
     )
 
-
-Builder = Callable[[Catalog, GeometryScene, Mode, str | None, float], Overlay]
 
 BUILDERS: dict[str, Builder] = {
     "reference_rack": _rack,

@@ -25,7 +25,7 @@ def levels(bits: int) -> int:
     """L = 2^(b−1) − 1: the largest code of a symmetric b-bit quantizer."""
     if bits < 2:
         raise ValueError("a symmetric quantizer needs at least 2 bits")
-    return 2 ** (bits - 1) - 1
+    return int(2 ** (bits - 1)) - 1
 
 
 def bfloat16_round_up(x: float) -> float:

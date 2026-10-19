@@ -318,3 +318,18 @@ def test_every_product_evaluates(catalog):
         g = evaluate_graph(catalog, product)
         assert g.scope == product
         assert evaluate_graph(catalog, product) == g  # deterministic
+
+
+def test_every_physics_evaluation_runs_and_labels_its_numbers():
+    from oicd.provenance import SourceClass
+    from oicd.twin.catalog import load_catalog
+    from oicd.twin.physics import EVALUATIONS, physics_for
+
+    catalog = load_catalog()
+    for product in EVALUATIONS:
+        physics = physics_for(catalog, product)
+        assert physics is not None and physics.sections, product
+        for section in physics.sections:
+            assert section.title and section.items, (product, section.title)
+            assert all(isinstance(i.source_class, SourceClass) for i in section.items)
+    assert physics_for(catalog, "vclick") is None

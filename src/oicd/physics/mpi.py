@@ -28,7 +28,7 @@ class MpiResult(BaseModel):
 def _reflectance(value_db: float, name: str) -> float:
     if not math.isfinite(value_db) or value_db > 0.0:
         raise ValueError(f"{name} must be a finite reflectance <= 0 dB, got {value_db!r}")
-    return 10.0 ** (value_db / 10.0)
+    return float(10.0 ** (value_db / 10.0))
 
 
 def mpi_penalty_db(

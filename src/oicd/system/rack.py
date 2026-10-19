@@ -177,11 +177,12 @@ def evaluate_rack(spec: RackSpec, name: str = "OICD-R64") -> RackResult:
     tx_lanes = 2 * links
     paths = []
     fiber_m = 0.0
-    for plane, vclick in (
+    cases: tuple[tuple[ReferencePlane, float | None], ...] = (
         ("H_vclick_channel", spec.vclick_loss_db.value),
         ("H_vclick_channel", 1.0),
         ("H_vclick_module", None),
-    ):
+    )
+    for plane, vclick in cases:
         link, fiber_m = _path_link(spec, plane, vclick if vclick is not None else 0.0)
         report = evaluate(link)
         paths.append(

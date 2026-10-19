@@ -11,7 +11,7 @@ inside their stated range.
 
 import re
 import tomllib
-from collections.abc import Iterable
+from collections.abc import Iterable, Iterator
 from functools import cached_property
 from pathlib import Path
 from typing import Literal, Self
@@ -203,6 +203,19 @@ class CatalogFile(BaseModel):
 
 
 Node = Fact | Assumption | Derived
+Item = Fact | Assumption | Derived | Check | Hypothesis
+
+
+def _nodes_of(f: CatalogFile) -> Iterator[Node]:
+    yield from f.fact
+    yield from f.assumption
+    yield from f.derived
+
+
+def _items_of(f: CatalogFile) -> Iterator[Item]:
+    yield from _nodes_of(f)
+    yield from f.check
+    yield from f.hypothesis
 
 
 class Catalog(BaseModel):
@@ -215,7 +228,7 @@ class Catalog(BaseModel):
 
     @cached_property
     def nodes(self) -> dict[str, Node]:
-        return {n.id: n for f in self.files.values() for n in (*f.fact, *f.assumption, *f.derived)}
+        return {n.id: n for f in self.files.values() for n in _nodes_of(f)}
 
     @cached_property
     def checks(self) -> dict[str, Check]:
@@ -230,7 +243,7 @@ class Catalog(BaseModel):
         """File stem that defines each node, check and hypothesis id."""
         out: dict[str, str] = {}
         for stem, f in self.files.items():
-            for item in (*f.fact, *f.assumption, *f.derived, *f.check, *f.hypothesis):
+            for item in _items_of(f):
                 out[item.id] = stem
         return out
 
@@ -242,7 +255,7 @@ class Catalog(BaseModel):
         errors: list[str] = []
         seen: dict[str, str] = {}
         for stem, f in self.files.items():
-            for item in (*f.fact, *f.assumption, *f.derived, *f.check, *f.hypothesis):
+            for item in _items_of(f):
                 if item.id in seen:
                     errors.append(f"duplicate id {item.id!r} in {stem} and {seen[item.id]}")
                 seen[item.id] = stem
@@ -253,7 +266,7 @@ class Catalog(BaseModel):
         unopened = context.get("unopened_keys")
         if unopened is None:
             unopened = load_unopened_keys()
-        nodes = {n.id: n for f in self.files.values() for n in (*f.fact, *f.assumption, *f.derived)}
+        nodes: dict[str, Node] = {n.id: n for f in self.files.values() for n in _nodes_of(f)}
 
         def numeric(node_id: str, where: str) -> bool:
             node = nodes.get(node_id)

@@ -6,7 +6,7 @@ _Draft. Independent model built from public information. Not affiliated with or 
 
 ## Abstract
 
-Optical interconnect for AI accelerators is now designed from public fragments: press releases, slides, draft standards and the occasional peer-reviewed paper. Feasibility arguments built from such fragments usually lose track of where each number came from, mix optical power kinds and reference planes, and silently pick one reading of an ambiguous claim. OICD is an open feasibility engine that refuses all three: every parameter carries a provenance class and citation, dB and dBm and OMA and average power are distinct types, and every ambiguous public claim is carried as named, competing hypotheses through an inference graph. On top of a worst-case link budget, OICD adds design-space sweeps, multi-lane trays, an upstream laser chain, statistical yield, a validation against the draft IEEE 802.3dj 200G DR budget, microring and WDM physics, and architecture twins of today's photonic interconnect building blocks. Three results stand out. A reference rack built from public parts passes or fails on the definition of a reference plane, not on physics: the same worst path is −1.0016 dB or +1.9984 dB [INFERENCE]. A 16-wavelength bidirectional link loses most of its interleaving isolation to ring free-spectral-range aliasing unless the ring's FSR is at least 3.2 THz [INFERENCE]. At rack scale, a 99 % rack yield over 8192 links needs per-link yield 0.99999877, about 4.7σ [INFERENCE], so statistical design converges back toward worst-case design.
+Public information about optical interconnect for AI accelerators comes in fragments: press releases, slides, draft standards and a few peer-reviewed papers. OICD is an open feasibility engine that keeps track of where each number came from, keeps dB, dBm, OMA and average power as distinct types, and carries ambiguous claims as competing hypotheses. It adds sweeps, multi-lane trays, an upstream laser chain, statistical yield, the draft IEEE 802.3dj 200G DR budget, microring and WDM physics, and models of current photonic interconnect building blocks. Three results stand out. A reference rack passes or fails on where the reference plane sits, not on physics: the same worst path is −1.0016 dB or +1.9984 dB [INFERENCE]. A 16-wavelength bidirectional link loses most of its interleaving isolation unless the ring FSR is at least 3.2 THz [INFERENCE]. A 99 % yield over 8192 links needs per-link yield 0.99999877, about 4.7σ [INFERENCE], so statistical design converges back to worst-case design.
 
 ## 1. Motivation
 
@@ -102,7 +102,3 @@ Microring modulators and filters [bogaerts2012_mrr], their thermo-optic tuning [
 ## Acknowledgments
 
 The code, tests and documents of OICD were written with an AI coding assistant, which also proposed design decisions that the author reviewed; the models and physics are the author's.
-
-## Disclaimer
-
-Independent model built from public information. Not affiliated with or endorsed by any company whose publications are cited.

@@ -1,4 +1,4 @@
-"""Upstream chain from the laser to TP2 (model card §10, Milestone 2).
+"""Upstream chain from the laser to TP2 (model card §10).
 
 P_TP2,avg = P_laser,avg − L_laser_fiber − L_couple − 10·log10(N) − L_excess − L_mod − L_out
 P_TP2,OMA = P_TP2,avg + 10·log10(2(ER − 1)/(ER + 1))

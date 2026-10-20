@@ -171,7 +171,7 @@ dims_class = "SCHEMATIC"
 dims_source = "Ribbon routing schematic."
 
 [[part]]
-id = "sw.lnics"
+id = "sw.lasernics"
 name = "ELS-DR laser NICs (4 under H_dir, 2 under H_agg)"
 assembly = "lasers"
 size = [76.0, 115.0, 1.6]
@@ -187,7 +187,7 @@ grid = [4, 1, 1]
 pitch = [120.0, 0.0, 0.0]
 explode = [0.0, -120.0, 20.0]
 enters = "laser_sources"
-label = "ELS-DR LNIC"
+label = "ELS-DR laser NIC"
 
 [[part]]
 id = "sw.rear_connectors"
@@ -221,7 +221,7 @@ part = "sw.faus"
 node = "fau.il_reinsertion_max"
 
 [[tour]]
-part = "sw.lnics"
+part = "sw.lasernics"
 node = "trays.switch_els_dr_count_lm"
 
 [[tour]]

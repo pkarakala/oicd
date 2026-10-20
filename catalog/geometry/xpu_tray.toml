@@ -140,7 +140,7 @@ enters = "bidi_engine"
 label = "BiDi engine"
 
 [[part]]
-id = "xpu.lnics"
+id = "xpu.lasernics"
 name = "ELS-DR laser NICs (2 under H_dir)"
 assembly = "lasers"
 size = [76.0, 115.0, 1.6]
@@ -156,7 +156,7 @@ grid = [2, 1, 1]
 pitch = [120.0, 0.0, 0.0]
 explode = [0.0, -120.0, 20.0]
 enters = "laser_sources"
-label = "ELS-DR LNIC"
+label = "ELS-DR laser NIC"
 
 [[part]]
 id = "xpu.rear_connectors"
@@ -212,7 +212,7 @@ part = "xpu.engines"
 node = "trays.xpu_per_engine"
 
 [[tour]]
-part = "xpu.lnics"
+part = "xpu.lasernics"
 node = "trays.xpu_blind_mate"
 
 [[tour]]

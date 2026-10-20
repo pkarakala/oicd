@@ -7,7 +7,7 @@ name = "External laser sources (ELS, ELS-DWDM, ELS-DR)"
 family = "ELS"
 kind = "product"
 status = "Public technical material, 2026"
-summary = "External multi-wavelength laser engines: ELS (VLSP), ELS-DWDM (DWDM for microring transmitters) and ELS-DR (liquid-cooled laser NIC for 200G DR lanes)."
+summary = "External multi-wavelength laser engines: ELS, ELS-DWDM (DWDM for microring transmitters) and ELS-DR (liquid-cooled laser NIC for 200G DR lanes)."
 
 [[fact]]
 id = "els.modules_100t_1ru_yole"
@@ -46,7 +46,7 @@ quote = "32 ﬁber output with > 100 mW each."
 cite = "vendor_yole_ofc26"
 source_class = "vendor_claim"
 verified = true
-location = "p13 'ELS VLSP Light Engine Overview', bullet 2 (text layer spells 'fiber' with the U+FB01 ligature; also seen on rendered slide)"
+location = "p13 'ELS light engine overview', bullet 2 (text layer spells 'fiber' with the U+FB01 ligature; also seen on rendered slide)"
 note = "Evidence: text."
 
 [[fact]]
@@ -59,7 +59,7 @@ quote = "32 ﬁber output with > 100 mW each."
 cite = "vendor_yole_ofc26"
 source_class = "vendor_claim"
 verified = true
-location = "p13 'ELS VLSP Light Engine Overview', bullet 2 (also tile '100 mW+ per Fiber')"
+location = "p13 'ELS light engine overview', bullet 2 (also tile '100 mW+ per Fiber')"
 note = "Evidence: text. Matches. Unflagged internal tension: in the same deck, p14 'POWER IN FIBER' box plot (post 24-hr burn-in, reference lines at 100mW and 150mW) has its lower whisker at roughly 87 mW (my visual estimate), i.e. some measured fibers below 100 mW."
 
 [[fact]]
@@ -71,12 +71,12 @@ quote = "Optimized for microring modulator Tx architectures."
 cite = "vendor_yole_ofc26"
 source_class = "vendor_claim"
 verified = true
-location = "p13 'ELS VLSP Light Engine Overview', bullet 3 (also seen on rendered slide)"
+location = "p13 'ELS light engine overview', bullet 3 (also seen on rendered slide)"
 note = "Evidence: text."
 
 [[fact]]
 id = "els.lasers_per_chip_hoti26"
-quantity = "lasers per ELS VLSP chip"
+quantity = "lasers per ELS chip"
 value = 128.0
 bound = "min"
 unit = "count"
@@ -84,12 +84,12 @@ quote = "128+ Lasers per chip"
 cite = "vendor_hoti26"
 source_class = "vendor_claim"
 verified = true
-location = "p18 ELS VLSP stats grid (also seen on rendered slide)"
+location = "p18 ELS stats grid (also seen on rendered slide)"
 note = "Evidence: text. Matches. Note on the A6 conflict 'Counterpoint: 128 lasers per chip (CONFLICT with 64)': this vendor slide itself says '128+ Lasers per chip'; the A6 figure of 64 is the ELS-DR laser count (vendor_pr_els_dr, not checked by G3), so per chip vs per module may explain the difference (my inference)."
 
 [[fact]]
 id = "els.fit_hoti26"
-quantity = "ELS VLSP reliability (FIT), with self-healing"
+quantity = "ELS reliability (FIT), with self-healing"
 value = 0.1
 bound = "exact"
 unit = "FIT"
@@ -97,12 +97,12 @@ quote = "0.1 FIT Reliability and self-healing"
 cite = "vendor_hoti26"
 source_class = "vendor_claim"
 verified = true
-location = "p18 ELS VLSP stats grid (also seen on rendered slide)"
+location = "p18 ELS stats grid (also seen on rendered slide)"
 note = "Evidence: text. Matches. Note: the slide gives no conditions (per laser, per chip or per module; temperature; time base)."
 
 [[fact]]
 id = "els.power_accuracy_hoti26"
-quantity = "ELS VLSP optical power accuracy"
+quantity = "ELS optical power accuracy"
 value = 0.25
 bound = "exact"
 unit = "dB"
@@ -110,12 +110,12 @@ quote = "0.25 dB Power Accuracy"
 cite = "vendor_hoti26"
 source_class = "vendor_claim"
 verified = true
-location = "p18 ELS VLSP stats grid (also seen on rendered slide)"
+location = "p18 ELS stats grid (also seen on rendered slide)"
 note = "Evidence: text."
 
 [[fact]]
 id = "els.freq_accuracy_hoti26"
-quantity = "ELS VLSP frequency accuracy"
+quantity = "ELS frequency accuracy"
 value = 3.0
 bound = "exact"
 unit = "GHz"
@@ -123,7 +123,7 @@ quote = "3 GHz Frequency Accuracy"
 cite = "vendor_hoti26"
 source_class = "vendor_claim"
 verified = true
-location = "p18 ELS VLSP stats grid (also seen on rendered slide)"
+location = "p18 ELS stats grid (also seen on rendered slide)"
 note = "Evidence: text. Matches. Unflagged tension: contrasts with vendor_yole_ofc26 p14 'ACCURACY OF +/- 15 GHZ' (els.freq_accuracy_yole) and the A6 grid tolerance of ±20 GHz; the metrics may differ (tuned accuracy vs as-built spread), the slides do not say."
 
 [[fact]]
@@ -141,7 +141,7 @@ note = "Evidence: text. Extra. Conflicts with vendor_yole_ofc26 p12 '18 x ELSFP 
 
 [[fact]]
 id = "els.wavelengths_hoti26"
-quantity = "ELS VLSP wavelengths (multi-color)"
+quantity = "ELS wavelengths (multi-color)"
 value = 64.0
 bound = "min"
 unit = "count"
@@ -149,7 +149,7 @@ quote = "64λ+ multi-color"
 cite = "vendor_hoti26"
 source_class = "vendor_claim"
 verified = true
-location = "p18 ELS VLSP stats grid (also seen on rendered slide)"
+location = "p18 ELS stats grid (also seen on rendered slide)"
 note = "Evidence: text. Extra. Related to the A6 '1 to 64 wavelengths' (press_els_2026, not checked by G3); same slide also says '300mm CMOS SOI Wafers'."
 
 [[fact]]
@@ -163,7 +163,7 @@ cite = "vendor_yole_ofc26"
 source_class = "vendor_claim"
 verified = true
 conflicts_with = ["els.freq_accuracy_hoti26"]
-location = "p14 'ELS VLSP Industry-Leading Performance', fourth plot title; dashed lines at 15GHz and -15GHz (also seen on rendered slide)"
+location = "p14 'ELS performance', fourth plot title; dashed lines at 15GHz and -15GHz (also seen on rendered slide)"
 note = "Evidence: text. Extra. Value is +/-15 GHz. Contrasts with HOTI26 '3 GHz Frequency Accuracy'. My visual estimate of the plotted data: whiskers about -16 to +11 GHz, median about -2 GHz, outliers near +14, -17.5 and -21 GHz, so a few points fall outside the +/-15 GHz lines."
 
 [[fact]]
@@ -189,7 +189,7 @@ quote = "Wavelengths: generates 16 wavelengths with multiplexing"
 cite = "press_els_2026"
 source_class = "vendor_claim"
 verified = true
-location = "'the vendor VLSP Technology Validation' bullet list, bullet 3 (raw.html.txt line 82)"
+location = "'the vendor's laser technology validation' bullet list, bullet 3 (raw.html.txt line 82)"
 note = "Evidence: text."
 
 [[fact]]
@@ -202,7 +202,7 @@ quote = "High Optical Output Power: Minimum of 100 mW per fiber"
 cite = "press_els_2026"
 source_class = "vendor_claim"
 verified = true
-location = "'the vendor VLSP Technology Validation' bullet list, bullet 2 (raw.html.txt line 81)"
+location = "'the vendor's laser technology validation' bullet list, bullet 2 (raw.html.txt line 81)"
 note = "Evidence: text."
 
 [[fact]]
@@ -268,7 +268,7 @@ quote = "Up to 51.2 Tbps per laser module for NPO and CPO applications"
 cite = "press_els_2026"
 source_class = "vendor_claim"
 verified = true
-location = "'the vendor VLSP Technology Validation' bullet list, bullet 1 ('High Bandwidth Density') (raw.html.txt line 80)"
+location = "'the vendor's laser technology validation' bullet list, bullet 1 ('High Bandwidth Density') (raw.html.txt line 80)"
 note = "Evidence: text."
 
 [[fact]]
@@ -535,10 +535,10 @@ note = "Evidence: text. Not in the initial fact list. Coexists with the '±20 GH
 
 [[fact]]
 id = "els_dr.form_factor"
-quantity = "form factor: Laser Network Interface Card (LNIC) built to OCP NIC 3.0 dimensions"
+quantity = "form factor: Laser Network Interface Card (laser NIC) built to OCP NIC 3.0 dimensions"
 bound = "exact"
 unit = "text"
-quote = "Laser Network Interface Card (“LNIC”) form factor built to OCP NIC 3.0 dimensions"
+quote = "Laser Network Interface Card (“[laser NIC]”) form factor built to OCP NIC 3.0 dimensions"
 cite = "vendor_pr_els_dr"
 source_class = "vendor_claim"
 verified = true
@@ -582,7 +582,7 @@ cite = "vendor_pr_els_dr"
 source_class = "vendor_claim"
 verified = true
 location = "'Key specifications' list, 'High-Density Optical Power' bullet (raw.html.txt line 76)"
-note = "Evidence: text. Product page agrees: '64 Lasers inside a single ELS-DR LNIC power 256 scale-up lanes at 200G'."
+note = "Evidence: text. Product page agrees: '64 Lasers inside a single ELS-DR laser NIC power 256 scale-up lanes at 200G'."
 
 [[fact]]
 id = "els_dr.lane_rate"
@@ -599,7 +599,7 @@ note = "Evidence: text. Source writes '200G' (unit and modulation not spelled ou
 
 [[fact]]
 id = "els_dr.bw_per_module"
-quantity = "total bandwidth powered by one ELS-DR LNIC"
+quantity = "total bandwidth powered by one ELS-DR laser NIC"
 value = 51.2
 bound = "exact"
 unit = "Tbps"
@@ -625,11 +625,11 @@ note = "Evidence: text. 12.8 W is optical output (= 64 x 200 mW), not electrical
 
 [[fact]]
 id = "els_dr.lasers_per_module"
-quantity = "lasers per ELS-DR LNIC module"
+quantity = "lasers per ELS-DR laser NIC module"
 value = 64.0
 bound = "exact"
 unit = "count"
-quote = "64 Lasers inside a single [ELS-DR] LNIC"
+quote = "64 Lasers inside a single [ELS-DR] [laser NIC]"
 cite = "vendor_web_els_dr"
 source_class = "vendor_claim"
 verified = true
@@ -686,9 +686,9 @@ quote = "By utilizing four [ELS-DR] modules, a single 1 RU switch tray can suppo
 cite = "vendor_pr_els_dr"
 source_class = "vendor_claim"
 verified = true
-conflicts_with = ["els_dr.lnic_per_1ru_tray_page"]
+conflicts_with = ["els_dr.lasernic_per_1ru_tray_page"]
 location = "paragraph 2 (raw.html.txt line 71)"
-note = "Evidence: text. CONFLICT: release also says 'The modular architecture accommodates up to 4 ELS-DR modules supporting scale-up bandwidth of over 200 Tbps in a 1RU switch tray' (4 as the maximum), while vendor_web_els_dr says 'up to 8 LNIC in a single 1RU switch tray' (409.6 Tbps)."
+note = "Evidence: text. CONFLICT: release also says 'The modular architecture accommodates up to 4 ELS-DR modules supporting scale-up bandwidth of over 200 Tbps in a 1RU switch tray' (4 as the maximum), while vendor_web_els_dr says 'up to 8 laser NIC in a single 1RU switch tray' (409.6 Tbps)."
 
 [[fact]]
 id = "els_dr.tray_bw_4_modules"
@@ -704,25 +704,25 @@ location = "paragraph 2 (raw.html.txt line 71)"
 note = "Evidence: text. Arithmetic: 4 x 51.2 = 204.8 Tbps."
 
 [[fact]]
-id = "els_dr.lnic_per_1ru_tray_page"
-quantity = "maximum ELS-DR LNICs in one 1RU switch tray (product page)"
+id = "els_dr.lasernic_per_1ru_tray_page"
+quantity = "maximum ELS-DR laser NICs in one 1RU switch tray (product page)"
 value = 8.0
 bound = "max"
 unit = "count"
-quote = "allows up to 8 LNIC in a single 1RU switch tray, powering up to 409.6 Tbps scale-up bandwidth"
+quote = "allows up to 8 [laser NIC] in a single 1RU switch tray, powering up to 409.6 Tbps scale-up bandwidth"
 cite = "vendor_web_els_dr"
 source_class = "vendor_claim"
 verified = true
-location = "section 'ENGINEERED TO SCALE'; repeated in '01 – Consolidation' ('up to 8 LNICs fit into a single 1RU tray') (raw.html.txt line 78)"
+location = "section 'ENGINEERED TO SCALE'; repeated in '01 – Consolidation' ('up to 8 laser NICs fit into a single 1RU tray') (raw.html.txt line 78)"
 note = "Evidence: text. CONFLICT with vendor_pr_els_dr 'accommodates up to 4 ELS-DR modules' in a 1RU switch tray."
 
 [[fact]]
-id = "els_dr.tray_bw_8_lnic"
-quantity = "1RU switch tray bandwidth with eight ELS-DR LNICs (product page)"
+id = "els_dr.tray_bw_8_lasernic"
+quantity = "1RU switch tray bandwidth with eight ELS-DR laser NICs (product page)"
 value = 409.6
 bound = "max"
 unit = "Tbps"
-quote = "allows up to 8 LNIC in a single 1RU switch tray, powering up to 409.6 Tbps scale-up bandwidth"
+quote = "allows up to 8 [laser NIC] in a single 1RU switch tray, powering up to 409.6 Tbps scale-up bandwidth"
 cite = "vendor_web_els_dr"
 source_class = "vendor_claim"
 verified = true
@@ -764,7 +764,7 @@ cite = "counterpoint_nvlinkfusion"
 source_class = "third_party"
 verified = true
 location = "'Key Technology Differentiators', 'ELS-DR Laser Engine' paragraph (raw.html.txt line 80)"
-note = "Evidence: text. NOT in counterpoint_ocp26 (OCP article; whole raw HTML incl. embedded JSON searched, no '128' and no laser count). Found in a different Counterpoint insight that is NOT in the initial source list: 'the vendor Joins NVLink Fusion Club' (Gareth Owen, 2026-06-12), https://counterpointresearch.com/en/insights/lightmatter-joins-nvlink-fusion-club, saved as SRC/counterpoint_nvlinkfusion/ (needs an initial source list key). Counterpoint says per chip; the vendor (vendor_web_els_dr) says '64 Lasers' per LNIC module, so the conflict may partly be chip vs module scope. The initial fact list also lists '128+ lasers per chip' for vendor_hoti26 (another group's item, not checked here)."
+note = "Evidence: text. NOT in counterpoint_ocp26 (OCP article; whole raw HTML incl. embedded JSON searched, no '128' and no laser count). Found in a different Counterpoint insight that is NOT in the initial source list: 'the vendor Joins NVLink Fusion Club' (Gareth Owen, 2026-06-12), https://counterpointresearch.com/en/insights/lightmatter-joins-nvlink-fusion-club, saved as SRC/counterpoint_nvlinkfusion/ (needs an initial source list key). Counterpoint says per chip; the vendor (vendor_web_els_dr) says '64 Lasers' per laser NIC module, so the conflict may partly be chip vs module scope. The initial fact list also lists '128+ lasers per chip' for vendor_hoti26 (another group's item, not checked here)."
 
 [[fact]]
 id = "els_dr.density_vs_elsfp"
@@ -814,7 +814,7 @@ quote = "Only two units are required to power a 100T switch replacing 8 conventi
 cite = "counterpoint_nvlinkfusion"
 source_class = "third_party"
 verified = true
-location = "'ELS-DR Laser Engine' section, LNIC paragraph (raw.html.txt line 81)"
+location = "'ELS-DR Laser Engine' section, laser NIC paragraph (raw.html.txt line 81)"
 note = "Evidence: text. Not in the initial fact list; source not in the initial source list. Consistent with 51.2 Tbps per module (2 x 51.2 = 102.4), but '8 conventional ELSFP' differs from the vendor's 'about 18 conventional ELSFP modules' for 100 Tbps (press_els_2026) and 'nine ELSFP' per ELS-DWDM (vendor_web_els_dwdm)."
 # ---- Model (model card §14.6) ---------------------------------------------
 
@@ -1019,9 +1019,9 @@ note = "204.8 Tbps over four modules"
 [[derived]]
 id = "els_dr.bw_per_module_8"
 fn = "divide_by_count"
-inputs = ["els_dr.tray_bw_8_lnic", "els_dr.lnic_per_1ru_tray_page"]
+inputs = ["els_dr.tray_bw_8_lasernic", "els_dr.lasernic_per_1ru_tray_page"]
 unit = "Tbps"
-note = "409.6 Tbps over eight LNIC"
+note = "409.6 Tbps over eight laser NIC"
 
 [[check]]
 id = "els_dwdm.check_fiber_power"
@@ -1118,15 +1118,15 @@ kind = "consistent"
 a = "els_dr.lasers_per_module"
 b = "els_dr.lasers_per_chip_counterpoint"
 rel_tol = 0.01
-note = "64 lasers per LNIC (product page) against 128 lasers per chip (Counterpoint); chip and module may differ"
+note = "64 lasers per laser NIC (product page) against 128 lasers per chip (Counterpoint); chip and module may differ"
 
 [[check]]
 id = "els_dr.check_modules_per_tray"
 kind = "consistent"
 a = "els_dr.modules_per_1ru_tray_release"
-b = "els_dr.lnic_per_1ru_tray_page"
+b = "els_dr.lasernic_per_1ru_tray_page"
 rel_tol = 0.01
-note = "four modules (release) against up to 8 LNIC (product page) per 1RU tray"
+note = "four modules (release) against up to 8 laser NIC (product page) per 1RU tray"
 
 [[check]]
 id = "els_dr.check_per_module_rates"

@@ -1,4 +1,4 @@
-# Model card: optical link feasibility (Milestone 1)
+# Model card: optical link feasibility
 
 Author: Pranav. This card is the spec: code implements it, tests take their expected values from it. All component values are **synthetic** unless a citation key is given.
 
@@ -16,8 +16,8 @@ TP2 ══► [TX FAU mating] ══► [fiber] ══► [patch connector] ═�
 
 - **TP2:** the transmitter's optical output at its fiber interface, before the first mated connection. Transmitter OMA is specified here, so everything upstream (laser, split, modulator, coupler) is inside the transmitter spec.
 - **TP3:** the receiver's optical input at its fiber interface, after the last mated connection. Receiver sensitivity is specified here, so the receiver's own coupler and photodiode response are inside the receiver spec.
-- **Inside the Milestone 1 budget (TP2 to TP3):** the passive channel only: every mated connector or fiber-array-unit (FAU) interface, fiber attenuation, and any shuffle or patch panel. This is the channel insertion loss.
-- **Upstream, deferred to Milestone 2:** laser power, laser-to-PIC coupling, split loss 10·log10(N), modulator insertion loss, output coupler. Milestone 2 derives TP2 from these instead of taking it as an input.
+- **Inside the budget (TP2 to TP3):** the passive channel only: every mated connector or fiber-array-unit (FAU) interface, fiber attenuation, and any shuffle or patch panel. This is the channel insertion loss.
+- **Upstream (§10):** laser power, laser-to-PIC coupling, split loss 10·log10(N), modulator insertion loss, output coupler. §10 derives TP2 from these instead of taking it as an input.
 
 This convention follows the TP2/TP3 split used by IEEE 802.3 optical PMD clauses (to be cited once the clause is read).
 
@@ -114,38 +114,7 @@ T04 note: the float result depends on summation order. The test asserts PASS and
 
 ## 7. Decision log
 
-| Date | Decision | Why | Alternative rejected |
-| --- | --- | --- | --- |
-| 2026-10-18 | Budget in OMA | 200G/lane DR optics specify TX and RX in OMA | Average power: simpler but mixes quantities |
-| 2026-10-18 | Allow DB − DB and −DB | The margin equation subtracts penalties and reserve (both dB) from a dB difference; a gain is a negative loss | Forbid them: the margin equation could not be written |
-| 2026-10-18 | Treat c as exact, no bib entry | c = 299 792 458 m/s by SI definition (2019 SI); cite the SI Brochure once read | Leave uncited: violates rule 1 |
-| 2026-10-18 | Pass rule M ≥ −1e-9 dB | Floating-point sums of dB values can land a hair below zero at an exact boundary (T04) | Exact M ≥ 0: fails real boundaries at random |
-| 2026-10-18 | Unit-kind mismatch raises instead of FAIL | a mismatch is invalid input, not a verdict; rule 5 applies to valid links | return FAIL: hides input bugs as physics |
-| 2026-10-18 | Wavelength pass rule clearance ≥ −1e-9 nm | float edge test found −2.27e-13 nm on an edge that is exact on paper | exact containment: random failures at real edges |
-| 2026-10-18 | §3 defines threshold_dbm = S_RX + ΣΠ + R, headroom_db(plane) and above_threshold(plane) with the verdict's ε; M_net decides and headroom at TP3 equals M_net (review R1, R6) | the explorer compared headroom with 0 itself and turned the RX side red under a NOT_EXCLUDED verdict at an exact boundary | let displays compare headroom with 0: two pass rules that disagree by ulps |
-| 2026-10-18 | §3 defines lower and upper clearance | "both clearances" was undefined | leave the definition to the code |
-| 2026-10-18 | §4 lists the fiber as the two §2 segments, 2 × 0.0004 dB | matches the §2 diagram, the shipped profile and the 3D scene; Σ L stays 4.0008 dB | one lumped 2 m element |
-| 2026-10-18 | T16 added: trace flag at an exact boundary | review R1 found the disagreement on this input | property test only |
-| 2026-10-18 | ≥, ≤ and − throughout the card instead of their ASCII spellings | one notation for every pass rule | mixed ASCII and math notation |
-| 2026-10-18 | §8 design-space sweep: a 2D grid of any two power or wavelength inputs, at most 201 × 201, with the 0 dB contour | shows the trade-offs a single margin hides | 1D sweeps only (brief 04 phase B) |
-| 2026-10-18 | §9 multi-lane tray: excluded if any lane is, margin = minimum lane margin, deciding lane reported | a tray ships as a unit | average lane margin: hides the lane that fails |
-| 2026-10-18 | §10 upstream chain derives TP2 from the laser (Milestone 2), with max fan-out by search | TP2 in CPO is set by the shared external laser | keep TP2 a free input: hides the split limit |
-| 2026-10-18 | §11 statistical yield Φ(M_mean/σ_total) with a seeded Monte Carlo, never changing the worst-case verdict | worst case over-provisions stacked connectors | replace the worst-case verdict with yield: assumption-dependent |
-| 2026-10-18 | §12 draft IEEE 802.3dj 200GBASE-DR1 budget as a validation profile, M_net = 0 on paper | an external budget the engine must close exactly | validate only against hand cases we wrote ourselves |
-| 2026-10-18 | §12.1 uses the D3.x values, not the 2023 baseline (budget 6.5, OMA −1.2 + TDECQ) or open comment R2-199 (budget 6.9) | johnson2025_3dj_mpidgd and dawe2026_3dj_er199 state the D3.x values; R2-199's outcome is unknown | the baseline: superseded |
-| 2026-10-18 | §12.3 MPI as the bhatt2016 worst-case bound, stated as conservative versus the 1e-6 allocation | a closed form the engine can evaluate | a Monte Carlo of phases: not reproducible from the sources read |
-| 2026-10-18 | §12.4 reflection crosstalk from bhatt2001, with a diplexer-isolation extension labeled INFERENCE | BiDi needs a reflection penalty; the extension is ours | apply the single-wavelength formula unchanged to two-wavelength BiDi |
-| 2026-10-18 | Source classes PEER_REVIEWED and THIRD_PARTY added; both need a citation key | the twin cites peer-reviewed papers (some vendor-authored) and analysts, which are neither vendor claims nor specifications | fold them into VENDOR_CLAIM: hides independent and reviewed sources |
-| 2026-10-18 | §14.1 twin method: facts, assumptions, derived nodes with corner intervals, CONSISTENT/TENSION/CONFLICT checks, hypotheses, support matrix, tornado | written before the engine, the products follow in phase 6 | one confidence score per number: hides why a number is uncertain |
-| 2026-10-18 | §14.1 status rule: CONFLICT only when two facts disagree, TENSION when a derived node does | a derived node carries our reading, a fact pair is a disagreement between sources | one threshold on the gap size: mixes source disagreement with our assumptions |
-| 2026-10-18 | §14.1 `bound` checks may state `relation` (le, ge) against a node that is not a min or max fact | phase 6 needs requirements between derived nodes (grid span against FSR, OU used against frame capacity) | encode each requirement as a fake min or max fact: a fact must come from a source |
-| 2026-10-18 | §13.1 states that the image sum peaks 0.0047 dB above 1 (Q_L 3500, FSR 1.8 THz) | found when the API sampled the ring response; the model is kept and its approximation stated | renormalize the sum to peak at 1: changes the brief's leakage values |
-| 2026-10-18 | §4 fiber note cites ITU-T G.652.D (0.40 dB/km, 1310 to 1625 nm) with its short-cable caveat | the source was opened | keep "typical value, to be cited" |
-| 2026-10-18 | §13 microring and WDM physics: periodic Lorentzian (k = −50 … 50), FWHM = f0/Q_L with the factor-2 lifetime caveat, crosstalk −10·log10(1 − kX) (INFERENCE) with 10·log10(1 + X) alongside, SYNTHETIC design window, thermal tuning with barrel shifting, interleaved ELS grid (INFERENCE), aliasing and the worst-channel rule, BiDi link model | brief 05 phase 5 | single-neighbor Lorentzian without images: misses the FSR aliasing that decides the 16λ BiDi result |
-| 2026-10-18 | §3 trace points carry power_mw = 10^(P_plane,OMA/10) and relative_power | pulse brightness follows the API's linear power | convert dBm to mW in the browser: the web would compute physics |
-| 2026-10-18 | §13.7 BiDi directions report the crosstalk power at the receiver, 10^(P_TX,local/10)·R | the ghost pulse's brightness is the API's crosstalk power | let the web scale the ghost from the penalty: the web would compute physics |
-| 2026-10-18 | §15 photonic processor: facts, derived values, the ABFP data path with two readings of the ADC range (H_out_n, H_out_1), the bfloat16 round-up rule, seeded experiments and per-cell optical power under two laser mappings | brief 05 phase 9 | read the SI's Q_11 on the N-term sum literally only: it contradicts the 24-bit output word and the gain-window figure |
-| 2026-10-18 | §14.2 to §14.10 architecture twins, the 16λ BiDi ring-FSR hypotheses, the ELS-DR fan-out, tray and pod hypotheses and the reference rack OICD-R64 with its reference-plane hypotheses | brief 05 phase 6, written before the catalog graphs | per-product prose without derivations: nothing a test could check |
+Changes to this card are in the git history.
 
 ## 8. Design-space sweep
 
@@ -194,7 +163,7 @@ Why: a tray ships as a unit. One excluded lane makes the tray unusable at the mo
 
 Hand case (`docs/hand_calcs/s09_tray.py`): 8 copies of the §4 worked example, lane 5 (index 5) with its patch connector at 2.0 dB: lane margins +0.4992 dB except lane 5 at −0.5008 dB; M_tray = −0.5008 dB, deciding lane 5, EXCLUDED.
 
-## 10. Upstream chain: TP2 derived (Milestone 2)
+## 10. Upstream chain: TP2 derived
 
 The §2 upstream elements, from the laser to TP2, replace the fixed TP2 input when a chain is given.
 
@@ -454,7 +423,7 @@ Properties tested: crosstalk falls with spacing, the penalty rises with X, heate
 
 The twin models an architecture class from what has been published about it, and labels every number by where it came from. It is not any vendor's specification and is not affiliated with or endorsed by any company whose publications are cited.
 
-- **Facts** (`catalog/products/*.toml`, `[[fact]]`): a public statement with its exact quote, citation key and class (VENDOR_CLAIM, PEER_REVIEWED, THIRD_PARTY, PUBLISHED_SPEC or PROPOSED_STANDARD). `verified` is true only if the value was confirmed in the opened source; otherwise the initial fact list wording is kept and a note says why. A fact is a point (`value`) or a range (`lo`, `hi`); `bound` records whether the source says exact, approximately, at least (min) or at most (max). Non-numeric facts (a modulation format) carry no number.
+- **Facts** (`catalog/products/*.toml`, `[[fact]]`): a public statement with its exact quote, citation key and class (VENDOR_CLAIM, PEER_REVIEWED, THIRD_PARTY, PUBLISHED_SPEC or PROPOSED_STANDARD). `verified` is true only if the value was confirmed in the opened source; otherwise the summarized wording is kept and a note says why. A fact is a point (`value`) or a range (`lo`, `hi`); `bound` records whether the source says exact, approximately, at least (min) or at most (max). Non-numeric facts (a modulation format) carry no number.
 - **Assumptions** (`[[assumption]]`): SYNTHETIC values with nominal, low, high and a rationale.
 - **Derived nodes** (`[[derived]]`): INFERENCE. A registered formula (`oicd.twin.formulas`, never an evaluated string) of other nodes, with the formula's units checked against its inputs. Each carries a derivation string, e.g. "30 W / 6.4 Tbps = 4.6875 pJ/bit".
 - **Intervals:** facts are points unless the source gives a range (nominal = the middle); assumptions span [low, high]. A derived node's [lo, hi] is the minimum and maximum of the node evaluated at its nominal point and at every corner of its interval-valued ancestors. This is exact when the node is monotone in each ancestor, which holds for every formula used here (products, quotients, sums, differences and logarithms of positive quantities). With more than 12 interval ancestors, 4096 seeded uniform samples replace the corners and the node is flagged.
